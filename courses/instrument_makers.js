@@ -34,7 +34,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "エレキギター: Telecaster、Stratocaster、Jazzmaster、Jaguar。エレキベース: Precision Bass、Jazz Bass。廉価ライン: Squier(初心者〜中級者向け、Fenderが所有するブランド)。上位ライン: Custom Shop(職人による受注製作)、American Professional/American Ultraシリーズ。",
+            "定番ライン(15〜25万円): Player IIシリーズ(メキシコ製の主力普及帯)。上位ライン(25〜35万円): American Professional II(USA製、テレキャスター/ストラトキャスター/ジャズマスター/ジャガー等の主要モデルを網羅)、American Ultra II(より現代的な仕様、コンター加工強化のネック)。",
+            "フラッグシップ(50万円〜): Custom Shop(職人による受注製作、Masterbuiltシリーズは著名ビルダーの手作業で1本100万円を超えることも)。ベースはPrecision Bass(1951年発売、世界初の量産エレキベース)、Jazz Bass(1960年発売、2ピックアップ仕様)が定番。廉価ラインSquier(初心者〜中級者向け、Fenderが所有するブランド)は3〜10万円台で展開。",
           ],
         },
         {
@@ -92,7 +93,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Les Paul(Standard/Custom/Studio等グレード多数)、SG(Les Paulより軽量、1961年〜)、ES-335(セミホロウボディ、1958年〜)、Flying V/Explorer(1958年発売、当時としては先進的すぎたデザイン)。廉価ラインはEpiphone(Gibson傘下ブランド)が担う。",
+            "Les Paul(1952年発売、20万円台のStudioから50万円超のCustomまでグレード多数、マホガニーボディ+メイプルトップ)、SG(1961年発売、Les Paulより軽量なマホガニー単板ボディ)、ES-335(1958年発売、セミホロウボディでフィードバックに強くジャズ〜ロックまで対応)。",
+            "Flying V/Explorer(1958年発売、当時としては先進的すぎたデザインで販売不振だったが後年再評価された「Modernistic」シリーズ)。価格帯は多くが25〜60万円程度。廉価ラインはEpiphone(Gibson傘下ブランド、3〜15万円台)が担う。",
           ],
         },
         {
@@ -148,7 +150,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "RGシリーズ(速弾き向けの定番)、JEMシリーズ(Steve Vaiシグネチャー)、S(Saber)シリーズ(薄型ボディ)、AZシリーズ(近年の汎用高性能ライン)。アコースティックギターのラインも展開している。",
+            "RGシリーズ(1987年発売開始、速弾き向けの定番、5〜30万円台まで幅広い価格帯)、JEMシリーズ(Steve Vaiシグネチャー、モンキーグリップ付き、20万円台〜)、S(Saber)シリーズ(薄型軽量ボディ)、AZシリーズ(2018年発売、フジゲン製の近年の高評価汎用ライン)。",
+            "普及帯のGIOシリーズ(3〜5万円台)から日本製Prestigeライン(20万円台〜)まで価格帯が広く、アコースティックギターやベース(SRシリーズ)のラインも展開している。",
           ],
         },
         {
@@ -203,7 +206,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Custom 24(24フレット仕様のフラッグシップ)、McCarty(22フレット、よりヴィンテージ的な音を志向)。廉価ラインのSEシリーズ(インドネシア等での製造)により、価格帯の裾野を広げている。",
+            "Custom 24(1985年発売、24フレット仕様のフラッグシップ、40万円台〜)、McCarty(22フレット、よりヴィンテージ的な音を志向、Ted McCarty監修)、Silver Sky(John Mayerシグネチャー、Fenderライクな設計で30万円台)。",
+            "廉価ラインのSEシリーズ(インドネシア等での製造、5〜15万円台)により、価格帯の裾野を広げている。Private Stock(完全受注生産、100万円超)は同社最高峰のカスタムライン。",
           ],
         },
         {
@@ -259,7 +263,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "ギター: 330、360、360/12(12弦)。ベース: 4001(ヴィンテージ)、4003(現行主力モデル)。ラインナップは他ブランドに比べて非常に絞り込まれており、頻繁なモデルチェンジも行わない。",
+            "ギター(20〜35万円): 330(セミアコ、シングルピックアップ配置)、360(上位機、バインディング装飾強化)、360/12(12弦、George Harrison使用モデル)。ベース: 4001(1960年代のヴィンテージ、Paul McCartney使用)、4003(現行主力モデル、20万円台)。",
+            "ラインナップは他ブランドに比べて非常に絞り込まれており(常時展開モデルは10種前後)、頻繁なモデルチェンジも行わない。カラーバリエーションもFireglo(サンバースト系)、Jetglo(黒)等、伝統色が中心。",
           ],
         },
         {
@@ -313,7 +318,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Randy Rhoadsモデル(V字型)、Soloist(汎用スーパーストラト型)、King V、Dinky。上位はUSA Custom Shop製、普及帯はJSシリーズ(海外生産)。",
+            "Randy Rhoadsモデル(1981年発表のV字型、20万円台〜)、Soloist(汎用スーパーストラト型、ネックスルー構造の上位機あり)、King V、Dinky(小ぶりなヘッドが特徴)。上位はUSA Custom Shop製(40万円〜100万円超)、普及帯はJSシリーズ(海外生産、3〜8万円台)。",
           ],
         },
         {
@@ -367,7 +372,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "So-Cal、San Dimas(ブランド発祥地カリフォルニアの地名に由来)、Pro-Mod DK24。Jacksonと同じFenderグループ傘下で、よりオールラウンドなロック/フュージョン向けの性格を持つ。",
+            "So-Cal(ハムバッカー2基のシンプル構成)、San Dimas(ブランド発祥地カリフォルニアの地名に由来、Fender系ヴィンテージ寄りの設計)、Pro-Mod DK24(24フレット仕様、10〜20万円台の中核ライン)。Jacksonと同じFenderグループ傘下で、よりオールラウンドなロック/フュージョン向けの性格を持つ。上位はUSA製Custom Shop(50万円超)。",
           ],
         },
         {
@@ -421,7 +426,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Eclipse(Les Paul的ボディ形状のオリジナル解釈)、Horizon、Kirk Hammettシグネチャー、James Hetfieldシグネチャー(Snakebyte等)。LTDラインはEC、MHシリーズなど廉価版として展開。",
+            "Eclipse(Les Paul的ボディ形状のオリジナル解釈、ESP本家は40万円台〜)、Horizon(スーパーストラト型)、Kirk Hammettシグネチャー(KH-2等、こうもり型インレイが特徴)、James Hetfieldシグネチャー(Snakebyte、Truckster等)。",
+            "LTDラインはEC(Eclipse系)、MHシリーズなど、本家のデザインを踏襲しつつ海外生産で3〜15万円台に抑えた廉価版として展開。EC-1000等は中級者に特に人気が高い。",
           ],
         },
         {
@@ -474,7 +480,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Hellraiserシリーズ、Omenシリーズ(入門〜中級)、C-1(汎用性の高いオフセット気味のボディ)。Synyster Gates(Avenged Sevenfold)らとのシグネチャーモデルも展開。",
+            "Hellraiserシリーズ(EMGアクティブピックアップ搭載、8〜15万円台)、Omenシリーズ(入門〜中級、3〜6万円台)、C-1(汎用性の高いオフセット気味のボディ、シリーズの主力形状)。Synyster Gates(Avenged Sevenfold)、Nikki Sixx(Mötley Crüe)らとのシグネチャーモデルも展開。",
           ],
         },
         {
@@ -528,7 +534,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "White Falcon(最上位)、Duo Jet、6120(Chet Atkinsモデル)、Streamlinerシリーズ(入門〜中級)。",
+            "White Falcon(1955年発表、最上位、金色パーツと白い外装が特徴、40万円台〜)、Duo Jet(George Harrison使用、黒い外装のソリッド寄りホロウ構造)、6120(Chet Atkinsモデル、オレンジ色が象徴的)、Streamlinerシリーズ(入門〜中級、5〜10万円台)。",
           ],
         },
         {
@@ -582,7 +588,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Les Paul(Epiphone版)、SG(同)、Casino(セミホロウ、John Lennonが使用したことで知られる)。近年は上位ライン「Epiphone Inspired by Gibson」シリーズで、本家に近い仕様を手頃な価格で提供している。",
+            "Les Paul(Epiphone版、3〜10万円台)、SG(同)、Casino(セミホロウ、John Lennon/Paul McCartneyが使用したことで知られる)。近年は上位ライン「Epiphone Inspired by Gibson」シリーズ(6〜15万円台)で、本家に近い仕様(USA製ピックアップ採用モデルも)を手頃な価格で提供している。",
           ],
         },
         {
@@ -636,7 +642,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Bulletシリーズ(最も手頃な入門帯)、Affinityシリーズ(中位)、Classic Vibeシリーズ(上位、ヴィンテージ仕様に近い再現度)。",
+            "Bulletシリーズ(最も手頃な入門帯、1〜2万円台)、Affinityシリーズ(中位、2〜3万円台)、Classic Vibeシリーズ(上位、3〜6万円台、ヴィンテージ仕様に近い再現度でコストパフォーマンスの評価が特に高い)。",
           ],
         },
         {
@@ -690,7 +696,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "56/59シリーズ(復刻モデル)、12弦モデル、ベースの「Longhorn」(牛の角のような特徴的なボディ形状)。",
+            "56/59シリーズ(1956/1959年モデルの復刻、5〜10万円台)、12弦モデル(リップスティックピックアップ2基搭載)、ベースの「Longhorn」(牛の角のような特徴的なボディ形状、軽量なのに独特の見た目)。",
           ],
         },
         {
@@ -743,7 +749,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Modern(汎用性の高いモダンなスーパーストラト型)、Classic(Stratocaster的な伝統デザイン)。Guthrie Govan(テクニカル系ギタリスト)とのシグネチャーモデルでも知られる。",
+            "Modern(汎用性の高いモダンなスーパーストラト型、30〜50万円台)、Classic(Stratocaster的な伝統デザイン)。Guthrie Govan(テクニカル系ギタリスト)とのシグネチャーモデルでも知られ、自社製ピックアップ(SSV、SSH+等)の評価も高い。",
           ],
         },
         {
@@ -797,7 +803,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Legacy(Stratocaster的デザイン)、ASAT(Telecaster的デザイン)、L-2000(ベース、2基のハムバッカー的構造を持つ独自設計)。",
+            "Legacy(Stratocaster的デザイン、20〜30万円台)、ASAT(Telecaster的デザイン)、L-2000(ベース、2基のハムバッカー的構造を持つ独自設計、シリーズ/パラレル配線切替可能)。USA製が基本で廉価ラインは持たない。",
           ],
         },
         {
@@ -852,7 +858,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "ベース: StingRay(定番)、Bongo(近年の上位モデル)。ギター: John Petruginシグネチャーの「JPシリーズ」、Steve Morseシグネチャーモデルなど、テクニカル系ギタリストとの協業モデルも多い。",
+            "ベース(20〜30万円台): StingRay(1976年発売、定番、3バンドアクティブEQ)、StingRay5(5弦版)、Bongo(2003年発売、近年の上位モデル、より現代的なボディ形状)。ギター: John Petrucciシグネチャーの「JPシリーズ」(7弦モデルも展開)、Steve Morseシグネチャーモデルなど、テクニカル系ギタリストとの協業モデルも多い。",
           ],
         },
         {
@@ -906,7 +912,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Thumb Bass(フラッグシップ、ネックスルー構造)、Streamer、Corvette。廉価ラインRockbassは主にコリア・中国・インドネシア工場で生産され、価格の裾野を広げている。",
+            "Thumb Bass(フラッグシップ、ネックスルー構造、40万円台〜、Bubinga単板ネック)、Streamer(ボルトオン仕様もある中位ライン)、Corvette(比較的コンパクトなボディ)。廉価ラインRockbass(3〜8万円台)は主にコリア・中国・インドネシア工場で生産され、価格の裾野を広げている。",
           ],
         },
         {
@@ -960,7 +966,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "NYCシリーズ(最上位、ニューヨーク製)、Metroシリーズ(日本製、手頃な価格帯)。Marcus Millerが自身のシグネチャーモデルを持つ以前、長年Sadowsky製ベースを愛用していたことでも知られる。",
+            "NYCシリーズ(最上位、ニューヨーク製、50万円台〜)、Metroシリーズ(日本製、20万円前後の手頃な価格帯)。ジャズベース型が中心で、Sadowskyプリアンプはオプションで他ブランドのベースに後付け改造することも可能。Marcus Millerが自身のシグネチャーモデルを持つ以前、長年Sadowsky製ベースを愛用していたことでも知られる。",
           ],
         },
         {
@@ -1013,7 +1019,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "55-94、55-02(フラッグシップ)。Skylineシリーズ(韓国製、手頃な価格帯)。",
+            "55-94、55-02(フラッグシップ、USA製、30万円台〜)、Duck Dunnモデル(Pベース系)、Joe Osbornモデル(ジャズベース系)。Skylineシリーズ(韓国製、8〜15万円台の手頃な価格帯)は特にコストパフォーマンスで評価が高い。",
           ],
         },
         {
@@ -1067,7 +1073,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Monarch(標準的なフラッグシップ)、Victor Wootenシグネチャーモデル、Anthony Jackson コントラバスギター(6弦)。",
+            "Monarch(標準的なフラッグシップ、100万円前後〜)、Emperor(上位、より豪華な装飾)、Victor Wootenシグネチャーモデル、Anthony Jackson コントラバスギター(6弦、B-F弦の拡張音域)。1本ずつ価格が異なる完全受注生産が基本。",
           ],
         },
         {
@@ -1120,7 +1126,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "NS-2、NS-4(定番)。廉価ラインのPerformerシリーズも展開している。",
+            "NS-2、NS-4(定番、20万円台前後、ネックスルー構造)、NS-5(5弦)。廉価ラインのPerformerシリーズ(海外生産、5〜8万円台)も展開し、独特のボディ形状を手頃な価格で体験できるようにしている。",
           ],
         },
         {
@@ -1173,7 +1179,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Series I、Series II(最上位ライン)、Epicシリーズ(比較的手頃な価格帯)。",
+            "Series I、Series II(最上位ライン、100万円クラス、複雑な積層ボディとアクティブ回路)、Epicシリーズ(比較的手頃な価格帯、30万円台〜でAlembicサウンドを体験できる入門格)。全モデルとも受注生産が基本で納期は長め。",
           ],
         },
         {
@@ -1226,7 +1232,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "NGシリーズ、Combustionシリーズ(比較的手頃な価格帯)、Zシリーズ。5弦・6弦モデルが特に高く評価されている。",
+            "NGシリーズ(カナダ製、上位、30万円台〜)、Combustionシリーズ(比較的手頃な価格帯、インドネシア製で10万円台)、Zシリーズ(より現代的な形状)。5弦・6弦モデルが特に高く評価されており、低音弦のファンフレット角度が特に大きく設計されている。",
           ],
         },
         {
@@ -1279,7 +1285,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "BBシリーズ(定番、幅広い価格帯を展開)、TRBシリーズ(より上位、多弦モデルも充実)。",
+            "BBシリーズ(1977年発売、定番、3〜15万円台と幅広い価格帯を展開、BB434/BB735等)、TRBシリーズ(より上位、5弦・6弦の多弦モデルも充実)。長年基本設計を維持しながら細部を継続的に改良するロングセラー戦略が特徴。",
           ],
         },
         {
@@ -1333,7 +1339,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "535(5弦フラッグシップ)、Kingstonシリーズ(廉価ライン)。",
+            "535(5弦フラッグシップ、USA製、40万円台〜)、434(4弦版)。Kingstonシリーズ(廉価ライン、韓国製、10万円台)は、本家の人間工学的設計を手頃な価格で体験できるとして評価されている。",
           ],
         },
         {
@@ -1386,7 +1392,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "BSRシリーズ(5弦・6弦モデルが充実)、Burner(比較的手頃なライン)。",
+            "BSRシリーズ(5弦・6弦モデルが充実、USA製ハンドメイド、50万円前後〜)、Burner(比較的手頃なライン、海外生産で20万円台)。低音弦の音圧を損なわないボディバランス設計が評価されている。",
           ],
         },
         {
@@ -1440,7 +1446,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Status Streamlineシリーズ(ヘッドレス)、Kingbassシリーズ。",
+            "Status Streamlineシリーズ(ヘッドレス、グラファイトネック、30万円前後〜)、Kingbassシリーズ(木材ボディ+グラファイトネックのハイブリッド構成)。全モデルとも英国内でのハンドメイド生産が基本。",
           ],
         },
         {
@@ -1493,7 +1499,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Quantumシリーズ、Flea Bass(Red Hot Chili PeppersのFleaのシグネチャーモデル)。",
+            "Quantumシリーズ(グラファイトネック+木製ボディのハイブリッド、20〜30万円台)、Flea Bass(Red Hot Chili PeppersのFleaのシグネチャーモデル、コンパクトなボディが特徴)。近年は生産規模が縮小し、中古市場での取引が中心になっている面もある。",
           ],
         },
         {
@@ -1546,7 +1552,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Buzzシリーズ(フレットレス/フレット付き両対応)、MVPシリーズ。",
+            "Buzzシリーズ(フレットレス/フレット付き両対応、30万円台〜、指板にライン(目印)入りのモデルも選択可能)、MVPシリーズ(より汎用的な形状)。少量生産のためモデルチェンジは緩やかで、ロングセラー傾向が強い。",
           ],
         },
         {
@@ -1599,7 +1605,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Cirrusシリーズ(上位)、T-40(ヴィンテージ)、Milleniumシリーズ(普及帯)。",
+            "Cirrusシリーズ(上位、15〜25万円台、ニュートラルなサウンドで評価)、T-40(1978年発売のヴィンテージ、コイルタップ機能を先進的に搭載)、Milleniumシリーズ(普及帯、5〜10万円台)。アンプ・PA機材との組み合わせでのバンドルセット展開も強み。",
           ],
         },
         {
@@ -1654,7 +1660,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "D-28、D-45(最高級ライン)、000シリーズ(小ぶりなボディで指弾き向き)。D-45は1933年に「歌うカウボーイ」Gene Autryのために特注されたのが最初とされ、当時は1本のみの製造で、一般ラインへの再導入は1968年になってからだった。",
+            "D-28(1931年発売、ドレッドノートの定番、ローズウッド単板、50万円台〜)、D-45(最高級ライン、abaloneの装飾、100万円超)、000シリーズ(小ぶりなボディで指弾き向き)。普及帯はDX1シリーズ等の合板・複合素材モデル(5〜10万円台)、上位USA製手工品はSシリーズ等で細かくグレード分けされている。",
+            "D-45は1933年に「歌うカウボーイ」Gene Autryのために特注されたのが最初とされ、当時は1本のみの製造で、一般ラインへの再導入は1968年になってからだった。",
           ],
         },
         {
@@ -1710,7 +1717,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "800シリーズ(ハイエンド)、200/300番台(ミドルクラス)、GS Mini(小型・携行向けモデルとして人気)。エレクトロニクス内蔵のExpression Systemによりライブでのプラグイン使用にも強い。",
+            "800シリーズ(ハイエンド、V-Classブレーシング搭載、50万円台〜)、200/300番台(ミドルクラス、15〜30万円台)、100番台(入門〜中級、10万円台)、GS Mini(3〜5万円台、小型・携行向けモデルとして人気)。",
+            "エレクトロニクス内蔵のExpression System(ピエゾ+マイクのハイブリッド式ピックアップ)によりライブでのプラグイン使用にも強く、上位モデルはほぼ標準搭載されている。",
           ],
         },
         {
@@ -1764,7 +1772,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "F-212(12弦の代表格)、D-55(ドレッドノート型)、DV-6(近年の再設計ライン)。",
+            "F-212(12弦の代表格、20万円台〜)、D-55(ドレッドノート型、Martin系に近い設計)、DV-6(近年の再設計ライン、10万円台の普及帯)。Westerly(米国ロードアイランド)、後に中国・韓国工場と、時代により生産拠点が変遷してきた。",
           ],
         },
         {
@@ -1818,7 +1826,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "J-45(ワークホース)、Hummingbird(装飾的なピックガードが特徴)、SJ-200(ジャンボ)。",
+            "J-45(1942年発売、ワークホース、30万円台〜)、Hummingbird(1960年発売、装飾的なピックガードが特徴)、SJ-200(1937年発売、ジャンボ、50万円台〜)。廉価版はEpiphoneのGibsonアコースティック復刻ライン(5〜10万円台)が担う。",
           ],
         },
         {
@@ -1871,7 +1879,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "FGシリーズ(定番、普及帯〜中級帯)、LLシリーズ(上位)、LSシリーズ(小ぶりなボディ)。",
+            "FGシリーズ(1966年発売、定番、普及帯〜中級帯、2〜6万円台)、LLシリーズ(上位、単板構成で10万円台〜)、LSシリーズ(小ぶりなボディ、指弾き向け)。ヴィンテージのFG-180(初代赤ラベル)は中古市場で特に人気が高い。",
           ],
         },
         {
@@ -1924,7 +1932,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Balladeer、Adamas(最上位、カーボン系素材の甲板)、Celebrity(廉価ライン)。",
+            "Balladeer(定番のボウル型、15〜25万円台)、Adamas(最上位、カーボン系素材の甲板、50万円台〜)、Celebrity(廉価ライン、海外生産で5〜10万円台)。全モデルに何らかの形でピエゾピックアップが内蔵されているのが基本仕様。",
           ],
         },
         {
@@ -1977,7 +1985,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Pro Seriesシリーズ、GN/EGシリーズ。エレキギター的な薄型カッタウェイ(演奏性を高める切り欠き)を持つステージ向けモデルも多い。",
+            "Pro Seriesシリーズ(15〜30万円台、パラセティックピックアップ標準搭載)、GN/EGシリーズ(廉価〜中位、5〜15万円台)。エレキギター的な薄型カッタウェイ(演奏性を高める切り欠き)を持つステージ向けモデルも多い。",
           ],
         },
         {
@@ -2031,7 +2039,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Artist Seriesシリーズ(普及帯)、Yairiシリーズ(上位、Kazuo Yairi監修)。",
+            "Artist Seriesシリーズ(普及帯、3〜8万円台)、Yairiシリーズ(上位、Kazuo Yairi監修、15〜30万円台)。生産国は時代により日本・韓国・中国と変遷しており、旧い日本製個体はヴィンテージとして評価されることもある。",
           ],
         },
         {
@@ -2084,7 +2092,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "OMシリーズ(小ぶりな指弾き向けボディ)、Dreadnoughtシリーズ。",
+            "OMシリーズ(小ぶりな指弾き向けボディ、40万円台〜)、Dreadnoughtシリーズ(低域重視の大型ボディ)。全て単板構成のハンドメイドで、量産ラインは持たない。",
           ],
         },
         {
@@ -2137,7 +2145,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "OMシリーズ、CJシリーズ(ジャンボ)、マンドリンのMFシリーズ。",
+            "OMシリーズ(50万円台〜)、CJシリーズ(ジャンボ)、マンドリンのMFシリーズ(ブルーグラス奏者に評価が高い)。全ラインで木材の乾燥・加工に極めて長い時間をかける工程が品質の均一性を支えている。",
           ],
         },
         {
@@ -2190,7 +2198,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Oregonシリーズ(地元産木材使用)、Discoveryシリーズ(入門〜中級帯)。",
+            "Oregonシリーズ(地元産木材使用、20万円台〜)、Discoveryシリーズ(入門〜中級帯、5〜10万円台、海外生産)。姉妹ブランドBedellも含め、木材のトレーサビリティを製品ページで開示する取り組みを進めている。",
           ],
         },
         {
@@ -2243,7 +2251,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "S6シリーズ(定番の入門〜中級帯)、Mavenシリーズ(コンパクトボディ)。",
+            "S6シリーズ(定番の入門〜中級帯、単板トップで4〜8万円台)、Mavenシリーズ(コンパクトボディ、より現代的な仕様)。上位のArtist Collectionは単板オール構成で15万円前後まで価格帯を伸ばしている。",
           ],
         },
         {
@@ -2296,7 +2304,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "C5シリーズ(入門〜中級帯の定番)、GKシリーズ(フラメンコ向け)、Fusionシリーズ(スチール弦感覚で弾けるナイロン弦モデル)。",
+            "C5シリーズ(入門〜中級帯の定番、3〜6万円台)、GKシリーズ(フラメンコ向け、Cypress材使用)、Fusionシリーズ(12フレットジョイント・薄いネック等、スチール弦感覚で弾けるナイロン弦モデル)。上位のMasterシリーズは単板構成で10万円台〜。",
           ],
         },
         {
@@ -2350,7 +2358,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Style O(装飾的なエングレービングが特徴のヴィンテージ復刻)、Delphiシリーズ(比較的手頃な価格帯)。",
+            "Style O(装飾的なエングレービングが特徴のヴィンテージ復刻、金属ボディ、20万円台〜)、Delphiシリーズ(比較的手頃な価格帯、木製ボディで10万円前後)。単一コーン式・トリコーン(3連コーン)式などコーン構造の違いで音のキャラクターを選べる。",
           ],
         },
         {
@@ -2404,7 +2412,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "RD/RDシリーズ(ドレッドノート型のヴィンテージ系)、バンジョーのVoyagerシリーズ。",
+            "RD/RDシリーズ(ドレッドノート型のヴィンテージ系、5〜10万円台)、バンジョーのVoyagerシリーズ。海外生産による手頃な価格ながら、ヴィンテージらしい仕様(V字ネックシェイプ等)にこだわった作りが特徴。",
           ],
         },
         {
@@ -2458,7 +2466,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "スネア: Supraphonic LM402、Black Beauty(真鍮製)。ドラムセット: Classic Maple、Breakbeats(コンパクトキット)。ロゴのScript(筆記体)ロゴは、実はRingo Starrのキット用に特別デザインされたものが、後に同社全体の標準ロゴとして定着した経緯がある。",
+            "スネア(3〜8万円台): Supraphonic LM402(アルミシェル)、Black Beauty(真鍮製、より重く太い音)。ドラムセット(15〜40万円台): Classic Maple(ヴィンテージ系メイプルシェル)、Breakbeats(コンパクトキット、都市部の宅練習にも人気)。ロゴのScript(筆記体)ロゴは、実はRingo Starrのキット用に特別デザインされたものが、後に同社全体の標準ロゴとして定着した経緯がある。",
           ],
         },
         {
@@ -2513,7 +2521,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "ドラムセット: Masterworks、Reference、Export(普及価格帯の定番)。ペダル: Eliminatorシリーズ(ダブルペダル/メタル系ドラマーに人気)。マーチング(吹奏楽・パレード用)打楽器や教育市場向け製品も幅広く手がける。",
+            "ドラムセット: Masterworks(完全カスタムオーダー、50万円超)、Reference(準カスタム、20〜30万円台)、Export(普及価格帯の定番、5〜10万円台)。ペダル: Eliminatorシリーズ(ダブルペダル/メタル系ドラマーに人気)。マーチング(吹奏楽・パレード用)打楽器や教育市場向け製品も幅広く手がける。",
           ],
         },
         {
@@ -2567,7 +2575,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "ドラムセット: Starclassic(上位)、Superstar(定番)、Imperialstar(入門)。ハードウェア: Iron Cobraペダル、Speed Cobraペダル(より軽量・高速志向の後継)。",
+            "ドラムセット: Starclassic(上位、20〜40万円台、メイプル/バーチ/ベルベットバブア等シェル素材選択可)、Superstar(定番、10万円台)、Imperialstar(入門、5〜8万円台)。ハードウェア: Iron Cobraペダル(1万円台後半〜)、Speed Cobraペダル(より軽量・高速志向の後継)。",
           ],
         },
         {
@@ -2621,7 +2629,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Collector's Series(最上位カスタムライン)、Performance Series(中位)。ペダル: 5000シリーズ(チェーンドライブ/ベルトドライブ等、駆動方式を選べる先駆的な設計)。",
+            "Collector's Series(最上位カスタムライン、50万円超、VLT加工・SoftWood Technology等の独自仕上げ選択可)、Performance Series(中位、20万円前後)。ペダル: 5000シリーズ(1〜3万円台、チェーンドライブ/ベルトドライブ等、駆動方式を選べる先駆的な設計)。",
           ],
         },
         {
@@ -2674,7 +2682,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Recording Custom(上位、スタジオ向け)、Stage Custom(中位)、Rydeen(入門帯)。",
+            "Recording Custom(上位、スタジオ向け、20万円台〜)、Stage Custom(中位、10万円前後)、Rydeen(入門帯、5〜7万円台)。上位機ほどシェルの真円精度・厚み管理が緻密になり、それが「録音向き」の均一な鳴りにつながっている。",
           ],
         },
         {
@@ -2727,7 +2735,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "SQ2(フルカスタムオーダー)、Signature Series、AQ2(中位)。",
+            "SQ2(フルカスタムオーダー、30万円超、木材・サイズ・金具を個別選択)、Signature Series(準カスタム、20万円台)、AQ2(中位、10万円台)。ヨーロッパらしい多様なラッカー仕上げのバリエーションも特徴。",
           ],
         },
         {
@@ -2781,7 +2789,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "USA Custom(上位)、Catalinaシリーズ(中位)、Broadkasterシリーズ(ヴィンテージ復刻)。",
+            "USA Custom(上位、30万円超、アメリカ製シェル)、Catalinaシリーズ(中位、10万円前後、海外生産)、Broadkasterシリーズ(ヴィンテージ復刻、ラウンドバッジ期の意匠を再現)。",
           ],
         },
         {
@@ -2834,7 +2842,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Saturnシリーズ(上位)、Armoryシリーズ(中位)、入門帯のComet/Toriシリーズ。",
+            "Saturnシリーズ(上位、15〜25万円台、複数のシェル素材を選択可能)、Armoryシリーズ(中位、10万円前後)、入門帯のComet/Toriシリーズ(5万円前後)。上位機は日本製の高精度ハードウェアを採用している点も評価されている。",
           ],
         },
         {
@@ -2887,7 +2895,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Genista(現行の上位ライン)、Series XPK(過去の代表機)。",
+            "Genista(現行の上位ライン、15〜25万円台)、Series XPK(過去の代表機、ヴィンテージ市場で流通)。1960〜70年代のResonatorシリーズは、現在も英国ロックファンの間でコレクターズアイテムとして人気が高い。",
           ],
         },
         {
@@ -2941,7 +2949,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Radio King(最も著名なヴィンテージシリーズ)。現行ブランドとしての新製品展開は限定的で、主にヴィンテージ市場での評価が中心となっている。",
+            "Radio King(最も著名なヴィンテージシリーズ、単板シェル、状態の良い個体は中古市場で数十万円)。現行ブランドとしての新製品展開は限定的で、主にヴィンテージ市場での評価が中心となっている。復刻版が期間限定で生産されることもある。",
           ],
         },
         {
@@ -2994,7 +3002,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Dyna-Sonicシリーズ(スネアドラム、独特のスプリング機構を持つ)、Holiday(普及帯)。",
+            "Dyna-Sonicシリーズ(スネアドラム、独特のスプリング機構を持つ、ヴィンテージ市場で10万円前後)、Holiday(普及帯)。現行の再興版として一部モデルが再生産されることもあるが、大半はヴィンテージ流通が中心。",
           ],
         },
         {
@@ -3047,7 +3055,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Solid Shellシリーズ(スネアドラムが特に有名)。フルセットよりも単品のスネアドラム販売が中心的な事業になっている。",
+            "Solid Shellシリーズ(スネアドラムが特に有名、1台15〜30万円台)。フルセットよりも単品のスネアドラム販売が中心的な事業になっており、木材の種類(メイプル、ウォルナット等)ごとに細かくラインが分かれている。",
           ],
         },
         {
@@ -3100,7 +3108,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Custom Series(受注生産、カラーリング自由選択)、Tour Series(既製品ライン)。",
+            "Custom Series(受注生産、カラーリング自由選択、15〜25万円台)、Tour Series(既製品ライン、10万円前後)。パステルカラーやグラフィティ調など、他ブランドにはない大胆な仕上げの選択肢が豊富。",
           ],
         },
         {
@@ -3153,7 +3161,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Customシリーズ(受注生産中心)。",
+            "Customシリーズ(受注生産中心、1台10〜20万円台)。フルセットだけでなく単品スネアの受注も多く、顧客の要望に応じた木材・仕上げの組み合わせが可能。",
           ],
         },
         {
@@ -3207,7 +3215,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "TDシリーズ(V-Drums本体、TD-17/TD-27等)、SPD-SX(サンプリングパッド、ライブでの効果音/オケ再生にも使われる)。",
+            "TDシリーズ(V-Drums本体、10〜30万円台、TD-17は中級、TD-27/TD-50は上位でハイブリッドキット構築も可能)、SPD-SX(3〜6万円台、サンプリングパッド、ライブでの効果音/オケ再生にも使われる)。電子/生ハイブリッドのTM-2トリガーモジュールも人気。",
           ],
         },
         {
@@ -3261,7 +3269,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "A Zildjian、K Zildjian、Kシリーズ派生のK Custom等、非常に多岐にわたるラインナップを展開。ジャズ、ロック、フュージョンなどジャンルごとに専用ラインを細分化している点も特徴。",
+            "A Zildjian(1900年代〜、明るいオールラウンド系、1枚2〜4万円台)、K Zildjian(イスタンブール系譜の暗く複雑な響き)、Kシリーズ派生のK Custom(ジャズ〜フュージョン向けにモダン化)等、非常に多岐にわたるラインナップを展開。",
+            "普及帯のPlanet Z、ZBTシリーズ(1万円前後)から、最上位のK Constantinople(職人による手作業比率が最も高い、5万円超)まで価格帯も幅広く、ジャズ、ロック、フュージョンなどジャンルごとに専用ラインを細分化している点も特徴。",
           ],
         },
         {
@@ -3315,7 +3324,8 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "AA/AAXシリーズ(明るい系統)、HH/HHXシリーズ(ヴィンテージ系の暗さ)、B8シリーズ(青銅合金比率の異なる普及価格帯ライン)。",
+            "AA/AAXシリーズ(明るい系統、B20ブロンズ、2〜4万円台)、HH/HHXシリーズ(ヴィンテージ系の暗さ、手打ち工程を含む)、B8シリーズ(青銅合金比率の異なる普及価格帯ライン、B8ブロンズで1万円前後)。",
+            "最上位のArtisanシリーズ(職人の手作業比率が高い、4〜6万円台)や、Neil Peart(Rush)らとのシグネチャーモデルも展開している。",
           ],
         },
         {
@@ -3369,7 +3379,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "2002シリーズ(ロック向けの定番)、Signatureシリーズ、Formula 602(ヴィンテージ系)。",
+            "2002シリーズ(1971年発表、ロック向けの定番、1枚2〜4万円台)、Signatureシリーズ(モダンなジャズ〜フュージョン向け)、Formula 602(1960年代のヴィンテージ系、復刻ラインもあり)。PSTXシリーズはエフェクト系(トラッシュ、スプラッシュ等)に特化。",
           ],
         },
         {
@@ -3422,7 +3432,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Byzanceシリーズ(上位、伝統製法)、Classics Customシリーズ(中位)、HCS(入門帯)。",
+            "Byzanceシリーズ(上位、伝統製法、1枚3〜6万円台)、Classics Customシリーズ(中位、1〜2万円台)、HCS(入門帯、5千円前後)。パーカッション製品ではカホンのHeadlinerシリーズが特に普及している。",
           ],
         },
         {
@@ -3475,7 +3485,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "30th Anniversary、Xistシリーズ、Traditionalシリーズ(ジャズ向け)。",
+            "30th Anniversary(記念モデル、高価格帯)、Xistシリーズ(比較的手頃、1〜2万円台)、Traditionalシリーズ(ジャズ向け、2〜4万円台、暗く複雑な響き)。1枚ずつ音の個体差があるため、店頭での試打・選定が前提とされることが多い。",
           ],
         },
         {
@@ -3528,7 +3538,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Traditionalシリーズ、Nostalgiaシリーズ。",
+            "Traditionalシリーズ(2〜4万円台、Istanbul Agopと同価格帯)、Nostalgiaシリーズ(よりヴィンテージ寄りの音作り)。同じくジャズドラマー向けに1枚ずつ試打販売されることが多い。",
           ],
         },
         {
@@ -3581,7 +3591,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Masterシリーズ、Turkシリーズ(比較的手頃な価格帯)。",
+            "Masterシリーズ(2〜4万円台、伝統的な暗い響き)、Turkシリーズ(比較的手頃な価格帯、1万円台)。近年はモダンジャズ〜フュージョン向けの明るめのラインも拡充している。",
           ],
         },
         {
@@ -3634,7 +3644,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Class Seriesシリーズ、Rideシリーズ。",
+            "Class Seriesシリーズ(2〜4万円台、キャスト製法による複雑な倍音)、Rideシリーズ(単品ライドシンバルに強み)。イタリアらしい、やや華やかで艶のある響きが個性とされる。",
           ],
         },
         {
@@ -3687,7 +3697,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "各種チャイナシンバル。他社ブランド向けにOEM(相手先ブランドでの製造)供給を行うことも多い。",
+            "各種チャイナシンバル(1枚数千円〜1万円台、非常に手頃)。他社ブランド向けにOEM(相手先ブランドでの製造)供給を行うことも多く、有名ブランドの廉価チャイナラインの中身がWuhan製というケースも珍しくない。",
           ],
         },
         {
@@ -3740,7 +3750,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Bliss、Energyシリーズ(手打ちシンバル各種)、各種ゴング(銅鑼)。",
+            "Bliss、Energyシリーズ(手打ちシンバル各種、1〜2万円台)、各種ゴング(銅鑼、サイズにより数万円〜)。老舗の同グレード品と比べ2〜3割ほど手頃な価格設定が多い。",
           ],
         },
         {
@@ -3793,7 +3803,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Custom Brilliantシリーズ、Vintage Old Schoolシリーズなど多数のラインを展開。",
+            "Custom Brilliantシリーズ(明るい響き、1万円台)、Vintage Old Schoolシリーズ(ヴィンテージ寄りの暗さ)など、非常に多数のラインを1〜2万円台中心に展開している。",
           ],
         },
         {
@@ -3846,7 +3856,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "SHシリーズ(普及帯シンバルセット)。",
+            "SHシリーズ(普及帯シンバルセット、4点セットで1〜2万円台という低価格)。単品バラ売りよりもセット販売が中心で、初めてドラムセットを一式揃える初心者向けに最適化されている。",
           ],
         },
         {
@@ -3899,7 +3909,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "MDTシリーズ、DSKシリーズ。",
+            "MDTシリーズ(マルチレイジング加工、2〜4万円台)、DSKシリーズ(よりモダンな響き)。少量生産のため流通量は限られるが、精密な旋盤加工へのこだわりがマニアの間で評価されている。",
           ],
         },
         {
@@ -3952,7 +3962,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Traditionalシリーズ、Rockシリーズ。",
+            "Traditionalシリーズ(伝統的な暗い響き、1〜2万円台)、Rockシリーズ(ロック/メタル向けにカッティングパワーを強化)。家族経営らしく生産量は限られ、専門店経由での取り扱いが中心。",
           ],
         },
         {
@@ -4005,7 +4015,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "代表製品ラインナップ",
           paragraphs: [
-            "Renaissanceシリーズ、Legendシリーズ。",
+            "Renaissanceシリーズ(1〜2万円台、バランスの取れたモダンな響き)、Legendシリーズ(より伝統寄りの暗さ)。他のトルコ系ブランドと同様、価格の割に上質という評価で徐々にシェアを広げている。",
           ],
         },
         {
