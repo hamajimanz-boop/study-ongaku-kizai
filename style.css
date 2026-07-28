@@ -176,8 +176,10 @@ a:hover { text-decoration: underline; }
   margin-bottom: 20px;
   font-weight: 600;
 }
-.lesson-image { max-width: 100%; border-radius: 10px; display: block; margin: 12px 0 20px; border: 1px solid var(--border); }
+.lesson-image { max-width: 100%; border-radius: 10px; display: block; margin: 12px 0 4px; border: 1px solid var(--border); }
 .lesson-image-hero { margin-top: 0; }
+.image-credit { font-size: 11.5px; color: var(--muted); margin: 0 0 16px; }
+.image-credit a { color: var(--muted); }
 .lesson-section { margin: 26px 0; }
 .lesson-section h3 { font-size: 18px; margin: 0 0 10px; border-bottom: 2px solid var(--grid); padding-bottom: 6px; }
 .lesson-section p { margin: 0 0 12px; color: var(--ink-secondary); }

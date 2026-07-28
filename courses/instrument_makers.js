@@ -33,6 +33,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/fender_stratocaster.jpg",
+          imageCredit: '写真: Friedrich Haag / <a href="https://commons.wikimedia.org/wiki/File:002_2014_12_17_Musikinstrumente.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>Player IIシリーズ</strong>(15〜25万円) — メキシコ製の主力普及帯。定番ライン。",
             "<strong>American Professional II</strong>(25〜35万円) — USA製上位ライン。テレキャスター/ストラトキャスター/ジャズマスター/ジャガー等の主要モデルを網羅。",
@@ -97,6 +99,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/gibson_les_paul.jpg",
+          imageCredit: '写真: David Saddler / <a href="https://commons.wikimedia.org/wiki/File:Spirit_of_America_Gibson_Les_Paul_Guitar_closeup_at_Ellis_Island_2011-03-18.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Les Paul</strong>(20万円台〜50万円超) — 1952年発売。Studioから最上位Customまでグレード多数。マホガニーボディ+メイプルトップ。",
             "<strong>SG</strong>(25〜60万円程度) — 1961年発売。Les Paulより軽量なマホガニー単板ボディ。",
@@ -278,6 +282,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/rickenbacker_360_12.jpg",
+          imageCredit: '写真: Marc Wathieu / <a href="https://commons.wikimedia.org/wiki/File:Rickenbacker_360-12_Jetglo_(black),_360-6_Fireglo_(red),_Fender_Vibro-Champ_vintage_tube_amp_1968,_Marc_Morgan_album_recording,_LowSwing_studio,_Berlin,_2011-01-25_22_30_45.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>330</strong>(20〜35万円) — セミアコ、シングルピックアップ配置。",
             "<strong>360</strong>(20〜35万円) — 上位機、バインディング装飾強化。",
@@ -567,6 +573,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/gretsch_white_falcon.jpg",
+          imageCredit: '写真: Eric Kilby / <a href="https://commons.wikimedia.org/wiki/File:Gretsch_White_Falcon_(1995),_played_by_The_Reverend_Horton_Heat,_Petersen_Auto_Museum.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>White Falcon</strong>(40万円台〜) — 1955年発表、最上位。金色パーツと白い外装が特徴。",
             "<strong>Duo Jet</strong> — George Harrison使用。黒い外装のソリッド寄りホロウ構造。",
@@ -1748,6 +1756,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/martin_d28.jpg",
+          imageCredit: '写真: Tony 1212 / <a href="https://commons.wikimedia.org/wiki/File:Martin-dreadnought-shapes.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 4.0)',
           paragraphs: [
             "<strong>D-28</strong>(50万円台〜) — 1931年発売、ドレッドノートの定番。ローズウッド単板。",
             "<strong>D-45</strong>(100万円超) — 最高級ライン。abaloneの装飾。1933年に「歌うカウボーイ」Gene Autryのために特注されたのが最初で、一般ラインへの再導入は1968年。",
@@ -1807,6 +1817,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/taylor_acoustic.jpg",
+          imageCredit: '写真: andy carter / <a href="https://commons.wikimedia.org/wiki/File:Taylor_Richie_Sambora_Signature_model,_2008_Stamford_Guitar_Festival.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>800シリーズ</strong>(50万円台〜) — ハイエンド。V-Classブレーシング搭載。",
             "<strong>200/300番台</strong>(15〜30万円台) — ミドルクラス。",
@@ -3374,6 +3386,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/roland_vdrums.jpg",
+          imageCredit: '写真: Rob DiCaterino / <a href="https://commons.wikimedia.org/wiki/File:Electronic_drum_kit_Roland.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.5)',
           paragraphs: [
             "<strong>TD-17</strong>(10〜30万円台) — V-Drums中級モデル。",
             "<strong>TD-27/TD-50</strong>(10〜30万円台) — 上位、ハイブリッドキット構築も可能。",
@@ -3431,6 +3445,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/zildjian_cymbal.jpg",
+          imageCredit: '写真: U.S. Navy (Mark Logico) / <a href="https://commons.wikimedia.org/wiki/File:US_Navy_110518-N-WP746-217_Musician_2nd_Class_Ed_William,_assigned_to_the_U.S._Pacific_Fleet_Band,_plays_the_cymbals_during_the_joint-service_rehea.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (Public domain)',
           paragraphs: [
             "<strong>A Zildjian</strong>(1枚2〜4万円台) — 1900年代〜、明るいオールラウンド系。",
             "<strong>K Zildjian</strong>(2〜4万円台) — イスタンブール系譜の暗く複雑な響き。",
@@ -3489,6 +3505,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/sabian_cymbal.jpg",
+          imageCredit: '写真: The United States Army Band / <a href="https://commons.wikimedia.org/wiki/File:VDC_2197_(34822470623).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (Public domain)',
           paragraphs: [
             "<strong>AA/AAXシリーズ</strong>(2〜4万円台) — 明るい系統、B20ブロンズ。",
             "<strong>HH/HHXシリーズ</strong>(2〜4万円台) — ヴィンテージ系の暗さ、手打ち工程を含む。",

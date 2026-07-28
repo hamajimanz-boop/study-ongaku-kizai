@@ -39,6 +39,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/neumann_u87.jpg",
+          imageCredit: '写真: Ville Hyvönen / <a href="https://commons.wikimedia.org/wiki/File:Neumann_U87_%26_U47,_Toot_Toot_in_Mankku_Studio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>TLM102 / TLM103シリーズ</strong>(5〜10万円台) — 小型軽量のエントリー〜ミドル機。TLM103は自己ノイズ7dB-Aの静粛設計で、単一指向性固定・当時「世界最静音」を謳った。",
             "<strong>U87シリーズ</strong>(20〜30万円台) — 業界標準機U87 Ai。単一指向性/無指向性/双指向性の3モード切替、パッド・ローカットスイッチ付き。半世紀以上のロングセラー。",
@@ -349,6 +351,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/shure_sm57.jpg",
+          imageCredit: '写真: E bailey / <a href="https://commons.wikimedia.org/wiki/File:Shure_SM57_microphone.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>SM57</strong>(1〜2万円台) — 1965年発売、楽器アンプ・スネア用の定番。業界で最も複製・模倣されたマイクの一つ。",
             "<strong>SM58</strong>(1〜2万円台) — 同年発売、ボーカル用ダイナミックの世界的定番。",
@@ -502,6 +506,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/ssl_4000.jpg",
+          imageCredit: '写真: Audio Mix House / <a href="https://commons.wikimedia.org/wiki/File:80-channel_Solid_State_Logic_(SSL)_XL_9000_K_Series_Console_at_Audio_Mix_House,_Studio_B_(13430125635).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>SSL 4000シリーズ</strong>(数千万円規模) — 1979年発表のヴィンテージコンソール。E/G等のリビジョン違いあり。",
             "<strong>SSL 9000 Jシリーズ</strong>(数千万円規模) — 1990年代後半、より高解像度な世代。",
@@ -876,6 +882,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/yamaha_ns10.jpg",
+          imageCredit: '写真: CJ Sorg / <a href="https://commons.wikimedia.org/wiki/File:Event,_NS-10.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>NS-10M</strong>(発売当時1本2万円台) — 1978年発売のオリジナル。白いコーン紙のウーファーが特徴の伝説的モニター。",
             "<strong>NS-10M Studio</strong>(発売当時1本2万円台) — 1987年、より現場向けの仕様に調整。パッシブ型でパワーアンプ別途必要。",

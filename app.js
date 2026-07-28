@@ -236,6 +236,7 @@ function renderLesson(courseId, unitId) {
       <div class="lesson-section">
         <h3>${s.heading}</h3>
         ${s.image ? `<img class="lesson-image" src="images/${s.image}" alt="${s.heading}">` : ""}
+        ${s.imageCredit ? `<p class="image-credit">${s.imageCredit}</p>` : ""}
         ${s.paragraphs.map((p) => `<p>${p}</p>`).join("")}
       </div>`
     )
