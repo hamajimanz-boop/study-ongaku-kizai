@@ -224,6 +224,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/prs_guitar.jpg",
+          imageCredit: '写真: Rachmaninoff / <a href="https://commons.wikimedia.org/wiki/File:PRS_Custom_24_teal_black_2004,_headstock.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>Custom 24</strong>(40万円台〜) — 1985年発売。24フレット仕様のフラッグシップ。",
             "<strong>McCarty</strong>(40万円台〜) — 22フレット、よりヴィンテージ的な音を志向。Ted McCarty監修。",
@@ -405,6 +407,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/charvel_guitar.jpg",
+          imageCredit: '写真: Shixart1985 / <a href="https://commons.wikimedia.org/wiki/File:Charvel_San_Dimas_Koa_headstock_with_logo.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>So-Cal</strong> — ハムバッカー2基のシンプル構成。",
             "<strong>San Dimas</strong> — ブランド発祥地カリフォルニアの地名に由来。Fender系ヴィンテージ寄りの設計。",
@@ -638,6 +642,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/epiphone_lp.jpg",
+          imageCredit: '写真: Ethan Prater / <a href="https://commons.wikimedia.org/wiki/File:Epiphone_Limited_Edition_1959_Les_Paul_Standard_(2008,_headstock).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Les Paul(Epiphone版)</strong>(3〜10万円台) — Gibsonデザインの廉価版。",
             "<strong>SG(Epiphone版)</strong>(3〜10万円台)",
@@ -753,6 +759,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/danelectro_guitar.jpg",
+          imageCredit: '写真: Eden, Janine and Jim / <a href="https://commons.wikimedia.org/wiki/File:Jimmy_Page%27s_Rig_-_1961_Danelectro_Model_3021,_ca.1962_Harmony_Sovereign_H1260_(serial_no._9631111260),_2%C3%97_Marshall_1959_Super_Lead,_Super_Bass,_3%C3%97_4%C3%9712in._cab.,_etc._-_Play_It_Loud._MET_(2019-05-13_19.09.34_by_Eden,_Janine_and_Jim).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>56/59シリーズ</strong>(5〜10万円台) — 1956/1959年モデルの復刻。",
             "<strong>12弦モデル</strong>(5〜10万円台) — リップスティックピックアップ2基搭載。",
@@ -923,6 +931,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/musicman_stingray.jpg",
+          imageCredit: '写真: Serguei Trouchelle / <a href="https://commons.wikimedia.org/wiki/File:AX_Music_Man_Bongo_5_Head_Front.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 3.0)',
           paragraphs: [
             "<strong>StingRay</strong>(20〜30万円台) — 1976年発売、定番ベース。3バンドアクティブEQ。",
             "<strong>StingRay5</strong>(20〜30万円台) — 5弦版。",
@@ -1887,6 +1897,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/guild_12string.jpg",
+          imageCredit: '写真: Alfred Kiefer / <a href="https://commons.wikimedia.org/wiki/File:Kopfplatte_Guild_F-2512E.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>F-212</strong>(20万円台〜) — 12弦の代表格。",
             "<strong>D-55</strong>(20万円台〜) — ドレッドノート型、Martin系に近い設計。",
@@ -2118,6 +2130,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/takamine_guitar.jpg",
+          imageCredit: '写真: Alan Levine / <a href="https://commons.wikimedia.org/wiki/File:Takamine_F-340_headstock_logo_-_EST._1962.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>Pro Seriesシリーズ</strong>(15〜30万円台) — パラセティックピックアップ標準搭載。",
             "<strong>GN/EGシリーズ</strong>(5〜15万円台) — 廉価〜中位。",
@@ -2738,6 +2752,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/tama_drums.jpg",
+          imageCredit: '写真: Kenny Jolt / <a href="https://commons.wikimedia.org/wiki/File:Bsy_boredsuburbanyouths_redmenace.JPG" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)',
           paragraphs: [
             "<strong>Starclassic</strong>(20〜40万円台) — 上位。メイプル/バーチ/ベルベットバブア等シェル素材選択可。",
             "<strong>Superstar</strong>(10万円台) — 定番。",

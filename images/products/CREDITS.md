@@ -43,6 +43,14 @@
 | focusrite_scarlett.jpg | Focusrite | Matt Vanacoro | CC BY 2.0 | Wikimedia Commons |
 | apogee_interface.jpg | Apogee | David Podosek | CC BY 2.0 | Wikimedia Commons |
 | api_console.jpg | API | CJ Sorg | CC BY-SA 2.0 | Wikimedia Commons |
+| prs_guitar.jpg | PRS | Rachmaninoff | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:PRS_Custom_24_teal_black_2004,_headstock.jpg |
+| charvel_guitar.jpg | Charvel | Shixart1985 | CC BY 2.0 | Wikimedia Commons |
+| epiphone_lp.jpg | Epiphone | Ethan Prater | CC BY 2.0 | Wikimedia Commons |
+| guild_12string.jpg | Guild | Alfred Kiefer | CC BY-SA 4.0 | Wikimedia Commons |
+| takamine_guitar.jpg | Takamine | Alan Levine | CC BY-SA 2.0 | Wikimedia Commons |
+| tama_drums.jpg | Tama | Kenny Jolt | CC BY 3.0 | Wikimedia Commons |
+| musicman_stingray.jpg | Music Man | Serguei Trouchelle | CC BY-SA 3.0 | Wikimedia Commons |
+| danelectro_guitar.jpg | Danelectro | Eden, Janine and Jim | CC BY 2.0 | Wikimedia Commons |
 
 学習用アプリでの使用にあたり、各ライセンスの表示義務(帰属表示)を満たすため、
 アプリ内の該当セクションにも撮影者名・ライセンス・出典リンクを表示している。
