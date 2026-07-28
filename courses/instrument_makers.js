@@ -38,7 +38,7 @@ window.COURSES["instrument_makers"] = {
           paragraphs: [
             "<strong>Player IIシリーズ</strong>(15〜25万円) — メキシコ製の主力普及帯。定番ライン。",
             "<strong>American Professional II</strong>(25〜35万円) — USA製上位ライン。テレキャスター/ストラトキャスター/ジャズマスター/ジャガー等の主要モデルを網羅。",
-            "<strong>American Ultra II</strong>(25〜35万円) — より現代的な仕様、コンター加工強化のネック。",
+            "<strong>American Ultra II</strong>(25〜35万円) — より現代的な仕様、コンター加工(体に沿うよう丸く削る加工)強化のネック。",
             "<strong>Custom Shop / Masterbuilt</strong>(50万円〜) — 職人による受注製作。Masterbuiltは著名ビルダーの手作業で1本100万円を超えることも。",
             "<strong>Precision Bass</strong>(1951年発売) — 世界初の量産エレキベース。",
             "<strong>Jazz Bass</strong>(1960年発売) — 2ピックアップ仕様のベース定番。",
@@ -87,7 +87,7 @@ window.COURSES["instrument_makers"] = {
           paragraphs: [
             "1902年、アメリカ・ミシガン州カラマズーでOrville Gibsonが設立。アーチトップ(表板が湾曲した)アコースティック/セミアコギターのメーカーとして発展した老舗ブランド。",
             "1952年発売のLes Paulは、ギタリストのLes Paul本人が提案した「ソリッドボディに近い、ハウリングに強いギター」のアイデアを反映して開発された。実はLes Paul自身は当初「丸太に弦を張った」ような完全ソリッドボディの試作機をGibsonに持ち込んだが、市場に受け入れられないと一度は断られた経緯がある。後にFenderのソリッドボディ人気を見て方針転換し、Les Paulとの協業モデルとして発売された。",
-            "1969年から1986年まで複合企業Norlin傘下となり、この時期は品質のばらつきが指摘されることもあった(いわゆる「ノーリン期」)。1986年にHenry Juszkiewicz氏らが買収し再建。2018年には楽器以外の消費者向け事業への多角化が裏目に出て経営破綻(チャプター11)したが、その後投資ファンドKKR主導の再建を経て、現在はギター/楽器事業に集中する体制に戻っている。",
+            "1969年から1986年まで複合企業Norlin傘下となり、この時期は品質のばらつきが指摘されることもあった(いわゆる「ノーリン期」)。1986年にHenry Juszkiewicz氏らが買収し再建。2018年には楽器以外の消費者向け事業への多角化が裏目に出て経営破綻(チャプター11、アメリカの会社更生手続きにあたる制度)したが、その後投資ファンドKKR主導の再建を経て、現在はギター/楽器事業に集中する体制に戻っている。",
           ],
         },
         {
@@ -461,7 +461,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "音の特徴",
           paragraphs: [
-            "極端に速いネック、拡張スケール(低チューニング向けの長いネック設計)、高出力/アクティブピックアップの標準搭載など、メタル/エクストリームミュージック向けの機能を一貫して追求している。",
+            "極端に速いネック、拡張スケール(低チューニング向けの長いネック設計)、高出力/アクティブピックアップ(電池を使って信号を増幅するピックアップ)の標準搭載など、メタル/エクストリームミュージック向けの機能を一貫して追求している。",
           ],
         },
         {
@@ -526,7 +526,7 @@ window.COURSES["instrument_makers"] = {
           image: "products/schecter_guitar.jpg",
           imageCredit: '写真: Toglenn / <a href="https://commons.wikimedia.org/wiki/File:Schecter_Guitar_Research-2020_by_Glenn_Francis.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
-            "<strong>Hellraiserシリーズ</strong>(8〜15万円台) — EMGアクティブピックアップ搭載。",
+            "<strong>Hellraiserシリーズ</strong>(8〜15万円台) — EMGアクティブピックアップ(電池で信号を増幅するピックアップ)搭載。",
             "<strong>Omenシリーズ</strong>(3〜6万円台) — 入門〜中級。",
             "<strong>C-1</strong> — 汎用性の高いオフセット気味のボディ、シリーズの主力形状。",
             "<strong>Synyster Gatesシグネチャー</strong> — Avenged Sevenfoldのギタリストとの協業モデル。",
@@ -868,7 +868,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "音の特徴",
           paragraphs: [
-            "初代Fenderの設計思想を土台にしつつ、独自開発のピックアップ「マグネットレゾネーター」や、より精密なサドル設計のブリッジなど、Leo Fenderが生涯かけて改良を続けた技術が惜しみなく投入されている。",
+            "初代Fenderの設計思想を土台にしつつ、独自開発のピックアップ「マグネットレゾネーター」や、より精密なサドル(弦を支え振動を伝える金具)設計のブリッジなど、Leo Fenderが生涯かけて改良を続けた技術が惜しみなく投入されている。",
           ],
         },
         {
@@ -876,7 +876,7 @@ window.COURSES["instrument_makers"] = {
           paragraphs: [
             "<strong>Legacy</strong>(20〜30万円台) — Stratocaster的デザイン。",
             "<strong>ASAT</strong>(20〜30万円台) — Telecaster的デザイン。",
-            "<strong>L-2000(ベース)</strong> — 2基のハムバッカー的構造を持つ独自設計、シリーズ/パラレル配線切替可能。",
+            "<strong>L-2000(ベース)</strong> — 2基のハムバッカー的構造を持つ独自設計、シリーズ/パラレル配線(ピックアップ2つの結線方式を切り替えて音色を変える仕組み)切替可能。",
             "USA製が基本で廉価ラインは持たない。",
           ],
         },
@@ -926,7 +926,7 @@ window.COURSES["instrument_makers"] = {
           heading: "音の特徴",
           paragraphs: [
             "1976年発売のStingRayベースは、量産ベースとして初めて「オンボード・アクティブプリアンプ/EQ」(電池駆動で音を積極的に補正・増幅する回路)を搭載したモデルとされ、パンチが効いて前に出る、いわゆる「スラップベース」に理想的な音を確立した。",
-            "ハムバッカー1basicピックアップとアクティブ回路の組み合わせが生む、太さと抜けの両立が最大の個性。",
+            "ハムバッカー1基のピックアップとアクティブ回路の組み合わせが生む、太さと抜けの両立が最大の個性。",
           ],
         },
         {
@@ -991,6 +991,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/warwick_bass.jpg",
+          imageCredit: '写真: Simon Doggett / <a href="https://commons.wikimedia.org/wiki/File:Warwick_Thumb_5_Custom_White_-_backplate.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Thumb Bass</strong>(40万円台〜) — フラッグシップ。ネックスルー構造、Bubinga単板ネック。",
             "<strong>Streamer</strong> — ボルトオン仕様もある中位ライン。",
@@ -1213,7 +1215,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "音の特徴",
           paragraphs: [
-            "多くのモデルがネックスルー構造を標準採用し、パンチの効いた前に出る音を特徴とする。ボディの「翼」のような非対称カーブは、座奏・立奏どちらでも構えやすい人間工学的な工夫でもある。",
+            "多くのモデルがネックスルー構造(ネックとボディの中心部を一体の木材で貫通させる構造)を標準採用し、パンチの効いた前に出る音を特徴とする。ボディの「翼」のような非対称カーブは、座奏・立奏どちらでも構えやすい人間工学的な工夫でもある。",
           ],
         },
         {
@@ -1720,7 +1722,7 @@ window.COURSES["instrument_makers"] = {
           heading: "代表製品ラインナップ",
           paragraphs: [
             "<strong>Cirrusシリーズ</strong>(15〜25万円台) — 上位、ニュートラルなサウンドで評価。",
-            "<strong>T-40</strong> — 1978年発売のヴィンテージ、コイルタップ機能を先進的に搭載。",
+            "<strong>T-40</strong> — 1978年発売のヴィンテージ、コイルタップ機能(ハムバッカーの片方のコイルだけを使い音を細くできる機能)を先進的に搭載。",
             "<strong>Milleniumシリーズ</strong>(5〜10万円台) — 普及帯。",
             "アンプ・PA機材との組み合わせでのバンドルセット展開も強み。",
           ],
@@ -1780,7 +1782,7 @@ window.COURSES["instrument_makers"] = {
           imageCredit: '写真: Tony 1212 / <a href="https://commons.wikimedia.org/wiki/File:Martin-dreadnought-shapes.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 4.0)',
           paragraphs: [
             "<strong>D-28</strong>(50万円台〜) — 1931年発売、ドレッドノートの定番。ローズウッド単板。",
-            "<strong>D-45</strong>(100万円超) — 最高級ライン。abaloneの装飾。1933年に「歌うカウボーイ」Gene Autryのために特注されたのが最初で、一般ラインへの再導入は1968年。",
+            "<strong>D-45</strong>(100万円超) — 最高級ライン。abalone(アワビ貝の内側を使った装飾素材)の装飾。1933年に「歌うカウボーイ」Gene Autryのために特注されたのが最初で、一般ラインへの再導入は1968年。",
             "<strong>000シリーズ</strong> — 小ぶりなボディで指弾き向き。",
             "<strong>DX1シリーズ</strong>(5〜10万円台) — 合板・複合素材の普及帯。",
           ],
@@ -1856,7 +1858,7 @@ window.COURSES["instrument_makers"] = {
         {
           heading: "業界内でのポジション",
           paragraphs: [
-            "Martinの「伝統」に対する「革新」の象徴として位置づけられることが多い。CNC加工などの精密機械技術を早くから取り入れたことで、量産品としての品質の均一性という点でも評価されてきた。",
+            "Martinの「伝統」に対する「革新」の象徴として位置づけられることが多い。CNC加工(コンピューター制御による精密な切削加工)などの精密機械技術を早くから取り入れたことで、量産品としての品質の均一性という点でも評価されてきた。",
           ],
         },
         {
@@ -2298,6 +2300,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/collings_guitar.jpg",
+          imageCredit: '写真: Roberto Cipriano / <a href="https://commons.wikimedia.org/wiki/File:Collings_MT2-O_mandolin_headstock.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>OMシリーズ</strong>(50万円台〜)",
             "<strong>CJシリーズ</strong>(50万円台〜) — ジャンボボディ。",
@@ -2579,6 +2583,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/recording_king_guitar.jpg",
+          imageCredit: '写真: Matanao / <a href="https://commons.wikimedia.org/wiki/File:Recording_king_headstock.JPG" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 3.0)',
           paragraphs: [
             "<strong>RD/RDシリーズ</strong>(5〜10万円台) — ドレッドノート型のヴィンテージ系。",
             "<strong>Voyagerシリーズ(バンジョー)</strong>",
@@ -2635,6 +2641,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/ludwig_drums.jpg",
+          imageCredit: '写真: Eden, Janine and Jim / <a href="https://commons.wikimedia.org/wiki/File:Ringo_Starr%27s_Ludwig_Downbeat_Four-piece_drum_set_with_cymbals_(1963)_-_Play_It_Loud._MET_(2019-05-13_18.37.59_by_Eden,_Janine_and_Jim).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Supraphonic LM402</strong>(3〜8万円台) — アルミシェルスネア。",
             "<strong>Black Beauty</strong>(3〜8万円台) — 真鍮製スネア、より重く太い音。",
@@ -3434,7 +3442,7 @@ window.COURSES["instrument_makers"] = {
             "<strong>TD-17</strong>(10〜30万円台) — V-Drums中級モデル。",
             "<strong>TD-27/TD-50</strong>(10〜30万円台) — 上位、ハイブリッドキット構築も可能。",
             "<strong>SPD-SX</strong>(3〜6万円台) — サンプリングパッド、ライブでの効果音/オケ再生にも使われる。",
-            "<strong>TM-2トリガーモジュール</strong> — 電子/生ハイブリッド用、人気の高い製品。",
+            "<strong>TM-2トリガーモジュール</strong> — 電子/生ハイブリッド用、太鼓の振動を検知して電子音を鳴らすトリガー機能を追加する製品。",
           ],
         },
         {
@@ -3942,6 +3950,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/wuhan_cymbal.jpg",
+          imageCredit: '写真: Andrewa (en.wikipedia) / <a href="https://commons.wikimedia.org/wiki/File:Aachinatypes.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 3.0)',
           paragraphs: [
             "<strong>各種チャイナシンバル</strong>(1枚数千円〜1万円台) — 非常に手頃な価格帯。",
             "他社ブランド向けにOEM(相手先ブランドでの製造)供給を行うことも多く、有名ブランドの廉価チャイナラインの中身がWuhan製というケースも珍しくない。",
@@ -4107,6 +4117,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/stagg_cymbal.jpg",
+          imageCredit: '写真: bigdrumthump.com from Santa Monica, United States / <a href="https://commons.wikimedia.org/wiki/File:Stagg_cymbals.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>SHシリーズ</strong>(4点セットで1〜2万円台) — 普及帯シンバルセット。",
             "単品バラ売りよりもセット販売が中心で、初めてドラムセットを一式揃える初心者向けに最適化されている。",

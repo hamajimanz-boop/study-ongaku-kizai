@@ -51,6 +51,13 @@
 | tama_drums.jpg | Tama | Kenny Jolt | CC BY 3.0 | Wikimedia Commons |
 | musicman_stingray.jpg | Music Man | Serguei Trouchelle | CC BY-SA 3.0 | Wikimedia Commons |
 | danelectro_guitar.jpg | Danelectro | Eden, Janine and Jim | CC BY 2.0 | Wikimedia Commons |
+| sony_mic.jpg | Sony | SkywalkerPL | CC BY 3.0 | Wikimedia Commons |
+| collings_guitar.jpg | Collings | Roberto Cipriano | CC BY 2.0 | Wikimedia Commons |
+| ludwig_drums.jpg | Ludwig | Eden, Janine and Jim | CC BY 2.0 | Wikimedia Commons |
+| recording_king_guitar.jpg | Recording King | Matanao | CC BY-SA 3.0 | Wikimedia Commons |
+| warwick_bass.jpg | Warwick | Simon Doggett | CC BY 2.0 | Wikimedia Commons |
+| stagg_cymbal.jpg | Stagg | bigdrumthump.com | CC BY 2.0 | Wikimedia Commons |
+| wuhan_cymbal.jpg | Wuhan | Andrewa (en.wikipedia) | CC BY-SA 3.0 | Wikimedia Commons |
 
 学習用アプリでの使用にあたり、各ライセンスの表示義務(帰属表示)を満たすため、
 アプリ内の該当セクションにも撮影者名・ライセンス・出典リンクを表示している。
