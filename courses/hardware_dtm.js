@@ -123,6 +123,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/rme_interface.jpg",
+          imageCredit: '写真: Dan Lynch / <a href="https://commons.wikimedia.org/wiki/File:RME_Hammerfall_DSP_9652_Expansion_Board.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>Babyfaceシリーズ</strong>(8〜12万円) — Babyface Pro FSは12in/12out、USBバスパワー駆動可能な携行モデル。SteadyClock FS搭載。",
             "<strong>Firefaceシリーズ(UCX II)</strong>(15〜20万円) — デスクトップ帯の主力。40chミキシング、単体でも使えるスタンドアロン機能。",
@@ -198,6 +200,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/genelec_monitor.jpg",
+          imageCredit: '写真: TaurusEmerald / <a href="https://commons.wikimedia.org/wiki/File:Genelec_8010A_Studio_Monitor_Speaker.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>8010</strong>(1本3〜5万円) — 3インチウーファー、極小デスクトップ向けエントリー機。",
             "<strong>8020</strong>(1本3〜5万円) — 4インチ、DTM用途の定番。",
@@ -429,6 +433,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/focusrite_scarlett.jpg",
+          imageCredit: '写真: Matt Vanacoro / <a href="https://commons.wikimedia.org/wiki/File:Focusrite_Scarlett_2i2,_2i4,_6i6_USB2.0_Audio_Interfaces_with_Focusrite_Mic_Preamps_-_2014_NAMM_Show_(by_Matt_Vanacoro).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Scarlettシリーズ</strong>(1〜3万円台) — Solo(1in/2out)、2i2(2in/2out、宅録の定番)、4i4(4in/4out)。入門帯の代名詞。",
             "<strong>Clarett+シリーズ</strong>(5〜10万円台) — 中位、音質重視ユーザー向け。Air機能標準搭載。",
@@ -658,6 +664,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/apogee_interface.jpg",
+          imageCredit: '写真: David Podosek from Garden Grove, USA / <a href="https://commons.wikimedia.org/wiki/File:Apogee_Symphony_IO_(x2)_%2B_Symphony_64_ThnderBridge_%2B_New_Mac_Pro_%2B_Logic_(photographed_and_edited_by_David_Podosek).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Duet</strong>(3〜8万円) — 2007年発売、2in/2out。Mac用USB I/Fの先駆け。",
             "<strong>One</strong>(3〜8万円) — Mac/iOS向けの小型モデル。",
@@ -733,6 +741,8 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/api_console.jpg",
+          imageCredit: '写真: CJ Sorg from Hendersonville, United States / <a href="https://commons.wikimedia.org/wiki/File:Vibe_56_rack_1.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>512c</strong>(5〜10万円台) — 500シリーズプリアンプ。2520オペアンプ搭載。",
             "<strong>550A / 560</strong>(5〜10万円台) — EQモジュール。550Aは4バンド、560はグラフィックEQ。",

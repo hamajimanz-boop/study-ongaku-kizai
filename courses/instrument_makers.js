@@ -161,6 +161,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/ibanez_rg.jpg",
+          imageCredit: '写真: Styroks / <a href="https://commons.wikimedia.org/wiki/File:IbanezRg.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>RGシリーズ</strong>(5〜30万円台) — 1987年発売開始。速弾き向けの定番。",
             "<strong>JEMシリーズ</strong>(20万円台〜) — Steve Vaiシグネチャー。モンキーグリップ付き。",
@@ -343,6 +345,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/jackson_v.jpg",
+          imageCredit: '写真: The original uploader was RunningWild at English Wikipedia. / <a href="https://commons.wikimedia.org/wiki/File:JACK1.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 3.0)',
           paragraphs: [
             "<strong>Randy Rhoadsモデル</strong>(20万円台〜) — 1981年発表のV字型。",
             "<strong>Soloist</strong> — 汎用スーパーストラト型。ネックスルー構造の上位機あり。",
@@ -515,6 +519,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/schecter_guitar.jpg",
+          imageCredit: '写真: Toglenn / <a href="https://commons.wikimedia.org/wiki/File:Schecter_Guitar_Research-2020_by_Glenn_Francis.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>Hellraiserシリーズ</strong>(8〜15万円台) — EMGアクティブピックアップ搭載。",
             "<strong>Omenシリーズ</strong>(3〜6万円台) — 入門〜中級。",
@@ -689,6 +695,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/squier_strat.jpg",
+          imageCredit: '写真: Arkach at English Wikipedia / <a href="https://commons.wikimedia.org/wiki/File:Modified_Fender_Squier_Stratocaster.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 3.0)',
           paragraphs: [
             "<strong>Bulletシリーズ</strong>(1〜2万円台) — 最も手頃な入門帯。",
             "<strong>Affinityシリーズ</strong>(2〜3万円台) — 中位ライン。",
@@ -1200,6 +1208,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/spector_bass.jpg",
+          imageCredit: '写真: Toglenn / <a href="https://commons.wikimedia.org/wiki/File:Spector_Guitars_2020_by_Glenn_Francis.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>NS-2 / NS-4</strong>(20万円台前後) — 定番、ネックスルー構造。",
             "<strong>NS-5</strong>(20万円台前後) — 5弦版。",
@@ -1934,6 +1944,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/gibson_j45.jpg",
+          imageCredit: '写真: Lauren Gerson (Uploaded on Flickr by LBJ Foundation) / <a href="https://commons.wikimedia.org/wiki/File:Buddy_Holly%27s_Gibson_J-45_with_leather_cover_-_%22Ladies_and_Gentlemen..._the_Beatles!%22_exhibit_at_LBJ_Presidential_Library,_Austin,_TX,_2015-06-23_16.11.39.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (Public domain)',
           paragraphs: [
             "<strong>J-45</strong>(30万円台〜) — 1942年発売、「ワークホース」の異名を持つ定番。",
             "<strong>Hummingbird</strong>(30万円台〜) — 1960年発売、装飾的なピックガードが特徴。",
@@ -1990,6 +2002,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/yamaha_fg.jpg",
+          imageCredit: '写真: John Clift / <a href="https://commons.wikimedia.org/wiki/File:Yamaha_FG-312_12-String_Acoustic_Guitar_(1977-1981).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>FGシリーズ</strong>(2〜6万円台) — 1966年発売の定番、普及帯〜中級帯。",
             "<strong>LLシリーズ</strong>(10万円台〜) — 上位、単板構成。",
@@ -2046,6 +2060,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/ovation_guitar.jpg",
+          imageCredit: '写真: Eden, Janine and Jim; derivative by Clusternote / <a href="https://commons.wikimedia.org/wiki/File:Nancy_Wilson_(Heart)%27s_1978_Ovation_Adamas_1687-7_(serial_no._477-92)_specially_made_for_her_-_Play_It_Loud._MET_(2019-05-13_19.31.01_by_Eden,_Janine_and_Jim).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.0)',
           paragraphs: [
             "<strong>Balladeer</strong>(15〜25万円台) — 定番のボウル型。",
             "<strong>Adamas</strong>(50万円台〜) — 最上位、カーボン系素材の甲板。",
@@ -2491,6 +2507,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/national_resonator.jpg",
+          imageCredit: '写真: brad_bechtel / <a href="https://commons.wikimedia.org/wiki/File:National_prototype_Smith_%26_Young_style_1_metal_body_resonator_guitar_-_ResoSummit_2012_(2012-11-10_12.53.55_by_brad_bechtel).jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Style O</strong>(20万円台〜) — 装飾的なエングレービングが特徴のヴィンテージ復刻、金属ボディ。",
             "<strong>Delphiシリーズ</strong>(10万円前後) — 比較的手頃な価格帯、木製ボディ。",
@@ -2778,6 +2796,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/dw_drums.jpg",
+          imageCredit: '写真: Angel Ramos G / <a href="https://commons.wikimedia.org/wiki/File:3_Doors_Down_DW_Drum-kits_-_HRC_Punta_Cana.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY 2.0)',
           paragraphs: [
             "<strong>Collector's Series</strong>(50万円超) — 最上位カスタムライン。VLT加工・SoftWood Technology等の独自仕上げ選択可。",
             "<strong>Performance Series</strong>(20万円前後) — 中位。",
@@ -2833,6 +2853,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/yamaha_drum_kit.jpg",
+          imageCredit: '写真: Bookcase72 / <a href="https://commons.wikimedia.org/wiki/File:Yamaha_DTXPRO_Module.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>Recording Custom</strong>(20万円台〜) — 上位、スタジオ向け。",
             "<strong>Stage Custom</strong>(10万円前後) — 中位。",
@@ -2889,6 +2911,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/sonor_drums.jpg",
+          imageCredit: '写真: Stephan Czuratis (Jazz-face) / <a href="https://commons.wikimedia.org/wiki/File:2006-07-06_drum_set.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.5)',
           paragraphs: [
             "<strong>SQ2</strong>(30万円超) — フルカスタムオーダー。木材・サイズ・金具を個別選択。",
             "<strong>Signature Series</strong>(20万円台) — 準カスタム。",
@@ -3057,6 +3081,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/premier_drums.jpg",
+          imageCredit: '写真: Acabashi / <a href="https://commons.wikimedia.org/wiki/File:Premier_drum_kit_at_Two_Temple_Place,_Astor_House.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 4.0)',
           paragraphs: [
             "<strong>Genista</strong>(15〜25万円台) — 現行の上位ライン。",
             "<strong>Series XPK</strong> — 過去の代表機、ヴィンテージ市場で流通。",
@@ -3565,6 +3591,8 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "products/paiste_cymbal.jpg",
+          imageCredit: '写真: Stephan Czuratis (Jazz-face) / <a href="https://commons.wikimedia.org/wiki/File:2006-07-06_crash_paiste_16.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA 2.5)',
           paragraphs: [
             "<strong>2002シリーズ</strong>(1枚2〜4万円台) — 1971年発表、ロック向けの定番。",
             "<strong>Signatureシリーズ</strong>(2〜4万円台) — モダンなジャズ〜フュージョン向け。",

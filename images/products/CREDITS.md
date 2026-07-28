@@ -24,6 +24,25 @@
 | ssl_4000.jpg | Solid State Logic | Audio Mix House | CC BY 2.0 | Wikimedia Commons |
 | yamaha_ns10.jpg | Yamaha | CJ Sorg | CC BY-SA 2.0 | Wikimedia Commons |
 | roland_vdrums.jpg | Roland | Rob DiCaterino | CC BY-SA 2.5 | Wikimedia Commons |
+| ibanez_rg.jpg | Ibanez | Styroks | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:IbanezRg.jpg |
+| schecter_guitar.jpg | Schecter | Toglenn | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Schecter_Guitar_Research-2020_by_Glenn_Francis.jpg |
+| squier_strat.jpg | Squier | Arkach at English Wikipedia | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Modified_Fender_Squier_Stratocaster.jpg |
+| spector_bass.jpg | Spector | Toglenn | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spector_Guitars_2020_by_Glenn_Francis.jpg |
+| jackson_v.jpg | Jackson | RunningWild (en.wikipedia) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:JACK1.jpg |
+| yamaha_fg.jpg | Yamaha(アコースティック) | John Clift | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Yamaha_FG-312_12-String_Acoustic_Guitar_(1977-1981).jpg |
+| gibson_j45.jpg | Gibson(アコースティック) | Lauren Gerson / LBJ Foundation | Public domain | Wikimedia Commons |
+| ovation_guitar.jpg | Ovation | Eden, Janine and Jim; derivative Clusternote | CC BY-SA 2.0 | Wikimedia Commons |
+| national_resonator.jpg | National Resophonic | brad_bechtel | CC BY 2.0 | Wikimedia Commons |
+| dw_drums.jpg | DW(Drum Workshop) | Angel Ramos G | CC BY 2.0 | Wikimedia Commons |
+| yamaha_drum_kit.jpg | Yamaha(ドラム) | Bookcase72 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Yamaha_DTXPRO_Module.jpg |
+| premier_drums.jpg | Premier | Acabashi | CC BY-SA 4.0 | Wikimedia Commons |
+| sonor_drums.jpg | Sonor | Stephan Czuratis (Jazz-face) | CC BY-SA 2.5 | Wikimedia Commons |
+| paiste_cymbal.jpg | Paiste | Stephan Czuratis (Jazz-face) | CC BY-SA 2.5 | Wikimedia Commons |
+| rme_interface.jpg | RME | Dan Lynch | CC BY-SA 2.0 | Wikimedia Commons |
+| genelec_monitor.jpg | Genelec | TaurusEmerald | CC BY-SA 4.0 | Wikimedia Commons |
+| focusrite_scarlett.jpg | Focusrite | Matt Vanacoro | CC BY 2.0 | Wikimedia Commons |
+| apogee_interface.jpg | Apogee | David Podosek | CC BY 2.0 | Wikimedia Commons |
+| api_console.jpg | API | CJ Sorg | CC BY-SA 2.0 | Wikimedia Commons |
 
 学習用アプリでの使用にあたり、各ライセンスの表示義務(帰属表示)を満たすため、
 アプリ内の該当セクションにも撮影者名・ライセンス・出典リンクを表示している。
