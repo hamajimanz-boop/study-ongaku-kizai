@@ -16,6 +16,9 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
   ドラム/シンバル 各15社、計75社
 - 個人事業主マネー編(`kojin_jigyou`) — 簿記3級(仕訳の基本)、FP3級(保険・年金)、
   開業届〜確定申告〜法人化までの実務、全7単元
+- DAWソフトウェア編(`daw_software`) — Pro Tools・Logic Pro・Ableton Live・Cubase・
+  FL Studio・Studio One・Reaper・Bitwig・Reason・Digital Performer・Cakewalk・LUNAなど
+  DAWソフト会社12社の沿革・お金の話
 
 ## ローカルでの開発
 
