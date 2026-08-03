@@ -5,7 +5,7 @@ window.COURSES["kojin_jigyou"] = {
   title: "個人事業主マネー編(簿記・FP・実務)",
   description: "個人事業主として活動するために必要なお金の知識を学ぶ。簿記3級(記帳・確定申告の土台)、FP3級(保険・年金などのライフプランニング)、開業届〜法人化までの実務を扱う。",
   color: "#2f9e58",
-  order: 3,
+  order: 4,
   active: true,
   units: [
     {
@@ -14,6 +14,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "簿記とは何か",
       category: "簿記3級",
       hook: "個人事業主になると避けて通れないのが「帳簿をつける」という作業。実はその中身は、簿記3級の知識がそのまま使えるようにできている。",
+      image: "kojin_boki_kernel.png",
       sections: [
         {
           heading: "簿記とは何か",
@@ -66,6 +67,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "仕訳の基本",
       category: "簿記3級",
       hook: "「借方・貸方」という響きに身構えなくていい。中身は単なる左右振り分けのルールで、丸暗記すれば誰でも使えるようになる。",
+      image: "kojin_shiwake_table.png",
       sections: [
         {
           heading: "借方・貸方とは",
@@ -132,6 +134,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "FP3級とは何か",
       category: "FP3級",
       hook: "会社員時代は意識しなくてよかった保険・年金・税金の選択を、個人事業主は全部自分で決めることになる。その武器がFPの知識。",
+      image: "kojin_fp_fields.png",
       sections: [
         {
           heading: "FP3級とは",
@@ -179,6 +182,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "リスク管理(保険)",
       category: "FP3級",
       hook: "会社員は勤務先の社会保険に守られているが、個人事業主になった瞬間、その多くが「自分で選んで加入する」ものに変わる。",
+      image: "kojin_hoken_compare.png",
       sections: [
         {
           heading: "会社員と個人事業主の保障の違い",
@@ -237,6 +241,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "開業届・確定申告の基礎",
       category: "個人事業主実務",
       hook: "開業したらまず何を出せばいいのか、白色と青色で何が違うのか。ここを押さえないと、使えるはずの控除を丸ごと逃す。",
+      image: "kojin_kakutei_flow.png",
       sections: [
         {
           heading: "開業したらまずやること",
@@ -291,6 +296,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "国民健康保険・国民年金・老後資金",
       category: "個人事業主実務",
       hook: "会社員時代は給与から天引きされて意識しなかった保険料と年金。個人事業主になると、その金額と仕組みを自分で把握する必要が出てくる。",
+      image: "kojin_nenkin_layers.png",
       sections: [
         {
           heading: "国民健康保険(国保)",
@@ -340,6 +346,7 @@ window.COURSES["kojin_jigyou"] = {
       title: "法人化(法人成り)を考えるタイミング",
       category: "個人事業主実務",
       hook: "「個人事業主のままか、会社にするか」は多くの個人事業主が数年以内に直面する判断。早すぎても遅すぎても損をしうる。",
+      image: "kojin_houjinka_crossover.png",
       sections: [
         {
           heading: "法人化のメリット",
