@@ -15,7 +15,8 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
 - 楽器メーカー編(`instrument_makers`) — エレキギター/ベース/アコースティック/
   ドラム/シンバル 各15社、計75社
 - 個人事業主マネー編(`kojin_jigyou`) — 簿記3級(仕訳の基本)、FP3級(保険・年金)、
-  開業届〜確定申告〜法人化までの実務、全7単元
+  開業届〜確定申告〜法人化までの実務、消費税/インボイス、資金調達、
+  フリーランス新法(2024年施行)まで、全10単元
 - DAWソフトウェア編(`daw_software`) — Pro Tools・Logic Pro・Ableton Live・Cubase・
   FL Studio・Studio One・Reaper・Bitwig・Reason・Digital Performer・Cakewalk・LUNA・
   Tracktion(Waveform)・MAGIX(Samplitude)・Harrison(Mixbus)のDAWソフト会社15社の沿革・お金の話
