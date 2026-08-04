@@ -17,8 +17,8 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
 - 個人事業主マネー編(`kojin_jigyou`) — 簿記3級(仕訳の基本)、FP3級(保険・年金)、
   開業届〜確定申告〜法人化までの実務、全7単元
 - DAWソフトウェア編(`daw_software`) — Pro Tools・Logic Pro・Ableton Live・Cubase・
-  FL Studio・Studio One・Reaper・Bitwig・Reason・Digital Performer・Cakewalk・LUNAなど
-  DAWソフト会社12社の沿革・お金の話
+  FL Studio・Studio One・Reaper・Bitwig・Reason・Digital Performer・Cakewalk・LUNA・
+  Tracktion(Waveform)・MAGIX(Samplitude)・Harrison(Mixbus)のDAWソフト会社15社の沿革・お金の話
 - 音楽業界のお金編(`music_business_money`) — 著作権の基礎、著作権印税・原盤印税、
   JASRAC/NexTone、レーベル契約、ストリーミング収益構造、二次使用料、全6単元
 

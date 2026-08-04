@@ -1,4 +1,4 @@
-/* DAWソフトウェア編(音楽制作ソフトウェア会社) — 全12単元
+/* DAWソフトウェア編(音楽制作ソフトウェア会社) — 全15単元
    出典: 各社公式サイト・Wikipedia・MusicRadar・Sound on Sound等の一次/準一次情報を
    WebSearchで裏取りして作成(2026-08-04)。年号・買収額等は情報源により多少ぶれがあるため
    目安表記にしている箇所がある。 */
@@ -639,6 +639,165 @@ window.COURSES["daw_software"] = {
         { q: "LUNAの最大の特徴とされているのは?", choices: ["軽量で最速起動", "Neve/API/Studer/Ampex等アナログ機材の質感を組み込んだ設計", "完全クラウド動作", "VRヘッドセット対応"], answer: 1, explain: "伝説的アナログ機材の質感をDAW自体に組み込んだ点が特徴。" },
         { q: "LUNAは主にどのようなユーザーに無料提供されているか?", choices: ["誰でも無条件に無料", "Thunderbolt接続のApollo/Arrowシリーズ所有者", "学生のみ", "サブスク契約者のみ"], answer: 1, explain: "Thunderbolt接続のApollo/Arrowシリーズ所有者に無料提供される位置づけ。" },
         { q: "Universal Audioの中核ビジネスモデルの説明として正しいのは?", choices: ["広告収入のみに依存", "ハードウェア(Apollo)+DSPプラグイン+自社DAWの三位一体戦略", "サブスクの動画配信事業", "楽器の小売販売のみ"], answer: 1, explain: "Apolloインターフェース、UADプラグイン、LUNAを組み合わせたエコシステム戦略。" },
+      ],
+    },
+    {
+      id: "tracktion_waveform",
+      order: 13,
+      title: "Tracktion / Waveform",
+      category: "DAWソフトウェア",
+      hook: "開発者本人が一度手放したソフトを、大手ハードメーカーからの塩漬け状態を経て自分で買い戻し、名前を変えて蘇らせたという珍しい経歴を持つDAW。",
+      image: "daw_tracktion_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          paragraphs: [
+            "Tracktion(トラクション)は、開発者Julian Storer(ジュリアン・ストーラー)によって2002年に生み出されたDAW。2003年、音響機器メーカーMackie(マッキー)がTracktionを買収し、同社のオーディオインターフェース・ミキサー製品に同梱するソフトとして展開した。",
+            "しかし2008年1月以降、Mackieからの公式なアップデート・発表が途絶え、ユーザーの間では事実上「開発終了」と受け止められる状態が続いた。2013年1月のNAMMショーで、開発者本人のJulian Storerが「自ら権利を買い戻した」ことを発表し、新会社Tracktion Software Corporationとして開発を再開した。",
+          ],
+        },
+        {
+          heading: "Waveformへの改名(2017年)",
+          paragraphs: [
+            "2017年、Tracktion Software CorporationはDAW製品名を「Waveform」に改名した。会社名は現在もTracktion Software Corporationのままだが、製品ブランドはWaveformとして展開されている(ややこしいが「会社名Tracktion、製品名Waveform」という状態)。",
+            "macOS・Windows・Linuxに加えて、小型コンピュータ「Raspberry Pi」上でも動作するなど、対応プラットフォームの幅広さも特徴の一つ。",
+          ],
+        },
+        {
+          heading: "製品としての特徴",
+          paragraphs: [
+            "無制限のオーディオ/MIDIトラック、無制限のプラグインスロットなど、価格帯の割に機能制限が少ない太っ腹な設計を掲げている。無料版「Waveform Free」も提供されており、低予算でDAWを始めたいユーザーの選択肢としても知られる。",
+            "開発者自身がJUCE(ジュース)という、多くの音楽ソフトで使われるクロスプラットフォーム開発フレームワークの開発者でもあり、Waveform自体もこのJUCEを土台に作られている。",
+          ],
+        },
+        {
+          heading: "業界内でのポジション",
+          paragraphs: [
+            "Pro Tools・Logic Proのような業界標準の座を狙うというより、「低価格でLinuxを含む幅広いOSに対応する現実的な選択肢」というニッチな立ち位置で根強い支持を得ている。",
+            "「一度大手に飲み込まれたソフトが、開発者自身の手に戻って生き延びる」という経緯は、後述のCakewalkの「倒産→BandLabによる救済」とはまた違う形の、DAW業界における復活劇の一例といえる。",
+          ],
+        },
+        {
+          heading: "よくある誤解・豆知識",
+          paragraphs: [
+            "「Tracktionという名前のDAWは今も存在する」と思われがちだが、現在の製品名は「Waveform」であり、Tracktionは開発会社の名前として残っている(紛らわしいポイント)。",
+            "「Mackieに買収されたまま今もMackie傘下」と誤解されることがあるが、実際は開発者自身が権利を買い戻し、Mackieとは独立した別会社として再出発している。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Tracktionの開発者は誰か?", choices: ["Justin Frankel", "Julian Storer", "Karl Steinberg", "Bill Putnam"], answer: 1, explain: "Julian StorerがTracktionを開発した。" },
+        { q: "2003年にTracktionを買収したのはどこか?", choices: ["Avid", "Mackie", "Yamaha", "Gibson"], answer: 1, explain: "音響機器メーカーのMackieが2003年にTracktionを買収した。" },
+        { q: "2013年、Tracktionはどのような経緯で再スタートしたか?", choices: ["新興企業に売却された", "開発者本人が権利を買い戻し新会社を設立した", "無償でオープンソース化された", "国が買収した"], answer: 1, explain: "開発者Julian Storer本人が権利を買い戻し、Tracktion Software Corporationを設立した。" },
+        { q: "2017年にTracktionの製品名は何に改名されたか?", choices: ["Waveform", "Reaper", "Cubase", "Studio One"], answer: 0, explain: "2017年に製品名が「Waveform」に改名された。" },
+        { q: "Waveformが対応しているプラットフォームとして正しいものは?", choices: ["Windowsのみ", "macOSのみ", "Windows/macOS/Linux/Raspberry Pi", "iOSのみ"], answer: 2, explain: "Raspberry Piを含む幅広いプラットフォームに対応している。" },
+        { q: "Waveformの土台になっている、開発者自身が手がけたクロスプラットフォーム開発フレームワークは?", choices: ["JUCE", "VST SDK", "AAX SDK", "Core Audio"], answer: 0, explain: "多くの音楽ソフトで使われるJUCEというフレームワークが土台になっている。" },
+      ],
+    },
+    {
+      id: "magix_samplitude",
+      order: 14,
+      title: "MAGIX / Samplitude",
+      category: "DAWソフトウェア",
+      hook: "元々はAmiga(アミーガ)という懐かしいコンピュータ用のサンプルエディタとして生まれたソフトが、今もドイツ製DAWとして生き残っている。",
+      image: "daw_magix_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          paragraphs: [
+            "Samplitude(サンプリチュード)の開発は1992年、Amigaプラットフォーム向けのサンプルエディタとして始まった。開発を担ったのはドレスデン出身の技術者たちで、1993年から2000年までは「SEK'D」という会社名で開発が行われていた。",
+            "1995年にはWindows 3.1版が登場し、以後Windows環境のDAWとして開発が続けられている。1998年に設立された「MAGIX Development GmbH」に開発が引き継がれ、以後はMAGIX(マジックス)というドイツのソフトウェア会社のブランドとして展開されている。",
+          ],
+        },
+        {
+          heading: "会社としてのMAGIX",
+          paragraphs: [
+            "MAGIX自体は1993年、ドレスデン出身の技術者2名と西ドイツ出身の起業家2名の出会いから設立された会社で、音楽制作ソフトだけでなく、動画編集・写真スライドショー作成ソフトなど、幅広いマルチメディアソフトを手がける総合ソフトウェア企業として成長してきた。",
+            "音楽制作の初心者向けには「Music Maker」という別ブランドの入門用ソフトも展開しており、Samplitudeはその中でもプロ向けの上位ラインという位置づけになる。",
+          ],
+        },
+        {
+          heading: "製品ラインナップ:Samplitude と Sequoia",
+          paragraphs: [
+            "<strong>Samplitude</strong> — 音楽制作全般に対応する看板DAW。オーディオ編集の緻密さに定評があり、特にマスタリング用途で評価されることが多い。",
+            "<strong>Sequoia(セコイア)</strong> — Samplitudeの技術をベースにした放送局・マスタリングスタジオ向けの上位版。より専門的なワークフロー(放送用ファイル形式対応等)に特化している。",
+          ],
+        },
+        {
+          heading: "業界内でのポジション",
+          paragraphs: [
+            "Pro Tools・Cubaseほどの世界的な知名度は無いものの、「音質・オーディオエンジンの緻密さ」を評価するマスタリングエンジニアやオーディオ編集の専門家の間で根強い支持層を持つ、玄人好みのDAWという位置づけ。",
+            "特にドイツ語圏を中心としたヨーロッパでの利用が伝統的に多いとされ、地域的な人気の偏りがあるDAWの一例。",
+          ],
+        },
+        {
+          heading: "よくある誤解・豆知識",
+          paragraphs: [
+            "「MAGIXは音楽ソフト専業の会社」と思われがちだが、実際は動画編集ソフト・写真ソフトなども手がける総合マルチメディア企業であり、Samplitudeはその一事業ラインに過ぎない。",
+            "「Samplitudeは最初からWindows用ソフトだった」というのは誤りで、最初期(1992年)はAmigaという当時人気だった別のコンピュータプラットフォーム向けに開発されていた。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Samplitudeの開発が最初に始まったプラットフォームはどれか?", choices: ["Windows", "Amiga", "Macintosh", "MS-DOS単体機"], answer: 1, explain: "1992年、Amigaプラットフォーム向けのサンプルエディタとして開発が始まった。" },
+        { q: "1993〜2000年、Samplitudeを開発していた会社名は?", choices: ["MAGIX", "SEK'D", "Cockos", "Emagic"], answer: 1, explain: "SEK'D(SEKD GbR)という会社名で開発されていた。" },
+        { q: "MAGIXという会社が手がけている分野として正しいものは?", choices: ["音楽ソフトのみ", "音楽・動画編集・写真スライドショー等の総合マルチメディアソフト", "ハードウェアの製造のみ", "ゲーム開発のみ"], answer: 1, explain: "MAGIXは音楽だけでなく動画・写真など幅広いマルチメディアソフトを手がける。" },
+        { q: "Samplitudeの技術をベースにした放送局・マスタリングスタジオ向け上位版の名称は?", choices: ["Sequoia", "Nuendo", "Sonar", "Mixbus"], answer: 0, explain: "SequoiaがSamplitudeの上位版として放送・マスタリング向けに展開されている。" },
+        { q: "Samplitudeが特に評価されている用途は?", choices: ["ゲーム音楽の同時多人数収録", "マスタリング等、オーディオ編集の緻密さが問われる用途", "VR空間での演奏", "ライブ配信専用機能"], answer: 1, explain: "オーディオエンジンの緻密さからマスタリング用途で評価されることが多い。" },
+        { q: "MAGIXの初心者向け音楽制作ソフトのブランド名は?", choices: ["Music Maker", "GarageBand", "Mixcraft", "BandLab"], answer: 0, explain: "「Music Maker」が初心者向けの別ブランドとして展開されている。" },
+      ],
+    },
+    {
+      id: "harrison_mixbus",
+      order: 15,
+      title: "Harrison / Mixbus",
+      category: "DAWソフトウェア",
+      hook: "1975年からナッシュビルで高級ミキシングコンソールを作り続けてきたメーカーが、オープンソースDAWをベースに「自社コンソールの質感」を再現したソフトを作った。",
+      image: "daw_harrison_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          paragraphs: [
+            "Harrison(ハリソン)は1975年、アメリカ・テネシー州ナッシュビルで設立された、大型ミキシングコンソール(操作卓)の老舗メーカー。創業者Dave Harrison(デイブ・ハリソン)は元々サクソフォン奏者・レコーディングエンジニアで、スタジオの設計・機材導入を手がける会社「Studio Supply」を経てHarrisonを興した。",
+            "アナログ全盛期からレコーディングスタジオ・放送局向けの大型コンソールで高い評価を受けてきたメーカーで、現在はAudiotonix(オーディオトニックス)グループの一員として活動している。",
+          ],
+        },
+        {
+          heading: "Mixbusの開発",
+          paragraphs: [
+            "2000年代、デジタル録音技術が普及する中で、Harrisonは自社のアナログコンソールの質感をソフトウェアでも提供しようと、オープンソースDAW「Ardour(アードア)」をベースにした独自DAW「Mixbus」を開発した。",
+            "オープンソースソフトを土台にしながら、Harrison独自のEQ・コンプレッサー・リミッター・アナログサチュレーション(飽和感)の質感や、実機のHarrisonコンソールを模したメーターなどを組み込んでいる点が特徴。",
+          ],
+        },
+        {
+          heading: "製品としての特徴",
+          paragraphs: [
+            "各チャンネルストライプに、アナログモデリングされた3バンドEQ(ハイパスフィルター込み)、3種類のコンプレッサー、パンニング、サミング(複数トラックの信号を混ぜ合わせる処理)機能を搭載。8系統のステレオMixbus(サブミックス用のバス)にはトーンコントロールやテープサチュレーション、コンプレッションが備わっている。",
+            "「実機のHarrisonコンソールで作業しているような操作感」を重視した設計で、単なる録音・編集ソフトというより「バーチャルなアナログコンソール」としての性格が強い。",
+          ],
+        },
+        {
+          heading: "業界内でのポジション",
+          paragraphs: [
+            "Pro Tools等の主要DAWと比べると知名度は高くないが、「アナログコンソールの質感を求めるが、実機は買えない/置けない」というニーズに応えるニッチな存在として、根強いファン層を持つ。",
+            "オープンソースのArdourをベースにしている点は、前述のReaperの独立系開発姿勢とも通じる部分があり、大手DAWとは異なる開発思想を持つ製品として並べて語られることがある。",
+          ],
+        },
+        {
+          heading: "よくある誤解・豆知識",
+          paragraphs: [
+            "「HarrisonはDAWの会社」と誤解されることがあるが、そもそもの本業は1975年創業のアナログミキシングコンソール製造であり、Mixbusはその技術・ノウハウをソフトウェアに転用した派生製品という位置づけ。",
+            "「Mixbusは完全にゼロから作られた独自ソフト」というのは誤りで、実際はオープンソースDAW「Ardour」をベースに、Harrison独自の音響処理を追加する形で開発されている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Harrisonが設立されたのはどこの都市か?", choices: ["ロサンゼルス", "ナッシュビル", "ニューヨーク", "シアトル"], answer: 1, explain: "1975年、テネシー州ナッシュビルで設立された。" },
+        { q: "Harrisonの本業として正しいものは?", choices: ["ギター製造", "大型ミキシングコンソールの製造", "DAWソフト専業", "マイク製造専業"], answer: 1, explain: "1975年からレコーディングスタジオ・放送局向け大型コンソールを製造してきた。" },
+        { q: "Mixbusのベースになっているオープンソースソフトは?", choices: ["Ardour", "Reaper", "Bitwig", "Cakewalk"], answer: 0, explain: "オープンソースDAW「Ardour」をベースにMixbusが開発されている。" },
+        { q: "Mixbusの各チャンネルストリップに搭載されている特徴的な機能は?", choices: ["VRヘッドセット連携", "アナログモデリングされたEQ・コンプレッサー・サミング機能", "自動作曲AI", "ライブ配信専用エンコーダー"], answer: 1, explain: "アナログモデリングされたEQ・コンプ・サミングがHarrisonコンソールの質感を再現している。" },
+        { q: "Harrisonが現在所属しているグループ企業はどこか?", choices: ["Audiotonix", "Avid", "Yamaha", "Fender"], answer: 0, explain: "現在Harrisonは Audiotonixグループの一員として活動している。" },
+        { q: "Mixbusが重視している設計思想は?", choices: ["最新のクラウド連携", "実機のHarrisonコンソールで作業しているような操作感", "ゲーム音楽の効率的な量産", "スマホ単体での完結"], answer: 1, explain: "実機コンソールの操作感・質感を重視した「バーチャルなアナログコンソール」を志向している。" },
       ],
     },
   ],
