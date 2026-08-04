@@ -103,6 +103,23 @@ a:hover { text-decoration: underline; }
 .course-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 .course-card-foot { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-top: 8px; }
 
+/* genre cards */
+.genre-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.genre-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  color: var(--ink);
+}
+.genre-card:hover { text-decoration: none; border-color: var(--blue); }
+.genre-card-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
+.genre-icon { font-size: 32px; line-height: 1; flex-shrink: 0; }
+.genre-card-titles h3 { margin: 0 0 6px; font-size: 19px; }
+.genre-desc { margin: 0; color: var(--ink-secondary); font-size: 14px; line-height: 1.6; }
+.genre-card-foot { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-top: 10px; }
+
 .bar-track { height: 8px; background: var(--grid); border-radius: 4px; overflow: hidden; }
 .bar-track-lg { height: 12px; border-radius: 6px; margin: 8px 0 4px; }
 .bar-fill { height: 100%; border-radius: 4px; }

@@ -47,6 +47,22 @@ function courseIds() {
   return Object.keys(window.COURSES).sort((a, b) => window.COURSES[a].order - window.COURSES[b].order);
 }
 
+// ---------- genre lookup ----------
+function genres() {
+  return window.GENRES || [];
+}
+function getGenre(genreId) {
+  return genres().find((g) => g.id === genreId) || null;
+}
+function coursesInGenre(genreId) {
+  const g = getGenre(genreId);
+  if (!g) return [];
+  return g.courseIds.map((cid) => getCourse(cid)).filter(Boolean);
+}
+function getGenreForCourse(courseId) {
+  return genres().find((g) => g.courseIds.includes(courseId)) || null;
+}
+
 // ---------- routing ----------
 window.addEventListener("hashchange", render);
 window.addEventListener("DOMContentLoaded", render);
@@ -60,6 +76,7 @@ function parseHash() {
 function render() {
   const parts = parseHash();
   if (parts.length === 0) return renderHome();
+  if (parts[0] === "genre" && parts[1]) return renderGenre(parts[1]);
   if (parts[0] === "course" && parts[1]) return renderCourse(parts[1]);
   if (parts[0] === "lesson" && parts[1] && parts[2]) return renderLesson(parts[1], parts[2]);
   if (parts[0] === "quiz" && parts[1] && parts[2]) return renderQuiz(parts[1], parts[2]);
@@ -95,35 +112,25 @@ function badge(status) {
   return `<span class="badge ${STATUS_CLASS[status]}">${STATUS_LABEL[status]}</span>`;
 }
 
-// ---------- HOME ----------
-function renderHome() {
-  const state = loadState();
-  const today = todayStr();
+// ---------- shared: course card ----------
+function courseProgress(course, state) {
+  const realUnits = course.units.filter((u) => !u.stub);
+  let masteredCount = 0;
+  let startedCount = 0;
+  course.units.forEach((u) => {
+    if (u.stub) return;
+    const st = computeStatus(state, course.id, u.id);
+    if (st === "mastered") masteredCount++;
+    if (st !== "new") startedCount++;
+  });
+  return { realUnits, masteredCount, startedCount };
+}
 
-  let dueItems = [];
-  let nextNewItems = [];
-  let courseCards = "";
-
-  courseIds().forEach((cid) => {
-    const course = getCourse(cid);
-    const realUnits = course.units.filter((u) => !u.stub);
-    let masteredCount = 0;
-    let startedCount = 0;
-
-    course.units.forEach((u) => {
-      if (u.stub) return;
-      const st = computeStatus(state, cid, u.id);
-      if (st === "mastered") masteredCount++;
-      if (st !== "new") startedCount++;
-      if (st === "due") dueItems.push({ course, unit: u });
-    });
-
-    const nextNew = course.units.find((u) => !u.stub && computeStatus(state, cid, u.id) === "new");
-    if (nextNew) nextNewItems.push({ course, unit: nextNew });
-
-    const pct = realUnits.length ? Math.round((masteredCount / realUnits.length) * 100) : 0;
-    courseCards += `
-      <a class="course-card" href="#/course/${cid}">
+function courseCardHtml(course, state) {
+  const { realUnits, masteredCount, startedCount } = courseProgress(course, state);
+  const pct = realUnits.length ? Math.round((masteredCount / realUnits.length) * 100) : 0;
+  return `
+      <a class="course-card" href="#/course/${course.id}">
         <div class="course-card-head">
           <span class="course-dot" style="background:${course.color}"></span>
           <h3>${course.title}</h3>
@@ -131,11 +138,60 @@ function renderHome() {
         </div>
         <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${course.color}"></div></div>
         <div class="course-card-foot">
-          <span>${masteredCount} / ${realUnits.length} 社 定着</span>
-          <span>${startedCount} 社 着手済み</span>
+          <span>${masteredCount} / ${realUnits.length} 単元 定着</span>
+          <span>${startedCount} 単元 着手済み</span>
         </div>
       </a>`;
+}
+
+// ---------- HOME ----------
+function renderHome() {
+  const state = loadState();
+  const today = todayStr();
+
+  let dueItems = [];
+  let nextNewItems = [];
+
+  courseIds().forEach((cid) => {
+    const course = getCourse(cid);
+    course.units.forEach((u) => {
+      if (u.stub) return;
+      const st = computeStatus(state, cid, u.id);
+      if (st === "due") dueItems.push({ course, unit: u });
+    });
+    const nextNew = course.units.find((u) => !u.stub && computeStatus(state, cid, u.id) === "new");
+    if (nextNew) nextNewItems.push({ course, unit: nextNew });
   });
+
+  const genreCards = genres()
+    .map((g) => {
+      const gCourses = coursesInGenre(g.id);
+      let mastered = 0;
+      let total = 0;
+      gCourses.forEach((course) => {
+        const { realUnits, masteredCount } = courseProgress(course, state);
+        total += realUnits.length;
+        mastered += masteredCount;
+      });
+      const pct = total ? Math.round((mastered / total) * 100) : 0;
+      const activeCount = gCourses.filter((c) => c.active).length;
+      return `
+      <a class="genre-card" href="#/genre/${g.id}">
+        <div class="genre-card-head">
+          <span class="genre-icon">${g.icon}</span>
+          <div class="genre-card-titles">
+            <h3>${g.title}</h3>
+            <p class="genre-desc">${g.description}</p>
+          </div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
+        <div class="genre-card-foot">
+          <span>${gCourses.length}コース(${activeCount}アクティブ)</span>
+          <span>${mastered} / ${total} 単元 定着</span>
+        </div>
+      </a>`;
+    })
+    .join("");
 
   const dueHtml = dueItems.length
     ? dueItems
@@ -173,7 +229,29 @@ function renderHome() {
       <div class="task-list">${dueHtml}${newHtml}</div>
     </section>
     <section class="section">
-      <h2>コース</h2>
+      <h2>ジャンルから選ぶ</h2>
+      <div class="genre-grid">${genreCards}</div>
+    </section>
+  `;
+}
+
+// ---------- GENRE ----------
+function renderGenre(genreId) {
+  const state = loadState();
+  const genre = getGenre(genreId);
+  if (!genre) return renderHome();
+
+  const courseCards = coursesInGenre(genreId)
+    .map((course) => courseCardHtml(course, state))
+    .join("");
+
+  root.innerHTML = `
+    <header class="topbar">
+      <a class="back" href="#/">← ホーム</a>
+      <h1>${genre.icon} ${genre.title}</h1>
+    </header>
+    <section class="section">
+      <p class="lead">${genre.description}</p>
       <div class="course-grid">${courseCards}</div>
     </section>
   `;
@@ -184,6 +262,9 @@ function renderCourse(courseId) {
   const state = loadState();
   const course = getCourse(courseId);
   if (!course) return renderHome();
+  const genre = getGenreForCourse(courseId);
+  const backHref = genre ? `#/genre/${genre.id}` : "#/";
+  const backLabel = genre ? `${genre.icon} ${genre.title}` : "ホーム";
 
   const rows = course.units
     .map((u) => {
@@ -205,7 +286,7 @@ function renderCourse(courseId) {
 
   root.innerHTML = `
     <header class="topbar">
-      <a class="back" href="#/">← ホーム</a>
+      <a class="back" href="${backHref}">← ${backLabel}</a>
       <h1>${course.title}</h1>
     </header>
     <section class="section">
@@ -412,9 +493,9 @@ function renderProgress() {
       <div class="section">
         <h2><span class="course-dot" style="background:${course.color}"></span> ${course.title}</h2>
         <div class="bar-track bar-track-lg"><div class="bar-fill" style="width:${pct}%;background:${course.color}"></div></div>
-        <p class="lead">${masteredCount} / ${realUnits.length} 社が定着済み(${pct}%)</p>
+        <p class="lead">${masteredCount} / ${realUnits.length} 単元が定着済み(${pct}%)</p>
         <table class="progress-table">
-          <thead><tr><th>会社名</th><th>状態</th><th>次回復習日</th><th>復習回数</th><th>直近スコア</th></tr></thead>
+          <thead><tr><th>単元</th><th>状態</th><th>次回復習日</th><th>復習回数</th><th>直近スコア</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>`;
