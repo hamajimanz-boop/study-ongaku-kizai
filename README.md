@@ -20,7 +20,8 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
   FL Studio・Studio One・Reaper・Bitwig・Reason・Digital Performer・Cakewalk・LUNA・
   Tracktion(Waveform)・MAGIX(Samplitude)・Harrison(Mixbus)のDAWソフト会社15社の沿革・お金の話
 - 音楽業界のお金編(`music_business_money`) — 著作権の基礎、著作権印税・原盤印税、
-  JASRAC/NexTone、レーベル契約、ストリーミング収益構造、二次使用料、全6単元
+  JASRAC/NexTone、レーベル契約、ストリーミング収益構造、二次使用料、ライブ・物販・
+  マネジメント契約、全7単元
 
 ## ローカルでの開発
 
