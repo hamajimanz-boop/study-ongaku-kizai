@@ -211,6 +211,9 @@ function renderHome() {
   const greeting = homeGreeting(streak, dueItems.length, nextNewItems.length);
 
   // ---- アクティブなコース(タイル) ----
+  // 「アクティブ」の名の通り、実際に着手済み(startedCount>0)のコースだけを表示する。
+  // 未着手のコースをここに混ぜると、たまたまorderが若いコースが常に先頭表示され、
+  // 「触ってもいないのに目立って表示される」という誤解を招くため表示しない。
   const genreLookup = {};
   genres().forEach((g) => g.courseIds.forEach((cid) => (genreLookup[cid] = g)));
   const courseTiles = courseIds()
@@ -221,8 +224,8 @@ function renderHome() {
       const pct = realUnits.length ? Math.round((masteredCount / realUnits.length) * 100) : 0;
       return { course, pct, started: startedCount > 0, genre: genreLookup[course.id] };
     })
-    .filter((x) => x.pct < 100)
-    .sort((a, b) => (b.started - a.started) || (b.pct - a.pct))
+    .filter((x) => x.started && x.pct < 100)
+    .sort((a, b) => b.pct - a.pct)
     .slice(0, 3);
 
   const tileHtml = courseTiles
@@ -233,11 +236,11 @@ function renderHome() {
           <span class="tile-icon">${(x.genre && x.genre.icon) || ""}</span>
           <h3>${x.course.title}</h3>
         </div>
-        <p>${x.started ? "学習中" : "まだ始めていません"}</p>
+        <p>学習中</p>
         <div class="bar-track"><div class="bar-fill" style="width:${x.pct}%"></div></div>
         <div class="tile-foot">
           <span class="tile-pct">${x.pct}% 完了</span>
-          <a class="tile-btn" href="#/course/${x.course.id}">${x.started ? "続ける →" : "始める →"}</a>
+          <a class="tile-btn" href="#/course/${x.course.id}">続ける →</a>
         </div>
       </div>`
     )
@@ -342,6 +345,11 @@ function renderHome() {
       <div class="tile-grid">${tileHtml}</div>
     </section>` : ""}
 
+    <section class="section">
+      <h2>ジャンルから選ぶ</h2>
+      <div class="genre-grid">${genreCards}</div>
+    </section>
+
     <div class="home-columns">
       <section class="section" style="margin-bottom:0">
         <h2>今日やること <small>${today}</small></h2>
@@ -354,11 +362,6 @@ function renderHome() {
         <div class="side-card-foot"><a href="#/progress">すべての実績を見る →</a></div>
       </div>
     </div>
-
-    <section class="section">
-      <h2>ジャンルから選ぶ</h2>
-      <div class="genre-grid">${genreCards}</div>
-    </section>
   `;
 }
 

@@ -4,9 +4,9 @@
 window.GENRES = [
   {
     id: "hardware_instruments",
-    title: "音響ハードウェア・楽器",
+    title: "機材ブランド・楽器メーカー",
     icon: "HW",
-    description: "マイク・コンソール・モニタースピーカーなどの音響機材メーカーと、ギター/ベース/ドラム/シンバルなどの楽器メーカーの沿革・お金の話。",
+    description: "マイク・コンソール・モニタースピーカーなどの音響機材メーカーと、ギター/ベース/ドラム/シンバルなどの楽器メーカーの沿革・お金の話(各社の歴史・製品ラインナップ)。",
     color: "#2a78d6",
     courseIds: ["hardware_dtm", "instrument_makers"],
   },
@@ -20,9 +20,9 @@ window.GENRES = [
   },
   {
     id: "acoustics_theory",
-    title: "音響理論・工学",
+    title: "音響理論・音響概論(物理と工学)",
     icon: "AC",
-    description: "部屋の音響(定在波・吸音・拡散)から、聴覚のしくみ・電気の基礎・磁気記録まで、音の物理と工学的な土台。",
+    description: "「音響概論」にあたる編。部屋の音響(定在波・吸音・拡散・シュレーダー周波数)から、聴覚のしくみ・波動物理・電気の基礎・磁気記録まで、音の物理と工学的な土台をゼロから積み上げる。機材メーカーの話ではなく、音そのものの理論。",
     color: "#7a1f3d",
     courseIds: ["studio_acoustics", "sound_engineering_theory"],
   },
