@@ -451,12 +451,13 @@ function renderLesson(courseId, unitId) {
 
   const sectionsHtml = unit.sections
     .map((s, i) => {
+      const bodyHtml = s.dialogue ? dialogueHtml(s.dialogue) : s.paragraphs.map((p) => `<p>${p}</p>`).join("");
       const sectionHtml = `
       <div class="lesson-section">
         <h3>${s.heading}</h3>
         ${s.image ? `<img class="lesson-image" src="images/${s.image}" alt="${s.heading}">` : ""}
         ${s.imageCredit ? `<p class="image-credit">${s.imageCredit}</p>` : ""}
-        ${s.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+        ${bodyHtml}
       </div>`;
       const cpQuizIdx = checkpointAtSection[i];
       return sectionHtml + (cpQuizIdx !== undefined ? checkpointHtml(unit.quiz[cpQuizIdx], `${courseId}-${unitId}-${i}`) : "");
@@ -479,6 +480,30 @@ function renderLesson(courseId, unitId) {
   `;
 
   wireCheckpoints();
+}
+
+// ---------- lesson: dialogue-style sections ----------
+// sectionのparagraphsの代わりに dialogue: [{who: "sensei"|"mina", text: "..."}] を
+// 書くと、対話(チャット吹き出し)形式でレッスンを表示できる(paragraphsとは併用不可、
+// どちらか一方を書く)。
+const DIALOGUE_PERSONS = {
+  sensei: { name: "先生", initial: "先" },
+  mina: { name: "ミナ", initial: "ミ" },
+};
+function dialogueHtml(turns) {
+  return `<div class="dialogue-list">${turns
+    .map((t) => {
+      const p = DIALOGUE_PERSONS[t.who] || DIALOGUE_PERSONS.sensei;
+      return `
+      <div class="dialogue-turn ${t.who}">
+        <span class="dialogue-avatar">${p.initial}</span>
+        <div class="dialogue-bubble">
+          <span class="dialogue-name">${p.name}</span>
+          <p class="dialogue-text">${t.text}</p>
+        </div>
+      </div>`;
+    })
+    .join("")}</div>`;
 }
 
 const checkpointExplains = {};
