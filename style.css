@@ -98,7 +98,7 @@ a, button {
   transition: transform 0.12s cubic-bezier(.34,1.4,.64,1), box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 .course-card:active, .genre-card:active, .task-row:active, .unit-row:active,
-.btn:active, .choice:active:not(:disabled) {
+.btn:active, .choice:active:not(:disabled), .checkpoint-choice:active:not(:disabled) {
   transform: scale(0.97);
   box-shadow: var(--shadow-sm);
 }
@@ -203,6 +203,88 @@ a, button {
   padding: 6px 13px;
   font-size: 12.5px;
   font-weight: 700;
+}
+
+/* ---------- home: two-column layout (main + achievements sidebar) ---------- */
+.home-columns { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+.side-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.side-card-foot { margin-top: 12px; text-align: right; }
+.side-card-foot a { font-size: 12.5px; font-weight: 700; }
+
+/* ---------- mini badge row (icon-forward achievements) ---------- */
+.mini-badge-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 4px; }
+.mini-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 64px; text-align: center; }
+.mini-badge-icon {
+  width: 54px; height: 54px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 23px;
+  background: linear-gradient(145deg, var(--yellow), var(--orange));
+  box-shadow: 0 4px 10px rgba(255, 122, 61, 0.4);
+}
+.mini-badge.locked .mini-badge-icon { background: var(--grid); filter: grayscale(1); box-shadow: none; opacity: 0.55; }
+.mini-badge span { font-size: 10.5px; font-weight: 700; color: var(--ink-secondary); line-height: 1.25; }
+
+/* ---------- active course tiles (bold color, EduSpark-style) ---------- */
+.tile-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 4px; }
+.tile {
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  min-height: 148px;
+}
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 92% -10%, rgba(255,255,255,0.35), transparent 55%);
+  pointer-events: none;
+}
+.tile-top { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; }
+.tile-icon {
+  font-size: 20px;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.22);
+  border-radius: 11px;
+  flex-shrink: 0;
+}
+.tile h3 { margin: 0; font-size: 15.5px; font-weight: 800; line-height: 1.3; }
+.tile p { margin: 0; font-size: 12px; opacity: 0.88; position: relative; z-index: 1; }
+.tile .bar-track { background: rgba(255,255,255,0.3); position: relative; z-index: 1; }
+.tile .bar-fill { background: #fff; }
+.tile-foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; position: relative; z-index: 1; }
+.tile-pct { font-size: 12px; font-weight: 800; opacity: 0.9; }
+.tile-btn {
+  background: rgba(255,255,255,0.24);
+  border: 1px solid rgba(255,255,255,0.45);
+  color: #fff;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+.tile-btn:active { transform: scale(0.93); }
+@media (hover: hover) {
+  .tile-btn:hover { background: rgba(255,255,255,0.36); transform: translateY(-1px); }
+}
+
+@media (min-width: 760px) {
+  .home-columns { grid-template-columns: 1fr 280px; }
+  .tile-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---------- course cards ---------- */
@@ -338,6 +420,34 @@ a, button {
 .lesson-section { margin: 26px 0; }
 .lesson-section h3 { font-size: 17px; margin: 0 0 10px; padding-bottom: 8px; border-bottom: 2px solid var(--grid); font-weight: 800; }
 .lesson-section p { margin: 0 0 12px; color: var(--ink-secondary); }
+
+/* ---------- lesson: inline checkpoint (reading-time active recall) ---------- */
+.checkpoint {
+  margin: 22px 0 30px;
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--aqua) 9%, var(--surface));
+  border: 2px dashed color-mix(in srgb, var(--aqua) 45%, var(--border));
+}
+.checkpoint-label { margin: 0 0 8px; font-size: 12px; font-weight: 800; color: var(--aqua); text-transform: uppercase; letter-spacing: 0.03em; }
+.checkpoint-q { margin: 0 0 14px; font-size: 15.5px; font-weight: 700; }
+.checkpoint-choices { display: flex; flex-direction: column; gap: 8px; }
+.checkpoint-choice {
+  text-align: left;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.checkpoint-choice:hover:not(:disabled) { border-color: var(--aqua); }
+.checkpoint-choice:disabled { cursor: default; }
+.checkpoint-feedback { margin-top: 12px; min-height: 0; }
+.checkpoint-feedback:empty { margin-top: 0; }
 
 .btn {
   display: inline-block;

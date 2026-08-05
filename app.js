@@ -197,6 +197,54 @@ function renderHome() {
   const streak = computeStudyStreak(studyDays);
   const greeting = homeGreeting(streak, dueItems.length, nextNewItems.length);
 
+  // ---- アクティブなコース(タイル) ----
+  const genreLookup = {};
+  genres().forEach((g) => g.courseIds.forEach((cid) => (genreLookup[cid] = g)));
+  const courseTiles = courseIds()
+    .map((cid) => getCourse(cid))
+    .filter((c) => c.active)
+    .map((course) => {
+      const { realUnits, masteredCount, startedCount } = courseProgress(course, state);
+      const pct = realUnits.length ? Math.round((masteredCount / realUnits.length) * 100) : 0;
+      return { course, pct, started: startedCount > 0, genre: genreLookup[course.id] };
+    })
+    .filter((x) => x.pct < 100)
+    .sort((a, b) => (b.started - a.started) || (b.pct - a.pct))
+    .slice(0, 3);
+
+  const tileHtml = courseTiles
+    .map(
+      (x) => `
+      <div class="tile" style="background:${x.course.color}">
+        <div class="tile-top">
+          <span class="tile-icon">${(x.genre && x.genre.icon) || "🎧"}</span>
+          <h3>${x.course.title}</h3>
+        </div>
+        <p>${x.started ? "学習中" : "まだ始めていません"}</p>
+        <div class="bar-track"><div class="bar-fill" style="width:${x.pct}%"></div></div>
+        <div class="tile-foot">
+          <span class="tile-pct">${x.pct}% 完了</span>
+          <a class="tile-btn" href="#/course/${x.course.id}">${x.started ? "続ける →" : "始める →"}</a>
+        </div>
+      </div>`
+    )
+    .join("");
+
+  // ---- 実績サイドカード(獲得済みバッジを最大6件アイコン表示) ----
+  const allBadges = window.getAllBadges ? window.getAllBadges(state) : [];
+  const earnedBadges = allBadges.filter((b) => b.earned);
+  const lockedBadges = allBadges.filter((b) => !b.earned);
+  const sideBadges = earnedBadges.slice(0, 6).concat(lockedBadges.slice(0, Math.max(0, 6 - earnedBadges.length)));
+  const miniBadgeHtml = sideBadges
+    .map(
+      (b) => `
+      <div class="mini-badge ${b.earned ? "" : "locked"}" title="${b.desc}">
+        <span class="mini-badge-icon">${b.icon}</span>
+        <span>${b.title}</span>
+      </div>`
+    )
+    .join("");
+
   const genreCards = genres()
     .map((g) => {
       const gCourses = coursesInGenre(g.id);
@@ -275,10 +323,25 @@ function renderHome() {
       </div>
     </div>
 
+    ${tileHtml ? `
     <section class="section">
-      <h2>今日やること <small>${today}</small></h2>
-      <div class="task-list">${dueHtml}${newHtml}</div>
-    </section>
+      <h2>アクティブなコース</h2>
+      <div class="tile-grid">${tileHtml}</div>
+    </section>` : ""}
+
+    <div class="home-columns">
+      <section class="section" style="margin-bottom:0">
+        <h2>今日やること <small>${today}</small></h2>
+        <div class="task-list">${dueHtml}${newHtml}</div>
+      </section>
+      <div class="side-card">
+        <h2 style="margin:0 0 4px">🏅 実績</h2>
+        <p class="lead" style="margin:0 0 10px;font-size:12.5px">${earnedBadges.length} / ${allBadges.length} 個の称号を獲得</p>
+        <div class="mini-badge-row">${miniBadgeHtml}</div>
+        <div class="side-card-foot"><a href="#/progress">すべての実績を見る →</a></div>
+      </div>
+    </div>
+
     <section class="section">
       <h2>ジャンルから選ぶ</h2>
       <div class="genre-grid">${genreCards}</div>
@@ -362,16 +425,29 @@ function renderLesson(courseId, unitId) {
     return;
   }
 
+  // 各セクションの合間に、unit.quizの問題を使い回した「ちょっと確認」チェックポイントを挟み込む
+  // (本番のクイズ(drawQuiz)から問題を減らすわけではなく、同じ問題を先読みで一度使うことで
+  //  「読む→問われる→読む」という対話的なリズムを作る。新しい原稿は一切追加しない)
+  const checkpointCount = Math.min(unit.sections.length - 1, unit.quiz.length, 3);
+  const checkpointAtSection = {};
+  for (let k = 1; k <= checkpointCount; k++) {
+    const sectionIdx = Math.max(0, Math.min(unit.sections.length - 1, Math.round((unit.sections.length * k) / (checkpointCount + 1)) - 1));
+    const quizIdx = Math.max(0, Math.min(unit.quiz.length - 1, Math.round((unit.quiz.length * k) / (checkpointCount + 1)) - 1));
+    checkpointAtSection[sectionIdx] = quizIdx;
+  }
+
   const sectionsHtml = unit.sections
-    .map(
-      (s) => `
+    .map((s, i) => {
+      const sectionHtml = `
       <div class="lesson-section">
         <h3>${s.heading}</h3>
         ${s.image ? `<img class="lesson-image" src="images/${s.image}" alt="${s.heading}">` : ""}
         ${s.imageCredit ? `<p class="image-credit">${s.imageCredit}</p>` : ""}
         ${s.paragraphs.map((p) => `<p>${p}</p>`).join("")}
-      </div>`
-    )
+      </div>`;
+      const cpQuizIdx = checkpointAtSection[i];
+      return sectionHtml + (cpQuizIdx !== undefined ? checkpointHtml(unit.quiz[cpQuizIdx], `${courseId}-${unitId}-${i}`) : "");
+    })
     .join("");
 
   root.innerHTML = `
@@ -381,13 +457,53 @@ function renderLesson(courseId, unitId) {
     <article class="lesson">
       <p class="unit-eyebrow">#${String(unit.order).padStart(2, "0")} ${unit.category || ""}</p>
       <h1>${unit.title}</h1>
-      <div class="hook-box">${unit.hook}</div>
+      <div class="hook-box">💭 ${unit.hook}</div>
       ${unit.image ? `<img class="lesson-image lesson-image-hero" src="images/${unit.image}" alt="${unit.title}">` : ""}
       ${sectionsHtml}
       ${furtherLearningHtml(unit)}
       <a class="btn btn-primary" href="#/quiz/${courseId}/${unitId}">クイズに挑戦する →</a>
     </article>
   `;
+
+  wireCheckpoints();
+}
+
+const checkpointExplains = {};
+function checkpointHtml(q, key) {
+  checkpointExplains[key] = q.explain || "";
+  const choicesHtml = q.choices
+    .map((c, i) => `<button class="checkpoint-choice" data-key="${key}" data-i="${i}" data-answer="${q.answer}">${c}</button>`)
+    .join("");
+  return `
+    <div class="checkpoint" id="cp-${key}">
+      <p class="checkpoint-label">🤔 ちょっと確認</p>
+      <p class="checkpoint-q">${q.q}</p>
+      <div class="checkpoint-choices">${choicesHtml}</div>
+      <div class="checkpoint-feedback" id="cp-feedback-${key}"></div>
+    </div>`;
+}
+
+function wireCheckpoints() {
+  document.querySelectorAll(".checkpoint-choice").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.key;
+      const container = document.getElementById(`cp-${key}`);
+      if (container.dataset.answered) return;
+      container.dataset.answered = "1";
+      const chosen = parseInt(btn.dataset.i, 10);
+      const answer = parseInt(btn.dataset.answer, 10);
+      const correct = chosen === answer;
+      container.querySelectorAll(".checkpoint-choice").forEach((b, i) => {
+        b.disabled = true;
+        if (i === answer) b.classList.add("choice-correct");
+        else if (i === chosen) b.classList.add("choice-wrong");
+      });
+      document.getElementById(`cp-feedback-${key}`).innerHTML = `
+        <p class="${correct ? "fb-correct" : "fb-wrong"}">${correct ? "その通り!このまま読み進めましょう。" : "おしい!正解は上でハイライトした選択肢です。"}</p>
+        <p class="fb-explain">${checkpointExplains[key] || ""}</p>
+      `;
+    });
+  });
 }
 
 function furtherLearningHtml(unit) {
