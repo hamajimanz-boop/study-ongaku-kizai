@@ -112,6 +112,21 @@ function badge(status) {
   return `<span class="badge ${STATUS_CLASS[status]}">${STATUS_LABEL[status]}</span>`;
 }
 
+// ---------- shared: circular progress ring (SVG) ----------
+function ringSvg(pct, size, stroke) {
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const offset = c * (1 - Math.max(0, Math.min(100, pct)) / 100);
+  const center = size / 2;
+  return `
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      <circle cx="${center}" cy="${center}" r="${r}" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="${stroke}"></circle>
+      <circle cx="${center}" cy="${center}" r="${r}" fill="none" stroke="#fff" stroke-width="${stroke}"
+        stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${offset}"
+        transform="rotate(-90 ${center} ${center})"></circle>
+    </svg>`;
+}
+
 // ---------- shared: course card ----------
 function courseProgress(course, state) {
   const realUnits = course.units.filter((u) => !u.stub);
@@ -132,7 +147,7 @@ function courseCardHtml(course, state) {
   return `
       <a class="course-card" href="#/course/${course.id}">
         <div class="course-card-head">
-          <span class="course-dot" style="background:${course.color}"></span>
+          <span class="course-dot" style="background:${course.color}; color:${course.color}"></span>
           <h3>${course.title}</h3>
           ${course.active ? '<span class="badge badge-blue">アクティブ</span>' : '<span class="badge badge-muted">一時停止</span>'}
         </div>
@@ -145,23 +160,42 @@ function courseCardHtml(course, state) {
 }
 
 // ---------- HOME ----------
+function homeGreeting(streak, dueCount, newCount) {
+  if (streak >= 7) return { title: `${streak}日連続、絶好調です🔥`, sub: "この調子でどんどん積み上げていきましょう。" };
+  if (streak >= 1) return { title: `${streak}日連続で学習中!`, sub: "今日も1つ進めて、記録を伸ばしましょう。" };
+  if (dueCount > 0) return { title: "復習のタイミングです", sub: "忘れる前に思い出すと、記憶がぐっと定着します。" };
+  if (newCount > 0) return { title: "新しい単元、始めてみませんか?", sub: "今日の1単元が、教養の積み重ねになります。" };
+  return { title: "おかえりなさい", sub: "気になるジャンルから、気軽に学び始めましょう。" };
+}
+
 function renderHome() {
   const state = loadState();
   const today = todayStr();
 
   let dueItems = [];
   let nextNewItems = [];
+  let totalRealUnits = 0;
+  let totalMastered = 0;
+  const studyDays = new Set();
 
   courseIds().forEach((cid) => {
     const course = getCourse(cid);
     course.units.forEach((u) => {
       if (u.stub) return;
+      totalRealUnits++;
       const st = computeStatus(state, cid, u.id);
       if (st === "due") dueItems.push({ course, unit: u });
+      if (st === "mastered") totalMastered++;
+      const us = unitState(state, cid, u.id);
+      (us && us.history ? us.history : []).forEach((h) => studyDays.add(h.date));
     });
     const nextNew = course.units.find((u) => !u.stub && computeStatus(state, cid, u.id) === "new");
     if (nextNew) nextNewItems.push({ course, unit: nextNew });
   });
+
+  const overallPct = totalRealUnits ? Math.round((totalMastered / totalRealUnits) * 100) : 0;
+  const streak = computeStudyStreak(studyDays);
+  const greeting = homeGreeting(streak, dueItems.length, nextNewItems.length);
 
   const genreCards = genres()
     .map((g) => {
@@ -178,7 +212,7 @@ function renderHome() {
       return `
       <a class="genre-card" href="#/genre/${g.id}">
         <div class="genre-card-head">
-          <span class="genre-icon">${g.icon}</span>
+          <span class="genre-icon" style="--genre-color:${g.color}">${g.icon}</span>
           <div class="genre-card-titles">
             <h3>${g.title}</h3>
             <p class="genre-desc">${g.description}</p>
@@ -198,9 +232,9 @@ function renderHome() {
         .map(
           (x) => `
       <a class="task-row" href="#/quiz/${x.course.id}/${x.unit.id}">
-        <span class="task-tag" style="background:${x.course.color}">復習</span>
+        <span class="task-tag" style="background:${x.course.color}">🔁 復習</span>
         <span class="task-title">${x.unit.title}<small>${x.course.title}</small></span>
-        <span class="task-arrow">→ テストを受ける</span>
+        <span class="task-arrow">テストを受ける →</span>
       </a>`
         )
         .join("")
@@ -211,9 +245,9 @@ function renderHome() {
         .map(
           (x) => `
       <a class="task-row" href="#/lesson/${x.course.id}/${x.unit.id}">
-        <span class="task-tag" style="background:${x.course.color}">新規</span>
+        <span class="task-tag" style="background:${x.course.color}">✨ 新規</span>
         <span class="task-title">${x.unit.title}<small>${x.course.title} / #${String(x.unit.order).padStart(2, "0")}</small></span>
-        <span class="task-arrow">→ 教材を読む</span>
+        <span class="task-arrow">教材を読む →</span>
       </a>`
         )
         .join("")
@@ -222,8 +256,25 @@ function renderHome() {
   root.innerHTML = `
     <header class="topbar">
       <h1>🎛 音楽機材の教養</h1>
-      <nav><a href="#/progress">進捗・実績</a> <a href="#/glossary">音響用語辞典</a></nav>
+      <nav><a href="#/progress">📊 進捗・実績</a> <a href="#/glossary">📖 音響用語辞典</a></nav>
     </header>
+
+    <div class="hero-banner">
+      <div class="hero-ring">
+        ${ringSvg(overallPct, 88, 9)}
+        <div class="hero-ring-label"><strong>${overallPct}%</strong><span>理解度</span></div>
+      </div>
+      <div class="hero-body">
+        <p class="hero-title">${greeting.title}</p>
+        <p class="hero-sub">${greeting.sub}</p>
+        <div class="hero-chips">
+          <span class="hero-chip">🔥 連続 ${streak}日</span>
+          <span class="hero-chip">🏆 定着 ${totalMastered}/${totalRealUnits}単元</span>
+          ${dueItems.length ? `<span class="hero-chip">🔁 復習待ち ${dueItems.length}件</span>` : ""}
+        </div>
+      </div>
+    </div>
+
     <section class="section">
       <h2>今日やること <small>${today}</small></h2>
       <div class="task-list">${dueHtml}${newHtml}</div>
@@ -466,6 +517,7 @@ function drawQuizResult(course, unit) {
       <a class="back" href="#/course/${course.id}">← ${course.title}</a>
     </header>
     <section class="section quiz-result">
+      <div class="quiz-result-icon">${pass ? "🎉" : "💪"}</div>
       <h2>結果: ${score} / ${total}</h2>
       <p class="${pass ? "fb-correct" : "fb-wrong"}">
         ${pass ? "全問正解!次回の復習は " + us.nextReview + " です。" : "一部間違いあり。次回の復習は " + us.nextReview + "(間隔をリセットしました)"}
@@ -603,7 +655,7 @@ function renderProgress() {
 
     courseBody += `
       <div class="section">
-        <h2><span class="course-dot" style="background:${course.color}"></span> ${course.title}</h2>
+        <h2><span class="course-dot" style="background:${course.color}; color:${course.color}"></span> ${course.title}</h2>
         <div class="bar-track bar-track-lg"><div class="bar-fill" style="width:${pct}%;background:${course.color}"></div></div>
         <p class="lead">${masteredCount} / ${realUnits.length} 単元が定着済み(${pct}%)</p>
         <table class="progress-table">
@@ -622,10 +674,10 @@ function renderProgress() {
     <section class="section">
       <h2>全体サマリー</h2>
       <div class="stat-grid">
-        <div class="stat-card"><strong>${overallPct}%</strong><span>全体の理解度(定着率)</span></div>
-        <div class="stat-card"><strong>${totalMastered} / ${totalRealUnits}</strong><span>定着済み単元数</span></div>
-        <div class="stat-card"><strong>${totalAttempts}</strong><span>クイズ挑戦回数</span></div>
-        <div class="stat-card"><strong>${streak}</strong><span>連続学習日数</span></div>
+        <div class="stat-card"><span class="stat-card-icon">📈</span><strong>${overallPct}%</strong><span>全体の理解度(定着率)</span></div>
+        <div class="stat-card"><span class="stat-card-icon">🏆</span><strong>${totalMastered} / ${totalRealUnits}</strong><span>定着済み単元数</span></div>
+        <div class="stat-card"><span class="stat-card-icon">📝</span><strong>${totalAttempts}</strong><span>クイズ挑戦回数</span></div>
+        <div class="stat-card"><span class="stat-card-icon">🔥</span><strong>${streak}</strong><span>連続学習日数</span></div>
       </div>
       <div class="bar-track bar-track-lg"><div class="bar-fill" style="width:${overallPct}%;background:var(--violet)"></div></div>
     </section>
