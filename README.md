@@ -20,8 +20,9 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
   `instrument_makers`(楽器メーカー75社)
 - 💻 **DAW・ソフトウェア** — `daw_software`(DAWソフト15社)、
   `plugin_makers`(プラグインメーカー、一時停止中)
-- 📐 **音響理論・工学** — `studio_acoustics`(部屋の音響、全6単元)、
-  `sound_engineering_theory`(JAPRS準拠の音響工学理論、高校物理の波動から積み上げ、全14単元)
+- 📐 **音響理論・工学** — `studio_acoustics`(部屋の音響、軸性/接線/斜めモードと
+  シュレーダー周波数まで踏み込んだ全7単元)、`sound_engineering_theory`(JAPRS準拠の
+  音響工学理論、高校物理の波動から積み上げ、全14単元)
 - 💰 **お金・ビジネス** — `kojin_jigyou`(個人事業主マネー、全10単元)、
   `music_business_money`(音楽業界のお金、全7単元)
 
