@@ -222,7 +222,7 @@ function renderHome() {
   root.innerHTML = `
     <header class="topbar">
       <h1>🎛 音楽機材の教養</h1>
-      <nav><a href="#/progress">進捗・統計</a> <a href="#/glossary">音響用語辞典</a></nav>
+      <nav><a href="#/progress">進捗・実績</a> <a href="#/glossary">音響用語辞典</a></nav>
     </header>
     <section class="section">
       <h2>今日やること <small>${today}</small></h2>
@@ -333,9 +333,27 @@ function renderLesson(courseId, unitId) {
       <div class="hook-box">${unit.hook}</div>
       ${unit.image ? `<img class="lesson-image lesson-image-hero" src="images/${unit.image}" alt="${unit.title}">` : ""}
       ${sectionsHtml}
+      ${furtherLearningHtml(unit)}
       <a class="btn btn-primary" href="#/quiz/${courseId}/${unitId}">クイズに挑戦する →</a>
     </article>
   `;
+}
+
+function furtherLearningHtml(unit) {
+  const fl = unit.furtherLearning;
+  if (!fl || (!fl.videos?.length && !fl.articles?.length)) return "";
+  const videoItems = (fl.videos || [])
+    .map((v) => `<li><a href="${v.url}" target="_blank" rel="noopener">▶ ${v.title}</a></li>`)
+    .join("");
+  const articleItems = (fl.articles || [])
+    .map((a) => `<li><a href="${a.url}" target="_blank" rel="noopener">📄 ${a.title}</a></li>`)
+    .join("");
+  return `
+    <div class="further-learning">
+      <h3>さらに学ぶ</h3>
+      ${videoItems ? `<p class="further-learning-label">関連動画</p><ul class="further-learning-list">${videoItems}</ul>` : ""}
+      ${articleItems ? `<p class="further-learning-label">関連記事</p><ul class="further-learning-list">${articleItems}</ul>` : ""}
+    </div>`;
 }
 
 // ---------- QUIZ ----------
@@ -461,11 +479,106 @@ function drawQuizResult(course, unit) {
   quizRuntime = null;
 }
 
-// ---------- PROGRESS ----------
+// ---------- PROGRESS / DASHBOARD ----------
+const STEPS_LEN = STEPS.length;
+function understandingPct(us) {
+  if (!us) return 0;
+  if (us.status === "mastered") return 100;
+  return Math.min(100, Math.round((us.reviewCount / STEPS_LEN) * 100));
+}
+
+function computeStudyStreak(studyDaysSet) {
+  // 今日 or 昨日を起点に、連続して学習した日数を数える
+  const days = studyDaysSet;
+  let streak = 0;
+  let cursor = todayStr();
+  if (!days.has(cursor)) {
+    cursor = addDays(cursor, -1);
+    if (!days.has(cursor)) return 0;
+  }
+  while (days.has(cursor)) {
+    streak++;
+    cursor = addDays(cursor, -1);
+  }
+  return streak;
+}
+
+function badgeGridHtml(state) {
+  const badges = window.getAllBadges ? window.getAllBadges(state) : [];
+  const earned = badges.filter((b) => b.earned);
+  const items = badges
+    .map(
+      (b) => `
+      <div class="badge-card ${b.earned ? "badge-card-earned" : "badge-card-locked"}">
+        <span class="badge-card-icon">${b.icon}</span>
+        <div class="badge-card-body">
+          <strong>${b.title}</strong>
+          <small>${b.desc}</small>
+        </div>
+      </div>`
+    )
+    .join("");
+  return { html: items, earnedCount: earned.length, totalCount: badges.length };
+}
+
+function learningLogHtml(state) {
+  const entries = [];
+  courseIds().forEach((cid) => {
+    const course = getCourse(cid);
+    course.units.forEach((u) => {
+      const us = unitState(state, cid, u.id);
+      if (!us) return;
+      (us.history || []).forEach((h) => {
+        entries.push({ date: h.date, course, unit: u, score: h.score, total: h.total });
+      });
+    });
+  });
+  entries.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  const recent = entries.slice(0, 30);
+  if (!recent.length) return `<p class="empty">まだ学習ログがありません。クイズに挑戦すると、ここに記録されていきます。</p>`;
+  return `
+    <ul class="log-list">
+      ${recent
+        .map(
+          (e) => `
+        <li class="log-row">
+          <span class="log-date">${e.date}</span>
+          <span class="log-desc"><strong>${e.unit.title}</strong><small>${e.course.title}</small></span>
+          <span class="log-score ${e.score === e.total ? "fb-correct" : ""}">${e.score} / ${e.total}</span>
+        </li>`
+        )
+        .join("")}
+    </ul>`;
+}
+
 function renderProgress() {
   const state = loadState();
-  let body = "";
 
+  // ---- 全体サマリー ----
+  let totalRealUnits = 0;
+  let totalMastered = 0;
+  let totalAttempts = 0;
+  const studyDays = new Set();
+  courseIds().forEach((cid) => {
+    const course = getCourse(cid);
+    const realUnits = course.units.filter((u) => !u.stub);
+    totalRealUnits += realUnits.length;
+    realUnits.forEach((u) => {
+      const us = unitState(state, cid, u.id);
+      if (!us) return;
+      if (us.status === "mastered") totalMastered++;
+      (us.history || []).forEach((h) => {
+        totalAttempts++;
+        studyDays.add(h.date);
+      });
+    });
+  });
+  const overallPct = totalRealUnits ? Math.round((totalMastered / totalRealUnits) * 100) : 0;
+  const streak = computeStudyStreak(studyDays);
+  const { html: badgeHtml, earnedCount, totalCount } = badgeGridHtml(state);
+
+  // ---- コース別テーブル ----
+  let courseBody = "";
   courseIds().forEach((cid) => {
     const course = getCourse(cid);
     const realUnits = course.units.filter((u) => !u.stub);
@@ -473,14 +586,13 @@ function renderProgress() {
       .map((u) => {
         const us = unitState(state, cid, u.id);
         const st = computeStatus(state, cid, u.id);
-        const attempts = us ? us.history.length : 0;
         const lastScore = us && us.history.length ? us.history[us.history.length - 1] : null;
         return `
         <tr>
           <td>${u.title}</td>
           <td>${badge(st)}</td>
+          <td>${understandingPct(us)}%</td>
           <td>${us ? us.nextReview : "-"}</td>
-          <td>${us ? us.reviewCount : 0} 回</td>
           <td>${lastScore ? lastScore.score + "/" + lastScore.total : "-"}</td>
         </tr>`;
       })
@@ -489,13 +601,13 @@ function renderProgress() {
     const masteredCount = realUnits.filter((u) => computeStatus(state, cid, u.id) === "mastered").length;
     const pct = realUnits.length ? Math.round((masteredCount / realUnits.length) * 100) : 0;
 
-    body += `
+    courseBody += `
       <div class="section">
         <h2><span class="course-dot" style="background:${course.color}"></span> ${course.title}</h2>
         <div class="bar-track bar-track-lg"><div class="bar-fill" style="width:${pct}%;background:${course.color}"></div></div>
         <p class="lead">${masteredCount} / ${realUnits.length} 単元が定着済み(${pct}%)</p>
         <table class="progress-table">
-          <thead><tr><th>単元</th><th>状態</th><th>次回復習日</th><th>復習回数</th><th>直近スコア</th></tr></thead>
+          <thead><tr><th>単元</th><th>状態</th><th>理解度</th><th>次回復習日</th><th>直近スコア</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>`;
@@ -504,9 +616,34 @@ function renderProgress() {
   root.innerHTML = `
     <header class="topbar">
       <a class="back" href="#/">← ホーム</a>
-      <h1>進捗・統計</h1>
+      <h1>進捗・実績</h1>
     </header>
-    ${body}
+
+    <section class="section">
+      <h2>全体サマリー</h2>
+      <div class="stat-grid">
+        <div class="stat-card"><strong>${overallPct}%</strong><span>全体の理解度(定着率)</span></div>
+        <div class="stat-card"><strong>${totalMastered} / ${totalRealUnits}</strong><span>定着済み単元数</span></div>
+        <div class="stat-card"><strong>${totalAttempts}</strong><span>クイズ挑戦回数</span></div>
+        <div class="stat-card"><strong>${streak}</strong><span>連続学習日数</span></div>
+      </div>
+      <div class="bar-track bar-track-lg"><div class="bar-fill" style="width:${overallPct}%;background:var(--violet)"></div></div>
+    </section>
+
+    <section class="section">
+      <h2>称号 <small>${earnedCount} / ${totalCount} 獲得</small></h2>
+      <div class="badge-grid">${badgeHtml}</div>
+    </section>
+
+    <section class="section">
+      <h2>学習ログ <small>直近30件</small></h2>
+      ${learningLogHtml(state)}
+    </section>
+
+    <section class="section">
+      <h2>コース別の詳細</h2>
+      ${courseBody}
+    </section>
   `;
 }
 

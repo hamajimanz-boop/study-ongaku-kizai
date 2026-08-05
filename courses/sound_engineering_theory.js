@@ -67,6 +67,16 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "2つの波の山と谷が重なり振幅が打ち消し合う現象を何と呼ぶか?", choices: ["建設的干渉", "相殺的干渉", "共鳴", "ドップラー効果"], answer: 1, explain: "位相が反転した波が重なり打ち消し合うのが相殺的干渉。" },
         { q: "気温が上がると音速はどうなる傾向があるか?", choices: ["わずかに速くなる", "わずかに遅くなる", "全く変化しない", "音速は気温と無関係に一定"], answer: 0, explain: "音速は気温にほぼ比例して速くなる(約331.5+0.6×気温 m/秒)。" },
       ],
+      furtherLearning: {
+        videos: [
+          { title: "【単振動】高校物理 物理 力学 単振動1 単振動とは？ 授業", url: "https://www.youtube.com/watch?v=t67hrsggU2M" },
+          { title: "【高校物理】 波動3 波を表す式 （２３分）", url: "https://www.youtube.com/watch?v=nYhaL_TlxIk" },
+        ],
+        articles: [
+          { title: "単振動 ■わかりやすい高校物理の部屋■", url: "https://wakariyasui.sakura.ne.jp/p/mech/tann/tannsinn.html" },
+          { title: "波動 ■わかりやすい高校物理の部屋■", url: "http://www.wakariyasui.sakura.ne.jp/p/wave/hadou/hadou.html" },
+        ],
+      },
     },
     {
       id: "standing_waves_resonance",
@@ -119,6 +129,15 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "同じ音程でも楽器ごとに音色が違って聞こえる物理的な理由は?", choices: ["基本振動数が楽器ごとに異なるため", "倍音構成(倍音の強さのバランス)が楽器ごとに異なるため", "音速が楽器ごとに異なるため", "楽器の色が違うため"], answer: 1, explain: "基本振動数が同じでも倍音の強さのバランスが異なるため音色が変わる。" },
         { q: "複雑な波形を正弦波の重ね合わせに分解する考え方を何と呼ぶか?", choices: ["フーリエ級数(フーリエ分解)", "オームの法則", "ドップラー効果", "逆二乗の法則"], answer: 0, explain: "複雑な波形をサイン波の重ね合わせに分解する考え方がフーリエ級数。" },
       ],
+      furtherLearning: {
+        videos: [
+          { title: "気柱の振動は弦と同じ感覚でOK！開管・閉管の基本振動と倍振動がわかる！【波動15】", url: "https://www.youtube.com/watch?v=63Zz5j-Q710" },
+          { title: "【高校物理講座】254 音 弦の振動 倍音 ハーモニクス 弦楽器", url: "https://www.youtube.com/watch?v=0CqG6iqfW_k" },
+        ],
+        articles: [
+          { title: "気柱の振動 ■わかりやすい高校物理の部屋■", url: "https://wakariyasui.sakura.ne.jp/p/wave/koyuu/kityuu.html" },
+        ],
+      },
     },
     {
       id: "sound_energy_inverse_square_db",
@@ -171,6 +190,15 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "dB SPLの基準値(0dB SPL)とされる音圧は?", choices: ["20マイクロパスカル", "1パスカル", "1気圧", "100デシベル"], answer: 0, explain: "人間の最小可聴音圧とされる20μPaが0dB SPLの基準。" },
         { q: "無相関な音源2つを同時に鳴らしたときのレベル上昇の目安は?", choices: ["約+3dB", "約+6dB", "約+20dB", "変化しない"], answer: 0, explain: "強度が2倍になるため10×log10(2)≈+3dBの上昇になる。" },
       ],
+      furtherLearning: {
+        videos: [
+          { title: "【解説】音圧・音圧レベル・エネルギー・デシベルとかの話", url: "https://www.youtube.com/watch?v=sNKIbQtU0us" },
+        ],
+        articles: [
+          { title: "逆2乗の法則 ■わかりやすい高校物理の部屋■", url: "https://wakariyasui.sakura.ne.jp/p/math/sukika/gyakunijyou.html" },
+          { title: "音響パワー測定の「逆二乗則」とは？｜ソノーラテクノロジー", url: "https://www.soundenvironment.jp/technology/what-is-the-inverse-square-law/" },
+        ],
+      },
     },
     {
       id: "beats_doppler",
@@ -216,6 +244,13 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "ドップラー効果の式 f' = f × v/(v - vs) において、音源が近づく(vsが正)とf'はどうなるか?", choices: ["元のfより高くなる", "元のfより低くなる", "変化しない", "0になる"], answer: 0, explain: "分母(v-vs)が小さくなるため、f'は元のfより高くなる。" },
         { q: "レズリースピーカーが音の揺れを生み出す物理的な仕組みは?", choices: ["スピーカーを回転させ音源が周期的に近づく/遠ざかる状態を作る", "スピーカーの音量を手動で上下させる", "録音後にEQを自動でかける", "常に一定の音量・ピッチを保つ"], answer: 0, explain: "スピーカーの回転による相対運動でドップラー効果由来のピッチ・音量の揺れを生む。" },
       ],
+      furtherLearning: {
+        videos: [
+          { title: "【高校物理】うなり①(基本編)【波動】", url: "https://www.youtube.com/watch?v=krVkvuCsy5E" },
+          { title: "【高校物理】ドップラー効果①(音源が動く場合)/全4講【波動】", url: "https://www.youtube.com/watch?v=GsiSZzpElSQ" },
+        ],
+        articles: [],
+      },
     },
     {
       id: "hearing_mechanism",

@@ -244,6 +244,65 @@ a:hover { text-decoration: underline; }
 .progress-table th, .progress-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--grid); }
 .progress-table th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
 
+/* further learning (lesson page) */
+.further-learning {
+  margin: 30px 0 10px;
+  padding: 18px 20px;
+  background: color-mix(in srgb, var(--violet) 8%, var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.further-learning h3 { margin: 0 0 10px; font-size: 16px; }
+.further-learning-label { margin: 12px 0 4px; font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.further-learning-label:first-of-type { margin-top: 0; }
+.further-learning-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.further-learning-list a { font-size: 14px; }
+
+/* dashboard: summary stat cards */
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-card strong { font-size: 24px; }
+.stat-card span { font-size: 12.5px; color: var(--muted); }
+
+/* dashboard: badges */
+.badge-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.badge-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.badge-card-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.badge-card-body { display: flex; flex-direction: column; }
+.badge-card-body small { color: var(--muted); font-size: 12.5px; }
+.badge-card-locked { opacity: 0.4; filter: grayscale(1); }
+
+/* dashboard: learning log */
+.log-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.log-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--grid);
+  font-size: 14px;
+}
+.log-date { color: var(--muted); font-size: 12.5px; width: 84px; flex-shrink: 0; }
+.log-desc { flex: 1; }
+.log-desc small { display: block; color: var(--muted); font-size: 12px; }
+.log-score { font-weight: 600; flex-shrink: 0; }
+
 /* glossary */
 .glossary-list { display: flex; flex-direction: column; gap: 4px; }
 .glossary-item {
@@ -256,6 +315,11 @@ a:hover { text-decoration: underline; }
 .glossary-item h3 { margin: 0 0 6px; font-size: 16px; }
 .glossary-item h3 small { color: var(--muted); font-weight: normal; font-size: 13px; }
 .glossary-item p { margin: 0; color: var(--ink-secondary); font-size: 14px; }
+
+@media (min-width: 640px) {
+  .stat-grid { grid-template-columns: repeat(4, 1fr); }
+  .badge-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 @media (max-width: 600px) {
   .lesson { padding: 20px; }
