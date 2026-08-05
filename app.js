@@ -59,9 +59,6 @@ function coursesInGenre(genreId) {
   if (!g) return [];
   return g.courseIds.map((cid) => getCourse(cid)).filter(Boolean);
 }
-function getGenreForCourse(courseId) {
-  return genres().find((g) => g.courseIds.includes(courseId)) || null;
-}
 
 // ---------- routing ----------
 window.addEventListener("hashchange", render);
@@ -261,33 +258,18 @@ function renderHome() {
     )
     .join("");
 
-  const genreCards = genres()
+  // ジャンルは「別ページに飛ぶボタン」ではなく、ホーム画面上の見出し+その場でコース一覧、
+  // という形にする(クリック1回でコースの中身が見えるように、中間ページを挟まない)。
+  const genreSectionsHtml = genres()
     .map((g) => {
       const gCourses = coursesInGenre(g.id);
-      let mastered = 0;
-      let total = 0;
-      gCourses.forEach((course) => {
-        const { realUnits, masteredCount } = courseProgress(course, state);
-        total += realUnits.length;
-        mastered += masteredCount;
-      });
-      const pct = total ? Math.round((mastered / total) * 100) : 0;
-      const activeCount = gCourses.filter((c) => c.active).length;
+      const cardsHtml = gCourses.map((course) => courseCardHtml(course, state)).join("");
       return `
-      <a class="genre-card" href="#/genre/${g.id}">
-        <div class="genre-card-head">
-          <span class="genre-icon" style="--genre-color:${g.color}">${g.icon}</span>
-          <div class="genre-card-titles">
-            <h3>${g.title}</h3>
-            <p class="genre-desc">${g.description}</p>
-          </div>
-        </div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${g.color}"></div></div>
-        <div class="genre-card-foot">
-          <span>${gCourses.length}コース(${activeCount}アクティブ)</span>
-          <span>${mastered} / ${total} 単元 定着</span>
-        </div>
-      </a>`;
+      <section class="section genre-block">
+        <h2><span class="genre-icon genre-icon-sm" style="--genre-color:${g.color}">${g.icon}</span>${g.title}</h2>
+        <p class="lead">${g.description}</p>
+        <div class="course-grid">${cardsHtml}</div>
+      </section>`;
     })
     .join("");
 
@@ -345,10 +327,7 @@ function renderHome() {
       <div class="tile-grid">${tileHtml}</div>
     </section>` : ""}
 
-    <section class="section">
-      <h2>ジャンルから選ぶ</h2>
-      <div class="genre-grid">${genreCards}</div>
-    </section>
+    ${genreSectionsHtml}
 
     <div class="home-columns">
       <section class="section" style="margin-bottom:0">
@@ -392,9 +371,8 @@ function renderCourse(courseId) {
   const state = loadState();
   const course = getCourse(courseId);
   if (!course) return renderHome();
-  const genre = getGenreForCourse(courseId);
-  const backHref = genre ? `#/genre/${genre.id}` : "#/";
-  const backLabel = genre ? `${genre.icon} ${genre.title}` : "ホーム";
+  const backHref = "#/";
+  const backLabel = "ホーム";
 
   const rows = course.units
     .map((u) => {
