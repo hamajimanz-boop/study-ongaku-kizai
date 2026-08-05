@@ -2,11 +2,11 @@
   color-scheme: light;
   --surface: #ffffff;
   --surface-raised: #ffffff;
-  --page: #f4f2fb;
+  --page: #fbf5ff;
   --ink: #16131f;
   --ink-secondary: #55506b;
   --muted: #8b869e;
-  --grid: #e6e2f5;
+  --grid: #ece4ff;
   --border: rgba(22, 19, 31, 0.08);
   --blue: #3a6df0;
   --orange: #ff7a3d;
@@ -20,35 +20,14 @@
   --shadow-md: 0 8px 20px rgba(30, 20, 60, 0.10), 0 2px 6px rgba(30, 20, 60, 0.06);
   --shadow-lg: 0 16px 36px rgba(30, 20, 60, 0.16), 0 4px 10px rgba(30, 20, 60, 0.08);
   --gradient-hero: linear-gradient(120deg, #6a4bff 0%, #8b5cff 45%, #ff5da2 100%);
+  --gradient-page: linear-gradient(160deg, #fff7f0 0%, #fbf5ff 45%, #f2f6ff 100%);
   --radius-lg: 20px;
   --radius-md: 14px;
   --radius-sm: 10px;
 }
-@media (prefers-color-scheme: dark) {
-  :root:where(:not([data-theme="light"])) {
-    color-scheme: dark;
-    --surface: #201c30;
-    --surface-raised: #262137;
-    --page: #14111f;
-    --ink: #f5f3ff;
-    --ink-secondary: #c7c2dd;
-    --muted: #918cae;
-    --grid: #322c47;
-    --border: rgba(255, 255, 255, 0.10);
-    --blue: #5b8bff;
-    --orange: #ff8f5c;
-    --aqua: #2fe0b4;
-    --yellow: #ffc25c;
-    --violet: #a48bff;
-    --pink: #ff7fb8;
-    --red: #ff6b7f;
-    --good: #35d374;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.25);
-    --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.45), 0 4px 10px rgba(0, 0, 0, 0.3);
-    --gradient-hero: linear-gradient(120deg, #4b2fc9 0%, #6a3fd6 45%, #c93f8c 100%);
-  }
-}
+/* このアプリは常に明るいテーマで表示する(OSのダーク設定に関わらず、
+   意図的に暗いテーマへは自動切り替えしない)。将来トグルを付ける場合の
+   ために :root[data-theme="dark"] だけ残してある。 */
 :root[data-theme="dark"] {
   color-scheme: dark;
   --surface: #201c30;
@@ -77,7 +56,9 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--page);
+  min-height: 100%;
+  background: var(--gradient-page, var(--page));
+  background-attachment: fixed;
   color: var(--ink);
   font-family: system-ui, -apple-system, "Hiragino Sans", "Segoe UI", sans-serif;
   line-height: 1.7;
@@ -318,7 +299,9 @@ a, button {
 .genre-card:hover { text-decoration: none; }
 .genre-card-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 14px; }
 .genre-icon {
-  font-size: 26px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   line-height: 1;
   flex-shrink: 0;
   width: 52px;
@@ -327,6 +310,7 @@ a, button {
   align-items: center;
   justify-content: center;
   border-radius: 16px;
+  color: var(--genre-color, var(--violet));
   background: color-mix(in srgb, var(--genre-color, var(--violet)) 16%, var(--surface));
 }
 .genre-card-titles h3 { margin: 0 0 6px; font-size: 18px; font-weight: 800; }
@@ -514,7 +498,7 @@ a, button {
 .fb-wrong { color: var(--red); font-weight: 800; }
 .fb-explain { color: var(--ink-secondary); }
 .quiz-result h2 { margin-top: 0; font-weight: 800; }
-.quiz-result-icon { font-size: 40px; margin-bottom: 4px; animation: pop 0.5s cubic-bezier(.34,1.56,.64,1); }
+.quiz-result-icon { font-size: 40px; margin-bottom: 4px; display: block; animation: pop 0.5s cubic-bezier(.34,1.56,.64,1); }
 .result-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
 
 /* ---------- progress table ---------- */
@@ -549,7 +533,7 @@ a, button {
   gap: 3px;
   box-shadow: var(--shadow-sm);
 }
-.stat-card-icon { font-size: 20px; margin-bottom: 2px; }
+.stat-card-icon { font-size: 20px; margin-bottom: 2px; display: block; color: var(--violet); }
 .stat-card strong { font-size: 25px; font-weight: 800; letter-spacing: -0.01em; }
 .stat-card span { font-size: 12px; color: var(--muted); font-weight: 600; }
 

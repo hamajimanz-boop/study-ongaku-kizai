@@ -5,7 +5,7 @@ window.GENRES = [
   {
     id: "hardware_instruments",
     title: "音響ハードウェア・楽器",
-    icon: "🎚️",
+    icon: "HW",
     description: "マイク・コンソール・モニタースピーカーなどの音響機材メーカーと、ギター/ベース/ドラム/シンバルなどの楽器メーカーの沿革・お金の話。",
     color: "#2a78d6",
     courseIds: ["hardware_dtm", "instrument_makers"],
@@ -13,7 +13,7 @@ window.GENRES = [
   {
     id: "software",
     title: "DAW・ソフトウェア",
-    icon: "💻",
+    icon: "SW",
     description: "Pro Tools・Logic Pro・Ableton LiveなどのDAWを作る会社と、プラグインメーカーの沿革・ビジネス。",
     color: "#0e7490",
     courseIds: ["daw_software", "plugin_makers"],
@@ -21,7 +21,7 @@ window.GENRES = [
   {
     id: "acoustics_theory",
     title: "音響理論・工学",
-    icon: "📐",
+    icon: "AC",
     description: "部屋の音響(定在波・吸音・拡散)から、聴覚のしくみ・電気の基礎・磁気記録まで、音の物理と工学的な土台。",
     color: "#7a1f3d",
     courseIds: ["studio_acoustics", "sound_engineering_theory"],
@@ -29,7 +29,7 @@ window.GENRES = [
   {
     id: "money_business",
     title: "お金・ビジネス",
-    icon: "💰",
+    icon: "¥",
     description: "個人事業主の簿記・税務・実務と、印税・著作権・レーベル契約など音楽業界特有のお金の話。",
     color: "#2f9e58",
     courseIds: ["kojin_jigyou", "music_business_money"],

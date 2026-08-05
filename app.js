@@ -112,6 +112,19 @@ function badge(status) {
   return `<span class="badge ${STATUS_CLASS[status]}">${STATUS_LABEL[status]}</span>`;
 }
 
+// ---------- shared: small inline icons (SVG, no emoji) ----------
+const ICONS = {
+  flame: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12.5 2c.7 3.1-2.2 4.6-3.5 7A7 7 0 1019 13c0-2.4-1.2-3.8-2.3-4.9.4 2.6-1 4-2.3 4-1.6 0-2.4-1.6-1.4-3.7.9-1.9.9-4-.5-6.4z"/></svg>',
+  trophy: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M17 4V2H7v2H2v3a5 5 0 005 5h.06A6 6 0 0011 17.65V20H8v2h8v-2h-3v-2.35A6 6 0 0016.94 9H17a5 5 0 005-5V4h-5zM4 7V6h3.05A6.9 6.9 0 008 9.8 3 3 0 014 7zm16 0a3 3 0 01-4 2.8A6.9 6.9 0 0016.95 6H20v1z"/></svg>',
+  chart: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M4 20V10h4v10H4zm6 0V4h4v16h-4zm6 0v-7h4v7h-4z"/></svg>',
+  pencil: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+  play: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.29 1.54.83l10.14-6.86a1 1 0 000-1.66L9.54 4.3A1 1 0 008 5.14z"/></svg>',
+  doc: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M6 2h8l6 6v14H6V2zm7 1.5V9h5.5L13 3.5zM8 13h8v1.6H8V13zm0 3.2h8v1.6H8v-1.6zm0-6.4h3v1.6H8V9.8z"/></svg>',
+  chat: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M4 4h16v11H8l-4 4V4z"/></svg>',
+  refresh: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 5V2L7 6l5 4V7a5 5 0 11-4.9 6H5a7 7 0 107-8z"/></svg>',
+  sparkle: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 2l1.8 5.7L19.5 9l-5.7 1.8L12 16.5l-1.8-5.7L4.5 9l5.7-1.3L12 2z"/></svg>',
+};
+
 // ---------- shared: circular progress ring (SVG) ----------
 function ringSvg(pct, size, stroke) {
   const r = (size - stroke) / 2;
@@ -161,7 +174,7 @@ function courseCardHtml(course, state) {
 
 // ---------- HOME ----------
 function homeGreeting(streak, dueCount, newCount) {
-  if (streak >= 7) return { title: `${streak}日連続、絶好調です🔥`, sub: "この調子でどんどん積み上げていきましょう。" };
+  if (streak >= 7) return { title: `${streak}日連続、絶好調です`, sub: "この調子でどんどん積み上げていきましょう。" };
   if (streak >= 1) return { title: `${streak}日連続で学習中!`, sub: "今日も1つ進めて、記録を伸ばしましょう。" };
   if (dueCount > 0) return { title: "復習のタイミングです", sub: "忘れる前に思い出すと、記憶がぐっと定着します。" };
   if (newCount > 0) return { title: "新しい単元、始めてみませんか?", sub: "今日の1単元が、教養の積み重ねになります。" };
@@ -217,7 +230,7 @@ function renderHome() {
       (x) => `
       <div class="tile" style="background:${x.course.color}">
         <div class="tile-top">
-          <span class="tile-icon">${(x.genre && x.genre.icon) || "🎧"}</span>
+          <span class="tile-icon">${(x.genre && x.genre.icon) || ""}</span>
           <h3>${x.course.title}</h3>
         </div>
         <p>${x.started ? "学習中" : "まだ始めていません"}</p>
@@ -239,7 +252,7 @@ function renderHome() {
     .map(
       (b) => `
       <div class="mini-badge ${b.earned ? "" : "locked"}" title="${b.desc}">
-        <span class="mini-badge-icon">${b.icon}</span>
+        <span class="mini-badge-icon">${ICONS.trophy}</span>
         <span>${b.title}</span>
       </div>`
     )
@@ -280,7 +293,7 @@ function renderHome() {
         .map(
           (x) => `
       <a class="task-row" href="#/quiz/${x.course.id}/${x.unit.id}">
-        <span class="task-tag" style="background:${x.course.color}">🔁 復習</span>
+        <span class="task-tag" style="background:${x.course.color}">復習</span>
         <span class="task-title">${x.unit.title}<small>${x.course.title}</small></span>
         <span class="task-arrow">テストを受ける →</span>
       </a>`
@@ -293,7 +306,7 @@ function renderHome() {
         .map(
           (x) => `
       <a class="task-row" href="#/lesson/${x.course.id}/${x.unit.id}">
-        <span class="task-tag" style="background:${x.course.color}">✨ 新規</span>
+        <span class="task-tag" style="background:${x.course.color}">新規</span>
         <span class="task-title">${x.unit.title}<small>${x.course.title} / #${String(x.unit.order).padStart(2, "0")}</small></span>
         <span class="task-arrow">教材を読む →</span>
       </a>`
@@ -303,8 +316,8 @@ function renderHome() {
 
   root.innerHTML = `
     <header class="topbar">
-      <h1>🎛 音楽機材の教養</h1>
-      <nav><a href="#/progress">📊 進捗・実績</a> <a href="#/glossary">📖 音響用語辞典</a></nav>
+      <h1>音楽機材の教養</h1>
+      <nav><a href="#/progress">進捗・実績</a> <a href="#/glossary">音響用語辞典</a></nav>
     </header>
 
     <div class="hero-banner">
@@ -316,9 +329,9 @@ function renderHome() {
         <p class="hero-title">${greeting.title}</p>
         <p class="hero-sub">${greeting.sub}</p>
         <div class="hero-chips">
-          <span class="hero-chip">🔥 連続 ${streak}日</span>
-          <span class="hero-chip">🏆 定着 ${totalMastered}/${totalRealUnits}単元</span>
-          ${dueItems.length ? `<span class="hero-chip">🔁 復習待ち ${dueItems.length}件</span>` : ""}
+          <span class="hero-chip">${ICONS.flame} 連続 ${streak}日</span>
+          <span class="hero-chip">${ICONS.trophy} 定着 ${totalMastered}/${totalRealUnits}単元</span>
+          ${dueItems.length ? `<span class="hero-chip">${ICONS.refresh} 復習待ち ${dueItems.length}件</span>` : ""}
         </div>
       </div>
     </div>
@@ -335,7 +348,7 @@ function renderHome() {
         <div class="task-list">${dueHtml}${newHtml}</div>
       </section>
       <div class="side-card">
-        <h2 style="margin:0 0 4px">🏅 実績</h2>
+        <h2 style="margin:0 0 4px">実績</h2>
         <p class="lead" style="margin:0 0 10px;font-size:12.5px">${earnedBadges.length} / ${allBadges.length} 個の称号を獲得</p>
         <div class="mini-badge-row">${miniBadgeHtml}</div>
         <div class="side-card-foot"><a href="#/progress">すべての実績を見る →</a></div>
@@ -457,7 +470,7 @@ function renderLesson(courseId, unitId) {
     <article class="lesson">
       <p class="unit-eyebrow">#${String(unit.order).padStart(2, "0")} ${unit.category || ""}</p>
       <h1>${unit.title}</h1>
-      <div class="hook-box">💭 ${unit.hook}</div>
+      <div class="hook-box">${unit.hook}</div>
       ${unit.image ? `<img class="lesson-image lesson-image-hero" src="images/${unit.image}" alt="${unit.title}">` : ""}
       ${sectionsHtml}
       ${furtherLearningHtml(unit)}
@@ -476,7 +489,7 @@ function checkpointHtml(q, key) {
     .join("");
   return `
     <div class="checkpoint" id="cp-${key}">
-      <p class="checkpoint-label">🤔 ちょっと確認</p>
+      <p class="checkpoint-label">${ICONS.chat} ちょっと確認</p>
       <p class="checkpoint-q">${q.q}</p>
       <div class="checkpoint-choices">${choicesHtml}</div>
       <div class="checkpoint-feedback" id="cp-feedback-${key}"></div>
@@ -510,10 +523,10 @@ function furtherLearningHtml(unit) {
   const fl = unit.furtherLearning;
   if (!fl || (!fl.videos?.length && !fl.articles?.length)) return "";
   const videoItems = (fl.videos || [])
-    .map((v) => `<li><a href="${v.url}" target="_blank" rel="noopener">▶ ${v.title}</a></li>`)
+    .map((v) => `<li><a href="${v.url}" target="_blank" rel="noopener">${ICONS.play} ${v.title}</a></li>`)
     .join("");
   const articleItems = (fl.articles || [])
-    .map((a) => `<li><a href="${a.url}" target="_blank" rel="noopener">📄 ${a.title}</a></li>`)
+    .map((a) => `<li><a href="${a.url}" target="_blank" rel="noopener">${ICONS.doc} ${a.title}</a></li>`)
     .join("");
   return `
     <div class="further-learning">
@@ -633,7 +646,7 @@ function drawQuizResult(course, unit) {
       <a class="back" href="#/course/${course.id}">← ${course.title}</a>
     </header>
     <section class="section quiz-result">
-      <div class="quiz-result-icon">${pass ? "🎉" : "💪"}</div>
+      <div class="quiz-result-icon ${pass ? "fb-correct" : "fb-wrong"}">${pass ? ICONS.trophy : ICONS.refresh}</div>
       <h2>結果: ${score} / ${total}</h2>
       <p class="${pass ? "fb-correct" : "fb-wrong"}">
         ${pass ? "全問正解!次回の復習は " + us.nextReview + " です。" : "一部間違いあり。次回の復習は " + us.nextReview + "(間隔をリセットしました)"}
@@ -678,7 +691,7 @@ function badgeGridHtml(state) {
     .map(
       (b) => `
       <div class="badge-card ${b.earned ? "badge-card-earned" : "badge-card-locked"}">
-        <span class="badge-card-icon">${b.icon}</span>
+        <span class="badge-card-icon">${ICONS.trophy}</span>
         <div class="badge-card-body">
           <strong>${b.title}</strong>
           <small>${b.desc}</small>
@@ -790,10 +803,10 @@ function renderProgress() {
     <section class="section">
       <h2>全体サマリー</h2>
       <div class="stat-grid">
-        <div class="stat-card"><span class="stat-card-icon">📈</span><strong>${overallPct}%</strong><span>全体の理解度(定着率)</span></div>
-        <div class="stat-card"><span class="stat-card-icon">🏆</span><strong>${totalMastered} / ${totalRealUnits}</strong><span>定着済み単元数</span></div>
-        <div class="stat-card"><span class="stat-card-icon">📝</span><strong>${totalAttempts}</strong><span>クイズ挑戦回数</span></div>
-        <div class="stat-card"><span class="stat-card-icon">🔥</span><strong>${streak}</strong><span>連続学習日数</span></div>
+        <div class="stat-card"><span class="stat-card-icon">${ICONS.chart}</span><strong>${overallPct}%</strong><span>全体の理解度(定着率)</span></div>
+        <div class="stat-card"><span class="stat-card-icon">${ICONS.trophy}</span><strong>${totalMastered} / ${totalRealUnits}</strong><span>定着済み単元数</span></div>
+        <div class="stat-card"><span class="stat-card-icon">${ICONS.pencil}</span><strong>${totalAttempts}</strong><span>クイズ挑戦回数</span></div>
+        <div class="stat-card"><span class="stat-card-icon">${ICONS.flame}</span><strong>${streak}</strong><span>連続学習日数</span></div>
       </div>
       <div class="bar-track bar-track-lg"><div class="bar-fill" style="width:${overallPct}%;background:var(--violet)"></div></div>
     </section>
