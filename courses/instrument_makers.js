@@ -1579,15 +1579,22 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "Michael Tobiasは1970年代後半から自身の名を冠した「Tobias Basses」を展開していたが、1990年代にブランドをGibsonに売却。Gibson傘下でのTobiasブランドは後に事業整理され姿を消した。",
-            "その後Michael Tobias本人は新たに「MTD(Michael Tobias Design)」を設立し、ゼロからブランドを再構築した。",
+          dialogue: [
+            { who: "mina", text: "MTDって、なんか名前が省略形っぽいですね。" },
+            { who: "sensei", text: "Michael Tobias Designの頭文字だよ。ただ、創業者Michael Tobiasは実は1970年代後半から自分の名前そのままの「Tobias Basses」というブランドを既にやっていたんだ。" },
+            { who: "mina", text: "え、じゃあ今のMTDは2つ目のブランドってことですか?" },
+            { who: "sensei", text: "そう。1990年代にそのTobiasブランドをGibsonに売却してしまってね。Gibson傘下でのTobiasは後に事業整理されて姿を消した。" },
+            { who: "mina", text: "自分の名前なのに、他社のものになっちゃったんですね…。" },
+            { who: "sensei", text: "だからこそMichael Tobias本人は、新たに「MTD」を立ち上げてゼロからブランドを再構築したんだ。冒頭のhookにあった通りだね。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "人間工学に基づいた独特のボディ形状・薄いネックシェイプにより、弾き心地の良さに定評がある。ハイエンドの米国製カスタムショップモデルと、より手頃な韓国製Kingstonラインを併売している。",
+          dialogue: [
+            { who: "mina", text: "MTDのベースはどんな特徴があるんですか?" },
+            { who: "sensei", text: "人間工学に基づいた独特のボディ形状と、薄いネックシェイプが特徴だよ。弾き心地の良さに定評がある。" },
+            { who: "mina", text: "価格帯はどうなってますか?" },
+            { who: "sensei", text: "ハイエンドの米国製カスタムショップモデルと、より手頃な韓国製Kingstonラインを併売しているんだ。予算に応じて選べる構成になっている。" },
           ],
         },
         {
@@ -1600,20 +1607,29 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "自身のブランドを一度手放し、再び個人名義で立ち上げ直すという経緯は、楽器業界における「ブランドと創業者個人の分離・再統合」の典型例として語られる。",
+          dialogue: [
+            { who: "mina", text: "MTDの成り立ちって、お金の面でも面白い話なんですか?" },
+            { who: "sensei", text: "そうだね。自分のブランドを一度手放して、また個人名義でゼロから立ち上げ直すという経緯は、楽器業界における「ブランドと創業者個人の分離・再統合」の典型例として語られているんだ。" },
+            { who: "mina", text: "ブランド名自体が資産で、創業者本人とは切り離して売買できるってことですね。" },
+            { who: "sensei", text: "その通り。会社が買収されるとブランド名の権利も一緒に移るから、創業者が別の名前で再出発するケースは楽器業界では珍しくないんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Ken Smith、Foderaと並ぶ、拡張弦(5弦以上)ベース設計のパイオニア世代の一人として位置づけられている。",
+          dialogue: [
+            { who: "mina", text: "MTDって業界内ではどんな立ち位置なんですか?" },
+            { who: "sensei", text: "Ken Smith、Foderaと並ぶ、拡張弦(5弦以上)ベース設計のパイオニア世代の一人として位置づけられているよ。" },
+            { who: "mina", text: "5弦ベースの草分け的存在ってことですね。" },
+            { who: "sensei", text: "そう。この3社は今でも拡張弦ベースの高級ラインを語るときに必ず名前が挙がる存在なんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "旧ブランド名Tobiasは、Gibson傘下時代の製品も含め今も中古市場でコレクターズアイテムとして流通している。",
+          dialogue: [
+            { who: "mina", text: "何か豆知識ってありますか?" },
+            { who: "sensei", text: "旧ブランド名のTobiasは、Gibson傘下時代の製品も含めて今も中古市場でコレクターズアイテムとして流通しているんだ。" },
+            { who: "mina", text: "もう作られていないブランドなのに、価値が残っているんですね。" },
+            { who: "sensei", text: "むしろ生産終了しているからこそ希少価値がついているとも言えるね。" },
           ],
         },
       ],
