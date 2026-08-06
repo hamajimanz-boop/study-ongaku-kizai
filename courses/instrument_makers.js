@@ -1,4 +1,4 @@
-/* Phase 3: 楽器メーカー編(ギター/ベース/ドラム/シンバル) — 全15社 */
+/* Phase 3: 楽器メーカー編(ギター/ベース/アコースティック/ドラム/シンバル) — 全75社、対話形式(先生↔ミナ)で変換済み */
 window.COURSES = window.COURSES || {};
 window.COURSES["instrument_makers"] = {
   id: "instrument_makers",
@@ -5079,14 +5079,19 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "トルコの比較的新しいシンバルメーカー。Istanbul Agop/Mehmet、Bosphorus、Dirilら先行するイスタンブール系ブランドに続く形で、伝統的な手打ち製法を土台にブランドを確立してきた。",
+          dialogue: [
+            { who: "mina", text: "Amediaが楽器メーカー編の最後の1社なんですね。「もう一社、現代の名乗り」ってhookにありましたけど?" },
+            { who: "sensei", text: "そうなんだ。トルコの比較的新しいシンバルメーカーでね。Istanbul Agop/Mehmet、Bosphorus、Dirilら先行するイスタンブール系ブランドに続く形で、伝統的な手打ち製法を土台にブランドを確立してきたんだ。" },
+            { who: "mina", text: "ここまで見てきたトルコ系ブランドの、また新しい仲間なんですね。" },
+            { who: "sensei", text: "その通り。1つの伝統文化の中から、これだけ多くのブランドが生まれ続けているのが、トルコのシンバル産業の面白いところなんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "伝統的な暗く複雑な響きを土台にしながら、比較的モダンでバランスの取れたサウンドも展開し、幅広いジャンルに対応できるラインナップを揃えている。",
+          dialogue: [
+            { who: "mina", text: "Amediaの音の特徴は?" },
+            { who: "sensei", text: "伝統的な暗く複雑な響きを土台にしながら、比較的モダンでバランスの取れたサウンドも展開しているんだ。幅広いジャンルに対応できるラインナップを揃えているよ。" },
+            { who: "mina", text: "伝統と現代性のバランスを取っているんですね。" },
           ],
         },
         {
@@ -5099,20 +5104,27 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "先行するトルコ系ブランドに比べ後発ながら、品質対価格のバランスの良さで徐々に評価を高めてきた比較的新しいブランドの一つ。",
+          dialogue: [
+            { who: "mina", text: "Amediaはどうやって評価を高めてきたんですか?" },
+            { who: "sensei", text: "先行するトルコ系ブランドに比べ後発ながら、品質対価格のバランスの良さで徐々に評価を高めてきた比較的新しいブランドの一つなんだ。" },
+            { who: "mina", text: "後発でも、コスパの良さで評価されているんですね。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Diril同様、トルコ系伝統派の中では中堅〜新興の位置づけにあり、Istanbul Agop/Mehmetという2大ブランドに次ぐ選択肢として認知され始めている。",
+          dialogue: [
+            { who: "mina", text: "業界内でのポジションは?" },
+            { who: "sensei", text: "Diril同様、トルコ系伝統派の中では中堅〜新興の位置づけにあってね。Istanbul Agop/Mehmetという2大ブランドに次ぐ選択肢として認知され始めているんだ。" },
+            { who: "mina", text: "2大ブランドを追いかける存在なんですね。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "トルコのシンバル製造業は一つの巨大企業に集約されておらず、Istanbul Agop/Mehmet/Bosphorus/Diril/Amediaなど、複数のブランドが並び立つ独特の産業構造を持ち続けている。",
+          dialogue: [
+            { who: "mina", text: "最後にトルコのシンバル産業全体についてまとめてもらえますか?" },
+            { who: "sensei", text: "もちろん。トルコのシンバル製造業は一つの巨大企業に集約されておらず、Istanbul Agop/Mehmet/Bosphorus/Diril/Amediaなど、複数のブランドが並び立つ独特の産業構造を持ち続けているんだ。" },
+            { who: "mina", text: "1つの伝統技術から、こんなに多様なブランドが生まれているのは本当に面白いですね。これで楽器メーカー編の全75社を学び終えたんですね!" },
+            { who: "sensei", text: "お疲れ様!ギター・ベース・アコースティック・ドラム・シンバルと、それぞれの分野で全く違う成り立ちや戦略を持つブランドたちを見てきたね。" },
           ],
         },
       ],
