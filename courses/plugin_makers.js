@@ -608,8 +608,106 @@ window.COURSES["plugin_makers"] = {
         { q: "Cliff MaagがMaag Audio以前に在籍していた会社は?", choices: ["NTIやNightpro", "SSL", "Universal Audio", "Celemony"], answer: 0, explain: "NTIやNightproでプロダクションマネージャーとして機材設計に携わっていた。" },
       ],
     },
-    { id: "vertigo_bettermaker", order: 13, title: "Vertigo Sound / Bettermaker", category: "ブティックハード系", hook: "オランダとポーランド、東欧発の高級ブティックブランドの話。", stub: true },
-    { id: "millennia_chandler", order: 14, title: "Millennia Media / Chandler Limited", category: "ブティックハード系", hook: "アメリカの「本物のヴィンテージ回路を今も作る」職人メーカーの話。", stub: true },
+    {
+      id: "vertigo_bettermaker",
+      order: 13,
+      title: "Vertigo Sound / Bettermaker",
+      category: "ブティックハード系",
+      hook: "ドイツとポーランド、それぞれ違うアプローチで「アナログとデジタルの融合」を目指した2つの職人ブランドの話。",
+      image: "vertigo_bettermaker_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革: Vertigo Sound",
+          dialogue: [
+            { who: "mina", text: "Vertigo Soundってどこの国の会社なんですか?" },
+            { who: "sensei", text: "ドイツ・ミュンヘンの会社なんだ。2007年6月、Andreas Eschenweckerが設立したブランドでね。母体になったHE Studiotechnikという会社は、長年ヴィンテージ機材の修理・メンテナンス・改造を手がけてきた歴史を持つんだよ。Mustang Sound GmbHという会社がVertigo Soundを運営しているんだ。" },
+            { who: "mina", text: "どんな機材を作っているんですか?" },
+            { who: "sensei", text: "ディスクリート回路(VCA、ジャイレーター、ディスクリートオペアンプなど)を使った、ハンドメイドの高級スタジオ機材を手がけているんだ。ヴィンテージ機材の修理経験が、そのまま自社設計のノウハウに繋がっているという流れだね。" },
+          ],
+        },
+        {
+          heading: "会社の正体・沿革: Bettermaker",
+          dialogue: [
+            { who: "mina", text: "Bettermakerはポーランドの会社なんですよね?" },
+            { who: "sensei", text: "そうなんだ。2010年、Marek Walaszekが設立したポーランドのブティックメーカーだよ。彼は幼い頃から音楽制作に興味があって、自分のスタジオを持つことを夢見ていたそうなんだ。" },
+            { who: "mina", text: "Bettermakerの製品にはどんな特徴があるんですか?" },
+            { who: "sensei", text: "「アナログとデジタル制御のハイブリッド」の先駆けとされているんだ。100%アナログの信号経路を保ちながら、設定を記憶したりDAWと連携したりできるデジタル制御を組み込んだ機材(EQ232P MkIIなど)を作っているんだよ。プラグインのように設定をリコールできるハードウェア、というのが最大の売りなんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 著名エンジニアからの支持",
+          dialogue: [
+            { who: "mina", text: "Bettermakerってどれくらい評価されているんですか?" },
+            { who: "sensei", text: "グラミー受賞歴のあるミキシングエンジニアDave Pensado(Beyoncé、Mariah Carey、Justin Timberlakeとの仕事で知られる)や、Greg Wells(Adele、Katy Perry、OneRepublicを手がけた)といった著名エンジニアが使用してきたことで知られているんだ。" },
+            { who: "mina", text: "小さな国のブティックブランドでも世界的な評価を得られるんですね。" },
+            { who: "sensei", text: "そう。ドイツのVertigo Soundもポーランドのbettermakerも、大量生産ではなく職人的なものづくりで世界のトップエンジニアに選ばれているという点が共通しているんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Vertigo Sound: VSC-2(コンプレッサー)、VSM-3(マイクプリ)等がPlugin Alliance経由でプラグイン化。Bettermaker: EQ232P、C502(コンプレッサー)、Mastering Limiterなど、実機のデジタル制御機能を活かしたプラグイン連携製品を展開。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Vertigo Soundの拠点はどこの国か?", choices: ["ドイツ", "オランダ", "ポーランド", "スウェーデン"], answer: 0, explain: "ドイツ・ミュンヘンを拠点とする会社で、2007年にAndreas Eschenweckerが設立した。" },
+        { q: "Vertigo Soundの母体になった、ヴィンテージ機材修理を手がけていた会社は?", choices: ["HE Studiotechnik", "Bohus Sound Studios", "Studio Supply", "United Recording"], answer: 0, explain: "長年ヴィンテージ機材の修理・改造を行ってきたHE Studiotechnikが母体になっている。" },
+        { q: "Bettermakerを2010年に設立した人物は?", choices: ["Marek Walaszek", "Andreas Eschenwecker", "Cliff Mäag", "Tobias Lindell"], answer: 0, explain: "ポーランドのMarek Walaszekが2010年に設立した。" },
+        { q: "Bettermakerの製品が先駆けとされている特徴は?", choices: ["アナログ回路とデジタル制御のハイブリッド", "完全デジタルシミュレーション専業", "無料プラグインの配布", "AIによる自動ミックス"], answer: 0, explain: "100%アナログ信号経路とデジタル制御(設定リコール等)を組み合わせた先駆けとされる。" },
+        { q: "Bettermakerを使用してきたことで知られるグラミー受賞エンジニアは?", choices: ["Dave Pensado", "Rupert Neve", "Bill Putnam Sr.", "Peter Neubäcker"], answer: 0, explain: "Beyoncé等を手がけたDave Pensadoらが使用してきたことで知られる。" },
+      ],
+    },
+    {
+      id: "millennia_chandler",
+      order: 14,
+      title: "Millennia Media / Chandler Limited",
+      category: "ブティックハード系",
+      hook: "「歩き入れるクローゼット」を工房にした男が、世界で唯一EMI/アビイ・ロードの機材を公式に作れる会社になった話。",
+      image: "millennia_chandler_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革: Millennia Media",
+          dialogue: [
+            { who: "mina", text: "Millennia Mediaってどんな会社なんですか?" },
+            { who: "sensei", text: "1991年、John La GrouとCynthia La Grouが設立した会社なんだ。John La Grouはもともとクラシック音楽専門のレコーディングエンジニアで、1990年に北カリフォルニアでサクラメント交響楽団などの録音を手がける会社を始めたのがルーツなんだよ。" },
+            { who: "mina", text: "どうして機材まで作るようになったんですか?" },
+            { who: "sensei", text: "既存のマイクプリアンプでは自分が求める「音楽的に正確な音」が出せなくて、自分で設計を始めたんだ。2年かけて24チャンネル分を自作したら、それが自身のキャリアで最高の録音になった、という逸話があるんだよ。" },
+          ],
+        },
+        {
+          heading: "会社の正体・沿革: Chandler Limited",
+          dialogue: [
+            { who: "mina", text: "Chandler Limitedの方はどんな会社なんですか?" },
+            { who: "sensei", text: "1999年、Wade Goekeがカリフォルニア・ノースハリウッドで始めた会社なんだ。当時は本業を持ちながら、借りていた家の「歩き入れるクローゼット」を工房にして、夜と週末だけ機材開発をしていたそうなんだよ。" },
+            { who: "mina", text: "そこからどうやって有名になったんですか?" },
+            { who: "sensei", text: "Chandler Limitedは、世界で唯一EMI/アビイ・ロード・スタジオの公式ライセンスを受けて機材を開発・販売できる会社になったんだ。TG2プリアンプ/DIは、1960年代末〜70年代初頭のEMI/アビイ・ロードのレコーディング・マスタリングコンソールに使われていた、幻のTG12428プリアンプを再現した製品なんだよ。ビートルズが録音していた時代の機材だね。" },
+          ],
+        },
+        {
+          heading: "お金の話: 信頼性と本物志向",
+          dialogue: [
+            { who: "mina", text: "この2社に共通する特徴って何ですか?" },
+            { who: "sensei", text: "どちらも「妥協のない正確さ・本物志向」で評価されている点だね。Millenniaのプリアンプは世界で1万チャンネル以上使われていて、NASAやホワイトハウス、多くのクラシック・映画音楽の現場でも使われているんだ。Chandlerは公式ライセンスという裏付けのもと、「本物のアビイ・ロードの音」を今も作り続けているんだよ。" },
+            { who: "mina", text: "どちらも一人の技術者のこだわりから始まっているんですね。" },
+            { who: "sensei", text: "その通り。理想の音を求めて自分で作り始めた、という原点が共通していて、それが今の会社の信頼性に繋がっているんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Millennia: HV-3(プリアンプ)、NSEQ-2(EQ)、TCL-2(コンプレッサー)等。Chandler Limited: TG1リミッター、TG2プリアンプ/DI、Curve Bender(EQ)、Zener Limiter等。両社ともBrainworxのPlugin Alliance経由でプラグイン化されている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Millennia Media創業者John La Grouの経歴として正しいのは?", choices: ["クラシック音楽専門のレコーディングエンジニア", "ゲーム開発者", "映画監督", "楽器職人"], answer: 0, explain: "サクラメント交響楽団などクラシック音楽の録音を手がけてきたエンジニアだった。" },
+        { q: "Chandler Limited創業者Wade Goekeが最初に工房として使っていた場所は?", choices: ["借家のクローゼット", "スタジオのビル1棟", "大学の研究室", "実家の工場"], answer: 0, explain: "本業をこなしながら、借家のクローゼットを工房にして夜間・週末に開発していた。" },
+        { q: "Chandler Limitedが世界で唯一持っているとされるライセンスは?", choices: ["EMI/アビイ・ロード・スタジオの公式ライセンス", "SSLの特許ライセンス", "Neveの商標ライセンス", "Beatlesの楽曲ライセンス"], answer: 0, explain: "EMI/アビイ・ロードの機材を公式に開発・販売できる唯一の会社とされる。" },
+        { q: "ChandlerのTG2プリアンプが再現した往年の機材は?", choices: ["EMI TG12428プリアンプ", "Neve 1073", "API 512c", "SSL Eシリーズ"], answer: 0, explain: "1960〜70年代のEMI/アビイ・ロードで使われていたTG12428プリアンプを再現した。" },
+        { q: "Millenniaのマイクプリアンプが使われてきた場所として挙げられるのは?", choices: ["NASAやホワイトハウス", "スペースXの発射施設のみ", "海外の空港のみ", "使用実績は非公開"], answer: 0, explain: "世界で1万チャンネル以上使われ、NASAやホワイトハウスでも採用されてきたとされる。" },
+      ],
+    },
     { id: "shadow_hills_etc", order: 15, title: "Shadow Hills / Purple Audio / Black Box Analog Design", category: "ブティックハード系", hook: "一台数十万円のハードウェアを作る極小工房が、なぜプラグイン化に踏み切ったか。", stub: true },
     { id: "pultec", order: 16, title: "Pultec", category: "ヴィンテージEQ", hook: "1950年代の真空管EQが、今も「あの音」の代名詞であり続ける理由。", stub: true },
     { id: "tascam_teac", order: 17, title: "TASCAM / TEAC", category: "テープエミュレーション", hook: "日本のテープ機メーカーが、なぜ今デジタルの中で「エミュレーション」として蘇っているか。", stub: true },
