@@ -374,15 +374,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "元はCharvelのリペア工房を引き継いだGrover Jacksonが、1980年前後に自身の名を冠したブランドとして展開を始めた。最初の看板製品は、Ozzy Osbourneのバンドのギタリスト、故Randy Rhoadsが自らスケッチしたデザインを元に製作されたV字形ギター「Randy Rhoads」モデル。",
-            "現在はFenderグループ傘下(Charvelと同じ企業グループ)で、メタル/シュレッド市場に特化したブランドとして運営されている。",
+          dialogue: [
+            { who: "mina", text: "Jacksonって、あのV字型ギターで有名ですよね?どういう経緯で生まれたブランドなんですか?" },
+            { who: "sensei", text: "元はCharvelのリペア工房を引き継いだGrover Jacksonが、1980年前後に自身の名を冠したブランドとして展開を始めたんだ。最初の看板製品は、Ozzy Osbourneのバンドのギタリスト、故Randy Rhoadsが自らスケッチしたデザインを元に製作されたV字形ギター「Randy Rhoads」モデルなんだよ。" },
+            { who: "mina", text: "今も独立したブランドなんですか?" },
+            { who: "sensei", text: "現在はFenderグループ傘下(Charvelと同じ企業グループ)で、メタル/シュレッド市場に特化したブランドとして運営されているんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "先鋭的なボディシェイプ(V字・スター型など)と、ネックスルー構造(ネックとボディの中心部が一体の木材で貫通する構造)による長いサステインが特徴。高出力ピックアップとの組み合わせで、歪ませた時の抜けの良さを追求している。",
+          dialogue: [
+            { who: "mina", text: "Jacksonの音の特徴って何なんですか?" },
+            { who: "sensei", text: "先鋭的なボディシェイプ(V字・スター型など)と、ネックスルー構造による長いサステインが特徴だ。高出力ピックアップとの組み合わせで、歪ませた時の抜けの良さを追求しているんだよ。" },
           ],
         },
         {
@@ -399,20 +402,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "2002年にFenderグループに買収され、Charvelと同じ傘下企業として運営されている。メタル市場という明確なニッチに特化することで、Fender/Gibsonの主流路線とは棲み分けたブランド戦略を取っている。",
+          dialogue: [
+            { who: "mina", text: "Jacksonっていつ頃Fenderの傘下になったんですか?" },
+            { who: "sensei", text: "2002年にFenderグループに買収されて、Charvelと同じ傘下企業として運営されているんだ。メタル市場という明確なニッチに特化することで、Fender/Gibsonの主流路線とは棲み分けたブランド戦略を取っているんだよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Ibanez、ESP/LTD、Charvelと並ぶ「メタル/シュレッド系」ブランドの代表格。特にV字ボディの分野ではJacksonが最も象徴的なブランドとして扱われることが多い。",
+          dialogue: [
+            { who: "mina", text: "Jacksonと同じジャンルのブランドって他にもありますよね?" },
+            { who: "sensei", text: "Ibanez、ESP/LTD、Charvelと並ぶ「メタル/シュレッド系」ブランドの代表格だ。特にV字ボディの分野ではJacksonが最も象徴的なブランドとして扱われることが多いんだよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "「シャークフィン」(サメのヒレ型)インレイと呼ばれる指板装飾は、Jacksonブランドの視覚的な識別要素として広く知られている。",
+          dialogue: [
+            { who: "mina", text: "Jacksonのギターって、見た目で分かる特徴とかあるんですか?" },
+            { who: "sensei", text: "「シャークフィン」(サメのヒレ型)インレイと呼ばれる指板装飾が、Jacksonブランドの視覚的な識別要素として広く知られているんだよ。" },
           ],
         },
       ],
