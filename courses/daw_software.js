@@ -515,37 +515,47 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "現在Reason Studios(リーズン・スタジオズ)と名乗るこの会社は、1994年にスウェーデン・ストックホルムで、Ernst Nathorst-Böös(エルンスト・ナートホルスト=ベース)、Marcus Zetterquist(マルクス・ゼッターキスト)、Peter Jubel(ペーター・ユーベル)によってPropellerhead(プロペラヘッド)として創業された。",
-            "最初のヒット製品は、ループ素材のテンポを音質劣化なく自在に変えられるサンプルエディタ「ReCycle」。続いてRolandの往年の名機を再現した「ReBirth RB-338」を発表し、その後2000年に看板製品「Reason」を発表した。2019年、社名を製品名に合わせて「Reason Studios」に改称した。",
+          dialogue: [
+            { who: "mina", text: "Reason Studiosって社名が変わったんですね。" },
+            { who: "sensei", text: "そうなんだ。現在Reason Studios(リーズン・スタジオズ)と名乗るこの会社は、1994年にスウェーデン・ストックホルムで、Ernst Nathorst-Böös(エルンスト・ナートホルスト=ベース)、Marcus Zetterquist(マルクス・ゼッターキスト)、Peter Jubel(ペーター・ユーベル)によってPropellerhead(プロペラヘッド)として創業されたんだ。" },
+            { who: "mina", text: "看板製品のReasonが出るまでの流れは?" },
+            { who: "sensei", text: "最初のヒット製品は、ループ素材のテンポを音質劣化なく自在に変えられるサンプルエディタ「ReCycle」だよ。続いてRolandの往年の名機を再現した「ReBirth RB-338」を発表して、その後2000年に看板製品「Reason」を発表したんだ。2019年、社名を製品名に合わせて「Reason Studios」に改称したんだよ。" },
           ],
         },
         {
           heading: "製品としての特徴",
-          paragraphs: [
-            "Reason最大の特徴は「仮想ラック」という画面構成。実機のハードウェアシンセ・エフェクターがラックに積まれ、背面でケーブルを繋いで信号を送るという、実際のスタジオ機材ラックをそのまま模した独特なインターフェースを持つ。",
-            "音源・エフェクトは「Rack Extension」という独自形式の拡張モジュールとして追加でき、これはVST/AUのような一般的なプラグイン規格とは別のReason独自のエコシステムだった(後述の通り現在はVST/AU/AAXにも対応)。",
+          dialogue: [
+            { who: "mina", text: "Reasonの「仮想スタジオラック」ってどんな発想なんですか?" },
+            { who: "sensei", text: "Reason最大の特徴は「仮想ラック」という画面構成だよ。実機のハードウェアシンセ・エフェクターがラックに積まれていて、背面でケーブルを繋いで信号を送るという、実際のスタジオ機材ラックをそのまま模した独特なインターフェースを持つんだ。" },
+            { who: "mina", text: "音源やエフェクトの追加方法も独特なんですか?" },
+            { who: "sensei", text: "音源・エフェクトは「Rack Extension」という独自形式の拡張モジュールとして追加できるんだ。これはVST/AUのような一般的なプラグイン規格とは別のReason独自のエコシステムだったんだよ(後述の通り現在はVST/AU/AAXにも対応しているよ)。" },
           ],
         },
         {
           heading: "2019年の大きな方針転換",
-          paragraphs: [
-            "2019年の社名変更と同時に、Reason自体をVST/AU/AAXプラグインとして他のDAW(Pro Tools、Cubase、Ableton Liveなど)の中で使えるようにするという大きな仕様変更が行われた。これはそれまで「独立したDAWとしてのReason」という立場を貫いてきた会社にとって、大きな路線転換だった。",
-            "この変更により、ユーザーは使い慣れた他社DAWをメインに使いながら、Reasonの仮想ラックの世界観を音源・エフェクトの一つとして呼び出せるようになった。",
+          dialogue: [
+            { who: "mina", text: "2019年に何か大きな変化があったんですか?" },
+            { who: "sensei", text: "2019年の社名変更と同時に、Reason自体をVST/AU/AAXプラグインとして他のDAW(Pro Tools、Cubase、Ableton Liveなど)の中で使えるようにするという大きな仕様変更が行われたんだ。これはそれまで「独立したDAWとしてのReason」という立場を貫いてきた会社にとって、大きな路線転換だったんだよ。" },
+            { who: "mina", text: "この変更でユーザーは何ができるようになったんですか?" },
+            { who: "sensei", text: "この変更により、ユーザーは使い慣れた他社DAWをメインに使いながら、Reasonの仮想ラックの世界観を音源・エフェクトの一つとして呼び出せるようになったんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "スウェーデンはAbba、Spotify、Max Martin(著名プロデューサー)など音楽・音楽テック産業が盛んな国として知られており、Propellerhead/Reason Studiosもその系譜に連なる企業の一つ。",
-            "独立DAWとしての存在感は最盛期より下がった面があるものの、「他のDAWの中で使えるプラグイン化」という方向転換によって、Reason独自の音作りの世界観自体は生き残りを図っている。",
+          dialogue: [
+            { who: "mina", text: "スウェーデンの会社って他にも音楽関連で有名なところがあるんですか?" },
+            { who: "sensei", text: "あるよ。スウェーデンはAbba、Spotify、Max Martin(著名プロデューサー)など音楽・音楽テック産業が盛んな国として知られていてね。Propellerhead/Reason Studiosもその系譜に連なる企業の一つなんだ。" },
+            { who: "mina", text: "今のReasonの立ち位置はどうなんですか?" },
+            { who: "sensei", text: "独立DAWとしての存在感は最盛期より下がった面があるんだけど、「他のDAWの中で使えるプラグイン化」という方向転換によって、Reason独自の音作りの世界観自体は生き残りを図っているんだ。" },
           ],
         },
         {
           heading: "よくある誤解・豆知識",
-          paragraphs: [
-            "「Reason StudiosはPropellerheadという会社を買収した」という誤解があるが、実際はPropellerhead自身が製品名に合わせて社名変更しただけで、別会社への買収ではない。",
-            "「Reasonはプラグインが使えない」というのは現在は誤り。2019年以降、Rack Extensionに加えて一般的なVST/AUプラグインも読み込めるようになっている。",
+          dialogue: [
+            { who: "mina", text: "Reason StudiosがPropellerheadを買収したんですか?" },
+            { who: "sensei", text: "いや、それは誤解だよ。実際はPropellerhead自身が製品名に合わせて社名変更しただけで、別会社への買収ではないんだ。" },
+            { who: "mina", text: "Reasonはプラグインが使えないというイメージもありますよね。" },
+            { who: "sensei", text: "「Reasonはプラグインが使えない」というのは現在は誤りだよ。2019年以降、Rack Extensionに加えて一般的なVST/AUプラグインも読み込めるようになっているんだ。" },
           ],
         },
       ],
