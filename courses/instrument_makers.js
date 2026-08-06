@@ -2144,15 +2144,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1952年、ニューヨークで元Epiphone社員のAlfred DrongeとGeorge Mannが設立。アーチトップ/フラットトップ両方の高品質なアコースティックギターで評価を確立した。",
-            "特に12弦ギターの評価が高く、1969年のウッドストック・フェスティバルでRitchie Havensが演奏した12弦ギターがGuild製だったことでも知られる。",
+          dialogue: [
+            { who: "mina", text: "Guildってウッドストックに関係あるんですか?hookにありましたけど。" },
+            { who: "sensei", text: "そうなんだ。まず会社としては1952年、ニューヨークで元Epiphone社員のAlfred DrongeとGeorge Mannが設立したブランドだよ。アーチトップ/フラットトップ両方の高品質なアコースティックギターで評価を確立したんだ。" },
+            { who: "mina", text: "それでウッドストックとの繋がりは?" },
+            { who: "sensei", text: "特に12弦ギターの評価が高くてね。1969年のウッドストック・フェスティバルでRitchie Havensが演奏した12弦ギターがGuild製だったことでも知られているんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "12弦モデルは、6弦それぞれに対応するオクターブ違いの弦を追加することで生まれる豊かな倍音・煌びやかな響きが特徴。フラットトップモデルはMartin系の伝統を踏襲しつつ、やや異なる力木設計で独自の鳴りを追求している。",
+          dialogue: [
+            { who: "mina", text: "12弦ギターってどんな音の特徴があるんですか?" },
+            { who: "sensei", text: "6弦それぞれに対応するオクターブ違いの弦を追加することで生まれる豊かな倍音・煌びやかな響きが特徴だよ。" },
+            { who: "mina", text: "フラットトップモデルはどうですか?" },
+            { who: "sensei", text: "Martin系の伝統を踏襲しつつ、やや異なる力木設計で独自の鳴りを追求しているんだ。" },
           ],
         },
         {
@@ -2168,20 +2173,27 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "複数回オーナーが変わり、現在はコルドバ・ミュージック・グループ(Cordoba、後述)の傘下で運営されている。歴史ある名門ブランドが、近年参入した企業グループに統合されるという業界の再編を象徴する例。",
+          dialogue: [
+            { who: "mina", text: "Guildは今も同じ経営者が続けているんですか?" },
+            { who: "sensei", text: "いや、複数回オーナーが変わっていてね。現在はコルドバ・ミュージック・グループ(Cordoba)の傘下で運営されているんだ。" },
+            { who: "mina", text: "老舗ブランドが別の会社の傘下になるのは珍しくないんですか?" },
+            { who: "sensei", text: "歴史ある名門ブランドが、近年参入した企業グループに統合されるという業界の再編を象徴する例なんだ。この後に出てくるCordobaのところで詳しく話すよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Martin・Gibsonに次ぐ「老舗フォーク/アコースティック」ブランドとして位置づけられ、特に12弦ギターの分野では独自の存在感を保っている。",
+          dialogue: [
+            { who: "mina", text: "業界内でのポジションはどうですか?" },
+            { who: "sensei", text: "Martin・Gibsonに次ぐ「老舗フォーク/アコースティック」ブランドとして位置づけられているよ。特に12弦ギターの分野では独自の存在感を保っているんだ。" },
+            { who: "mina", text: "12弦といえばGuild、という感じなんですね。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "創業者Alfred DrongeはEpiphoneで培った製造ノウハウを土台にGuildを立ち上げており、Epiphone→Guildという人材の流れも楽器業界の系譜として興味深い。",
+          dialogue: [
+            { who: "mina", text: "創業者について何か面白い話はありますか?" },
+            { who: "sensei", text: "創業者Alfred DrongeはEpiphoneで培った製造ノウハウを土台にGuildを立ち上げたんだ。Epiphone→Guildという人材の流れも楽器業界の系譜として興味深いよね。" },
+            { who: "mina", text: "人の移動が新しいブランドを生むこともあるんですね。" },
           ],
         },
       ],
