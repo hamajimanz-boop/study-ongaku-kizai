@@ -208,8 +208,106 @@ window.COURSES["plugin_makers"] = {
         { q: "Rupert Neve Designs本人が承認したプラグインを2011年に発表した会社は?", choices: ["Yamaha(Steinberg)", "Avid", "Apple", "Roland"], answer: 0, explain: "YamahaがSteinbergプラットフォーム向けに、本人承認のプラグインを発表した。" },
       ],
     },
-    { id: "izotope", order: 5, title: "iZotope", category: "マスタリング/AI", hook: "大学院生が始めた研究プロジェクトが、AI/機械学習でマスタリングを自動化する会社になり、最後はNative Instrumentsに吸収された話。", stub: true },
-    { id: "elysia", order: 6, title: "elysia", category: "ブティックハード系", hook: "ドイツの技術者集団が「値段を下げない」戦略で高級ブランドを守り続けている話。", stub: true },
+    {
+      id: "izotope",
+      order: 5,
+      title: "iZotope",
+      category: "マスタリング/AI",
+      hook: "大学生が「家で食費と家賃のために」作ったプラグインが、AI/機械学習でマスタリングを自動化する業界標準ソフトになった話。",
+      image: "izotope_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "iZotopeってどんな経緯で始まった会社なんですか?" },
+            { who: "sensei", text: "2001年、アメリカ・マサチューセッツ州ケンブリッジで、MIT(マサチューセッツ工科大学)の学生だったMark EthierとJeremy Toddが設立した会社なんだ。音楽とコンピューターサイエンスを学んでいた2人が、友人たちと一緒に始めたんだよ。" },
+            { who: "mina", text: "最初は何を作っていたんですか?" },
+            { who: "sensei", text: "「Vinyl」という、音楽をレコードっぽい音に加工する遊び心のあるプラグインが最初の製品だったんだ。その後、卒業してからOzoneの最初のバージョンを作って、夏の終わりにリリースしたんだよ。当時は正直、食費と家賃のためにお金が必要だった、という切実な理由もあったそうなんだ。" },
+          ],
+        },
+        {
+          heading: "AI・機械学習によるマスタリングの自動化",
+          dialogue: [
+            { who: "mina", text: "Ozoneってマスタリングの定番ソフトですよね?" },
+            { who: "sensei", text: "そうだね。Ozoneは20年以上にわたってマスタリング技術のゴールドスタンダード(業界標準)とされてきたソフトなんだ。もう一つの看板製品RXは、ノイズ除去・音声修復の分野で音楽・TV・映画・ポッドキャストの現場標準になっているよ。" },
+            { who: "mina", text: "AIを使っているのが特徴なんですか?" },
+            { who: "sensei", text: "そう。iZotopeは機械学習を使った音声処理のパイオニアとして知られていて、「参照トラックの音を分析して自動でマスタリングの提案をする」といった、AIの実用的な活用に早くから力を入れてきた会社なんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 目まぐるしいグループ再編",
+          dialogue: [
+            { who: "mina", text: "iZotopeって最近も会社の所属が変わっているんですか?" },
+            { who: "sensei", text: "そうなんだ。2021年、iZotopeはNative Instruments(ソフトシンセ・サンプラーで有名な会社)と、投資会社Francisco Partnersの出資で新しいグループを結成したんだ。2023年6月にはそのグループがNative Instrumentsブランドに統合されて、Brainworx・Plugin Allianceも同じグループの一員になったんだよ。" },
+            { who: "mina", text: "今はどうなっているんですか?" },
+            { who: "sensei", text: "2026年6月、今度はNative Instrumentsグループ自体がinMusicに買収されたんだけど、その際iZotopeだけは切り離されてBoris FX(映像編集エフェクトの会社)に買収されたんだ。つまり同じグループにいたNative InstrumentsとiZotopeが、それぞれ別の会社の傘下に分かれることになったんだよ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Ozone(マスタリング)、RX(音声修復・ノイズ除去)、Neutron(ミキシング)、Nectar(ボーカル処理)、VocalSynth、Trash、Iris(サンプリング・シンセ)など。AIアシスト機能(Master Assistant、Mix Assistant等)を各製品で展開している。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "iZotopeを2001年に設立したのはどんな人物か?", choices: ["MITの学生Mark EthierとJeremy Todd", "元Nirvanaのエンジニア", "英国の元コンソール技術者", "韓国の音響研究者"], answer: 0, explain: "MITで音楽とコンピューターサイエンスを学んでいたMark EthierとJeremy Toddが設立した。" },
+        { q: "iZotopeの最初の製品(遊び心のあるプラグイン)は何か?", choices: ["Vinyl", "Ozone", "RX", "Neutron"], answer: 0, explain: "音をレコードっぽく加工する「Vinyl」が最初の製品だった。" },
+        { q: "iZotopeのマスタリング用フラッグシップ製品は?", choices: ["Ozone", "RX", "Nectar", "Trash"], answer: 0, explain: "Ozoneが20年以上マスタリング技術のゴールドスタンダードとされてきた。" },
+        { q: "iZotopeが2021年にグループを結成した相手は?", choices: ["Native Instruments", "Universal Audio", "Steinberg", "Avid"], answer: 0, explain: "投資会社Francisco Partnersの出資でNative Instrumentsとグループを結成した。" },
+        { q: "2026年6月、iZotopeを買収した会社はどこか?", choices: ["Boris FX", "inMusic", "Yamaha", "Fender"], answer: 0, explain: "Native InstrumentsグループがinMusicに買収される中、iZotopeだけはBoris FXに買収された。" },
+      ],
+    },
+    {
+      id: "elysia",
+      order: 6,
+      title: "elysia",
+      category: "ブティックハード系",
+      hook: "伝説的な機材を設計した一人のエンジニアが、自分の名前を出さないブランドを立ち上げた話。",
+      image: "elysia_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "elysiaってどんな会社なんですか?" },
+            { who: "sensei", text: "ドイツ・ネッテタール発のブティックハードウェアメーカーでね。2005年、Ruben TilgnerとDominik Klaßenが設立した会社なんだ。「alpha compressor」という機種を作りたいという夢から始まった会社だと語られているよ。" },
+            { who: "mina", text: "Ruben Tilgnerさんって、前に聞いたことある名前な気がします。" },
+            { who: "sensei", text: "鋭いね。彼は伝説的な機材「SPL Transient Designer」の設計に関わったことで知られるエンジニアなんだ。その後、自分のブランドとしてelysiaを立ち上げたという経緯なんだよ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: ディスクリートClass-A回路",
+          dialogue: [
+            { who: "mina", text: "elysiaの音作りへのこだわりって何ですか?" },
+            { who: "sensei", text: "ディスクリート(既製の集積回路ではなく、個別の部品を一つひとつ組み合わせる設計)のClass-A回路にこだわっているんだ。全ての製品を自社工場で設計・組み立て・検査まで一貫して行っているのも特徴だよ。" },
+            { who: "mina", text: "他のブティックブランドとは違うんですか?" },
+            { who: "sensei", text: "「奇をてらわず、確実な価値と信頼性を届ける」という姿勢を掲げているんだ。派手な機能よりも、音質そのものと品質管理にこだわる職人的なブランドと言えるね。" },
+          ],
+        },
+        {
+          heading: "お金の話: Plugin Allianceとの提携",
+          dialogue: [
+            { who: "mina", text: "elysiaも前に出てきたPlugin Allianceと関係あるんですか?" },
+            { who: "sensei", text: "そうなんだ。elysiaは自社で大きな販売網は持たず、Brainworxが運営するPlugin Alliance経由でプラグイン化・販売を行っているんだよ。alpha compressor、museq(EQ)などがプラグイン化されているんだ。" },
+            { who: "mina", text: "ハードウェアメーカーがプラグイン販売を他社に任せるのは、この編で何度も出てくるパターンですね。" },
+            { who: "sensei", text: "その通り。小規模な工房が自社製品を広く届けるために、販売力のあるパブリッシャーと組むという構図は、ブティックハードウェアメーカーに共通する生存戦略なんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "elysia alpha compressor、elysia museq、elysia nvelope、elysia xpressor、elysia karacterなど。実機同様、Plugin Alliance経由でプラグイン版が提供されている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "elysiaが設立されたのはいつ、どこの国か?", choices: ["2005年、ドイツ", "1995年、イギリス", "2010年、アメリカ", "1980年、日本"], answer: 0, explain: "2005年、ドイツ・ネッテタールでRuben TilgnerとDominik Klaßenが設立した。" },
+        { q: "elysia創業者Ruben Tilgnerが設計に関わったことで知られる伝説的機材は?", choices: ["SPL Transient Designer", "Neve 1073", "SSLバスコンプ", "LA-2A"], answer: 0, explain: "SPL Transient Designerの設計に関わったエンジニアとして知られる。" },
+        { q: "elysiaがこだわっている回路設計は?", choices: ["ディスクリートClass-A回路", "デジタル完全変換", "真空管のみの回路", "IC集積回路のみ"], answer: 0, explain: "個別部品を組み合わせるディスクリートのClass-A回路にこだわっている。" },
+        { q: "elysiaが自社製品をプラグイン化・販売する際に提携している会社は?", choices: ["Plugin Alliance", "Waves", "iZotope", "Native Instruments"], answer: 0, explain: "Brainworxが運営するPlugin Alliance経由でプラグイン販売を行っている。" },
+        { q: "elysiaの最初の看板製品となったコンプレッサーの名称は?", choices: ["alpha compressor", "museq", "nvelope", "xpressor"], answer: 0, explain: "alpha compressorを作りたいという夢が創業のきっかけだった。" },
+      ],
+    },
     { id: "lindell_audio", order: 7, title: "Lindell Audio", category: "ブティックハード系", hook: "スウェーデンの一人メーカーが「本物の回路を安く」で市場を食った話。", stub: true },
     { id: "uad", order: 8, title: "Universal Audio", category: "DSP/インターフェース", hook: "親子二代でDSPハードウェアとプラグインを結びつけたビジネスの話。", stub: true },
     { id: "celemony", order: 9, title: "Celemony", category: "ピッチ編集", hook: "たった一つの技術(DNA)が特許で守られ、20年経っても競合が現れない理由。", stub: true },
