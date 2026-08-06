@@ -858,8 +858,106 @@ window.COURSES["plugin_makers"] = {
         { q: "TEAC A-3340Sが70年代に果たした役割は?", choices: ["多くのロックバンドのデモ・作品録音に使われた", "デジタル録音の先駆けとなった", "MIDIを発明した", "CD規格を策定した"], answer: 0, explain: "70年代、多くの影響力のあるロックバンドのデモや作品録音に使われた名機とされる。" },
       ],
     },
-    { id: "ik_multimedia", order: 18, title: "IK Multimedia", category: "アンプシム/総合", hook: "イタリア発、ハードとソフトの両方でギタリスト市場を制した会社の話。", stub: true },
-    { id: "neold", order: 19, title: "NEOLD", category: "ヴィンテージ復刻", hook: "韓国発の新興ブランドが、なぜ古い真空管マイクプリの名前を次々復刻するのか。", stub: true },
+    {
+      id: "ik_multimedia",
+      order: 18,
+      title: "IK Multimedia",
+      category: "アンプシム/総合",
+      hook: "「アナログの音をコンピューターで再現したい」という2人のエンジニアの情熱が、ハードとソフトの両方でギタリスト市場を制する会社を作った話。",
+      image: "ik_multimedia_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "IK Multimediaってどんな会社なんですか?" },
+            { who: "sensei", text: "1996年、イタリア・モデナという町で、Enrico IoriとDavide Barbiという2人のエンジニアが設立した会社なんだ。「アナログのヴィンテージ機材の音をコンピューターで再現したい」という情熱から始まったんだよ。" },
+            { who: "mina", text: "モデナってどんな町なんですか?" },
+            { who: "sensei", text: "実はハイテク製造業の伝統がある町でね。今も現地に自社工場を持っていて、職人技を大事にする姿勢が受け継がれているんだ。従業員は100人以上に成長して、7カ国に拠点を持つ企業になっているんだよ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: T-RackSとAmpliTube",
+          dialogue: [
+            { who: "mina", text: "IK Multimediaの代表的な製品って何ですか?" },
+            { who: "sensei", text: "1999年に発表したT-RackSだね。アナログモデリングによるデスクトップ・マスタリングソリューションとしては初めての製品とされているんだ。前の単元で扱ったTASCAMのテープエミュレーションも、このT-RackSシリーズの一部だったよね。" },
+            { who: "mina", text: "ギタリスト向けの製品もありますよね?" },
+            { who: "sensei", text: "そう、2002年発表のAmpliTubeだよ。アンプヘッド、キャビネット、エフェクトペダルまで、ギターのリグ(機材構成)全体を丸ごとモデリングする、初のギターアンプ/エフェクトモデリングプラグインとされているんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: ハードとソフトの両輪",
+          dialogue: [
+            { who: "mina", text: "「ハードとソフトの両方で市場を制した」ってどういうことですか?" },
+            { who: "sensei", text: "2010年に発表したiRigという製品が大きかったんだ。スマートフォンにギターを直接繋げる小型インターフェースで、モバイル向けギターインターフェースとして史上最も普及した製品の一つになったんだよ。" },
+            { who: "mina", text: "ソフトだけじゃなくハードウェアも自社で作っているんですね。" },
+            { who: "sensei", text: "そう。AmpliTubeというソフトと、iRigというハードウェアをセットで展開することで、「スマホ一つでギター録音ができる」という体験を作り上げたんだ。ソフトウェア専業からモバイル技術のリーダー企業へと成長した、分かりやすい成功例だね。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "T-RackS(マスタリングスイート、TASCAMコレクション含む)、AmpliTube(ギターアンプ/エフェクトモデリング)、iRig(ハードウェアインターフェース)、SampleTank(音源)、MODO BASS/DRUM(物理モデリング音源)など幅広いラインナップを展開。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "IK Multimediaが設立されたのはいつ、どこの国か?", choices: ["1996年、イタリア", "1996年、ドイツ", "2005年、フランス", "1990年、アメリカ"], answer: 0, explain: "1996年、イタリア・モデナでEnrico IoriとDavide Barbiが設立した。" },
+        { q: "IK Multimediaが1999年に発表した、アナログモデリングによるデスクトップマスタリングの先駆けとされる製品は?", choices: ["T-RackS", "AmpliTube", "iRig", "SampleTank"], answer: 0, explain: "T-RackSが分析モデリングデスクトップマスタリングの初期製品とされる。" },
+        { q: "IK Multimediaが2002年に発表した、ギターリグ全体をモデリングするプラグインは?", choices: ["AmpliTube", "T-RackS", "MODO BASS", "iRig"], answer: 0, explain: "AmpliTubeがアンプ・キャビネット・ペダルまで含むギターリグ全体をモデリングする先駆けとされる。" },
+        { q: "IK Multimediaが2010年に発表した、モバイル向け人気ギターインターフェースは?", choices: ["iRig", "Apollo", "UAD-2", "Scarlett"], answer: 0, explain: "iRigはスマートフォンとギターを繋ぐ小型インターフェースとして広く普及した。" },
+        { q: "IK Multimediaの本拠地であるイタリア・モデナの特徴は?", choices: ["ハイテク製造業の伝統がある町", "音楽大学が集中する学術都市", "楽器の原材料産地", "デジタル配信の発祥地"], answer: 0, explain: "モデナはハイテク製造業の伝統があり、IKは今も現地に自社工場を持つ。" },
+      ],
+    },
+    {
+      id: "neold",
+      order: 19,
+      title: "NEOLD",
+      category: "ヴィンテージ復刻",
+      hook: "elysiaを10年以上率いた男が、次に選んだのは「一点物の試作機」だけを追いかけるという新しいこだわり方だった。",
+      image: "neold_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "NEOLDってどんな会社なんですか?" },
+            { who: "sensei", text: "ドイツの会社でね。3人のベテランが設立したんだ。アナログ電子回路の設計者Roger Schult、そしてDominik Klaßen——実は彼、この編の6社目で扱ったelysiaを10年以上にわたって創業・経営していた人物なんだよ。そしてDSPの専門家Reimund Dratwaの3人だね。" },
+            { who: "mina", text: "elysiaを離れて新しい会社を作ったんですね。" },
+            { who: "sensei", text: "そうなんだ。第一弾製品のV76U73は、Telefunken(テレフンケン)というドイツの往年のブランドが作ったV76というプリアンプと、U73というコンプレッサー/リミッターを組み合わせて再現したプラグインなんだよ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: 「一点物の試作機」だけを追う",
+          dialogue: [
+            { who: "mina", text: "NEOLDの特徴的なこだわりって何ですか?" },
+            { who: "sensei", text: "希少な一点物のアナログ試作機を、NOS(New Old Stock、未使用のまま長期保管されていた当時の部品)を使って組み立て直し、それを忠実にモデリングするという独自のアプローチを取っているんだ。単に「有名機種を再現する」のではなく、そもそも量産されなかった希少な個体を掘り起こしているんだよ。" },
+            { who: "mina", text: "それってすごく手間のかかる作業ですよね。" },
+            { who: "sensei", text: "その通り。V76U73は、音の豊かさで知られる真空管プリアンプ・コンプレッサーの実回路・部品を、丹念に精密再現したプラグインとして評価されているんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 経験豊富な創業者による再出発",
+          dialogue: [
+            { who: "mina", text: "elysiaでの経験がNEOLDにどう活きているんですか?" },
+            { who: "sensei", text: "elysiaを10年以上経営してきたDominik Klaßenの経験は、ブランド運営・製品開発の両面で活きているはずなんだ。前に学んだBrainworxのPlugin Allianceを通じて製品を展開しているのも、業界内の繋がりの深さを示していると言えるね。" },
+            { who: "mina", text: "プラグイン業界って、意外と同じ人たちが色々な会社を渡り歩いているんですね。" },
+            { who: "sensei", text: "そうなんだ。SPLからelysia、elysiaからNEOLDというように、優れたエンジニアが新しい会社を興し続けているのが、このドイツのブティックプラグイン業界の面白いところなんだよ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "V76U73(Telefunken V76+U73)、BIG AL(真空管サチュレーター)、U2A(オプティカルコンプレッサー)、WUNDERLICH、WARBLE、OLDTIMER(ディレイ)、U17、RZ062など。Plugin Alliance経由で提供されている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "NEOLDはどこの国の会社か?", choices: ["ドイツ", "韓国", "スウェーデン", "アメリカ"], answer: 0, explain: "ドイツの会社で、elysia元経営者らによって設立された。" },
+        { q: "NEOLD創業者の一人で、以前elysiaを10年以上経営していた人物は?", choices: ["Dominik Klaßen", "Ruben Tilgner", "Wade Goeke", "Andrew Roberts"], answer: 0, explain: "Dominik KlaßenはNEOLD設立前、elysiaを10年以上創業・経営していた。" },
+        { q: "NEOLDの第一弾製品V76U73が再現した往年のブランドは?", choices: ["Telefunken", "Neve", "SSL", "API"], answer: 0, explain: "ドイツのTelefunkenブランドのV76プリアンプ・U73コンプレッサーを再現した。" },
+        { q: "NEOLDが製品開発でこだわっているアプローチは?", choices: ["希少な一点物の試作機をNOS部品で組み立て直しモデリングする", "AIで自動的に音色を生成する", "量産機のみを対象にする", "デジタル専用の新規回路を設計する"], answer: 0, explain: "一点物のアナログ試作機をNOS(未使用当時部品)で再現するという独自路線を取る。" },
+        { q: "NEOLDが製品を展開する際に利用しているパブリッシャーは?", choices: ["Plugin Alliance", "iZotope", "Waves", "Native Instruments"], answer: 0, explain: "BrainworxのPlugin Alliance経由で製品を展開している。" },
+      ],
+    },
     { id: "small_brands_roundup", order: 20, title: "小規模・新興ブランド総集編", category: "総集編", hook: "「大手になれなかった」わけではなく「なる気がない」規模のニッチ経営という生き方。", stub: true },
   ],
 };
