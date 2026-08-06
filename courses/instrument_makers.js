@@ -698,15 +698,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "ギリシャ系移民Anastasios Stathopouloが興した楽器製造業が源流。息子Epaminondas(愛称Epi)の名にちなみ「Epiphone」ブランドとして展開された。1930〜40年代のアーチトップギター全盛期にはGibsonと肩を並べる、あるいは凌ぐ人気を誇るブランドだった。",
-            "創業者Epiの死後経営が傾き、1957年にライバルであったはずのGibsonが買収。以後はGibsonの廉価ブランドとして運用され、Les Paul・SGなどGibsonの代表モデルを海外(近年は中国・インドネシア等)で生産する役割を担っている。",
+          dialogue: [
+            { who: "mina", text: "Epiphoneって最初からGibsonの廉価版だったんですか?" },
+            { who: "sensei", text: "実は全く逆なんだ。ギリシャ系移民Anastasios Stathopouloが興した楽器製造業が源流で、息子Epaminondas(愛称Epi)の名にちなみ「Epiphone」ブランドとして展開されたんだよ。1930〜40年代のアーチトップギター全盛期にはGibsonと肩を並べる、あるいは凌ぐ人気を誇るブランドだったんだ。" },
+            { who: "mina", text: "それがどうしてGibson傘下になったんですか?" },
+            { who: "sensei", text: "創業者Epiの死後経営が傾いて、1957年にライバルであったはずのGibsonが買収したんだ。以後はGibsonの廉価ブランドとして運用されて、Les Paul・SGなどGibsonの代表モデルを海外で生産する役割を担っているんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "現行製品は基本的にGibsonと同系統の設計(ハムバッカー、セットネック等)を踏襲しているが、コスト重視の部材・工程により、Gibson本家とは価格・質感の面で明確に差別化されている。",
+          dialogue: [
+            { who: "mina", text: "Epiphoneの音ってGibson本家とどう違うんですか?" },
+            { who: "sensei", text: "現行製品は基本的にGibsonと同系統の設計(ハムバッカー、セットネック等)を踏襲しているけど、コスト重視の部材・工程により、Gibson本家とは価格・質感の面で明確に差別化されているんだ。" },
           ],
         },
         {
@@ -722,20 +725,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "「かつてのライバルが、買収後は相手の廉価版ブランドとして生き延びる」という構図は楽器業界でも有数の劇的な転換劇として語られる。Gibsonにとっては入門〜中級市場を取りこぼさないための重要な収益源になっている。",
+          dialogue: [
+            { who: "mina", text: "ライバルに買収されたブランドって、そのあとどうなるものなんですか?" },
+            { who: "sensei", text: "「かつてのライバルが、買収後は相手の廉価版ブランドとして生き延びる」という構図は楽器業界でも有数の劇的な転換劇として語られるんだ。Gibsonにとっては入門〜中級市場を取りこぼさないための重要な収益源になっているんだよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "FenderにおけるSquierと同じ立ち位置(廉価版海外生産ブランド)として、業界内で明確に対になる存在として語られることが多い。",
+          dialogue: [
+            { who: "mina", text: "Epiphoneって他ブランドで言うと何に近い立ち位置なんですか?" },
+            { who: "sensei", text: "FenderにおけるSquierと同じ立ち位置(廉価版海外生産ブランド)として、業界内で明確に対になる存在として語られることが多いよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "John Lennon(The Beatles)が使用したEpiphone Casinoは、Gibson本家ではなくEpiphoneブランドの製品でありながら、音楽史上屈指の有名ギターの一つになっている。",
+          dialogue: [
+            { who: "mina", text: "ジョン・レノンがEpiphoneを使ってたって本当ですか?" },
+            { who: "sensei", text: "本当だよ。使用したEpiphone Casinoは、Gibson本家ではなくEpiphoneブランドの製品でありながら、音楽史上屈指の有名ギターの一つになっているんだ。" },
           ],
         },
       ],
