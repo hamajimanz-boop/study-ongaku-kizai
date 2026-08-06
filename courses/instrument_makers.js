@@ -4401,14 +4401,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "創業者Agop Tomurcukは、かつてZildjian一族がアメリカへ拠点を移す以前、イスタンブールの工房で培われていた伝統的な手打ち製法の系譜に連なる職人とされる。Zildjianの主力がアメリカに移った後も、イスタンブールに残り伝統的な製法を守り続けた流れの中で設立されたブランド。",
+          dialogue: [
+            { who: "mina", text: "Istanbul Agopは「アメリカに渡らなかった職人」ってhookにありましたね。" },
+            { who: "sensei", text: "そうなんだ。創業者Agop Tomurcukは、かつてZildjian一族がアメリカへ拠点を移す以前、イスタンブールの工房で培われていた伝統的な手打ち製法の系譜に連なる職人とされているんだ。" },
+            { who: "mina", text: "Zildjianがアメリカに行った後はどうなったんですか?" },
+            { who: "sensei", text: "Zildjianの主力がアメリカに移った後も、イスタンブールに残り伝統的な製法を守り続けた流れの中で設立されたブランドなんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "1枚ずつ手作業で打ち出すことによる、複雑で暗く、倍音の多い「オールドKスタイル」の響きが特徴。ジャズドラマーから特に高い評価を得ている。",
+          dialogue: [
+            { who: "mina", text: "Istanbul Agopの音の特徴は?" },
+            { who: "sensei", text: "1枚ずつ手作業で打ち出すことによる、複雑で暗く、倍音の多い「オールドKスタイル」の響きが特徴だよ。" },
+            { who: "mina", text: "どんなジャンルで評価されているんですか?" },
+            { who: "sensei", text: "ジャズドラマーから特に高い評価を得ているんだ。" },
           ],
         },
         {
@@ -4422,20 +4428,27 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "1枚ずつ手作業で仕上げるため大量生産には向かないが、その希少性・伝統性がむしろ高価格帯での付加価値になっている。",
+          dialogue: [
+            { who: "mina", text: "手作業だと生産数は少なそうですね。" },
+            { who: "sensei", text: "その通り。1枚ずつ手作業で仕上げるため大量生産には向かないんだ。でもその希少性・伝統性がむしろ高価格帯での付加価値になっているんだよ。" },
+            { who: "mina", text: "少量生産が逆に価値を生んでいるんですね。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "同じくイスタンブール系伝統を継ぐIstanbul Mehmet、Bosphorusと並ぶ「トルコ伝統派」の代表格。近代的なZildjian/Sabianの量産ラインとは異なる評価軸(職人の手仕事)で語られる。",
+          dialogue: [
+            { who: "mina", text: "業界内でのポジションは?" },
+            { who: "sensei", text: "同じくイスタンブール系伝統を継ぐIstanbul Mehmet、Bosphorusと並ぶ「トルコ伝統派」の代表格だよ。" },
+            { who: "mina", text: "ZildjianやSabianとは評価軸が違うんですか?" },
+            { who: "sensei", text: "そう。近代的なZildjian/Sabianの量産ラインとは異なる評価軸、つまり職人の手仕事という軸で語られるんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Istanbul AgopとIstanbul Mehmetは、同じイスタンブールの伝統を汲みながらも別会社として競合しており、Zildjian/Sabianの分裂劇と似た構図がトルコのシンバル業界にも存在する。",
+          dialogue: [
+            { who: "mina", text: "Istanbul Mehmetとの関係もZildjianとSabianに似ているんですか?" },
+            { who: "sensei", text: "そうなんだ。Istanbul AgopとIstanbul Mehmetは、同じイスタンブールの伝統を汲みながらも別会社として競合していてね。Zildjian/Sabianの分裂劇と似た構図がトルコのシンバル業界にも存在するんだよ。" },
+            { who: "mina", text: "シンバル業界って、家族や職人同士の分裂劇が意外と多いんですね。" },
           ],
         },
       ],
