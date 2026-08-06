@@ -1083,15 +1083,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1982年、ドイツでHans-Peter Wilfer(父Fred Wilferはギターブランド Framusの創業者)が設立。父の会社Framusは一度廃業していたが、Hans-Peterは独立してベース専業のWarwickを興し、後年Framusブランドも買い戻して復活させた。",
-            "「Made in Germany」の高級ラインと、アジア圏工場で生産する廉価ラインRockbassの二段構えの生産体制を早くから確立している。",
+          dialogue: [
+            { who: "mina", text: "Warwickってどういう成り立ちのブランドなんですか?" },
+            { who: "sensei", text: "1982年、ドイツでHans-Peter Wilfer(父Fred Wilferはギターブランド Framusの創業者)が設立したんだ。父の会社Framusは一度廃業していたけど、Hans-Peterは独立してベース専業のWarwickを興して、後年Framusブランドも買い戻して復活させたんだよ。" },
+            { who: "mina", text: "生産体制はどうなってるんですか?" },
+            { who: "sensei", text: "「Made in Germany」の高級ラインと、アジア圏工場で生産する廉価ラインRockbassの二段構えの生産体制を早くから確立しているんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "Bubinga、Wenge、Ovangkol(アフリカ産の硬く重い木材)などのエキゾチックウッドを積極採用し、明るく倍音の多い「ザラッとした」個性的なトーンを追求している。自社開発のピックアップ/プリアンプブランドMEC(Music Electronic Germany)による積極的なアクティブ回路設計も特徴。",
+          dialogue: [
+            { who: "mina", text: "Warwickの音って何が特徴なんですか?" },
+            { who: "sensei", text: "Bubinga、Wenge、Ovangkolなどのエキゾチックウッドを積極採用していて、明るく倍音の多い「ザラッとした」個性的なトーンを追求しているんだ。自社開発のピックアップ/プリアンプブランドMECによる積極的なアクティブ回路設計も特徴だよ。" },
           ],
         },
         {
@@ -1107,20 +1110,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "高価な輸入木材への依存度が高いため、為替・産地の環境規制の影響を受けやすいビジネスモデルとされる。近年は木材資源の持続可能性(サステナビリティ)にも配慮した調達方針を打ち出している。",
+          dialogue: [
+            { who: "mina", text: "エキゾチックウッドにこだわるのって、経営的にはリスクもあるんですか?" },
+            { who: "sensei", text: "高価な輸入木材への依存度が高いから、為替・産地の環境規制の影響を受けやすいビジネスモデルとされているんだ。近年は木材資源の持続可能性にも配慮した調達方針を打ち出しているよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Music Man同様アクティブベースの代表格だが、Warwickはより「攻撃的で個性の強い」音作りで知られ、メタル/ヘヴィ系のベーシスト(Korn の Fieldy等)からも支持を集めてきた。",
+          dialogue: [
+            { who: "mina", text: "WarwickってMusic Manと似たポジションなんですか?" },
+            { who: "sensei", text: "同じアクティブベースの代表格だけど、Warwickはより「攻撃的で個性の強い」音作りで知られていて、メタル/ヘヴィ系のベーシスト(Kornの Fieldy等)からも支持を集めてきたんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Hans-Peter Wilferは1995年に父の会社Framusブランドを買い戻し、ギター事業も並行して展開している。ベース専業からギターブランドも傘下に収めるという逆流的な展開をたどった稀有な例。",
+          dialogue: [
+            { who: "mina", text: "Warwickってギターも作ってるんですか?" },
+            { who: "sensei", text: "Hans-Peter Wilferは1995年に父の会社Framusブランドを買い戻して、ギター事業も並行して展開しているんだ。ベース専業からギターブランドも傘下に収めるという逆流的な展開をたどった稀有な例なんだよ。" },
           ],
         },
       ],
