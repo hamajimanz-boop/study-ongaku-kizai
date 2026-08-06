@@ -1015,16 +1015,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1972年、Fenderの元従業員(Forrest White、Tom Walkerら)によって設立。Leo Fender本人も設立に関与していたとされ、後年G&L(Leo Fenderが最後に興したブランド)へと移る前の重要な足跡となっている。",
-            "1984年、弦メーカーのErnie Ball社が買収し、現在の社名「Ernie Ball Music Man」となった。弦メーカーが楽器メーカーそのものを傘下に収めるという珍しい統合の例。",
+          dialogue: [
+            { who: "mina", text: "Music Manってどういう経緯でできた会社なんですか?" },
+            { who: "sensei", text: "1972年、Fenderの元従業員(Forrest White、Tom Walkerら)によって設立されたんだ。Leo Fender本人も設立に関与していたとされていて、後年G&Lへと移る前の重要な足跡になっているんだよ。" },
+            { who: "mina", text: "今の社名、なんかErnie Ballって付いてますよね?" },
+            { who: "sensei", text: "そう、1984年、弦メーカーのErnie Ball社が買収して、現在の社名「Ernie Ball Music Man」になったんだ。弦メーカーが楽器メーカーそのものを傘下に収めるという珍しい統合の例なんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "1976年発売のStingRayベースは、量産ベースとして初めて「オンボード・アクティブプリアンプ/EQ」(電池駆動で音を積極的に補正・増幅する回路)を搭載したモデルとされ、パンチが効いて前に出る、いわゆる「スラップベース」に理想的な音を確立した。",
-            "ハムバッカー1基のピックアップとアクティブ回路の組み合わせが生む、太さと抜けの両立が最大の個性。",
+          dialogue: [
+            { who: "mina", text: "StingRayベースって何がそんなに画期的だったんですか?" },
+            { who: "sensei", text: "1976年発売のStingRayベースは、量産ベースとして初めて「オンボード・アクティブプリアンプ/EQ」を搭載したモデルとされていて、パンチが効いて前に出る、いわゆる「スラップベース」に理想的な音を確立したんだ。" },
+            { who: "mina", text: "音の個性はどこから来るんですか?" },
+            { who: "sensei", text: "ハムバッカー1基のピックアップとアクティブ回路の組み合わせが生む、太さと抜けの両立が最大の個性なんだよ。" },
           ],
         },
         {
@@ -1041,20 +1045,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "弦メーカーであるErnie Ball社の傘下に入ったことで、自社製造・自社流通を強みとする体制を築いている。米国内工場での一貫生産にこだわる数少ないブランドの一つ。",
+          dialogue: [
+            { who: "mina", text: "Ernie Ball傘下になって、何か変わったんですか?" },
+            { who: "sensei", text: "弦メーカーであるErnie Ball社の傘下に入ったことで、自社製造・自社流通を強みとする体制を築いているんだ。米国内工場での一貫生産にこだわる数少ないブランドの一つだよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "アクティブベースの分野ではWarwick等と並び称される存在。ギターにおいてはPRS同様、Fender/Gibsonに次ぐハイエンド市場のプレイヤーとして扱われることが多い。",
+          dialogue: [
+            { who: "mina", text: "Music Manって業界的にどういう位置づけなんですか?" },
+            { who: "sensei", text: "アクティブベースの分野ではWarwick等と並び称される存在だ。ギターにおいてはPRS同様、Fender/Gibsonに次ぐハイエンド市場のプレイヤーとして扱われることが多いよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Red Hot Chili PeppersのFlea(ベーシスト)がStingRayを長年愛用してきたことでも知られ、ファンクロック系のベースサウンドの基準の一つになっている。",
+          dialogue: [
+            { who: "mina", text: "StingRayの有名な愛用者っているんですか?" },
+            { who: "sensei", text: "Red Hot Chili PeppersのFlea(ベーシスト)が長年愛用してきたことでも知られていて、ファンクロック系のベースサウンドの基準の一つになっているんだよ。" },
           ],
         },
       ],
