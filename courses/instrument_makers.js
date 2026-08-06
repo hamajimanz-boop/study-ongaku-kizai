@@ -952,15 +952,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1979年、Leo Fender本人と、初期Fenderの盟友George Fullertonによって設立(社名G&Lは「George & Leo」に由来)。FenderとMusic Manに続く、Leo Fenderにとって生涯3社目のギターブランドとなった。",
-            "Leo Fenderは1991年に亡くなるまで、このG&Lで現役の設計者として製品開発に携わり続けた。",
+          dialogue: [
+            { who: "mina", text: "G&Lって聞いたことないブランドなんですけど、どんな会社なんですか?" },
+            { who: "sensei", text: "1979年、Leo Fender本人と、初期Fenderの盟友George Fullertonによって設立されたんだ。社名G&Lは「George & Leo」に由来しているよ。FenderとMusic Manに続く、Leo Fenderにとって生涯3社目のギターブランドになったんだ。" },
+            { who: "mina", text: "Leo Fenderってここでも設計に関わってたんですか?" },
+            { who: "sensei", text: "そう、1991年に亡くなるまで、このG&Lで現役の設計者として製品開発に携わり続けたんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "初代Fenderの設計思想を土台にしつつ、独自開発のピックアップ「マグネットレゾネーター」や、より精密なサドル(弦を支え振動を伝える金具)設計のブリッジなど、Leo Fenderが生涯かけて改良を続けた技術が惜しみなく投入されている。",
+          dialogue: [
+            { who: "mina", text: "G&Lの音ってFenderと何が違うんですか?" },
+            { who: "sensei", text: "初代Fenderの設計思想を土台にしつつ、独自開発のピックアップ「マグネットレゾネーター」や、より精密なサドル設計のブリッジなど、Leo Fenderが生涯かけて改良を続けた技術が惜しみなく投入されているんだ。" },
           ],
         },
         {
@@ -974,20 +977,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "Fenderほどの知名度・売上規模は持たないが、「Leo Fender本人による設計の集大成」という物語性から、コアなギターファン・コレクターの間で高く評価されている。",
+          dialogue: [
+            { who: "mina", text: "G&LってFenderほど有名じゃないですよね?" },
+            { who: "sensei", text: "そうだね、Fenderほどの知名度・売上規模は持たないけど、「Leo Fender本人による設計の集大成」という物語性から、コアなギターファン・コレクターの間で高く評価されているんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "一般的な知名度ではFenderに及ばないものの、設計の完成度という観点から「知る人ぞ知る」ブランドとして語られることが多い。Fenderの伝統的設計を愛しつつ、より現代的な精度・機能を求める層に支持されている。",
+          dialogue: [
+            { who: "mina", text: "G&Lって業界的にはどう見られてるんですか?" },
+            { who: "sensei", text: "一般的な知名度ではFenderに及ばないものの、設計の完成度という観点から「知る人ぞ知る」ブランドとして語られることが多いんだ。Fenderの伝統的設計を愛しつつ、より現代的な精度・機能を求める層に支持されているよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Leo Fenderは自身の最初の会社Fenderを去った後も、Music Man、G&Lと生涯にわたりギター設計に携わり続け、G&Lはその「最終到達点」としてファンの間で特別視されている。",
+          dialogue: [
+            { who: "mina", text: "Leo Fenderって、Fenderを離れた後もずっとギター作ってたんですか?" },
+            { who: "sensei", text: "そう、自身の最初の会社Fenderを去った後も、Music Man、G&Lと生涯にわたりギター設計に携わり続けたんだ。G&Lはその「最終到達点」としてファンの間で特別視されているんだよ。" },
           ],
         },
       ],
