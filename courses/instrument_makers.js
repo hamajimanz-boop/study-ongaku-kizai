@@ -4538,14 +4538,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "イスタンブールの伝統的なシンバル職人たちによって設立された、比較的後発のトルコ系シンバルブランド。社名はイスタンブールを東西に分けるボスポラス海峡に由来する。",
+          dialogue: [
+            { who: "mina", text: "Bosphorusは「第三の勢力」ってhookにありましたね。" },
+            { who: "sensei", text: "そうなんだ。イスタンブールの伝統的なシンバル職人たちによって設立された、比較的後発のトルコ系シンバルブランドでね。社名はイスタンブールを東西に分けるボスポラス海峡に由来しているんだ。" },
+            { who: "mina", text: "AgopとMehmetに続く3社目なんですね。" },
+            { who: "sensei", text: "その通り。同じ伝統を汲む職人たちが、また新たなブランドを興したという流れなんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "Istanbul Agop/Mehmetと同様、伝統的な手打ち製法による複雑で暗い響きを特徴とする。Master seriesは特にジャズ/フュージョン系ドラマーから評価が高い。",
+          dialogue: [
+            { who: "mina", text: "音の特徴は他の2社と似ているんですか?" },
+            { who: "sensei", text: "Istanbul Agop/Mehmetと同様、伝統的な手打ち製法による複雑で暗い響きを特徴としているよ。" },
+            { who: "mina", text: "評価されているシリーズはありますか?" },
+            { who: "sensei", text: "Master seriesは特にジャズ/フュージョン系ドラマーから評価が高いんだ。" },
           ],
         },
         {
@@ -4558,20 +4564,27 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "Istanbul Agop/Mehmetという先行2社に対する「第三の勢力」として、同じ伝統技術を武器に独自の顧客基盤を築いてきた。",
+          dialogue: [
+            { who: "mina", text: "後発ブランドとして、どう顧客を獲得したんですか?" },
+            { who: "sensei", text: "Istanbul Agop/Mehmetという先行2社に対する「第三の勢力」として、同じ伝統技術を武器に独自の顧客基盤を築いてきたんだ。" },
+            { who: "mina", text: "同じ技術を持っていても、後発だと差別化が必要そうですね。" },
+            { who: "sensei", text: "そう。伝統技術という土台は同じでも、ブランドとしての個性づくりに工夫を凝らしてきたんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "イスタンブール伝統派シンバルの中では比較的後発だが、Istanbul Agop/Mehmetと並ぶ選択肢として認知されるようになっている。",
+          dialogue: [
+            { who: "mina", text: "業界内での今の立ち位置は?" },
+            { who: "sensei", text: "イスタンブール伝統派シンバルの中では比較的後発だけど、Istanbul Agop/Mehmetと並ぶ選択肢として認知されるようになっているんだ。" },
+            { who: "mina", text: "後発でも今は肩を並べる存在になったんですね。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "トルコには他にもDiril、Amedia等、伝統的な手打ち製法を受け継ぐ中小メーカーが複数存在し、イスタンブール系シンバルは一つの企業に留まらない「地域産業」として発展してきた。",
+          dialogue: [
+            { who: "mina", text: "トルコには他にもシンバルメーカーがあるんですか?" },
+            { who: "sensei", text: "あるよ。他にもDiril、Amedia等、伝統的な手打ち製法を受け継ぐ中小メーカーが複数存在していてね。イスタンブール系シンバルは一つの企業に留まらない「地域産業」として発展してきたんだ。" },
+            { who: "mina", text: "1つの都市に、これだけ多くのシンバルメーカーが集まっているのも珍しいですね。" },
           ],
         },
       ],
