@@ -210,16 +210,20 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "Steinberg(スタインバーグ)は1984年、ドイツ・ハンブルクでKarl Steinberg(カール・スタインバーグ)、Manfred Rürup(マンフレート・リュルプ)、その妻Nicole(ニコル)によって設立された。設立場所はRürup夫妻の自宅アパートだったという逸話が残っている。",
-            "会社は2003年にPinnacle Systemsグループの傘下に入った後、2004年末にYamahaが買収する方針を固め、2005年に完全子会社化された。以後Steinbergは現在までYamahaグループの一員として活動している。",
+          dialogue: [
+            { who: "mina", text: "Steinbergって「VST」を作った会社なんですね。" },
+            { who: "sensei", text: "そうなんだ。Steinberg(スタインバーグ)は1984年、ドイツ・ハンブルクでKarl Steinberg(カール・スタインバーグ)、Manfred Rürup(マンフレート・リュルプ)、その妻Nicole(ニコル)によって設立されたんだ。設立場所はRürup夫妻の自宅アパートだったという逸話が残っているんだよ。" },
+            { who: "mina", text: "今はどこの傘下なんですか?" },
+            { who: "sensei", text: "会社は2003年にPinnacle Systemsグループの傘下に入った後、2004年末にYamahaが買収する方針を固めて、2005年に完全子会社化されたんだ。以後Steinbergは現在までYamahaグループの一員として活動しているんだよ。" },
           ],
         },
         {
           heading: "業界標準規格の生みの親",
-          paragraphs: [
-            "Steinbergは「VST(Virtual Studio Technology)」というプラグイン規格を開発した会社として知られる。VSTは現在、業界で最も広く使われるプラグイン規格(の一つ)となっており、多くのDAW・多くのプラグインメーカーがVST/VST3に対応している。",
-            "同様にSteinbergは「ASIO(Audio Stream Input/Output)」というオーディオドライバ規格も開発した。低遅延なオーディオ入出力を実現するWindows用の業界標準規格として、多くのオーディオインターフェースがASIO対応を謳っている。",
+          dialogue: [
+            { who: "mina", text: "VSTって色々なソフトで聞きますけど、Steinbergが作ったんですか?" },
+            { who: "sensei", text: "そうなんだ。Steinbergは「VST(Virtual Studio Technology)」というプラグイン規格を開発した会社として知られているんだ。VSTは現在、業界で最も広く使われるプラグイン規格(の一つ)となっていて、多くのDAW・多くのプラグインメーカーがVST/VST3に対応しているんだよ。" },
+            { who: "mina", text: "他にも業界標準を作ったんですか?" },
+            { who: "sensei", text: "同様にSteinbergは「ASIO(Audio Stream Input/Output)」というオーディオドライバ規格も開発したんだ。低遅延なオーディオ入出力を実現するWindows用の業界標準規格として、多くのオーディオインターフェースがASIO対応を謳っているんだよ。" },
           ],
         },
         {
@@ -232,16 +236,20 @@ window.COURSES["daw_software"] = {
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Cubaseは特に日本・ヨーロッパで根強いユーザー層を持つ老舗DAWで、Windows環境での作曲・DTMの定番として長年使われてきた。Yamaha傘下という立場から、Yamahaのハードウェア製品(オーディオインターフェース、シンセサイザー等)との連携が図られることもある。",
-            "VST/ASIOという2つの業界標準規格を生み出した実績は、単なる一DAWメーカーを超えた「業界のインフラを作った会社」としての存在感につながっている。",
+          dialogue: [
+            { who: "mina", text: "Cubaseってどこの地域で強いんですか?" },
+            { who: "sensei", text: "Cubaseは特に日本・ヨーロッパで根強いユーザー層を持つ老舗DAWでね。Windows環境での作曲・DTMの定番として長年使われてきたんだ。Yamaha傘下という立場から、Yamahaのハードウェア製品(オーディオインターフェース、シンセサイザー等)との連携が図られることもあるよ。" },
+            { who: "mina", text: "VSTとASIOを作った実績は大きいですよね。" },
+            { who: "sensei", text: "その通り。VST/ASIOという2つの業界標準規格を生み出した実績は、単なる一DAWメーカーを超えた「業界のインフラを作った会社」としての存在感につながっているんだ。" },
           ],
         },
         {
           heading: "よくある誤解",
-          paragraphs: [
-            "「VSTはどこかの業界団体が策定した公式規格」と思われがちだが、実際は一企業であるSteinbergが独自に開発したフォーマット(その後デファクトスタンダード化した)という経緯を持つ。",
-            "「CubaseとNuendoは名前が違うだけの同じソフト」と誤解されることがあるが、Nuendoは映像ポスプロ向けの機能(サラウンドミキシング等)に特化した別ブランド・別価格帯の製品。",
+          dialogue: [
+            { who: "mina", text: "VSTについてよくある誤解はありますか?" },
+            { who: "sensei", text: "「VSTはどこかの業界団体が策定した公式規格」と思われがちだけど、実際は一企業であるSteinbergが独自に開発したフォーマットなんだ。その後デファクトスタンダード化したという経緯を持つんだよ。" },
+            { who: "mina", text: "CubaseとNuendoの違いも誤解されやすいですか?" },
+            { who: "sensei", text: "そうだね。「CubaseとNuendoは名前が違うだけの同じソフト」と誤解されることがあるけど、Nuendoは映像ポスプロ向けの機能(サラウンドミキシング等)に特化した別ブランド・別価格帯の製品なんだ。" },
           ],
         },
       ],
