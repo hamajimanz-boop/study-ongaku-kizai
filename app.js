@@ -497,6 +497,10 @@ function checkpointHtml(q, key) {
     <div class="checkpoint" id="cp-${key}">
       <p class="checkpoint-label">${ICONS.chat} ちょっと確認</p>
       <p class="checkpoint-q">${q.q}</p>
+      <button type="button" class="memo-toggle" id="cp-memoToggle-${key}">${ICONS.pencil} 計算メモを開く</button>
+      <div class="memo-pad" id="cp-memoPad-${key}" style="display:none">
+        <textarea id="cp-memoTextarea-${key}" placeholder="ここに途中の計算式やメモを自由に書けます(採点には使われません)"></textarea>
+      </div>
       <div class="checkpoint-choices">${choicesHtml}</div>
       <div class="checkpoint-feedback" id="cp-feedback-${key}"></div>
     </div>`;
@@ -521,6 +525,15 @@ function wireCheckpoints() {
         <p class="${correct ? "fb-correct" : "fb-wrong"}">${correct ? "その通り!このまま読み進めましょう。" : "おしい!正解は上でハイライトした選択肢です。"}</p>
         <p class="fb-explain">${checkpointExplains[key] || ""}</p>
       `;
+    });
+  });
+  document.querySelectorAll(".checkpoint .memo-toggle").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const pad = toggle.nextElementSibling;
+      const isOpen = pad.style.display !== "none";
+      pad.style.display = isOpen ? "none" : "block";
+      toggle.innerHTML = `${ICONS.pencil} ${isOpen ? "計算メモを開く" : "計算メモを閉じる"}`;
+      if (!isOpen) pad.querySelector("textarea").focus();
     });
   });
 }
@@ -581,6 +594,10 @@ function drawQuiz(course, unit) {
     <section class="quiz">
       <h2>${unit.title} テスト</h2>
       <p class="quiz-q">${q.q}</p>
+      <button type="button" class="memo-toggle" id="memoToggle">${ICONS.pencil} 計算メモを開く</button>
+      <div class="memo-pad" id="memoPad" style="display:none">
+        <textarea id="memoTextarea" placeholder="ここに途中の計算式やメモを自由に書けます(採点には使われません)"></textarea>
+      </div>
       <div class="choice-list">${choicesHtml}</div>
       <div class="quiz-feedback" id="feedback"></div>
       <button class="btn btn-primary" id="nextBtn" style="display:none">次へ →</button>
@@ -589,6 +606,15 @@ function drawQuiz(course, unit) {
 
   document.querySelectorAll(".choice").forEach((btn) => {
     btn.addEventListener("click", () => onAnswer(course, unit, q, parseInt(btn.dataset.i, 10)));
+  });
+
+  const memoToggle = document.getElementById("memoToggle");
+  const memoPad = document.getElementById("memoPad");
+  memoToggle.addEventListener("click", () => {
+    const isOpen = memoPad.style.display !== "none";
+    memoPad.style.display = isOpen ? "none" : "block";
+    memoToggle.innerHTML = `${ICONS.pencil} ${isOpen ? "計算メモを開く" : "計算メモを閉じる"}`;
+    if (!isOpen) document.getElementById("memoTextarea").focus();
   });
 }
 
