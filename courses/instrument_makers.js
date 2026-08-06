@@ -633,15 +633,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1883年、ドイツ系移民Friedrich Gretschがニューヨーク・ブルックリンで創業した老舗。当初は太鼓・バンジョーなど幅広い楽器を手がけ、後にホロウボディ/セミホロウボディのエレキギターで独自の地位を築いた。",
-            "The BeatlesのGeorge Harrisonが初期に愛用したDuo Jet、カントリー奏者Chet Atkinsのシグネチャーモデル(6120)、そして白い外装が印象的なWhite Falconなど、視覚的にも個性の強いモデルで知られる。",
+          dialogue: [
+            { who: "mina", text: "Gretschってすごく古い会社なんですよね?" },
+            { who: "sensei", text: "そう、1883年、ドイツ系移民Friedrich Gretschがニューヨーク・ブルックリンで創業した老舗なんだ。当初は太鼓・バンジョーなど幅広い楽器を手がけて、後にホロウボディ/セミホロウボディのエレキギターで独自の地位を築いたんだよ。" },
+            { who: "mina", text: "有名なモデルってどんなのがあるんですか?" },
+            { who: "sensei", text: "The BeatlesのGeorge Harrisonが初期に愛用したDuo Jet、カントリー奏者Chet Atkinsのシグネチャーモデル(6120)、そして白い外装が印象的なWhite Falconなど、視覚的にも個性の強いモデルで知られているんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "ホロウボディ/セミホロウボディ構造による、乾いたトゥワング(はじけるような煌びやかさ)サウンドが特徴。ロカビリー(Brian Setzer等)の音を象徴するギターとして今も現役で使われ続けている。",
+          dialogue: [
+            { who: "mina", text: "Gretschの音の特徴って何なんですか?" },
+            { who: "sensei", text: "ホロウボディ/セミホロウボディ構造による、乾いたトゥワング(はじけるような煌びやかさ)サウンドが特徴だ。ロカビリー(Brian Setzer等)の音を象徴するギターとして今も現役で使われ続けているんだよ。" },
           ],
         },
         {
@@ -657,20 +660,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "2002年よりギター部門はFenderがライセンス生産・販売を担当している。一方、Gretschのドラム部門は全くの別企業として存在し、2012年にDW(Drum Workshop)が買収して現在に至る。同じGretschブランドがギターとドラムで別々の企業に運用されているという珍しい構造を持つ。",
+          dialogue: [
+            { who: "mina", text: "Gretschって今もFriedrich Gretsch家の会社なんですか?" },
+            { who: "sensei", text: "いや、2002年よりギター部門はFenderがライセンス生産・販売を担当しているんだ。一方、Gretschのドラム部門は全くの別企業として存在していて、2012年にDW(Drum Workshop)が買収して現在に至るよ。同じGretschブランドがギターとドラムで別々の企業に運用されているという珍しい構造を持っているんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "ホロウボディ系ギターの代表格として、Gibsonのセミホロウ(ES-335等)と比較される。ロカビリー/カントリー/ロックンロールの「レトロな色気」を求める層に特に支持されている。",
+          dialogue: [
+            { who: "mina", text: "Gretschって業界的にどう見られてるんですか?" },
+            { who: "sensei", text: "ホロウボディ系ギターの代表格として、Gibsonのセミホロウ(ES-335等)と比較されるんだ。ロカビリー/カントリー/ロックンロールの「レトロな色気」を求める層に特に支持されているよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "George Harrison(The Beatles)が最初に本格的に使用したエレキギターはGretsch Duo Jetだったとされ、後にRickenbackerやGibsonへと移行していく前の重要な足跡として語られる。",
+          dialogue: [
+            { who: "mina", text: "George Harrisonって最初はGretschを使ってたんですか?" },
+            { who: "sensei", text: "そう、最初に本格的に使用したエレキギターはGretsch Duo Jetだったとされていて、後にRickenbackerやGibsonへと移行していく前の重要な足跡として語られるんだよ。" },
           ],
         },
       ],
