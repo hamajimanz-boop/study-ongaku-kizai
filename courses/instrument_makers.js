@@ -3633,14 +3633,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1922年、イギリスで創業。アメリカのLudwigに対する「イギリスを代表するドラムブランド」として、20世紀を通じて英国ロック/ポップスシーンを支えてきた。",
+          dialogue: [
+            { who: "mina", text: "Premierは「イギリス代表」ってhookにありましたね。" },
+            { who: "sensei", text: "そうなんだ。1922年、イギリスで創業した会社でね。アメリカのLudwigに対する「イギリスを代表するドラムブランド」として、20世紀を通じて英国ロック/ポップスシーンを支えてきたんだ。" },
+            { who: "mina", text: "アメリカとイギリスで、それぞれ代表的なブランドがあったんですね。" },
+            { who: "sensei", text: "その通り。ドラムの世界でも、国ごとの音楽シーンを象徴するブランドが存在していたんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "「Premier Resonator」等の独自シェル設計により、パンチのある明瞭なサウンドを追求してきた。The Whoの Keith Moon、Cozy Powell(Rainbow等)ら英国の著名ドラマーに愛用された歴史を持つ。",
+          dialogue: [
+            { who: "mina", text: "Premierの音の特徴は?" },
+            { who: "sensei", text: "「Premier Resonator」等の独自シェル設計により、パンチのある明瞭なサウンドを追求してきたんだ。" },
+            { who: "mina", text: "有名な愛用者はいますか?" },
+            { who: "sensei", text: "The WhoのKeith Moon、Cozy Powell(Rainbow等)ら英国の著名ドラマーに愛用された歴史を持つよ。" },
           ],
         },
         {
@@ -3655,20 +3661,28 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "1960〜70年代の英国ロック黄金期を支えたブランドとしての歴史的価値を持つが、近年は日本・アメリカブランドとの競争の中でかつてほどの市場シェアは持っていないとされる。",
+          dialogue: [
+            { who: "mina", text: "今のPremierの市場での立ち位置はどうなんですか?" },
+            { who: "sensei", text: "1960〜70年代の英国ロック黄金期を支えたブランドとしての歴史的価値を持っているんだ。ただ近年は日本・アメリカブランドとの競争の中で、かつてほどの市場シェアは持っていないとされているよ。" },
+            { who: "mina", text: "歴史的価値と今の市場シェアは、また別の話なんですね。" },
+            { who: "sensei", text: "その通り。栄光の歴史があっても、現在の競争環境では必ずしも優位とは限らないんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "「イギリスのLudwig」として、英国ロックの歴史を語る上で欠かせないブランド。ヴィンテージファンの間では今も高く評価されている。",
+          dialogue: [
+            { who: "mina", text: "業界内での位置づけは?" },
+            { who: "sensei", text: "「イギリスのLudwig」として、英国ロックの歴史を語る上で欠かせないブランドだよ。" },
+            { who: "mina", text: "今でも評価されているんですか?" },
+            { who: "sensei", text: "ヴィンテージファンの間では今も高く評価されているんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "The WhoのKeith Moonの破天荒なドラムセット破壊パフォーマンスも、当時のPremier製ドラムセットを舞台に行われていたことがしばしば語られる。",
+          dialogue: [
+            { who: "mina", text: "Keith Moonって破壊的なパフォーマンスで有名でしたよね?" },
+            { who: "sensei", text: "The WhoのKeith Moonの破天荒なドラムセット破壊パフォーマンスも、当時のPremier製ドラムセットを舞台に行われていたことがしばしば語られるんだ。" },
+            { who: "mina", text: "壊されるドラムセットの側にも歴史があったんですね。" },
           ],
         },
       ],
