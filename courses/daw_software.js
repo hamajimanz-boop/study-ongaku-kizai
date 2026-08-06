@@ -84,37 +84,47 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "Logic Proの前身を開発したのは、1992年にドイツ・レリンゲンでGerhard Lengeling(ゲアハルト・レンゲリング)とChris Adam(クリス・アダム)が設立したEmagic(イーマジック)社。2人はC-Lab(シーラボ)という別会社出身のプログラマーだった。",
-            "Emagicは1993年に「Notator Logic」という製品を発表し、これが後のLogicシリーズの原型になる。2002年7月、AppleがEmagicを買収。当時Logicは世界で20万人以上のミュージシャンに使われていた。",
+          dialogue: [
+            { who: "mina", text: "Logic ProもAppleが最初から作ったわけじゃないんですよね?" },
+            { who: "sensei", text: "その通り。Logic Proの前身を開発したのは、1992年にドイツ・レリンゲンでGerhard Lengeling(ゲアハルト・レンゲリング)とChris Adam(クリス・アダム)が設立したEmagic(イーマジック)社なんだ。2人はC-Lab(シーラボ)という別会社出身のプログラマーだったんだよ。" },
+            { who: "mina", text: "Appleに買収されるまでの流れは?" },
+            { who: "sensei", text: "Emagicは1993年に「Notator Logic」という製品を発表して、これが後のLogicシリーズの原型になるんだ。2002年7月、AppleがEmagicを買収したんだよ。当時Logicは世界で20万人以上のミュージシャンに使われていたんだ。" },
           ],
         },
         {
           heading: "買収後の変化",
-          paragraphs: [
-            "Apple買収後、Emagicが手がけていたWindows版製品の提供は2002年9月末で終了し、Logicは事実上Mac専用ソフトになった。2004年にApple自身のブランドとして「Logic Pro 7」がリリースされ、Emagicブランドは段階的に姿を消した。",
-            "この買収を機に、それまでEmagicの各種プラグイン・音源として個別販売されていた製品群が、Logic Pro本体に統合されるバンドル形式に変わった。",
+          dialogue: [
+            { who: "mina", text: "Appleに買収されてから何が変わったんですか?" },
+            { who: "sensei", text: "Apple買収後、Emagicが手がけていたWindows版製品の提供は2002年9月末で終了して、Logicは事実上Mac専用ソフトになったんだ。2004年にApple自身のブランドとして「Logic Pro 7」がリリースされて、Emagicブランドは段階的に姿を消していったんだよ。" },
+            { who: "mina", text: "プラグインや音源はどうなったんですか?" },
+            { who: "sensei", text: "この買収を機に、それまでEmagicの各種プラグイン・音源として個別販売されていた製品群が、Logic Pro本体に統合されるバンドル形式に変わったんだ。" },
           ],
         },
         {
           heading: "価格体系の特徴",
-          paragraphs: [
-            "Logic Proの大きな特徴は、他社の主要DAWと違い「買い切り・一括払いのみ」を貫いている点。App Store経由で購入する定額の買い切り価格で、サブスクリプション課金は採用していない(2026年時点)。この価格モデルは、サブスク移行が進む業界の中でむしろ異色の存在になっている。",
-            "Mac/iPadでしか動作しない(Windows非対応)という制約と引き換えに、Apple製品(Mac本体)を持っていることが前提の価格戦略になっている。",
+          dialogue: [
+            { who: "mina", text: "Logic Proの価格体系はどんな感じなんですか?" },
+            { who: "sensei", text: "大きな特徴は、他社の主要DAWと違い「買い切り・一括払いのみ」を貫いている点だよ。App Store経由で購入する定額の買い切り価格で、サブスクリプション課金は採用していないんだ(2026年時点)。この価格モデルは、サブスク移行が進む業界の中でむしろ異色の存在になっているんだよ。" },
+            { who: "mina", text: "その代わりMacじゃないと使えないんですよね?" },
+            { who: "sensei", text: "そう。Mac/iPadでしか動作しない(Windows非対応)という制約と引き換えに、Apple製品(Mac本体)を持っていることが前提の価格戦略になっているんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Mac/DTM層で高いシェアを持ち、宅録ミュージシャンや作曲家、映像音楽制作者に広く使われている。プロのレコーディングスタジオではPro Toolsが標準的な一方、個人制作〜プリプロダクション(下準備段階の制作)ではLogic Proを使うケースも多い。",
-            "Appleがハードウェア(Mac)とソフトウェア(Logic Pro)を自社で一貫して作っている点は、他のDAWメーカーには無い強み(動作最適化・機能連携)になっている。",
+          dialogue: [
+            { who: "mina", text: "Logic Proはどんな層に使われているんですか?" },
+            { who: "sensei", text: "Mac/DTM層で高いシェアを持っていて、宅録ミュージシャンや作曲家、映像音楽制作者に広く使われているんだ。プロのレコーディングスタジオではPro Toolsが標準的な一方、個人制作〜プリプロダクション(下準備段階の制作)ではLogic Proを使うケースも多いんだよ。" },
+            { who: "mina", text: "Appleならではの強みってあるんですか?" },
+            { who: "sensei", text: "あるよ。Appleがハードウェア(Mac)とソフトウェア(Logic Pro)を自社で一貫して作っている点は、他のDAWメーカーには無い強み、つまり動作最適化・機能連携になっているんだ。" },
           ],
         },
         {
           heading: "よくある誤解",
-          paragraphs: [
-            "「Logic ProはApple純正で最初から作られた」は誤り。実際は買収によって手に入れた製品であり、Windows版が存在した時期があったことは意外と知られていない。",
-            "「Macを買えば無料で付いてくる」と誤解されることがあるが、Logic Proは別途購入が必要な有料ソフト(簡易版のGarageBandは無料でMac/iPhoneに標準搭載)。",
+          dialogue: [
+            { who: "mina", text: "Logic Proについてよくある誤解ってありますか?" },
+            { who: "sensei", text: "「Logic ProはApple純正で最初から作られた」というのは誤りだよ。実際は買収によって手に入れた製品であり、Windows版が存在した時期があったことは意外と知られていないんだ。" },
+            { who: "mina", text: "Macを買えば無料で付いてくるんじゃないんですか?" },
+            { who: "sensei", text: "それも誤解されやすいポイントだね。Logic Proは別途購入が必要な有料ソフトなんだ(簡易版のGarageBandは無料でMac/iPhoneに標準搭載されているよ)。" },
           ],
         },
       ],
