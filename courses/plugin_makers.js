@@ -108,8 +108,106 @@ window.COURSES["plugin_makers"] = {
         { q: "Slate Digitalが2社を跨いで手がけている製品ジャンルは?", choices: ["ドラム音源とミキシングプラグイン", "楽譜作成とDAW", "シンセサイザーとアンプシム", "ゲーム音楽と映像編集"], answer: 0, explain: "Steven Slate Drumsのドラム音源とSlate Digitalのミキシングプラグインの両方を手がけている。" },
       ],
     },
-    { id: "ssl_plugins", order: 3, title: "SSL", category: "コンソールプラグイン", hook: "英国の伝説コンソールメーカーが何度も買収され、今は非上場のまま生き残っている話。", stub: true },
-    { id: "neve_plugins", order: 4, title: "Neve / AMS Neve", category: "コンソールプラグイン", hook: "一人の天才技術者(Rupert Neve)の名前が今も最高級の代名詞であり続ける理由。", stub: true },
+    {
+      id: "ssl_plugins",
+      order: 3,
+      title: "SSL",
+      category: "コンソールプラグイン",
+      hook: "英国の伝説コンソールメーカーが何度も買収され、今もブランドとして生き残っている話。",
+      image: "ssl_plugins_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "SSLってもともと何を作っていた会社なんですか?" },
+            { who: "sensei", text: "実はパイプオルガンの制御システムから始まった会社なんだ。1969年、イギリス・オックスフォードシャーでColin Sandersが設立したSolid State Logicがそのルーツでね。そこから音楽レコーディング・放送業界向けの大型ミキシングコンソールで、圧倒的な地位を築いていったんだよ。" },
+            { who: "mina", text: "何度も買収されたってhookにありましたけど?" },
+            { who: "sensei", text: "そうなんだ。1988年にUEIというテクノロジーグループに買収されて、その後Carlton Televisionに、1999年には3iによる買収が行われて、2005年には音楽家のPeter Gabrielと放送起業家のDave Engelkeが資産を取得したんだ。そして2017年12月、Audiotonixグループの傘下に入った。これで実に5回目のオーナー交代だったんだよ。" },
+          ],
+        },
+        {
+          heading: "「SSLサウンド」というブランド",
+          dialogue: [
+            { who: "mina", text: "SSLの音って独特な個性があるんですよね?" },
+            { who: "sensei", text: "そうだね。特にバスコンプレッサー(複数トラックをまとめて通す圧縮処理)の音は「SSLサウンド」と呼ばれるほど有名で、パンチがありつつ音圧感のある仕上がりが特徴とされているんだ。ミックスの最終段(マスターバス)に挿すだけで曲がまとまって聴こえる、という評判が定着しているんだよ。" },
+            { who: "mina", text: "プラグイン版もその音を再現しているんですか?" },
+            { who: "sensei", text: "そう。SSLは実機コンソール(Duality、AWS、X-Rack、Matrix2など)をベースにしたプラグイン群を、サブスクリプション・レンタル購入・買い切りなど複数の課金方式で展開しているんだ。実機の高価さに対して、プラグインなら手頃に「あの音」を体験できるという位置づけだね。" },
+          ],
+        },
+        {
+          heading: "お金の話: 非上場のまま生き残る",
+          dialogue: [
+            { who: "mina", text: "何度も買収されているのに、なぜブランドが消えなかったんですか?" },
+            { who: "sensei", text: "SSLというブランド名と技術・特許は一貫して価値があるとみなされ続けてきたからなんだ。オーナーは何度も変わったけど、SSL自体はずっと非上場企業のまま存続しているんだよ。" },
+            { who: "mina", text: "Audiotonixってどんな会社なんですか?" },
+            { who: "sensei", text: "DiGiCo、Calrec、Allen & Heathといった音響機材ブランドを傘下に持つグループでね。Peter Gabriel自身もAudiotonixへの出資者になったんだ。買収されても、著名アーティストが関わり続けているのは面白いポイントだよね。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "SSL Native Bus Compressor 2、SSL Native Channel Strip 2、X-EQ 2、X-Comp、X-Saturator、Fusion系など。実機同様「バスコンプ」が最も代表的な製品として知られる。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "SSL(Solid State Logic)がもともと手がけていた事業は?", choices: ["パイプオルガンの制御システム", "ギターアンプの製造", "楽譜出版", "映画配給"], answer: 0, explain: "1969年創業当初はパイプオルガン用の制御システムを手がける会社だった。" },
+        { q: "SSLが2017年に買収されたグループはどこか?", choices: ["Audiotonix", "Yamaha", "Focusrite", "inMusic"], answer: 0, explain: "2017年12月、DiGiCoやCalrecなどを傘下に持つAudiotonixグループに買収された。" },
+        { q: "SSLのプラグインで特に有名な製品ジャンルは?", choices: ["バスコンプレッサー", "ピッチ補正", "楽譜作成", "MIDIシーケンサー"], answer: 0, explain: "「SSLサウンド」と呼ばれるバスコンプレッサーの音が特に有名。" },
+        { q: "SSLの買収に関わった著名ミュージシャンは誰か?", choices: ["Peter Gabriel", "Steven Slate", "Rupert Neve", "Brian Eno"], answer: 0, explain: "2005年に資産取得に関わり、Audiotonix買収後も出資者になったPeter Gabriel。" },
+        { q: "SSLは何回目のオーナー交代でAudiotonix傘下に入ったか?", choices: ["5回目", "1回目", "10回目", "一度も変わっていない"], answer: 0, explain: "1988年のUEI買収以降、2017年のAudiotonix入りまでで5回目のオーナー交代とされる。" },
+      ],
+    },
+    {
+      id: "neve_plugins",
+      order: 4,
+      title: "Neve / AMS Neve",
+      category: "コンソールプラグイン",
+      hook: "一人の天才技術者(Rupert Neve)の名前が、本人がもう関わっていない会社の看板として今も最高級の代名詞であり続ける理由。",
+      image: "neve_plugins_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "Neveって「現代のミキシングコンソールを作った人」なんですよね?" },
+            { who: "sensei", text: "そうなんだ。1961年、Rupert Neveがイギリスで設立したNeve Electronicsがルーツで、彼は「近代的なミキシングコンソールの生みの親」とされる人物なんだよ。1992年、AMS(Advanced Music Systems)と合併してAMS Neveという会社になったんだ。" },
+            { who: "mina", text: "じゃあ今のAMS NeveにRupert Neve本人が関わっているんですか?" },
+            { who: "sensei", text: "実はそうじゃないんだ。Rupert Neveは元の会社を離れた後、2005年に妻のEvelyn NeveやJosh Thomasと一緒に「Rupert Neve Designs」というアメリカの別会社を立ち上げているんだよ。つまりAMS Neveのために彼が新たに設計したものは何もないんだ。名前だけが受け継がれている、と言った方が正確だね。" },
+          ],
+        },
+        {
+          heading: "「Neveサウンド」の再現をめぐる争い",
+          dialogue: [
+            { who: "mina", text: "でもプラグインの世界では「Neve系」ってよく聞きますよね。" },
+            { who: "sensei", text: "そうなんだ。特に「1073」という往年のプリアンプ/EQは、暖かく太いサウンドの代名詞として、多くの会社がプラグインでモデリングしているんだよ。ただし、その中でAMS Neveから直接ライセンスを受けているのはUniversal Audio(UAD)だけとされているんだ。" },
+            { who: "mina", text: "他の会社のは正式なライセンス品じゃないんですか?" },
+            { who: "sensei", text: "SoftubeやWaves(Abbey Road NEVE 1073など)も同様のサウンドを再現したプラグインを出しているけど、UADのように「AMS Neveから直接ライセンスされた回路設計」を謳っているのはUniversal Audio版だけなんだ。他社は独自にサウンドを分析・再現するアプローチを取っていることが多いんだよ。" },
+          ],
+        },
+        {
+          heading: "Rupert Neve Designs自身はプラグインを作らない",
+          dialogue: [
+            { who: "mina", text: "本人の新しい会社、Rupert Neve Designsはプラグインを出さないんですか?" },
+            { who: "sensei", text: "自社でプラグインを開発することはしていないんだ。ただ2011年、YamahaがSteinbergのプラットフォーム向けにRupert Neve本人が承認したプラグインを発表していて、これはYamahaのCLシリーズやRivage PM10というデジタルコンソールにも組み込まれているんだよ。" },
+            { who: "mina", text: "本人が公認した回路を、他社がデジタルに落とし込んでいるんですね。" },
+            { who: "sensei", text: "その通り。ハードウェアの設計を専門とする本人と、それをソフトウェアに変換する専門家が分業しているという構図なんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "「Neve系」を謳うプラグインはUniversal Audio(UAD Neve 1073/1084)、Softube(Trident/Neve系)、Waves(Abbey Road NEVE 1073、Scheps 73)、Brainworx/Plugin Alliance(bx_console等)など多岐にわたる。どのプラグインが公式ライセンス品かは各社の製品説明で確認するのがポイント。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Rupert Neveが1961年に設立した会社は?", choices: ["Neve Electronics", "AMS Neve", "Rupert Neve Designs", "Focusrite"], answer: 0, explain: "Neve Electronicsが1961年設立の最初の会社。AMS Neveは1992年の合併で誕生した。" },
+        { q: "AMS Neveは何と何が合併してできた会社か?", choices: ["AMSとNeve Electronics", "SSLとNeve", "FocusriteとNeve", "UniversalとNeve"], answer: 0, explain: "1992年、Advanced Music SystemsとNeve Electronicsの合併で誕生した。" },
+        { q: "Rupert Neve本人が2005年に新たに設立した会社は?", choices: ["Rupert Neve Designs", "AMS Neve", "Focusrite", "Universal Audio"], answer: 0, explain: "妻のEvelyn NeveやJosh Thomasと共に2005年にアメリカで設立した。" },
+        { q: "Neve 1073のプラグインで、AMS Neveから直接ライセンスを受けているとされるのはどこの製品か?", choices: ["Universal Audio(UAD)", "Waves", "Softube", "iZotope"], answer: 0, explain: "UADのNeve 1073がAMS Neveから直接ライセンスされた回路設計とされる。" },
+        { q: "Rupert Neve Designs本人が承認したプラグインを2011年に発表した会社は?", choices: ["Yamaha(Steinberg)", "Avid", "Apple", "Roland"], answer: 0, explain: "YamahaがSteinbergプラットフォーム向けに、本人承認のプラグインを発表した。" },
+      ],
+    },
     { id: "izotope", order: 5, title: "iZotope", category: "マスタリング/AI", hook: "大学院生が始めた研究プロジェクトが、AI/機械学習でマスタリングを自動化する会社になり、最後はNative Instrumentsに吸収された話。", stub: true },
     { id: "elysia", order: 6, title: "elysia", category: "ブティックハード系", hook: "ドイツの技術者集団が「値段を下げない」戦略で高級ブランドを守り続けている話。", stub: true },
     { id: "lindell_audio", order: 7, title: "Lindell Audio", category: "ブティックハード系", hook: "スウェーデンの一人メーカーが「本物の回路を安く」で市場を食った話。", stub: true },
