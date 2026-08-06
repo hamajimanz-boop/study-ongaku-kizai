@@ -578,37 +578,47 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "MOTU(Mark of the Unicorn、モツ)は1980年、アメリカ・マサチューセッツ州ケンブリッジで設立された。1984年に発売された初代Apple Macintosh向けに開発された最初期のアプリケーションの一つ「Professional Composer(楽譜作成ソフト)」を手がけたことで知られる。",
-            "1985年、MIDIシーケンスソフト「Performer」を発売(後の看板製品Digital Performerの前身)。同じ1985年、複数MIDIポートと正確な同期を実現するハードウェア「MIDI Time Piece」も発売し、ソフトとハードウェア両方の草分け的存在となった。",
+          dialogue: [
+            { who: "mina", text: "MOTUって「初代Macの頃から」ってhookにありましたけど、そんなに古いんですか?" },
+            { who: "sensei", text: "そうなんだ。MOTU(Mark of the Unicorn、モツ)は1980年、アメリカ・マサチューセッツ州ケンブリッジで設立されたんだ。1984年に発売された初代Apple Macintosh向けに開発された最初期のアプリケーションの一つ「Professional Composer(楽譜作成ソフト)」を手がけたことで知られているんだよ。" },
+            { who: "mina", text: "看板製品のDigital Performerはいつからあるんですか?" },
+            { who: "sensei", text: "1985年、MIDIシーケンスソフト「Performer」を発売したんだ。これが後の看板製品Digital Performerの前身になるんだよ。同じ1985年、複数MIDIポートと正確な同期を実現するハードウェア「MIDI Time Piece」も発売して、ソフトとハードウェア両方の草分け的存在となったんだ。" },
           ],
         },
         {
           heading: "製品としての特徴",
-          paragraphs: [
-            "Digital Performerは音楽制作全般に加え、映像音楽・ポストプロダクション(映像とのシンクロ、サラウンドミキシング等)にも強みを持つ総合型DAWとして進化してきた。長年Mac専用だったが、現在はWindows版も提供されている。",
-            "MIDIシーケンサーとしての歴史が長いことから、MIDI編集機能の緻密さ・伝統に定評があり、映画・TV音楽のスコアリング(劇伴制作)分野で根強いユーザー層を持つ。",
+          dialogue: [
+            { who: "mina", text: "Digital Performerの特徴は?" },
+            { who: "sensei", text: "音楽制作全般に加え、映像音楽・ポストプロダクション(映像とのシンクロ、サラウンドミキシング等)にも強みを持つ総合型DAWとして進化してきたんだ。長年Mac専用だったけど、現在はWindows版も提供されているよ。" },
+            { who: "mina", text: "MIDIに強いというのはどういうことですか?" },
+            { who: "sensei", text: "MIDIシーケンサーとしての歴史が長いことから、MIDI編集機能の緻密さ・伝統に定評があってね。映画・TV音楽のスコアリング(劇伴制作)分野で根強いユーザー層を持っているんだ。" },
           ],
         },
         {
           heading: "企業としての変遷",
-          paragraphs: [
-            "2015年、PreSonusによって買収された。ただし現在もMOTUというブランド名・Digital Performerという製品名は維持されており、PreSonusの他製品(Studio One)とは別ラインとして開発が続けられている。",
-            "ハードウェア面でもMOTUはオーディオインターフェース(828シリーズなど)で長年高い評価を得ており、ソフトとハードウェアの両輪で事業を展開してきた点はPreSonus・Universal Audioとも共通するビジネスモデル。",
+          dialogue: [
+            { who: "mina", text: "MOTUは今どこの傘下なんですか?" },
+            { who: "sensei", text: "2015年、PreSonusによって買収されたんだ。ただし現在もMOTUというブランド名・Digital Performerという製品名は維持されていてね。PreSonusの他製品(Studio One)とは別ラインとして開発が続けられているんだよ。" },
+            { who: "mina", text: "ハードウェアでも有名なんですよね?" },
+            { who: "sensei", text: "そう。ハードウェア面でもMOTUはオーディオインターフェース(828シリーズなど)で長年高い評価を得ていてね。ソフトとハードウェアの両輪で事業を展開してきた点はPreSonus・Universal Audioとも共通するビジネスモデルなんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Pro Tools・Logic Proほどの知名度はないものの、劇伴・スコアリング分野や、MIDI主体の制作(オーケストラ音源の緻密な打ち込み等)を行う層から根強く支持されている「玄人好みのDAW」という位置づけ。",
-            "「初代Macintosh時代から続く老舗」という歴史の長さは、Pro Tools(1991年〜)やCubase(1984年設立)と並び、DAW業界の中でもかなり古参の部類に入る。",
+          dialogue: [
+            { who: "mina", text: "MOTUはどんな層に支持されているんですか?" },
+            { who: "sensei", text: "Pro Tools・Logic Proほどの知名度はないんだけど、劇伴・スコアリング分野や、MIDI主体の制作(オーケストラ音源の緻密な打ち込み等)を行う層から根強く支持されている「玄人好みのDAW」という位置づけだよ。" },
+            { who: "mina", text: "歴史の長さでも際立っているんですか?" },
+            { who: "sensei", text: "そう。「初代Macintosh時代から続く老舗」という歴史の長さは、Pro Tools(1991年〜)やCubase(1984年設立)と並び、DAW業界の中でもかなり古参の部類に入るんだ。" },
           ],
         },
         {
           heading: "よくある誤解",
-          paragraphs: [
-            "「MOTU=モーツ」と読まれることもあるが、一般的には「モツ」または頭文字通り「エムオーティーユー」と呼ばれることが多い(表記・読み方は情報源により揺れがある)。",
-            "「PreSonusに買収されたので製品も統合された」というのは誤りで、Digital PerformerはMOTU独自のブランドとして現在も継続して開発・販売されている。",
+          dialogue: [
+            { who: "mina", text: "MOTUの読み方って決まっているんですか?" },
+            { who: "sensei", text: "「MOTU=モーツ」と読まれることもあるけど、一般的には「モツ」または頭文字通り「エムオーティーユー」と呼ばれることが多いんだ(表記・読み方は情報源により揺れがある)。" },
+            { who: "mina", text: "買収されて製品が統合されたんじゃないんですか?" },
+            { who: "sensei", text: "「PreSonusに買収されたので製品も統合された」というのは誤りだよ。Digital PerformerはMOTU独自のブランドとして現在も継続して開発・販売されているんだ。" },
           ],
         },
       ],
