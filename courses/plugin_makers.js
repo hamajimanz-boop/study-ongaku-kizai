@@ -756,8 +756,108 @@ window.COURSES["plugin_makers"] = {
         { q: "Shadow Hills Mastering Compressorのプラグイン化を手がけたのはどこか?", choices: ["Brainworx", "iZotope", "Celemony", "Native Instruments"], answer: 0, explain: "ドイツのBrainworxが回路をモデリングし、UADプラグインとしても発売された。" },
       ],
     },
-    { id: "pultec", order: 16, title: "Pultec", category: "ヴィンテージEQ", hook: "1950年代の真空管EQが、今も「あの音」の代名詞であり続ける理由。", stub: true },
-    { id: "tascam_teac", order: 17, title: "TASCAM / TEAC", category: "テープエミュレーション", hook: "日本のテープ機メーカーが、なぜ今デジタルの中で「エミュレーション」として蘇っているか。", stub: true },
+    {
+      id: "pultec",
+      order: 16,
+      title: "Pultec",
+      category: "ヴィンテージEQ",
+      hook: "設計者が意図していなかった「奇妙な操作」が、70年以上経った今も定番のテクニックとして語り継がれている話。",
+      image: "pultec_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "Pultecってどんな会社だったんですか?" },
+            { who: "sensei", text: "1953年、アメリカ・ニュージャージー州ティーネックで、Eugene ShenkとOllie Summerlinという2人の技術者が設立した会社なんだ。2人はRCA Instituteの同級生だったんだよ。真空管機材用の電源やテストオシレーターといった専門機材から事業を始めたんだ。" },
+            { who: "mina", text: "小さな会社だったんですか?" },
+            { who: "sensei", text: "そうなんだ。この2人だけで運営する、秘密主義的な小さな工房でね。全ての製品を受注ごとに手作りしていたんだよ。看板製品のEQP-1Aは1951年に原型が発表されて、1961年に改良版として登場し、その後30年近く同じ形で作られ続けたんだ。会社自体は1970年代末〜80年代初頭に閉じてしまったんだけどね。" },
+          ],
+        },
+        {
+          heading: "音の特徴: 「Pultecトリック」という奇妙な操作",
+          dialogue: [
+            { who: "mina", text: "hookにあった「設計者が意図していなかった操作」って何ですか?" },
+            { who: "sensei", text: "「Pultecトリック」と呼ばれる裏技なんだ。EQP-1Aは同じ周波数(例えば60Hz)を、ブーストとカットの両方を同時にかけられる作りになっていてね。普通に考えたら効果が打ち消し合いそうだよね?" },
+            { who: "mina", text: "そうですよね、意味がなさそうです。" },
+            { who: "sensei", text: "でも実は、ブースト回路とカット回路が微妙に違うカーブを描く設計になっているんだ。ブーストは60Hz中心の丸いピークを作って、カットは60Hzより少し下からのシェルフ(棚状)カーブになる。結果、60Hz付近にパンチを与えつつ、その少し下の「もたつく低音」だけを削れるという、独特な効果が生まれるんだよ。" },
+            { who: "mina", text: "設計者の想定外の使い方が、名物テクニックになったんですね。" },
+            { who: "sensei", text: "その通り。今でも「Pultecトリック」として、キックドラムやベースの低音処理の定番テクニックとして語り継がれているんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 会社は消えても技術は生き続ける",
+          dialogue: [
+            { who: "mina", text: "Pultec社自体はもう無いのに、なぜ今もプラグインが作られているんですか?" },
+            { who: "sensei", text: "回路設計そのものは著作権や特許の保護期間をとうに過ぎていて、いわば「業界の共有財産」のようになっているんだ。Universal Audio(UAD)は、EQP-1A・MEQ-5・HLF-3Cという3機種をまとめた「Pultec Passive EQ Collection」を出しているし、他にもWaves、Softubeなど多くの会社が独自にPultec系EQのプラグインを出しているんだよ。" },
+            { who: "mina", text: "1つの会社の発明が、業界全体の共通言語になったんですね。" },
+            { who: "sensei", text: "そう。「Pultec系EQ」というジャンルそのものが確立されているのは、それだけこの2人の設計が音楽的に優れていた証拠だと言えるね。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Pultec系EQは各社が独自にプラグイン化しており、UAD Pultec Passive EQ Collection(EQP-1A/MEQ-5/HLF-3C)、Waves PuigTec EQs、Softube Tube-Techなど、会社ごとに名称・音の解釈が異なる。「オリジナルPultec社」からの直接ライセンス製品は現存しない点に注意。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Pultec社を1953年に設立した2人はどんな関係だったか?", choices: ["RCA Instituteの同級生", "兄弟", "父と息子", "大学の指導教員と学生"], answer: 0, explain: "Eugene ShenkとOllie SummerlinはRCA Instituteの同級生だった。" },
+        { q: "「Pultecトリック」とはどのような操作か?", choices: ["同じ周波数のブーストとカットを同時にかける", "全帯域をミュートする", "ピッチを1オクターブ下げる", "ステレオ幅を無限に広げる"], answer: 0, explain: "同じ周波数を同時にブースト・カットすることで独特な低域カーブを作る裏技。" },
+        { q: "Pultecトリックが独特な効果を生む理由は?", choices: ["ブースト回路とカット回路のカーブが微妙にずれているから", "真空管が故障しているから", "デジタル処理特有のバグだから", "単なる都市伝説で実際には効果がないから"], answer: 0, explain: "設計上、ブーストとカットの周波数カーブがわずかに異なるため独特な効果が生まれる。" },
+        { q: "Pultec社自体はいつ頃活動を終えたとされるか?", choices: ["1970年代末〜80年代初頭", "2000年代", "1960年代半ば", "現在も現役で稼働中"], answer: 0, explain: "1970年代末から80年代初頭にかけて、会社としては活動を終えたとされる。" },
+        { q: "Universal AudioのPultec Passive EQ Collectionに含まれない機種は?", choices: ["EQP-1A", "MEQ-5", "HLF-3C", "SSL 4000バスコンプ"], answer: 3, explain: "SSL 4000バスコンプは別会社(SSL)の製品でPultecコレクションには含まれない。" },
+      ],
+    },
+    {
+      id: "tascam_teac",
+      order: 17,
+      title: "TASCAM / TEAC",
+      category: "テープエミュレーション",
+      hook: "「宅録」を発明した日本のテープ機メーカーが、50周年を機に自社の名機をデジタルの中で蘇らせた話。",
+      image: "tascam_teac_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "TASCAMとTEACって別会社なんですか?" },
+            { who: "sensei", text: "いや、TEACがTASCAMの親会社なんだ。TEACはもともと1953年8月26日、Tani(谷)兄弟のKatsumaとTomomaが設立した「Tokyo Television Acoustic Company」が始まりでね。1956年に設立したもう一つの会社と1964年に合併して、今のTEAC Corporationになったんだよ。" },
+            { who: "mina", text: "TASCAMというブランド名はいつからあるんですか?" },
+            { who: "sensei", text: "1979年、TEAC 144という機材で、手頃な価格の携帯型マルチトラック録音を発明したとされているんだ。その後継のTASCAM 244も含めて、「一般の人が自宅で多重録音できる」という時代を切り開いたんだよ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: 「宅録の名機」たちの音",
+          dialogue: [
+            { who: "mina", text: "TASCAMのテープ機ってどんな音の特徴があるんですか?" },
+            { who: "sensei", text: "1984年発売のTASCAM Porta Oneは、同社で最も売れたPortaStudio(携帯型多重録音機)になって、家庭での音楽制作を大衆化した機材なんだ。1985年のTASCAM 388は8chミキサーと8トラックのテープ機が一体になった製品だよ。" },
+            { who: "mina", text: "TEACブランドの方の名機もあるんですか?" },
+            { who: "sensei", text: "あるよ。1973年発売のTEAC A-6100 MKIIはマスタリング用レコーダーとして今も「テープの温かみ」を求めるエンジニアに支持されているし、TEAC A-3340Sは70年代、多くのロックバンドがデモや作品を録音した名機として知られているんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 50周年を機にプラグイン化",
+          dialogue: [
+            { who: "mina", text: "実機のテープ機って今も使えるんですか?" },
+            { who: "sensei", text: "現物は経年劣化やメンテナンスの問題もあって、気軽に使えるものではなくなっているんだ。そこでIK Multimediaという会社が、TASCAM創立50周年を記念してこの4機種(A-6100 MKII、A-3340S、388、Porta One)をT-RackSというプラグインシリーズとしてまとめてデジタル化したんだよ。" },
+            { who: "mina", text: "どうやってテープの音を再現しているんですか?" },
+            { who: "sensei", text: "IKのDSPエンジニアチームが、磁気テープ録音のプロセスを段階ごとに分解・分析して、その全体をモデル化したんだ。動的な畳み込み(コンボリューション)エンジンと組み合わせて、実機の質感を再現しているんだよ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "IK Multimedia T-RackS TASCAM Tape Collection(TEAC A-6100 MKII、TEAC A-3340S、TASCAM 388、TASCAM Porta One)。TASCAM/TEAC公式協力のもとで開発された点が、他社の非公式なテープエミュレーションと一線を画す。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "TEACの前身「Tokyo Television Acoustic Company」が設立されたのはいつか?", choices: ["1953年", "1979年", "1964年", "1985年"], answer: 0, explain: "1953年8月26日、Tani兄弟によって設立された。" },
+        { q: "TASCAMが1979年に発表し、手頃な価格の携帯型マルチトラック録音を切り開いたとされる機材は?", choices: ["TEAC 144", "TASCAM 388", "Porta One", "A-3340S"], answer: 0, explain: "TEAC 144が携帯型マルチトラック録音の先駆けとされる。" },
+        { q: "TASCAM史上最も売れたPortaStudioとされる機材は?", choices: ["Porta One", "388", "A-6100 MKII", "A-3340S"], answer: 0, explain: "1984年発売のPorta Oneが最も売れたPortaStudioとされる。" },
+        { q: "TASCAM 50周年を記念してテープ機コレクションをプラグイン化した会社は?", choices: ["IK Multimedia", "iZotope", "Universal Audio", "Celemony"], answer: 0, explain: "IK MultimediaがTASCAM公式協力のもとT-RackSシリーズとして発売した。" },
+        { q: "TEAC A-3340Sが70年代に果たした役割は?", choices: ["多くのロックバンドのデモ・作品録音に使われた", "デジタル録音の先駆けとなった", "MIDIを発明した", "CD規格を策定した"], answer: 0, explain: "70年代、多くの影響力のあるロックバンドのデモや作品録音に使われた名機とされる。" },
+      ],
+    },
     { id: "ik_multimedia", order: 18, title: "IK Multimedia", category: "アンプシム/総合", hook: "イタリア発、ハードとソフトの両方でギタリスト市場を制した会社の話。", stub: true },
     { id: "neold", order: 19, title: "NEOLD", category: "ヴィンテージ復刻", hook: "韓国発の新興ブランドが、なぜ古い真空管マイクプリの名前を次々復刻するのか。", stub: true },
     { id: "small_brands_roundup", order: 20, title: "小規模・新興ブランド総集編", category: "総集編", hook: "「大手になれなかった」わけではなく「なる気がない」規模のニッチ経営という生き方。", stub: true },
