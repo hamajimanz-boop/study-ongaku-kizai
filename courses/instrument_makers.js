@@ -1788,14 +1788,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "アメリカ・カリフォルニアで設立。Status Graphiteと同じく、グラファイト(炭素繊維)を使ったネック製造技術のパイオニアとして、1980〜90年代に高い評価を得た。",
+          dialogue: [
+            { who: "mina", text: "さっきのStatus Graphiteと似た名前の技術が出てきますか?" },
+            { who: "sensei", text: "そう、実はModulusもグラファイト系なんだ。アメリカ・カリフォルニアで設立された会社で、Status Graphiteと同じくグラファイト(炭素繊維)を使ったネック製造技術のパイオニアとして、1980〜90年代に高い評価を得たんだ。" },
+            { who: "mina", text: "イギリスとアメリカ、両方でほぼ同時期に同じ発想が出てきたんですね。" },
+            { who: "sensei", text: "そう考えると面白いよね。木材の限界を克服するというアイデアが、大西洋を挟んで同時多発的に生まれたわけだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "グラファイトネックによる高い剛性と、湿度変化に左右されない安定した音程・演奏性を特徴とする。木材ボディと組み合わせたハイブリッド構造のモデルが主流。",
+          dialogue: [
+            { who: "mina", text: "Modulusの音の特徴は?" },
+            { who: "sensei", text: "グラファイトネックによる高い剛性と、湿度変化に左右されない安定した音程・演奏性が特徴だよ。" },
+            { who: "mina", text: "ボディも全部グラファイトなんですか?" },
+            { who: "sensei", text: "いや、木材ボディと組み合わせたハイブリッド構造のモデルが主流なんだ。ネックだけグラファイトにして、ボディは木の鳴りを活かす設計だね。" },
           ],
         },
         {
@@ -1808,20 +1814,28 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "1980〜90年代の「安定性重視」ブームの中で高く評価されたが、近年は主に木製ネックのブランドが市場の主流を占めており、Modulusはニッチな存在としてコアなファン層に支持され続けている。",
+          dialogue: [
+            { who: "mina", text: "今のModulusの市場での立ち位置はどうなんですか?" },
+            { who: "sensei", text: "1980〜90年代の「安定性重視」ブームの中で高く評価されたけど、近年は主に木製ネックのブランドが市場の主流を占めているんだ。" },
+            { who: "mina", text: "じゃあ今は下火なんですか?" },
+            { who: "sensei", text: "下火というよりニッチな存在として、コアなファン層に支持され続けているという方が正確だね。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Status Graphiteと並ぶグラファイトネックの代表格。特にFleaのようなロック/ファンク系ベーシストからの支持で知られる。",
+          dialogue: [
+            { who: "mina", text: "業界内でのポジションはどうなんですか?" },
+            { who: "sensei", text: "Status Graphiteと並ぶグラファイトネックの代表格だよ。特にFleaのようなロック/ファンク系ベーシストからの支持で知られているんだ。" },
+            { who: "mina", text: "Fleaって誰でしたっけ?" },
+            { who: "sensei", text: "Red Hot Chili Peppersのベーシストだよ。次のセクションでも詳しく触れるね。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Flea(Red Hot Chili Peppers)は主力のMusic Man StingRayと並行してModulus製ベースも使用してきたことがあり、両ブランドの愛用者として語られることがある。",
+          dialogue: [
+            { who: "mina", text: "Fleaとの関係、もう少し詳しく教えてください。" },
+            { who: "sensei", text: "Flea(Red Hot Chili Peppers)は主力のMusic Man StingRayと並行してModulus製ベースも使用してきたことがあり、両ブランドの愛用者として語られることがあるんだ。" },
+            { who: "mina", text: "一人のベーシストが複数のブランドを使い分けるのも珍しくないんですね。" },
           ],
         },
       ],
