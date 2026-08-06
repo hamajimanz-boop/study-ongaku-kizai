@@ -708,7 +708,54 @@ window.COURSES["plugin_makers"] = {
         { q: "Millenniaのマイクプリアンプが使われてきた場所として挙げられるのは?", choices: ["NASAやホワイトハウス", "スペースXの発射施設のみ", "海外の空港のみ", "使用実績は非公開"], answer: 0, explain: "世界で1万チャンネル以上使われ、NASAやホワイトハウスでも採用されてきたとされる。" },
       ],
     },
-    { id: "shadow_hills_etc", order: 15, title: "Shadow Hills / Purple Audio / Black Box Analog Design", category: "ブティックハード系", hook: "一台数十万円のハードウェアを作る極小工房が、なぜプラグイン化に踏み切ったか。", stub: true },
+    {
+      id: "shadow_hills_etc",
+      order: 15,
+      title: "Shadow Hills / Purple Audio / Black Box Analog Design",
+      category: "ブティックハード系",
+      hook: "パンクバンドのために高校を中退した男が作った「化け物コンプレッサー」を、有名エンジニアが実物を見ずに注文した話。",
+      image: "shadow_hills_etc_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革: Shadow Hills",
+          dialogue: [
+            { who: "mina", text: "Shadow Hillsってどんな会社なんですか?" },
+            { who: "sensei", text: "2000年頃、Peter ReardonがロサンゼルスでShadow Hills Industriesを設立したんだ。彼は元々パンク/アンダーグラウンド系のプロデューサーで、高校を中退してまで、無料のスタジオ時間を使って自分のパンクバンドを録音していたという経歴の持ち主なんだよ。" },
+            { who: "mina", text: "そこからどうやって機材メーカーになったんですか?" },
+            { who: "sensei", text: "1990年代に自分用の機材をいくつも作っていくうちに、2000年頃にShadow Hills Industriesを設立したんだ。看板製品の「Mastering Compressor」は5ラックスペースもある巨大なコンプレッサーでね。ミキシングエンジニアのMichael Brauerが、実物を見ないまま最初の1台を注文した、という逸話が伝わっているんだよ。" },
+          ],
+        },
+        {
+          heading: "会社の正体・沿革: Purple Audio",
+          dialogue: [
+            { who: "mina", text: "Purple Audioはどんな成り立ちなんですか?" },
+            { who: "sensei", text: "1997年、Andrew Robertsが設立した会社なんだ。彼はNYUの音楽テクノロジープログラムに通っていた1994年頃から、寮の部屋でレコーディング機材の売買・修理をしていたそうだよ。そこから独立して自社ブランドを立ち上げたんだ。MC76・MC77というFETコンプレッサー(往年の1176系回路を再現したもの)で評判を確立しているよ。" },
+          ],
+        },
+        {
+          heading: "お金の話: Plugin Allianceでプラグイン化",
+          dialogue: [
+            { who: "mina", text: "こういう極小工房が、なぜプラグインまで作るんですか?" },
+            { who: "sensei", text: "Shadow HillsのMastering Compressorはドイツ・BrainworxがモデリングしてUADプラグインとしても発売されているんだ。回路を丸ごとコードとして「構築」する手間のかかる作業をBrainworxが担って、UADプラットフォームで最も人気のあるダイナミクス系プラグインの一つになったんだよ。" },
+            { who: "mina", text: "実機は高くて手が届かなくても、プラグインなら試せますもんね。" },
+            { who: "sensei", text: "その通り。Black Box Analog Designという別のブティックメーカーも、HG-2という真空管サチュレーション処理機をPlugin Alliance・UAD両方でプラグイン化していてね。Dave Pensadoら著名エンジニアに使われている製品なんだ。極小工房が世界中のユーザーにリーチする手段として、プラグイン化は欠かせない戦略になっているんだよ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Shadow Hills Mastering Compressor(UAD/Plugin Alliance)、Purple Audio MC77(Plugin Alliance)、Black Box Analog Design HG-2(UAD/Plugin Alliance)など。いずれも実機は高価なハイエンド機材で、プラグイン版がより多くのユーザーへの入口になっている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Shadow Hills Industries創業者Peter Reardonの若い頃の経歴は?", choices: ["パンクバンドのために高校を中退した", "音楽大学を首席で卒業した", "電気工学の博士号を取得した", "映画音楽の作曲家を目指していた"], answer: 0, explain: "無料のスタジオ時間を使ってパンクバンドを録音するため高校を中退した経歴を持つ。" },
+        { q: "Shadow Hillsの看板製品「Mastering Compressor」の特徴は?", choices: ["5ラックスペースの巨大な筐体", "手のひらサイズの小型機", "完全ワイヤレス動作", "無料で配布されている"], answer: 0, explain: "5ラックスペースもある大型のマスタリング用コンプレッサーとして知られる。" },
+        { q: "Purple Audio創業者Andrew Robertsが機材の売買・修理を始めた場所は?", choices: ["NYUの寮の部屋", "実家のガレージ", "レンタルスタジオの一室", "工場の倉庫"], answer: 0, explain: "NYUの音楽テクノロジープログラム在籍中、寮の部屋から機材売買・修理を始めた。" },
+        { q: "Purple Audioの代表製品MC76/MC77が再現しているとされる往年の回路は?", choices: ["1176系FETコンプレッサー", "Neve 1073プリアンプ", "SSLバスコンプ", "Pultec EQ"], answer: 0, explain: "往年の1176系FETコンプレッサー回路を再現したモデルとされる。" },
+        { q: "Shadow Hills Mastering Compressorのプラグイン化を手がけたのはどこか?", choices: ["Brainworx", "iZotope", "Celemony", "Native Instruments"], answer: 0, explain: "ドイツのBrainworxが回路をモデリングし、UADプラグインとしても発売された。" },
+      ],
+    },
     { id: "pultec", order: 16, title: "Pultec", category: "ヴィンテージEQ", hook: "1950年代の真空管EQが、今も「あの音」の代名詞であり続ける理由。", stub: true },
     { id: "tascam_teac", order: 17, title: "TASCAM / TEAC", category: "テープエミュレーション", hook: "日本のテープ機メーカーが、なぜ今デジタルの中で「エミュレーション」として蘇っているか。", stub: true },
     { id: "ik_multimedia", order: 18, title: "IK Multimedia", category: "アンプシム/総合", hook: "イタリア発、ハードとソフトの両方でギタリスト市場を制した会社の話。", stub: true },
