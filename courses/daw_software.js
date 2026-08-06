@@ -641,37 +641,47 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "Cakewalk(ケイクウォーク)は1987年、Twelve Tone Systems社によって設立されたアメリカのDAWブランド。長年Windows環境の定番DAWとして親しまれ、2000年代には音声エンジンを刷新した看板製品「SONAR」ブランドを展開していた。",
-            "2007年にRoland、2013年にGibson(ギブソン、ギターで有名な楽器メーカー)がCakewalkを買収。しかし2018年、Gibsonが経営再建(倒産・事業整理)の過程でギター事業に注力する方針を固め、Cakewalkを含む非ギター系事業が手放されることになった。",
+          dialogue: [
+            { who: "mina", text: "Cakewalkは倒産に巻き込まれかけたってhookにありましたけど?" },
+            { who: "sensei", text: "そうなんだ。まずCakewalk(ケイクウォーク)は1987年、Twelve Tone Systems社によって設立されたアメリカのDAWブランドでね。長年Windows環境の定番DAWとして親しまれ、2000年代には音声エンジンを刷新した看板製品「SONAR」ブランドを展開していたんだ。" },
+            { who: "mina", text: "それがどうして倒産に巻き込まれたんですか?" },
+            { who: "sensei", text: "2007年にRoland、2013年にGibson(ギブソン、ギターで有名な楽器メーカー)がCakewalkを買収したんだ。しかし2018年、Gibsonが経営再建(倒産・事業整理)の過程でギター事業に注力する方針を固めてね。Cakewalkを含む非ギター系事業が手放されることになったんだよ。" },
           ],
         },
         {
           heading: "BandLabによる救済と無料化",
-          paragraphs: [
-            "2018年2月、シンガポールのテック企業BandLab Technologiesが、Cakewalk社の資産と知的財産権を買収したことを発表。BandLabはSONARを「Cakewalk by BandLab」として再生させ、全機能を無料で提供するという大胆な方針転換を行った。",
-            "これにより、かつては高額な買い切りソフトだったSONAR(Cakewalk)が、現在は完全無料の高機能DAWとして配布されている(BandLab自体はSNS型の音楽制作プラットフォーム・クラウドサービスを別途展開しており、そちらで収益を得るビジネスモデルと考えられる)。",
+          dialogue: [
+            { who: "mina", text: "それでCakewalkはどうやって助かったんですか?" },
+            { who: "sensei", text: "2018年2月、シンガポールのテック企業BandLab Technologiesが、Cakewalk社の資産と知的財産権を買収したことを発表したんだ。BandLabはSONARを「Cakewalk by BandLab」として再生させて、全機能を無料で提供するという大胆な方針転換を行ったんだよ。" },
+            { who: "mina", text: "有料ソフトが無料になったのはすごいですね。" },
+            { who: "sensei", text: "そう。これにより、かつては高額な買い切りソフトだったSONAR(Cakewalk)が、現在は完全無料の高機能DAWとして配布されているんだ(BandLab自体はSNS型の音楽制作プラットフォーム・クラウドサービスを別途展開していて、そちらで収益を得るビジネスモデルと考えられるよ)。" },
           ],
         },
         {
           heading: "製品としての特徴",
-          paragraphs: [
-            "長年のWindows DAWとしての開発の蓄積があり、MIDI編集・オーディオ編集ともに機能が充実している。無料でありながらVST3対応、マルチトラックのミキシング・マスタリング機能なども備えた本格仕様。",
-            "Windows専用(macOS版は提供されていない)という制約がある点は、Cakewalk選定における重要な注意点になる。",
+          dialogue: [
+            { who: "mina", text: "無料でどれくらい本格的なことができるんですか?" },
+            { who: "sensei", text: "長年のWindows DAWとしての開発の蓄積があってね。MIDI編集・オーディオ編集ともに機能が充実しているんだ。無料でありながらVST3対応、マルチトラックのミキシング・マスタリング機能なども備えた本格仕様なんだよ。" },
+            { who: "mina", text: "何か制約はあるんですか?" },
+            { who: "sensei", text: "Windows専用(macOS版は提供されていない)という制約がある点は、Cakewalk選定における重要な注意点になるね。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "「無料でここまでできるのか」という驚きの声とともに、予算の限られる初心者・学生層から根強い支持を得ている。一方でプロの現場での標準採用例はPro Tools等に比べると少なく、主に個人制作・学習用途での存在感が大きい。",
-            "「大手企業に買収されては業態が変わる」という業界の再編劇(Yamaha×Steinberg、PreSonus×MOTU等)の中でも、Cakewalkの「倒産→救済→無料化」という経緯は特に劇的な事例として語られることが多い。",
+          dialogue: [
+            { who: "mina", text: "Cakewalkはどんな層に使われているんですか?" },
+            { who: "sensei", text: "「無料でここまでできるのか」という驚きの声とともに、予算の限られる初心者・学生層から根強い支持を得ているんだ。一方でプロの現場での標準採用例はPro Tools等に比べると少なくて、主に個人制作・学習用途での存在感が大きいんだよ。" },
+            { who: "mina", text: "業界の再編劇の中でも珍しい例なんですか?" },
+            { who: "sensei", text: "「大手企業に買収されては業態が変わる」という業界の再編劇(Yamaha×Steinberg、PreSonus×MOTU等)の中でも、Cakewalkの「倒産→救済→無料化」という経緯は特に劇的な事例として語られることが多いんだ。" },
           ],
         },
         {
           heading: "よくある誤解",
-          paragraphs: [
-            "「無料版は機能制限版」と誤解されがちだが、Cakewalk by BandLabは基本的に旧SONAR Platinum相当のフル機能が無料で提供されている(細部の対応状況は都度公式情報を確認するのが望ましい)。",
-            "「BandLabは日本ではあまり聞かない」と思われがちだが、モバイルアプリ「BandLab」はSNS的な音楽制作アプリとして世界的に広く使われており、Cakewalkはそのグループ会社の一員という位置づけ。",
+          dialogue: [
+            { who: "mina", text: "無料版は機能制限があるんじゃないんですか?" },
+            { who: "sensei", text: "「無料版は機能制限版」と誤解されがちだけど、Cakewalk by BandLabは基本的に旧SONAR Platinum相当のフル機能が無料で提供されているんだ(細部の対応状況は都度公式情報を確認するのが望ましいよ)。" },
+            { who: "mina", text: "BandLabって聞いたことないですけど、有名な会社なんですか?" },
+            { who: "sensei", text: "「BandLabは日本ではあまり聞かない」と思われがちだけど、モバイルアプリ「BandLab」はSNS的な音楽制作アプリとして世界的に広く使われているんだ。Cakewalkはそのグループ会社の一員という位置づけなんだよ。" },
           ],
         },
       ],
