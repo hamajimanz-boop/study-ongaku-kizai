@@ -19,7 +19,7 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
 - **機材ブランド・楽器メーカー** — `hardware_dtm`(音響機材15社)、
   `instrument_makers`(楽器メーカー75社)
 - **DAW・ソフトウェア** — `daw_software`(DAWソフト15社)、
-  `plugin_makers`(プラグインメーカー、一時停止中)
+  `plugin_makers`(プラグインメーカー全20社)
 - **音響理論・音響概論(物理と工学)** — `studio_acoustics`(部屋の音響、軸性/接線/斜め
   モードとシュレーダー周波数まで踏み込んだ全7単元)、`sound_engineering_theory`
   (JAPRS準拠の音響工学理論、高校物理の波動から積み上げ、全14単元)。機材メーカーの

@@ -1,12 +1,15 @@
-/* Phase 2: プラグインメーカー編(一時停止中) — #01のみ本文あり、他はスタブ */
+/* Phase 2: プラグインメーカー編 — 全20社、対話形式(先生↔ミナ)で完成済み
+   出典: 各社公式サイト・Wikipedia・SoundOnSound・TapeOp等の一次/準一次情報をWebSearchで
+   裏取りして作成(2026-08)。スタブ時代のhookに含まれていた事実誤認(拠点国の誤り等)は
+   WebSearchでの裏取り時に修正済み。 */
 window.COURSES = window.COURSES || {};
 window.COURSES["plugin_makers"] = {
   id: "plugin_makers",
   title: "プラグインメーカー編",
-  description: "所有プラグイン187個のカタログを分析して選んだ全20社。現在は音響機材編を優先しており一時停止中。",
+  description: "所有プラグイン187個のカタログを分析して選んだ全20社。ブティックハードウェアメーカーからAI/機械学習を活用する新興企業まで、プラグインを作っている会社の沿革・お金の話・業界内でのポジションを学ぶ。",
   color: "#4a3aa7",
   order: 2,
-  active: false,
+  active: true,
   units: [
     {
       id: "brainworx_plugin_alliance",
@@ -958,6 +961,58 @@ window.COURSES["plugin_makers"] = {
         { q: "NEOLDが製品を展開する際に利用しているパブリッシャーは?", choices: ["Plugin Alliance", "iZotope", "Waves", "Native Instruments"], answer: 0, explain: "BrainworxのPlugin Alliance経由で製品を展開している。" },
       ],
     },
-    { id: "small_brands_roundup", order: 20, title: "小規模・新興ブランド総集編", category: "総集編", hook: "「大手になれなかった」わけではなく「なる気がない」規模のニッチ経営という生き方。", stub: true },
+    {
+      id: "small_brands_roundup",
+      order: 20,
+      title: "小規模・新興ブランド総集編",
+      category: "総集編",
+      hook: "「大手になれなかった」わけではなく「なる気がない」規模のニッチ経営という生き方。ドイツでたった一人でプラグインを作り続ける開発者もいる。",
+      image: "small_brands_roundup_card.png",
+      sections: [
+        {
+          heading: "Kush Audio: 「機材を改造する人」から「機材を作る人」へ",
+          dialogue: [
+            { who: "mina", text: "Kush Audioってどんな会社なんですか?" },
+            { who: "sensei", text: "ロサンゼルスの会社で、Gregory Scott(通称「UBK」)というレコーディングエンジニア兼ハードウェア設計者が興したんだ。彼は最初、既存の機材を改造する「モッダー」として評判を得た人物でね。特に「UBK Fatso」という改造機で名を知られていたんだよ。" },
+            { who: "mina", text: "改造から自社設計に進んだんですね。" },
+            { who: "sensei", text: "そう。改造で培った知見をもとに、独自のアナログハードウェア設計へと進んでいったんだ。他社を修理・改造することから始めて、自分のブランドを立ち上げるというキャリアパスも、この業界では珍しくないんだよ。" },
+          ],
+        },
+        {
+          heading: "Tokyo Dawn Labs: 音楽コレクティブから生まれた「無料」の思想",
+          dialogue: [
+            { who: "mina", text: "Tokyo Dawn Labsってどんな会社なんですか?" },
+            { who: "sensei", text: "実はプラグイン会社である前に、1997年にMarc Wallowyらが設立した「Tokyo Dawn Records」という音楽コレクティブがルーツなんだ。インターネットを通じた音楽活動(ネットオーディオ)の先駆けとして知られているんだよ。" },
+            { who: "mina", text: "そこからどうやってプラグイン開発に進んだんですか?" },
+            { who: "sensei", text: "音楽制作の中で自分たちが必要とするツールを作り始めたのがきっかけなんだ。TDR Novaという動的EQは完全無料で配布されていて、多くの宅録ユーザーの入門ツールになっているんだよ。無料でも質の高いプラグインを提供するという姿勢が、コレクティブとしてのルーツを感じさせるね。" },
+          ],
+        },
+        {
+          heading: "Klanghelm: たった一人で作り続けるドイツの開発者",
+          dialogue: [
+            { who: "mina", text: "「たった一人」ってさっきhookにありましたけど?" },
+            { who: "sensei", text: "Klanghelmのことだね。ドイツ・ベルリン近郊を拠点に、Tony Frenzelという開発者がほぼ一人で運営している会社なんだ。DC1A、IVGI、MJUC、TENSといったコンプレッサー・サチュレーター系プラグインで知られているよ。" },
+            { who: "mina", text: "一人でそんなに評判の良い製品を作れるものなんですか?" },
+            { who: "sensei", text: "作れるんだ。無料版(jr.が付くバージョン)と有料フル版を両方用意していて、KVR AudioやGearspaceといった業界フォーラムでも「クオリティの高い入門用プラグイン」として頻繁に勧められているんだよ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 大きくならない、という経営判断",
+          dialogue: [
+            { who: "mina", text: "この3社に共通することって何ですか?" },
+            { who: "sensei", text: "どこも大企業に成長することを目指していない、という点が共通しているんだ。Brainworx/Plugin AllianceやiZotopeのように事業拡大・買収を重ねてきた会社とは対照的に、個人の技術・こだわりの延長線上で事業を続けている会社が多いんだよ。" },
+            { who: "mina", text: "「大手になれなかった」んじゃなくて「なる気がない」ってことですね。" },
+            { who: "sensei", text: "その通り。プラグイン業界には、大きな資本で成長を目指す道と、少人数のこだわりを貫く道の、両方の生き方があるんだ。ここまで19社を見てきたけど、それぞれの会社にそれぞれの規模の哲学がある、というのがこの編全体を通して分かることだね。" },
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Kush Audio創業者Gregory Scott(UBK)が最初に評判を得たのは何がきっかけか?", choices: ["既存機材の改造(モッド)", "音楽大学での研究", "映画音楽の作曲", "ゲーム開発"], answer: 0, explain: "「UBK Fatso」など既存機材の改造で評判を得てからKush Audioを興した。" },
+        { q: "Tokyo Dawn Labsのルーツになった1997年設立の団体は?", choices: ["Tokyo Dawn Records(音楽コレクティブ)", "レコード会社Tokyo Dawn", "楽器メーカーTokyo Dawn", "大学のサークル"], answer: 0, explain: "Marc Wallowyらが設立した音楽コレクティブTokyo Dawn Recordsがルーツ。" },
+        { q: "Tokyo Dawn Labsの代表的な無料プラグインは?", choices: ["TDR Nova", "V76U73", "HG-2", "Melodyne"], answer: 0, explain: "動的EQのTDR Novaが完全無料で配布され、広く使われている。" },
+        { q: "Klanghelmはどのような規模で運営されている会社か?", choices: ["ほぼ一人(Tony Frenzel)で運営", "従業員1000人超の大企業", "複数国にまたがる多国籍企業", "上場企業"], answer: 0, explain: "ドイツ・ベルリン近郊で、開発者Tony Frenzelがほぼ一人で運営している。" },
+        { q: "この単元で紹介した3社に共通する経営姿勢は?", choices: ["大企業への成長を目指さず個人のこだわりを貫く", "全社が同じ親会社の傘下にある", "全社が上場を目指している", "全社がハードウェア専業である"], answer: 0, explain: "BrainworxやiZotopeのような拡大路線とは対照的に、小規模路線を選んでいる点が共通する。" },
+      ],
+    },
   ],
 };
