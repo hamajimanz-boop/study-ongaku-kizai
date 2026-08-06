@@ -508,8 +508,106 @@ window.COURSES["plugin_makers"] = {
         { q: "SPLがプラグイン販売で提携している会社は?", choices: ["Plugin Alliance", "Waves", "iZotope", "Native Instruments"], answer: 0, explain: "BrainworxのPlugin Alliance経由でプラグイン化・販売されている。" },
       ],
     },
-    { id: "valhalla_dsp", order: 11, title: "Valhalla DSP", category: "リバーブ", hook: "たった一人の開発者が「安くて良いリバーブ」で業界の価格破壊をした話。", stub: true },
-    { id: "maag_audio", order: 12, title: "Maag Audio", category: "ブティックハード系", hook: "一つの帯域(Air Band)を発明したことで一生食えるようになったエンジニアの話。", stub: true },
+    {
+      id: "valhalla_dsp",
+      order: 11,
+      title: "Valhalla DSP",
+      category: "リバーブ",
+      hook: "夫婦2人だけの会社が「フェアな価格を守り続ける」という一貫した信念で、業界の価格破壊をした話。",
+      image: "valhalla_dsp_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "Valhalla DSPってどんな会社なんですか?" },
+            { who: "sensei", text: "2009〜2010年頃、Sean CostelloとKristin Costelloという夫婦2人が設立した会社なんだ。Seanがコーディング、Kristinがグラフィック・マーケティングを担当しているんだよ。" },
+            { who: "mina", text: "Seanさんはどんな経歴の人なんですか?" },
+            { who: "sensei", text: "スタンフォード大学でコンピューターミュージックを学んで、ゲーム業界で物理モデリング(車のエンジン音のシミュレーションなど)の仕事をしていたんだ。リバーブに関する学術論文も共同執筆しているような、根っからのDSP研究者だよ。会社を立ち上げる前には、Audio DamageのEOSというリバーブプラグインに、4つのリバーブアルゴリズムを提供していたこともあるんだ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: 純粋な音の追求",
+          dialogue: [
+            { who: "mina", text: "Valhalla DSPのリバーブの評判ってどうなんですか?" },
+            { who: "sensei", text: "とても高いよ。「音そのものの純粋さ」にこだわっていて、余計な歪みやアーティファクト(不要なノイズ・違和感)のない、音楽を邪魔しない響きを追求しているんだ。" },
+            { who: "mina", text: "具体的にはどんな製品があるんですか?" },
+            { who: "sensei", text: "VintageVerb、Room、Shimmer、Delayなど。特にVintageVerbは開発に何年もかけたと言われていて、「これ以上ないくらい完璧に近い」とまで評されたこともあるんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 「フェアな価格を、いつも」",
+          dialogue: [
+            { who: "mina", text: "「価格破壊」って具体的にどういうことなんですか?" },
+            { who: "sensei", text: "Sean Costelloの哲学は「fair price always(フェアな価格をいつも)」なんだ。ほとんどの製品を年間通して50ドルという価格に固定していて、ブラックフライデーのようなセールもやらないんだよ。" },
+            { who: "mina", text: "他社は数百ドルするようなプラグインもありますよね?" },
+            { who: "sensei", text: "そうなんだ。Valhalla DSPの製品は、その何倍もする他社製品と比べても遜色ない、むしろ高く評価されることが多いんだよ。本人は「フル機能のDAWが200ドルで買える時代に、プラグインがそれ以上高くていいわけがない」と語っていてね。より多くの人が使える価格にすることを大事にしているんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "VintageVerb、Room、Shimmer、Plate、Delay、SupermassiveやFreqEchoなど、リバーブ・ディレイ・モジュレーション系プラグインを中心に展開。全製品ほぼ一律の価格設定が特徴。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Valhalla DSPを設立したのは誰か?", choices: ["Sean CostelloとKristin Costello", "Bill Putnam SrとJr", "Ruben TilgnerとDominik Klaßen", "Mark EthierとJeremy Todd"], answer: 0, explain: "夫婦であるSean CostelloとKristin Costelloが設立した。" },
+        { q: "Sean Costelloの学術的な背景は?", choices: ["スタンフォード大学でコンピューターミュージックを研究", "MITで機械工学を専攻", "オックスフォード大学で物理学を専攻", "特に音響の専門教育を受けていない"], answer: 0, explain: "スタンフォード大学でコンピューターミュージックを学び、ゲーム業界での物理モデリング経験も持つ。" },
+        { q: "Valhalla DSPの価格に関する方針として正しいのは?", choices: ["ほぼ一律50ドル、セールを行わない「フェアな価格をいつも」", "毎年価格を倍にしていく", "無料配布のみ", "オークション形式で価格を決める"], answer: 0, explain: "「fair price always」という信念のもと、ほぼ一律50ドルでセールも行わない方針を貫いている。" },
+        { q: "Sean Costelloが会社設立前に関わった製品は?", choices: ["Audio DamageのEOSリバーブへのアルゴリズム提供", "Neve 1073の設計", "SSLコンソールの開発", "Melodyneの開発"], answer: 0, explain: "Audio DamageのEOSリバーブプラグインに4つのリバーブアルゴリズムを提供していた。" },
+        { q: "Valhalla DSPが得意とするプラグインのジャンルは?", choices: ["リバーブ・ディレイ・モジュレーション系", "ドラム音源", "楽譜作成", "マスタリング用ラウドネスメーター"], answer: 0, explain: "VintageVerbなどのリバーブ・ディレイ系プラグインで高い評価を得ている。" },
+      ],
+    },
+    {
+      id: "maag_audio",
+      order: 12,
+      title: "Maag Audio",
+      category: "ブティックハード系",
+      hook: "「Air Band」というたった一つの周波数帯域の発明が、30年後も自分の会社の看板であり続けているエンジニアの話。",
+      image: "maag_audio_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "Maag Audioってどんな人が作った会社なんですか?" },
+            { who: "sensei", text: "35年以上のキャリアを持つレコーディングエンジニア、Cliff Mäagが2009年に設立した会社なんだ。息子のRyanに勧められて機材開発の世界に戻ってきたという経緯があってね。もう一人の息子Cliff Jr.や、電気技師のTravis Allenも会社に加わっているんだよ。" },
+            { who: "mina", text: "それ以前は何をしていた人なんですか?" },
+            { who: "sensei", text: "Maag Audioを始める前は、NTIやNightproという会社でプロダクションマネージャーを務めていて、PreQ3やEQ3Dという製品も設計していたんだ。機材開発一筋のキャリアを持つ人物なんだよ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: 「Air Band」という発明",
+          dialogue: [
+            { who: "mina", text: "「Air Band」ってどんな発明だったんですか?" },
+            { who: "sensei", text: "1993年、Cliff MaagがNTI EQ3という製品で初めて世に出した、非常に高い周波数帯域を扱うEQバンドのことなんだ。単に「高音を上げる」のとは違って、音を硬くせずに、音楽的な形で細やかさと広がりを加えられるカーブを作ったんだよ。このEQ3は、今でも「最も音楽的なイコライザーの一つ」と言われているんだ。" },
+            { who: "mina", text: "その技術がMaag Audioの製品にも受け継がれているんですか?" },
+            { who: "sensei", text: "そうなんだ。20年以上経って、Maag AudioはEQ3の精神をEQ4Mという製品で引き継いでいてね。マスタリング用のフラッグシップモデルとして、より高い出力・ヘッドルーム・コントロール性を持たせているんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 一つの発明が続く会社の資産に",
+          dialogue: [
+            { who: "mina", text: "「一生食えるようになった」ってどういうことですか?" },
+            { who: "sensei", text: "1993年に発明したAir Bandという技術・ブランドイメージが、2009年に自分の会社を立ち上げてからも、30年近く経った今も看板製品であり続けているということなんだ。一つの発明のアイデアが、これほど長く商業的な価値を持ち続けているのは珍しい例だよ。" },
+            { who: "mina", text: "会社を移っても、発明したアイデアは自分についてくるんですね。" },
+            { who: "sensei", text: "そう。技術者個人の発明力そのものが、会社を超えて長く評価され続ける資産になるといういい例だね。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Maag EQ4、EQ4M(マスタリング用)、PreQ4(プリアンプ+EQ)など。Air Bandを含むプラグイン版もPlugin Alliance等を通じて提供されている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Maag Audioを2009年に設立した人物は?", choices: ["Cliff Mäag", "Ruben Tilgner", "Sean Costello", "Tobias Lindell"], answer: 0, explain: "35年以上のキャリアを持つエンジニア、Cliff Mäagが設立した。" },
+        { q: "「Air Band」が最初に世に出た製品は?", choices: ["NTI EQ3", "Maag EQ4M", "SSL 4000", "Neve 1073"], answer: 0, explain: "1993年、NTI EQ3という製品でCliff Maagが初めて世に出した。" },
+        { q: "Air Bandの特徴として正しいのは?", choices: ["高音を硬くせず音楽的に細やかさ・広がりを加える", "低音のみをブーストする", "音を完全に無音化する", "ピッチを自動補正する"], answer: 0, explain: "単純な高音ブーストとは違い、音楽的なカーブで細やかさと広がりを加える設計。" },
+        { q: "Maag AudioがEQ3の精神を引き継いだマスタリング向け製品は?", choices: ["EQ4M", "Transient Designer", "Vitalizer", "Fairchild 670"], answer: 0, explain: "EQ4MがEQ3の精神を受け継いだマスタリング用フラッグシップモデル。" },
+        { q: "Cliff MaagがMaag Audio以前に在籍していた会社は?", choices: ["NTIやNightpro", "SSL", "Universal Audio", "Celemony"], answer: 0, explain: "NTIやNightproでプロダクションマネージャーとして機材設計に携わっていた。" },
+      ],
+    },
     { id: "vertigo_bettermaker", order: 13, title: "Vertigo Sound / Bettermaker", category: "ブティックハード系", hook: "オランダとポーランド、東欧発の高級ブティックブランドの話。", stub: true },
     { id: "millennia_chandler", order: 14, title: "Millennia Media / Chandler Limited", category: "ブティックハード系", hook: "アメリカの「本物のヴィンテージ回路を今も作る」職人メーカーの話。", stub: true },
     { id: "shadow_hills_etc", order: 15, title: "Shadow Hills / Purple Audio / Black Box Analog Design", category: "ブティックハード系", hook: "一台数十万円のハードウェアを作る極小工房が、なぜプラグイン化に踏み切ったか。", stub: true },
