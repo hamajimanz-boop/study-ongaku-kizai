@@ -3492,15 +3492,22 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "ギターブランドのGretschと起源は同じ1883年創業の会社だが、現在はギター部門(Fenderがライセンス運営)とドラム部門が別々の企業によって運営されている。ドラム部門は2012年よりDW(Drum Workshop)が所有している。",
-            "1950〜60年代の「ラウンドバッジ(丸いエンブレム)」期のヴィンテージキットは特に評価が高く、ジャズ〜ロックの幅広いジャンルで愛用されてきた。",
+          dialogue: [
+            { who: "mina", text: "hookに「同じ社名なのに別会社」ってありましたけど、どういうことですか?" },
+            { who: "sensei", text: "ギターブランドのGretschと起源は同じ1883年創業の会社なんだ。でも現在はギター部門(Fenderがライセンス運営)とドラム部門が別々の企業によって運営されているんだよ。" },
+            { who: "mina", text: "ドラム部門は今どこが持っているんですか?" },
+            { who: "sensei", text: "ドラム部門は2012年よりDW(Drum Workshop)が所有しているんだ。さっき紹介したDWがここでも出てくるね。" },
+            { who: "mina", text: "古いモデルにも人気があるんですか?" },
+            { who: "sensei", text: "1950〜60年代の「ラウンドバッジ(丸いエンブレム)」期のヴィンテージキットは特に評価が高くてね。ジャズ〜ロックの幅広いジャンルで愛用されてきたんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "「Gretschサウンド」と呼ばれる、深みのある温かいシェルの鳴りが特徴とされる。The Rolling StonesのCharlie Wattsが長年Gretschドラムを愛用していたことでも知られる。",
+          dialogue: [
+            { who: "mina", text: "「Gretschサウンド」ってどんな音なんですか?" },
+            { who: "sensei", text: "深みのある温かいシェルの鳴りが特徴とされているんだ。" },
+            { who: "mina", text: "有名な愛用者はいますか?" },
+            { who: "sensei", text: "The Rolling StonesのCharlie Wattsが長年Gretschドラムを愛用していたことでも知られているよ。" },
           ],
         },
         {
@@ -3513,20 +3520,28 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "同一ブランド名でギター部門とドラム部門が全く別の企業に運用されているという珍しい構造は、複数回の事業売却・再編を経てきたGretschというブランドの歴史そのものを物語っている。",
+          dialogue: [
+            { who: "mina", text: "ギターとドラムが別企業っていうのは、なぜそうなったんですか?" },
+            { who: "sensei", text: "同一ブランド名でギター部門とドラム部門が全く別の企業に運用されているという珍しい構造なんだ。複数回の事業売却・再編を経てきたGretschというブランドの歴史そのものを物語っているんだよ。" },
+            { who: "mina", text: "1つのブランド名の裏に、複雑な歴史があるんですね。" },
+            { who: "sensei", text: "そう。楽器業界ではブランド名と経営実体が分離するケースが珍しくないんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Ludwigと並ぶヴィンテージ・ロック/ジャズドラムサウンドの代表格。DW傘下となったことで、製造技術面でのアップデートも進んでいる。",
+          dialogue: [
+            { who: "mina", text: "業界内でのポジションは?" },
+            { who: "sensei", text: "Ludwigと並ぶヴィンテージ・ロック/ジャズドラムサウンドの代表格だよ。" },
+            { who: "mina", text: "DW傘下になって何か変わったんですか?" },
+            { who: "sensei", text: "DW傘下となったことで、製造技術面でのアップデートも進んでいるんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Charlie Watts(The Rolling Stones)は生涯を通じてGretschドラムへの愛用を貫いたことで知られ、ロック史における「渋いドラムサウンド」の象徴として語られることが多い。",
+          dialogue: [
+            { who: "mina", text: "Charlie Wattsについてもう少し教えてください。" },
+            { who: "sensei", text: "Charlie Watts(The Rolling Stones)は生涯を通じてGretschドラムへの愛用を貫いたことで知られていてね。ロック史における「渋いドラムサウンド」の象徴として語られることが多いんだ。" },
+            { who: "mina", text: "一人のドラマーの選択が、ブランドイメージそのものになっているんですね。" },
           ],
         },
       ],
