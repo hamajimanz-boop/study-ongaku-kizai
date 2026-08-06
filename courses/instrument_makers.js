@@ -763,15 +763,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1890年、V.C. Squier Companyとして弦メーカーからスタート。1965年、FenderのCBS売却時に一緒に買収され、Fenderグループの一員となった。",
-            "1982年、当時市場に溢れていた日本製の高品質な「コピーモデル」に対抗するため、Fender自身が公認する廉価ブランドとしてSquierブランドのギターが復活・展開された。以後、Fenderの入門者向けラインとして定着している。",
+          dialogue: [
+            { who: "mina", text: "Squierって最初からギターブランドだったんですか?" },
+            { who: "sensei", text: "いや、1890年、V.C. Squier Companyとして弦メーカーからスタートしたんだ。1965年、FenderのCBS売却時に一緒に買収されて、Fenderグループの一員となったんだよ。" },
+            { who: "mina", text: "今の「入門者向け」っていうイメージはいつ頃からなんですか?" },
+            { who: "sensei", text: "1982年、当時市場に溢れていた日本製の高品質な「コピーモデル」に対抗するため、Fender自身が公認する廉価ブランドとしてSquierブランドのギターが復活・展開されたんだ。以後、Fenderの入門者向けラインとして定着しているんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "設計自体はFender本家(Stratocaster、Telecaster等)の忠実な縮小コスト版であり、音の傾向も基本的にはFender系のシングルコイルサウンドを踏襲する。価格帯によって部材・製造精度に差がある。",
+          dialogue: [
+            { who: "mina", text: "Squierの音ってFender本家とどれくらい違うんですか?" },
+            { who: "sensei", text: "設計自体はFender本家(Stratocaster、Telecaster等)の忠実な縮小コスト版で、音の傾向も基本的にはFender系のシングルコイルサウンドを踏襲するんだ。価格帯によって部材・製造精度に差があるよ。" },
           ],
         },
         {
@@ -786,20 +789,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "多くのギタリストが「最初の1本」としてSquierを手にすることから、Fenderブランド全体へのファン獲得の入り口として重要な役割を果たしている。生産国は時代により日本・韓国・インドネシア・中国など変遷してきた。",
+          dialogue: [
+            { who: "mina", text: "Squierってビジネス的にはどういう役割なんですか?" },
+            { who: "sensei", text: "多くのギタリストが「最初の1本」としてSquierを手にすることから、Fenderブランド全体へのファン獲得の入り口として重要な役割を果たしているんだ。生産国は時代により日本・韓国・インドネシア・中国など変遷してきたよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "GibsonにおけるEpiphoneと対になる、入門〜廉価帯の代表ブランド。近年は上位ラインの品質向上により「初心者用」という枠を超えた評価を得ることもある。",
+          dialogue: [
+            { who: "mina", text: "Squierって他のブランドで言うと何に近いんですか?" },
+            { who: "sensei", text: "GibsonにおけるEpiphoneと対になる、入門〜廉価帯の代表ブランドだ。近年は上位ラインの品質向上により「初心者用」という枠を超えた評価を得ることもあるよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Squierブランドが復活した1982年は、日本製ギターの品質向上がFender/Gibson側に強い危機感を与えていた時期であり、Squierはその対抗策として生まれた「防衛的ブランド」という側面を持つ。",
+          dialogue: [
+            { who: "mina", text: "1982年の復活って、どういう背景があったんですか?" },
+            { who: "sensei", text: "その頃は日本製ギターの品質向上がFender/Gibson側に強い危機感を与えていた時期で、Squierはその対抗策として生まれた「防衛的ブランド」という側面を持っているんだよ。" },
           ],
         },
       ],
