@@ -440,15 +440,18 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1970年代、Wayne Charvelがリペア/パーツ販売業として創業。後にGrover Jacksonが引き継ぎ、1980年代初頭の「カスタムパーツでスーパーストラトを組む」というシュレッドギター文化の震源地の一つとなった。",
-            "Eddie Van Halen(Van Halen)が自作した通称「Frankenstrat(フランケンシュタイン)」は、Charvel製のパーツを組み合わせて作られたものとされ、この1本がその後のスーパーストラト・ブームに火をつけたと言われる。",
+          dialogue: [
+            { who: "mina", text: "Charvelってどうやって始まったブランドなんですか?" },
+            { who: "sensei", text: "1970年代、Wayne Charvelがリペア/パーツ販売業として創業したんだ。後にGrover Jacksonが引き継いで、1980年代初頭の「カスタムパーツでスーパーストラトを組む」というシュレッドギター文化の震源地の一つになったんだよ。" },
+            { who: "mina", text: "エディ・ヴァン・ヘイレンとも関係あるんですか?" },
+            { who: "sensei", text: "そう、Eddie Van Halenが自作した通称「Frankenstrat」は、Charvel製のパーツを組み合わせて作られたものとされていて、この1本がその後のスーパーストラト・ブームに火をつけたと言われているんだ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "Fender系のボルトオン構造をベースに、高出力ハムバッカーやフロイドローズ式トレモロを組み合わせた「いいとこ取り」設計が特徴。伝統的なFender/Gibsonのどちらにも属さない「実戦向けカスタム」という発想を体現している。",
+          dialogue: [
+            { who: "mina", text: "Charvelの音の特徴って何なんですか?" },
+            { who: "sensei", text: "Fender系のボルトオン構造をベースに、高出力ハムバッカーやフロイドローズ式トレモロを組み合わせた「いいとこ取り」設計が特徴だ。伝統的なFender/Gibsonのどちらにも属さない「実戦向けカスタム」という発想を体現しているんだよ。" },
           ],
         },
         {
@@ -464,20 +467,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "JacksonとともにFenderグループ傘下で運営されており、企業としては同じ資本のもとメタル系(Jackson)/オールラウンド系(Charvel)という棲み分けがされている。",
+          dialogue: [
+            { who: "mina", text: "CharvelもJacksonと同じ会社なんですか?" },
+            { who: "sensei", text: "そう、JacksonとともにFenderグループ傘下で運営されていて、企業としては同じ資本のもとメタル系(Jackson)/オールラウンド系(Charvel)という棲み分けがされているんだ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Ibanez・Jacksonと並ぶ「スーパーストラト」文化の源流ブランドの一つ。特にEddie Van Halenのエピソードにより、シュレッドギター史における象徴的な存在として語られる。",
+          dialogue: [
+            { who: "mina", text: "Charvelって業界的にはどう位置づけられてるんですか?" },
+            { who: "sensei", text: "Ibanez・Jacksonと並ぶ「スーパーストラト」文化の源流ブランドの一つだ。特にEddie Van Halenのエピソードにより、シュレッドギター史における象徴的な存在として語られるんだよ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "「Frankenstrat」はCharvel純正の完成品ではなく、パーツを寄せ集めて自作されたギターだったという点が、当時のDIY的なカスタムギター文化そのものを象徴するエピソードとしてしばしば語られる。",
+          dialogue: [
+            { who: "mina", text: "「Frankenstrat」って、Charvelの正式な製品だったんですか?" },
+            { who: "sensei", text: "いや、実はCharvel純正の完成品ではなく、パーツを寄せ集めて自作されたギターだったんだ。この点が、当時のDIY的なカスタムギター文化そのものを象徴するエピソードとしてしばしば語られるんだよ。" },
           ],
         },
       ],
