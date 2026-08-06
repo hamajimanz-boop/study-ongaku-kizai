@@ -308,8 +308,106 @@ window.COURSES["plugin_makers"] = {
         { q: "elysiaの最初の看板製品となったコンプレッサーの名称は?", choices: ["alpha compressor", "museq", "nvelope", "xpressor"], answer: 0, explain: "alpha compressorを作りたいという夢が創業のきっかけだった。" },
       ],
     },
-    { id: "lindell_audio", order: 7, title: "Lindell Audio", category: "ブティックハード系", hook: "スウェーデンの一人メーカーが「本物の回路を安く」で市場を食った話。", stub: true },
-    { id: "uad", order: 8, title: "Universal Audio", category: "DSP/インターフェース", hook: "親子二代でDSPハードウェアとプラグインを結びつけたビジネスの話。", stub: true },
+    {
+      id: "lindell_audio",
+      order: 7,
+      title: "Lindell Audio",
+      category: "ブティックハード系",
+      hook: "現役プロデューサーが「スタジオで感じた不満」をそのまま製品化して、スウェーデンから世界に売った話。",
+      image: "lindell_audio_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "Lindell Audioってどんな会社なんですか?" },
+            { who: "sensei", text: "スウェーデンのプロオーディオブランドでね。2010年、レコーディングエンジニア・プロデューサーのTobias Lindellが設立した会社なんだ。彼はBohus Sound Studiosという有名スタジオの専属プロデューサーで、Europe、Mustasch、Crash Diet、Avatarといった国際的なアーティストのヒット作を手がけてきた人物なんだよ。" },
+            { who: "mina", text: "現役のプロデューサーが機材メーカーを立ち上げたんですね。" },
+            { who: "sensei", text: "そうなんだ。長年の現場経験の中で、既存の機材のワークフローやインターフェースへの不満・改善アイデアを溜めていって、2010年に自分の製品ラインを立ち上げたんだよ。「自分の厳しい基準を満たす道具」を作りたかったんだって。" },
+          ],
+        },
+        {
+          heading: "音の特徴: クラシックな回路を現代の使い勝手で",
+          dialogue: [
+            { who: "mina", text: "Lindell Audioの機材の特徴は?" },
+            { who: "sensei", text: "クラシックなアナログ回路の音を土台にしながら、現代的な使いやすさ・直感的なインターフェースを組み合わせているのが特徴なんだ。プリアンプ、コンプレッサー、EQ、そして「500シリーズ」という規格のモジュールを幅広く手がけているよ。" },
+            { who: "mina", text: "500シリーズって何ですか?" },
+            { who: "sensei", text: "複数のモジュールをラック(弁当箱型のケースなので「ランチボックス」とも呼ばれる)に差し込んで組み合わせられる規格のことだよ。コンパクトにお気に入りの機材を揃えられるのが人気の理由なんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: Plugin Alliance経由で手頃な価格に",
+          dialogue: [
+            { who: "mina", text: "プラグイン版はどこで売っているんですか?" },
+            { who: "sensei", text: "Lindell AudioもBrainworxのPlugin Alliance経由でプラグイン化されているんだ。50 Seriesという製品では、人気の500シリーズEQ・コンプレッサーを再現していて、Brainworxの特許技術TMT(実機の個体差までモデリングする技術)も使われているんだよ。" },
+            { who: "mina", text: "実機もプラグインも比較的手頃な価格なんですか?" },
+            { who: "sensei", text: "そう言われることが多いね。ハイエンドブティックブランドの中では、実用性と価格のバランスが取れたブランドとして評価されているんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Lindell 50 Series、ChannelX(7X-500リミッター・PEX-500 EQ・6X-500プリアンプの集合体)、PEX-500、80 Seriesなど。実機同様、500シリーズ規格のモジュールを中心に展開している。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Lindell Audio創業者Tobias Lindellの本業は?", choices: ["レコーディングエンジニア・プロデューサー", "楽器店の店主", "音楽理論の大学教授", "コンサートホールの設計者"], answer: 0, explain: "Bohus Sound Studiosの専属プロデューサーとして活動してきた人物。" },
+        { q: "Lindell Audioが設立されたのはいつ、どこの国か?", choices: ["2010年、スウェーデン", "1995年、ドイツ", "2015年、アメリカ", "2005年、イギリス"], answer: 0, explain: "2010年、スウェーデンでTobias Lindellが設立した。" },
+        { q: "Lindell Audioが多く手がける機材の規格は?", choices: ["500シリーズ", "19インチフルラック専用", "デスクトップUSB専用", "モジュラーシンセ規格"], answer: 0, explain: "複数モジュールを組み合わせられる500シリーズ(ランチボックス)規格を多く手がける。" },
+        { q: "Lindell Audioがプラグイン販売で提携している会社は?", choices: ["Plugin Alliance", "iZotope", "Native Instruments", "Waves"], answer: 0, explain: "BrainworxのPlugin Alliance経由でプラグイン化・販売されている。" },
+        { q: "Tobias Lindellがプロデュースしてきたアーティストとして挙げられるのは?", choices: ["Europe", "The Beatles", "Michael Jackson", "Queen"], answer: 0, explain: "Europe、Mustasch、Crash Diet、Avatarなどのプロデュースを手がけてきた。" },
+      ],
+    },
+    {
+      id: "uad",
+      order: 8,
+      title: "Universal Audio",
+      category: "DSP/インターフェース",
+      hook: "「近代レコーディングの父」の息子が、亡き父の名作機材をソフトウェアで蘇らせた話。",
+      image: "uad_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "DAWソフト編でUniversal AudioのLUNAは学びましたけど、そもそもUniversal Audioってどんな会社なんですか?" },
+            { who: "sensei", text: "1958年、Bill Putnam Sr.がアメリカ・ハリウッドで設立した会社なんだ。Frank Sinatra、Nat King Cole、Ray Charlesといった大物アーティストのエンジニアたちから信頼を集めて、「近代レコーディングの父」と称される人物なんだよ。" },
+            { who: "mina", text: "その後どうなったんですか?" },
+            { who: "sensei", text: "父の死後、一度会社は活動を停止したんだ。それを1999年、息子のBill Putnam Jr.とJim Putnamが復活させたんだよ。Bill Jr.はスタンフォード大学でデジタル信号処理(DSP)を学んでいる最中に、サイドプロジェクトとして父の1960年代の名機を忠実に再現しようとしたのがきっかけなんだ。" },
+          ],
+        },
+        {
+          heading: "UADカードという発明",
+          dialogue: [
+            { who: "mina", text: "UADプラグインって、普通のプラグインと何が違うんですか?" },
+            { who: "sensei", text: "UAD Powered Plug-inというプラットフォームは、専用のDSPチップを搭載した「UADカード」でプラグインの処理を行う仕組みなんだ。最初はコンピューターに挿すPCIカードとして登場して、レコーディング業界に革命を起こしたと言われているんだよ。" },
+            { who: "mina", text: "なぜ専用ハードウェアが必要だったんですか?" },
+            { who: "sensei", text: "パソコンのCPUだけでは処理しきれない、Fairchildコンプレッサーのような高精度なアナログ機材の音を、専用チップの力を借りてリアルタイムで再現するためなんだ。DSPの専門家を積極的に採用したことで、業界でも特に「本物っぽい」再現度の高さで評価されてきたんだよ。" },
+          ],
+        },
+        {
+          heading: "お金の話: ハードとソフトの両輪ビジネス",
+          dialogue: [
+            { who: "mina", text: "DAWソフト編のLUNAとはどう繋がるんですか?" },
+            { who: "sensei", text: "覚えているかな、Apollo・Arrowシリーズのオーディオインターフェースと、そこで動くUADプラグイン、そして自社DAW LUNAという「三位一体」のビジネスモデルの話をしたよね。UADプラグインは、そのビジネスモデルの最も歴史の長い柱にあたるんだ。" },
+            { who: "mina", text: "父親の設計思想が、今のビジネスの土台になっているんですね。" },
+            { who: "sensei", text: "その通り。60年以上前のアナログ設計のノウハウを、現代のDSP技術で製品化し続けているという点で、一貫した会社のアイデンティティになっているんだよ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "UAD Neve 1073 Collection、Fairchild 670、1176 Classic Limiter、LA-2A、Ampex ATR-102、Lexicon 224、Roland Dimension D、SSL 4000 E等、往年の名機を幅広くモデリング。近年はUADxとしてネイティブ処理版(専用DSP不要)も展開。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Universal Audioを1958年に設立し「近代レコーディングの父」と呼ばれる人物は?", choices: ["Bill Putnam Sr.", "Bill Putnam Jr.", "Rupert Neve", "Tobias Lindell"], answer: 0, explain: "Bill Putnam Sr.が1958年に設立し、多くの著名アーティストのエンジニアから信頼を得た。" },
+        { q: "1999年、Universal Audioを復活させたのは誰か?", choices: ["息子のBill Putnam Jr.とJim Putnam", "全くの第三者企業", "Rupert Neve本人", "Steven Slate"], answer: 0, explain: "父の死後、息子たちが1999年に会社を復活させた。" },
+        { q: "UADプラグインの処理に使われる専用ハードウェアは何と呼ばれるか?", choices: ["UADカード", "iLokドングル", "MIDIインターフェース", "ASIOドライバ"], answer: 0, explain: "専用DSPチップを搭載したUADカードで高精度な処理を行う。" },
+        { q: "Bill Putnam Jr.が会社を復活させるきっかけとなった学びの場は?", choices: ["スタンフォード大学でのDSP研究", "MITでの音楽制作研究", "オックスフォード大学の工学部", "バークリー音楽大学"], answer: 0, explain: "スタンフォード大学でデジタル信号処理を学んでいた際のサイドプロジェクトが発端。" },
+        { q: "Universal Audioの近年のビジネスモデルの三本柱に含まれないものは?", choices: ["オーディオインターフェース(Apollo/Arrow)", "自社DAW(LUNA)", "UADプラグイン", "楽譜作成ソフト"], answer: 3, explain: "楽譜作成ソフトはUniversal Audioの事業ではない。三本柱はインターフェース・DAW・プラグイン。" },
+      ],
+    },
     { id: "celemony", order: 9, title: "Celemony", category: "ピッチ編集", hook: "たった一つの技術(DNA)が特許で守られ、20年経っても競合が現れない理由。", stub: true },
     { id: "spl", order: 10, title: "SPL", category: "ブティックハード系", hook: "「Exciter」「Transient Designer」という新しいプラグインのジャンルそのものを発明した会社の話。", stub: true },
     { id: "valhalla_dsp", order: 11, title: "Valhalla DSP", category: "リバーブ", hook: "たった一人の開発者が「安くて良いリバーブ」で業界の価格破壊をした話。", stub: true },
