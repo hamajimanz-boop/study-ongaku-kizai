@@ -767,37 +767,47 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "Tracktion(トラクション)は、開発者Julian Storer(ジュリアン・ストーラー)によって2002年に生み出されたDAW。2003年、音響機器メーカーMackie(マッキー)がTracktionを買収し、同社のオーディオインターフェース・ミキサー製品に同梱するソフトとして展開した。",
-            "しかし2008年1月以降、Mackieからの公式なアップデート・発表が途絶え、ユーザーの間では事実上「開発終了」と受け止められる状態が続いた。2013年1月のNAMMショーで、開発者本人のJulian Storerが「自ら権利を買い戻した」ことを発表し、新会社Tracktion Software Corporationとして開発を再開した。",
+          dialogue: [
+            { who: "mina", text: "Tracktionは開発者本人が買い戻したってhookにありましたけど?" },
+            { who: "sensei", text: "そうなんだ。Tracktion(トラクション)は、開発者Julian Storer(ジュリアン・ストーラー)によって2002年に生み出されたDAWでね。2003年、音響機器メーカーMackie(マッキー)がTracktionを買収して、同社のオーディオインターフェース・ミキサー製品に同梱するソフトとして展開したんだ。" },
+            { who: "mina", text: "それがどうして開発者本人の手に戻ったんですか?" },
+            { who: "sensei", text: "しかし2008年1月以降、Mackieからの公式なアップデート・発表が途絶えてね。ユーザーの間では事実上「開発終了」と受け止められる状態が続いたんだ。2013年1月のNAMMショーで、開発者本人のJulian Storerが「自ら権利を買い戻した」ことを発表して、新会社Tracktion Software Corporationとして開発を再開したんだよ。" },
           ],
         },
         {
           heading: "Waveformへの改名(2017年)",
-          paragraphs: [
-            "2017年、Tracktion Software CorporationはDAW製品名を「Waveform」に改名した。会社名は現在もTracktion Software Corporationのままだが、製品ブランドはWaveformとして展開されている(ややこしいが「会社名Tracktion、製品名Waveform」という状態)。",
-            "macOS・Windows・Linuxに加えて、小型コンピュータ「Raspberry Pi」上でも動作するなど、対応プラットフォームの幅広さも特徴の一つ。",
+          dialogue: [
+            { who: "mina", text: "今は製品名が変わっているんですよね?" },
+            { who: "sensei", text: "そう。2017年、Tracktion Software CorporationはDAW製品名を「Waveform」に改名したんだ。会社名は現在もTracktion Software Corporationのままだけど、製品ブランドはWaveformとして展開されているんだよ(ややこしいけど「会社名Tracktion、製品名Waveform」という状態なんだ)。" },
+            { who: "mina", text: "対応OSも幅広いんですか?" },
+            { who: "sensei", text: "macOS・Windows・Linuxに加えて、小型コンピュータ「Raspberry Pi」上でも動作するなど、対応プラットフォームの幅広さも特徴の一つだよ。" },
           ],
         },
         {
           heading: "製品としての特徴",
-          paragraphs: [
-            "無制限のオーディオ/MIDIトラック、無制限のプラグインスロットなど、価格帯の割に機能制限が少ない太っ腹な設計を掲げている。無料版「Waveform Free」も提供されており、低予算でDAWを始めたいユーザーの選択肢としても知られる。",
-            "開発者自身がJUCE(ジュース)という、多くの音楽ソフトで使われるクロスプラットフォーム開発フレームワークの開発者でもあり、Waveform自体もこのJUCEを土台に作られている。",
+          dialogue: [
+            { who: "mina", text: "Waveformの機能面での特徴は?" },
+            { who: "sensei", text: "無制限のオーディオ/MIDIトラック、無制限のプラグインスロットなど、価格帯の割に機能制限が少ない太っ腹な設計を掲げているんだ。無料版「Waveform Free」も提供されていてね。低予算でDAWを始めたいユーザーの選択肢としても知られているよ。" },
+            { who: "mina", text: "開発者自身にも面白い経歴があるんですか?" },
+            { who: "sensei", text: "そうなんだ。開発者自身がJUCE(ジュース)という、多くの音楽ソフトで使われるクロスプラットフォーム開発フレームワークの開発者でもあってね。Waveform自体もこのJUCEを土台に作られているんだよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Pro Tools・Logic Proのような業界標準の座を狙うというより、「低価格でLinuxを含む幅広いOSに対応する現実的な選択肢」というニッチな立ち位置で根強い支持を得ている。",
-            "「一度大手に飲み込まれたソフトが、開発者自身の手に戻って生き延びる」という経緯は、後述のCakewalkの「倒産→BandLabによる救済」とはまた違う形の、DAW業界における復活劇の一例といえる。",
+          dialogue: [
+            { who: "mina", text: "Waveformは業界標準を狙っているんですか?" },
+            { who: "sensei", text: "Pro Tools・Logic Proのような業界標準の座を狙うというより、「低価格でLinuxを含む幅広いOSに対応する現実的な選択肢」というニッチな立ち位置で根強い支持を得ているんだ。" },
+            { who: "mina", text: "似たような復活劇が他にもあるんですか?" },
+            { who: "sensei", text: "「一度大手に飲み込まれたソフトが、開発者自身の手に戻って生き延びる」という経緯は、後述のCakewalkの「倒産→BandLabによる救済」とはまた違う形の、DAW業界における復活劇の一例といえるね。" },
           ],
         },
         {
           heading: "よくある誤解・豆知識",
-          paragraphs: [
-            "「Tracktionという名前のDAWは今も存在する」と思われがちだが、現在の製品名は「Waveform」であり、Tracktionは開発会社の名前として残っている(紛らわしいポイント)。",
-            "「Mackieに買収されたまま今もMackie傘下」と誤解されることがあるが、実際は開発者自身が権利を買い戻し、Mackieとは独立した別会社として再出発している。",
+          dialogue: [
+            { who: "mina", text: "「Tracktion」という名前のDAWって今もあるんですか?" },
+            { who: "sensei", text: "「Tracktionという名前のDAWは今も存在する」と思われがちだけど、現在の製品名は「Waveform」であり、Tracktionは開発会社の名前として残っているんだ(紛らわしいポイントだね)。" },
+            { who: "mina", text: "今もMackieの傘下だと思っていました。" },
+            { who: "sensei", text: "「Mackieに買収されたまま今もMackie傘下」と誤解されることがあるけど、実際は開発者自身が権利を買い戻していて、Mackieとは独立した別会社として再出発しているんだ。" },
           ],
         },
       ],
