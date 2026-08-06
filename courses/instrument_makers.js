@@ -4470,14 +4470,20 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "創業者Mehmet Tamdegerも、Istanbul Agop同様イスタンブールの伝統的なシンバル製造の系譜に連なる人物とされる。両社は同じ伝統文化を土台にしながら、別会社として独自にブランドを展開している。",
+          dialogue: [
+            { who: "mina", text: "hookに「同じイスタンブールの名を背負う2つの会社」ってありましたね。" },
+            { who: "sensei", text: "そう、前のセクションのIstanbul Agopと今回のIstanbul Mehmetのことだよ。創業者Mehmet Tamdegerも、Istanbul Agop同様イスタンブールの伝統的なシンバル製造の系譜に連なる人物とされているんだ。" },
+            { who: "mina", text: "2社は同じルーツから来ているんですね。" },
+            { who: "sensei", text: "そう。両社は同じ伝統文化を土台にしながら、別会社として独自にブランドを展開しているんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "Istanbul Agopと同様、複雑で暗い響きの伝統的なトルコ式サウンドを追求しているが、モデルごとの音の傾向にはそれぞれ独自の個性がある。",
+          dialogue: [
+            { who: "mina", text: "音もIstanbul Agopと似ているんですか?" },
+            { who: "sensei", text: "Istanbul Agopと同様、複雑で暗い響きの伝統的なトルコ式サウンドを追求しているんだ。" },
+            { who: "mina", text: "全く同じ音というわけではないんですね。" },
+            { who: "sensei", text: "そう、モデルごとの音の傾向にはそれぞれ独自の個性があるんだ。" },
           ],
         },
         {
@@ -4490,20 +4496,27 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "Istanbul Agopと同じくニッチながら根強いファン層を持つ、手作業中心の高付加価値ブランドとして運営されている。",
+          dialogue: [
+            { who: "mina", text: "Istanbul Mehmetのビジネスモデルは?" },
+            { who: "sensei", text: "Istanbul Agopと同じくニッチながら根強いファン層を持つ、手作業中心の高付加価値ブランドとして運営されているんだ。" },
+            { who: "mina", text: "経営スタイルもよく似ているんですね。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "ジャズ・伝統的な音楽ジャンルで、Istanbul Agopとしばしば比較・併用される。「イスタンブール系ならこの2社」という形で並び称されることが多い。",
+          dialogue: [
+            { who: "mina", text: "業界内でのポジションは?" },
+            { who: "sensei", text: "ジャズ・伝統的な音楽ジャンルで、Istanbul Agopとしばしば比較・併用されるんだ。" },
+            { who: "mina", text: "セットで語られることが多いんですね。" },
+            { who: "sensei", text: "そう、「イスタンブール系ならこの2社」という形で並び称されることが多いんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "同じ「イスタンブール」を名乗る2社が別会社として存在すること自体、シンバル業界の伝統と分裂の歴史を象徴するエピソードとしてしばしば紹介される。",
+          dialogue: [
+            { who: "mina", text: "同じ地名を名乗る2社が併存しているのは面白いですね。" },
+            { who: "sensei", text: "そうだね。同じ「イスタンブール」を名乗る2社が別会社として存在すること自体、シンバル業界の伝統と分裂の歴史を象徴するエピソードとしてしばしば紹介されるんだ。" },
+            { who: "mina", text: "地名がブランド名になっていると、こういう混同も起きるんですね。" },
           ],
         },
       ],
