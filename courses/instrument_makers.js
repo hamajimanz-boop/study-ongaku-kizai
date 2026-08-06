@@ -1211,14 +1211,16 @@ window.COURSES["instrument_makers"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "1994年、アメリカ・シカゴでDan Lakinが設立。後発ブランドながら、著名セッションベーシストとのシグネチャーモデル展開(Duck Dunn、Joe Osborn等)で急速に信頼を獲得した。",
+          dialogue: [
+            { who: "mina", text: "Laklandって比較的新しいブランドなんですか?" },
+            { who: "sensei", text: "そう、1994年、アメリカ・シカゴでDan Lakinが設立したんだ。後発ブランドながら、著名セッションベーシストとのシグネチャーモデル展開(Duck Dunn、Joe Osborn等)で急速に信頼を獲得したんだよ。" },
           ],
         },
         {
           heading: "音の特徴",
-          paragraphs: [
-            "Fender系のヴィンテージサウンドを踏襲しつつ、現代的な製造精度・パーツ品質でトラブルの少なさを実現している。パッシブ(電池不要)/アクティブ両対応モデルを併売し、幅広い音作りに対応する。",
+          dialogue: [
+            { who: "mina", text: "Laklandの音の特徴って何なんですか?" },
+            { who: "sensei", text: "Fender系のヴィンテージサウンドを踏襲しつつ、現代的な製造精度・パーツ品質でトラブルの少なさを実現しているんだ。パッシブ/アクティブ両対応モデルを併売していて、幅広い音作りに対応するよ。" },
           ],
         },
         {
@@ -1232,20 +1234,23 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "お金の話",
-          paragraphs: [
-            "USカスタムショップの高級ラインと、韓国製Skylineの普及ラインを両輪にすることで、後発ブランドながら価格帯の幅を早期に確立した。",
+          dialogue: [
+            { who: "mina", text: "後発ブランドなのに、どうやって価格帯を広げたんですか?" },
+            { who: "sensei", text: "USカスタムショップの高級ラインと、韓国製Skylineの普及ラインを両輪にすることで、後発ブランドながら価格帯の幅を早期に確立したんだよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "Sadowsky同様「ヴィンテージ系の音を現代の信頼性で」という路線のブランドとして、セッション/ツアーミュージシャンから支持されている。",
+          dialogue: [
+            { who: "mina", text: "Laklandって業界的にどういう立ち位置なんですか?" },
+            { who: "sensei", text: "Sadowsky同様「ヴィンテージ系の音を現代の信頼性で」という路線のブランドとして、セッション/ツアーミュージシャンから支持されているんだ。" },
           ],
         },
         {
           heading: "豆知識",
-          paragraphs: [
-            "Duck Dunn(Stax/Booker T. & the M.G.'sのベーシスト)のシグネチャーモデルは、ソウル/R&B系のヴィンテージPベースサウンドを求めるベーシストの定番になっている。",
+          dialogue: [
+            { who: "mina", text: "Duck Dunnモデルってどんな人が使うんですか?" },
+            { who: "sensei", text: "Duck Dunn(Stax/Booker T. & the M.G.'sのベーシスト)のシグネチャーモデルは、ソウル/R&B系のヴィンテージPベースサウンドを求めるベーシストの定番になっているんだよ。" },
           ],
         },
       ],
