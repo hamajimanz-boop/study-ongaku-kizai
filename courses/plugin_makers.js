@@ -408,8 +408,106 @@ window.COURSES["plugin_makers"] = {
         { q: "Universal Audioの近年のビジネスモデルの三本柱に含まれないものは?", choices: ["オーディオインターフェース(Apollo/Arrow)", "自社DAW(LUNA)", "UADプラグイン", "楽譜作成ソフト"], answer: 3, explain: "楽譜作成ソフトはUniversal Audioの事業ではない。三本柱はインターフェース・DAW・プラグイン。" },
       ],
     },
-    { id: "celemony", order: 9, title: "Celemony", category: "ピッチ編集", hook: "たった一つの技術(DNA)が特許で守られ、20年経っても競合が現れない理由。", stub: true },
-    { id: "spl", order: 10, title: "SPL", category: "ブティックハード系", hook: "「Exciter」「Transient Designer」という新しいプラグインのジャンルそのものを発明した会社の話。", stub: true },
+    {
+      id: "celemony",
+      order: 9,
+      title: "Celemony",
+      category: "ピッチ編集",
+      hook: "「石はどんな音がするんだろう?」という一つの問いから始まった技術が、特許で守られたまま20年以上ボーカル編集の代名詞であり続けている話。",
+      image: "celemony_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "Melodyneって、そもそもどうやって生まれたソフトなんですか?" },
+            { who: "sensei", text: "きっかけは1997年、研究者・発明家のPeter Neubäckerが抱いた「石はどんな音がするんだろう?」という素朴な問いだったんだ。彼は音楽家であり数学好き、ギター職人、そして倍音構造の専門家でもあってね。従来の信号処理とは違う、音楽的・感情的な要素を捉えるアプローチを追求していたんだよ。" },
+            { who: "mina", text: "会社としてはいつできたんですか?" },
+            { who: "sensei", text: "2000年、Peter NeubäckerがCarsten Gehle、Hildegard Sourgensと一緒にCelemonyを設立したんだ。看板製品のMelodyneは2001年のNAMMショーで初めて披露されたんだよ。" },
+          ],
+        },
+        {
+          heading: "DNA(Direct Note Access)という特許技術",
+          dialogue: [
+            { who: "mina", text: "「DNA」ってどんな技術なんですか?" },
+            { who: "sensei", text: "Direct Note Accessの略でね。それまでのピッチ編集は単音(モノフォニック)にしか対応していなかったんだけど、DNAは和音(ポリフォニック)の中の個々の音符にまでアクセスして編集できるようにした技術なんだ。2008年に特許取得を発表して、正式版は2009年11月にリリースされたんだよ。" },
+            { who: "mina", text: "和音の中の1音だけを直したりできるってことですか?" },
+            { who: "sensei", text: "その通り。ギターやピアノで複数の音が同時に鳴っている状態から、特定の1音だけを取り出して音程を変える、なんてことができるんだ。これは当時としては画期的な技術で、Celemonyはこの功績でテクニカル・グラミー賞も受賞しているんだよ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 20年以上競合が現れない理由",
+          dialogue: [
+            { who: "mina", text: "hookにあった「20年経っても競合が現れない」ってどういうことですか?" },
+            { who: "sensei", text: "DNA技術が特許で守られているから、他社が同じ仕組みのポリフォニック編集ソフトを簡単には作れないんだ。ピッチ編集ソフトは他にも色々あるけど、「和音の中の1音を自在に編集する」という核心部分では、Melodyneが長年独走状態を保っているんだよ。" },
+            { who: "mina", text: "技術力そのものが会社の一番の資産になっているんですね。" },
+            { who: "sensei", text: "そう。特許という法律上の仕組みが、一つの発明のアイデアを長期間守り続けている、分かりやすい実例だと言えるね。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "Melodyne(Essential/Assistant/Editor/Studio各グレード)。DAWのプラグインとしてだけでなく、ReWireやARA(Audio Random Access)という規格を通じてDAWと深く統合して使われることが多い。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "Melodyneのアイデアの発端となった問いは?", choices: ["石はどんな音がするんだろう?", "ピアノの調律を自動化できないか?", "AIで作曲できないか?", "無料のDAWを作れないか?"], answer: 0, explain: "発明者Peter Neubäckerが1997年に抱いた素朴な疑問がきっかけだった。" },
+        { q: "Celemonyが設立されたのはいつか?", choices: ["2000年", "1990年", "2010年", "1985年"], answer: 0, explain: "2000年、Peter Neubäckerらによって設立された。" },
+        { q: "MelodyneのDNA技術の正式名称は?", choices: ["Direct Note Access", "Digital Note Analysis", "Dynamic Note Automation", "Discrete Note Array"], answer: 0, explain: "Direct Note Access(直接ノートアクセス)の略称がDNA。" },
+        { q: "DNA技術によって可能になったこととして正しいのは?", choices: ["和音の中の個々の音符を編集できる", "無音部分を自動削除できる", "楽譜を自動作成できる", "MIDIをオーディオに変換できる"], answer: 0, explain: "それまで難しかったポリフォニック(和音)の個別音編集を可能にした。" },
+        { q: "Celemonyが受賞したことで知られる賞は?", choices: ["テクニカル・グラミー賞", "アカデミー賞", "ノーベル物理学賞", "レッドドット・デザイン賞"], answer: 0, explain: "DNA技術の功績によりテクニカル・グラミー賞を受賞している。" },
+      ],
+    },
+    {
+      id: "spl",
+      order: 10,
+      title: "SPL",
+      category: "ブティックハード系",
+      hook: "「Exciter」「Transient Designer」という、今では当たり前になったプラグインのジャンルそのものを発明した会社の話。",
+      image: "spl_card.png",
+      sections: [
+        {
+          heading: "会社の正体・沿革",
+          dialogue: [
+            { who: "mina", text: "SPLってどんな会社なんですか?" },
+            { who: "sensei", text: "正式名称Sound Performance Lab、ドイツの会社でね。1984年、Hermann GierとWolfgang Neumannが設立したんだ。プリアンプ、コンプレッサー、EQ、モニターコントローラーなど幅広いプロオーディオ機材を手がけているよ。" },
+            { who: "mina", text: "さっき出てきたelysiaのRuben Tilgnerさんと関係あるんですか?" },
+            { who: "sensei", text: "そう、実はそこが繋がるんだ。Ruben Tilgnerは元々SPLに在籍していたエンジニアで、後にelysiaを立ち上げているんだよ。この編で扱う会社同士も、こうして人の繋がりで結びついていることが多いんだ。" },
+          ],
+        },
+        {
+          heading: "音の特徴: 新ジャンルを発明した2つの技術",
+          dialogue: [
+            { who: "mina", text: "「Transient Designer」ってどんな発明なんですか?" },
+            { who: "sensei", text: "1998年、フランクフルトのProlight + Soundフェアで発表された機材でね。開発者のRuben Tilgnerが「Differential Envelope Technology(DET)」という技術を発見して、音の「アタック(立ち上がり)」と「サステイン(伸び)」を、それぞれ独立して足したり引いたりできるようにしたんだ。それまでのダイナミクス処理にはなかった、全く新しいジャンルの機材が生まれたんだよ。" },
+            { who: "mina", text: "もう一つの発明も気になります。" },
+            { who: "sensei", text: "Vitalizerという製品だね。1988年に発表された「サイコアコースティック(心理音響)EQ」なんだ。開発者はWolfgang NeumannとHermann Gierで、通常のEQのように周波数を増減させるのではなく、位相をずらすことで音に奥行きと透明感を持たせる、特許取得済みのフィルター技術を使っているんだよ。今では「エキサイター/エンハンサー」というプラグインジャンルの代表例として扱われているんだ。" },
+          ],
+        },
+        {
+          heading: "お金の話: 実機とプラグインの二本柱",
+          dialogue: [
+            { who: "mina", text: "SPLもプラグインを出しているんですか?" },
+            { who: "sensei", text: "そうなんだ。SPLもBrainworxのPlugin Alliance経由でTransient DesignerやVitalizerをプラグイン化しているよ。実機ハードウェアの評判の高さがそのままプラグインの信頼性につながっているという構図だね。" },
+            { who: "mina", text: "発明した技術が特許で守られているのもCelemonyと似ていますね。" },
+            { who: "sensei", text: "その通り。Vitalizerのフィルター技術は特許取得済みの数少ないフィルターの一つとされていて、他社が簡単には模倣できない独自性を保っているんだ。" },
+          ],
+        },
+        {
+          heading: "あなたの持っているプラグインとの接続",
+          paragraphs: [
+            "SPL Transient Designer、Vitalizer MK2-T、De-Esser、Attacker、TwinTube、EQ Rangerなど。実機同様Plugin Alliance経由で提供されている。",
+          ],
+        },
+      ],
+      quiz: [
+        { q: "SPL(Sound Performance Lab)が設立されたのはいつ、どこの国か?", choices: ["1984年、ドイツ", "1998年、イギリス", "1970年、アメリカ", "2000年、フランス"], answer: 0, explain: "1984年、ドイツでHermann GierとWolfgang Neumannが設立した。" },
+        { q: "SPL在籍時にTransient Designerを開発し、後にelysiaを設立した人物は?", choices: ["Ruben Tilgner", "Rupert Neve", "Bill Putnam Sr.", "Peter Neubäcker"], answer: 0, explain: "Ruben TilgnerがSPL時代にTransient Designerを開発し、後にelysiaを共同設立した。" },
+        { q: "Transient Designerが操作できる2つの要素は?", choices: ["アタックとサステイン", "音量と周波数", "左右のパン", "テンポとピッチ"], answer: 0, explain: "Differential Envelope Technologyにより、アタックとサステインを独立して操作できる。" },
+        { q: "SPLのVitalizerはどのようなジャンルの製品として分類されるか?", choices: ["エキサイター/エンハンサー(サイコアコースティックEQ)", "リバーブ", "ピッチ補正", "ドラム音源"], answer: 0, explain: "位相操作による心理音響的な効果を持つエキサイター/エンハンサーとして知られる。" },
+        { q: "SPLがプラグイン販売で提携している会社は?", choices: ["Plugin Alliance", "Waves", "iZotope", "Native Instruments"], answer: 0, explain: "BrainworxのPlugin Alliance経由でプラグイン化・販売されている。" },
+      ],
+    },
     { id: "valhalla_dsp", order: 11, title: "Valhalla DSP", category: "リバーブ", hook: "たった一人の開発者が「安くて良いリバーブ」で業界の価格破壊をした話。", stub: true },
     { id: "maag_audio", order: 12, title: "Maag Audio", category: "ブティックハード系", hook: "一つの帯域(Air Band)を発明したことで一生食えるようになったエンジニアの話。", stub: true },
     { id: "vertigo_bettermaker", order: 13, title: "Vertigo Sound / Bettermaker", category: "ブティックハード系", hook: "オランダとポーランド、東欧発の高級ブティックブランドの話。", stub: true },
