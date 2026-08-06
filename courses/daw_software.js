@@ -461,30 +461,38 @@ window.COURSES["daw_software"] = {
       sections: [
         {
           heading: "会社の正体・沿革",
-          paragraphs: [
-            "Bitwig(ビットウィッグ)は2009年、ドイツ・ベルリンで設立された会社。創業者はClaes Johanson・Pablo Sara・Nicholas Allen・Volker Schumacherの4名で、いずれも元Abletonの開発チームでLiveの開発に携わっていた人物、または音響ソフトVember Audio(ソフトシンセ「Surge」開発元)出身の人物という経歴を持つ。",
-            "自社製品「Bitwig Studio」の最初のバージョンは2014年3月26日にリリースされた。設立から製品発売まで約5年をかけて開発されており、これはAbletonでの経験を踏まえたじっくりとした開発体制を示すエピソードとされる。",
+          dialogue: [
+            { who: "mina", text: "Bitwigは元Abletonの人たちが作った会社なんですね。" },
+            { who: "sensei", text: "そうなんだ。Bitwig(ビットウィッグ)は2009年、ドイツ・ベルリンで設立された会社でね。創業者はClaes Johanson・Pablo Sara・Nicholas Allen・Volker Schumacherの4名で、いずれも元Abletonの開発チームでLiveの開発に携わっていた人物、または音響ソフトVember Audio(ソフトシンセ「Surge」開発元)出身の人物という経歴を持つんだ。" },
+            { who: "mina", text: "製品はいつ発売されたんですか?" },
+            { who: "sensei", text: "自社製品「Bitwig Studio」の最初のバージョンは2014年3月26日にリリースされたんだ。設立から製品発売まで約5年をかけて開発されていてね。これはAbletonでの経験を踏まえたじっくりとした開発体制を示すエピソードとされているんだよ。" },
           ],
         },
         {
           heading: "製品としての特徴",
-          paragraphs: [
-            "AbletonのセッションビューやMax for Liveに近い発想(モジュラー的な音作り、リアルタイムのループ演奏)を持ちながら、Windows/macOS/Linuxの3プラットフォームに対応する点がAbletonにはない特徴(Ableton LiveはLinux非対応)。",
-            "「The Grid」というモジュラーシンセ的な音源作成環境を内蔵しており、パッチケーブルをつなぐ感覚で自由に音色を設計できる。この発想はEurorack(モジュラーシンセの規格)的なハードウェアの発想をソフトに取り込んだものといえる。",
+          dialogue: [
+            { who: "mina", text: "Bitwig StudioはAbletonとどう違うんですか?" },
+            { who: "sensei", text: "AbletonのセッションビューやMax for Liveに近い発想、モジュラー的な音作りやリアルタイムのループ演奏だね、それを持ちながら、Windows/macOS/Linuxの3プラットフォームに対応する点がAbletonにはない特徴なんだ(Ableton LiveはLinux非対応)。" },
+            { who: "mina", text: "「The Grid」って何ですか?" },
+            { who: "sensei", text: "「The Grid」というモジュラーシンセ的な音源作成環境を内蔵していてね。パッチケーブルをつなぐ感覚で自由に音色を設計できるんだ。この発想はEurorack(モジュラーシンセの規格)的なハードウェアの発想をソフトに取り込んだものといえるよ。" },
           ],
         },
         {
           heading: "業界内でのポジション",
-          paragraphs: [
-            "AbletonやFL Studioと同じくエレクトロニックミュージック制作者に強く支持されているが、規模としてはAbletonよりニッチな位置づけで、「玄人好みの選択肢」として語られることが多い。",
-            "「元Abletonの開発者が作った」という出自から、常にAbletonとの比較で語られる宿命を持つ会社だが、Linux対応やモジュラー的な音作りなど独自色を打ち出すことで差別化を図っている。",
+          dialogue: [
+            { who: "mina", text: "Bitwigはどれくらい普及しているんですか?" },
+            { who: "sensei", text: "AbletonやFL Studioと同じくエレクトロニックミュージック制作者に強く支持されているんだけど、規模としてはAbletonよりニッチな位置づけでね。「玄人好みの選択肢」として語られることが多いんだ。" },
+            { who: "mina", text: "常にAbletonと比較されてしまうんですね。" },
+            { who: "sensei", text: "そう。「元Abletonの開発者が作った」という出自から、常にAbletonとの比較で語られる宿命を持つ会社なんだ。でもLinux対応やモジュラー的な音作りなど独自色を打ち出すことで差別化を図っているんだよ。" },
           ],
         },
         {
           heading: "よくある誤解・豆知識",
-          paragraphs: [
-            "「BitwigはAbletonの後継・公式アップグレード版」ではない。あくまで元従業員が独立して立ち上げた完全に別会社・別製品であり、資本関係もない。",
-            "設立(2009年)から製品発売(2014年)まで約5年の開発期間があったことは、スタートアップとしては長い部類に入り、機能の完成度を重視した開発姿勢の表れとして語られることが多い。",
+          dialogue: [
+            { who: "mina", text: "BitwigはAbletonの公式アップグレード版みたいなものなんですか?" },
+            { who: "sensei", text: "それは誤解だね。「BitwigはAbletonの後継・公式アップグレード版」ではないんだ。あくまで元従業員が独立して立ち上げた完全に別会社・別製品であり、資本関係もないんだよ。" },
+            { who: "mina", text: "開発に5年もかかったのは長いんですか?" },
+            { who: "sensei", text: "設立(2009年)から製品発売(2014年)まで約5年の開発期間があったことは、スタートアップとしては長い部類に入るんだ。機能の完成度を重視した開発姿勢の表れとして語られることが多いよ。" },
           ],
         },
       ],
