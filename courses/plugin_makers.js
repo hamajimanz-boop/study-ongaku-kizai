@@ -67,7 +67,6 @@ window.COURSES["plugin_makers"] = {
       title: "Slate Digital",
       category: "プラグインバンドル",
       hook: "ドラム音源屋がサブスク制ミキシングツールの先駆けになり、業界のビジネスモデルを変えた話。",
-      image: "slate_digital_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -117,7 +116,6 @@ window.COURSES["plugin_makers"] = {
       title: "SSL",
       category: "コンソールプラグイン",
       hook: "英国の伝説コンソールメーカーが何度も買収され、今もブランドとして生き残っている話。",
-      image: "ssl_plugins_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -167,7 +165,6 @@ window.COURSES["plugin_makers"] = {
       title: "Neve / AMS Neve",
       category: "コンソールプラグイン",
       hook: "一人の天才技術者(Rupert Neve)の名前が、本人がもう関わっていない会社の看板として今も最高級の代名詞であり続ける理由。",
-      image: "neve_plugins_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -217,7 +214,6 @@ window.COURSES["plugin_makers"] = {
       title: "iZotope",
       category: "マスタリング/AI",
       hook: "大学生が「家で食費と家賃のために」作ったプラグインが、AI/機械学習でマスタリングを自動化する業界標準ソフトになった話。",
-      image: "izotope_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -267,7 +263,6 @@ window.COURSES["plugin_makers"] = {
       title: "elysia",
       category: "ブティックハード系",
       hook: "伝説的な機材を設計した一人のエンジニアが、自分の名前を出さないブランドを立ち上げた話。",
-      image: "elysia_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -317,7 +312,6 @@ window.COURSES["plugin_makers"] = {
       title: "Lindell Audio",
       category: "ブティックハード系",
       hook: "現役プロデューサーが「スタジオで感じた不満」をそのまま製品化して、スウェーデンから世界に売った話。",
-      image: "lindell_audio_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -367,7 +361,6 @@ window.COURSES["plugin_makers"] = {
       title: "Universal Audio",
       category: "DSP/インターフェース",
       hook: "「近代レコーディングの父」の息子が、亡き父の名作機材をソフトウェアで蘇らせた話。",
-      image: "uad_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -417,7 +410,6 @@ window.COURSES["plugin_makers"] = {
       title: "Celemony",
       category: "ピッチ編集",
       hook: "「石はどんな音がするんだろう?」という一つの問いから始まった技術が、特許で守られたまま20年以上ボーカル編集の代名詞であり続けている話。",
-      image: "celemony_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -467,7 +459,6 @@ window.COURSES["plugin_makers"] = {
       title: "SPL",
       category: "ブティックハード系",
       hook: "「Exciter」「Transient Designer」という、今では当たり前になったプラグインのジャンルそのものを発明した会社の話。",
-      image: "spl_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -517,7 +508,6 @@ window.COURSES["plugin_makers"] = {
       title: "Valhalla DSP",
       category: "リバーブ",
       hook: "夫婦2人だけの会社が「フェアな価格を守り続ける」という一貫した信念で、業界の価格破壊をした話。",
-      image: "valhalla_dsp_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -567,7 +557,6 @@ window.COURSES["plugin_makers"] = {
       title: "Maag Audio",
       category: "ブティックハード系",
       hook: "「Air Band」というたった一つの周波数帯域の発明が、30年後も自分の会社の看板であり続けているエンジニアの話。",
-      image: "maag_audio_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -617,7 +606,6 @@ window.COURSES["plugin_makers"] = {
       title: "Vertigo Sound / Bettermaker",
       category: "ブティックハード系",
       hook: "ドイツとポーランド、それぞれ違うアプローチで「アナログとデジタルの融合」を目指した2つの職人ブランドの話。",
-      image: "vertigo_bettermaker_card.png",
       sections: [
         {
           heading: "会社の正体・沿革: Vertigo Sound",
@@ -667,7 +655,6 @@ window.COURSES["plugin_makers"] = {
       title: "Millennia Media / Chandler Limited",
       category: "ブティックハード系",
       hook: "「歩き入れるクローゼット」を工房にした男が、世界で唯一EMI/アビイ・ロードの機材を公式に作れる会社になった話。",
-      image: "millennia_chandler_card.png",
       sections: [
         {
           heading: "会社の正体・沿革: Millennia Media",
@@ -717,7 +704,6 @@ window.COURSES["plugin_makers"] = {
       title: "Shadow Hills / Purple Audio / Black Box Analog Design",
       category: "ブティックハード系",
       hook: "パンクバンドのために高校を中退した男が作った「化け物コンプレッサー」を、有名エンジニアが実物を見ずに注文した話。",
-      image: "shadow_hills_etc_card.png",
       sections: [
         {
           heading: "会社の正体・沿革: Shadow Hills",
@@ -765,7 +751,6 @@ window.COURSES["plugin_makers"] = {
       title: "Pultec",
       category: "ヴィンテージEQ",
       hook: "設計者が意図していなかった「奇妙な操作」が、70年以上経った今も定番のテクニックとして語り継がれている話。",
-      image: "pultec_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -817,7 +802,6 @@ window.COURSES["plugin_makers"] = {
       title: "TASCAM / TEAC",
       category: "テープエミュレーション",
       hook: "「宅録」を発明した日本のテープ機メーカーが、50周年を機に自社の名機をデジタルの中で蘇らせた話。",
-      image: "tascam_teac_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -867,7 +851,6 @@ window.COURSES["plugin_makers"] = {
       title: "IK Multimedia",
       category: "アンプシム/総合",
       hook: "「アナログの音をコンピューターで再現したい」という2人のエンジニアの情熱が、ハードとソフトの両方でギタリスト市場を制する会社を作った話。",
-      image: "ik_multimedia_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -917,7 +900,6 @@ window.COURSES["plugin_makers"] = {
       title: "NEOLD",
       category: "ヴィンテージ復刻",
       hook: "elysiaを10年以上率いた男が、次に選んだのは「一点物の試作機」だけを追いかけるという新しいこだわり方だった。",
-      image: "neold_card.png",
       sections: [
         {
           heading: "会社の正体・沿革",
@@ -967,7 +949,6 @@ window.COURSES["plugin_makers"] = {
       title: "小規模・新興ブランド総集編",
       category: "総集編",
       hook: "「大手になれなかった」わけではなく「なる気がない」規模のニッチ経営という生き方。ドイツでたった一人でプラグインを作り続ける開発者もいる。",
-      image: "small_brands_roundup_card.png",
       sections: [
         {
           heading: "Kush Audio: 「機材を改造する人」から「機材を作る人」へ",
