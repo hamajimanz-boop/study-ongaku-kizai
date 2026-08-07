@@ -59,6 +59,8 @@ window.COURSES["plugin_makers"] = {
         { q: "BrainworxとPlugin Allianceの関係は?", choices: ["同じ会社の別名", "別の会社(自社ブランドと出版社)", "無関係の競合会社", "Plugin AllianceがBrainworxの子会社を吸収して消滅した"], answer: 1, explain: "Brainworxは自社ブランド(bx_系)の開発元、Plugin Allianceはそれと他社をまとめて売る出版社。" },
         { q: "Plugin Allianceの認証方式の特徴は?", choices: ["iLok必須", "自社オンライン認証でiLok不要", "認証不要の完全フリー", "サブスクのみで買い切り不可"], answer: 1, explain: "iLok(専用ドングル)を使わず、自社オンライン認証のみで動作する。" },
         { q: "TMT(Tolerance Modeling Technology)とは?", choices: ["AIによる自動EQ", "実機を何十台も測定し個体差までモデリングする技術", "クラウド上でプラグインを動かす技術", "無料でアップデートできる仕組み"], answer: 1, explain: "同じハードウェアを何十台も測定し、個体差ごとモデリングする技術。" },
+        { q: "Plugin AllianceのCEOで、bx_console開発にも関わっているのは誰か?", choices: ["Torsten Kunkel", "Dirk Ulrich", "Ruben Tilgner", "Tobias Lindell"], answer: 0, explain: "自身もエンジニアであるTorsten KunkelがCEOを務め、bx_console開発にも関わっている。" },
+        { q: "Plugin Allianceの販売スタイルとして知られるのは?", choices: ["年に何度も大規模セール(50〜90%オフ)を行う", "セールを一切行わない定価販売のみ", "オークション形式でしか購入できない", "招待制の限定販売のみ"], answer: 0, explain: "単品・バンドル・サブスクの選択肢に加え、頻繁な大規模セールで知られる。" },
       ],
     },
     {
