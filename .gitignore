@@ -1,0 +1,4 @@
+scripts/x_autopost/.env
+scripts/x_autopost/*.log
+scripts/x_autopost/venv/
+scripts/x_autopost/units.json
