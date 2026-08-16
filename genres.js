@@ -34,4 +34,12 @@ window.GENRES = [
     color: "#2f9e58",
     courseIds: ["kojin_jigyou", "music_business_money"],
   },
+  {
+    id: "mix_technique",
+    title: "ミックス・マスタリング実践",
+    icon: "MX",
+    description: "会社の歴史ではなく「今すぐセッションで使える」実践テクニック集。クリップゲインの使い方からLUFSの目標値まで、編集・ミキシング・マスタリングの判断基準と数値目安。",
+    color: "#a21caf",
+    courseIds: ["mix_mastering_edit"],
+  },
 ];
