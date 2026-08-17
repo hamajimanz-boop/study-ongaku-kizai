@@ -29,6 +29,40 @@ localStorageに保存されるため、同じブラウザ(同じURL)で開き続
 - **ミックス・マスタリング実践** — `mix_mastering_edit`(実践的な編集/ミキシング/
   マスタリングのテクニックと数値目安、全10単元)。会社の歴史ではなく「今すぐ
   セッションで使える」判断基準を扱う編
+- **実践問題編** — `gear_patch_practice`(デスク配線パズル)、
+  `money_case_studies`(お金のケーススタディ)、`mix_tips_practice`(ミックス判断
+  即断クイズ、全10単元)。「機材が欲しくなって調べる瞬間がいちばん知識が身につく」
+  という発想の編。詳細は下記「実践問題編の仕組み」を参照
+
+## 実践問題編の仕組み(`kind:"patch"` / `kind:"case"` / `kind:"tip"`)
+
+通常コースは `sections`(教材)+ `quiz`(4択)を持つが、実践問題編の3コースは
+これを持たず、代わりに `course.kind` と `unit.patch` / `unit.caseStudy` / `unit.tip` を持つ。
+`app.js` の `entryHref()`/`reviewHref()` が `course.kind` を見て、教材とテストが
+1画面に統合された専用ページ(`#/patch/...` または `#/case/...`)へルーティングする。
+採点結果は `updateUnitProgress()` を通して通常のクイズと同じ間隔反復・進捗・
+バッジのしくみにそのまま乗る。
+
+- **`kind:"patch"`(配線パズル)** — `unit.patch = { scenario, equipment, cablePalette,
+  correctConnections, explain }`。`equipment[].ports[]` に `{id,label,type,dir}` を
+  並べ、`correctConnections` に `{from:"equipId.portId", to:"...", cable:"xlr"}` を
+  列挙する。画面上ではケーブル種別を1つ選んでから、機材の端子(●)から別の端子へ
+  マウスドラッグして接続する(`renderPatch`/`wirePatchBoard`/`gradePatch`)。
+  接続した本数・種類が `correctConnections` と一致するかを採点し、不足分は盤面に
+  グレーの点線で正解ルートを表示する。新しいデスクのシナリオを追加する場合は
+  `courses/gear_patch_practice.js` の `units` 配列に1ユニット追記すればよい
+  (機材アイコンは`patch-equip-icon`に表示する短い英字ラベルでよく、写真は不要)。
+- **`kind:"case"`(ケーススタディ)** — `unit.caseStudy = { scenario:[...], inputs:[{
+  type:"choice"|"number"|"text", label, choices/answer/tolerance, explain }], explain:[...] }`。
+  具体的な数字の状況文を読んで、選択式/数値/自由記述の設問に答え、`gradeCase()`が
+  1問ずつ正誤判定してから全体の解説(`explain`)を表示する。新しいケースを追加する
+  場合は `courses/money_case_studies.js` の `units` 配列に1ユニット追記すればよい。
+  音響機材に限らず、お金・ビジネス系の具体例問題もこの仕組みで作れる。
+- **`kind:"tip"`(即断クイズ)** — `unit.tip = { situation, question, choices:[...],
+  answer, explain, nextStep? }`。具体的な症状(situation)を読んで「まず最初に
+  試すべき対処」を選択式で即答する、1問1画面の最短フォーマット(`renderTip`/
+  `gradeTip`)。新しい判断クイズを追加する場合は `courses/mix_tips_practice.js` の
+  `units` 配列に1ユニット追記すればよい。
 
 ## 進捗・実績ダッシュボード(`#/progress`)
 

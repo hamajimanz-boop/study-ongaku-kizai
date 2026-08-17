@@ -77,6 +77,9 @@ function render() {
   if (parts[0] === "course" && parts[1]) return renderCourse(parts[1]);
   if (parts[0] === "lesson" && parts[1] && parts[2]) return renderLesson(parts[1], parts[2]);
   if (parts[0] === "quiz" && parts[1] && parts[2]) return renderQuiz(parts[1], parts[2]);
+  if (parts[0] === "patch" && parts[1] && parts[2]) return renderPatch(parts[1], parts[2]);
+  if (parts[0] === "case" && parts[1] && parts[2]) return renderCase(parts[1], parts[2]);
+  if (parts[0] === "tip" && parts[1] && parts[2]) return renderTip(parts[1], parts[2]);
   if (parts[0] === "progress") return renderProgress();
   if (parts[0] === "glossary") return renderGlossary();
   renderHome();
@@ -107,6 +110,23 @@ const STATUS_CLASS = {
 
 function badge(status) {
   return `<span class="badge ${STATUS_CLASS[status]}">${STATUS_LABEL[status]}</span>`;
+}
+
+// ---------- shared: kind-aware routing ----------
+// 通常コース(quiz形式)は 教材(lesson)→クイズ(quiz) の2ステップだが、
+// kind:"patch"(配線パズル)/kind:"case"(ケーススタディ)は教材とテストが1画面に
+// 統合されているため、入口・復習ともに同じURLへ飛ばす。
+function entryHref(course, unit) {
+  if (course.kind === "patch") return `#/patch/${course.id}/${unit.id}`;
+  if (course.kind === "case") return `#/case/${course.id}/${unit.id}`;
+  if (course.kind === "tip") return `#/tip/${course.id}/${unit.id}`;
+  return `#/lesson/${course.id}/${unit.id}`;
+}
+function reviewHref(course, unit) {
+  if (course.kind === "patch") return `#/patch/${course.id}/${unit.id}`;
+  if (course.kind === "case") return `#/case/${course.id}/${unit.id}`;
+  if (course.kind === "tip") return `#/tip/${course.id}/${unit.id}`;
+  return `#/quiz/${course.id}/${unit.id}`;
 }
 
 // ---------- shared: small inline icons (SVG, no emoji) ----------
@@ -277,10 +297,10 @@ function renderHome() {
     ? dueItems
         .map(
           (x) => `
-      <a class="task-row" href="#/quiz/${x.course.id}/${x.unit.id}">
+      <a class="task-row" href="${reviewHref(x.course, x.unit)}">
         <span class="task-tag" style="background:${x.course.color}">復習</span>
         <span class="task-title">${x.unit.title}<small>${x.course.title}</small></span>
-        <span class="task-arrow">テストを受ける →</span>
+        <span class="task-arrow">${x.course.kind ? "もう一度挑戦する →" : "テストを受ける →"}</span>
       </a>`
         )
         .join("")
@@ -290,10 +310,10 @@ function renderHome() {
     ? nextNewItems
         .map(
           (x) => `
-      <a class="task-row" href="#/lesson/${x.course.id}/${x.unit.id}">
+      <a class="task-row" href="${entryHref(x.course, x.unit)}">
         <span class="task-tag" style="background:${x.course.color}">新規</span>
         <span class="task-title">${x.unit.title}<small>${x.course.title} / #${String(x.unit.order).padStart(2, "0")}</small></span>
-        <span class="task-arrow">教材を読む →</span>
+        <span class="task-arrow">${x.course.kind ? "挑戦する →" : "教材を読む →"}</span>
       </a>`
         )
         .join("")
@@ -387,7 +407,7 @@ function renderCourse(courseId) {
         ${badge(st)}
       `;
       return clickable
-        ? `<a class="unit-row" href="#/lesson/${courseId}/${u.id}">${inner}</a>`
+        ? `<a class="unit-row" href="${entryHref(course, u)}">${inner}</a>`
         : `<div class="unit-row unit-row-disabled">${inner}</div>`;
     })
     .join("");
@@ -409,6 +429,7 @@ function renderLesson(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
   if (!course || !unit) return renderHome();
+  if (!unit.sections) return renderCourse(courseId);
 
   if (unit.stub) {
     root.innerHTML = `
@@ -562,6 +583,7 @@ function renderQuiz(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
   if (!course || !unit || unit.stub) return renderHome();
+  if (!unit.quiz) return renderCourse(courseId);
 
   if (!quizRuntime || quizRuntime.courseId !== courseId || quizRuntime.unitId !== unitId) {
     quizRuntime = {
@@ -643,16 +665,15 @@ function onAnswer(course, unit, q, chosenIndex) {
   });
 }
 
-function drawQuizResult(course, unit) {
-  const total = unit.quiz.length;
-  const score = quizRuntime.correct;
+// ---------- shared: spaced-repetition progress update ----------
+// quiz(選択式)/patch(配線パズル)/case(ケーススタディ)、すべての採点結果は
+// この共通関数を通して localStorage の進捗・復習スケジュール・実績(バッジ)に反映する。
+function updateUnitProgress(courseId, unitId, score, total) {
   const pass = score === total;
-
-  // update spaced-repetition state
   const state = loadState();
-  const cState = ensureCourse(state, course.id);
+  const cState = ensureCourse(state, courseId);
   const today = todayStr();
-  let us = cState[unit.id];
+  let us = cState[unitId];
   if (!us) {
     us = { status: "learning", learnedAt: today, intervalIdx: 0, nextReview: addDays(today, STEPS[0]), reviewCount: 0, history: [] };
   } else {
@@ -670,8 +691,15 @@ function drawQuizResult(course, unit) {
   }
   us.history = us.history || [];
   us.history.push({ date: today, score, total });
-  cState[unit.id] = us;
+  cState[unitId] = us;
   saveState(state);
+  return { pass, us };
+}
+
+function drawQuizResult(course, unit) {
+  const total = unit.quiz.length;
+  const score = quizRuntime.correct;
+  const { pass, us } = updateUnitProgress(course.id, unit.id, score, total);
 
   root.innerHTML = `
     <header class="topbar">
@@ -690,6 +718,443 @@ function drawQuizResult(course, unit) {
     </section>
   `;
   quizRuntime = null;
+}
+
+// ---------- PATCH EXERCISE (配線パズル: ドラッグ&ドロップでケーブルをつなぐ) ----------
+// unit.patch = { scenario, equipment:[{id,label,icon,ports:[{id,label,type,dir}]}],
+//                cablePalette:["xlr",...], correctConnections:[{from:"equipId.portId",to:"...",cable:"xlr"}], explain }
+const CABLE_LABELS = {
+  xlr: "XLRケーブル", trs: "TRSフォーン(バランス)", ts: "TSフォーン(アンバランス)",
+  usb: "USBケーブル", rca: "RCAケーブル(ピン)", speaker: "スピーカーケーブル",
+  midi: "MIDIケーブル", optical: "光デジタル(TOSLINK)", power: "電源ケーブル",
+  digilink: "DigiLink(Pro Tools HDX専用)", wordclock: "ワードクロック(BNC)",
+  madi: "MADI(同軸/光)", aes: "AES/EBU(デジタル)", ethernet: "Ethernet(Dante等)",
+};
+const CABLE_COLORS = {
+  xlr: "#3a6df0", trs: "#14c39a", ts: "#7c5cff", usb: "#ff7a3d", rca: "#ffb02e",
+  speaker: "#ef4459", midi: "#ff5da2", optical: "#0e7490", power: "#55506b",
+  digilink: "#1d4ed8", wordclock: "#c026d3", madi: "#b45309", aes: "#0891b2", ethernet: "#059669",
+};
+
+let patchRuntime = null;
+
+function renderPatch(courseId, unitId) {
+  const course = getCourse(courseId);
+  const unit = getUnit(courseId, unitId);
+  if (!course || !unit || !unit.patch) return renderHome();
+  const p = unit.patch;
+
+  patchRuntime = { courseId, unitId, cables: [], graded: false, armedCable: null, dragging: null, dragPoint: null };
+
+  const equipHtml = p.equipment
+    .map(
+      (eq) => `
+    <div class="patch-equip" data-equip="${eq.id}">
+      <div class="patch-equip-head"><span class="patch-equip-icon">${eq.icon || "?"}</span><span>${eq.label}</span></div>
+      <div class="patch-equip-ports">
+        ${eq.ports
+          .map(
+            (port) => `
+          <div class="patch-port-row patch-port-${port.dir}">
+            ${
+              port.dir === "in"
+                ? patchPortDotHtml(eq.id, port) + `<span class="patch-port-label">${port.label}</span>`
+                : `<span class="patch-port-label">${port.label}</span>` + patchPortDotHtml(eq.id, port)
+            }
+          </div>`
+          )
+          .join("")}
+      </div>
+    </div>`
+    )
+    .join("");
+
+  const paletteHtml = p.cablePalette
+    .map(
+      (ct) => `
+    <button type="button" class="cable-chip" data-cable="${ct}" style="--cable-color:${CABLE_COLORS[ct] || "#999"}">
+      <span class="cable-chip-dot"></span>${CABLE_LABELS[ct] || ct}
+    </button>`
+    )
+    .join("");
+
+  root.innerHTML = `
+    <header class="topbar">
+      <a class="back" href="#/course/${courseId}">← ${course.title}</a>
+    </header>
+    <section class="section patch-page">
+      <p class="unit-eyebrow">配線問題 #${String(unit.order).padStart(2, "0")}</p>
+      <h1>${unit.title}</h1>
+      <div class="hook-box">${p.scenario}</div>
+
+      <p class="patch-instructions">${ICONS.sparkle} 下のケーブルを1本選び、機材の端子(●)からもう一方の端子までドラッグしてつなごう。配線を間違えたら、そのケーブルをクリックすると剪定(削除)できる。</p>
+
+      <div class="patch-palette" id="patchPalette">${paletteHtml}</div>
+
+      <div class="patch-board-wrap">
+        <svg class="patch-cables-svg" id="patchSvg"></svg>
+        <div class="patch-board" id="patchBoard">${equipHtml}</div>
+      </div>
+
+      <div class="patch-actions">
+        <button type="button" class="btn btn-primary" id="patchGradeBtn">配線を確認する</button>
+        <button type="button" class="btn" id="patchResetBtn">やり直す</button>
+      </div>
+      <div class="patch-feedback" id="patchFeedback"></div>
+    </section>
+  `;
+
+  wirePatchBoard(course, unit);
+}
+
+function patchPortDotHtml(equipId, port) {
+  return `<span class="patch-port" data-equip="${equipId}" data-port="${port.id}" data-dir="${port.dir}" data-type="${port.type}" title="${port.label}"></span>`;
+}
+function patchPortEl(equipId, portId) {
+  return document.querySelector(`.patch-port[data-equip="${CSS.escape(equipId)}"][data-port="${CSS.escape(portId)}"]`);
+}
+function patchPortCenter(el, wrapRect) {
+  const r = el.getBoundingClientRect();
+  return { x: r.left + r.width / 2 - wrapRect.left, y: r.top + r.height / 2 - wrapRect.top };
+}
+function patchPairKey(a, b) {
+  return [a, b].sort().join("|");
+}
+function patchParsePortKey(s) {
+  const i = s.indexOf(".");
+  return { equip: s.slice(0, i), port: s.slice(i + 1) };
+}
+
+function redrawPatchCables(status) {
+  const svg = document.getElementById("patchSvg");
+  if (!svg) return;
+  const wrap = svg.closest(".patch-board-wrap");
+  const wrapRect = wrap.getBoundingClientRect();
+  svg.setAttribute("width", wrapRect.width);
+  svg.setAttribute("height", wrapRect.height);
+
+  let html = "";
+  patchRuntime.cables.forEach((c) => {
+    const elA = patchPortEl(c.from.equip, c.from.port);
+    const elB = patchPortEl(c.to.equip, c.to.port);
+    if (!elA || !elB) return;
+    const a = patchPortCenter(elA, wrapRect);
+    const b = patchPortCenter(elB, wrapRect);
+    const midX = (a.x + b.x) / 2;
+    const cls = status ? (status[c.id] === "correct" ? "cable-line-correct" : "cable-line-wrong") : "";
+    const color = CABLE_COLORS[c.type] || "#999";
+    html += `<path class="cable-line ${cls}" data-cable-id="${c.id}" d="M${a.x},${a.y} C${midX},${a.y} ${midX},${b.y} ${b.x},${b.y}" stroke="${color}" fill="none" stroke-width="4" stroke-linecap="round" />`;
+  });
+
+  if (status && status.missing) {
+    status.missing.forEach((m) => {
+      const elA = patchPortEl(m.from.equip, m.from.port);
+      const elB = patchPortEl(m.to.equip, m.to.port);
+      if (!elA || !elB) return;
+      const a = patchPortCenter(elA, wrapRect);
+      const b = patchPortCenter(elB, wrapRect);
+      const midX = (a.x + b.x) / 2;
+      html += `<path class="cable-line cable-line-missing" d="M${a.x},${a.y} C${midX},${a.y} ${midX},${b.y} ${b.x},${b.y}" stroke="#aaa" fill="none" stroke-width="3" stroke-dasharray="6,6" stroke-linecap="round" />`;
+    });
+  }
+
+  if (patchRuntime.dragging && patchRuntime.dragPoint) {
+    const elA = patchPortEl(patchRuntime.dragging.equip, patchRuntime.dragging.port);
+    if (elA) {
+      const a = patchPortCenter(elA, wrapRect);
+      const b = patchRuntime.dragPoint;
+      const midX = (a.x + b.x) / 2;
+      html += `<path class="cable-line cable-line-dragging" d="M${a.x},${a.y} C${midX},${a.y} ${midX},${b.y} ${b.x},${b.y}" stroke="${CABLE_COLORS[patchRuntime.armedCable] || "#999"}" fill="none" stroke-width="4" stroke-dasharray="4,4" stroke-linecap="round" />`;
+    }
+  }
+
+  svg.innerHTML = html;
+}
+
+function flashPatchHint(msg) {
+  const fb = document.getElementById("patchFeedback");
+  if (fb) fb.innerHTML = `<p class="fb-wrong">${msg}</p>`;
+}
+
+function wirePatchBoard(course, unit) {
+  redrawPatchCables(null);
+
+  document.querySelectorAll(".cable-chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      if (patchRuntime.graded) return;
+      const already = chip.classList.contains("cable-chip-armed");
+      document.querySelectorAll(".cable-chip").forEach((c) => c.classList.remove("cable-chip-armed"));
+      patchRuntime.armedCable = already ? null : chip.dataset.cable;
+      if (patchRuntime.armedCable) chip.classList.add("cable-chip-armed");
+    });
+  });
+
+  document.querySelectorAll(".patch-port").forEach((portEl) => {
+    portEl.addEventListener("mousedown", (e) => {
+      if (patchRuntime.graded) return;
+      if (!patchRuntime.armedCable) {
+        flashPatchHint("先に上のケーブルを1本選んでください。");
+        return;
+      }
+      e.preventDefault();
+      patchRuntime.dragging = { equip: portEl.dataset.equip, port: portEl.dataset.port };
+      const board = document.getElementById("patchBoard");
+      board.classList.add("patch-board-dragging");
+
+      const onMove = (ev) => {
+        const wrap = document.getElementById("patchSvg").closest(".patch-board-wrap");
+        const r = wrap.getBoundingClientRect();
+        patchRuntime.dragPoint = { x: ev.clientX - r.left, y: ev.clientY - r.top };
+        redrawPatchCables(null);
+      };
+      const onUp = (ev) => {
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onUp);
+        board.classList.remove("patch-board-dragging");
+        const targetPort = ev.target.closest && ev.target.closest(".patch-port");
+        patchRuntime.dragPoint = null;
+        if (
+          targetPort &&
+          !(targetPort.dataset.equip === patchRuntime.dragging.equip && targetPort.dataset.port === patchRuntime.dragging.port)
+        ) {
+          patchRuntime.cables.push({
+            id: "c" + Math.random().toString(36).slice(2, 9),
+            from: patchRuntime.dragging,
+            to: { equip: targetPort.dataset.equip, port: targetPort.dataset.port },
+            type: patchRuntime.armedCable,
+          });
+        }
+        patchRuntime.dragging = null;
+        redrawPatchCables(null);
+      };
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup", onUp);
+    });
+  });
+
+  document.getElementById("patchSvg").addEventListener("click", (e) => {
+    if (patchRuntime.graded) return;
+    const id = e.target.dataset.cableId;
+    if (!id) return;
+    patchRuntime.cables = patchRuntime.cables.filter((c) => c.id !== id);
+    redrawPatchCables(null);
+  });
+
+  document.getElementById("patchGradeBtn").addEventListener("click", () => gradePatch(course, unit));
+  document.getElementById("patchResetBtn").addEventListener("click", () => renderPatch(course.id, unit.id));
+}
+
+function gradePatch(course, unit) {
+  const p = unit.patch;
+  const expected = p.correctConnections.map((e, i) => ({
+    idx: i,
+    from: patchParsePortKey(e.from),
+    to: patchParsePortKey(e.to),
+    type: e.cable,
+    key: patchPairKey(e.from, e.to),
+  }));
+
+  const status = {};
+  const usedExpected = new Set();
+  let correctCount = 0;
+
+  patchRuntime.cables.forEach((c) => {
+    const key = patchPairKey(`${c.from.equip}.${c.from.port}`, `${c.to.equip}.${c.to.port}`);
+    const match = expected.find((e) => !usedExpected.has(e.idx) && e.key === key);
+    if (match && match.type === c.type) {
+      status[c.id] = "correct";
+      usedExpected.add(match.idx);
+      correctCount++;
+    } else if (match) {
+      status[c.id] = "wrong";
+      usedExpected.add(match.idx);
+    } else {
+      status[c.id] = "wrong";
+    }
+  });
+
+  const missing = expected.filter((e) => !usedExpected.has(e.idx)).map((e) => ({ from: e.from, to: e.to }));
+  status.missing = missing;
+
+  const total = expected.length;
+  patchRuntime.graded = true;
+  redrawPatchCables(status);
+
+  const { pass } = updateUnitProgress(course.id, unit.id, correctCount, total);
+
+  document.getElementById("patchFeedback").innerHTML = `
+    <p class="${pass ? "fb-correct" : "fb-wrong"}">結果: ${correctCount} / ${total} 本を正しく接続できました。</p>
+    ${missing.length ? `<p class="fb-wrong">未接続・不足: ${missing.length}本(盤面のグレーの点線が正解のルート)</p>` : ""}
+    <p class="fb-explain">${p.explain || ""}</p>
+    <div class="result-actions">
+      <button type="button" class="btn" id="patchRetryBtn">もう一度挑戦する</button>
+      <a class="btn btn-primary" href="#/course/${course.id}">${course.title}に戻る</a>
+    </div>
+  `;
+  document.getElementById("patchGradeBtn").disabled = true;
+  document.getElementById("patchResetBtn").disabled = true;
+  document.getElementById("patchRetryBtn").addEventListener("click", () => renderPatch(course.id, unit.id));
+}
+
+// ---------- CASE STUDY (お金などの実践ケーススタディ: 数字を入力して答え合わせ) ----------
+// unit.caseStudy = { scenario:[...paragraphs], inputs:[{label,type:"choice"|"number"|"text",choices,answer,tolerance,unit,explain}], explain:[...paragraphs] }
+let caseRuntime = null;
+
+function renderCase(courseId, unitId) {
+  const course = getCourse(courseId);
+  const unit = getUnit(courseId, unitId);
+  if (!course || !unit || !unit.caseStudy) return renderHome();
+  const cs = unit.caseStudy;
+
+  caseRuntime = { courseId, unitId, graded: false };
+
+  const inputsHtml = cs.inputs
+    .map((inp, i) => {
+      let fieldHtml = "";
+      if (inp.type === "choice") {
+        fieldHtml = `<select class="case-input" id="case-input-${i}">
+          <option value="">選択してください</option>
+          ${inp.choices.map((c, ci) => `<option value="${ci}">${c}</option>`).join("")}
+        </select>`;
+      } else if (inp.type === "number") {
+        fieldHtml = `<input class="case-input" type="number" id="case-input-${i}" placeholder="${inp.placeholder || "数値を入力"}">`;
+      } else {
+        fieldHtml = `<input class="case-input" type="text" id="case-input-${i}" placeholder="${inp.placeholder || "回答を入力"}">`;
+      }
+      return `
+      <div class="case-input-row">
+        <label for="case-input-${i}">${inp.label}${inp.unit ? `(${inp.unit})` : ""}</label>
+        ${fieldHtml}
+        <div class="case-input-feedback" id="case-feedback-${i}"></div>
+      </div>`;
+    })
+    .join("");
+
+  root.innerHTML = `
+    <header class="topbar">
+      <a class="back" href="#/course/${courseId}">← ${course.title}</a>
+    </header>
+    <section class="section case-page">
+      <p class="unit-eyebrow">ケーススタディ #${String(unit.order).padStart(2, "0")}</p>
+      <h1>${unit.title}</h1>
+      <div class="case-scenario">${cs.scenario.map((p) => `<p>${p}</p>`).join("")}</div>
+      <form class="case-form" id="caseForm" onsubmit="return false">${inputsHtml}</form>
+      <button type="button" class="btn btn-primary" id="caseCheckBtn">答え合わせする</button>
+      <div class="case-result" id="caseResult"></div>
+    </section>
+  `;
+
+  document.getElementById("caseCheckBtn").addEventListener("click", () => gradeCase(course, unit));
+}
+
+function formatCaseAnswer(inp) {
+  if (inp.type === "choice") return inp.choices[inp.answer];
+  if (inp.type === "number") return String(inp.answer) + (inp.unit ? inp.unit : "");
+  return Array.isArray(inp.answer) ? inp.answer[0] : inp.answer;
+}
+
+function gradeCase(course, unit) {
+  const cs = unit.caseStudy;
+  let correct = 0;
+
+  cs.inputs.forEach((inp, i) => {
+    const el = document.getElementById(`case-input-${i}`);
+    const fb = document.getElementById(`case-feedback-${i}`);
+    let ok = false;
+    if (inp.type === "number") {
+      const v = parseFloat(el.value);
+      ok = !isNaN(v) && Math.abs(v - inp.answer) <= (inp.tolerance || 0);
+    } else if (inp.type === "choice") {
+      ok = el.value !== "" && parseInt(el.value, 10) === inp.answer;
+    } else {
+      const norm = (s) => (s || "").trim();
+      const accepted = Array.isArray(inp.answer) ? inp.answer : [inp.answer];
+      ok = accepted.some((a) => norm(el.value) === norm(a));
+    }
+    if (ok) correct++;
+    el.classList.remove("case-input-correct", "case-input-wrong");
+    el.classList.add(ok ? "case-input-correct" : "case-input-wrong");
+    el.disabled = true;
+    fb.innerHTML = `
+      <p class="${ok ? "fb-correct" : "fb-wrong"}">${ok ? "正解" : "不正解 — 正しい答え: " + formatCaseAnswer(inp)}</p>
+      ${inp.explain ? `<p class="fb-explain">${inp.explain}</p>` : ""}`;
+  });
+
+  const total = cs.inputs.length;
+  caseRuntime.graded = true;
+  document.getElementById("caseCheckBtn").disabled = true;
+  const { pass } = updateUnitProgress(course.id, unit.id, correct, total);
+
+  document.getElementById("caseResult").innerHTML = `
+    <p class="${pass ? "fb-correct" : "fb-wrong"}">結果: ${correct} / ${total} 問正解</p>
+    <div class="case-walkthrough">${(cs.explain || []).map((p) => `<p>${p}</p>`).join("")}</div>
+    <div class="result-actions">
+      <button type="button" class="btn" id="caseRetryBtn">もう一度挑戦する</button>
+      <a class="btn btn-primary" href="#/course/${course.id}">${course.title}に戻る</a>
+    </div>
+  `;
+  document.getElementById("caseRetryBtn").addEventListener("click", () => renderCase(course.id, unit.id));
+}
+
+// ---------- MIX TIP (即断クイズ: 状況→選択肢→即採点) ----------
+// unit.tip = { situation, question, choices:[...], answer, explain, nextStep? }
+let tipRuntime = null;
+
+function renderTip(courseId, unitId) {
+  const course = getCourse(courseId);
+  const unit = getUnit(courseId, unitId);
+  if (!course || !unit || !unit.tip) return renderHome();
+  const t = unit.tip;
+
+  tipRuntime = { courseId, unitId, graded: false };
+
+  const choicesHtml = t.choices
+    .map((c, i) => `<button type="button" class="choice" data-i="${i}">${c}</button>`)
+    .join("");
+
+  root.innerHTML = `
+    <header class="topbar">
+      <a class="back" href="#/course/${courseId}">← ${course.title}</a>
+    </header>
+    <section class="section tip-page">
+      <p class="unit-eyebrow">ミックス判断 #${String(unit.order).padStart(2, "0")}</p>
+      <h1>${unit.title}</h1>
+      <div class="hook-box">${t.situation}</div>
+      <p class="tip-question">${t.question}</p>
+      <div class="choice-list">${choicesHtml}</div>
+      <div class="tip-feedback" id="tipFeedback"></div>
+    </section>
+  `;
+
+  document.querySelectorAll(".tip-page .choice").forEach((btn) => {
+    btn.addEventListener("click", () => gradeTip(course, unit, parseInt(btn.dataset.i, 10)));
+  });
+}
+
+function gradeTip(course, unit, chosenIndex) {
+  if (tipRuntime.graded) return;
+  tipRuntime.graded = true;
+  const t = unit.tip;
+  const correct = chosenIndex === t.answer;
+
+  document.querySelectorAll(".tip-page .choice").forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === t.answer) btn.classList.add("choice-correct");
+    else if (i === chosenIndex) btn.classList.add("choice-wrong");
+  });
+
+  const { pass } = updateUnitProgress(course.id, unit.id, correct ? 1 : 0, 1);
+
+  document.getElementById("tipFeedback").innerHTML = `
+    <p class="${pass ? "fb-correct" : "fb-wrong"}">${correct ? "正解!" : "不正解"}</p>
+    <p class="fb-explain">${t.explain || ""}</p>
+    ${t.nextStep ? `<p class="fb-explain"><strong>次の一手: </strong>${t.nextStep}</p>` : ""}
+    <div class="result-actions">
+      <button type="button" class="btn" id="tipRetryBtn">もう一度挑戦する</button>
+      <a class="btn btn-primary" href="#/course/${course.id}">${course.title}に戻る</a>
+    </div>
+  `;
+  document.getElementById("tipRetryBtn").addEventListener("click", () => renderTip(course.id, unit.id));
 }
 
 // ---------- PROGRESS / DASHBOARD ----------

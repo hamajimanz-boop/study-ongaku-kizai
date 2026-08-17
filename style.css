@@ -682,3 +682,90 @@ a, button {
   .hero-banner { padding: 20px; }
   .hero-ring svg { width: 76px; height: 76px; }
 }
+
+/* ---------- 実践問題編: 配線パズル (patch) ---------- */
+.patch-instructions {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13.5px; color: var(--ink-secondary);
+  background: var(--surface-raised); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 14px; margin: 14px 0;
+}
+.patch-palette { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.cable-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--cable-color, var(--border));
+  background: var(--surface); color: var(--ink); font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all 0.15s ease;
+}
+.cable-chip:hover { box-shadow: var(--shadow-sm); }
+.cable-chip-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--cable-color, var(--muted)); flex-shrink: 0; }
+.cable-chip-armed { background: var(--cable-color, var(--violet)); color: #fff; border-color: transparent; box-shadow: var(--shadow-md); }
+.cable-chip-armed .cable-chip-dot { background: #fff; }
+
+.patch-board-wrap { position: relative; margin: 10px 0 18px; }
+.patch-cables-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; overflow: visible; }
+.patch-cables-svg .cable-line { pointer-events: auto; cursor: pointer; }
+.patch-cables-svg .cable-line-correct { stroke: var(--good) !important; }
+.patch-cables-svg .cable-line-wrong { stroke: var(--red) !important; }
+.patch-cables-svg .cable-line-missing,
+.patch-cables-svg .cable-line-dragging { pointer-events: none; }
+
+.patch-board {
+  display: flex; flex-wrap: wrap; gap: 22px; padding: 20px;
+  background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  position: relative; z-index: 1;
+}
+.patch-board-dragging, .patch-board-dragging .patch-port { cursor: grabbing; }
+.patch-equip {
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-md);
+  padding: 12px 14px; min-width: 190px; box-shadow: var(--shadow-sm);
+}
+.patch-equip-head { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13.5px; margin-bottom: 10px; }
+.patch-equip-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 34px; height: 22px; padding: 0 6px; border-radius: 7px;
+  background: var(--violet); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 0.02em;
+}
+.patch-equip-ports { display: flex; flex-direction: column; gap: 9px; }
+.patch-port-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-secondary); }
+.patch-port-row.patch-port-out { justify-content: flex-end; text-align: right; }
+.patch-port-label { white-space: nowrap; }
+.patch-port {
+  width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0;
+  background: var(--surface); border: 2.5px solid var(--muted); cursor: pointer; transition: all 0.15s ease;
+}
+.patch-port:hover { border-color: var(--violet); transform: scale(1.15); }
+
+.patch-actions { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+.patch-feedback { margin-top: 6px; }
+
+/* ---------- 実践問題編: ケーススタディ (case) ---------- */
+.case-scenario {
+  background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 16px 18px; margin: 14px 0; font-size: 14.5px; line-height: 1.8;
+}
+.case-scenario p { margin: 0 0 8px; }
+.case-scenario p:last-child { margin-bottom: 0; }
+.case-form { display: flex; flex-direction: column; gap: 16px; margin: 18px 0; }
+.case-input-row { display: flex; flex-direction: column; gap: 6px; }
+.case-input-row label { font-weight: 700; font-size: 13.5px; }
+.case-input {
+  padding: 10px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+  background: var(--surface); color: var(--ink); font-size: 14px; max-width: 360px; width: 100%;
+}
+.case-input:focus { outline: none; border-color: var(--violet); }
+.case-input-correct { border-color: var(--good); }
+.case-input-wrong { border-color: var(--red); }
+.case-input-feedback p { margin: 2px 0; font-size: 12.5px; }
+.case-result { margin-top: 18px; }
+.case-walkthrough {
+  background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 14px 16px; margin: 12px 0; font-size: 13.5px; line-height: 1.8;
+}
+.case-walkthrough p { margin: 0 0 8px; }
+.case-walkthrough p:last-child { margin-bottom: 0; }
+
+@media (max-width: 600px) {
+  .patch-board { padding: 14px; gap: 14px; }
+  .patch-equip { min-width: 150px; }
+}

@@ -42,4 +42,12 @@ window.GENRES = [
     color: "#a21caf",
     courseIds: ["mix_mastering_edit"],
   },
+  {
+    id: "practice_exercises",
+    title: "実践問題編(配線パズル・ケーススタディ)",
+    icon: "PR",
+    description: "「機材が欲しくなって調べた瞬間」がいちばん知識が身につく、という発想の実践編。様々な宅録デスクの配線をドラッグ&ドロップで組み立てる配線パズル、お金の具体的な数字を自分で計算して答え合わせするケーススタディ、ミキシング中の症状に即答するミックス判断クイズを収録。",
+    color: "#c2410c",
+    courseIds: ["gear_patch_practice", "money_case_studies", "mix_tips_practice"],
+  },
 ];
