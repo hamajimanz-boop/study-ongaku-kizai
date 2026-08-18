@@ -583,5 +583,36 @@ window.COURSES["gear_patch_practice"] = {
           "キック・スネアには近接効果に強く音圧にも耐えるダイナミックマイク(Beta 52A、SM57)、オーバーヘッドには周波数レンジが広く繊細な音を拾えるコンデンサーマイク(C414)を使うのがドラム収録の定番の組み合わせ。ADA8200のような外部マイクプリは、マイク入力が足りないインターフェースの『増設用マイクプリ』として使え、集めた複数chの音を『ADAT(ライトパイプ)』という光デジタル伝送規格1本にまとめて送れる——ADATは見た目もコネクタも家庭用のS/PDIF光(TOSLINK)ケーブルと同じだが、最大8ch分をまとめて送れる点が異なる。Scarlett 18i20のように背面にADAT INを備えたインターフェースなら、この1本のケーブルで一気にチャンネル数を拡張できる。",
       },
     },
+    {
+      id: "aes_spdif_digital_transfer",
+      order: 15,
+      title: "マスタリングルームのAES/EBUとS/PDIFを配線する(Prism Sound ADA-8XR)",
+      category: "配線問題(プロ環境)",
+      hook: "同じ『デジタル伝送』でも、プロ機材同士のAES/EBUと、コンシューマー機器のS/PDIF(同軸)ではコネクタも扱いも違う。マスタリングルームで両方を配線してみよう。",
+      patch: {
+        scenario:
+          "マスタリングルームで、高精度なAD/DAコンバーター「Prism Sound ADA-8XR」を中心に配線する。ADA-8XRのAES/EBU OUTから、Pro Tools HDXシステムの「Avid HD I/O」のAES/EBU INへ、プロ機材同士の標準的なデジタル伝送を行う。さらに、リファレンス用のCDプレーヤー「TASCAM CD-200BT」のS/PDIF OUT(同軸)を、ADA-8XRのS/PDIF INへ繋いで、比較用の音源として読み込めるようにしよう。",
+        equipment: [
+          {
+            id: "converter",
+            label: "Prism Sound ADA-8XR(AD/DAコンバーター)",
+            icon: "ADA8XR",
+            ports: [
+              { id: "aesOut", label: "AES/EBU OUT (XLR)", type: "aes", dir: "out" },
+              { id: "spdifIn", label: "S/PDIF IN (同軸/RCA)", type: "rca", dir: "in" },
+            ],
+          },
+          { id: "hdio", label: "Avid HD I/O", icon: "HD I/O", ports: [{ id: "aesIn", label: "AES/EBU IN (XLR)", type: "aes", dir: "in" }] },
+          { id: "cdPlayer", label: "TASCAM CD-200BT(リファレンスCDプレーヤー)", icon: "CD200BT", ports: [{ id: "spdifOut", label: "S/PDIF OUT (同軸/RCA)", type: "rca", dir: "out" }] },
+        ],
+        cablePalette: ["aes", "rca", "optical", "xlr", "digilink"],
+        correctConnections: [
+          { from: "converter.aesOut", to: "hdio.aesIn", cable: "aes" },
+          { from: "cdPlayer.spdifOut", to: "converter.spdifIn", cable: "rca" },
+        ],
+        explain:
+          "AES/EBU(AES3とも呼ばれる)は主にプロ機材同士で使われるデジタル伝送規格で、見た目はマイク用のXLRケーブルと同じ3ピンXLRコネクタを使い、1本でステレオ2ch分のデジタル音声を送れる(ただし本来はマイクケーブルと特性インピーダンスが異なる専用ケーブルを使うのが望ましいとされる)。一方S/PDIFはコンシューマー機器で広く普及したデジタル伝送規格で、同軸(見た目はRCAピンケーブルと同じ)または光(TOSLINK)のいずれかで2ch分を伝送する。今回のように、業務用のAES/EBUで基幹の伝送を組みつつ、S/PDIFで手軽にリファレンス音源を読み込む、という組み合わせはマスタリングルームでよくある構成。同じ『デジタル』でもコネクタと電気的な規格が違うため、変換が必要になる場面があることを覚えておこう。",
+      },
+    },
   ],
 };
