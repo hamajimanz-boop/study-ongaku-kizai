@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全21単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全22単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -857,6 +857,47 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "Eurorackのモジュラーシンセでは、音の高さを電圧で表す『CV(Control Voltage)』、音のオン/オフのタイミングを表す『Gate』、そして実際の音声(オーディオ)まで、信号の種類が違っても物理的にはすべて同じ3.5mmモノラルのパッチケーブルでやり取りする——これは、信号の種類ごとにコネクタ形状が変わる(XLR、TRS、MIDIなど)これまでの単元の機材とはまったく違う発想で、モジュラーシンセ特有の『何にでも同じケーブルを挿せてしまう自由さ』の背景になっている。ただし物理的に同じケーブルでも、繋ぐ先のジャックが『CV/Gate入力』を想定しているか『オーディオ入力』を想定しているかで電圧のレンジや扱いが異なるため、どのモジュールのどの端子が何を意味するかを理解していないと、正しく音を作れない。MIDIケーブルは今回のシステムには登場しないが、MIDI-CV変換モジュールを使えば、以前の単元で扱ったMIDIキーボードの演奏データをCV/Gateに変換して、モジュラーシンセを鍵盤で演奏することもできる。",
+      },
+    },
+    {
+      id: "field_recorder_live_backup",
+      order: 22,
+      title: "フィールドレコーダーでライブ本番のバックアップ収録をする(Zoom H8)",
+      category: "配線問題",
+      hook: "メインの録音システムが本番中に落ちたら?——デジタル卓とは完全に独立した経路で音を残しておく『保険』の配線を体験しよう。",
+      patch: {
+        scenario:
+          "ライブの本番音声を、メインのデジタル卓とは完全に独立した経路でも録音しておきたい。デジタルミキサー「Yamaha CL5」のMAIN OUT(L/R, XLR)を、マルチトラックレコーダー「Zoom H8」のCH1・CH2のXLR入力へ接続し、本体のSDカードへステレオミックスを独立収録する。さらに客席にコンデンサーマイク「Neumann KM 184」を1本立て、その出力をH8のCH3へ接続して、会場の空気感(拍手・歓声・生の反響)も別チャンネルで記録しよう。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha CL5(デジタルミキサー)",
+            icon: "CL5",
+            ports: [
+              { id: "mainOutL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainOutR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "ambMic", label: "Neumann KM 184(客席アンビエンスマイク)", icon: "KM184", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "recorder",
+            label: "Zoom H8(マルチトラックレコーダー)",
+            icon: "H8",
+            ports: [
+              { id: "inL", label: "CH1 IN (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "CH2 IN (XLR)", type: "xlr", dir: "in" },
+              { id: "inAmb", label: "CH3 IN (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "rca"],
+        correctConnections: [
+          { from: "mixer.mainOutL", to: "recorder.inL", cable: "xlr" },
+          { from: "mixer.mainOutR", to: "recorder.inR", cable: "xlr" },
+          { from: "ambMic.out", to: "recorder.inAmb", cable: "xlr" },
+        ],
+        explain:
+          "メインのデジタル卓(CL5)からPro Toolsなどの本線に送っている経路とは完全に独立した経路で、Zoom H8のSDカードにも同時に音を残しておくことで、本線側のPCやオーディオI/Fにトラブルが起きても録音データが手元に残る『保険』になる。Zoom H8はXLRのマイク入力を複数備え、乾電池でも動作できる機種が多く、電源トラブルにも強いため、ライブの現場ではこうした独立バックアップ収録の定番として使われる。客席にコンデンサーマイク(KM 184)を1本立ててH8の別チャンネルに録っておくと、あとで会場の空気感をミックスにブレンドできる——本線のミックスとは別に、会場の反響や拍手だけを狙って録る『アンビエンスマイク』の典型的な使い方。",
       },
     },
   ],
