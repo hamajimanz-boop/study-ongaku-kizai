@@ -18,7 +18,7 @@
 
 ## SEO
 - [x] (2026-08-17対応) meta description / OGP(og:title, og:description, og:type)タグを追加する
-- [ ] favicon を設定する
+- [x] (2026-08-18対応) favicon を設定する(favicon.svg、8分音符モチーフ・テーマカラーのグラデーション)
 - [ ] robots.txt / sitemap.xml の追加要否を検討する
 
 ## パフォーマンス
