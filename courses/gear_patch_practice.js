@@ -364,5 +364,49 @@ window.COURSES["gear_patch_practice"] = {
           "コンソールの『メインバスOUT』は複数チャンネルをミックスした後の音が出るため、個別トラックとして録音するには向かない。ダイレクトアウトは、フェーダーより手前(またはフェーダー通過後・機種によって設計が違う)でそのチャンネルの信号だけを単独で取り出せる出口で、マルチトラックレコーディングでは各チャンネルのダイレクトアウトをそれぞれ別のインターフェース入力へ送るのが基本形になる。Neumann U 87 Aiは今なお現役の定番大型ダイアフラム・コンデンサーマイクで、SSL 4000 G+は数多くの名盤をミックスしてきた伝説的コンソール。",
       },
     },
+    {
+      id: "midi_keyboard_module",
+      order: 10,
+      title: "MIDIキーボードと外部音源モジュールを配線する(Roland A-88MKII + INTEGRA-7)",
+      category: "配線問題",
+      hook: "MIDIケーブルには音は流れない——鍵盤の演奏データと、実際の音を運ぶオーディオケーブル、2種類の配線をきちんと使い分けよう。",
+      patch: {
+        scenario:
+          "あなたは音源を内蔵しない「Roland A-88MKII」(MIDIマスターキーボード)を弾いて、ラック型の音源モジュール「Roland INTEGRA-7」を鳴らしたい。A-88MKIIのMIDI OUTから、INTEGRA-7のMIDI INへ演奏データを送り、INTEGRA-7が実際に生成した音(ステレオL/R出力)を、オーディオインターフェース「Steinberg UR44」のライン入力へ送って、MacBook Airに録音できるように配線しよう。",
+        equipment: [
+          { id: "keyboard", label: "Roland A-88MKII(MIDIマスターキーボード)", icon: "A-88", ports: [{ id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" }] },
+          {
+            id: "module",
+            label: "Roland INTEGRA-7(音源モジュール)",
+            icon: "INTGR7",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Steinberg UR44",
+            icon: "UR44",
+            ports: [
+              { id: "lineInL", label: "LINE IN 3 L (TRS)", type: "trs", dir: "in" },
+              { id: "lineInR", label: "LINE IN 4 R (TRS)", type: "trs", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["midi", "trs", "usb", "xlr", "ts"],
+        correctConnections: [
+          { from: "keyboard.midiOut", to: "module.midiIn", cable: "midi" },
+          { from: "module.outL", to: "interface.lineInL", cable: "trs" },
+          { from: "module.outR", to: "interface.lineInR", cable: "trs" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "MIDIケーブルが運ぶのは『どの鍵盤を、どのくらいの強さで、いつ弾いたか』という演奏データ(MIDIメッセージ)であり、音そのものではない。A-88MKIIのように音源を持たない(内蔵音色がない)マスターキーボードは、MIDI OUTから音源モジュールやソフトシンセにMIDI信号を送って初めて音が鳴る仕組み。INTEGRA-7が実際に生成した音(オーディオ信号)は、MIDIケーブルとはまったく別に、通常のオーディオケーブル(ここではTRSのライン出力)でインターフェースへ送る必要がある。『MIDIケーブルを繋いだのに音が出ない』という宅録初心者によくある勘違いは、この『データ』と『音』の違いを混同していることが多い。",
+      },
+    },
   ],
 };
