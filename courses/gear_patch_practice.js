@@ -492,5 +492,46 @@ window.COURSES["gear_patch_practice"] = {
           "Shure SM7Bはダイナミックマイクの中でも出力レベルが低く、大きめのゲインを持つマイクプリと相性が良いため、RODECaster Pro IIのような配信用ミキサーによく組み合わされる。複数の話者が同時に収録する場合、それぞれに独立したマイク入力とヘッドホン出力を用意するのが基本形で、これにより各話者は自分のタイミングや声量に合わせて自分専用のモニターバランスを聴きながら話せる。全員分の音はRODECaster Pro IIの内部で1つのステレオ(または複数トラック)にまとめられ、USB1本でPCの配信・録画ソフトへ送られる。",
       },
     },
+    {
+      id: "reverb_aux_send_return",
+      order: 13,
+      title: "外部リバーブユニットをAUX SEND/RETURNで配線する(TC Electronic M300)",
+      category: "配線問題(プロ環境)",
+      hook: "以前の単元で扱った『インサート』と同じくコンプを外部に挟む配線だったが、今度は『センド/リターン』——ドライ音を残したまま、エフェクト音だけを混ぜる配線を体験しよう。",
+      patch: {
+        scenario:
+          "ミキサー「Yamaha MG12XU」に外部のリバーブユニット「TC Electronic M300」を追加する。MG12XUのAUX SEND 1(各chから任意の量だけ分けてもらえる、モノラル1系統の送り出しバス)から、M300のIN 1へ送り、M300が生成したステレオのリバーブ音を、MG12XUのSTEREO IN(L/R、リターン用の入力)へ戻そう。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "auxSend", label: "AUX SEND 1 (TS, モノ)", type: "ts", dir: "out" },
+              { id: "retL", label: "STEREO IN 3/4 L (TRS)", type: "trs", dir: "in" },
+              { id: "retR", label: "STEREO IN 3/4 R (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+          {
+            id: "reverb",
+            label: "TC Electronic M300(リバーブユニット)",
+            icon: "M300",
+            ports: [
+              { id: "inL", label: "IN 1 (TRS, モノで受ける)", type: "ts", dir: "in" },
+              { id: "outL", label: "OUT 1 L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUT 2 R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker"],
+        correctConnections: [
+          { from: "mixer.auxSend", to: "reverb.inL", cable: "ts" },
+          { from: "reverb.outL", to: "mixer.retL", cable: "trs" },
+          { from: "reverb.outR", to: "mixer.retR", cable: "trs" },
+        ],
+        explain:
+          "AUX SENDバスは通常モノラル1系統(各チャンネルからのセンド量を1つに集約したバス)なので、M300のようにステレオ入力を持つ機種でも、実務上はIN 1(L)だけにモノラルで送るのが一般的——M300はそのモノラル入力から左右に広がるステレオのリバーブ音を作り出す。戻りはOUT 1/OUT 2からのステレオ信号を、ミキサーのSTEREO IN(リターン)のL/R両方へ接続する。以前の単元で扱ったインサート(1chの信号を直列に外部機器へ通す配線)との違いは、こちらは『元のドライな音はそのまま残しつつ、センドで分けた分だけをエフェクト処理して並列(パラレル)に足す』という使い方である点。ボーカルやスネアなど、複数のチャンネルから同じリバーブへセンドを送って、1台のユニットを全体で共有できるのもAUX SEND/RETURN方式の利点。",
+      },
+    },
   ],
 };
