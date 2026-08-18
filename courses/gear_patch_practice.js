@@ -452,5 +452,45 @@ window.COURSES["gear_patch_practice"] = {
           "JBL JRX225のようなパッシブスピーカーはアンプを内蔵していないため、単体では鳴らない。ミキサーのMAIN OUTから出るのは『ライン信号』という小さな電力の音声信号で、そのままではスピーカーを駆動できず、必ずパワーアンプで大きな電力に増幅する必要がある。ミキサー→アンプの区間はXLRのライン信号、アンプ→スピーカーの区間はSpeakon等のスピーカーケーブルで大きな電力を送る、という2種類のケーブルの役割の違いがポイント。Yamaha HS5のようなパワードモニター(アンプ内蔵)は、このアンプの役割をスピーカー自身が内蔵しているため配線がシンプルになる、という対比で覚えておくと理解しやすい。",
       },
     },
+    {
+      id: "podcast_multi_speaker",
+      order: 12,
+      title: "2人収録のポッドキャスト配線(RODECaster Pro II + Shure SM7B)",
+      category: "配線問題",
+      hook: "話者が増えるほど、マイクだけでなくヘッドホンの本数も増える——複数人収録の基本形を配線しよう。",
+      patch: {
+        scenario:
+          "2人の話者でポッドキャストを収録する。オールインワンの音声ミキサー「RODECaster Pro II」に、話者それぞれのダイナミックマイク「Shure SM7B」を接続し、それぞれが自分の声をモニターできるようヘッドホンも1つずつ接続する。RODECaster Pro IIからはUSBでノートPCに繋ぎ、録画・配信ソフトへ音声を送ろう。",
+        equipment: [
+          { id: "mic1", label: "Shure SM7B(話者A)", icon: "SM7B", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "mic2", label: "Shure SM7B(話者B)", icon: "SM7B", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "caster",
+            label: "RODECaster Pro II",
+            icon: "RCP2",
+            ports: [
+              { id: "in1", label: "COMBO INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "COMBO INPUT 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "hp1", label: "HEADPHONE OUT 1 (TRS)", type: "trs", dir: "out" },
+              { id: "hp2", label: "HEADPHONE OUT 2 (TRS)", type: "trs", dir: "out" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "hp1", label: "モニターヘッドホン(話者A)", icon: "HP", ports: [{ id: "in", label: "IN (TRS)", type: "trs", dir: "in" }] },
+          { id: "hp2", label: "モニターヘッドホン(話者B)", icon: "HP", ports: [{ id: "in", label: "IN (TRS)", type: "trs", dir: "in" }] },
+          { id: "pc", label: "ノートPC", icon: "PC", ports: [{ id: "usbin", label: "USB", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "ts", "rca"],
+        correctConnections: [
+          { from: "mic1.out", to: "caster.in1", cable: "xlr" },
+          { from: "mic2.out", to: "caster.in2", cable: "xlr" },
+          { from: "caster.hp1", to: "hp1.in", cable: "trs" },
+          { from: "caster.hp2", to: "hp2.in", cable: "trs" },
+          { from: "caster.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "Shure SM7Bはダイナミックマイクの中でも出力レベルが低く、大きめのゲインを持つマイクプリと相性が良いため、RODECaster Pro IIのような配信用ミキサーによく組み合わされる。複数の話者が同時に収録する場合、それぞれに独立したマイク入力とヘッドホン出力を用意するのが基本形で、これにより各話者は自分のタイミングや声量に合わせて自分専用のモニターバランスを聴きながら話せる。全員分の音はRODECaster Pro IIの内部で1つのステレオ(または複数トラック)にまとめられ、USB1本でPCの配信・録画ソフトへ送られる。",
+      },
+    },
   ],
 };
