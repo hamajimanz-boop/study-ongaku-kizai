@@ -533,5 +533,55 @@ window.COURSES["gear_patch_practice"] = {
           "AUX SENDバスは通常モノラル1系統(各チャンネルからのセンド量を1つに集約したバス)なので、M300のようにステレオ入力を持つ機種でも、実務上はIN 1(L)だけにモノラルで送るのが一般的——M300はそのモノラル入力から左右に広がるステレオのリバーブ音を作り出す。戻りはOUT 1/OUT 2からのステレオ信号を、ミキサーのSTEREO IN(リターン)のL/R両方へ接続する。以前の単元で扱ったインサート(1chの信号を直列に外部機器へ通す配線)との違いは、こちらは『元のドライな音はそのまま残しつつ、センドで分けた分だけをエフェクト処理して並列(パラレル)に足す』という使い方である点。ボーカルやスネアなど、複数のチャンネルから同じリバーブへセンドを送って、1台のユニットを全体で共有できるのもAUX SEND/RETURN方式の利点。",
       },
     },
+    {
+      id: "drum_multimic_adat",
+      order: 14,
+      title: "ドラム収録の複数マイキングとADAT拡張配線",
+      category: "配線問題(プロ環境)",
+      hook: "マイク4本なのに、インターフェースのマイク入力が足りない——そんな時は外部マイクプリを『ADAT』1本でまとめて増設する。",
+      patch: {
+        scenario:
+          "ドラムを4本のマイクで収録する。キック(バスドラム)に「Shure Beta 52A」、スネアに「Shure SM57」、オーバーヘッド左右に「AKG C414」を2本立てる。オーディオインターフェース「Focusrite Scarlett 18i20」の内蔵マイク入力だけでは他の楽器の分の余裕がなくなるため、外部マイクプリ「Behringer ADA8200」の4つのXLR入力に全マイクを立て、ADA8200のADAT OUT(光デジタル、8ch分をまとめて伝送できる)から、18i20背面のADAT INへ送って4ch分を一気に受け取ろう。",
+        equipment: [
+          { id: "kickMic", label: "Shure Beta 52A(キック用)", icon: "Beta52A", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "snareMic", label: "Shure SM57(スネア用)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ohL", label: "AKG C414(オーバーヘッドL)", icon: "C414", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ohR", label: "AKG C414(オーバーヘッドR)", icon: "C414", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "preamp8200",
+            label: "Behringer ADA8200(外部マイクプリ)",
+            icon: "ADA8200",
+            ports: [
+              { id: "in1", label: "MIC IN 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "MIC IN 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "in3", label: "MIC IN 3 (XLR)", type: "xlr", dir: "in" },
+              { id: "in4", label: "MIC IN 4 (XLR)", type: "xlr", dir: "in" },
+              { id: "adatOut", label: "ADAT OUT(光)", type: "optical", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 18i20",
+            icon: "18i20",
+            ports: [
+              { id: "adatIn", label: "OPTICAL IN(ADAT)", type: "optical", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "optical", "usb", "trs", "midi"],
+        correctConnections: [
+          { from: "kickMic.out", to: "preamp8200.in1", cable: "xlr" },
+          { from: "snareMic.out", to: "preamp8200.in2", cable: "xlr" },
+          { from: "ohL.out", to: "preamp8200.in3", cable: "xlr" },
+          { from: "ohR.out", to: "preamp8200.in4", cable: "xlr" },
+          { from: "preamp8200.adatOut", to: "interface.adatIn", cable: "optical" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "キック・スネアには近接効果に強く音圧にも耐えるダイナミックマイク(Beta 52A、SM57)、オーバーヘッドには周波数レンジが広く繊細な音を拾えるコンデンサーマイク(C414)を使うのがドラム収録の定番の組み合わせ。ADA8200のような外部マイクプリは、マイク入力が足りないインターフェースの『増設用マイクプリ』として使え、集めた複数chの音を『ADAT(ライトパイプ)』という光デジタル伝送規格1本にまとめて送れる——ADATは見た目もコネクタも家庭用のS/PDIF光(TOSLINK)ケーブルと同じだが、最大8ch分をまとめて送れる点が異なる。Scarlett 18i20のように背面にADAT INを備えたインターフェースなら、この1本のケーブルで一気にチャンネル数を拡張できる。",
+      },
+    },
   ],
 };
