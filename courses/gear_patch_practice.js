@@ -1350,5 +1350,46 @@ window.COURSES["gear_patch_practice"] = {
           "レコードのカートリッジが拾う信号は非常に微弱なうえ、レコード制作時に録音・再生しやすいよう低音を減らし高音を強調して記録される『RIAAカーブ』という特殊な補正がかけられている。フォノプリアンプ(フォノイコライザー)は、この信号を十分な音量まで増幅しつつ、RIAAカーブを元の周波数バランスに逆補正して『ライン信号』に変換する専用機材。ターンテーブル本体にフォノイコライザーを内蔵し、PHONO/LINE切替スイッチを備える機種もあるが、内蔵していない、またはLINE出力に切り替えていない場合は、外付けのフォノプリアンプを必ず経由させる必要がある。もし補正なしにフォノレベルの信号を直接ライン入力に突っ込むと、音量が小さすぎるうえ低音がスカスカで高音がキンキンした、聴くに堪えない音になってしまう——『同じRCAケーブルでも、挿す場所を間違えると全く違う結果になる』典型例。",
       },
     },
+    {
+      id: "personal_monitor_p16",
+      order: 34,
+      title: "Behringer Powerplay P16でパーソナルモニターを組む(デジタルスネーク)",
+      category: "配線問題(プロ環境)",
+      hook: "以前のAUX SENDは『欲しいバランスを卓側で作って送る』方式だったが、P16は『材料を全員に配って、各奏者が自分でミックスする』方式——発想の違う配線を体験しよう。",
+      patch: {
+        scenario:
+          "バンドのリハーサルスタジオに、パーソナルモニターシステム「Behringer Powerplay P16」を導入する。デジタルミキサー「Behringer X32」の各chの信号を、Ultranet(16ch分の音声をまとめて送れる、見た目はEthernetケーブルの専用伝送)でマスターユニット「P16-M」へ送る。P16-Mから、ドラマーの手元に置くパーソナルミキサー「P16-I」へ、同じくCat5eケーブルで接続する。最後に、P16-IからドラマーのヘッドホンへTRSケーブルで接続しよう。",
+        equipment: [
+          { id: "x32", label: "Behringer X32(デジタルミキサー)", icon: "X32", ports: [{ id: "ultranetOut", label: "ULTRANET OUT", type: "ethernet", dir: "out" }] },
+          {
+            id: "p16m",
+            label: "Behringer Powerplay P16-M(マスターユニット)",
+            icon: "P16-M",
+            ports: [
+              { id: "ultranetIn", label: "ULTRANET IN", type: "ethernet", dir: "in" },
+              { id: "chainOut", label: "CAT5 OUT (次のP16-Iへ)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "p16i",
+            label: "Behringer Powerplay P16-I(ドラマー用パーソナルミキサー)",
+            icon: "P16-I",
+            ports: [
+              { id: "chainIn", label: "CAT5 IN", type: "ethernet", dir: "in" },
+              { id: "hpOut", label: "PHONES OUT", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "headphones", label: "Sony MDR-CD900ST(ドラマー用)", icon: "900ST", ports: [{ id: "in", label: "φ6.3 TRS IN", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["ethernet", "xlr", "trs", "midi"],
+        correctConnections: [
+          { from: "x32.ultranetOut", to: "p16m.ultranetIn", cable: "ethernet" },
+          { from: "p16m.chainOut", to: "p16i.chainIn", cable: "ethernet" },
+          { from: "p16i.hpOut", to: "headphones.in", cable: "trs" },
+        ],
+        explain:
+          "Behringer X32のようなデジタルミキサーは『Ultranet』という、見た目はEthernet(Cat5e)ケーブルと同じだが専用プロトコルで16ch分の音声をまとめて送れる出力を持つ。この1本のケーブルをP16-M(マスターユニット)に挿すと、16ch分の音声がすべてP16-Mまで届く。そこから先はCat5eケーブルでP16-I(演奏者ごとの手元パーソナルミキサー)を数珠つなぎ(デイジーチェーン)にでき、各演奏者は届いた16chの中から自分の好きな音量バランスを自分の手元のツマミで作れる——以前の単元で扱ったAUX SEND方式(卓側のエンジニアが各演奏者向けのバランスをあらかじめ作って送る)とは逆に、『材料(16ch全部)を配っておいて、後は各自でミックスしてもらう』という発想の違うシステム。配線するケーブルの本数自体はAUX方式より減らせるうえ、演奏中に本人がリハーサルしながら自分のバランスを調整できる利点があるが、各人が16chすべてを自由に触れてしまうため、勝手にメインボーカルの音量を下げてしまうといった事故を防ぐには、P16-M側で各ユニットの操作範囲を制限しておくことも実務上大切。",
+      },
+    },
   ],
 };
