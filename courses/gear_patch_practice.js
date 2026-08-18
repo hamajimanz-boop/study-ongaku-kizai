@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全20単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全21単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -816,6 +816,47 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "AUX SENDは各チャンネルから独立して送り出せるモノラルの送り出しバスで、演奏者ごとに欲しいバランス(ボーカルは自分の声を大きめ、ギタリストはクリックとガイドを大きめ、など)を個別に作れる『パーソナルモニターミックス』に使われる——これはリバーブの単元で扱ったAUX SEND/RETURNと同じ仕組みを、外部エフェクターではなく人間向けのミックスに応用したもの。Shure PSM300のようなワイヤレスイヤモニシステムでは、ミキサーのAUX SENDから送信機P3TのINPUTまでは通常のケーブル配線だが、そこから先(P3T→受信機P3R→イヤホン)は電波で伝送されるため、物理的なケーブルは存在しない。複数の送信機を同時に使う場合は、それぞれ別の周波数(チャンネル)に設定しないと混信するため、本番前のセッティングが重要になる。",
+      },
+    },
+    {
+      id: "eurorack_cv_gate",
+      order: 21,
+      title: "Eurorackモジュラーシンセをパッチする(Doepfer A-155 + A-110 + A-138)",
+      category: "配線問題",
+      hook: "XLR、TRS、MIDI……信号の種類ごとにコネクタが変わるのがふつうの機材の世界。でもモジュラーシンセは、音程もオン/オフも音そのものも、全部同じ1本のケーブルで送ってしまう。",
+      patch: {
+        scenario:
+          "Eurorackのモジュラーシンセを組む。ステップシーケンサー「Doepfer A-155」のCV OUT(音の高さを電圧で送る出力)を、VCOモジュール「Doepfer A-110」のCV INへ、GATE OUT(音の長さ・オン/オフを送る出力)を、A-110のGATE INへ、それぞれ3.5mmのモジュラーパッチケーブルで接続する。A-110が生成した音声(AUDIO OUT)は、パッシブミキサーモジュール「Doepfer A-138」のIN 1へ、こちらも同じ3.5mmパッチケーブルで接続しよう。",
+        equipment: [
+          {
+            id: "seq",
+            label: "Doepfer A-155(ステップシーケンサー)",
+            icon: "A-155",
+            ports: [
+              { id: "cvOut", label: "CV OUT", type: "cv", dir: "out" },
+              { id: "gateOut", label: "GATE OUT", type: "cv", dir: "out" },
+            ],
+          },
+          {
+            id: "vco",
+            label: "Doepfer A-110(VCO)",
+            icon: "A-110",
+            ports: [
+              { id: "cvIn", label: "CV IN", type: "cv", dir: "in" },
+              { id: "gateIn", label: "GATE IN", type: "cv", dir: "in" },
+              { id: "audioOut", label: "AUDIO OUT", type: "cv", dir: "out" },
+            ],
+          },
+          { id: "mixerMod", label: "Doepfer A-138(パッシブミキサーモジュール)", icon: "A-138", ports: [{ id: "in1", label: "IN 1", type: "cv", dir: "in" }] },
+        ],
+        cablePalette: ["cv", "trs", "ts", "midi"],
+        correctConnections: [
+          { from: "seq.cvOut", to: "vco.cvIn", cable: "cv" },
+          { from: "seq.gateOut", to: "vco.gateIn", cable: "cv" },
+          { from: "vco.audioOut", to: "mixerMod.in1", cable: "cv" },
+        ],
+        explain:
+          "Eurorackのモジュラーシンセでは、音の高さを電圧で表す『CV(Control Voltage)』、音のオン/オフのタイミングを表す『Gate』、そして実際の音声(オーディオ)まで、信号の種類が違っても物理的にはすべて同じ3.5mmモノラルのパッチケーブルでやり取りする——これは、信号の種類ごとにコネクタ形状が変わる(XLR、TRS、MIDIなど)これまでの単元の機材とはまったく違う発想で、モジュラーシンセ特有の『何にでも同じケーブルを挿せてしまう自由さ』の背景になっている。ただし物理的に同じケーブルでも、繋ぐ先のジャックが『CV/Gate入力』を想定しているか『オーディオ入力』を想定しているかで電圧のレンジや扱いが異なるため、どのモジュールのどの端子が何を意味するかを理解していないと、正しく音を作れない。MIDIケーブルは今回のシステムには登場しないが、MIDI-CV変換モジュールを使えば、以前の単元で扱ったMIDIキーボードの演奏データをCV/Gateに変換して、モジュラーシンセを鍵盤で演奏することもできる。",
       },
     },
   ],

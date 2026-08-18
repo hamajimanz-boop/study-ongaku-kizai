@@ -729,11 +729,13 @@ const CABLE_LABELS = {
   midi: "MIDIケーブル", optical: "光デジタル(TOSLINK)", power: "電源ケーブル",
   digilink: "DigiLink(Pro Tools HDX専用)", wordclock: "ワードクロック(BNC)",
   madi: "MADI(同軸/光)", aes: "AES/EBU(デジタル)", ethernet: "Ethernet(Dante等)",
+  cv: "CV/Gate(モジュラー3.5mm)",
 };
 const CABLE_COLORS = {
   xlr: "#3a6df0", trs: "#14c39a", ts: "#7c5cff", usb: "#ff7a3d", rca: "#ffb02e",
   speaker: "#ef4459", midi: "#ff5da2", optical: "#0e7490", power: "#55506b",
   digilink: "#1d4ed8", wordclock: "#c026d3", madi: "#b45309", aes: "#0891b2", ethernet: "#059669",
+  cv: "#65a30d",
 };
 
 let patchRuntime = null;
