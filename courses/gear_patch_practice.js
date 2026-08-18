@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全25単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全26単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -1014,6 +1014,43 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "dbx 160AのDETECTOR INにケーブルを挿すと、コンプレッサーは『いつ・どれだけ圧縮するか』の判断材料を、本来のINPUT信号ではなく、DETECTOR INに挿した外部信号(ここではキック)に切り替える——ただし実際に圧縮されて音が変化するのは、あくまでINPUT→OUTPUTを通る信号(ここではベース)。つまりキックが鳴った瞬間だけベースの音量がグッと下がり、キックが鳴りやんだ瞬間にまた元の音量に戻る『ダッキング』が生まれる。これがEDMやハウスでよく聴く『ポンピング』したベースの正体。以前のインサート配線(SEND→機材IN、機材OUT→RETURN)を思い出すと理解しやすく、あれに『別チャンネルからのトリガー用ケーブル(DETECTOR IN)』を1本追加した形と考えるとよい。ソフトウェアのDAWでは同じ効果をサイドチェイン・コンプというプラグイン機能で作るのが一般的だが、原理は今回のハードウェア配線と同じ。",
+      },
+    },
+    {
+      id: "mic_splitter_foh_monitor",
+      order: 26,
+      title: "マイクスプリッターでFOHとモニターに音を分岐する(Radial JS3)",
+      category: "配線問題(プロ環境)",
+      hook: "1本のマイクの音を、グラウンド(接地)が別々の3つの卓に安全に分けて送るには?——『分岐』の裏にある地味だが重要な配線を体験しよう。",
+      patch: {
+        scenario:
+          "大きめのライブ会場で、ボーカルマイク「Shure SM58」の音を、FOH卓・モニター卓・中継録音システムの3系統に同時に送りたい。マイクをパッシブスプリッター「Radial JS3」のMIC INへ挿し、そこから3方向に分岐する。DIRECT OUT(トランスを通らない直結スルー)はFOH卓「Midas M32」へ、ISO OUT 1(トランスで電気的に絶縁された出力)はモニター卓「Behringer X32」へ、ISO OUT 2(同じくトランス絶縁された出力)は中継録音システム「Sound Devices 970」へ、それぞれ接続しよう。",
+        equipment: [
+          { id: "mic", label: "Shure SM58(ボーカル用)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "splitter",
+            label: "Radial JS3(パッシブマイクスプリッター)",
+            icon: "JS3",
+            ports: [
+              { id: "in", label: "MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "directOut", label: "DIRECT OUT (XLR, 直結スルー)", type: "xlr", dir: "out" },
+              { id: "isoOut1", label: "ISO OUT 1 (XLR, トランス絶縁)", type: "xlr", dir: "out" },
+              { id: "isoOut2", label: "ISO OUT 2 (XLR, トランス絶縁)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "foh", label: "Midas M32(FOH卓)", icon: "M32", ports: [{ id: "in1", label: "CH1 IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "mon", label: "Behringer X32(モニター卓)", icon: "X32", ports: [{ id: "in1", label: "CH1 IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "broadcast", label: "Sound Devices 970(中継録音システム)", icon: "SD970", ports: [{ id: "in1", label: "CH1 IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "speaker", "rca"],
+        correctConnections: [
+          { from: "mic.out", to: "splitter.in", cable: "xlr" },
+          { from: "splitter.directOut", to: "foh.in1", cable: "xlr" },
+          { from: "splitter.isoOut1", to: "mon.in1", cable: "xlr" },
+          { from: "splitter.isoOut2", to: "broadcast.in1", cable: "xlr" },
+        ],
+        explain:
+          "大規模なライブでは、FOH卓・モニター卓・中継録音システムがそれぞれ別の電源・別の場所に置かれ、微妙に基準となる接地(グラウンド)がずれていることが多い。1本のマイクの信号を電気的にそのまま複数の機材へ分配すると、このグラウンドのずれが原因で『ハムノイズ』が乗るグラウンドループが発生しやすい。Radial JS3のようなスプリッターは、DIRECT OUT(トランスを通らない直結の出力。ファンタム電源をそのまま素通しできるためマイクに一番近いFOH卓へ使うのが基本)と、ISO OUT(トランスによって電気的に絶縁された出力。絶縁されているためグラウンドループが起きにくい)を使い分けることで、複数の卓に安全に同じ音を届けられる。以前の単元で扱ったMADIのようなデジタル多ch伝送とは違い、スプリッターはアナログのまま『同じ信号をそっくりそのまま複製して配る』ための機材という点が特徴。",
       },
     },
   ],
