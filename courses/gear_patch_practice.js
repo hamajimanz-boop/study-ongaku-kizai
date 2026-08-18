@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全9単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全16単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -612,6 +612,47 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "AES/EBU(AES3とも呼ばれる)は主にプロ機材同士で使われるデジタル伝送規格で、見た目はマイク用のXLRケーブルと同じ3ピンXLRコネクタを使い、1本でステレオ2ch分のデジタル音声を送れる(ただし本来はマイクケーブルと特性インピーダンスが異なる専用ケーブルを使うのが望ましいとされる)。一方S/PDIFはコンシューマー機器で広く普及したデジタル伝送規格で、同軸(見た目はRCAピンケーブルと同じ)または光(TOSLINK)のいずれかで2ch分を伝送する。今回のように、業務用のAES/EBUで基幹の伝送を組みつつ、S/PDIFで手軽にリファレンス音源を読み込む、という組み合わせはマスタリングルームでよくある構成。同じ『デジタル』でもコネクタと電気的な規格が違うため、変換が必要になる場面があることを覚えておこう。",
+      },
+    },
+    {
+      id: "guitar_hiz_input",
+      order: 16,
+      title: "エレキギターを正しい入力(Hi-Z)へ配線する(Fender Stratocaster + Apollo x6)",
+      category: "配線問題",
+      hook: "ギターとシンセ、どちらもTS/TRSケーブルで挿せてしまうから厄介——でも挿すべき入力は別。インピーダンスの違いを配線で体感しよう。",
+      patch: {
+        scenario:
+          "宅録で「Fender Stratocaster(エレキギター)」と「Roland Gaia 2(シンセサイザー)」を同時に録音したい。オーディオインターフェース「Universal Audio Apollo x6」には、フロントパネルの「Hi-Z(インストゥルメント)入力」と、リアパネルの通常の「ライン入力」がある。ギターはHi-Z入力へ、シンセのステレオ出力(L/R)はライン入力へ、それぞれ正しい場所に配線しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "synth",
+            label: "Roland Gaia 2(シンセサイザー)",
+            icon: "Gaia2",
+            ports: [
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Universal Audio Apollo x6",
+            icon: "ApolloX6",
+            ports: [
+              { id: "hiZ1", label: "フロント Hi-Z INPUT 1 (TS)", type: "ts", dir: "in" },
+              { id: "lineIn3", label: "リア LINE IN 3 (TRS)", type: "trs", dir: "in" },
+              { id: "lineIn4", label: "リア LINE IN 4 (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "usb"],
+        correctConnections: [
+          { from: "guitar.out", to: "interface.hiZ1", cable: "ts" },
+          { from: "synth.outL", to: "interface.lineIn3", cable: "trs" },
+          { from: "synth.outR", to: "interface.lineIn4", cable: "trs" },
+        ],
+        explain:
+          "エレキギターのようなパッシブピックアップの楽器は『ハイインピーダンス(高い電気抵抗の性質)・アンバランス』な信号を出しており、通常のライン入力(ライン機器を前提にした低インピーダンス設計)にそのまま挿すと、インピーダンスの不一致で音がこもったり、レベルが不足したりしやすい。そこで多くのインターフェースはフロントパネルに『Hi-Z(インストゥルメント)』対応の入力を備えており、ギター・ベースはそちらへ挿すのが基本。一方、Roland Gaia 2のようなシンセサイザーはライン出力用に設計された機材なので、通常のライン入力(多くはリアパネルのTRS)へ挿すのが正解。以前の単元で扱ったRadial J48のようなDIボックスは『マイク入力を使ってバランス化・長距離伝送する』ための解決策で、対して今回のHi-Z入力は『インターフェースに1本挿すだけで済ませる』ための、宅録で最も手軽な解決策——同じインピーダンスの問題に対する2つの違うアプローチとして覚えておくとよい。",
       },
     },
   ],
