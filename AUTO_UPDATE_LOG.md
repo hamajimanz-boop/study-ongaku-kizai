@@ -9,3 +9,4 @@
 - 2026-08-17 [polish] SERVICE_READINESS_CHECKLIST.md — 新規作成(モバイル表示/アクセシビリティ/SEO/パフォーマンス/リンク健全性/コード品質/信頼性)。SEO項目のうちindex.htmlにmeta description・OGPタグ(og:type/title/description/url)を追加して対応済みにチェック
 - 2026-08-18 [polish] SEO — favicon.svg(8分音符モチーフ・テーマカラーのグラデーション)を新規作成し、index.htmlに<link rel="icon">を追加。SERVICE_READINESS_CHECKLIST.mdのfavicon項目を対応済みにチェック
 - 2026-08-18 [polish] コード品質 — 全13コースのunit数をnode -eで実カウントしREADME.mdの記載と照合(既存記載はすべて一致)。gear_patch_practice(全16単元)とmoney_case_studies(全10単元)の単元数記載がREADME.mdに欠けていたため追記。SERVICE_READINESS_CHECKLIST.mdの該当項目を対応済みにチェック
+- 2026-08-18 [content] music_business_money — 全7単元中furtherLearningが0だったため、既存7単元すべてにWebSearchで実在確認したfurtherLearning(記事リンク)を追加(JASRAC公式・NexTone公式・TuneCore Japan等)

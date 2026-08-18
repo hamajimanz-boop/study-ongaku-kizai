@@ -73,6 +73,12 @@ window.COURSES["music_business_money"] = {
         { q: "歌手・演奏家に発生する権利は何と呼ばれるか?", choices: ["著作権", "著作者人格権", "著作隣接権", "特許権"], answer: 2, explain: "実演家やレコード製作者には著作隣接権という別の権利が発生する。" },
         { q: "原盤印税の法律上の根拠は何にあたるか?", choices: ["著作権(作詞作曲の権利)", "著作隣接権(レコード製作者の権利)", "商標権", "意匠権"], answer: 1, explain: "原盤印税は著作隣接権(レコード製作者の権利)に基づく対価。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "音楽の著作権とは | JASRAC", url: "https://www.jasrac.or.jp/aboutus/copyright/" },
+          { title: "JASRACは何を守っているのか？音楽家が知っておくべき著作権の基礎知識【前編】 | Music Lesson Lab", url: "https://www.eys-musicschool.com/media/copyright_music01/" },
+        ],
+      },
     },
     {
       id: "royalty_types",
@@ -136,6 +142,12 @@ window.COURSES["music_business_money"] = {
         { q: "外注でミックス・レコーディング作業を請け負うエンジニアの一般的な報酬形態は?", choices: ["必ず著作権印税で受け取る", "通常は制作費(業務委託費)として受け取る", "必ず原盤印税の半分を受け取る", "報酬は発生しない"], answer: 1, explain: "通常は印税ではなく、一括の制作費として受け取る形が一般的。" },
         { q: "印税契約を結ぶ際、印税率以外に確認すべき重要な項目は?", choices: ["契約書の紙の色", "印税の計算対象・支払いタイミング・返品分の扱いなど", "スタジオの内装", "使用するDAWの種類"], answer: 1, explain: "印税率だけでなく計算方法や支払い条件など細部の確認が重要。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "【印税の話】作詞・作曲における２種類の印税と仕組みを徹底解説！ | wellen", url: "https://wellen.jp/compose/lyrics-compose-royalties/" },
+          { title: "作曲における印税の仕組み《原盤印税と著作権印税》", url: "https://octave-mo.com/composition/copyright-royalties" },
+        ],
+      },
     },
     {
       id: "jasrac_nextone",
@@ -203,6 +215,12 @@ window.COURSES["music_business_money"] = {
         { q: "JASRACの分配はおおよそ年に何回行われるか?", choices: ["1回", "2回", "4回", "12回"], answer: 2, explain: "6月・9月・12月・3月の年4回まとめて行われる。" },
         { q: "作家が音楽出版社に著作権管理を委託している場合、分配金の流れとして正しいのは?", choices: ["管理団体から直接作家に届く", "管理団体→音楽出版社→作家という流れを経る", "国税庁を経由する", "分配自体が行われない"], answer: 1, explain: "音楽出版社を経由し、契約で定めた分配率でさらに分配される。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "FAQ｜著作権管理サービス｜株式会社NexTone", url: "https://www.nex-tone.co.jp/copyright/faq.html" },
+          { title: "独立アーティスト必見！JASRACとNexToneの違いと著作権管理の基礎知識 | Frekul Tips", url: "https://tips.frekul.com/jasrac_or_nextone/" },
+        ],
+      },
     },
     {
       id: "label_contract",
@@ -265,6 +283,11 @@ window.COURSES["music_business_money"] = {
         { q: "外注でミックス等を請け負う際のトラブル防止策として適切なのは?", choices: ["口約束のみで進める", "書面に著作権・原盤権の帰属や報酬形態を残しておく", "契約書を一切作らない方が信頼される", "後からいつでも条件変更できると考える"], answer: 1, explain: "簡単でも書面に権利関係・報酬形態を残すことがトラブル防止につながる。" },
         { q: "共同制作(共作)でトラブルになりやすい典型例は?", choices: ["録音時間が短すぎること", "後からヒットした際の権利配分を巡る揉め事", "スタジオの温度設定", "使用したマイクの本数"], answer: 1, explain: "権利配分が事前に明確でないと、ヒット後に揉める典型例になりやすい。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "【連載】アーティストのための法と理論 ビギナークラス — エピソード9「レーベルとの契約」｜THE MAGAZINE (TuneCore Japan)", url: "https://magazine.tunecore.co.jp/skills/360163/2/" },
+        ],
+      },
     },
     {
       id: "streaming_revenue",
@@ -328,6 +351,12 @@ window.COURSES["music_business_money"] = {
         { q: "ストリーミング収益は個人事業主の確定申告上どの区分にあたるか?", choices: ["負債", "売上高(収益)", "純資産", "消耗品費"], answer: 1, explain: "ストリーミング収益は事業の売上高(収益)にあたる。" },
         { q: "海外プラットフォームからの入金で注意すべき点は?", choices: ["日本円以外では絶対に受け取れない", "源泉徴収や為替レートの扱いなど国内売上と異なる点がある", "確定申告の対象外になる", "税金が一切かからない"], answer: 1, explain: "海外からの入金は源泉徴収・為替の扱いなど独特の注意点がある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "ストリーミング収益の仕組みと計算方法を解説 | DJHAKK コラム", url: "https://djhakk.com/column/streaming-revenue-system-and-calculation-method" },
+          { title: "音楽サブスクの再生単価はどう決まるのか？｜くしりん", url: "https://note.com/strkrt/n/n1c5c71b69270" },
+        ],
+      },
     },
     {
       id: "secondary_use",
@@ -391,6 +420,12 @@ window.COURSES["music_business_money"] = {
         { q: "歌詞やメロディを大きく改変するアレンジカバーで配慮が必要になる権利は?", choices: ["特許権", "同一性保持権(著作者人格権)", "商標権", "意匠権"], answer: 1, explain: "大きな改変は同一性保持権との兼ね合いで配慮が必要になる場合がある。" },
         { q: "楽曲が二次利用される機会が出てきた場合の基本的な相談先は?", choices: ["近所の家電量販店", "JASRAC・NexToneや所属レーベル・音楽出版社の担当者", "市役所の戸籍課", "特に相談先は存在しない"], answer: 1, explain: "著作権管理団体やレーベル・音楽出版社の担当者に相談するのが基本的な進め方。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "カラオケ印税(著作権使用料)とは？いくらもらえる？｜TuneCore Japan アーティストガイド", url: "https://www.tunecore.co.jp/guide/promotion/karaoke-royalty" },
+          { title: "サンプリングは著作権侵害にあたる？かかわる権利と利用時の注意点を解説 | IP mag", url: "https://ipmag.skettt.com/detail/sampling-copyright" },
+        ],
+      },
     },
     {
       id: "live_merch_management",
@@ -466,6 +501,12 @@ window.COURSES["music_business_money"] = {
         { q: "マネジメント契約で「ディールバイディール」方式とはどのような手数料の取り方か?", choices: ["契約期間中の全収入に手数料がかかる方式", "事務所が直接交渉した案件のみに手数料が発生する方式", "手数料が毎年倍増する方式", "手数料が発生しない方式"], answer: 1, explain: "事務所が関わった案件のみを対象に手数料が発生する方式。" },
         { q: "契約終了後も在籍中に成立した案件の収入にフィーが発生し続ける条項を一般に何と呼ぶか?", choices: ["テール条項", "同一性保持権", "仕入税額控除", "家事按分"], answer: 0, explain: "「テール条項」と呼ばれ、契約終了後の収入にも関わる重要な確認ポイント。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "ライブハウスのチケットノルマとは？意味やさばき方・注意点を解説｜エンタメクロス", url: "https://www.ticket.co.jp/entx/knowhow/ticket_quota/" },
+          { title: "マネジメント契約書とは？定めるべき事項を弁護士がわかりやすく解説", url: "https://kai-law.jp/agreement/management-agreement/" },
+        ],
+      },
     },
   ],
 };
