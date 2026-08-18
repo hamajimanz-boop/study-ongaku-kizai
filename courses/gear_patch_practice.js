@@ -1214,5 +1214,46 @@ window.COURSES["gear_patch_practice"] = {
           "Bluetoothのようなワイヤレス伝送は、音声をいったん圧縮して電波に乗せ、受信側で復号するという処理を挟むため、有線接続に比べてどうしても数十〜数百ミリ秒の遅延(レイテンシー)が生じる。BGMを流すだけなら気にならないことも多いが、映像や進行のキューに合わせてSEを正確なタイミングで鳴らしたいライブ本番では、この遅延や、まれに起きる音切れが致命的なミスにつながりかねない。また、ライブ会場にはワイヤレスマイクやイヤモニなど他の無線機材が多数飛び交っており、電波の混雑によって接続が不安定になるリスクも増える。そのため現場のオペレーションでは、多少ケーブルで縛られても、有線のアナログ接続(または対応していればUSBオーディオでのデジタル接続)を選ぶのが定石。Yamaha MG12XUのUSB端子はパソコンとの録音・再生用として設計されており、スマートフォンから直接音楽を流す用途には使えないため、今回のようにステレオミニ⇄TRSケーブルでSTEREO INへ接続するのが現実的な有線ルートになる。",
       },
     },
+    {
+      id: "usb_midi_daw_direct",
+      order: 31,
+      title: "USB-MIDIキーボードをDAWに直結する(Akai MPK Mini mk3)",
+      category: "配線問題",
+      hook: "以前の単元で扱った5ピンMIDIケーブルとは違い、USB-MIDIキーボードはケーブル1本でPCに挿すだけ——『MIDIのUSB』と『オーディオのUSB』が別物である点も体験しよう。",
+      patch: {
+        scenario:
+          "あなたはUSB-MIDIキーボード「Akai Professional MPK Mini mk3」を使って、DAW上のソフトシンセを弾きたい。以前の単元で使った「Roland A-88MKII」のような5ピンMIDI OUTを持つキーボードとは違い、MPK Miniは背面にMIDI DIN端子を持たず、USBケーブル1本でパソコンと直接つながる『USB-MIDIクラスコンプライアント』機器。演奏音を耳で確認するため、オーディオインターフェース「Steinberg UR22C」のUSBもMacBook Airに接続し、UR22CのPHONES OUTにヘッドホンをつなごう。",
+        equipment: [
+          { id: "keyboard", label: "Akai Professional MPK Mini mk3(USB-MIDIキーボード)", icon: "MPKmini", ports: [{ id: "usbOut", label: "USB OUT", type: "usb", dir: "out" }] },
+          {
+            id: "interface",
+            label: "Steinberg UR22C",
+            icon: "UR22C",
+            ports: [
+              { id: "usbOut", label: "USB OUT", type: "usb", dir: "out" },
+              { id: "hpOut", label: "PHONES OUT", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "pc",
+            label: "MacBook Air",
+            icon: "MacBk",
+            ports: [
+              { id: "usbIn1", label: "USB-C (キーボード用)", type: "usb", dir: "in" },
+              { id: "usbIn2", label: "USB-C (インターフェース用)", type: "usb", dir: "in" },
+            ],
+          },
+          { id: "headphones", label: "Sony MDR-CD900ST", icon: "900ST", ports: [{ id: "in", label: "φ6.3 TRS IN", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "midi", "trs", "xlr"],
+        correctConnections: [
+          { from: "keyboard.usbOut", to: "pc.usbIn1", cable: "usb" },
+          { from: "interface.usbOut", to: "pc.usbIn2", cable: "usb" },
+          { from: "interface.hpOut", to: "headphones.in", cable: "trs" },
+        ],
+        explain:
+          "MPK Miniのような『USB-MIDIクラスコンプライアント』のキーボードは、USBケーブル1本をPCに挿すだけで演奏データ(MIDIメッセージ)を送れる。以前の単元で扱った5ピンのMIDIケーブルは、ハードウェア音源モジュールなどUSB端子を持たない、または昔ながらのDIN規格しか対応していない機材を鳴らす場合に使うもので、今回のようにDAW上のソフトシンセを弾くだけならMIDIケーブルは不要、USBだけで完結する。ここで注意したいのは『MIDIキーボードのUSB』と『オーディオインターフェースのUSB』はまったく別の役割を持つケーブルだという点——前者は演奏データだけを送り、実際に鳴る音(オーディオ信号)はUR22Cのようなインターフェースを経由して初めて耳に届く。1台のPCに複数のUSB機器を挿す場合、それぞれが何を運んでいるケーブルなのかを意識しておくと、トラブル時の切り分けがしやすくなる。",
+      },
+    },
   ],
 };
