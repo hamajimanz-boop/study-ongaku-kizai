@@ -1255,5 +1255,46 @@ window.COURSES["gear_patch_practice"] = {
           "MPK Miniのような『USB-MIDIクラスコンプライアント』のキーボードは、USBケーブル1本をPCに挿すだけで演奏データ(MIDIメッセージ)を送れる。以前の単元で扱った5ピンのMIDIケーブルは、ハードウェア音源モジュールなどUSB端子を持たない、または昔ながらのDIN規格しか対応していない機材を鳴らす場合に使うもので、今回のようにDAW上のソフトシンセを弾くだけならMIDIケーブルは不要、USBだけで完結する。ここで注意したいのは『MIDIキーボードのUSB』と『オーディオインターフェースのUSB』はまったく別の役割を持つケーブルだという点——前者は演奏データだけを送り、実際に鳴る音(オーディオ信号)はUR22Cのようなインターフェースを経由して初めて耳に届く。1台のPCに複数のUSB機器を挿す場合、それぞれが何を運んでいるケーブルなのかを意識しておくと、トラブル時の切り分けがしやすくなる。",
       },
     },
+    {
+      id: "amp_fx_loop_insert",
+      order: 32,
+      title: "マルチエフェクターをギターアンプのFXループに挿す(Boss GT-1000 + Marshall JVM410H)",
+      category: "配線問題",
+      hook: "以前のミキサーのインサートと同じ発想が、ギターアンプ本体にもある——ディレイやリバーブを『歪みの後段』に挟む配線を体験しよう。",
+      patch: {
+        scenario:
+          "真空管アンプ「Marshall JVM410H」の歪みは気に入っているが、ディレイやリバーブはマルチエフェクター「Boss GT-1000」でかけたい。歪みより前段(足元)にディレイ・リバーブを繋ぐと、音が濁って気持ち悪くなりやすいため、アンプ本体のFXループ(SEND/RETURN)を使う。ギターを「JVM410H」のINPUTへ、JVM410HのFX SENDから、GT-1000のINPUTへ、GT-1000のOUTPUTから、JVM410HのFX RETURNへ、それぞれ接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "amp",
+            label: "Marshall JVM410H(ギターアンプヘッド)",
+            icon: "JVM410H",
+            ports: [
+              { id: "guitarIn", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "fxSend", label: "FX SEND (TS)", type: "ts", dir: "out" },
+              { id: "fxReturn", label: "FX RETURN (TS)", type: "ts", dir: "in" },
+            ],
+          },
+          {
+            id: "multiFx",
+            label: "Boss GT-1000(マルチエフェクター)",
+            icon: "GT-1000",
+            ports: [
+              { id: "input", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "output", label: "OUTPUT (TS)", type: "ts", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker"],
+        correctConnections: [
+          { from: "guitar.out", to: "amp.guitarIn", cable: "ts" },
+          { from: "amp.fxSend", to: "multiFx.input", cable: "ts" },
+          { from: "multiFx.output", to: "amp.fxReturn", cable: "ts" },
+        ],
+        explain:
+          "ギターアンプの信号経路は『INPUT→プリアンプ(歪みを作る回路)→(FXループ)→パワーアンプ→スピーカー』という順番になっており、FXループのSENDはプリアンプの歪みを通過した後の信号を取り出せる出口、RETURNはそこへ戻す入口。ディレイ・リバーブ・コーラスのような『歪みの後にかけたい』空間系エフェクトは、ギター入力の手前(足元)に繋ぐと歪みで音が潰れて濁ってしまうため、FXループを使うのが定番。逆に歪み系・ワウのような『アンプの歪みと混ざり合ってほしい』エフェクトは、通常通りギターとアンプの間(INPUT手前)に繋ぐ。これは以前の単元で扱ったミキサーのインサート(SEND→機材IN、機材OUT→RETURN)とまったく同じ配線の考え方で、対象がミキサーのチャンネルからギターアンプのプリアンプ〜パワーアンプ間に変わっただけ、と捉えると理解しやすい。",
+      },
+    },
   ],
 };
