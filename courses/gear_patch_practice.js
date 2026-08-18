@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全22単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全23単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -898,6 +898,37 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "メインのデジタル卓(CL5)からPro Toolsなどの本線に送っている経路とは完全に独立した経路で、Zoom H8のSDカードにも同時に音を残しておくことで、本線側のPCやオーディオI/Fにトラブルが起きても録音データが手元に残る『保険』になる。Zoom H8はXLRのマイク入力を複数備え、乾電池でも動作できる機種が多く、電源トラブルにも強いため、ライブの現場ではこうした独立バックアップ収録の定番として使われる。客席にコンデンサーマイク(KM 184)を1本立ててH8の別チャンネルに録っておくと、あとで会場の空気感をミックスにブレンドできる——本線のミックスとは別に、会場の反響や拍手だけを狙って録る『アンビエンスマイク』の典型的な使い方。",
+      },
+    },
+    {
+      id: "streaming_switcher_audio",
+      order: 23,
+      title: "配信スイッチャーとオーディオミキサーを連携させる(ATEM Mini Extreme ISO)",
+      category: "配線問題",
+      hook: "映像機材はXLRを持たないことが多い——6.3mmのTRSと3.5mmのミニジャック、コネクタのサイズ違いをどう乗り越えるかを配線しよう。",
+      patch: {
+        scenario:
+          "複数カメラでのライブ配信本番。司会者の音声はアナログミキサー「Yamaha MG12XU」でまとめ、MAIN OUT(TRS)を、ビデオスイッチャー「Blackmagic ATEM Mini Extreme ISO」のMIC/LINE 1(3.5mmステレオ入力)へ、TRS-3.5mm変換ケーブルで接続する。さらにゲスト用のコンパクトなワイヤレスラベリアマイクシステム「Sennheiser XSW-D Lavalier Set」の受信機の出力を、ATEMのMIC/LINE 2へ直接接続しよう。",
+        equipment: [
+          { id: "mixer", label: "Yamaha MG12XU", icon: "MG12XU", ports: [{ id: "mainOut", label: "MAIN OUT (TRS)", type: "trs", dir: "out" }] },
+          { id: "xswReceiver", label: "Sennheiser XSW-D 受信機(ゲスト用)", icon: "XSW-D", ports: [{ id: "out", label: "OUTPUT (3.5mm TRS)", type: "trs", dir: "out" }] },
+          {
+            id: "switcher",
+            label: "Blackmagic ATEM Mini Extreme ISO",
+            icon: "ATEM",
+            ports: [
+              { id: "audioIn1", label: "MIC/LINE 1 (3.5mm)", type: "trs", dir: "in" },
+              { id: "audioIn2", label: "MIC/LINE 2 (3.5mm)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["trs", "xlr", "usb", "rca"],
+        correctConnections: [
+          { from: "mixer.mainOut", to: "switcher.audioIn1", cable: "trs" },
+          { from: "xswReceiver.out", to: "switcher.audioIn2", cable: "trs" },
+        ],
+        explain:
+          "ATEM Mini Extreme ISOのようなコンパクトなライブ配信スイッチャーは、映像だけでなく音声も内蔵のFairlightミキサーで扱えるが、入力は3.5mmのステレオミニジャックが基本で、業務用のXLR入力を持たない機種が多い。そのため、アナログミキサーのような6.3mmのTRS出力を持つ機材をつなぐ場合は、TRS-3.5mm変換ケーブルが必要になる。Sennheiser XSW-D Lavalier Setのような近年のコンパクトなワイヤレスシステムは、受信機自体が3.5mmのTRS出力を備え、カメラや配信機材へ直接挿せるよう設計されており、大掛かりな受信機とXLRケーブルを揃えなくても手軽に導入できるのが特徴。複数の音声ソースをまとめる際は、あらかじめミキサー側で音量バランスを整えてからスイッチャーへ送り、スイッチャー側での音声調整は最終的な微調整にとどめるのが実務的。",
       },
     },
   ],
