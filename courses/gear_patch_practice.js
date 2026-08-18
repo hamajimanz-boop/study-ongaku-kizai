@@ -1425,5 +1425,46 @@ window.COURSES["gear_patch_practice"] = {
           "1個の9Vアダプターから『デイジーチェーンケーブル』でタコ足のように複数のペダルへ電気を分ける配線方法は手軽だが、すべてのペダルが電気的に同じ1つのグラウンド(接地)を共有してしまう。Boss DD-8のようなデジタル回路のペダルは、内部のクロック(デジタル処理のタイミング信号)由来のノイズを電源ラインに乗せやすく、これが同じデイジーチェーンを共有するアナログペダルにまで回り込んで『ジー』というノイズの原因になることがある。Voodoo Lab Pedal Power 2 Plusのようなアイソレートパワーサプライは、内部に複数の独立したトランス(または絶縁されたDC-DCコンバーター)を持ち、出力ごとに電気的に分離された(アイソレートされた)電源を供給できるため、1台のノイズが他のペダルに回り込むのを防げる。以前の単元で扱ったEbtech Hum Eliminatorが『音声信号ラインのグラウンドループ』を断ち切る機材だったのに対し、今回のアイソレートパワーサプライは『電源ラインのグラウンドループ』を断ち切る機材、という対比で捉えると理解しやすい。",
       },
     },
+    {
+      id: "stage_piano_sustain_audio",
+      order: 36,
+      title: "ステージピアノのサスティンペダルとオーディオ出力を正しく配線する(Nord Stage 4)",
+      category: "配線問題",
+      hook: "どちらも同じ標準フォーンジャックの形をした端子なのに、片方はペダルのオン/オフを伝えるだけ、もう片方は音声そのもの——挿し間違えると音が出ない、あるいはペダルが効かない事故が起きる。",
+      patch: {
+        scenario:
+          "ステージピアノ「Nord Stage 4」を使ってライブに出演する。サスティンペダル「Nord Triple Pedal」を、Nord Stage 4のSUSTAIN PEDAL端子へ接続し、演奏中に足元でペダルを踏めるようにする。さらに、Nord Stage 4のオーディオ出力(OUTPUT L/R)を、ミキサー「Yamaha MG12XU」のライン入力へ接続して、実際の音をPAに送ろう。",
+        equipment: [
+          { id: "pedal", label: "Nord Triple Pedal(サスティンペダル)", icon: "TriPed", ports: [{ id: "out", label: "PLUG (TRS)", type: "trs", dir: "out" }] },
+          {
+            id: "piano",
+            label: "Nord Stage 4(ステージピアノ)",
+            icon: "Stage4",
+            ports: [
+              { id: "pedalIn", label: "SUSTAIN PEDAL (TRS対応)", type: "trs", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "lineInL", label: "STEREO IN L (TRS)", type: "trs", dir: "in" },
+              { id: "lineInR", label: "STEREO IN R (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "midi"],
+        correctConnections: [
+          { from: "pedal.out", to: "piano.pedalIn", cable: "trs" },
+          { from: "piano.outL", to: "mixer.lineInL", cable: "ts" },
+          { from: "piano.outR", to: "mixer.lineInR", cable: "ts" },
+        ],
+        explain:
+          "Nord Stage 4のSUSTAIN PEDAL端子は、単純なオン/オフだけの安価なフットスイッチ(TSプラグ)も、half-pedal(踏み込み具合を連続値で伝える)に対応したNord Triple Pedalのような多機能ペダル(TRSプラグ)も受け付けるよう作られているとされる。Triple Pedalはサスティン・ソステヌート・ソフトという3つのペダルの状態を1本のケーブルでまとめて本体に伝える必要があり、そのためにTRSプラグの2系統の信号線を使っているとされる。一方、Nord Stage 4のオーディオ出力(OUTPUT L/R)は公式スペック上『アンバランス、1/4インチ標準フォーン』と案内されており、実はTRSではなくTSのジャック。つまりペダル側と出力側は同じ『標準フォーンジャックに見える』端子でも中身の信号がまったく別物で、物理的には挿さってしまうため『刺さった=正しい接続』とは限らない典型例になっている。ペダルのケーブルを誤ってOUTPUT側に挿してしまうと、当然ながら踏んでも音の伸びが変化せず『壊れた』と勘違いしてしまうトラブルが実際によくある。買う前に、ペダル端子とオーディオ端子が本体のどこにあるか、取扱説明書やパネル表記(SUSTAIN PEDAL / OUTPUT L, R等)を必ず確認する習慣をつけておこう。",
+      },
+    },
   ],
 };
