@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全18単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全19単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -751,6 +751,40 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "Shure ULXD4Dのような受信機のOUTは、ふつうのマイクと同じくXLRでミキサーの入力へ接続する。受信機の出力レベルは『MIC/LINE』を切り替えられる機種が多く、どちらの入力(マイクin/ラインin)に挿すかに合わせて設定を揃える必要がある。送信機(ハンドヘルドマイク)から受信機までの区間は電波(無線)で伝送されており、物理的なケーブルは存在しない——今回の配線パズルで唯一『ケーブルを挿さない区間がある』という点が学びのポイント。ワイヤレスシステムを選ぶ際は、使用できる周波数帯域やチャンネル数、受信機アンテナの設置方法(見通しの確保など)も合わせて確認しておくと、本番での混信・受信トラブルを防ぎやすい。",
+      },
+    },
+    {
+      id: "guitar_loadbox_lineout",
+      order: 19,
+      title: "ギターアンプをロードボックスでライン録りする(Universal Audio OX)",
+      category: "配線問題",
+      hook: "爆音を出さずにチューブアンプの音を録りたい——スピーカー用のケーブルとライン用のケーブル、挿し間違えるとアンプを壊しかねない配線を丁寧に体験しよう。",
+      patch: {
+        scenario:
+          "自宅で、真空管ギターアンプヘッド「Marshall JCM800」の音をライン録音したい。JCM800のスピーカー出力を、ロードボックス(キャビネットシミュレーター)「Universal Audio OX Amp Top Box」の「FROM AMPLIFIER」端子へスピーカーケーブルで接続する(OXがアンプの負荷を肩代わりする)。OXの「TO SPEAKER」端子から、実機のギターキャビネット「Marshall 1960A」へもスピーカーケーブルで接続し、音量を絞りつつ実機キャビも鳴らせるようにする。最後に、OXの「LINE OUT」から、オーディオインターフェース「Universal Audio Apollo x6」のライン入力へ接続し、キャビシミュレートされたライン信号を録音しよう。",
+        equipment: [
+          { id: "ampHead", label: "Marshall JCM800(ギターアンプヘッド)", icon: "JCM800", ports: [{ id: "speakerOut", label: "SPEAKER OUT", type: "speaker", dir: "out" }] },
+          {
+            id: "ox",
+            label: "Universal Audio OX Amp Top Box(ロードボックス)",
+            icon: "OX",
+            ports: [
+              { id: "fromAmp", label: "FROM AMPLIFIER", type: "speaker", dir: "in" },
+              { id: "toSpeaker", label: "TO SPEAKER", type: "speaker", dir: "out" },
+              { id: "lineOut", label: "LINE OUT (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "cabinet", label: "Marshall 1960A(ギターキャビネット)", icon: "1960A", ports: [{ id: "in", label: "IN", type: "speaker", dir: "in" }] },
+          { id: "interface", label: "Universal Audio Apollo x6", icon: "ApolloX6", ports: [{ id: "lineIn", label: "LINE IN 3 (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["speaker", "trs", "xlr", "ts"],
+        correctConnections: [
+          { from: "ampHead.speakerOut", to: "ox.fromAmp", cable: "speaker" },
+          { from: "ox.toSpeaker", to: "cabinet.in", cable: "speaker" },
+          { from: "ox.lineOut", to: "interface.lineIn", cable: "trs" },
+        ],
+        explain:
+          "真空管アンプのヘッドは常にスピーカー(またはそれ相当の負荷)につながっていないと、内部の出力トランスを傷める危険があるため、OXのようなロードボックスはまず『FROM AMPLIFIER』でアンプの負荷を肩代わりする。OXはそのスピーカーレベルの信号をデジタルで解析し、内蔵のキャビネット/マイクのシミュレーションを通したライン信号を『LINE OUT』から出力できる——実際にマイクを立てずに、マイキングした音に近い音をライン録りできるのがロードボックスの利点。『TO SPEAKER』から実機のキャビネットにも音を送れるため、音量を絞りながら生のキャビも同時に鳴らす、という使い方もできる。『FROM AMPLIFIER』『TO SPEAKER』の区間は、ギターアンプの高出力に耐えるスピーカーケーブルを使う必要があり、間違えてTRSのライン用ケーブルなどを挿すと機材を破損するおそれがある点に注意。",
       },
     },
   ],
