@@ -1296,5 +1296,59 @@ window.COURSES["gear_patch_practice"] = {
           "ギターアンプの信号経路は『INPUT→プリアンプ(歪みを作る回路)→(FXループ)→パワーアンプ→スピーカー』という順番になっており、FXループのSENDはプリアンプの歪みを通過した後の信号を取り出せる出口、RETURNはそこへ戻す入口。ディレイ・リバーブ・コーラスのような『歪みの後にかけたい』空間系エフェクトは、ギター入力の手前(足元)に繋ぐと歪みで音が潰れて濁ってしまうため、FXループを使うのが定番。逆に歪み系・ワウのような『アンプの歪みと混ざり合ってほしい』エフェクトは、通常通りギターとアンプの間(INPUT手前)に繋ぐ。これは以前の単元で扱ったミキサーのインサート(SEND→機材IN、機材OUT→RETURN)とまったく同じ配線の考え方で、対象がミキサーのチャンネルからギターアンプのプリアンプ〜パワーアンプ間に変わっただけ、と捉えると理解しやすい。",
       },
     },
+    {
+      id: "turntable_phono_preamp",
+      order: 33,
+      title: "アナログターンテーブルをフォノプリアンプ経由でPC録音する(Technics SL-1200MK7)",
+      category: "配線問題",
+      hook: "ターンテーブルの出力をそのままライン入力に挿しても、音が小さくこもって聞こえる——『フォノイコライザー』という補正が必要な理由を配線しながら理解しよう。",
+      patch: {
+        scenario:
+          "実家に眠っていたアナログレコードをデジタル化(録音)したい。ターンテーブル「Technics SL-1200MK7」のカートリッジが拾う信号(フォノレベル。レコード制作時の都合でRIAAカーブという特殊な周波数特性で記録されている)を、そのままオーディオインターフェースのライン入力に挿してしまうと、レベルが小さすぎるうえ低音と高音のバランスもおかしいまま録音されてしまう。SL-1200MK7のOUTPUTを、フォノプリアンプ(フォノイコライザー)「audio-technica AT-PEQ3」のPHONO INへ接続し、そこでRIAAカーブを補正してライン信号に変換したうえで、AT-PEQ3のLINE OUTから、USBオーディオインターフェース「Behringer UCA202」のライン入力へ接続、UCA202のUSB OUTからMacBook Airへ接続しよう。",
+        equipment: [
+          {
+            id: "turntable",
+            label: "Technics SL-1200MK7",
+            icon: "SL1200",
+            ports: [
+              { id: "outL", label: "OUTPUT L (RCA)", type: "rca", dir: "out" },
+              { id: "outR", label: "OUTPUT R (RCA)", type: "rca", dir: "out" },
+            ],
+          },
+          {
+            id: "phonoPre",
+            label: "audio-technica AT-PEQ3(フォノプリアンプ)",
+            icon: "PEQ3",
+            ports: [
+              { id: "inL", label: "PHONO IN L (RCA)", type: "rca", dir: "in" },
+              { id: "inR", label: "PHONO IN R (RCA)", type: "rca", dir: "in" },
+              { id: "outL", label: "LINE OUT L (RCA)", type: "rca", dir: "out" },
+              { id: "outR", label: "LINE OUT R (RCA)", type: "rca", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Behringer UCA202",
+            icon: "UCA202",
+            ports: [
+              { id: "inL", label: "LINE IN L (RCA)", type: "rca", dir: "in" },
+              { id: "inR", label: "LINE IN R (RCA)", type: "rca", dir: "in" },
+              { id: "usbOut", label: "USB OUT", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbIn", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["rca", "trs", "usb", "xlr"],
+        correctConnections: [
+          { from: "turntable.outL", to: "phonoPre.inL", cable: "rca" },
+          { from: "turntable.outR", to: "phonoPre.inR", cable: "rca" },
+          { from: "phonoPre.outL", to: "interface.inL", cable: "rca" },
+          { from: "phonoPre.outR", to: "interface.inR", cable: "rca" },
+          { from: "interface.usbOut", to: "pc.usbIn", cable: "usb" },
+        ],
+        explain:
+          "レコードのカートリッジが拾う信号は非常に微弱なうえ、レコード制作時に録音・再生しやすいよう低音を減らし高音を強調して記録される『RIAAカーブ』という特殊な補正がかけられている。フォノプリアンプ(フォノイコライザー)は、この信号を十分な音量まで増幅しつつ、RIAAカーブを元の周波数バランスに逆補正して『ライン信号』に変換する専用機材。ターンテーブル本体にフォノイコライザーを内蔵し、PHONO/LINE切替スイッチを備える機種もあるが、内蔵していない、またはLINE出力に切り替えていない場合は、外付けのフォノプリアンプを必ず経由させる必要がある。もし補正なしにフォノレベルの信号を直接ライン入力に突っ込むと、音量が小さすぎるうえ低音がスカスカで高音がキンキンした、聴くに堪えない音になってしまう——『同じRCAケーブルでも、挿す場所を間違えると全く違う結果になる』典型例。",
+      },
+    },
   ],
 };
