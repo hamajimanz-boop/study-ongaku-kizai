@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全26単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全27単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -1051,6 +1051,40 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "大規模なライブでは、FOH卓・モニター卓・中継録音システムがそれぞれ別の電源・別の場所に置かれ、微妙に基準となる接地(グラウンド)がずれていることが多い。1本のマイクの信号を電気的にそのまま複数の機材へ分配すると、このグラウンドのずれが原因で『ハムノイズ』が乗るグラウンドループが発生しやすい。Radial JS3のようなスプリッターは、DIRECT OUT(トランスを通らない直結の出力。ファンタム電源をそのまま素通しできるためマイクに一番近いFOH卓へ使うのが基本)と、ISO OUT(トランスによって電気的に絶縁された出力。絶縁されているためグラウンドループが起きにくい)を使い分けることで、複数の卓に安全に同じ音を届けられる。以前の単元で扱ったMADIのようなデジタル多ch伝送とは違い、スプリッターはアナログのまま『同じ信号をそっくりそのまま複製して配る』ための機材という点が特徴。",
+      },
+    },
+    {
+      id: "acoustic_piezo_preamp_pa",
+      order: 27,
+      title: "アコースティックギターのピエゾピックアップをプリアンプ経由でPAに送る(Fishman)",
+      category: "配線問題",
+      hook: "エレキギターのHi-Z入力とは違うアプローチ——アコースティック専用のプリアンプ1台で、ステージ用アンプとPA用のXLR、2つの出口に音を分ける配線を体験しよう。",
+      patch: {
+        scenario:
+          "弾き語りライブで、サドル下にピエゾピックアップを内蔵したエレアコ「Taylor 214ce」を使う。ギターの出力を、アコースティック専用プリアンプ「Fishman Platinum Pro EQ/DI」のINPUTへ接続する。プリアンプの1/4″ OUTPUTからは、演奏者が自分の音を聴くためのステージ用アンプ「Fishman Loudbox Performer」へ、そしてプリアンプのXLR DI OUTからは、FOHのミキサー「Yamaha MG12XU」のマイク入力へ、それぞれ接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Taylor 214ce(ピエゾピックアップ内蔵エレアコ)", icon: "214ce", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "preamp",
+            label: "Fishman Platinum Pro EQ/DI",
+            icon: "PlatinumPro",
+            ports: [
+              { id: "input", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "ampOut", label: "1/4″ OUTPUT (TS)", type: "ts", dir: "out" },
+              { id: "xlrOut", label: "XLR DI OUT", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "stageAmp", label: "Fishman Loudbox Performer(アコースティックアンプ)", icon: "Loudbox", ports: [{ id: "in", label: "IN (TS)", type: "ts", dir: "in" }] },
+          { id: "mixer", label: "Yamaha MG12XU", icon: "MG12XU", ports: [{ id: "ch1In", label: "CH1 MIC IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "xlr", "trs", "speaker"],
+        correctConnections: [
+          { from: "guitar.out", to: "preamp.input", cable: "ts" },
+          { from: "preamp.ampOut", to: "stageAmp.in", cable: "ts" },
+          { from: "preamp.xlrOut", to: "mixer.ch1In", cable: "xlr" },
+        ],
+        explain:
+          "ピエゾピックアップの信号は、エレキギターと同じくハイインピーダンスだが、ピエゾ特有の硬質な音色やハウリング(フィードバック)対策のノッチフィルターなど、アコースティックギター専用のケア(トーンの補正)が必要になる場面が多い。Fishman Platinum Pro EQ/DIのようなアコースティック専用プリアンプは、EQでその音色を整えたうえで、1/4″の非バランス出力(近くのアンプ用、短距離向き)と、トランス絶縁されたバランスのXLR DI出力(長距離をノイズなく引ける、FOH卓向き)の両方を同時に出せる。以前の単元(Hi-Z入力)では『インターフェースのHi-Z入力に直接挿す』手軽な方法を扱ったが、今回のようにライブでステージ用アンプとFOHへ同時に音を送りたい場合は、DIを内蔵した専用プリアンプを使う方が実務的。XLR DI OUTにはたいてい『GROUND LIFT』スイッチが付いており、グラウンドループでハムが出た場合はここで接地を切り離して対処できる。",
       },
     },
   ],
