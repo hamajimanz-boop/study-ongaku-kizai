@@ -1391,5 +1391,39 @@ window.COURSES["gear_patch_practice"] = {
           "Behringer X32のようなデジタルミキサーは『Ultranet』という、見た目はEthernet(Cat5e)ケーブルと同じだが専用プロトコルで16ch分の音声をまとめて送れる出力を持つ。この1本のケーブルをP16-M(マスターユニット)に挿すと、16ch分の音声がすべてP16-Mまで届く。そこから先はCat5eケーブルでP16-I(演奏者ごとの手元パーソナルミキサー)を数珠つなぎ(デイジーチェーン)にでき、各演奏者は届いた16chの中から自分の好きな音量バランスを自分の手元のツマミで作れる——以前の単元で扱ったAUX SEND方式(卓側のエンジニアが各演奏者向けのバランスをあらかじめ作って送る)とは逆に、『材料(16ch全部)を配っておいて、後は各自でミックスしてもらう』という発想の違うシステム。配線するケーブルの本数自体はAUX方式より減らせるうえ、演奏中に本人がリハーサルしながら自分のバランスを調整できる利点があるが、各人が16chすべてを自由に触れてしまうため、勝手にメインボーカルの音量を下げてしまうといった事故を防ぐには、P16-M側で各ユニットの操作範囲を制限しておくことも実務上大切。",
       },
     },
+    {
+      id: "pedalboard_isolated_power",
+      order: 35,
+      title: "ペダルボードをアイソレート電源で配線する(Voodoo Lab Pedal Power 2 Plus)",
+      category: "配線問題",
+      hook: "これまでの単元はすべて『音の通り道』だったが、今回配線するのは音ではなく電気そのもの——デイジーチェーンで繋ぐとノイズが出る理由を体験しよう。",
+      patch: {
+        scenario:
+          "ギターのペダルボードに、コンプレッサー「MXR Dyna Comp」、歪み「Ibanez Tube Screamer」、デジタルディレイ「Boss DD-8」の3台を並べる。3台とも9V駆動だが、アナログ回路のコンプ・歪みに対して、デジタル回路のDD-8は動作中にノイズを発生しやすく、同じ電源から数珠つなぎ(デイジーチェーン)で電気を分けると、そのノイズがアナログ側にも回り込むことがある。そこでアイソレートパワーサプライ「Voodoo Lab Pedal Power 2 Plus」を使い、各ペダルへ独立した(電気的に絶縁された)出力からそれぞれ電源ケーブルを配ろう。",
+        equipment: [
+          {
+            id: "power",
+            label: "Voodoo Lab Pedal Power 2 Plus(アイソレートパワーサプライ)",
+            icon: "PP2+",
+            ports: [
+              { id: "out1", label: "ISOLATED OUT 1", type: "power", dir: "out" },
+              { id: "out2", label: "ISOLATED OUT 2", type: "power", dir: "out" },
+              { id: "out3", label: "ISOLATED OUT 3", type: "power", dir: "out" },
+            ],
+          },
+          { id: "comp", label: "MXR Dyna Comp(コンプレッサー)", icon: "DynaComp", ports: [{ id: "dcIn", label: "DC 9V IN", type: "power", dir: "in" }] },
+          { id: "drive", label: "Ibanez Tube Screamer(歪み)", icon: "TS9", ports: [{ id: "dcIn", label: "DC 9V IN", type: "power", dir: "in" }] },
+          { id: "delay", label: "Boss DD-8(デジタルディレイ)", icon: "DD-8", ports: [{ id: "dcIn", label: "DC 9V IN", type: "power", dir: "in" }] },
+        ],
+        cablePalette: ["power", "trs", "ts", "usb"],
+        correctConnections: [
+          { from: "power.out1", to: "comp.dcIn", cable: "power" },
+          { from: "power.out2", to: "drive.dcIn", cable: "power" },
+          { from: "power.out3", to: "delay.dcIn", cable: "power" },
+        ],
+        explain:
+          "1個の9Vアダプターから『デイジーチェーンケーブル』でタコ足のように複数のペダルへ電気を分ける配線方法は手軽だが、すべてのペダルが電気的に同じ1つのグラウンド(接地)を共有してしまう。Boss DD-8のようなデジタル回路のペダルは、内部のクロック(デジタル処理のタイミング信号)由来のノイズを電源ラインに乗せやすく、これが同じデイジーチェーンを共有するアナログペダルにまで回り込んで『ジー』というノイズの原因になることがある。Voodoo Lab Pedal Power 2 Plusのようなアイソレートパワーサプライは、内部に複数の独立したトランス(または絶縁されたDC-DCコンバーター)を持ち、出力ごとに電気的に分離された(アイソレートされた)電源を供給できるため、1台のノイズが他のペダルに回り込むのを防げる。以前の単元で扱ったEbtech Hum Eliminatorが『音声信号ラインのグラウンドループ』を断ち切る機材だったのに対し、今回のアイソレートパワーサプライは『電源ラインのグラウンドループ』を断ち切る機材、という対比で捉えると理解しやすい。",
+      },
+    },
   ],
 };
