@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全17単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全18単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -710,6 +710,47 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "CDJ-3000の音そのもの(オーディオ信号)は、いまも変わらずアナログのRCA(ピン)ケーブルでミキサーのライン入力へ送るのが基本。一方、CDJとミキサーを『PRO DJ LINK』と呼ばれるLANケーブル(Ethernetケーブル)で接続すると、音声そのものではなく、USBメモリ内の曲データや波形表示、BPM同期などの情報をやり取りできるようになる——つまり『音を運ぶ配線』と『情報を運ぶ配線』の2系統を、あえて別のケーブルで持っているのがモダンなDJブースの特徴。マスター出力はミキサーからバランス伝送のXLRで、パワードスピーカー(アンプ内蔵)へ直接送る。RCAは民生機器の接続でもおなじみの規格だが、DJ機材ではプロ機材とコンシューマー機材の橋渡し的な立ち位置として今も現役で使われている。",
+      },
+    },
+    {
+      id: "wireless_mic_receiver",
+      order: 18,
+      title: "ワイヤレスマイクシステムを配線する(Shure ULXD4D)",
+      category: "配線問題",
+      hook: "配線パズルなのに、ケーブルを挿さない区間がある——ワイヤレスマイクの『どこまでが有線で、どこからが無線か』を体験しよう。",
+      patch: {
+        scenario:
+          "屋外イベントで、2人のボーカリストがそれぞれ「Shure ULXD2/SM58」ワイヤレスハンドヘルドマイクを使う。2ch分のデジタルワイヤレス受信機「Shure ULXD4D」のCH1 OUT・CH2 OUTから、ミキサー「Yamaha MG12XU」のCH1・CH2 XLR INへそれぞれ接続し、ミキサーのMAIN OUT(XLR)をパワードスピーカー「Yamaha DZR12」に送ろう。なお、マイク本体(送信機)から受信機までの区間は電波で届くため、この配線問題には登場しない。",
+        equipment: [
+          {
+            id: "receiver",
+            label: "Shure ULXD4D(2chワイヤレス受信機)",
+            icon: "ULXD4D",
+            ports: [
+              { id: "out1", label: "CH1 OUT (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "CH2 OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "ch1In", label: "CH1 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch2In", label: "CH2 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "mainOut", label: "MAIN OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "speaker", label: "Yamaha DZR12(パワードスピーカー)", icon: "DZR12", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "rca", "speaker"],
+        correctConnections: [
+          { from: "receiver.out1", to: "mixer.ch1In", cable: "xlr" },
+          { from: "receiver.out2", to: "mixer.ch2In", cable: "xlr" },
+          { from: "mixer.mainOut", to: "speaker.in", cable: "xlr" },
+        ],
+        explain:
+          "Shure ULXD4Dのような受信機のOUTは、ふつうのマイクと同じくXLRでミキサーの入力へ接続する。受信機の出力レベルは『MIC/LINE』を切り替えられる機種が多く、どちらの入力(マイクin/ラインin)に挿すかに合わせて設定を揃える必要がある。送信機(ハンドヘルドマイク)から受信機までの区間は電波(無線)で伝送されており、物理的なケーブルは存在しない——今回の配線パズルで唯一『ケーブルを挿さない区間がある』という点が学びのポイント。ワイヤレスシステムを選ぶ際は、使用できる周波数帯域やチャンネル数、受信機アンテナの設置方法(見通しの確保など)も合わせて確認しておくと、本番での混信・受信トラブルを防ぎやすい。",
       },
     },
   ],
