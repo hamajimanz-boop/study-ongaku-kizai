@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全24単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全25単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -973,6 +973,47 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "トークバックとは、コントロールルームからブースの演奏者へ『指示の声』だけを届けるための専用の配信経路。SSL SiXのようにTALKBACK MIC専用のXLR入力(ファンタム電源対応)を持つ機種では、そこに挿したマイクの音は通常のチャンネルとは別扱いになり、TALKボタンを押している間だけCUE OUT(ブースへ送るヘッドホンミックス)に重ねて送られる——ボタンを離せば通常の演奏ミックスに戻る。以前の単元で扱ったAUX/CUE配線が『演奏者に聴かせたい音楽のバランス』を作る配線だったのに対し、トークバックは『エンジニアの声を一時的に割り込ませる』ための別回路である点が違い。ライブ収録や多人数セッションでは、トークバックがないと、指示を出すたびにヘッドホンを外してもらう必要が生じ、テイクとテイクの間のテンポが大きく落ちてしまう。",
+      },
+    },
+    {
+      id: "sidechain_ducking_kick_bass",
+      order: 25,
+      title: "サイドチェイン配線でダッキング効果を作る(dbx 160A)",
+      category: "配線問題(プロ環境)",
+      hook: "以前の単元で扱ったインサート配線と似ているけれど、今回はもう1本『トリガー用』のケーブルが増える——キックが鳴った瞬間だけベースを引っ込める、EDM定番の配線を体験しよう。",
+      patch: {
+        scenario:
+          "ダンストラックのミックスで、キックが鳴るたびにベースの音量を一瞬引っ込める『サイドチェイン・ダッキング』をハードウェアで作る。パッチベイのCH KICK INSERT SEND(キックchの信号)を、コンプレッサー「dbx 160A」のDETECTOR IN(外部キー入力。コンプが圧縮するかどうかの判断材料にする信号の入り口)へ送る。さらにCH BASS INSERT SENDから、160AのINPUT(実際に圧縮される音声そのものの入り口)へベースの信号を送り、160AのOUTPUTから、CH BASS INSERT RETURNへ処理後の信号を戻そう。",
+        equipment: [
+          {
+            id: "patchbay",
+            label: "Neutrik NPPA(TT/バンタムパッチベイ)",
+            icon: "PB",
+            ports: [
+              { id: "kickSend", label: "CH KICK INSERT SEND", type: "trs", dir: "out" },
+              { id: "bassSend", label: "CH BASS INSERT SEND", type: "trs", dir: "out" },
+              { id: "bassReturn", label: "CH BASS INSERT RETURN", type: "trs", dir: "in" },
+            ],
+          },
+          {
+            id: "comp",
+            label: "dbx 160A(コンプレッサー)",
+            icon: "160A",
+            ports: [
+              { id: "keyIn", label: "DETECTOR IN(外部キー入力)", type: "trs", dir: "in" },
+              { id: "in", label: "INPUT (TRS)", type: "trs", dir: "in" },
+              { id: "out", label: "OUTPUT (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["trs", "xlr", "ts", "speaker"],
+        correctConnections: [
+          { from: "patchbay.kickSend", to: "comp.keyIn", cable: "trs" },
+          { from: "patchbay.bassSend", to: "comp.in", cable: "trs" },
+          { from: "comp.out", to: "patchbay.bassReturn", cable: "trs" },
+        ],
+        explain:
+          "dbx 160AのDETECTOR INにケーブルを挿すと、コンプレッサーは『いつ・どれだけ圧縮するか』の判断材料を、本来のINPUT信号ではなく、DETECTOR INに挿した外部信号(ここではキック)に切り替える——ただし実際に圧縮されて音が変化するのは、あくまでINPUT→OUTPUTを通る信号(ここではベース)。つまりキックが鳴った瞬間だけベースの音量がグッと下がり、キックが鳴りやんだ瞬間にまた元の音量に戻る『ダッキング』が生まれる。これがEDMやハウスでよく聴く『ポンピング』したベースの正体。以前のインサート配線(SEND→機材IN、機材OUT→RETURN)を思い出すと理解しやすく、あれに『別チャンネルからのトリガー用ケーブル(DETECTOR IN)』を1本追加した形と考えるとよい。ソフトウェアのDAWでは同じ効果をサイドチェイン・コンプというプラグイン機能で作るのが一般的だが、原理は今回のハードウェア配線と同じ。",
       },
     },
   ],
