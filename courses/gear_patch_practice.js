@@ -408,5 +408,49 @@ window.COURSES["gear_patch_practice"] = {
           "MIDIケーブルが運ぶのは『どの鍵盤を、どのくらいの強さで、いつ弾いたか』という演奏データ(MIDIメッセージ)であり、音そのものではない。A-88MKIIのように音源を持たない(内蔵音色がない)マスターキーボードは、MIDI OUTから音源モジュールやソフトシンセにMIDI信号を送って初めて音が鳴る仕組み。INTEGRA-7が実際に生成した音(オーディオ信号)は、MIDIケーブルとはまったく別に、通常のオーディオケーブル(ここではTRSのライン出力)でインターフェースへ送る必要がある。『MIDIケーブルを繋いだのに音が出ない』という宅録初心者によくある勘違いは、この『データ』と『音』の違いを混同していることが多い。",
       },
     },
+    {
+      id: "live_pa_basic",
+      order: 11,
+      title: "ライブPAの基本配線(ミキサー→パワーアンプ→パッシブスピーカー)",
+      category: "配線問題",
+      hook: "パワードスピーカーなら1本で済むところを、ライブハウスの標準構成では『ミキサー→パワーアンプ→スピーカー』と2段階に分けて送る。その理由を配線しながら理解しよう。",
+      patch: {
+        scenario:
+          "小さなライブハウスのPAシステムを配線する。アナログミキサー「Yamaha MG12XU」のMAIN OUT(L/R)から、パワーアンプ「Crown XLS 2502」の入力へ送り、アンプで増幅した信号を、アンプ内蔵ではないパッシブスピーカー「JBL JRX225」(左右2台)へ送ろう。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "mainL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "amp",
+            label: "Crown XLS 2502(パワーアンプ)",
+            icon: "XLS2502",
+            ports: [
+              { id: "inL", label: "INPUT L (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "INPUT R (XLR)", type: "xlr", dir: "in" },
+              { id: "outL", label: "OUTPUT L (Speakon)", type: "speaker", dir: "out" },
+              { id: "outR", label: "OUTPUT R (Speakon)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "JBL JRX225(パッシブ, L)", icon: "JRX225", ports: [{ id: "in", label: "IN (Speakon)", type: "speaker", dir: "in" }] },
+          { id: "spkR", label: "JBL JRX225(パッシブ, R)", icon: "JRX225", ports: [{ id: "in", label: "IN (Speakon)", type: "speaker", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "speaker", "trs", "ts"],
+        correctConnections: [
+          { from: "mixer.mainL", to: "amp.inL", cable: "xlr" },
+          { from: "mixer.mainR", to: "amp.inR", cable: "xlr" },
+          { from: "amp.outL", to: "spkL.in", cable: "speaker" },
+          { from: "amp.outR", to: "spkR.in", cable: "speaker" },
+        ],
+        explain:
+          "JBL JRX225のようなパッシブスピーカーはアンプを内蔵していないため、単体では鳴らない。ミキサーのMAIN OUTから出るのは『ライン信号』という小さな電力の音声信号で、そのままではスピーカーを駆動できず、必ずパワーアンプで大きな電力に増幅する必要がある。ミキサー→アンプの区間はXLRのライン信号、アンプ→スピーカーの区間はSpeakon等のスピーカーケーブルで大きな電力を送る、という2種類のケーブルの役割の違いがポイント。Yamaha HS5のようなパワードモニター(アンプ内蔵)は、このアンプの役割をスピーカー自身が内蔵しているため配線がシンプルになる、という対比で覚えておくと理解しやすい。",
+      },
+    },
   ],
 };
