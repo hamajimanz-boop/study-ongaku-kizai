@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全23単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全24単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -929,6 +929,50 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "ATEM Mini Extreme ISOのようなコンパクトなライブ配信スイッチャーは、映像だけでなく音声も内蔵のFairlightミキサーで扱えるが、入力は3.5mmのステレオミニジャックが基本で、業務用のXLR入力を持たない機種が多い。そのため、アナログミキサーのような6.3mmのTRS出力を持つ機材をつなぐ場合は、TRS-3.5mm変換ケーブルが必要になる。Sennheiser XSW-D Lavalier Setのような近年のコンパクトなワイヤレスシステムは、受信機自体が3.5mmのTRS出力を備え、カメラや配信機材へ直接挿せるよう設計されており、大掛かりな受信機とXLRケーブルを揃えなくても手軽に導入できるのが特徴。複数の音声ソースをまとめる際は、あらかじめミキサー側で音量バランスを整えてからスイッチャーへ送り、スイッチャー側での音声調整は最終的な微調整にとどめるのが実務的。",
+      },
+    },
+    {
+      id: "talkback_console_booth",
+      order: 24,
+      title: "トークバック配線を組む(SSL SiXでブースに指示を送る)",
+      category: "配線問題(プロ環境)",
+      hook: "『せーの、もう1テイクいきましょう』——演奏中のブースに、音楽そのものとは別の『指示の声』だけを割り込ませる配線を体験しよう。",
+      patch: {
+        scenario:
+          "コントロールルームからボーカルブースへ指示を送りたい。小型アナログミキサー「SSL SiX」の背面にあるTALKBACK MICへ「Audio-Technica AT8531(グースネック型トークバックマイク)」を接続する。SSL SiXのCUE OUT(L/R)からは、ブース内のヘッドホンアンプ「Behringer HA400」へ接続し、演奏者用のヘッドホン「Sony MDR-CD900ST」までつなげよう。TALKトークバックボタンを押している間だけ、エンジニアの声がCUE OUTのミックスに割り込んで演奏者に届く。",
+        equipment: [
+          { id: "tbMic", label: "Audio-Technica AT8531(トークバックマイク)", icon: "AT8531", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "console",
+            label: "SSL SiX",
+            icon: "SiX",
+            ports: [
+              { id: "tbIn", label: "TALKBACK MIC (XLR)", type: "xlr", dir: "in" },
+              { id: "cueOutL", label: "CUE OUT L (TRS)", type: "trs", dir: "out" },
+              { id: "cueOutR", label: "CUE OUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "hpAmp",
+            label: "Behringer HA400(ヘッドホンアンプ)",
+            icon: "HA400",
+            ports: [
+              { id: "inL", label: "IN L (TRS)", type: "trs", dir: "in" },
+              { id: "inR", label: "IN R (TRS)", type: "trs", dir: "in" },
+              { id: "out", label: "PHONES OUT", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "hp", label: "Sony MDR-CD900ST(演奏者用)", icon: "900ST", ports: [{ id: "in", label: "IN (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "midi"],
+        correctConnections: [
+          { from: "tbMic.out", to: "console.tbIn", cable: "xlr" },
+          { from: "console.cueOutL", to: "hpAmp.inL", cable: "trs" },
+          { from: "console.cueOutR", to: "hpAmp.inR", cable: "trs" },
+          { from: "hpAmp.out", to: "hp.in", cable: "trs" },
+        ],
+        explain:
+          "トークバックとは、コントロールルームからブースの演奏者へ『指示の声』だけを届けるための専用の配信経路。SSL SiXのようにTALKBACK MIC専用のXLR入力(ファンタム電源対応)を持つ機種では、そこに挿したマイクの音は通常のチャンネルとは別扱いになり、TALKボタンを押している間だけCUE OUT(ブースへ送るヘッドホンミックス)に重ねて送られる——ボタンを離せば通常の演奏ミックスに戻る。以前の単元で扱ったAUX/CUE配線が『演奏者に聴かせたい音楽のバランス』を作る配線だったのに対し、トークバックは『エンジニアの声を一時的に割り込ませる』ための別回路である点が違い。ライブ収録や多人数セッションでは、トークバックがないと、指示を出すたびにヘッドホンを外してもらう必要が生じ、テイクとテイクの間のテンポが大きく落ちてしまう。",
       },
     },
   ],
