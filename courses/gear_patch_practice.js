@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全27単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全28単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -1085,6 +1085,57 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "ピエゾピックアップの信号は、エレキギターと同じくハイインピーダンスだが、ピエゾ特有の硬質な音色やハウリング(フィードバック)対策のノッチフィルターなど、アコースティックギター専用のケア(トーンの補正)が必要になる場面が多い。Fishman Platinum Pro EQ/DIのようなアコースティック専用プリアンプは、EQでその音色を整えたうえで、1/4″の非バランス出力(近くのアンプ用、短距離向き)と、トランス絶縁されたバランスのXLR DI出力(長距離をノイズなく引ける、FOH卓向き)の両方を同時に出せる。以前の単元(Hi-Z入力)では『インターフェースのHi-Z入力に直接挿す』手軽な方法を扱ったが、今回のようにライブでステージ用アンプとFOHへ同時に音を送りたい場合は、DIを内蔵した専用プリアンプを使う方が実務的。XLR DI OUTにはたいてい『GROUND LIFT』スイッチが付いており、グラウンドループでハムが出た場合はここで接地を切り離して対処できる。",
+      },
+    },
+    {
+      id: "ground_loop_hum_eliminator",
+      order: 28,
+      title: "ハムノイズを断つ配線(Ebtech Hum Eliminator)",
+      category: "配線問題",
+      hook: "以前の単元で『GROUND LIFT』というスイッチが出てきたが、今回はスイッチではなく専用の機材そのものを配線に挟んで『ブーン』というノイズを断ち切ろう。",
+      patch: {
+        scenario:
+          "宅録スタジオで、シンセサイザー「Roland Gaia 2」のステレオ出力を、離れた場所に置いたミキサー「Yamaha MG12XU」のSTEREO INへケーブルで送ったところ、電源タップが別系統なせいで『ブーン』というハムノイズ(グラウンドループによる低周波ノイズ)が乗ってしまった。Gaia 2とMG12XUの間に、アイソレーショントランスを内蔵した「Ebtech Hum Eliminator HE-2」を挟んで、ハムノイズを断ち切ろう。",
+        equipment: [
+          {
+            id: "synth",
+            label: "Roland Gaia 2(シンセサイザー)",
+            icon: "Gaia2",
+            ports: [
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "humEliminator",
+            label: "Ebtech Hum Eliminator HE-2",
+            icon: "HE-2",
+            ports: [
+              { id: "inL", label: "IN L (TRS)", type: "trs", dir: "in" },
+              { id: "inR", label: "IN R (TRS)", type: "trs", dir: "in" },
+              { id: "outL", label: "OUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "stereoInL", label: "STEREO IN L (TRS)", type: "trs", dir: "in" },
+              { id: "stereoInR", label: "STEREO IN R (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["trs", "xlr", "ts", "rca"],
+        correctConnections: [
+          { from: "synth.outL", to: "humEliminator.inL", cable: "trs" },
+          { from: "synth.outR", to: "humEliminator.inR", cable: "trs" },
+          { from: "humEliminator.outL", to: "mixer.stereoInL", cable: "trs" },
+          { from: "humEliminator.outR", to: "mixer.stereoInR", cable: "trs" },
+        ],
+        explain:
+          "グラウンドループは、2つの機材がそれぞれ別のコンセント(別の電源系統)につながっていて、両者の接地(グラウンド)の電位にわずかな差があるときに、ケーブルのシールド線を伝って微弱な電流がループ状に流れてしまうことで起きる。これが50Hz/60Hzの『ブーン』というハムノイズの主な原因の1つ。Ebtech Hum Eliminatorのような機材は、内部のアイソレーショントランスによって、信号(音声)は電磁誘導で伝えつつ、2つの機材の電気的な接続(直流的なつながり)そのものは切り離す、という仕組みでこのループを断ち切る。よくある誤った対処法に『電源プラグの3番目のアース端子を抜いてしまう』というものがあるが、これは感電などの安全上のリスクを生むため絶対に避けるべきで、Hum Eliminatorのような信号側で絶縁する機材を使うのが正しい対処法。以前の単元で出てきたDIボックスのGROUND LIFTスイッチは1系統・モノラル向けの簡易な対策だったのに対し、今回のような専用機材はステレオのライン信号をまとめて絶縁できる点が違い。",
       },
     },
   ],
