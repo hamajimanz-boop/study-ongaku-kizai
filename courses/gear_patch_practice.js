@@ -1,4 +1,4 @@
-/* 実践問題編: デスク配線パズル(kind:"patch") — 全16単元
+/* 実践問題編: デスク配線パズル(kind:"patch") — 全17単元
    「機材が欲しくなって調べる瞬間」を疑似体験する編。すべて実在の機材モデル名で構成し、
    様々な宅録〜プロスタジオのシナリオに対して、正しいケーブルを選び、機材の端子同士を
    ドラッグ&ドロップでつないで配線を完成させる。間違って挿したケーブルはクリックで
@@ -653,6 +653,63 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "エレキギターのようなパッシブピックアップの楽器は『ハイインピーダンス(高い電気抵抗の性質)・アンバランス』な信号を出しており、通常のライン入力(ライン機器を前提にした低インピーダンス設計)にそのまま挿すと、インピーダンスの不一致で音がこもったり、レベルが不足したりしやすい。そこで多くのインターフェースはフロントパネルに『Hi-Z(インストゥルメント)』対応の入力を備えており、ギター・ベースはそちらへ挿すのが基本。一方、Roland Gaia 2のようなシンセサイザーはライン出力用に設計された機材なので、通常のライン入力(多くはリアパネルのTRS)へ挿すのが正解。以前の単元で扱ったRadial J48のようなDIボックスは『マイク入力を使ってバランス化・長距離伝送する』ための解決策で、対して今回のHi-Z入力は『インターフェースに1本挿すだけで済ませる』ための、宅録で最も手軽な解決策——同じインピーダンスの問題に対する2つの違うアプローチとして覚えておくとよい。",
+      },
+    },
+    {
+      id: "dj_booth_link_master",
+      order: 17,
+      title: "DJブースを配線する(CDJ-3000 ×2 + DJM-A9 + PAスピーカー)",
+      category: "配線問題",
+      hook: "『音を運ぶ配線』と『情報を運ぶ配線』が別々に存在する、モダンなDJブースの裏側を配線しよう。",
+      patch: {
+        scenario:
+          "クラブのDJブースを配線する。2台の「Pioneer DJ CDJ-3000」から、DJミキサー「Pioneer DJ DJM-A9」のCH1・CH2ライン入力へ、それぞれ音声(オーディオ)を送る。さらに2台のCDJを「PRO DJ LINK」というLAN(Ethernet)接続でDJM-A9とつなぎ、USBメモリ内の曲データや波形、BPM同期などの情報を共有できるようにする。最後にDJM-A9のMASTER OUT(L/R)から、パワードスピーカー「QSC K12.2」2台へマスター音声を送ろう。",
+        equipment: [
+          {
+            id: "cdj1",
+            label: "Pioneer DJ CDJ-3000(#1)",
+            icon: "CDJ3000",
+            ports: [
+              { id: "audioOut", label: "AUDIO OUT (RCA)", type: "rca", dir: "out" },
+              { id: "link", label: "LINK (Ethernet)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "cdj2",
+            label: "Pioneer DJ CDJ-3000(#2)",
+            icon: "CDJ3000",
+            ports: [
+              { id: "audioOut", label: "AUDIO OUT (RCA)", type: "rca", dir: "out" },
+              { id: "link", label: "LINK (Ethernet)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Pioneer DJ DJM-A9",
+            icon: "DJM-A9",
+            ports: [
+              { id: "ch1In", label: "CH1 LINE IN (RCA)", type: "rca", dir: "in" },
+              { id: "ch2In", label: "CH2 LINE IN (RCA)", type: "rca", dir: "in" },
+              { id: "link1", label: "LINK 1 (Ethernet)", type: "ethernet", dir: "in" },
+              { id: "link2", label: "LINK 2 (Ethernet)", type: "ethernet", dir: "in" },
+              { id: "masterOutL", label: "MASTER 1 OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "masterOutR", label: "MASTER 1 OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "QSC K12.2(L)", icon: "K12.2", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "QSC K12.2(R)", icon: "K12.2", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["rca", "xlr", "ethernet", "trs", "speaker"],
+        correctConnections: [
+          { from: "cdj1.audioOut", to: "mixer.ch1In", cable: "rca" },
+          { from: "cdj2.audioOut", to: "mixer.ch2In", cable: "rca" },
+          { from: "cdj1.link", to: "mixer.link1", cable: "ethernet" },
+          { from: "cdj2.link", to: "mixer.link2", cable: "ethernet" },
+          { from: "mixer.masterOutL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.masterOutR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "CDJ-3000の音そのもの(オーディオ信号)は、いまも変わらずアナログのRCA(ピン)ケーブルでミキサーのライン入力へ送るのが基本。一方、CDJとミキサーを『PRO DJ LINK』と呼ばれるLANケーブル(Ethernetケーブル)で接続すると、音声そのものではなく、USBメモリ内の曲データや波形表示、BPM同期などの情報をやり取りできるようになる——つまり『音を運ぶ配線』と『情報を運ぶ配線』の2系統を、あえて別のケーブルで持っているのがモダンなDJブースの特徴。マスター出力はミキサーからバランス伝送のXLRで、パワードスピーカー(アンプ内蔵)へ直接送る。RCAは民生機器の接続でもおなじみの規格だが、DJ機材ではプロ機材とコンシューマー機材の橋渡し的な立ち位置として今も現役で使われている。",
       },
     },
   ],
