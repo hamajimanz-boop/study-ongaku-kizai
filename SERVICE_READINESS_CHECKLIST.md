@@ -35,4 +35,4 @@
 
 ## 信頼性
 - [ ] 固有名詞・数値に「〜とされる」等のぼかしが必要な箇所が残っていないか確認する
-- [ ] 存在しないコースID/unit IDへアクセスした際のエラー表示を確認する
+- [x] (2026-08-22対応) 存在しないコースID/unit IDへアクセスした際のエラー表示を確認する(app.jsの`getCourse`/`getUnit`は不正なIDに`undefined`/`null`を返し、`renderGenre`/`renderCourse`/`renderLesson`/`renderQuiz`/`renderPatch`/`renderCase`/`renderTip`の全ルートが`if (!course || !unit) return renderHome();`パターンで例外なくホーム画面へフォールバックすることをコードレビューで確認。クラッシュ・白画面なし。ただし無言でホームへ戻るだけで「見つかりません」等の明示メッセージは出ないため、次ラウンドで軽量なトースト表示の要否を検討する)
