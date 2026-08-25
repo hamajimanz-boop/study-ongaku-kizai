@@ -218,7 +218,7 @@ window.COURSES["music_business_money"] = {
       furtherLearning: {
         articles: [
           { title: "FAQ｜著作権管理サービス｜株式会社NexTone", url: "https://www.nex-tone.co.jp/copyright/faq.html" },
-          { title: "独立アーティスト必見！JASRACとNexToneの違いと著作権管理の基礎知識 | Frekul Tips", url: "https://tips.frekul.com/jasrac_or_nextone/" },
+          { title: "JASRACとNexToneの違いと、個人が知るべきこと", url: "https://www.starroute.jp/column/jasrac-nextone/" },
         ],
       },
     },

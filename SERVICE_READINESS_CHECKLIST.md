@@ -26,7 +26,7 @@
 - [ ] scriptタグが12個あるため、バージョンクエリによるキャッシュ更新が機能しているか確認する
 
 ## リンク健全性
-- [ ] furtherLearningの外部URL(video/article)が生きているか確認する
+- [x] (2026-08-25対応) furtherLearningの外部URL(video/article)が生きているか確認する(全13コースの41件のユニークURLをcurl+WebFetchで確認。404が2件(tips.frekul.com/jasrac_or_nextone/、acoustics.jp/qanda/answer/165.html)、DNS解決不能が1件(ordinarysound.com、ドメイン自体消滅)の計3件を発見し、生存確認済みの代替記事に差し替え済み。なお soundhouse.co.jp の2件(post=3605、post=3059)はcurl/WebFetch共にHTTP/2エラーまたはタイムアウトで確認不能だった。サイト自体はbot対策が強いことで知られ、404ではなくアクセス拒否の可能性が高いため未修正のまま次ラウンドで別経路の確認要)
 - [x] (2026-08-18対応) 各unitのimageフィールドが実ファイルと一致しているか確認する(node -eで全コースのunit/section image参照209件を実ファイルと突合、欠損0件。逆に画像フォルダ内で未参照のファイルが11件見つかったが削除は対象外とし次ラウンド送り)
 
 ## コード品質

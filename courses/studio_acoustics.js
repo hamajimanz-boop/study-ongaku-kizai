@@ -160,7 +160,7 @@ window.COURSES["studio_acoustics"] = {
           { title: "【オーディオ】定在波対策によるルームチューニングの理屈と効果", url: "https://www.youtube.com/watch?v=k3Ln2OcZ0fQ" },
         ],
         articles: [
-          { title: "音のなんでもコーナー Q and A｜日本音響学会", url: "https://acoustics.jp/qanda/answer/165.html" },
+          { title: "定在波｜ヒビノの用語集", url: "https://www.hibino.co.jp/glossary/teizaiha.html" },
         ],
       },
     },
@@ -501,7 +501,7 @@ window.COURSES["studio_acoustics"] = {
         videos: [],
         articles: [
           { title: "モニター・スピーカーを本来の音で正しく聴く – EQを使ったルーム補正 | RME Audio JP", url: "https://rme-audio.jp/knowledge-base/tutorials/room-correction/" },
-          { title: "音響測定：スピーカーの音質を正常化(清浄化)する為のはじめの一歩 | オーディナリーサウンド", url: "https://ordinarysound.com/measurement-basic/" },
+          { title: "オーディオ愛好家のためのオーディオ測定入門 その1 | 音工房Zのブログ", url: "https://otokoubouz.info/audio_characterization_primer_for_amateurs_01/" },
         ],
       },
     },
