@@ -64,6 +64,11 @@ window.COURSES["kojin_jigyou"] = {
         { q: "「買掛金」はどの要素に分類されるか?", choices: ["資産", "負債", "収益", "費用"], answer: 1, explain: "買掛金は「後で支払う義務があるお金」なので負債に分類される。" },
         { q: "簿記3級の学習で最優先とされる分野はどれか?", choices: ["決算書の清書の綺麗さ", "仕訳", "帳簿の綴じ方", "税率の暗記"], answer: 1, explain: "配点が大きく他の問題の土台にもなる「仕訳」の習得が最優先とされる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "簿記 3級 | 商工会議所の検定試験", url: "https://www.kentei.ne.jp/bookkeeping/class3" },
+        ],
+      },
     },
     {
       id: "boki_shiwake",
@@ -131,6 +136,11 @@ window.COURSES["kojin_jigyou"] = {
         { q: "「後で受け取る売上代金」を表す勘定科目は?", choices: ["買掛金", "売掛金", "元入金", "事業主貸"], answer: 1, explain: "売掛金は資産に分類され、後で受け取れるお金を表す。" },
         { q: "貸借一致の原則とはどういう意味か?", choices: ["借方と貸方の項目数が同じという意味", "1つの取引で借方合計と貸方合計の金額が必ず一致するという意味", "1年間の取引件数が一致するという意味", "資産と負債が同額になるという意味"], answer: 1, explain: "どんな取引でも、借方合計と貸方合計は必ず同じ金額になる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "借方と貸方の意味とは？違いや仕訳方法についてわかりやすく解説 | クラウド会計ソフト freee", url: "https://www.freee.co.jp/kb/kb-accounting/credit-and-debit/" },
+        ],
+      },
     },
     {
       id: "fp_overview",
@@ -184,6 +194,11 @@ window.COURSES["kojin_jigyou"] = {
         { q: "確定申告そのものを扱うFP3級の分野は?", choices: ["金融資産運用", "タックスプランニング", "不動産", "リスク管理"], answer: 1, explain: "所得税・住民税・確定申告を扱うのがタックスプランニングの分野。" },
         { q: "個人事業主が優先的に学ぶべき順序として提案されているのはどれか?", choices: ["不動産→相続→保険", "保険→税金→社会保険・年金", "相続→金融資産運用→保険", "金融資産運用→不動産→保険"], answer: 1, explain: "今の生活・確定申告に直結する保険・税金から進めるのがおすすめとされている。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "FP技能検定とは | 日本FP協会", url: "https://www.jafp.or.jp/exam/about/" },
+        ],
+      },
     },
     {
       id: "fp_hoken",
@@ -250,6 +265,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "生命保険料控除の3種類に含まれないものは?", choices: ["一般生命保険料控除", "介護医療保険料控除", "個人年金保険料控除", "地震保険料控除"], answer: 3, explain: "地震保険料控除は生命保険料控除とは別枠の控除。" },
         { q: "仕事上、第三者に損害を与えた場合の賠償に備える保険は?", choices: ["火災保険", "医療保険", "賠償責任保険", "収入保障保険"], answer: 2, explain: "賠償責任保険が該当し、音楽制作・イベント関連の仕事でも検討価値がある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "就業不能保障保険｜生命保険の種類｜公益財団法人 生命保険文化センター", url: "https://www.jili.or.jp/knows_learns/kind/main/8798.html" },
+          { title: "No.1140 生命保険料控除｜国税庁", url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1140.htm" },
+        ],
+      },
     },
     {
       id: "kaigyou_kakutei",
@@ -316,6 +337,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "確定申告の一般的な申告期間はいつか?", choices: ["毎年1月1日〜1月31日", "毎年2月16日頃〜3月15日頃", "毎年4月1日〜4月30日", "毎年12月1日〜12月31日"], answer: 1, explain: "翌年の2/16〜3/15頃が一般的な申告・納税期間(年により多少前後する)。" },
         { q: "税制改正で基礎控除額などの数字が変わることについて、正しい心構えは?", choices: ["一度覚えた数字を毎年そのまま使い続ければよい", "実際に申告する年の直前に最新の数字を確認する", "数字は一切変わらないので確認不要", "税理士だけが知っていればよい"], answer: 1, explain: "基礎控除額などは税制改正で変わりうるため、申告直前に最新情報を確認する習慣が重要。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "A1-5 個人事業の開業届出・廃業届出等手続｜国税庁", url: "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/shinkoku/annai/04.htm" },
+          { title: "No.2072 青色申告特別控除｜国税庁", url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2072.htm" },
+        ],
+      },
     },
     {
       id: "hoken_nenkin",
@@ -374,6 +401,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "月400円の上乗せ納付で将来の年金が増える制度は?", choices: ["付加年金", "iDeCo", "国民年金基金", "小規模企業共済"], answer: 0, explain: "付加年金は少額で始められ、2年でほぼ元が取れると言われる仕組み。" },
         { q: "退職後、会社員時代の健康保険を一定期間継続できる制度を何と呼ぶか?", choices: ["国民健康保険", "任意継続", "後期高齢者医療制度", "共済組合"], answer: 1, explain: "退職後2年間は健康保険の「任意継続」ができ、国保より安くなるケースもある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "iDeCo公式サイト｜iDeCo(イデコ・個人型確定拠出年金)【公式】", url: "https://www.ideco-koushiki.jp/" },
+          { title: "小規模企業共済制度について｜中小企業庁", url: "https://www.chusho.meti.go.jp/faq/faq/faq15_shokibokyosai.html" },
+        ],
+      },
     },
     {
       id: "houjinka",
@@ -430,6 +463,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "法人化のデメリットとして挙げられるのはどれか?", choices: ["赤字なら税金は一切かからない", "赤字でも法人住民税(均等割)がかかる", "社会保険への加入が禁止される", "記帳義務がなくなる"], answer: 1, explain: "法人は赤字であっても最低限の法人住民税(均等割)が発生する。" },
         { q: "インボイス制度が個人事業主の判断に絡んでくる理由は?", choices: ["免税事業者のままだと取引先が仕入税額控除を受けられず、取引上不利になりうるから", "インボイス制度は個人事業主に一切関係ないから", "インボイス制度により所得税が上がるから", "インボイス制度は簿記の試験科目だから"], answer: 0, explain: "免税事業者のままだと取引先が仕入税額控除を受けられないため、法人化や課税事業者化の判断材料になる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "法人化とは？個人事業主が法人成りするメリットや税金、手続きを解説｜弥生株式会社", url: "https://www.yayoi-kk.co.jp/kigyo/oyakudachi/hojinnari/" },
+          { title: "No.5759 法人税の税率｜国税庁", url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/hojin/5759.htm" },
+        ],
+      },
     },
     {
       id: "shohizei_invoice",
@@ -496,6 +535,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "2割特例の終了後に新設が予定されている措置は?", choices: ["4割特例", "3割特例", "1割特例", "特例は一切なくなる"], answer: 1, explain: "令和9年・10年分について、納税額を売上税額の3割に抑える3割特例が新設予定とされている。" },
         { q: "インボイス登録を特に求められやすい個人事業主の取引先の特徴は?", choices: ["一般消費者(BtoC)が中心", "事業者(BtoB、法人・課税事業者)が中心", "海外の顧客のみ", "無償のボランティア案件のみ"], answer: 1, explain: "事業者向け取引(BtoB)が中心だと、取引先がインボイスを求めやすい。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "特集 インボイス制度｜国税庁", url: "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm" },
+          { title: "インボイス制度の緩和措置「2割特例」とは？対象条件やメリット・注意点まで解説｜起業の「わからない」を「できる」に", url: "https://sogyotecho.jp/invoice-2waritokurei/" },
+        ],
+      },
     },
     {
       id: "shikin_chotatsu",
@@ -564,6 +609,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "創業融資で借りたお金は、簿記の5要素のどれに分類されるか?", choices: ["資産", "負債", "純資産", "収益"], answer: 1, explain: "借入金は将来返済する義務があるため負債に分類される。" },
         { q: "補助金の使い道について正しいのは?", choices: ["何にでも自由に使える", "事業に関係する経費にしか使えず、対象外だと返還を求められることがある", "生活費に自由に使ってよい", "使い道の報告は一切不要"], answer: 1, explain: "対象経費以外に使うと返還を求められることがあるため、使途には注意が必要。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "新規開業・スタートアップ支援資金｜日本政策金融公庫", url: "https://www.jfc.go.jp/n/finance/search/01_sinkikaigyou_m.html" },
+          { title: "小規模事業者持続化補助金について｜中小企業庁", url: "https://www.chusho.meti.go.jp/keiei/shokibo/jizoku/index.html" },
+        ],
+      },
     },
     {
       id: "freelance_law",
@@ -639,6 +690,12 @@ window.COURSES["kojin_jigyou"] = {
         { q: "支払期日を定めなかった場合、法律上どう扱われるか?(みなし規定)", choices: ["支払義務自体が消滅する", "納品日がそのまま支払期日とみなされる", "1年後が自動的に支払期日になる", "発注者が自由に決めてよい"], answer: 1, explain: "支払期日を定めなかった場合は、納品日が支払期日とみなされる。" },
         { q: "継続的な業務委託契約を中途解除・不更新する場合、発注者に原則として求められることは?", choices: ["即日解除が可能", "30日前までの予告", "1年前までの予告", "予告は一切不要"], answer: 1, explain: "原則として30日前までに予告する義務がある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "2024年公正取引委員会フリーランス法特設サイト｜公正取引委員会", url: "https://www.jftc.go.jp/freelancelaw_2024/" },
+          { title: "特定受託事業者に係る取引の適正化等に関する法律（フリーランス・事業者間取引適正化等法）｜中小企業庁", url: "https://www.chusho.meti.go.jp/keiei/torihiki/law_freelance.html" },
+        ],
+      },
     },
   ],
 };
