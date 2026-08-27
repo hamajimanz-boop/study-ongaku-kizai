@@ -601,7 +601,7 @@ window.COURSES["hardware_dtm"] = {
           ],
         },
         {
-          heading: "お金の話",
+          heading: "お金の話 — Total Recallが変えたビジネスモデル",
           image: "diagram_total_recall.png",
           dialogue: [
             { who: "mina", text: "「Total Recall」って何がそんなに画期的だったんですか?" },
@@ -837,7 +837,7 @@ window.COURSES["hardware_dtm"] = {
           ],
         },
         {
-          heading: "音の特徴",
+          heading: "音の特徴 — 2520オペアンプが生むパンチ感",
           image: "diagram_discrete_opamp.png",
           dialogue: [
             { who: "mina", text: "APIの音って、NeveやSSLと比べてどう違うんですか?" },
@@ -1258,7 +1258,7 @@ window.COURSES["hardware_dtm"] = {
           ],
         },
         {
-          heading: "音の特徴",
+          heading: "音の特徴 — 「無色透明」というキャラクター",
           image: "diagram_clean_vs_colored.png",
           dialogue: [
             { who: "mina", text: "他のヴィンテージ系プリアンプと真逆の方向性なんですね?" },
