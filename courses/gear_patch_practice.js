@@ -1466,5 +1466,243 @@ window.COURSES["gear_patch_practice"] = {
           "Nord Stage 4のSUSTAIN PEDAL端子は、単純なオン/オフだけの安価なフットスイッチ(TSプラグ)も、half-pedal(踏み込み具合を連続値で伝える)に対応したNord Triple Pedalのような多機能ペダル(TRSプラグ)も受け付けるよう作られているとされる。Triple Pedalはサスティン・ソステヌート・ソフトという3つのペダルの状態を1本のケーブルでまとめて本体に伝える必要があり、そのためにTRSプラグの2系統の信号線を使っているとされる。一方、Nord Stage 4のオーディオ出力(OUTPUT L/R)は公式スペック上『アンバランス、1/4インチ標準フォーン』と案内されており、実はTRSではなくTSのジャック。つまりペダル側と出力側は同じ『標準フォーンジャックに見える』端子でも中身の信号がまったく別物で、物理的には挿さってしまうため『刺さった=正しい接続』とは限らない典型例になっている。ペダルのケーブルを誤ってOUTPUT側に挿してしまうと、当然ながら踏んでも音の伸びが変化せず『壊れた』と勘違いしてしまうトラブルが実際によくある。買う前に、ペダル端子とオーディオ端子が本体のどこにあるか、取扱説明書やパネル表記(SUSTAIN PEDAL / OUTPUT L, R等)を必ず確認する習慣をつけておこう。",
       },
     },
+    {
+      id: "guitar_synth_13pin",
+      order: 37,
+      title: "ギターシンセを13ピンケーブルで配線する(Roland GK-3 + GR-55)",
+      category: "配線問題",
+      hook: "普通のギターケーブルは6本の弦の音を1本にまとめて送るだけ。でも13ピンケーブルは、弦1本1本の音を別々のまま送ってしまう——その違いを配線で体験しよう。",
+      patch: {
+        scenario:
+          "あなたの「Fender Stratocaster」のブリッジ側には、6本の弦の振動をそれぞれ別々に拾える分割ピックアップ「Roland GK-3」が後付けで装着されている。GK-3の「GK OUT(13ピン)」から、ギターシンセサイザー「Roland GR-55」の「GK IN(13ピン)」へ、専用の13ピンケーブルで接続しよう。さらに、ギター本来の通常ピックアップの音も一緒に鳴らしたいので、ギター本体の「GUITAR OUT(TS)」から、GR-55の「GUITAR IN(TS)」へも接続する。最後に、GR-55のステレオ出力(L/R)を、オーディオインターフェース「Universal Audio Apollo x6」のライン入力へ接続しよう。",
+        equipment: [
+          {
+            id: "guitar",
+            label: "Fender Stratocaster(GK-3装着)",
+            icon: "Strat+GK3",
+            ports: [
+              { id: "gkOut", label: "GK OUT (13ピン)", type: "gk13pin", dir: "out" },
+              { id: "guitarOut", label: "GUITAR OUT (TS, 通常ピックアップ)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "gr55",
+            label: "Roland GR-55(ギターシンセサイザー)",
+            icon: "GR-55",
+            ports: [
+              { id: "gkIn", label: "GK IN (13ピン)", type: "gk13pin", dir: "in" },
+              { id: "guitarIn", label: "GUITAR IN (TS)", type: "ts", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Universal Audio Apollo x6",
+            icon: "ApolloX6",
+            ports: [
+              { id: "lineIn3", label: "LINE IN 3 (TRS)", type: "trs", dir: "in" },
+              { id: "lineIn4", label: "LINE IN 4 (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["gk13pin", "ts", "trs", "midi"],
+        correctConnections: [
+          { from: "guitar.gkOut", to: "gr55.gkIn", cable: "gk13pin" },
+          { from: "guitar.guitarOut", to: "gr55.guitarIn", cable: "ts" },
+          { from: "gr55.outL", to: "interface.lineIn3", cable: "trs" },
+          { from: "gr55.outR", to: "interface.lineIn4", cable: "trs" },
+        ],
+        explain:
+          "ふつうのギターケーブル(TS)は、6本の弦の振動を1つのピックアップでまとめて拾い、1本の音声信号として送る。一方、Roland GK-3のような『分割ピックアップ(ディバイデッド・ピックアップ)』は弦ごとに独立したセンサーを持ち、13ピンケーブル(GKケーブル)で弦1本1本の信号を別々のまま、さらにピックアップを駆動する電源も一緒に送る——これによってGR-55のようなギターシンセサイザーは、弦ごとに音程を検出して個別に音源を鳴らしたり、和音を保ったまま1音だけベンドしたりといった、通常のギターケーブルでは不可能な処理ができる。GK対応の機材の多くは、この13ピンとは別に通常のTS出力も備えており、シンセの音とギター本来のアンプ的な音を混ぜて使えるようになっている——以前の単元(MIDIキーボードと外部音源モジュール)で扱った『MIDIは演奏データ、オーディオケーブルは音そのもの』という区別と同様に、ここでも『弦ごとの生データを送る13ピン』と『音そのものを送るTS/TRS』という役割の異なるケーブルを正しく使い分ける必要がある。",
+      },
+    },
+    {
+      id: "ltc_timecode_sync",
+      order: 38,
+      title: "映像とオーディオをLTCタイムコードで同期する(映画音楽レコーディングセッション)",
+      category: "配線問題(プロ環境)",
+      hook: "以前の単元で扱ったワードクロックは『デジタル音声のサンプルを揃える時計』だった。今回のLTCタイムコードは、それとは別の『映像の何コマ目かを伝える時計』——似ているようで役割がまったく違う2種類の同期信号を配線しよう。",
+      patch: {
+        scenario:
+          "映画のスコアリング(劇伴)レコーディングセッション。編集済みの映像を再生する「Blackmagic HyperDeck Studio 4K Pro」のLTC OUT(SMPTEタイムコードを音声のような信号として出力する端子)から、シンクロナイザー「Avid Sync HD」のLTC INへ接続する。Sync HDは受け取ったタイムコードをもとに内部で基準クロックを生成し、そのWORD CLOCK OUTから、Pro Tools HDXシステムのインターフェース「Avid HD I/O」のWORD CLOCK INへ接続して、映像のコマ位置とオーディオのサンプルタイミングの両方を1つの基準に揃えよう。",
+        equipment: [
+          { id: "videoDeck", label: "Blackmagic HyperDeck Studio 4K Pro(映像プレーヤー)", icon: "HyperDeck", ports: [{ id: "ltcOut", label: "LTC OUT (XLR)", type: "ltc", dir: "out" }] },
+          {
+            id: "syncHD",
+            label: "Avid Sync HD(シンクロナイザー)",
+            icon: "SyncHD",
+            ports: [
+              { id: "ltcIn", label: "LTC IN (XLR)", type: "ltc", dir: "in" },
+              { id: "wcOut", label: "WORD CLOCK OUT (BNC)", type: "wordclock", dir: "out" },
+            ],
+          },
+          { id: "hdio", label: "Avid HD I/O", icon: "HD I/O", ports: [{ id: "wcIn", label: "WORD CLOCK IN (BNC)", type: "wordclock", dir: "in" }] },
+        ],
+        cablePalette: ["ltc", "wordclock", "aes", "xlr", "digilink"],
+        correctConnections: [
+          { from: "videoDeck.ltcOut", to: "syncHD.ltcIn", cable: "ltc" },
+          { from: "syncHD.wcOut", to: "hdio.wcIn", cable: "wordclock" },
+        ],
+        explain:
+          "LTC(Longitudinal Time Code)は『何時間何分何秒何コマ目』というSMPTEタイムコードを、音声と同じような波形にエンコードして、通常のオーディオケーブル(ここではXLR)で送れるようにした信号。これをPro Tools側のシンクロナイザーが受け取ることで、DAWの再生位置を映像デッキの再生位置に『追従(チェイス)』させ、映像とオーディオがズレずに再生される。以前の単元(MADI伝送とワードクロック同期)で扱ったワードクロックは、デジタル機材同士がサンプル単位(1秒間に数万回)でタイミングを揃えるための基準信号で、LTCとはまったく別の目的の同期信号——LTCは『映像の何コマ目を再生しているか』というマクロな位置の同期、ワードクロックは『デジタル音声を1サンプルもズレなく記録・再生するため』のミクロな同期、という役割の違いを覚えておくとよい。Avid Sync HDのようなシンクロナイザーは、受け取ったLTCから内部で安定したワードクロックを生成し直してインターフェースへ供給する『両方の同期の橋渡し役』を担っている。この配線を怠ると、長尺の劇伴では時間の経過とともに映像と音楽が少しずつズレていく事故につながる。",
+      },
+    },
+    {
+      id: "active_crossover_biamp",
+      order: 39,
+      title: "アクティブクロスオーバーでバイアンプPAシステムを組む(dbx DriveRack PA2)",
+      category: "配線問題(プロ環境)",
+      hook: "1台のパワーアンプがフルレンジのスピーカーを丸ごと鳴らしていたこれまでの単元とは違い、ここでは高域と低域を電気的に分けて、別々のアンプ・別々のスピーカーで鳴らす『バイアンプ』を配線しよう。",
+      patch: {
+        scenario:
+          "屋外フェスのステージPAで、ホーンスピーカーとサブウーファーを別々のパワーアンプで駆動する『バイアンプ』構成を組む。ミキサーのMAIN OUTから、スピーカーマネジメントプロセッサー「dbx DriveRack PA2」のINPUTへ接続する。DriveRack PA2はここで2-WAY(高域/低域)のアクティブクロスオーバーとして設定してあり、HIGH OUTから高域用パワーアンプ「QSC PLD4.3(#1)」のINへ、LOW OUTから低域用パワーアンプ「QSC PLD4.3(#2)」のINへ、それぞれ接続する。最後に、高域用アンプのOUTからパッシブスピーカー「JBL SRX815」へ、低域用アンプのOUTからパッシブサブウーファー「JBL SRX828S」へ、スピーカーケーブルで接続しよう。",
+        equipment: [
+          { id: "crossover", label: "dbx DriveRack PA2(スピーカーマネジメントプロセッサー)", icon: "DriveRackPA2", ports: [
+            { id: "input", label: "INPUT (XLR)", type: "xlr", dir: "in" },
+            { id: "highOut", label: "HIGH OUT (XLR)", type: "xlr", dir: "out" },
+            { id: "lowOut", label: "LOW OUT (XLR)", type: "xlr", dir: "out" },
+          ] },
+          { id: "mixer", label: "Allen & Heath SQ-5(デジタルミキサー)", icon: "SQ-5", ports: [{ id: "mainOut", label: "MAIN OUT (XLR)", type: "xlr", dir: "out" }] },
+          { id: "ampHigh", label: "QSC PLD4.3(パワーアンプ #1, 高域用)", icon: "PLD4.3", ports: [
+            { id: "in", label: "CH1 IN (XLR)", type: "xlr", dir: "in" },
+            { id: "out", label: "CH1 OUT (Speakon)", type: "speaker", dir: "out" },
+          ] },
+          { id: "ampLow", label: "QSC PLD4.3(パワーアンプ #2, 低域用)", icon: "PLD4.3", ports: [
+            { id: "in", label: "CH1 IN (XLR)", type: "xlr", dir: "in" },
+            { id: "out", label: "CH1 OUT (Speakon)", type: "speaker", dir: "out" },
+          ] },
+          { id: "horn", label: "JBL SRX815(パッシブ2-WAYスピーカー、ホーン担当)", icon: "SRX815", ports: [{ id: "in", label: "IN (Speakon)", type: "speaker", dir: "in" }] },
+          { id: "sub", label: "JBL SRX828S(パッシブサブウーファー)", icon: "SRX828S", ports: [{ id: "in", label: "IN (Speakon)", type: "speaker", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "speaker", "trs", "ts"],
+        correctConnections: [
+          { from: "mixer.mainOut", to: "crossover.input", cable: "xlr" },
+          { from: "crossover.highOut", to: "ampHigh.in", cable: "xlr" },
+          { from: "crossover.lowOut", to: "ampLow.in", cable: "xlr" },
+          { from: "ampHigh.out", to: "horn.in", cable: "speaker" },
+          { from: "ampLow.out", to: "sub.in", cable: "speaker" },
+        ],
+        explain:
+          "以前の単元(ライブPAの基本配線)で組んだ構成は、1台のパワーアンプがフルレンジのパッシブスピーカーを丸ごと駆動し、スピーカー内部の『パッシブクロスオーバー』(アンプで増幅した後の大きな電力を、内部の部品で高域・低域に分けてツイーターとウーファーに振り分ける回路)が周波数を分けていた。今回のdbx DriveRack PA2のような『アクティブ(電子)クロスオーバー』は、逆にアンプで増幅する前のライン信号の段階で高域・低域を分割し、それぞれ専用のパワーアンプで別々に増幅してから、専用のスピーカー(ホーン用/サブウーファー用)へ送る——この方式を『バイアンプ(2-WAYの場合)』または『マルチアンプ』と呼ぶ。アクティブクロスオーバー方式の利点は、各アンプが受け持つ周波数帯域が狭くなることで、低域のエネルギーが誤ってホーンドライバーに流れ込んで破損させる事故を防ぎやすくなることや、帯域ごとに個別のリミッター・イコライジングでスピーカーを保護しながら音質を追い込めること。DriveRack PA2はこの他にフィードバック(ハウリング)抑制機能も備えており、ライブPA現場ではスピーカー保護とサウンドチューニングの中核を担う機材として使われている。",
+      },
+    },
+    {
+      id: "analog_snake_stagebox",
+      order: 40,
+      title: "アナログスネークでステージとFOHを配線する(Whirlwind M-24/4)",
+      category: "配線問題(プロ環境)",
+      hook: "以前の単元で扱ったMADIはデジタルで64ch分をまとめる方式だった。今回のアナログスネークは、各chの信号を最後までアナログのまま、1本の太いケーブルの中に何本も束ねて運ぶ——発想の違いを配線で体感しよう。",
+      patch: {
+        scenario:
+          "小〜中規模のライブハウスで、ステージ上の「Shure SM58」(ボーカル)と「Shure SM57」(ギターアンプ)の音を、客席後方のFOHミキサー「Midas M32」まで届けたい。2本のマイクを、ステージ袖に置いたアナログスネークのステージボックス「Whirlwind M-24/4 ステージボックス」のXLR入力へそれぞれ挿し、ステージボックスからSNAKE OUT(内部に24ch分のマイクケーブルを束ねた、1本の太いスネークケーブルの出口)で、FOH側の「Whirlwind M-24/4 FOHボックス」のSNAKE INへ接続する。FOHボックスの個別のXLR出力から、Midas M32のマイク入力へ、それぞれ接続しよう。",
+        equipment: [
+          { id: "mic1", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "mic2", label: "Shure SM57(ギターアンプ)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "stagebox",
+            label: "Whirlwind M-24/4 ステージボックス",
+            icon: "M24Stage",
+            ports: [
+              { id: "in1", label: "CH1 IN (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "CH2 IN (XLR)", type: "xlr", dir: "in" },
+              { id: "snakeOut", label: "SNAKE OUT(トランク)", type: "snake", dir: "out" },
+            ],
+          },
+          {
+            id: "fohbox",
+            label: "Whirlwind M-24/4 FOHボックス",
+            icon: "M24FOH",
+            ports: [
+              { id: "snakeIn", label: "SNAKE IN(トランク)", type: "snake", dir: "in" },
+              { id: "out1", label: "CH1 OUT (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "CH2 OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "mixer", label: "Midas M32(FOH卓)", icon: "M32", ports: [
+            { id: "in1", label: "CH1 IN (XLR)", type: "xlr", dir: "in" },
+            { id: "in2", label: "CH2 IN (XLR)", type: "xlr", dir: "in" },
+          ] },
+        ],
+        cablePalette: ["xlr", "snake", "madi", "ethernet"],
+        correctConnections: [
+          { from: "mic1.out", to: "stagebox.in1", cable: "xlr" },
+          { from: "mic2.out", to: "stagebox.in2", cable: "xlr" },
+          { from: "stagebox.snakeOut", to: "fohbox.snakeIn", cable: "snake" },
+          { from: "fohbox.out1", to: "mixer.in1", cable: "xlr" },
+          { from: "fohbox.out2", to: "mixer.in2", cable: "xlr" },
+        ],
+        explain:
+          "アナログスネークは、ステージ上の各マイクの信号線を、変換や圧縮を一切せずアナログのまま、1本の太いトランクケーブルの中に何本も束ねて運ぶ仕組み。ステージボックス側の個別XLR入力とFOHボックス側の個別XLR出力は、内部で1本1本独立した銅線として最初から最後までつながっており、デジタル変換のための電源もクロックの同期も不要——電源を入れなくても機能する『受動的(パッシブ)』な機材である点が、以前の単元で扱ったMidas DL32のようなデジタルステージボックス(MADI)との大きな違い。ただしアナログスネークは信号の本数が増えるほどトランクケーブル自体が太く重くなり、伝送距離が延びるほどノイズや信号劣化の影響も受けやすくなる——これに対しMADIのようなデジタル伝送は、1本の細い同軸(または光)ケーブルで64ch分を劣化なく送れる代わりに、電源とデジタル機器同士のクロック同期が必要になる。小規模なライブハウスのch数であれば扱いやすく壊れにくいアナログスネークが今でも根強く使われており、大規模な現場ではデジタルスネークへの置き換えが進んでいる、という使い分けを覚えておくとよい。",
+      },
+    },
+    {
+      id: "midi_merge_box",
+      order: 41,
+      title: "MIDIマージボックスで2台のコントローラーを1台の音源にまとめる(MIDI Solutions MERGER)",
+      category: "配線問題",
+      hook: "MIDI OUTを2本、1つのMIDI INに直接挿すことはできない——2つの演奏データを1本のケーブルに『合流』させる専用機材を配線しよう。",
+      patch: {
+        scenario:
+          "ウインドシンセサイザー「Roland Aerophone AE-30」でメロディを、MIDIマスターキーボード「Roland A-88MKII」でコードを、同時に演奏して1台の音源モジュール「Roland INTEGRA-7」を鳴らしたい。しかしINTEGRA-7のMIDI INは1つしかなく、2本のMIDIケーブルを同時に挿すことはできない。そこで「MIDI Solutions MERGER」(MIDIマージボックス)のIN Aに「Roland Aerophone AE-30」のMIDI OUTを、IN Bに「Roland A-88MKII」のMIDI OUTを接続し、MERGERのMIDI OUTから、INTEGRA-7のMIDI INへ、2つの演奏データを1本にまとめて送ろう。",
+        equipment: [
+          { id: "wind", label: "Roland Aerophone AE-30(ウインドシンセサイザー)", icon: "AE-30", ports: [{ id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" }] },
+          { id: "keyboard", label: "Roland A-88MKII(MIDIマスターキーボード)", icon: "A-88", ports: [{ id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" }] },
+          {
+            id: "merger",
+            label: "MIDI Solutions MERGER(MIDIマージボックス)",
+            icon: "Merger",
+            ports: [
+              { id: "inA", label: "MIDI IN A", type: "midi", dir: "in" },
+              { id: "inB", label: "MIDI IN B", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT(合流後)", type: "midi", dir: "out" },
+            ],
+          },
+          { id: "module", label: "Roland INTEGRA-7(音源モジュール)", icon: "INTGR7", ports: [{ id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" }] },
+        ],
+        cablePalette: ["midi", "usb", "trs", "xlr"],
+        correctConnections: [
+          { from: "wind.midiOut", to: "merger.inA", cable: "midi" },
+          { from: "keyboard.midiOut", to: "merger.inB", cable: "midi" },
+          { from: "merger.midiOut", to: "module.midiIn", cable: "midi" },
+        ],
+        explain:
+          "5ピンMIDIは基本的に『1つのOUTから1つのINへ』という一方向・一対一の通信を前提にした規格で、2本のMIDI OUTケーブルを無理やり1つのMIDI INに挿しても、電気的に信号がぶつかり合い正常に機能しない。以前の単元(MIDIキーボードと外部音源モジュール)で登場した『MIDI THRU』端子は、受け取った1つの演奏データをそのまま複製して別の機材にも送る(1つのソースを複数の音源に分配する)ための端子で、今回のように『複数のソースを1つの音源にまとめたい』場合には使えない。MIDI Solutions MERGERのようなマージボックスは、2系統(またはそれ以上)のMIDIメッセージを、ノートの取りこぼしや文字化けが起きないよう電子的に正しく調停(インターリーブ)しながら1本のMIDIストリームに合流させる専用機材。USB-MIDI接続(以前の単元で扱ったAkai MPK Mini mk3など)であれば、PC・DAW側のソフトウェアが複数のUSB-MIDIデバイスを自動的にマージしてくれることが多いが、今回のようにハードウェア音源モジュール自体にMIDI INが1つしかない場合は、このような物理的なマージボックスが必要になる。",
+      },
+    },
+    {
+      id: "ipad_mobile_rig",
+      order: 42,
+      title: "iPadでモバイル録音リグを組む(iRig Pro Duo I/O + USBハブ)",
+      category: "配線問題",
+      hook: "iPadの端子は1つしかないのに、オーディオインターフェースとMIDIキーボードを同時に使いたい——『給電付きハブ』を挟む理由を配線しながら理解しよう。",
+      patch: {
+        scenario:
+          "外出先のカフェで、USB-C端子を1つだけ備えた「iPad Pro」を使ってモバイル録音をしたい。オーディオインターフェース「IK Multimedia iRig Pro Duo I/O」と、USB-MIDIキーボード「Akai Professional MPK Mini mk3」を同時に接続するため、給電機能付きのUSB-Cハブ「Anker PowerExpand USBハブ(バスパワード)」を使う。ハブのUPSTREAM OUT(iPad側への出力)を、iPad ProのUSB-C INへ接続する。ハブの空いている2つの入力ポートに、iRig Pro Duo I/OのUSB OUTと、MPK Mini mk3のUSB OUTを、それぞれ接続しよう。",
+        equipment: [
+          { id: "ipad", label: "iPad Pro(USB-C)", icon: "iPadPro", ports: [{ id: "usbIn", label: "USB-C IN", type: "usb", dir: "in" }] },
+          {
+            id: "hub",
+            label: "Anker PowerExpand USBハブ(バスパワード)",
+            icon: "USBHub",
+            ports: [
+              { id: "upstreamOut", label: "UPSTREAM OUT(iPad側)", type: "usb", dir: "out" },
+              { id: "deviceIn1", label: "DEVICE IN 1", type: "usb", dir: "in" },
+              { id: "deviceIn2", label: "DEVICE IN 2", type: "usb", dir: "in" },
+            ],
+          },
+          { id: "interface", label: "IK Multimedia iRig Pro Duo I/O", icon: "iRigProDuo", ports: [{ id: "usbOut", label: "USB OUT", type: "usb", dir: "out" }] },
+          { id: "keyboard", label: "Akai Professional MPK Mini mk3(USB-MIDIキーボード)", icon: "MPKmini", ports: [{ id: "usbOut", label: "USB OUT", type: "usb", dir: "out" }] },
+        ],
+        cablePalette: ["usb", "midi", "trs", "lightning"],
+        correctConnections: [
+          { from: "hub.upstreamOut", to: "ipad.usbIn", cable: "usb" },
+          { from: "interface.usbOut", to: "hub.deviceIn1", cable: "usb" },
+          { from: "keyboard.usbOut", to: "hub.deviceIn2", cable: "usb" },
+        ],
+        explain:
+          "USB-C端子を備えたiPad Proは、Lightning仕様の旧型iPadで必要だった『Lightning - USB 3カメラアダプタ』なしに、USB-C機器を直接挿せる。ただし端子自体は1つしかないため、オーディオインターフェースとMIDIキーボードを同時に使いたい場合はUSBハブで分岐する必要がある——このとき注意したいのが『給電(セルフパワード/バスパワード対応)』の有無で、給電機能のない安価なハブでは複数のUSB機器を同時に動かすだけの電力が足りず、オーディオインターフェースの音切れやノイズ、機器の認識不良につながりやすい。以前の単元(USB-MIDIキーボードをDAWに直結する)で扱った『MIDIキーボードのUSBとオーディオインターフェースのUSBは別の役割』という原則はここでも変わらず、両方とも同じiPadの1つの端子に集約されるだけで、演奏データとオーディオ信号がそれぞれ独立してやり取りされている点は変わらない。IK Multimedia iRig Pro Duo I/Oのような『iOS対応』を掲げるオーディオインターフェースは、ドライバー不要でOS標準機能だけで認識されるクラスコンプライアント設計になっており、宅録用に買ったUSBオーディオインターフェースをそのままモバイル環境でも使い回せることが多いが、機種によっては消費電流の関係でiOSでの動作が保証されていない場合もあるため、購入前にメーカーのiOS対応表を確認しておくとよい。",
+      },
+    },
   ],
 };
