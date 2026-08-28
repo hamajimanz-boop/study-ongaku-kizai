@@ -16,6 +16,13 @@
   --pink: #ff5da2;
   --red: #ef4459;
   --good: #1cb85c;
+  /* 本来の --orange/--aqua/--good/--red は彩度重視でドット・枠線・背景の淡色用。
+     白背景に対する文字色や、白文字を乗せる塗りとして使うとWCAG AA(4.5:1)を
+     割り込むため、そうした用途専用に暗くしたバリアントを用意する。 */
+  --orange-dark: #b2552b;
+  --aqua-dark: #0d7f64;
+  --red-dark: #cb3a4c;
+  --good-dark: #148140;
   --shadow-sm: 0 1px 2px rgba(30, 20, 60, 0.06), 0 1px 1px rgba(30, 20, 60, 0.04);
   --shadow-md: 0 8px 20px rgba(30, 20, 60, 0.10), 0 2px 6px rgba(30, 20, 60, 0.06);
   --shadow-lg: 0 16px 36px rgba(30, 20, 60, 0.16), 0 4px 10px rgba(30, 20, 60, 0.08);
@@ -393,8 +400,8 @@ a, button {
   flex-shrink: 0;
 }
 .badge-blue { background: var(--blue); }
-.badge-orange { background: var(--orange); }
-.badge-aqua { background: var(--aqua); }
+.badge-orange { background: var(--orange-dark); }
+.badge-aqua { background: var(--aqua-dark); }
 .badge-muted { background: var(--muted); }
 
 /* ---------- lesson ---------- */
@@ -453,7 +460,7 @@ a, button {
   background: color-mix(in srgb, var(--aqua) 9%, var(--surface));
   border: 2px dashed color-mix(in srgb, var(--aqua) 45%, var(--border));
 }
-.checkpoint-label { margin: 0 0 8px; font-size: 12px; font-weight: 800; color: var(--aqua); text-transform: uppercase; letter-spacing: 0.03em; }
+.checkpoint-label { margin: 0 0 8px; font-size: 12px; font-weight: 800; color: var(--aqua-dark); text-transform: uppercase; letter-spacing: 0.03em; }
 .checkpoint-q { margin: 0 0 14px; font-size: 15.5px; font-weight: 700; }
 .checkpoint-choices { display: flex; flex-direction: column; gap: 8px; }
 .checkpoint-choice {
@@ -534,8 +541,8 @@ a, button {
   80% { transform: translateX(3px); }
 }
 .quiz-feedback { margin-top: 18px; min-height: 20px; }
-.fb-correct { color: var(--good); font-weight: 800; }
-.fb-wrong { color: var(--red); font-weight: 800; }
+.fb-correct { color: var(--good-dark); font-weight: 800; }
+.fb-wrong { color: var(--red-dark); font-weight: 800; }
 
 /* ---------- calculation memo pad ---------- */
 .memo-toggle {
