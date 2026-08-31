@@ -22,7 +22,7 @@
 - [ ] robots.txt / sitemap.xml の追加要否を検討する
 
 ## パフォーマンス
-- [ ] images/ 配下の画像サイズ・圧縮状況を確認する
+- [x] (2026-08-31対応) images/ 配下の画像サイズ・圧縮状況を確認する(images/全23MB中、product画像52件のJPGがImageMagickで元の品質93前後の高圧縮率で保存されていたことをidentify -verboseで確認。表示側はlesson-imageがmax-width:100%(コンテナ最大920px)でretina等倍程度の解像度しか要らないため、`magick -strip -quality 82`で全52件を再エンコード(EXIF等のメタデータも除去)。視覚劣化がないことをbefore/after比較で確認(yamaha_ns10.jpgは624KB→314KBの50%減、他は概ね1〜10%減、合計約1.25MB削減)。PNG(167件、products以外の図解含む)はpngquant等のロッシー量子化ツールが未インストールでロスレス再圧縮では有意な削減が出なかったため未対応、次ラウンドでpngquant導入を検討)
 - [ ] scriptタグが12個あるため、バージョンクエリによるキャッシュ更新が機能しているか確認する
 
 ## リンク健全性
