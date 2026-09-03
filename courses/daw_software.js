@@ -73,6 +73,11 @@ window.COURSES["daw_software"] = {
         { q: "Pro Toolsが業界標準としての地位を特に強く持つ分野は?", choices: ["ゲーム開発", "レコーディングスタジオ・ポストプロダクション", "Webデザイン", "写真編集"], answer: 1, explain: "映画・TV・音楽レコーディングの業界標準ワークフローとして定着している。" },
         { q: "Avid Technologyが音楽以外に手がけている有名な製品分野は?", choices: ["ゲームエンジン", "放送・映像編集ソフト(Media Composer)", "スマートフォン", "楽器製造"], answer: 1, explain: "Avidは映像編集ソフト「Media Composer」も手がける総合メディア企業。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Pro Tools - Wikipedia", url: "https://ja.wikipedia.org/wiki/Pro_Tools" },
+        ],
+      },
     },
     {
       id: "apple_logic",
@@ -136,6 +141,11 @@ window.COURSES["daw_software"] = {
         { q: "Logic Proが動作するプラットフォームは?", choices: ["Windowsのみ", "Mac/iPadのみ", "Linuxのみ", "全OS対応"], answer: 1, explain: "Mac(とiPad)専用で、Windowsには対応していない。" },
         { q: "Macに標準で無料搭載されている簡易版音楽制作ソフトは何か?", choices: ["Logic Pro", "GarageBand", "Cubase LE", "FL Studio Mobile"], answer: 1, explain: "GarageBandがMac/iPhoneに無料で標準搭載されている簡易版にあたる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Logic Pro | Apple", url: "https://www.apple.com/logic-pro/" },
+        ],
+      },
     },
     {
       id: "ableton_live",
@@ -199,6 +209,11 @@ window.COURSES["daw_software"] = {
         { q: "Liveの価格モデルとして正しいものは?", choices: ["サブスクのみ", "買い切り(Intro/Standard/Suiteの3グレード)", "完全無料", "従量課金制"], answer: 1, explain: "Intro/Standard/Suiteの3グレードによる買い切り型を採用している。" },
         { q: "元Abletonの開発者たちが興した競合DAW会社はどこか?", choices: ["Steinberg", "Bitwig", "PreSonus", "Cockos"], answer: 1, explain: "Bitwigは元Ableton/Vember Audioの開発者たちが2009年に設立した会社。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "What's new in Live 12 | Ableton", url: "https://www.ableton.com/en/live/" },
+        ],
+      },
     },
     {
       id: "steinberg_cubase",
@@ -261,6 +276,11 @@ window.COURSES["daw_software"] = {
         { q: "映像ポストプロダクション向けに特化したSteinbergの上位ブランドは?", choices: ["Cubase", "Dorico", "Nuendo", "WaveLab"], answer: 2, explain: "NuendoがCubaseの技術をベースにした映像ポスプロ特化ブランド。" },
         { q: "Doricoはどのような種類のソフトか?", choices: ["楽譜作成(譜面浄書)ソフト", "動画編集ソフト", "オーディオインターフェースの制御ソフト", "ライブ配信ソフト"], answer: 0, explain: "Doricoは楽譜作成(譜面浄書)ソフト。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Cubase | Steinberg", url: "https://www.steinberg.net/cubase/" },
+        ],
+      },
     },
     {
       id: "image_line_fl_studio",
@@ -324,6 +344,11 @@ window.COURSES["daw_software"] = {
         { q: "FL Studioの無料体験版の制限として正しいのは?", choices: ["音が出ない", "プロジェクトの保存ができない", "1曲しか作れない", "全く制限がない"], answer: 1, explain: "体験版はほぼ全機能を試せるが、プロジェクトの保存はできない。" },
         { q: "「FL」の名前の由来となった旧製品名は?", choices: ["Fruity Loops(FruityLoops)", "Final Line", "Fast Loop", "Free Loop"], answer: 0, explain: "旧名FruityLoopsの略として「FL」が使われている。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "FL Studio by Image-Line", url: "https://www.image-line.com/fl-studio/" },
+        ],
+      },
     },
     {
       id: "presonus_studio_one",
@@ -387,6 +412,11 @@ window.COURSES["daw_software"] = {
         { q: "現在PreSonus自体の親会社になっている大手楽器メーカーはどこか?", choices: ["Yamaha", "Roland", "Fender", "Gibson"], answer: 2, explain: "PreSonusはFender Musical Instruments Corporation傘下に入っている。" },
         { q: "Studio Oneの無料の下位グレードの名称は?", choices: ["Studio One Prime", "Studio One Lite", "Studio One Free", "Studio One Basic"], answer: 0, explain: "無料版「Studio One Prime」を用意し、有料版への導線としている。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "スタジオ・ワン - Wikipedia", url: "https://ja.wikipedia.org/wiki/Studio_One" },
+        ],
+      },
     },
     {
       id: "cockos_reaper",
@@ -450,6 +480,11 @@ window.COURSES["daw_software"] = {
         { q: "ユーザーがReaperの機能をスクリプトで拡張できる仕組みを何と呼ぶか?", choices: ["ReaScript", "Max for Live", "AAX SDK", "VST Bridge"], answer: 0, explain: "ReaScript等を使ってユーザー自身が機能を拡張できる。" },
         { q: "CockosはPreSonusやAvidと違いどのような立場の会社か?", choices: ["大企業の一部門", "大企業に買収されていない独立系ソフト会社", "非営利団体", "国営企業"], answer: 1, explain: "Cockosは大企業の買収を経ていない独立系ソフト会社。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "REAPER | Audio Production Without Limits", url: "https://www.reaper.fm/" },
+        ],
+      },
     },
     {
       id: "bitwig",
@@ -504,6 +539,11 @@ window.COURSES["daw_software"] = {
         { q: "BitwigとAbletonの資本関係として正しいのは?", choices: ["Bitwigは Abletonの子会社", "Bitwigは独立した別会社で資本関係はない", "Abletonが Bitwigの株式の過半数を保有", "同一の親会社の傘下"], answer: 1, explain: "元従業員が独立して立ち上げた完全に別の会社で、資本関係はない。" },
         { q: "会社設立から製品発売までのBitwigの開発期間はおおよそどのくらいか?", choices: ["半年", "約1年", "約5年", "約15年"], answer: 2, explain: "2009年の設立から2014年の発売まで、約5年の開発期間があった。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Bitwig | Home", url: "https://www.bitwig.com/" },
+        ],
+      },
     },
     {
       id: "reason_studios",
@@ -567,6 +607,11 @@ window.COURSES["daw_software"] = {
         { q: "2019年の方針転換で、Reason自体が何として使えるようになったか?", choices: ["無料アプリ", "他のDAW内で動くVST/AU/AAXプラグイン", "スマホアプリのみ", "ブラウザ上のWebアプリ"], answer: 1, explain: "Reasonが他社DAWの中で動くVST/AU/AAXプラグインとして使えるようになった。" },
         { q: "Reason独自の音源・エフェクト拡張モジュールの名称は?", choices: ["Rack Extension", "Max for Live", "AAX", "ReaScript"], answer: 0, explain: "Rack ExtensionがReason独自の拡張モジュール形式。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Reason Studios - Music Making Software That Sounds Like You", url: "https://www.reasonstudios.com/" },
+        ],
+      },
     },
     {
       id: "motu_digital_performer",
@@ -630,6 +675,11 @@ window.COURSES["daw_software"] = {
         { q: "Digital Performerが特に強みを持つ分野は?", choices: ["映画・TV音楽のスコアリング(劇伴制作)", "スマホゲームの効果音", "ライブ配信専用機能", "写真編集"], answer: 0, explain: "MIDI編集の緻密さから映像音楽・劇伴制作分野で根強い支持がある。" },
         { q: "MOTUが長年高い評価を得ているハードウェア製品ジャンルは?", choices: ["ギターアンプ", "オーディオインターフェース", "マイクロフォン", "スタジオモニター"], answer: 1, explain: "828シリーズなどのオーディオインターフェースで高い評価を得てきた。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Digital Performer | MOTU", url: "https://motu.com/en-us/products/software/dp/" },
+        ],
+      },
     },
     {
       id: "cakewalk_bandlab",
@@ -693,6 +743,11 @@ window.COURSES["daw_software"] = {
         { q: "BandLab買収後のCakewalkの価格方針は?", choices: ["価格が2倍になった", "完全無料で提供されている", "サブスク専用になった", "招待制の有料ベータのみ"], answer: 1, explain: "「Cakewalk by BandLab」として全機能が無料で提供されている。" },
         { q: "現在のCakewalk by BandLabが対応しているOSは?", choices: ["Windowsのみ", "macOSのみ", "Linuxのみ", "全OS対応"], answer: 0, explain: "Windows専用で、macOS版は提供されていない。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Cakewalk by BandLab", url: "https://www.bandlab.com/products/cakewalk" },
+        ],
+      },
     },
     {
       id: "universal_audio_luna",
@@ -756,6 +811,11 @@ window.COURSES["daw_software"] = {
         { q: "LUNAは主にどのようなユーザーに無料提供されているか?", choices: ["誰でも無条件に無料", "Thunderbolt接続のApollo/Arrowシリーズ所有者", "学生のみ", "サブスク契約者のみ"], answer: 1, explain: "Thunderbolt接続のApollo/Arrowシリーズ所有者に無料提供される位置づけ。" },
         { q: "Universal Audioの中核ビジネスモデルの説明として正しいのは?", choices: ["広告収入のみに依存", "ハードウェア(Apollo)+DSPプラグイン+自社DAWの三位一体戦略", "サブスクの動画配信事業", "楽器の小売販売のみ"], answer: 1, explain: "Apolloインターフェース、UADプラグイン、LUNAを組み合わせたエコシステム戦略。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "LUNA Recording System | Universal Audio", url: "https://www.uaudio.com/luna" },
+        ],
+      },
     },
     {
       id: "tracktion_waveform",
@@ -819,6 +879,11 @@ window.COURSES["daw_software"] = {
         { q: "Waveformが対応しているプラットフォームとして正しいものは?", choices: ["Windowsのみ", "macOSのみ", "Windows/macOS/Linux/Raspberry Pi", "iOSのみ"], answer: 2, explain: "Raspberry Piを含む幅広いプラットフォームに対応している。" },
         { q: "Waveformの土台になっている、開発者自身が手がけたクロスプラットフォーム開発フレームワークは?", choices: ["JUCE", "VST SDK", "AAX SDK", "Core Audio"], answer: 0, explain: "多くの音楽ソフトで使われるJUCEというフレームワークが土台になっている。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Waveform Pro DAW digital audio editing software | Tracktion", url: "https://www.tracktion.com/products/waveform-pro" },
+        ],
+      },
     },
     {
       id: "magix_samplitude",
@@ -880,6 +945,11 @@ window.COURSES["daw_software"] = {
         { q: "Samplitudeが特に評価されている用途は?", choices: ["ゲーム音楽の同時多人数収録", "マスタリング等、オーディオ編集の緻密さが問われる用途", "VR空間での演奏", "ライブ配信専用機能"], answer: 1, explain: "オーディオエンジンの緻密さからマスタリング用途で評価されることが多い。" },
         { q: "MAGIXの初心者向け音楽制作ソフトのブランド名は?", choices: ["Music Maker", "GarageBand", "Mixcraft", "BandLab"], answer: 0, explain: "「Music Maker」が初心者向けの別ブランドとして展開されている。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Samplitude | MAGIX", url: "https://www.magix.com/us/music/samplitude/" },
+        ],
+      },
     },
     {
       id: "harrison_mixbus",
@@ -943,6 +1013,11 @@ window.COURSES["daw_software"] = {
         { q: "Harrisonが現在所属しているグループ企業はどこか?", choices: ["Audiotonix", "Avid", "Yamaha", "Fender"], answer: 0, explain: "現在Harrisonは Audiotonixグループの一員として活動している。" },
         { q: "Mixbusが重視している設計思想は?", choices: ["最新のクラウド連携", "実機のHarrisonコンソールで作業しているような操作感", "ゲーム音楽の効率的な量産", "スマホ単体での完結"], answer: 1, explain: "実機コンソールの操作感・質感を重視した「バーチャルなアナログコンソール」を志向している。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Mixbus | Harrison Audio", url: "https://harrisonconsoles.com/site/mixbus.html" },
+        ],
+      },
     },
   ],
 };
