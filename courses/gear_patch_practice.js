@@ -1704,5 +1704,36 @@ window.COURSES["gear_patch_practice"] = {
           "USB-C端子を備えたiPad Proは、Lightning仕様の旧型iPadで必要だった『Lightning - USB 3カメラアダプタ』なしに、USB-C機器を直接挿せる。ただし端子自体は1つしかないため、オーディオインターフェースとMIDIキーボードを同時に使いたい場合はUSBハブで分岐する必要がある——このとき注意したいのが『給電(セルフパワード/バスパワード対応)』の有無で、給電機能のない安価なハブでは複数のUSB機器を同時に動かすだけの電力が足りず、オーディオインターフェースの音切れやノイズ、機器の認識不良につながりやすい。以前の単元(USB-MIDIキーボードをDAWに直結する)で扱った『MIDIキーボードのUSBとオーディオインターフェースのUSBは別の役割』という原則はここでも変わらず、両方とも同じiPadの1つの端子に集約されるだけで、演奏データとオーディオ信号がそれぞれ独立してやり取りされている点は変わらない。IK Multimedia iRig Pro Duo I/Oのような『iOS対応』を掲げるオーディオインターフェースは、ドライバー不要でOS標準機能だけで認識されるクラスコンプライアント設計になっており、宅録用に買ったUSBオーディオインターフェースをそのままモバイル環境でも使い回せることが多いが、機種によっては消費電流の関係でiOSでの動作が保証されていない場合もあるため、購入前にメーカーのiOS対応表を確認しておくとよい。",
       },
     },
+    {
+      id: "dante_network_audio_stagebox",
+      order: 43,
+      title: "Danteネットワークオーディオでステージボックスと録音システムを配線する(Yamaha Rio3224-D2)",
+      category: "配線問題(プロ環境)",
+      hook: "MADIは専用の同軸ケーブル1本で音声を送ったが、Danteは『ふつうのLANケーブルとネットワークスイッチ』で音声を送る。IT機材みたいな配線を体験しよう。",
+      patch: {
+        scenario:
+          "多目的ホールでのレコーディング。ステージ上の「Yamaha Rio3224-D2」(Dante対応I/Oラック)から、Dante(音声を伝送できるネットワーク規格)対応のネットワークスイッチ「Netgear GS110TP(Dante Certified/QoS対応スイッチ)」を経由して、録音用の「Mac Studio(Dante Virtual Soundcardをインストール済み)」まで音声を送りたい。Rio3224-D2のPRIMARY OUTからスイッチのPORT 1へ、スイッチのPORT 2からMac StudioのETHERNET INへ、それぞれLANケーブルで接続しよう。",
+        equipment: [
+          { id: "stagebox", label: "Yamaha Rio3224-D2(Dante I/Oラック)", icon: "Rio3224", ports: [{ id: "primaryOut", label: "PRIMARY OUT (Dante, RJ45)", type: "ethernet", dir: "out" }] },
+          {
+            id: "switch",
+            label: "Netgear GS110TP(Dante Certifiedスイッチ)",
+            icon: "Switch",
+            ports: [
+              { id: "port1", label: "PORT 1 (RJ45)", type: "ethernet", dir: "in" },
+              { id: "port2", label: "PORT 2 (RJ45)", type: "ethernet", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "Mac Studio(Dante Virtual Soundcard導入済み)", icon: "MacStudio", ports: [{ id: "ethIn", label: "ETHERNET IN (RJ45)", type: "ethernet", dir: "in" }] },
+        ],
+        cablePalette: ["ethernet", "madi", "wordclock", "usb", "xlr"],
+        correctConnections: [
+          { from: "stagebox.primaryOut", to: "switch.port1", cable: "ethernet" },
+          { from: "switch.port2", to: "mac.ethIn", cable: "ethernet" },
+        ],
+        explain:
+          "Dante(ダンテ)は、音声をIPネットワークのパケットに変換して伝送するデジタルオーディオ規格で、専用ケーブルではなく一般的なCAT5e/CAT6のLANケーブルと、ネットワークスイッチをそのまま流用できるのが最大の特徴。ただし『何でもいいから繋げばいい』わけではなく、音声が途切れないよう、QoS(通信の優先制御)に対応した『Dante Certified』スイッチを使うのが実務上の基本(一般的な安価なスイッチでも小規模なら動くことはあるが、チャンネル数が増えたり他の通信と混在すると音切れのリスクが上がる)。以前の単元で扱ったMADIが『1本のケーブルで機器同士を直結する専用の伝送路』だったのに対し、Danteは『既存のネットワークインフラの上に何百chもの音声を自由にルーティングできる』点が対照的。PC側は物理的な専用インターフェースカードがなくても、Dante Virtual Soundcardのようなソフトウェアがあれば標準のEthernetポートでDanteネットワークに参加できる。",
+      },
+    },
   ],
 };
