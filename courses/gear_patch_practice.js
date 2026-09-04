@@ -1880,5 +1880,36 @@ window.COURSES["gear_patch_practice"] = {
           "電子ドラムのパッドは、叩いたときの振動をピエゾセンサーなどで電気信号に変換し、一般的なTSフォーン(アンバランス)のトリガーケーブルでモジュールへ送る。生ドラムのマイキング(以前の単元)と違い、パッドの数だけモジュール側にも個別のTRIGGER INPUTがあり、『どのパッドをどの入力に挿したか』をモジュール側の設定でも指定して初めて正しい音色が鳴る(例えばキックのケーブルをスネアの入力に挿すと、キックを踏んだのにスネアの音が鳴ってしまう)。モジュールが内部で生成した音は最終的に『ふつうのオーディオ信号』としてMASTER OUTから出力されるため、そこから先はアコースティック楽器を録音するときと同じように、オーディオケーブルでインターフェースへ送ればよい。",
       },
     },
+    {
+      id: "reamp_di_recording",
+      order: 47,
+      title: "リアンプ配線でドライ録音をもう一度アンプに送り直す(Radial ProRMP)",
+      category: "配線問題(プロ環境)",
+      hook: "録音した『味のない』ドライなギター音を、後からもう一度アンプに送り込んで録り直す——『リアンプ』という一見遠回りなテクニックを配線してみよう。",
+      patch: {
+        scenario:
+          "ギター録音で、まずアンプを通さない『ドライ』な信号をDIボックス経由でそのままインターフェースに録音しておいた(この単元では録音済みとする)。後日、そのドライなトラックをオーディオインターフェース「Universal Audio Apollo x6」のライン出力から、リアンプボックス「Radial ProRMP」のINPUTへ送る。ProRMPは、ライン信号をギターアンプが求めるHi-Z(ハイインピーダンス)の楽器信号に変換してくれる。ProRMPのOUTPUTから、ギターアンプ「Marshall JCM800」のINPUTへ接続し、アンプで鳴らした音を改めてマイクで録り直せるようにしよう。",
+        equipment: [
+          { id: "interface", label: "Universal Audio Apollo x6", icon: "ApolloX6", ports: [{ id: "lineOut", label: "LINE OUT 1 (TRS, ドライトラック再生)", type: "trs", dir: "out" }] },
+          {
+            id: "reamp",
+            label: "Radial ProRMP(パッシブ・リアンプボックス)",
+            icon: "ProRMP",
+            ports: [
+              { id: "input", label: "INPUT (TRS)", type: "trs", dir: "in" },
+              { id: "output", label: "OUTPUT (TS, Hi-Z)", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "amp", label: "Marshall JCM800(ギターアンプヘッド)", icon: "JCM800", ports: [{ id: "input", label: "INPUT (TS)", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["trs", "ts", "xlr", "speaker"],
+        correctConnections: [
+          { from: "interface.lineOut", to: "reamp.input", cable: "trs" },
+          { from: "reamp.output", to: "amp.input", cable: "ts" },
+        ],
+        explain:
+          "リアンプ(Re-amping)とは、一度ドライ(アンプを通さない生の音)で録音しておいたギターやベースのトラックを、後からアンプに『再生』として送り込み、マイキングを変えたり別のアンプを試したりしながら好きなだけ録り直せるテクニック。インターフェースのライン出力は電圧が大きく、そのままギターアンプのインプットに挿すと信号が大きすぎたりインピーダンス(電気的な抵抗の性質)が合わず本来の音にならないため、Radial ProRMPのようなリアンプボックスでライン信号をギター本来のHi-Z信号相当に変換する。ProRMPは電源不要の『パッシブ』設計で、内部のトランスによってライン→Hi-Z変換とグラウンドループ(アース回路の電位差によるハムノイズ)の遮断を同時に行う。以前の単元で扱ったDI(楽器信号→ライン信号)とは逆方向の変換を行っている点も合わせて覚えておくとよい。",
+      },
+    },
   ],
 };
