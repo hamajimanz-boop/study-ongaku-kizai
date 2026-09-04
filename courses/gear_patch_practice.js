@@ -1833,5 +1833,52 @@ window.COURSES["gear_patch_practice"] = {
           "MIDIケーブルが運べるのは演奏データ(ノートオン/オフ)だけではない。MIDIクロックは『1拍を24分割したタイミングパルス』と『再生の開始・停止』の情報で、これを送ることで複数の機材のテンポをサンプル単位でぴったり揃えられる。ケーブルを挿すだけでなく、受け取る側(ここではTR-8S)の設定を『外部クロック待ち』に切り替えておかないと、機材同士がケーブルで繋がっていても同期しない点に注意——ケーブルは同期の必要条件であって、それだけでは十分条件にならない。以前の『MIDIキーボードと外部音源モジュールを配線する』単元で扱ったMIDIノート情報とは役割がまったく異なり、TR-8S自身が持つパターンはそのまま鳴りつつ、テンポだけがDigitakt側に追従する。なお、MIDIとよく似た5ピンDINコネクタを使う古い規格に『DIN Sync(Roland独自のテンポ同期方式)』があるが、電気的な信号形式がMIDIとは別物で互換性がないため、機材の対応規格を確認せずに繋いでも同期しない。",
       },
     },
+    {
+      id: "edrum_trigger_module",
+      order: 46,
+      title: "電子ドラムのトリガー配線とモジュール接続をする(Roland TD-27KV)",
+      category: "配線問題",
+      hook: "叩く場所の数だけケーブルが増える——電子ドラムは『パッドとモジュールを1対1でつなぐ』配線パズル。",
+      patch: {
+        scenario:
+          "電子ドラムキット「Roland TD-27KV」をセットアップする。キックパッド「KD-200」、スネアパッド「PD-140DS」、タムパッド「PD-120」を、それぞれ専用のトリガーケーブル(TSフォーンケーブル)でドラム音源モジュール「TD-27」のTRIGGER INPUTへ接続する。最後に、TD-27のMASTER OUT(L/R)を、オーディオインターフェース「Focusrite Scarlett 2i2」のライン入力へ送って、PCに録音できるようにしよう。",
+        equipment: [
+          { id: "kick", label: "Roland KD-200(キックパッド)", icon: "KD-200", ports: [{ id: "out", label: "TRIGGER OUT (TS)", type: "ts", dir: "out" }] },
+          { id: "snare", label: "Roland PD-140DS(スネアパッド)", icon: "PD-140DS", ports: [{ id: "out", label: "TRIGGER OUT (TS)", type: "ts", dir: "out" }] },
+          { id: "tom", label: "Roland PD-120(タムパッド)", icon: "PD-120", ports: [{ id: "out", label: "TRIGGER OUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "module",
+            label: "Roland TD-27(ドラム音源モジュール)",
+            icon: "TD-27",
+            ports: [
+              { id: "kickIn", label: "TRIGGER IN: KICK (TS)", type: "ts", dir: "in" },
+              { id: "snareIn", label: "TRIGGER IN: SNARE (TS)", type: "ts", dir: "in" },
+              { id: "tomIn", label: "TRIGGER IN: TOM1 (TS)", type: "ts", dir: "in" },
+              { id: "outL", label: "MASTER OUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "MASTER OUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 2i2",
+            icon: "2i2",
+            ports: [
+              { id: "lineInL", label: "LINE IN 1 (TRS)", type: "trs", dir: "in" },
+              { id: "lineInR", label: "LINE IN 2 (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "midi"],
+        correctConnections: [
+          { from: "kick.out", to: "module.kickIn", cable: "ts" },
+          { from: "snare.out", to: "module.snareIn", cable: "ts" },
+          { from: "tom.out", to: "module.tomIn", cable: "ts" },
+          { from: "module.outL", to: "interface.lineInL", cable: "trs" },
+          { from: "module.outR", to: "interface.lineInR", cable: "trs" },
+        ],
+        explain:
+          "電子ドラムのパッドは、叩いたときの振動をピエゾセンサーなどで電気信号に変換し、一般的なTSフォーン(アンバランス)のトリガーケーブルでモジュールへ送る。生ドラムのマイキング(以前の単元)と違い、パッドの数だけモジュール側にも個別のTRIGGER INPUTがあり、『どのパッドをどの入力に挿したか』をモジュール側の設定でも指定して初めて正しい音色が鳴る(例えばキックのケーブルをスネアの入力に挿すと、キックを踏んだのにスネアの音が鳴ってしまう)。モジュールが内部で生成した音は最終的に『ふつうのオーディオ信号』としてMASTER OUTから出力されるため、そこから先はアコースティック楽器を録音するときと同じように、オーディオケーブルでインターフェースへ送ればよい。",
+      },
+    },
   ],
 };
