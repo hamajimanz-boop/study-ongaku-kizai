@@ -1911,5 +1911,48 @@ window.COURSES["gear_patch_practice"] = {
           "リアンプ(Re-amping)とは、一度ドライ(アンプを通さない生の音)で録音しておいたギターやベースのトラックを、後からアンプに『再生』として送り込み、マイキングを変えたり別のアンプを試したりしながら好きなだけ録り直せるテクニック。インターフェースのライン出力は電圧が大きく、そのままギターアンプのインプットに挿すと信号が大きすぎたりインピーダンス(電気的な抵抗の性質)が合わず本来の音にならないため、Radial ProRMPのようなリアンプボックスでライン信号をギター本来のHi-Z信号相当に変換する。ProRMPは電源不要の『パッシブ』設計で、内部のトランスによってライン→Hi-Z変換とグラウンドループ(アース回路の電位差によるハムノイズ)の遮断を同時に行う。以前の単元で扱ったDI(楽器信号→ライン信号)とは逆方向の変換を行っている点も合わせて覚えておくとよい。",
       },
     },
+    {
+      id: "immersive_atmos_monitor_setup",
+      order: 48,
+      title: "イマーシブ(Dolby Atmos)モニタリングのスピーカー配置を配線する",
+      category: "配線問題(プロ環境)",
+      hook: "L/Rの2本だけでは終わらない——天井のスピーカーまで含めた立体的なモニター環境を、多ch出力インターフェースから配線しよう。",
+      patch: {
+        scenario:
+          "Dolby Atmosでの立体音響(イマーシブオーディオ)ミックスに対応するため、7.1.4ch(床面7ch+LFE1ch+天井4ch)のモニター環境を組む。多ch出力に対応したオーディオインターフェース「Universal Audio Apollo x16」から、床面のフロントL/C/R、サラウンドLs/Rs、リアRls/Rrs、そしてサブウーファー(LFE)、天井に設置した4台のハイトスピーカー(Height L/R、Rear Height L/R)へ、それぞれ個別のライン出力で接続する。今回は代表として、フロントL/C/R、サブウーファー、天井のHeight L/Rの6系統を配線しよう。",
+        equipment: [
+          {
+            id: "interface",
+            label: "Universal Audio Apollo x16",
+            icon: "ApolloX16",
+            ports: [
+              { id: "outL", label: "LINE OUT 1 (FRONT L, TRS)", type: "trs", dir: "out" },
+              { id: "outC", label: "LINE OUT 2 (CENTER, TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "LINE OUT 3 (FRONT R, TRS)", type: "trs", dir: "out" },
+              { id: "outSub", label: "LINE OUT 4 (LFE/SUB, TRS)", type: "trs", dir: "out" },
+              { id: "outHL", label: "LINE OUT 5 (HEIGHT L, TRS)", type: "trs", dir: "out" },
+              { id: "outHR", label: "LINE OUT 6 (HEIGHT R, TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Genelec 8341(フロントL)", icon: "8341", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkC", label: "Genelec 8341(センター)", icon: "8341", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Genelec 8341(フロントR)", icon: "8341", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "sub", label: "Genelec 7360(サブウーファー)", icon: "7360", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "heightL", label: "Genelec 8330(天井 Height L)", icon: "8330", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "heightR", label: "Genelec 8330(天井 Height R)", icon: "8330", ports: [{ id: "in", label: "IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["trs", "xlr", "speaker", "rca"],
+        correctConnections: [
+          { from: "interface.outL", to: "spkL.in", cable: "trs" },
+          { from: "interface.outC", to: "spkC.in", cable: "trs" },
+          { from: "interface.outR", to: "spkR.in", cable: "trs" },
+          { from: "interface.outSub", to: "sub.in", cable: "trs" },
+          { from: "interface.outHL", to: "heightL.in", cable: "trs" },
+          { from: "interface.outHR", to: "heightR.in", cable: "trs" },
+        ],
+        explain:
+          "Dolby Atmosのような立体音響(イマーシブオーディオ)のミックスは、これまでの単元で扱ってきたステレオ(L/R)やサラウンド5.1chと違い、天井方向のスピーカー(ハイトチャンネル)を含めた多数のスピーカーを同時にモニターする必要がある。そのぶん、モニターコントローラーやオーディオインターフェースには『チャンネル数の多い出力』が求められ、Apollo x16のような多ch出力対応の機種が使われることが多い。配線自体は1本1本『インターフェースの出力ch』と『対応する位置のスピーカーの入力』をTRSやXLRのライン接続でつなぐだけで、以前の単元(モニターコントローラーで複数スピーカーを切り替える)の考え方の延長線上にある——ただし本数が一気に増えるため、どの出力がどの位置のスピーカーに対応しているかをケーブルにラベルを付けて管理することが実務上重要になる。天井のスピーカーは、設置の都合上イネーブルドスピーカー(Dolby Atmos用に天井方向へ反射音を出す専用モデル)を使うケースもあるが、この単元では直接天井に設置するモデルとして配線した。",
+      },
+    },
   ],
 };
