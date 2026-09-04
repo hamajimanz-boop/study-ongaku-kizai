@@ -1779,5 +1779,59 @@ window.COURSES["gear_patch_practice"] = {
           "ボコーダーは『キャリア(carrier、搬送波)』と『モジュレーター(modulator、変調波)』という性質の違う2つの入力を掛け合わせて音を作る。キャリアはRoland SE-02のような音程のはっきりした持続音(オルガンやシンセの和音がよく使われる)で、これが最終的な『音程・音高』を決める。モジュレーターはマイクに入った自分の声で、これが『あ・い・う』のような子音・母音の成分(フォルマント)を提供する。VC340の内部では声を複数の周波数帯に分析し、その帯域ごとの音量変化をキャリア信号に適用することでロボットボイスが生まれる——マイクをキャリア入力に、シンセをモジュレーター入力に挿し違えると、この効果はまったく発生しない典型的な初心者のミスなので、どちらの入力がどちらの役割かを覚えておくことが重要。",
       },
     },
+    {
+      id: "midi_clock_sync_sequencer_drum",
+      order: 45,
+      title: "MIDIクロックでシーケンサーとドラムマシンのテンポを同期する(Elektron Digitakt + Roland TR-8S)",
+      category: "配線問題",
+      hook: "以前の単元ではMIDIケーブルで『どの鍵盤を弾いたか』という演奏データを送ったが、今回送るのは『テンポの拍』だけ——ノート情報を送らないMIDI配線もある。",
+      patch: {
+        scenario:
+          "「Elektron Digitakt」をマスター(基準となるテンポを発信する側)にして、「Roland TR-8S」をスレーブ(外部からのテンポに合わせる側、あらかじめ本体設定でMIDI Sync=Externalにしておく)にしたい。DigitaktのMIDI OUTから、TR-8SのMIDI INへ接続してテンポ情報(MIDIクロック)を送る。さらに、Digitakt・TR-8Sそれぞれのメイン出力を、ミキサー「Yamaha MG12XU」のCH1・CH2へ送って音を出せるようにしよう。",
+        equipment: [
+          {
+            id: "digitakt",
+            label: "Elektron Digitakt(マスターシーケンサー)",
+            icon: "Digitakt",
+            ports: [
+              { id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" },
+              { id: "outL", label: "MAIN OUT L (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "MAIN OUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "tr8s",
+            label: "Roland TR-8S(リズムマシン)",
+            icon: "TR-8S",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "outL", label: "MASTER OUT L (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "MASTER OUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "ch1L", label: "CH1 L IN (TS)", type: "ts", dir: "in" },
+              { id: "ch1R", label: "CH1 R IN (TS)", type: "ts", dir: "in" },
+              { id: "ch2L", label: "CH2 L IN (TS)", type: "ts", dir: "in" },
+              { id: "ch2R", label: "CH2 R IN (TS)", type: "ts", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["midi", "ts", "trs", "usb"],
+        correctConnections: [
+          { from: "digitakt.midiOut", to: "tr8s.midiIn", cable: "midi" },
+          { from: "digitakt.outL", to: "mixer.ch1L", cable: "ts" },
+          { from: "digitakt.outR", to: "mixer.ch1R", cable: "ts" },
+          { from: "tr8s.outL", to: "mixer.ch2L", cable: "ts" },
+          { from: "tr8s.outR", to: "mixer.ch2R", cable: "ts" },
+        ],
+        explain:
+          "MIDIケーブルが運べるのは演奏データ(ノートオン/オフ)だけではない。MIDIクロックは『1拍を24分割したタイミングパルス』と『再生の開始・停止』の情報で、これを送ることで複数の機材のテンポをサンプル単位でぴったり揃えられる。ケーブルを挿すだけでなく、受け取る側(ここではTR-8S)の設定を『外部クロック待ち』に切り替えておかないと、機材同士がケーブルで繋がっていても同期しない点に注意——ケーブルは同期の必要条件であって、それだけでは十分条件にならない。以前の『MIDIキーボードと外部音源モジュールを配線する』単元で扱ったMIDIノート情報とは役割がまったく異なり、TR-8S自身が持つパターンはそのまま鳴りつつ、テンポだけがDigitakt側に追従する。なお、MIDIとよく似た5ピンDINコネクタを使う古い規格に『DIN Sync(Roland独自のテンポ同期方式)』があるが、電気的な信号形式がMIDIとは別物で互換性がないため、機材の対応規格を確認せずに繋いでも同期しない。",
+      },
+    },
   ],
 };
