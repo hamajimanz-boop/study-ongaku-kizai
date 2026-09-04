@@ -1735,5 +1735,49 @@ window.COURSES["gear_patch_practice"] = {
           "Dante(ダンテ)は、音声をIPネットワークのパケットに変換して伝送するデジタルオーディオ規格で、専用ケーブルではなく一般的なCAT5e/CAT6のLANケーブルと、ネットワークスイッチをそのまま流用できるのが最大の特徴。ただし『何でもいいから繋げばいい』わけではなく、音声が途切れないよう、QoS(通信の優先制御)に対応した『Dante Certified』スイッチを使うのが実務上の基本(一般的な安価なスイッチでも小規模なら動くことはあるが、チャンネル数が増えたり他の通信と混在すると音切れのリスクが上がる)。以前の単元で扱ったMADIが『1本のケーブルで機器同士を直結する専用の伝送路』だったのに対し、Danteは『既存のネットワークインフラの上に何百chもの音声を自由にルーティングできる』点が対照的。PC側は物理的な専用インターフェースカードがなくても、Dante Virtual Soundcardのようなソフトウェアがあれば標準のEthernetポートでDanteネットワークに参加できる。",
       },
     },
+    {
+      id: "vocoder_carrier_modulator",
+      order: 44,
+      title: "ボコーダーのキャリア/モジュレーター配線をする(Behringer VC340 + アナログシンセ)",
+      category: "配線問題",
+      hook: "ロボットボイスの正体は『2つの別々の入力』——音程を作る信号と、声の成分を作る信号を、それぞれ違う入力に挿さないと効果は生まれない。",
+      patch: {
+        scenario:
+          "「Behringer VC340」ボコーダーを使って、ロボットのような声のエフェクトを作りたい。アナログシンセ「Roland SE-02」を、音程のもとになる音(キャリア)としてVC340のEXT SYNTH INへ接続する。あなたの声(モジュレーター、声の成分)は「Shure SM58」でVC340のMIC INへ接続する。VC340が作り出したステレオの出力を、ミキサー「Yamaha MG12XU」のCH1・CH2へ送ろう。",
+        equipment: [
+          { id: "synth", label: "Roland SE-02(アナログシンセ)", icon: "SE-02", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          { id: "mic", label: "Shure SM58", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "vocoder",
+            label: "Behringer VC340(ボコーダー)",
+            icon: "VC340",
+            ports: [
+              { id: "carrierIn", label: "EXT SYNTH IN (TS, キャリア入力)", type: "ts", dir: "in" },
+              { id: "micIn", label: "MIC IN (XLR, モジュレーター入力)", type: "xlr", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "ch1In", label: "CH1 LINE IN (TS)", type: "ts", dir: "in" },
+              { id: "ch2In", label: "CH2 LINE IN (TS)", type: "ts", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "xlr", "trs", "midi"],
+        correctConnections: [
+          { from: "synth.out", to: "vocoder.carrierIn", cable: "ts" },
+          { from: "mic.out", to: "vocoder.micIn", cable: "xlr" },
+          { from: "vocoder.outL", to: "mixer.ch1In", cable: "ts" },
+          { from: "vocoder.outR", to: "mixer.ch2In", cable: "ts" },
+        ],
+        explain:
+          "ボコーダーは『キャリア(carrier、搬送波)』と『モジュレーター(modulator、変調波)』という性質の違う2つの入力を掛け合わせて音を作る。キャリアはRoland SE-02のような音程のはっきりした持続音(オルガンやシンセの和音がよく使われる)で、これが最終的な『音程・音高』を決める。モジュレーターはマイクに入った自分の声で、これが『あ・い・う』のような子音・母音の成分(フォルマント)を提供する。VC340の内部では声を複数の周波数帯に分析し、その帯域ごとの音量変化をキャリア信号に適用することでロボットボイスが生まれる——マイクをキャリア入力に、シンセをモジュレーター入力に挿し違えると、この効果はまったく発生しない典型的な初心者のミスなので、どちらの入力がどちらの役割かを覚えておくことが重要。",
+      },
+    },
   ],
 };
