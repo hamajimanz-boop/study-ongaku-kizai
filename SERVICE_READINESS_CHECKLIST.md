@@ -23,7 +23,7 @@
 
 ## パフォーマンス
 - [x] (2026-08-31対応) images/ 配下の画像サイズ・圧縮状況を確認する(images/全23MB中、product画像52件のJPGがImageMagickで元の品質93前後の高圧縮率で保存されていたことをidentify -verboseで確認。表示側はlesson-imageがmax-width:100%(コンテナ最大920px)でretina等倍程度の解像度しか要らないため、`magick -strip -quality 82`で全52件を再エンコード(EXIF等のメタデータも除去)。視覚劣化がないことをbefore/after比較で確認(yamaha_ns10.jpgは624KB→314KBの50%減、他は概ね1〜10%減、合計約1.25MB削減)。PNG(167件、products以外の図解含む)はpngquant等のロッシー量子化ツールが未インストールでロスレス再圧縮では有意な削減が出なかったため未対応、次ラウンドでpngquant導入を検討)
-- [ ] scriptタグが12個あるため、バージョンクエリによるキャッシュ更新が機能しているか確認する
+- [x] (2026-09-04対応) scriptタグが12個あるため、バージョンクエリによるキャッシュ更新が機能しているか確認する(index.htmlの各`?v=`値と`git log -1 --date=format:%Y%m%d`で得た各ファイルの実際の最終更新日をnode -e/シェルで突合。style.css(8/28更新なのにv=8/17のまま)、hardware_dtm.js(8/27更新でv=8/10)、kojin_jigyou.js(8/26更新でv=8/10)、daw_software.js(9/3更新でv=8/10)、music_business_money.js/studio_acoustics.js(8/25更新でv=8/10)、gear_patch_practice.js/money_case_studies.js(8/29更新でv=8/18)、genres.js(8/18更新でv=8/17)の計8ファイルでバージョンクエリが実更新日より古く、既存ユーザーのブラウザに古いキャッシュ済みJS/CSSが配信され続けていた可能性があったため、各`?v=`を実際の最終更新日に合わせて修正。次ラウンドで「コース編集時に必ずindex.htmlのバージョンクエリも同時更新する」運用ルールをREADME.mdに明記するか検討)
 
 ## リンク健全性
 - [x] (2026-08-25対応) furtherLearningの外部URL(video/article)が生きているか確認する(全13コースの41件のユニークURLをcurl+WebFetchで確認。404が2件(tips.frekul.com/jasrac_or_nextone/、acoustics.jp/qanda/answer/165.html)、DNS解決不能が1件(ordinarysound.com、ドメイン自体消滅)の計3件を発見し、生存確認済みの代替記事に差し替え済み。なお soundhouse.co.jp の2件(post=3605、post=3059)はcurl/WebFetch共にHTTP/2エラーまたはタイムアウトで確認不能だった。サイト自体はbot対策が強いことで知られ、404ではなくアクセス拒否の可能性が高いため未修正のまま次ラウンドで別経路の確認要)
