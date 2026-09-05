@@ -746,7 +746,7 @@ function renderPatch(courseId, unitId) {
   if (!course || !unit || !unit.patch) return renderHome();
   const p = unit.patch;
 
-  patchRuntime = { courseId, unitId, cables: [], graded: false, armedCable: null, dragging: null, dragPoint: null };
+  patchRuntime = { courseId, unitId, cables: [], graded: false, armedCable: null, dragging: null, dragPoint: null, kbPending: null };
 
   const equipHtml = p.equipment
     .map(
@@ -760,8 +760,8 @@ function renderPatch(courseId, unitId) {
           <div class="patch-port-row patch-port-${port.dir}">
             ${
               port.dir === "in"
-                ? patchPortDotHtml(eq.id, port) + `<span class="patch-port-label">${port.label}</span>`
-                : `<span class="patch-port-label">${port.label}</span>` + patchPortDotHtml(eq.id, port)
+                ? patchPortDotHtml(eq.id, eq.label, port) + `<span class="patch-port-label">${port.label}</span>`
+                : `<span class="patch-port-label">${port.label}</span>` + patchPortDotHtml(eq.id, eq.label, port)
             }
           </div>`
           )
@@ -789,7 +789,7 @@ function renderPatch(courseId, unitId) {
       <h1>${unit.title}</h1>
       <div class="hook-box">${p.scenario}</div>
 
-      <p class="patch-instructions">${ICONS.sparkle} 下のケーブルを1本選び、機材の端子(●)からもう一方の端子までドラッグしてつなごう。配線を間違えたら、そのケーブルをクリックすると剪定(削除)できる。</p>
+      <p class="patch-instructions">${ICONS.sparkle} 下のケーブルを1本選び、機材の端子(●)からもう一方の端子までドラッグしてつなごう。配線を間違えたら、そのケーブルをクリックすると剪定(削除)できる。(キーボード操作の場合: ケーブルを選んだ後、Tabキーで端子に移動しEnterキーで選択、もう一方の端子でもEnterキーを押すと接続される)</p>
 
       <div class="patch-palette" id="patchPalette">${paletteHtml}</div>
 
@@ -809,8 +809,9 @@ function renderPatch(courseId, unitId) {
   wirePatchBoard(course, unit);
 }
 
-function patchPortDotHtml(equipId, port) {
-  return `<span class="patch-port" data-equip="${equipId}" data-port="${port.id}" data-dir="${port.dir}" data-type="${port.type}" title="${port.label}"></span>`;
+function patchPortDotHtml(equipId, equipLabel, port) {
+  const dirLabel = port.dir === "in" ? "入力" : "出力";
+  return `<button type="button" class="patch-port" data-equip="${equipId}" data-port="${port.id}" data-dir="${port.dir}" data-type="${port.type}" title="${port.label}" aria-label="${equipLabel} ${port.label}(${dirLabel})"></button>`;
 }
 function patchPortEl(equipId, portId) {
   return document.querySelector(`.patch-port[data-equip="${CSS.escape(equipId)}"][data-port="${CSS.escape(portId)}"]`);
@@ -878,6 +879,11 @@ function flashPatchHint(msg) {
   if (fb) fb.innerHTML = `<p class="fb-wrong">${msg}</p>`;
 }
 
+function clearKbPending() {
+  patchRuntime.kbPending = null;
+  document.querySelectorAll(".patch-port-selected").forEach((el) => el.classList.remove("patch-port-selected"));
+}
+
 function wirePatchBoard(course, unit) {
   redrawPatchCables(null);
 
@@ -888,6 +894,7 @@ function wirePatchBoard(course, unit) {
       document.querySelectorAll(".cable-chip").forEach((c) => c.classList.remove("cable-chip-armed"));
       patchRuntime.armedCable = already ? null : chip.dataset.cable;
       if (patchRuntime.armedCable) chip.classList.add("cable-chip-armed");
+      clearKbPending();
     });
   });
 
@@ -931,6 +938,34 @@ function wirePatchBoard(course, unit) {
       };
       document.addEventListener("mousemove", onMove);
       document.addEventListener("mouseup", onUp);
+    });
+
+    portEl.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      if (patchRuntime.graded) return;
+      if (!patchRuntime.armedCable) {
+        flashPatchHint("先に上のケーブルを1本選んでください。");
+        return;
+      }
+      const equip = portEl.dataset.equip;
+      const port = portEl.dataset.port;
+      if (!patchRuntime.kbPending) {
+        patchRuntime.kbPending = { equip, port };
+        portEl.classList.add("patch-port-selected");
+        flashPatchHint("もう一方の端子に移動してEnterキーを押すと接続します。");
+        return;
+      }
+      const from = patchRuntime.kbPending;
+      clearKbPending();
+      if (from.equip === equip && from.port === port) return;
+      patchRuntime.cables.push({
+        id: "c" + Math.random().toString(36).slice(2, 9),
+        from,
+        to: { equip, port },
+        type: patchRuntime.armedCable,
+      });
+      redrawPatchCables(null);
     });
   });
 

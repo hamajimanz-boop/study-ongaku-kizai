@@ -738,10 +738,12 @@ a, button {
 .patch-port-row.patch-port-out { justify-content: flex-end; text-align: right; }
 .patch-port-label { white-space: nowrap; }
 .patch-port {
-  width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0;
+  width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; padding: 0; appearance: none;
   background: var(--surface); border: 2.5px solid var(--muted); cursor: pointer; transition: all 0.15s ease;
 }
 .patch-port:hover { border-color: var(--violet); transform: scale(1.15); }
+.patch-port:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+.patch-port-selected { border-color: var(--violet); background: var(--violet); transform: scale(1.15); }
 
 .patch-actions { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
 .patch-feedback { margin-top: 6px; }
