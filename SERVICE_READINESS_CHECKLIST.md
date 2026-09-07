@@ -19,7 +19,7 @@
 ## SEO
 - [x] (2026-08-17対応) meta description / OGP(og:title, og:description, og:type)タグを追加する
 - [x] (2026-08-18対応) favicon を設定する(favicon.svg、8分音符モチーフ・テーマカラーのグラデーション)
-- [ ] robots.txt / sitemap.xml の追加要否を検討する
+- [x] (2026-09-07対応) robots.txt / sitemap.xml の追加要否を検討する(index.htmlのog:urlから本番URLがhttps://hamajimanz-boop.github.io/study-ongaku-kizai/のGitHub Pagesホスティングと確認。app.jsのルーティングがlocation.hash(`#/...`)によるSPA内遷移のみで個別URLが実質1つしかないため、sitemap.xmlはトップページ1件のみを記載する最小構成とし、robots.txtで全クローラーを許可しsitemap.xmlの場所を明示。両ファイルを新規作成)
 
 ## パフォーマンス
 - [x] (2026-08-31対応) images/ 配下の画像サイズ・圧縮状況を確認する(images/全23MB中、product画像52件のJPGがImageMagickで元の品質93前後の高圧縮率で保存されていたことをidentify -verboseで確認。表示側はlesson-imageがmax-width:100%(コンテナ最大920px)でretina等倍程度の解像度しか要らないため、`magick -strip -quality 82`で全52件を再エンコード(EXIF等のメタデータも除去)。視覚劣化がないことをbefore/after比較で確認(yamaha_ns10.jpgは624KB→314KBの50%減、他は概ね1〜10%減、合計約1.25MB削減)。PNG(167件、products以外の図解含む)はpngquant等のロッシー量子化ツールが未インストールでロスレス再圧縮では有意な削減が出なかったため未対応、次ラウンドでpngquant導入を検討)

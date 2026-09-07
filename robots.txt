@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hamajimanz-boop.github.io/study-ongaku-kizai/sitemap.xml
