@@ -108,6 +108,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "TLM103がU87と比べて省いている機能は?", choices: ["電源スイッチ", "指向性切り替え・パッド・ローカット", "出力端子", "マイクカプセル"], answer: 1, explain: "TLM103は単一指向性に絞り込んだ廉価版で、自己ノイズの低さを売りにしている。" },
         { q: "KM184が主に向いている用途は?", choices: ["ボーカルのメインマイク", "アコースティックギターやオーバーヘッドなど点音源の収録", "放送用インタビュー", "電話音声の収録"], answer: 1, explain: "小型ペンシルコンデンサーマイクで、点音源をピンポイントで狙う用途に向く。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "About us - Georg Neumann GmbH", url: "https://www.neumann.com/en-us/company/about-us" },
+        ],
+      },
     },
     {
       id: "rme",
@@ -197,6 +202,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "RMEがギタリスト・鍵盤奏者に支持される理由の一つは?", choices: ["ワイヤレス伝送対応", "極小バッファでも安定する低レイテンシー", "内蔵アンプシミュレーター", "無料のソフト音源同梱"], answer: 1, explain: "バッファサイズを小さくしても安定動作しやすく、ダイレクトモニタリング用途に向く。" },
         { q: "TotalMix FXについて初心者がつまずきやすい点は?", choices: ["価格が高すぎる", "入出力のマトリクス構造が分かりにくい画面構成", "日本語に対応していない", "Macでしか動作しない"], answer: 1, explain: "機能は豊富だが、マトリクス構造の画面に初見で戸惑うユーザーが多いとされる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Company - RME Audio", url: "https://www.rme-audio.de/company.html" },
+        ],
+      },
     },
     {
       id: "genelec",
@@ -287,6 +297,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "同軸(ポイントソース)設計が搭載されているのは主にどの製品か?", choices: ["The Onesシリーズ", "8010", "8020", "全モデル共通"], answer: 0, explain: "同軸設計は上位機種のThe Onesシリーズの特徴で、エントリー機は通常の2ウェイ構成。" },
         { q: "GLMによる補正について正しい説明は?", choices: ["部屋の反響そのものを物理的に無くす", "電気的な周波数特性の補正であり部屋の物理対策の代わりにはならない", "スピーカーの重量を軽減する", "ワイヤレス化を可能にする"], answer: 1, explain: "GLMは電気的補正であり、吸音材などの物理的な部屋対策と併用するのが前提。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "About Us - Genelec", url: "https://www.genelec.com/about-us" },
+        ],
+      },
     },
     {
       id: "ams_neve",
@@ -377,6 +392,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "1073のゲインステージについて正しい説明は?", choices: ["ゲインを上げても音は一切変化しない", "ゲインを上げるほどわずかに歪み太くなる", "ゲインは常にデジタル制御される", "トランスを通らない回路である"], answer: 1, explain: "クラスAディスクリート回路により、ゲインを上げるほど質感が太くなる挙動を持つ。" },
         { q: "1073が向いていないとされる使い方は?", choices: ["女性ボーカルの高音域", "アコースティックギターの高域補強", "すでに太いキック/ベースへの重ねがけ", "細身な楽器の底上げ"], answer: 2, explain: "既に太い音源に使うと低域が飽和気味になりやすいとされる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "About - AMS Neve", url: "https://ams-neve.com/about/" },
+        ],
+      },
     },
     {
       id: "shure",
@@ -465,6 +485,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "SM57とSM58の主な違いは?", choices: ["カプセル方式が全く異なる", "SM58はグリルに風防が内蔵されている", "SM57はコンデンサー型である", "SM58はワイヤレス専用である"], answer: 1, explain: "SM58は風防内蔵グリルでボーカル向け、SM57はグリルが無く楽器のマイキングに向く。" },
         { q: "SM7Bを使う際に実務上ほぼ必須とされることが多いのは?", choices: ["ワイヤレス送信機", "インラインゲインブースターや高ゲインプリアンプ", "専用の除湿ケース", "外部バッテリー"], answer: 1, explain: "出力レベルが低いため、内蔵プリアンプだけでは適正ゲインが得にくいことが多い。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Shure Celebrates 100 Years of Audio Innovation", url: "https://www.shure.com/en-US/newsroom/shure-celebrates-100-years-of-audio-innovation" },
+        ],
+      },
     },
     {
       id: "focusrite",
@@ -553,6 +578,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "Focusrite初期の代表的なラックプリアンプ/EQは?", choices: ["ISA110/ISA130", "1073", "2520", "V76"], answer: 0, explain: "Rupert Neve設計のトランスサウンドを持つ初期モジュールで、今も評価が高い。" },
         { q: "Scarlettの音質に関する誤解として正しい指摘は?", choices: ["A/D変換精度はハイエンド機と大差ない水準まで向上している", "全モデルが同じ回路のままである", "サブスク専用でしか使えない", "デジタル入力に対応していない"], answer: 0, explain: "体感差の多くはプリアンプの色付けや付属品の差に起因し、変換精度自体は向上している。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Focusrite公式サイト", url: "https://focusrite.com/" },
+        ],
+      },
     },
     {
       id: "ssl",
@@ -646,6 +676,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "SSLのバスコンプの実用的な使い方として適切とされるのは?", choices: ["常に10dB以上圧縮する", "ゲインリダクション2〜4dB程度に留める", "アタック/リリースを無段階調整する", "必ずバイパスして使う"], answer: 1, explain: "過度な圧縮はポンピングを招くため、軽めにかけるのが一般的とされる。" },
         { q: "SSL 4000系プラグインの中でよりモダン/クリーンとされるのはどちらか?", choices: ["4000 E", "4000 G", "両方とも同じ音", "どちらもヴィンテージ寄り"], answer: 1, explain: "4000 Eがヴィンテージ感、4000 Gがよりモダンでクリーンという世代差がある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Our History - Solid State Logic", url: "https://solidstatelogic.com/our-history" },
+        ],
+      },
     },
     {
       id: "sony",
@@ -730,6 +765,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "CD900STがミックス作業には不向きとされる理由は?", choices: ["装着感が悪いから", "低域の量感や広がりの確認には向かない特性だから", "有線接続だから", "価格が高すぎるから"], answer: 1, explain: "歌入れ用の粗探しに向いた特性であり、最終ミックス判断には別モニターの併用が前提。" },
         { q: "2019年に発売されたCD900STの並行ラインナップ的な後継機は?", choices: ["MDR-M1ST", "MDR-Z1R", "MDR-7506", "WH-1000XM"], answer: 0, explain: "MDR-M1STはCD900STの置き換えではなく並行ラインナップとして発売された。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "MDR-CD900ST 製品情報 - Sony", url: "https://www.sony.jp/headphone/products/MDR-CD900ST/" },
+        ],
+      },
     },
     {
       id: "apogee",
@@ -815,6 +855,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "Apogee製品はWindowsでも使えるか?", choices: ["Mac専用でWindowsは非対応", "Windows用ドライバーも提供され使用可能", "Linuxのみ対応", "iOSのみ対応"], answer: 1, explain: "Mac向けの訴求が手厚いが、Windows用ドライバーも提供されている。" },
         { q: "ディザリング処理が本来必要になる場面は?", choices: ["ビット深度を落とす変換を行う時", "サンプリングレートを上げる時", "ファイル名を変更する時", "モノラルをステレオにする時"], answer: 0, explain: "16bitなどへのビット深度変換時に量子化歪みを目立たなくするための処理。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "APOGEE - Wikipedia", url: "https://ja.wikipedia.org/wiki/APOGEE" },
+        ],
+      },
     },
     {
       id: "api",
@@ -901,6 +946,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "APIの回路がNeveより「パンチが出る」とされる技術的な理由は?", choices: ["スルーレートが高くトランジェントが速い", "トランスを一切使わないから", "デジタル処理を併用しているから", "電源電圧が低いから"], answer: 0, explain: "信号追従速度(スルーレート)が高く、音の立ち上がりがシャープに再現される。" },
         { q: "500シリーズのモジュールを組み合わせる際の注意点は?", choices: ["常にどの組み合わせでも問題ない", "電源部の出力・消費電流の規格を確認する必要がある", "モジュールは1枚しか挿せない", "USB接続が必須になる"], answer: 1, explain: "ラックの電源容量とモジュールの消費電力によっては対応しきれない場合がある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "About - API: Automated Processes, Inc.", url: "https://apiaudio.com/about/" },
+        ],
+      },
     },
     {
       id: "antelope_audio",
@@ -982,6 +1032,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "クロック精度と可聴上の効果について業界内の見解として正しいのは?", choices: ["誰もが明確に体感できると断定されている", "体感できる程度には議論があり意見が分かれる", "全く効果がないと断定されている", "クロックは音質に一切関与しない部品である"], answer: 1, explain: "理論上の影響と体感できる程度については、業界内でも意見が分かれるテーマとされる。" },
         { q: "AntelopeのFPGAベースのエフェクトモデリング機能について正しい説明は?", choices: ["レイテンシーほぼゼロで動作するがモデリングの質はメーカー実装次第", "既存プラグインを完全に代替する規格化された技術", "オーディオI/Fには搭載できない技術", "クラウド上でのみ動作する"], answer: 0, explain: "低遅延で動作する一方、質感の再現度は実装次第であり万能ではない。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "About | Antelope Audio", url: "https://en.antelopeaudio.com/about/" },
+        ],
+      },
     },
     {
       id: "yamaha_ns10",
@@ -1068,6 +1123,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "NS-10Mの弱点(低域再生の乏しさ)がもたらしたとされる副作用は?", choices: ["ミックスが低域過多になりがちになる", "音量が出せなくなる", "ワイヤレス化できなくなる", "価格が上昇し続ける"], answer: 0, explain: "低域が薄いモニターで作業すると、他環境で聴いた時に低域過多になりやすいと指摘される。" },
         { q: "HS5/HS8とNS-10Mの関係について正しい説明は?", choices: ["回路・ユニットとも全く同じ設計", "精神的後継だが設計は別物でより現代的でフラット", "HSシリーズはNS-10Mの生産終了前の型番違い", "HSシリーズはNS-10Mの海外向け名称"], answer: 1, explain: "精神は受け継ぐが設計は別物で、あえて聴き疲れさせる方向ではない。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "YAMAHA NS-10Mの仕様 - Audio Heritage", url: "https://audio-heritage.jp/YAMAHA/speaker/ns-10m.html" },
+        ],
+      },
     },
     {
       id: "mogami_canare",
@@ -1156,6 +1216,12 @@ window.COURSES["hardware_dtm"] = {
         { q: "スターカッド構造の弱点として指摘されることがあるのは?", choices: ["静電容量が高くなり超長距離で高域に影響しうる", "耐久性が極端に低い", "断線しやすい", "重量が異常に軽い"], answer: 0, explain: "静電容量の高さが超長距離伝送で高域特性に影響するという指摘があるが実用上は問題になりにくい。" },
         { q: "自作ケーブルでスターカッド構造の性能を活かすために重要なことは?", choices: ["結線方法(対角線上の2本を束ねる)を正しく行うこと", "ケーブルを短く切りすぎないこと", "コネクタを使わないこと", "被膜を全て剥がすこと"], answer: 0, explain: "結線を誤ると耐ノイズ性能のメリットが十分に得られない。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "History - Mogami Cable", url: "https://www.mogamicable.com/support/faq/history/" },
+          { title: "会社概要 - カナレ電気", url: "https://www.canare.co.jp/corporate/outline/" },
+        ],
+      },
     },
     {
       id: "chandler_limited",
@@ -1238,6 +1304,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "現在のヴィンテージ回路復刻における設計上の課題として正しいのは?", choices: ["当時と全く同じ部品が入手困難で現代部品での近似再現が必要", "当時の設計図が全く現存していない", "特許の関係で復刻自体ができない", "デジタル処理でしか再現できない"], answer: 0, explain: "当時のゲルマニウムトランジスタ等は入手困難で、現代部品での近似設計が必要とされる。" },
         { q: "Chandlerの500シリーズモジュールと大型ラック版の関係について正しいのは?", choices: ["回路設計の系譜は共通だが完全に同一ではない", "全く無関係の別製品である", "500シリーズの方が先に開発された", "ラック版は生産終了しモジュールのみ現存する"], answer: 0, explain: "系譜は共通だが、電源電圧などの制約でフォームファクターに合わせた再設計がある。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Celebrating 15 Years! – Chandler Limited", url: "https://chandlerlimited.com/news/15-year-anniversary/" },
+        ],
+      },
     },
     {
       id: "millennia_media",
@@ -1320,6 +1391,11 @@ window.COURSES["hardware_dtm"] = {
         { q: "クリーン系機材を録音段階で使うことの実務上のメリットは?", choices: ["ミックスで色付けを重ねすぎて濁るのを防げる", "録音時間が短縮できる", "ファイルサイズが小さくなる", "ワイヤレス化が容易になる"], answer: 0, explain: "素直な素材を確保しておき、ミックス時に意図的に色付けする使い分けが理にかなっている。" },
         { q: "HV-3の真空管モードについて正しい理解は?", choices: ["Neve並みの強い色付けを再現する", "ごくわずかな質感の変化を選べるオプション", "真空管を全く使用していない名称だけの機能", "デジタルシミュレーションのみで実装されている"], answer: 1, explain: "強い色付けというより、クリーンかわずかな温かみかを選ぶ位置づけの機能。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Company - Mil-Media", url: "https://www.mil-media.com/company/" },
+        ],
+      },
     },
   ],
 };
