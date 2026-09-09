@@ -2011,5 +2011,51 @@ window.COURSES["gear_patch_practice"] = {
           "電話ハイブリッドは、1本の電話回線で『こちらの声を送る』『相手の声を受け取る』を同時にこなす機材。もしAUX SEND 1に電話出演者自身のチャンネルまで混ぜて送ってしまうと、相手は自分の声を(電話回線とスタジオ側の遅延を挟んで)少し遅れて聞くことになり、強いエコーやハウリングの原因になる。そこで、送り出すミックスからは電話出演者本人のチャンネルだけを抜いた『ミックスマイナス(N-1ミックス)』を作ってSEND INへ送るのが放送・配信の定石。Broadcast HostのOUTPUTから出てくるのは相手の声だけなので、これを空いているチャンネルに立てれば、パーソナリティ2人の声と電話出演者の声が1つのミックスとしてXR18でまとまり、そのままオンエアや配信に使える。この『自分自身の声だけを抜いて相手に返す』という考え方は、Zoomなどのオンライン会議で相手側にハウリングのある音を返さないための処理にも応用されている。",
       },
     },
+    {
+      id: "loop_switcher_pedalboard",
+      order: 51,
+      title: "ループスイッチャーで複数エフェクターを一括切替する(Boss ES-8)",
+      category: "配線問題",
+      hook: "エフェクター1個ずつを直列につなぐと、足元でバイパスを踏み間違えるだけで音が止まる——『ループスイッチャー』で複数のペダルをワンタッチで一括オン/オフする配線を体験しよう。",
+      patch: {
+        scenario:
+          "ギタリストが、歪み系「Boss DS-1」・モジュレーション系「Boss CE-2W」・ディレイ「Boss DD-8」の3台のペダルを、ループスイッチャー「Boss ES-8」の個別ループに接続して、フットスイッチ1つで好きな組み合わせをオン/オフできるようにしたい。ギターをES-8のINPUTへ、LOOP 1 SEND/RETURNにDS-1、LOOP 2 SEND/RETURNにCE-2W、LOOP 3 SEND/RETURNにDD-8を接続し、最後にES-8のOUTPUTをギターアンプ「Fender '65 Twin Reverb」のINPUTへ送ろう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT", type: "ts", dir: "out" }] },
+          {
+            id: "switcher",
+            label: "Boss ES-8(ループスイッチャー)",
+            icon: "ES-8",
+            ports: [
+              { id: "input", label: "INPUT", type: "ts", dir: "in" },
+              { id: "loop1Send", label: "LOOP 1 SEND", type: "ts", dir: "out" },
+              { id: "loop1Return", label: "LOOP 1 RETURN", type: "ts", dir: "in" },
+              { id: "loop2Send", label: "LOOP 2 SEND", type: "ts", dir: "out" },
+              { id: "loop2Return", label: "LOOP 2 RETURN", type: "ts", dir: "in" },
+              { id: "loop3Send", label: "LOOP 3 SEND", type: "ts", dir: "out" },
+              { id: "loop3Return", label: "LOOP 3 RETURN", type: "ts", dir: "in" },
+              { id: "output", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "drive", label: "Boss DS-1(ディストーション)", icon: "DS-1", ports: [{ id: "in", label: "IN", type: "ts", dir: "in" }, { id: "out", label: "OUT", type: "ts", dir: "out" }] },
+          { id: "mod", label: "Boss CE-2W(コーラス)", icon: "CE-2W", ports: [{ id: "in", label: "IN", type: "ts", dir: "in" }, { id: "out", label: "OUT", type: "ts", dir: "out" }] },
+          { id: "delay", label: "Boss DD-8(ディレイ)", icon: "DD-8", ports: [{ id: "in", label: "IN", type: "ts", dir: "in" }, { id: "out", label: "OUT", type: "ts", dir: "out" }] },
+          { id: "amp", label: "Fender '65 Twin Reverb", icon: "TwinRvb", ports: [{ id: "in", label: "INPUT", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "midi"],
+        correctConnections: [
+          { from: "guitar.out", to: "switcher.input", cable: "ts" },
+          { from: "switcher.loop1Send", to: "drive.in", cable: "ts" },
+          { from: "drive.out", to: "switcher.loop1Return", cable: "ts" },
+          { from: "switcher.loop2Send", to: "mod.in", cable: "ts" },
+          { from: "mod.out", to: "switcher.loop2Return", cable: "ts" },
+          { from: "switcher.loop3Send", to: "delay.in", cable: "ts" },
+          { from: "delay.out", to: "switcher.loop3Return", cable: "ts" },
+          { from: "switcher.output", to: "amp.in", cable: "ts" },
+        ],
+        explain:
+          "ループスイッチャーは、複数のエフェクターをそれぞれ独立した『ループ(SEND/RETURN)』に接続しておき、フットスイッチ1つでそのループを丸ごとオン/オフできる機材。ペダルを1台ずつ直列(シリアル)につなぐ従来のペダルボードだと、足元でバイパスを1つずつ踏み替える必要があり、踏み忘れや誤操作が起きやすいうえ、ケーブルの本数が増えるほど音質劣化(バッファーの重ね掛かりやノイズ)のリスクも上がる。Boss ES-8のようなループスイッチャーなら、あらかじめ『Aメロは歪みだけ』『サビは歪み+ディレイ』のようにパッチ(組み合わせ)を登録しておき、曲中でボタン1つで一括切替できる。ES-8自体はMIDIの送受信にも対応しており、MIDI対応のペダルであれば音色そのものの呼び出しまで同時に自動化できるが、今回のシンプルな構成ではMIDIケーブルは登場しない。",
+      },
+    },
   ],
 };
