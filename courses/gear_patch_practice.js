@@ -2217,5 +2217,39 @@ window.COURSES["gear_patch_practice"] = {
           "GoXLRのようなブロードキャスト特化型ミキサーは、マイク・ゲーム機・PCの音声(通知音やボイスチャットなど)をそれぞれ別々の入力chとして受け取り、『配信で視聴者に聞かせる音量バランス』と『自分がヘッドホンで聞くバランス(たとえばゲーム音は大きめ、自分の声は小さめ等)』を、電動フェーダーでそれぞれ独立に調整できるのが特徴。マイクはMIDASプリアンプを搭載したXLR入力で受け、コンデンサーマイクを選べば+48Vのファンタム電源も供給できる。ゲーム機やPCの音は、あらかじめ用途別にチャンネルが分かれているため、『実況の声は配信に乗せるが、特定の通知音だけは自分にしか聞こえないようにする』といった、配信者ならではの細かい音量コントロールが1台で完結する。GoXLRからPCへの経路はUSB1本にまとめられ、配信ソフト側では各チャンネルを個別のオーディオデバイスとして認識できるため、マイクの声だけを別トラックで録音しておく、といった使い方もできる。",
       },
     },
+    {
+      id: "stereo_pair_piano_recording",
+      order: 56,
+      title: "ステレオペア(ORTF方式)でピアノを録音する(Neumann KM 184 ×2)",
+      category: "配線問題",
+      hook: "1本のマイクでは奥行きや左右の広がりが録れない——同じモデルのマイクを2本、決まった角度と間隔で立てる『ステレオペア』の配線を体験しよう。",
+      patch: {
+        scenario:
+          "グランドピアノをステレオで録音したい。同一モデルの小型コンデンサーマイク「Neumann KM 184」を2本用意し、カプセル同士の間隔を約17cm、開き角を約110度にした『ORTF方式』で立てる。左右それぞれのKM 184を、8chマイクプリアンプ内蔵インターフェース「Focusrite Scarlett 18i20」のMIC IN 1(L)とMIC IN 2(R)へXLRで接続し、MacBook Airへ録音しよう。",
+        equipment: [
+          { id: "micL", label: "Neumann KM 184(L)", icon: "KM184", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "micR", label: "Neumann KM 184(R)", icon: "KM184", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 18i20",
+            icon: "18i20",
+            ports: [
+              { id: "in1", label: "MIC IN 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "MIC IN 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "ts", "rca"],
+        correctConnections: [
+          { from: "micL.out", to: "interface.in1", cable: "xlr" },
+          { from: "micR.out", to: "interface.in2", cable: "xlr" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "ORTF方式は、2本の単一指向性(カーディオイド)マイクのカプセル同士を約17cm離し、左右に約110度開いて立てるステレオマイキングの定番手法の1つで、フランスの放送局(ORTF)で開発された、人間の耳の間隔・角度に近い設計から、自然な奥行きと左右の広がりが録れるとされる。1本のマイクだけでは、楽器のどの位置の音を拾うかという『点』の情報しか録れないが、同一モデルの2本を正しい間隔・角度で立てることで、低音弦側と高音弦側の音の広がりや、ホールの響きの左右差までステレオ感として記録できる。左右のマイクは必ず同じモデル(今回はKM 184を2本)を使い、左右で特性が揃った状態にすることが重要——片方だけ違うモデルを使うと、左右の音色や感度に差が出て、ステレオイメージが崩れてしまう。XLRケーブルは録音の左右(L/R)を取り違えないよう、インターフェースの入力chとマイクの左右を対応させて挿すのがポイント。",
+      },
+    },
   ],
 };
