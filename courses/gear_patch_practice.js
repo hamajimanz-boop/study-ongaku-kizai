@@ -1973,5 +1973,43 @@ window.COURSES["gear_patch_practice"] = {
           "Behringer X32のようなデジタルミキサーは、内蔵のUSBオーディオインターフェース機能によって、32chすべてのマイク入力を個別にUSB1本でPCへ丸ごと録音できる(マルチトラックレコーディング)。さらに同じUSB経路は再生方向にも対応しており、録音した32chの音源をPC側からもう一度X32へ送り返せば、実際のバンドがいなくても『本番と同じチャンネル構成』でフェーダーバランスやエフェクトの作り込みをリハーサルできる——これを『バーチャルサウンドチェック』と呼ぶ。配線自体はUSBケーブル1本だけとシンプルだが、以前の単元で扱ったADAT(8ch単位)やDante(ネットワーク経由)と違い、X32のUSBは『そのミキサー専用の32ch入出力』という位置づけで、他の機種と混在させる規格ではない点に注意。本番当日は、この同じUSB接続を使って全chをバックアップ録音しておくことも一般的で、トラブル対応や後日のミックスにも活用できる。",
       },
     },
+    {
+      id: "radio_hybrid_mixminus",
+      order: 50,
+      title: "ラジオ電話出演のミックスマイナス配線を組む(JK Audio Broadcast Host)",
+      category: "配線問題(プロ環境)",
+      hook: "電話の相手に自分の声をそのまま返すと、コンマ数秒の遅れで自分の声が『こだま』のように聞こえてしまう——それを防ぐ『ミックスマイナス』という考え方を配線しながら理解しよう。",
+      patch: {
+        scenario:
+          "小さなラジオ番組の収録。デジタルミキサー「Behringer XR18」で、パーソナリティ2人のマイクと電話出演者の声をまとめている。あらかじめXR18のAUX SEND 1には、電話出演者のチャンネルだけをミュートし、それ以外の全チャンネル(パーソナリティ2人の声)を送るよう設定済み(これを『N-1(マイナスワン)ミックス』と呼ぶ)。このAUX SEND 1を、電話ハイブリッド「JK Audio Broadcast Host」のSEND IN(電話回線へ送る音の入力)へ接続し、Broadcast HostのOUTPUT(電話回線から届いた、相手の声だけが出てくる出力)を、XR18の空いているチャンネル(CH8)のマイク/ライン入力へ接続して、番組全体の音にミックスしよう。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Behringer XR18(デジタルミキサー)",
+            icon: "XR18",
+            ports: [
+              { id: "auxSend", label: "AUX SEND 1 (XLR)", type: "xlr", dir: "out" },
+              { id: "ch8In", label: "CH8 MIC/LINE IN (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          {
+            id: "hybrid",
+            label: "JK Audio Broadcast Host(電話ハイブリッド)",
+            icon: "BCHost",
+            ports: [
+              { id: "sendIn", label: "SEND IN (XLR)", type: "xlr", dir: "in" },
+              { id: "out", label: "OUTPUT (XLR, 相手の声のみ)", type: "xlr", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "rca"],
+        correctConnections: [
+          { from: "mixer.auxSend", to: "hybrid.sendIn", cable: "xlr" },
+          { from: "hybrid.out", to: "mixer.ch8In", cable: "xlr" },
+        ],
+        explain:
+          "電話ハイブリッドは、1本の電話回線で『こちらの声を送る』『相手の声を受け取る』を同時にこなす機材。もしAUX SEND 1に電話出演者自身のチャンネルまで混ぜて送ってしまうと、相手は自分の声を(電話回線とスタジオ側の遅延を挟んで)少し遅れて聞くことになり、強いエコーやハウリングの原因になる。そこで、送り出すミックスからは電話出演者本人のチャンネルだけを抜いた『ミックスマイナス(N-1ミックス)』を作ってSEND INへ送るのが放送・配信の定石。Broadcast HostのOUTPUTから出てくるのは相手の声だけなので、これを空いているチャンネルに立てれば、パーソナリティ2人の声と電話出演者の声が1つのミックスとしてXR18でまとまり、そのままオンエアや配信に使える。この『自分自身の声だけを抜いて相手に返す』という考え方は、Zoomなどのオンライン会議で相手側にハウリングのある音を返さないための処理にも応用されている。",
+      },
+    },
   ],
 };
