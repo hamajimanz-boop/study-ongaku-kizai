@@ -2108,5 +2108,29 @@ window.COURSES["gear_patch_practice"] = {
           "MIDI THRUは『受け取った演奏データを、寸分違わずそのまま複製してもう1つ先に転送する』ための専用端子で、MIDI OUTのように『自分が生成したデータ』を送るわけではない点がポイント。この仕組みを使うと、A-88MKII → INTEGRA-7(MIDI IN)→(MIDI THRU)→ JV-1080(MIDI IN)というように、1本のキーボードの演奏データを複数の音源モジュールへ数珠つなぎ(デイジーチェーン)で分配でき、両方の音源を同時に鳴らして音を重ねる『レイヤーサウンド』が作れる。ただし、あまり多くの機材をTHRUで直列に連結すると、信号が伝わる過程でわずかなタイミングのズレ(ジッター)が蓄積することがあり、実務では以前の単元で登場したMIDI Solutions MERGERのようなマージボックスや、USB-MIDIインターフェースの複数ポート出力を使って、各機材へ直接データを配る設計にすることも多い。",
       },
     },
+    {
+      id: "guitar_wireless_system",
+      order: 53,
+      title: "ギター用ワイヤレスシステムを配線する(Shure GLXD16)",
+      category: "配線問題",
+      hook: "ボーカル用ワイヤレスと同じ『マイク』としてではなく、楽器の信号(Hi-Z)を無線で飛ばす——ギター専用のワイヤレスシステムを配線しよう。",
+      patch: {
+        scenario:
+          "ライブでギタリストがケーブルを気にせずステージを動き回れるように、ワイヤレスシステム「Shure GLXD16」を導入する。ギター「Fender Stratocaster」の出力に、ボディに装着するトランスミッター「GLXD1」を接続し、ペダルボード上に置いたレシーバー「GLXD6」(チューナー機能内蔵、足元で踏んで操作するペダル型)で無線受信する。GLXD6の出力を、ギターアンプ「Marshall JVM410H」のINPUTへ接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT", type: "ts", dir: "out" }] },
+          { id: "tx", label: "Shure GLXD1(ボディパック型トランスミッター)", icon: "GLXD1", ports: [{ id: "in", label: "INPUT", type: "ts", dir: "in" }] },
+          { id: "rx", label: "Shure GLXD6(ペダル型レシーバー)", icon: "GLXD6", ports: [{ id: "out", label: "OUTPUT", type: "ts", dir: "out" }] },
+          { id: "amp", label: "Marshall JVM410H", icon: "JVM410H", ports: [{ id: "in", label: "INPUT", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "usb"],
+        correctConnections: [
+          { from: "guitar.out", to: "tx.in", cable: "ts" },
+          { from: "rx.out", to: "amp.in", cable: "ts" },
+        ],
+        explain:
+          "ボーカル用のワイヤレスシステム(以前の単元で扱ったShure ULXD4Dなど)はマイクからのマイクレベル信号をXLRで扱うのに対し、GLXD16のようなギター用ワイヤレスシステムは、エレキギターのような高インピーダンス(Hi-Z)の楽器信号をそのまま無線化する設計になっている。GLXD1トランスミッターはギターのアウトプットに直接プラグイン(挿し込む)するタイプで、電波を使ってペダルボード上のGLXD6レシーバーへ信号を飛ばす——この間はケーブルではなく無線区間なので、パッチケーブルは登場しない。GLXD6の出力はアンプのHi-Z入力にそのまま送れるよう、ギター本来のインピーダンスに近い特性で出力される点も、通常のDIボックス(インピーダンスをライン/マイクレベルに変換する機材)とは役割が異なる。GLXD6はチューナー機能も内蔵しており、ペダルを踏むとミュートしながらチューニングできるため、ステージ上でケーブルレスかつ音を出さずにチューニングを確認できる実用的なメリットもある。",
+      },
+    },
   ],
 };
