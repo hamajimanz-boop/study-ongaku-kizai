@@ -2057,5 +2057,56 @@ window.COURSES["gear_patch_practice"] = {
           "ループスイッチャーは、複数のエフェクターをそれぞれ独立した『ループ(SEND/RETURN)』に接続しておき、フットスイッチ1つでそのループを丸ごとオン/オフできる機材。ペダルを1台ずつ直列(シリアル)につなぐ従来のペダルボードだと、足元でバイパスを1つずつ踏み替える必要があり、踏み忘れや誤操作が起きやすいうえ、ケーブルの本数が増えるほど音質劣化(バッファーの重ね掛かりやノイズ)のリスクも上がる。Boss ES-8のようなループスイッチャーなら、あらかじめ『Aメロは歪みだけ』『サビは歪み+ディレイ』のようにパッチ(組み合わせ)を登録しておき、曲中でボタン1つで一括切替できる。ES-8自体はMIDIの送受信にも対応しており、MIDI対応のペダルであれば音色そのものの呼び出しまで同時に自動化できるが、今回のシンプルな構成ではMIDIケーブルは登場しない。",
       },
     },
+    {
+      id: "midi_thru_daisychain",
+      order: 52,
+      title: "MIDI THRUで音源モジュールをデイジーチェーン接続する(Roland INTEGRA-7 + JV-1080)",
+      category: "配線問題",
+      hook: "1本のMIDIケーブルからでも、THRU端子を数珠つなぎにすれば複数の音源を同時に鳴らせる——レイヤーサウンドの裏側にある配線を体験しよう。",
+      patch: {
+        scenario:
+          "MIDIマスターキーボード「Roland A-88MKII」を弾いて、2台の音源モジュール「Roland INTEGRA-7」と「Roland JV-1080」を同時に鳴らし、2つの音色を重ねた『レイヤーサウンド』を作りたい。A-88MKIIのMIDI OUTから、まずINTEGRA-7のMIDI INへ演奏データを送る。INTEGRA-7のMIDI THRU(入ってきたデータをそのまま複製して転送する端子)から、JV-1080のMIDI INへケーブルをつなぎ、1本のキーボードから2台を同時に演奏できるようにしよう。さらに、INTEGRA-7とJV-1080それぞれの音声出力を、ミキサー「Yamaha MG12XU」の空いているチャンネルへ立てて音を混ぜよう。",
+        equipment: [
+          { id: "keyboard", label: "Roland A-88MKII(MIDIマスターキーボード)", icon: "A-88", ports: [{ id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" }] },
+          {
+            id: "module1",
+            label: "Roland INTEGRA-7(音源モジュール)",
+            icon: "INTGR7",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "midiThru", label: "MIDI THRU", type: "midi", dir: "out" },
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "module2",
+            label: "Roland JV-1080(音源モジュール)",
+            icon: "JV1080",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "ch1In", label: "CH1 LINE IN (TRS)", type: "trs", dir: "in" },
+              { id: "ch2In", label: "CH2 LINE IN (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["midi", "trs", "usb", "xlr"],
+        correctConnections: [
+          { from: "keyboard.midiOut", to: "module1.midiIn", cable: "midi" },
+          { from: "module1.midiThru", to: "module2.midiIn", cable: "midi" },
+          { from: "module1.outL", to: "mixer.ch1In", cable: "trs" },
+          { from: "module2.outL", to: "mixer.ch2In", cable: "trs" },
+        ],
+        explain:
+          "MIDI THRUは『受け取った演奏データを、寸分違わずそのまま複製してもう1つ先に転送する』ための専用端子で、MIDI OUTのように『自分が生成したデータ』を送るわけではない点がポイント。この仕組みを使うと、A-88MKII → INTEGRA-7(MIDI IN)→(MIDI THRU)→ JV-1080(MIDI IN)というように、1本のキーボードの演奏データを複数の音源モジュールへ数珠つなぎ(デイジーチェーン)で分配でき、両方の音源を同時に鳴らして音を重ねる『レイヤーサウンド』が作れる。ただし、あまり多くの機材をTHRUで直列に連結すると、信号が伝わる過程でわずかなタイミングのズレ(ジッター)が蓄積することがあり、実務では以前の単元で登場したMIDI Solutions MERGERのようなマージボックスや、USB-MIDIインターフェースの複数ポート出力を使って、各機材へ直接データを配る設計にすることも多い。",
+      },
+    },
   ],
 };
