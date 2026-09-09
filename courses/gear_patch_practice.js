@@ -2132,5 +2132,56 @@ window.COURSES["gear_patch_practice"] = {
           "ボーカル用のワイヤレスシステム(以前の単元で扱ったShure ULXD4Dなど)はマイクからのマイクレベル信号をXLRで扱うのに対し、GLXD16のようなギター用ワイヤレスシステムは、エレキギターのような高インピーダンス(Hi-Z)の楽器信号をそのまま無線化する設計になっている。GLXD1トランスミッターはギターのアウトプットに直接プラグイン(挿し込む)するタイプで、電波を使ってペダルボード上のGLXD6レシーバーへ信号を飛ばす——この間はケーブルではなく無線区間なので、パッチケーブルは登場しない。GLXD6の出力はアンプのHi-Z入力にそのまま送れるよう、ギター本来のインピーダンスに近い特性で出力される点も、通常のDIボックス(インピーダンスをライン/マイクレベルに変換する機材)とは役割が異なる。GLXD6はチューナー機能も内蔵しており、ペダルを踏むとミュートしながらチューニングできるため、ステージ上でケーブルレスかつ音を出さずにチューニングを確認できる実用的なメリットもある。",
       },
     },
+    {
+      id: "midi_to_cv_gate",
+      order: 54,
+      title: "DAWのMIDIをCV/Gateに変換してヴィンテージシンセを鳴らす(Kenton Pro-2000 mkII + Roland SH-101)",
+      category: "配線問題",
+      hook: "MIDI端子を持たないヴィンテージシンセも、変換すればDAWの打ち込みで演奏できる——『MIDI-CVコンバーター』の配線を体験しよう。",
+      patch: {
+        scenario:
+          "MIDI端子を持たない(発売当時、MIDI規格がまだ普及していなかった)ヴィンテージのアナログシンセ「Roland SH-101」を、DAWの打ち込みデータで演奏したい。PC(DAW起動済み)のUSBから、USB-MIDIインターフェース「Roland UM-ONE mk2」を経由してMIDI信号を5ピンDINに変換し、「Kenton Pro-2000 mkII」(MIDI-CV/Gateコンバーター)のMIDI INへ送る。Pro-2000 mkIIが生成したCV(音の高さを表す電圧)とGATE(音の長さ・オン/オフ)を、それぞれSH-101のCV INとGATE INへ接続しよう。",
+        equipment: [
+          { id: "pc", label: "PC(DAW起動済み)", icon: "PC", ports: [{ id: "usbOut", label: "USB", type: "usb", dir: "out" }] },
+          {
+            id: "umone",
+            label: "Roland UM-ONE mk2(USB-MIDIインターフェース)",
+            icon: "UM-ONE",
+            ports: [
+              { id: "usbIn", label: "USB", type: "usb", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" },
+            ],
+          },
+          {
+            id: "kenton",
+            label: "Kenton Pro-2000 mkII(MIDI-CV/Gateコンバーター)",
+            icon: "Pro2000",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "cvOut", label: "CV OUT", type: "cv", dir: "out" },
+              { id: "gateOut", label: "GATE OUT", type: "cv", dir: "out" },
+            ],
+          },
+          {
+            id: "synth",
+            label: "Roland SH-101(ヴィンテージアナログシンセ)",
+            icon: "SH-101",
+            ports: [
+              { id: "cvIn", label: "CV IN", type: "cv", dir: "in" },
+              { id: "gateIn", label: "GATE IN", type: "cv", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["cv", "midi", "usb", "trs"],
+        correctConnections: [
+          { from: "pc.usbOut", to: "umone.usbIn", cable: "usb" },
+          { from: "umone.midiOut", to: "kenton.midiIn", cable: "midi" },
+          { from: "kenton.cvOut", to: "synth.cvIn", cable: "cv" },
+          { from: "kenton.gateOut", to: "synth.gateIn", cable: "cv" },
+        ],
+        explain:
+          "Roland SH-101が発売された1980年代前半はまだMIDI規格が存在せず(MIDIの策定は1983年)、シンセ同士やシーケンサーとの同期にはCV(Control Voltage、音の高さを電圧で表す信号)とGATE(音のオン/オフを表す信号)が使われていた。現代のDAWはMIDIでしか演奏データを送れないため、Kenton Pro-2000 mkIIのような『MIDI-CV/Gateコンバーター』を挟み、MIDIのノート情報をCV(ピッチ電圧)とGATE(トリガー)に変換してSH-101へ送ることで、DAWの打ち込みでヴィンテージシンセを演奏できるようになる。PCとPro-2000 mkIIの間にUSB-MIDIインターフェース「UM-ONE mk2」を挟んでいるのは、PCのUSB-MIDIをKenton側の5ピンDIN MIDI INへ変換するため——以前の単元で扱ったEurorackモジュラーのCV/Gateとは別系統の機材同士でも、根っこにある電圧信号の考え方は同じであることがわかる。SH-101のCV/GateはV/oct(1オクターブ=1V)のスケールを採用しているため、Pro-2000 mkII側もV/octスケールに設定しておく必要がある——CV機器同士を組み合わせる際は、電圧のスケール(規格)が合っているかの確認が欠かせない。",
+      },
+    },
   ],
 };
