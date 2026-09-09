@@ -2183,5 +2183,39 @@ window.COURSES["gear_patch_practice"] = {
           "Roland SH-101が発売された1980年代前半はまだMIDI規格が存在せず(MIDIの策定は1983年)、シンセ同士やシーケンサーとの同期にはCV(Control Voltage、音の高さを電圧で表す信号)とGATE(音のオン/オフを表す信号)が使われていた。現代のDAWはMIDIでしか演奏データを送れないため、Kenton Pro-2000 mkIIのような『MIDI-CV/Gateコンバーター』を挟み、MIDIのノート情報をCV(ピッチ電圧)とGATE(トリガー)に変換してSH-101へ送ることで、DAWの打ち込みでヴィンテージシンセを演奏できるようになる。PCとPro-2000 mkIIの間にUSB-MIDIインターフェース「UM-ONE mk2」を挟んでいるのは、PCのUSB-MIDIをKenton側の5ピンDIN MIDI INへ変換するため——以前の単元で扱ったEurorackモジュラーのCV/Gateとは別系統の機材同士でも、根っこにある電圧信号の考え方は同じであることがわかる。SH-101のCV/GateはV/oct(1オクターブ=1V)のスケールを採用しているため、Pro-2000 mkII側もV/octスケールに設定しておく必要がある——CV機器同士を組み合わせる際は、電圧のスケール(規格)が合っているかの確認が欠かせない。",
       },
     },
+    {
+      id: "streaming_game_mic_mixer",
+      order: 55,
+      title: "実況配信のゲーム音声とマイクをミックスする(TC Helicon GoXLR)",
+      category: "配線問題",
+      hook: "ゲーム機の音・PCの音・自分の声を、視聴者に聞かせたいバランスでミックスしつつ、自分の耳ではまた別のバランスで聞きたい——配信者向けミキサーならではの配線を体験しよう。",
+      patch: {
+        scenario:
+          "ゲーム実況配信者が、コンデンサーマイク「Shure SM7B」の音声と、ゲーム機「PlayStation 5」の音声を、配信用オーディオインターフェース/ミキサー「TC Helicon GoXLR」でミックスしたい。SM7BをGoXLRのMIC INへ、PS5のヘッドホン出力をGoXLRのGAME INPUTへ接続し、GoXLRからUSBでPCへ送って配信ソフト(OBS等)に音を渡そう。",
+        equipment: [
+          { id: "mic", label: "Shure SM7B", icon: "SM7B", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ps5", label: "PlayStation 5", icon: "PS5", ports: [{ id: "audioOut", label: "AUDIO OUT (TRS)", type: "trs", dir: "out" }] },
+          {
+            id: "goxlr",
+            label: "TC Helicon GoXLR",
+            icon: "GoXLR",
+            ports: [
+              { id: "micIn", label: "MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "gameIn", label: "GAME INPUT (TRS)", type: "trs", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "配信用PC", icon: "PC", ports: [{ id: "usbIn", label: "USB", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "ts", "rca"],
+        correctConnections: [
+          { from: "mic.out", to: "goxlr.micIn", cable: "xlr" },
+          { from: "ps5.audioOut", to: "goxlr.gameIn", cable: "trs" },
+          { from: "goxlr.usb", to: "pc.usbIn", cable: "usb" },
+        ],
+        explain:
+          "GoXLRのようなブロードキャスト特化型ミキサーは、マイク・ゲーム機・PCの音声(通知音やボイスチャットなど)をそれぞれ別々の入力chとして受け取り、『配信で視聴者に聞かせる音量バランス』と『自分がヘッドホンで聞くバランス(たとえばゲーム音は大きめ、自分の声は小さめ等)』を、電動フェーダーでそれぞれ独立に調整できるのが特徴。マイクはMIDASプリアンプを搭載したXLR入力で受け、コンデンサーマイクを選べば+48Vのファンタム電源も供給できる。ゲーム機やPCの音は、あらかじめ用途別にチャンネルが分かれているため、『実況の声は配信に乗せるが、特定の通知音だけは自分にしか聞こえないようにする』といった、配信者ならではの細かい音量コントロールが1台で完結する。GoXLRからPCへの経路はUSB1本にまとめられ、配信ソフト側では各チャンネルを個別のオーディオデバイスとして認識できるため、マイクの声だけを別トラックで録音しておく、といった使い方もできる。",
+      },
+    },
   ],
 };
