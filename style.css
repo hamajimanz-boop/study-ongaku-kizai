@@ -69,6 +69,7 @@ html, body {
   color: var(--ink);
   font-family: system-ui, -apple-system, "Hiragino Sans", "Segoe UI", sans-serif;
   line-height: 1.7;
+  overflow-wrap: break-word;
 }
 #app {
   max-width: 920px;
