@@ -2351,5 +2351,62 @@ window.COURSES["gear_patch_practice"] = {
           "Genelec GLM(Genelec Loudspeaker Manager)は、SAM(Smart Active Monitor)と呼ばれるDSP内蔵のGenelecモニターを、部屋の音響特性に合わせて自動補正するためのシステム。GLM Network AdapterはPCとUSBで繋がり、付属の測定用リファレンスマイクをミニジャックでアダプターに挿すことで、部屋で実際にテスト信号を鳴らして反射やクセを測定できる。モニター同士はEthernet(Cat5等の一般的なLANケーブル)でIN→THRUとデイジーチェーン接続することで、1本のケーブルを各モニターに個別に配線しなくても、アダプターから順番に数珠つなぎで全台へ制御信号と測定用の信号を送れる。このEthernet配線はあくまで測定・制御(音量やディレイ、周波数補正の調整)のためのネットワークであり、日常のミックス作業で聴く音楽そのものの信号は、別途インターフェースからのAES/EBUやアナログ入力でモニターへ送られる——「音を聴く経路」と「部屋を測って補正する経路」が別系統になっている点が、通常のスピーカー配線との大きな違い。",
       },
     },
+    {
+      id: "wireless_antenna_combiner",
+      order: 59,
+      title: "ワイヤレスマイクのアンテナ分配システムを組む(Shure UA844+)",
+      category: "配線問題(プロ環境)",
+      hook: "ワイヤレス受信機が増えるたびにアンテナも本数を増やしていたら、ステージ裏がアンテナだらけになる——複数の受信機で2本のアンテナを共有する配線を体験しよう。",
+      patch: {
+        scenario:
+          "ライブハウスで、2式のワイヤレスマイク受信機(いずれもダイバーシティ方式でANT A・ANT Bの2系統アンテナ入力を持つ)を同時に使う。受信機ごとに専用アンテナを2本ずつ、計4本立てるのではなく、アクティブアンテナコンバイナー「Shure UA844+」を使って、指向性アンテナ2本(A系統・B系統)からの電波を、内部で増幅・分配して2式の受信機へ届けよう。",
+        equipment: [
+          { id: "antA", label: "UHFアンテナ A(指向性)", icon: "AntA", ports: [{ id: "out", label: "OUT(BNC)", type: "rf", dir: "out" }] },
+          { id: "antB", label: "UHFアンテナ B(指向性)", icon: "AntB", ports: [{ id: "out", label: "OUT(BNC)", type: "rf", dir: "out" }] },
+          {
+            id: "combiner",
+            label: "Shure UA844+(アクティブアンテナコンバイナー)",
+            icon: "UA844+",
+            ports: [
+              { id: "inA", label: "ANT A IN(BNC)", type: "rf", dir: "in" },
+              { id: "inB", label: "ANT B IN(BNC)", type: "rf", dir: "in" },
+              { id: "outA1", label: "RF OUT 1 – ANT A", type: "rf", dir: "out" },
+              { id: "outB1", label: "RF OUT 1 – ANT B", type: "rf", dir: "out" },
+              { id: "outA2", label: "RF OUT 2 – ANT A", type: "rf", dir: "out" },
+              { id: "outB2", label: "RF OUT 2 – ANT B", type: "rf", dir: "out" },
+            ],
+          },
+          {
+            id: "rx1",
+            label: "ワイヤレス受信機1(ダイバーシティ)",
+            icon: "RX1",
+            ports: [
+              { id: "antAIn", label: "ANT A IN", type: "rf", dir: "in" },
+              { id: "antBIn", label: "ANT B IN", type: "rf", dir: "in" },
+            ],
+          },
+          {
+            id: "rx2",
+            label: "ワイヤレス受信機2(ダイバーシティ)",
+            icon: "RX2",
+            ports: [
+              { id: "antAIn", label: "ANT A IN", type: "rf", dir: "in" },
+              { id: "antBIn", label: "ANT B IN", type: "rf", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["rf", "xlr", "trs", "ethernet"],
+        correctConnections: [
+          { from: "antA.out", to: "combiner.inA", cable: "rf" },
+          { from: "antB.out", to: "combiner.inB", cable: "rf" },
+          { from: "combiner.outA1", to: "rx1.antAIn", cable: "rf" },
+          { from: "combiner.outB1", to: "rx1.antBIn", cable: "rf" },
+          { from: "combiner.outA2", to: "rx2.antAIn", cable: "rf" },
+          { from: "combiner.outB2", to: "rx2.antBIn", cable: "rf" },
+        ],
+        explain:
+          "ワイヤレスマイクの受信機は、電波の受信を安定させる「ダイバーシティ方式」のため通常ANT A・ANT Bの2系統のアンテナ入力を持つ。受信機の台数が増えるたびにアンテナも2本ずつ増やしていくと、ステージ裏や卓周りがアンテナだらけになり、しかもアンテナ同士が近接して干渉やRF(電波)の飽和を招きやすい。Shure UA844+のようなアクティブアンテナコンバイナー(分配器)は、A系統・B系統それぞれ1本ずつのアンテナで受けた電波を、内部のRFアンプで増幅してから複数の受信機へ分配することで、必要なアンテナの本数を減らしつつ、電波強度も一定に保てる。「アクティブ」という名称の通り、内部に信号を増幅する回路を持つ点が、単に電波を分けるだけの「パッシブ」な分配器との違い——パッシブ型は分配するたびに電波が減衰するのに対し、アクティブ型は増幅で補うため、より多くの受信機に安定して電波を届けられる。UA844+にはさらに「カスケード」ポートがあり、複数台を数珠つなぎにすることで、4台を超える受信機にも対応を拡張できる。",
+      },
+    },
   ],
 };
