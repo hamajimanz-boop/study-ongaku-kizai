@@ -2528,5 +2528,46 @@ window.COURSES["gear_patch_practice"] = {
           "最初の単元で扱ったRode NT1のようなXLRコンデンサーマイクは、ファンタム電源(48V)を送りA/D変換も行ってくれる別体のオーディオインターフェースが必須だったが、AT2020USB+のようなUSBマイクは、そのインターフェースの役割(電源供給・プリアンプ・A/D変換)をマイク本体に内蔵しているため、USBケーブル1本でPCと直結できる。手軽さと引き換えに、複数本のマイクを同時に使う多チャンネル録音や、外部マイクプリで音の質感を変えるといった拡張性には乏しく、あくまで1人でのシンプルな宅録・配信向けの構成といえる。マイク本体のヘッドホン端子は、PCやDAWを経由せずマイクが直接拾った音をそのまま返しているため、DAWのバッファー処理による遅延(レイテンシー)を感じずに自分の声をモニターできる『ゼロレイテンシーモニタリング』という仕組みで、配信中の声の遅れによる違和感を防げる。",
       },
     },
+    {
+      id: "ribbon_mic_cloudlifter",
+      order: 63,
+      title: "リボンマイクをインラインプリアンプ経由で低ノイズ接続する(Royer R-121 + Cloudlifter CL-1)",
+      category: "配線問題",
+      hook: "出力が小さすぎて、プリアンプのゲインを目一杯上げてもまだノイズっぽい——リボンマイクにありがちな悩みを、マイクとプリの『間』に挟む機材で解決しよう。",
+      patch: {
+        scenario:
+          "ギターアンプの収録に、出力レベルがとても低いパッシブ型のリボンマイク「Royer R-121」を使う。オーディオインターフェース「Focusrite Scarlett 18i20」のマイクプリアンプだけではゲインが足りずノイズが目立ってしまうため、その間に『インラインマイクプリアンプ(マイクとプリの間に挟んで信号を底上げする機材)』の「Cloudlifter CL-1」を挟んで接続しよう。",
+        equipment: [
+          { id: "mic", label: "Royer R-121(リボンマイク)", icon: "R-121", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "cloudlifter",
+            label: "Cloudlifter CL-1(インラインマイクプリアンプ)",
+            icon: "CL-1",
+            ports: [
+              { id: "in", label: "MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "out", label: "MIC OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 18i20",
+            icon: "18i20",
+            ports: [
+              { id: "in1", label: "MIC IN 1 (XLR, +48V)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "ts"],
+        correctConnections: [
+          { from: "mic.out", to: "cloudlifter.in", cable: "xlr" },
+          { from: "cloudlifter.out", to: "interface.in1", cable: "xlr" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "Royer R-121のようなパッシブ型リボンマイクは、コンデンサーマイクよりずっと出力レベルが低いうえ、電源を必要としない代わりに信号を増幅する仕組みも内蔵していないため、インターフェース側のマイクプリアンプのゲインを目一杯上げてもまだ音が小さく、結果的にノイズだけが目立ってしまいがちになる。かといって、コンデンサーマイク用の+48Vファンタム電源をそのままリボン素子に流してしまうと、断線や損傷につながる危険がある(古いリボンマイクほどこのリスクが高い)。Cloudlifter CL-1のような『インラインマイクプリアンプ(マイクアクティベーター)』は、マイクとインターフェースの間に挟むことで、インターフェース側から送られてくる+48Vファンタム電源を受け取って内部の増幅回路の電源として使いながら、そのファンタム電源自体はマイク側には流さずブロックする——電源はもらうがマイクは守る、という仕組みで、約20〜25dBのクリーンなゲインを追加してからインターフェースへ送り出せる。結果としてインターフェース側のゲインつまみを上げすぎずに済み、ノイズの少ないリボンマイクの音を録れるようになる。",
+      },
+    },
   ],
 };
