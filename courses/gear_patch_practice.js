@@ -2408,5 +2408,49 @@ window.COURSES["gear_patch_practice"] = {
           "ワイヤレスマイクの受信機は、電波の受信を安定させる「ダイバーシティ方式」のため通常ANT A・ANT Bの2系統のアンテナ入力を持つ。受信機の台数が増えるたびにアンテナも2本ずつ増やしていくと、ステージ裏や卓周りがアンテナだらけになり、しかもアンテナ同士が近接して干渉やRF(電波)の飽和を招きやすい。Shure UA844+のようなアクティブアンテナコンバイナー(分配器)は、A系統・B系統それぞれ1本ずつのアンテナで受けた電波を、内部のRFアンプで増幅してから複数の受信機へ分配することで、必要なアンテナの本数を減らしつつ、電波強度も一定に保てる。「アクティブ」という名称の通り、内部に信号を増幅する回路を持つ点が、単に電波を分けるだけの「パッシブ」な分配器との違い——パッシブ型は分配するたびに電波が減衰するのに対し、アクティブ型は増幅で補うため、より多くの受信機に安定して電波を届けられる。UA844+にはさらに「カスケード」ポートがあり、複数台を数珠つなぎにすることで、4台を超える受信機にも対応を拡張できる。",
       },
     },
+    {
+      id: "ambisonics_vr_mic",
+      order: 60,
+      title: "360度収録用Ambisonicsマイクを配線する(Sennheiser AMBEO VR Mic)",
+      category: "配線問題",
+      hook: "1本のマイクなのに、出てくるケーブルは4本——VR動画向けの全方位音声を録るには、4つのカプセルを『順番通りに』つながなければならない。",
+      patch: {
+        scenario:
+          "360度VR動画の撮影にあわせて、全方位の音を1点で収録できる「Sennheiser AMBEO VR Mic」(正四面体状に4つのカプセルを配置したAmbisonicsマイク)を使う。付属のブレイクアウトケーブルで、4つのカプセルそれぞれの出力(CAPSULE 1〜4、番号・色分け済み)が出てくるので、4ch同時録音できるフィールドレコーダー「Zoom F8n」のIN 1〜4へ、番号を対応させて接続しよう。",
+        equipment: [
+          {
+            id: "mic",
+            label: "Sennheiser AMBEO VR Mic(4カプセルAmbisonicsマイク)",
+            icon: "AMBEO",
+            ports: [
+              { id: "cap1", label: "CAPSULE 1 OUT (XLR)", type: "xlr", dir: "out" },
+              { id: "cap2", label: "CAPSULE 2 OUT (XLR)", type: "xlr", dir: "out" },
+              { id: "cap3", label: "CAPSULE 3 OUT (XLR)", type: "xlr", dir: "out" },
+              { id: "cap4", label: "CAPSULE 4 OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "recorder",
+            label: "Zoom F8n(8chフィールドレコーダー)",
+            icon: "F8n",
+            ports: [
+              { id: "in1", label: "IN 1 (XLR, +48V)", type: "xlr", dir: "in" },
+              { id: "in2", label: "IN 2 (XLR, +48V)", type: "xlr", dir: "in" },
+              { id: "in3", label: "IN 3 (XLR, +48V)", type: "xlr", dir: "in" },
+              { id: "in4", label: "IN 4 (XLR, +48V)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "optical"],
+        correctConnections: [
+          { from: "mic.cap1", to: "recorder.in1", cable: "xlr" },
+          { from: "mic.cap2", to: "recorder.in2", cable: "xlr" },
+          { from: "mic.cap3", to: "recorder.in3", cable: "xlr" },
+          { from: "mic.cap4", to: "recorder.in4", cable: "xlr" },
+        ],
+        explain:
+          "AMBEO VR Micは正四面体の頂点に4つのカーディオイド(単一指向性)カプセルを配置し、それぞれが独立したコンデンサーカプセルとしてXLR出力を持つ(すべてコンデンサー型なので4ch分すべてに+48Vファンタム電源が必要)。この4chの生の状態を『A-format』と呼び、そのままでは全方位の音声として再生できない——後で専用のA-B変換プラグインを使い、上下・前後・左右の指向性成分に変換する『B-format』というAmbisonics規格の形式にエンコードして、はじめてVRプレイヤー等で360度の音として再生できるようになる。この変換処理は、4つのカプセルの位置関係(1〜4番がどの向きに配置されているか)を前提に計算されるため、録音時にケーブルの番号とレコーダーの入力chの番号を絶対にズラしてはいけない——1番と2番を挿し間違えるだけで、変換後の定位(音の方向)がすべて狂ってしまう。また4ch分の音量(ゲイン)は、変換の精度を保つためレコーダー側で『チャンネルリンク』機能を使い、4ch同時に同じ量だけ調整するのが基本。",
+      },
+    },
   ],
 };
