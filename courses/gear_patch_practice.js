@@ -2452,5 +2452,50 @@ window.COURSES["gear_patch_practice"] = {
           "AMBEO VR Micは正四面体の頂点に4つのカーディオイド(単一指向性)カプセルを配置し、それぞれが独立したコンデンサーカプセルとしてXLR出力を持つ(すべてコンデンサー型なので4ch分すべてに+48Vファンタム電源が必要)。この4chの生の状態を『A-format』と呼び、そのままでは全方位の音声として再生できない——後で専用のA-B変換プラグインを使い、上下・前後・左右の指向性成分に変換する『B-format』というAmbisonics規格の形式にエンコードして、はじめてVRプレイヤー等で360度の音として再生できるようになる。この変換処理は、4つのカプセルの位置関係(1〜4番がどの向きに配置されているか)を前提に計算されるため、録音時にケーブルの番号とレコーダーの入力chの番号を絶対にズラしてはいけない——1番と2番を挿し間違えるだけで、変換後の定位(音の方向)がすべて狂ってしまう。また4ch分の音量(ゲイン)は、変換の精度を保つためレコーダー側で『チャンネルリンク』機能を使い、4ch同時に同じ量だけ調整するのが基本。",
       },
     },
+    {
+      id: "hdmi_audio_deembed",
+      order: 61,
+      title: "HDMIから音声だけを抜き出して配信ミキサーに送る(Extron HAE 100 4K Plus)",
+      category: "配線問題",
+      hook: "最近のゲーム機やPCは、音声も映像もHDMI1本にまとめて出してくる——配信用ミキサーに音だけを渡すには、映像信号から音声を『抜き出す』機材が必要になる。",
+      patch: {
+        scenario:
+          "配信用のPCは、ヘッドホン端子等の別出力を持たず、映像と音声をまとめてHDMI1本で出力する設定にしている。このHDMI出力を、HDMIオーディオデエンベデダー(HDMI信号から音声だけを分離して取り出す機材)「Extron HAE 100 4K Plus」のHDMI INへ入れ、映像はHDMI THRU(スルー)から配信用モニターへそのまま送りつつ、分離したアナログステレオ音声を、配信用ミキサー「Yamaha AG06MK2」のSTEREO IN(RCA、L/R)へ送って、マイクの声とミックスできるようにしよう。",
+        equipment: [
+          { id: "pc", label: "配信用PC(HDMI出力のみ)", icon: "PC", ports: [{ id: "hdmiOut", label: "HDMI OUT", type: "hdmi", dir: "out" }] },
+          {
+            id: "extron",
+            label: "Extron HAE 100 4K Plus(HDMIオーディオデエンベデダー)",
+            icon: "HAE100",
+            ports: [
+              { id: "hdmiIn", label: "HDMI IN", type: "hdmi", dir: "in" },
+              { id: "hdmiThru", label: "HDMI THRU OUT", type: "hdmi", dir: "out" },
+              { id: "analogOutL", label: "ANALOG AUDIO OUT L (RCA)", type: "rca", dir: "out" },
+              { id: "analogOutR", label: "ANALOG AUDIO OUT R (RCA)", type: "rca", dir: "out" },
+              { id: "spdifOut", label: "S/PDIF OUT(同軸/RCA)", type: "rca", dir: "out" },
+            ],
+          },
+          { id: "display", label: "配信用モニター", icon: "Mon", ports: [{ id: "hdmiIn", label: "HDMI IN", type: "hdmi", dir: "in" }] },
+          {
+            id: "mixer",
+            label: "Yamaha AG06MK2",
+            icon: "AG06MK2",
+            ports: [
+              { id: "stereoInL", label: "STEREO IN L (RCA)", type: "rca", dir: "in" },
+              { id: "stereoInR", label: "STEREO IN R (RCA)", type: "rca", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["hdmi", "rca", "trs", "xlr", "optical"],
+        correctConnections: [
+          { from: "pc.hdmiOut", to: "extron.hdmiIn", cable: "hdmi" },
+          { from: "extron.hdmiThru", to: "display.hdmiIn", cable: "hdmi" },
+          { from: "extron.analogOutL", to: "mixer.stereoInL", cable: "rca" },
+          { from: "extron.analogOutR", to: "mixer.stereoInR", cable: "rca" },
+        ],
+        explain:
+          "HDMIケーブルは映像と音声の両方をまとめて1本で伝送する規格で、最近のゲーム機・ノートPC・キャプチャー機器は、単体のヘッドホン出力やライン出力を持たず『音声も映像もHDMIから出す』設計になっていることが多い。ところが配信用ミキサーの多くはHDMI入力を持たず、XLRやTRS、RCAといった従来のオーディオ入力しか受け付けないため、そのままでは接続できない。Extron HAE 100 4K Plusのような『HDMIオーディオデエンベデダー(de-embedder=分離器)』は、HDMI信号を一度受け取り、映像はHDMI THRU出力からそのまま次の機器(配信用モニターやキャプチャーカード)へ送りつつ、埋め込まれていた音声だけを分離してアナログ(RCA/TRS)またはS/PDIF(デジタル同軸)として別の出力から取り出せる。今回はYamaha AG06MK2のSTEREO INがRCA仕様のため、アナログ出力を選んで接続するが、もし接続先がAES/EBUやS/PDIF入力を持つデジタルミキサーであれば、S/PDIF OUTを使う場面もある——『デエンベデダー(分離)』の反対にあたる『エンベデダー(音声を映像に埋め込む機材)』も別に存在する点もあわせて覚えておくと理解が深まる。",
+      },
+    },
   ],
 };
