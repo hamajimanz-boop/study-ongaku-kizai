@@ -2251,5 +2251,61 @@ window.COURSES["gear_patch_practice"] = {
           "ORTF方式は、2本の単一指向性(カーディオイド)マイクのカプセル同士を約17cm離し、左右に約110度開いて立てるステレオマイキングの定番手法の1つで、フランスの放送局(ORTF)で開発された、人間の耳の間隔・角度に近い設計から、自然な奥行きと左右の広がりが録れるとされる。1本のマイクだけでは、楽器のどの位置の音を拾うかという『点』の情報しか録れないが、同一モデルの2本を正しい間隔・角度で立てることで、低音弦側と高音弦側の音の広がりや、ホールの響きの左右差までステレオ感として記録できる。左右のマイクは必ず同じモデル(今回はKM 184を2本)を使い、左右で特性が揃った状態にすることが重要——片方だけ違うモデルを使うと、左右の音色や感度に差が出て、ステレオイメージが崩れてしまう。XLRケーブルは録音の左右(L/R)を取り違えないよう、インターフェースの入力chとマイクの左右を対応させて挿すのがポイント。",
       },
     },
+    {
+      id: "analog_summing_mixer",
+      order: 57,
+      title: "アナログサミングミキサーでDAWのステムを外部ミックスする(Dangerous Music 2-BUS+)",
+      category: "配線問題(プロ環境)",
+      hook: "DAWの中で全トラックを混ぜる「ITB(イン・ザ・ボックス)ミックス」ではなく、あえて外に出してアナログ回路で混ぜる——ステムをサミングミキサーへ送り、また戻す配線を体験しよう。",
+      patch: {
+        scenario:
+          "ミックスエンジニアが、DAWで作った「ドラム」「ベース/ギター」「ボーカル」の3つのステレオステム(グループにまとめた音)を、アナログのサミングミキサー「Dangerous Music 2-BUS+」で混ぜたい。オーディオインターフェース「Universal Audio Apollo x8」の背面にはDB25コネクタの追加ライン出力があり、DB25-XLRスネークケーブルで3ステレオペア(計6ch)を2-BUS+の入力へ送る。2-BUS+でまとめられたステレオのミックス出力を、Apollo x8のアナログ入力(RETURN)へ戻し、DAWで新しいトラックとして録音し直せるように配線しよう。",
+        equipment: [
+          {
+            id: "interface",
+            label: "Universal Audio Apollo x8",
+            icon: "ApolloX8",
+            ports: [
+              { id: "stem1L", label: "STEM OUT 1 L (Drums)", type: "xlr", dir: "out" },
+              { id: "stem1R", label: "STEM OUT 1 R (Drums)", type: "xlr", dir: "out" },
+              { id: "stem2L", label: "STEM OUT 2 L (Bass/Gt)", type: "xlr", dir: "out" },
+              { id: "stem2R", label: "STEM OUT 2 R (Bass/Gt)", type: "xlr", dir: "out" },
+              { id: "stem3L", label: "STEM OUT 3 L (Vocals)", type: "xlr", dir: "out" },
+              { id: "stem3R", label: "STEM OUT 3 R (Vocals)", type: "xlr", dir: "out" },
+              { id: "returnL", label: "RETURN IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "returnR", label: "RETURN IN R (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          {
+            id: "summing",
+            label: "Dangerous Music 2-BUS+(アナログサミングミキサー)",
+            icon: "2BUS+",
+            ports: [
+              { id: "in1L", label: "CH1/2 IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "in1R", label: "CH1/2 IN R (XLR)", type: "xlr", dir: "in" },
+              { id: "in2L", label: "CH3/4 IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "in2R", label: "CH3/4 IN R (XLR)", type: "xlr", dir: "in" },
+              { id: "in3L", label: "CH5/6 IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "in3R", label: "CH5/6 IN R (XLR)", type: "xlr", dir: "in" },
+              { id: "mixOutL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mixOutR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "digilink"],
+        correctConnections: [
+          { from: "interface.stem1L", to: "summing.in1L", cable: "xlr" },
+          { from: "interface.stem1R", to: "summing.in1R", cable: "xlr" },
+          { from: "interface.stem2L", to: "summing.in2L", cable: "xlr" },
+          { from: "interface.stem2R", to: "summing.in2R", cable: "xlr" },
+          { from: "interface.stem3L", to: "summing.in3L", cable: "xlr" },
+          { from: "interface.stem3R", to: "summing.in3R", cable: "xlr" },
+          { from: "summing.mixOutL", to: "interface.returnL", cable: "xlr" },
+          { from: "summing.mixOutR", to: "interface.returnR", cable: "xlr" },
+        ],
+        explain:
+          "Dangerous Music 2-BUS+は最大16ch(8ステレオペア)をアナログ回路で混ぜられるサミングミキサーで、背面はDB25または XLRで入力を受けられる。多くのオーディオインターフェースは追加のライン出力をDB25コネクタでまとめて持っており、DB25-XLRスネークケーブルを使うことで、複数chをまとめて配線できる(1本ずつXLRを挿すより現実的)。DAWの内部(ITB=イン・ザ・ボックス)ですべてを混ぜるミックスと違い、外部のアナログ回路を通すことで、トランス回路や回路自体の非線形な歪みによる質感の変化(倍音の付加など)が加わるとされ、これを好むエンジニアが今でも一定数いる。2-BUS+から出てきたステレオのミックス信号は、そのままではDAWに戻らないため、インターフェースの余っているアナログ入力(RETURN)へ接続し、新しいオーディオトラックとして録音し直す必要がある——「外に出して、混ぜて、また録り直す」という往復の配線がアナログサミングの基本形。",
+      },
+    },
   ],
 };
