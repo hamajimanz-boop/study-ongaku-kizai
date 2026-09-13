@@ -2307,5 +2307,49 @@ window.COURSES["gear_patch_practice"] = {
           "Dangerous Music 2-BUS+は最大16ch(8ステレオペア)をアナログ回路で混ぜられるサミングミキサーで、背面はDB25または XLRで入力を受けられる。多くのオーディオインターフェースは追加のライン出力をDB25コネクタでまとめて持っており、DB25-XLRスネークケーブルを使うことで、複数chをまとめて配線できる(1本ずつXLRを挿すより現実的)。DAWの内部(ITB=イン・ザ・ボックス)ですべてを混ぜるミックスと違い、外部のアナログ回路を通すことで、トランス回路や回路自体の非線形な歪みによる質感の変化(倍音の付加など)が加わるとされ、これを好むエンジニアが今でも一定数いる。2-BUS+から出てきたステレオのミックス信号は、そのままではDAWに戻らないため、インターフェースの余っているアナログ入力(RETURN)へ接続し、新しいオーディオトラックとして録音し直す必要がある——「外に出して、混ぜて、また録り直す」という往復の配線がアナログサミングの基本形。",
       },
     },
+    {
+      id: "monitor_calibration_glm",
+      order: 58,
+      title: "モニタースピーカー較正用の測定マイクを配線する(Genelec GLM)",
+      category: "配線問題(プロ環境)",
+      hook: "スピーカーの音そのものではなく「部屋の響き」を測るための配線——測定マイクとネットワークアダプターで、GLMの自動音場補正を組んでみよう。",
+      patch: {
+        scenario:
+          "ミックスルームに「Genelec 8341A」(SAMモニター、L/R2台)を設置し、部屋の音響特性を測定して自動補正する「Genelec GLM」システムを組みたい。PCのUSBから「Genelec GLM Network Adapter」へ接続し、付属の「測定用リファレンスマイク」をアダプターのマイク入力へ挿す。アダプターからEthernetケーブルで8341A(L)へ、8341A(L)のTHRU(スルー)端子から8341A(R)へと、モニター同士をデイジーチェーン(数珠つなぎ)で接続しよう。",
+        equipment: [
+          { id: "pc", label: "PC(GLMソフトウェア)", icon: "PC", ports: [{ id: "usbOut", label: "USB", type: "usb", dir: "out" }] },
+          {
+            id: "adapter",
+            label: "Genelec GLM Network Adapter",
+            icon: "GLM",
+            ports: [
+              { id: "usbIn", label: "USB IN", type: "usb", dir: "in" },
+              { id: "micIn", label: "MIC IN(測定マイク用)", type: "trs", dir: "in" },
+              { id: "netOut", label: "NETWORK OUT", type: "ethernet", dir: "out" },
+            ],
+          },
+          { id: "mic", label: "測定用リファレンスマイク(GLM付属)", icon: "RefMic", ports: [{ id: "out", label: "OUT(ミニジャック)", type: "trs", dir: "out" }] },
+          {
+            id: "monL",
+            label: "Genelec 8341A(L, SAMモニター)",
+            icon: "8341A",
+            ports: [
+              { id: "netIn", label: "NETWORK IN", type: "ethernet", dir: "in" },
+              { id: "netThru", label: "NETWORK THRU", type: "ethernet", dir: "out" },
+            ],
+          },
+          { id: "monR", label: "Genelec 8341A(R, SAMモニター)", icon: "8341A", ports: [{ id: "netIn", label: "NETWORK IN", type: "ethernet", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "trs", "ethernet", "xlr", "optical"],
+        correctConnections: [
+          { from: "pc.usbOut", to: "adapter.usbIn", cable: "usb" },
+          { from: "mic.out", to: "adapter.micIn", cable: "trs" },
+          { from: "adapter.netOut", to: "monL.netIn", cable: "ethernet" },
+          { from: "monL.netThru", to: "monR.netIn", cable: "ethernet" },
+        ],
+        explain:
+          "Genelec GLM(Genelec Loudspeaker Manager)は、SAM(Smart Active Monitor)と呼ばれるDSP内蔵のGenelecモニターを、部屋の音響特性に合わせて自動補正するためのシステム。GLM Network AdapterはPCとUSBで繋がり、付属の測定用リファレンスマイクをミニジャックでアダプターに挿すことで、部屋で実際にテスト信号を鳴らして反射やクセを測定できる。モニター同士はEthernet(Cat5等の一般的なLANケーブル)でIN→THRUとデイジーチェーン接続することで、1本のケーブルを各モニターに個別に配線しなくても、アダプターから順番に数珠つなぎで全台へ制御信号と測定用の信号を送れる。このEthernet配線はあくまで測定・制御(音量やディレイ、周波数補正の調整)のためのネットワークであり、日常のミックス作業で聴く音楽そのものの信号は、別途インターフェースからのAES/EBUやアナログ入力でモニターへ送られる——「音を聴く経路」と「部屋を測って補正する経路」が別系統になっている点が、通常のスピーカー配線との大きな違い。",
+      },
+    },
   ],
 };
