@@ -2497,5 +2497,36 @@ window.COURSES["gear_patch_practice"] = {
           "HDMIケーブルは映像と音声の両方をまとめて1本で伝送する規格で、最近のゲーム機・ノートPC・キャプチャー機器は、単体のヘッドホン出力やライン出力を持たず『音声も映像もHDMIから出す』設計になっていることが多い。ところが配信用ミキサーの多くはHDMI入力を持たず、XLRやTRS、RCAといった従来のオーディオ入力しか受け付けないため、そのままでは接続できない。Extron HAE 100 4K Plusのような『HDMIオーディオデエンベデダー(de-embedder=分離器)』は、HDMI信号を一度受け取り、映像はHDMI THRU出力からそのまま次の機器(配信用モニターやキャプチャーカード)へ送りつつ、埋め込まれていた音声だけを分離してアナログ(RCA/TRS)またはS/PDIF(デジタル同軸)として別の出力から取り出せる。今回はYamaha AG06MK2のSTEREO INがRCA仕様のため、アナログ出力を選んで接続するが、もし接続先がAES/EBUやS/PDIF入力を持つデジタルミキサーであれば、S/PDIF OUTを使う場面もある——『デエンベデダー(分離)』の反対にあたる『エンベデダー(音声を映像に埋め込む機材)』も別に存在する点もあわせて覚えておくと理解が深まる。",
       },
     },
+    {
+      id: "usb_condenser_mic_direct",
+      order: 62,
+      title: "USBコンデンサーマイクをPCに直結する(Audio-Technica AT2020USB+)",
+      category: "配線問題",
+      hook: "最初の単元で組んだ『マイク→インターフェース→PC』の3点構成が、実は1本のケーブルで済んでしまう機種もある——USBマイクならではのシンプルな配線を確認しよう。",
+      patch: {
+        scenario:
+          "手軽に配信・宅録を始めたい人向けに、USB接続のコンデンサーマイク「Audio-Technica AT2020USB+」を使う。このマイクは内部にA/Dコンバーター(音をデジタル信号に変換する回路)とUSB電源受電の仕組みを内蔵しており、外部のオーディオインターフェースなしでMacBook AirのUSBポートへ直結できる。さらにマイク本体側面には、遅延のない『ゼロレイテンシーモニタリング』用のヘッドホン端子(3.5mm)があるので、そこにモニターヘッドホンを挿して自分の声を確認できるようにしよう。",
+        equipment: [
+          {
+            id: "mic",
+            label: "Audio-Technica AT2020USB+(USBコンデンサーマイク)",
+            icon: "AT2020USB+",
+            ports: [
+              { id: "usbOut", label: "USB OUT", type: "usb", dir: "out" },
+              { id: "hpOut", label: "HEADPHONE OUT (3.5mm TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbIn", label: "USB-C", type: "usb", dir: "in" }] },
+          { id: "headphones", label: "モニターヘッドホン", icon: "HP", ports: [{ id: "in", label: "IN (3.5mm TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "trs", "xlr", "ts"],
+        correctConnections: [
+          { from: "mic.usbOut", to: "pc.usbIn", cable: "usb" },
+          { from: "mic.hpOut", to: "headphones.in", cable: "trs" },
+        ],
+        explain:
+          "最初の単元で扱ったRode NT1のようなXLRコンデンサーマイクは、ファンタム電源(48V)を送りA/D変換も行ってくれる別体のオーディオインターフェースが必須だったが、AT2020USB+のようなUSBマイクは、そのインターフェースの役割(電源供給・プリアンプ・A/D変換)をマイク本体に内蔵しているため、USBケーブル1本でPCと直結できる。手軽さと引き換えに、複数本のマイクを同時に使う多チャンネル録音や、外部マイクプリで音の質感を変えるといった拡張性には乏しく、あくまで1人でのシンプルな宅録・配信向けの構成といえる。マイク本体のヘッドホン端子は、PCやDAWを経由せずマイクが直接拾った音をそのまま返しているため、DAWのバッファー処理による遅延(レイテンシー)を感じずに自分の声をモニターできる『ゼロレイテンシーモニタリング』という仕組みで、配信中の声の遅れによる違和感を防げる。",
+      },
+    },
   ],
 };
