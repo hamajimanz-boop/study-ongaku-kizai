@@ -2569,5 +2569,52 @@ window.COURSES["gear_patch_practice"] = {
           "Royer R-121のようなパッシブ型リボンマイクは、コンデンサーマイクよりずっと出力レベルが低いうえ、電源を必要としない代わりに信号を増幅する仕組みも内蔵していないため、インターフェース側のマイクプリアンプのゲインを目一杯上げてもまだ音が小さく、結果的にノイズだけが目立ってしまいがちになる。かといって、コンデンサーマイク用の+48Vファンタム電源をそのままリボン素子に流してしまうと、断線や損傷につながる危険がある(古いリボンマイクほどこのリスクが高い)。Cloudlifter CL-1のような『インラインマイクプリアンプ(マイクアクティベーター)』は、マイクとインターフェースの間に挟むことで、インターフェース側から送られてくる+48Vファンタム電源を受け取って内部の増幅回路の電源として使いながら、そのファンタム電源自体はマイク側には流さずブロックする——電源はもらうがマイクは守る、という仕組みで、約20〜25dBのクリーンなゲインを追加してからインターフェースへ送り出せる。結果としてインターフェース側のゲインつまみを上げすぎずに済み、ノイズの少ないリボンマイクの音を録れるようになる。",
       },
     },
+    {
+      id: "bass_di_amp_parallel",
+      order: 64,
+      title: "ベースをDI+アンプマイクでパラレル録音する(Ampeg SVT-7PRO)",
+      category: "配線問題",
+      hook: "ベースアンプの背面には、スピーカーを鳴らす出口とは別に『録音用の出口』がもう1つある——DIアウトとマイク、2つの音を同時に録っておく理由を配線しながら理解しよう。",
+      patch: {
+        scenario:
+          "ベーシストが「Fender Jazz Bass」を、真空管プリアンプ搭載のベースアンプヘッド「Ampeg SVT-7PRO」に接続してレコーディングする。SVT-7PROのSPEAKER OUTからは「Ampeg SVT-810E」キャビネットを鳴らし、その正面に「Sennheiser MD 421」を立ててアンプの空気感ごと録る。同時に、SVT-7PRO背面のBALANCED DI OUT(プリアンプ部の信号を直接取り出せるXLR出力)から、キャビネットを通さないクリーンな音も別トラックとして録っておく。どちらも「Focusrite Scarlett 18i20」の別々のXLR入力へ送り、USBでMacBook Airに録音しよう。",
+        equipment: [
+          { id: "bass", label: "Fender Jazz Bass", icon: "JBass", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "bassAmp",
+            label: "Ampeg SVT-7PRO(ベースアンプヘッド)",
+            icon: "SVT7PRO",
+            ports: [
+              { id: "input", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "speakerOut", label: "SPEAKER OUT", type: "speaker", dir: "out" },
+              { id: "diOut", label: "BALANCED DI OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "cabinet", label: "Ampeg SVT-810E(キャビネット)", icon: "SVT810E", ports: [{ id: "in", label: "IN (Speaker)", type: "speaker", dir: "in" }] },
+          { id: "mic", label: "Sennheiser MD 421(キャビネット用マイク)", icon: "MD421", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 18i20",
+            icon: "18i20",
+            ports: [
+              { id: "in1", label: "MIC IN 1 (XLR, DI用)", type: "xlr", dir: "in" },
+              { id: "in2", label: "MIC IN 2 (XLR, アンプマイク用)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Air", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "speaker", "xlr", "usb", "trs"],
+        correctConnections: [
+          { from: "bass.out", to: "bassAmp.input", cable: "ts" },
+          { from: "bassAmp.speakerOut", to: "cabinet.in", cable: "speaker" },
+          { from: "bassAmp.diOut", to: "interface.in1", cable: "xlr" },
+          { from: "mic.out", to: "interface.in2", cable: "xlr" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "SVT-7PROのようなベースアンプヘッドは、ベースを鳴らすためのスピーカー出力(SPEAKER OUT、ここには専用のスピーカーケーブルを使う)とは別に、プリアンプ通過後の信号をXLRのライン信号として直接取り出せる『BALANCED DI OUT』を背面に備えていることが多い。DIアウトは(機種によってはEQを通す前/後を切り替えられ)キャビネットやマイキングの影響を受けない輪郭のはっきりした音が録れる一方、MD 421でキャビネットを実際にマイキングした音は、キャビネットとアンプ本体が持つ低域の鳴り・空気感まで含めて録れる。この2つを別トラックとして同時に(パラレルに)録っておけば、ミックスの段階で両者を混ぜる比率を後から自由に決められる——ライブでのDI音と、リハーサルスタジオでのアンプマイク録りの違いを知っておくと、機材を選ぶときの判断材料になる。",
+      },
+    },
   ],
 };
