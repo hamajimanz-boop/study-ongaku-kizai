@@ -2680,5 +2680,45 @@ window.COURSES["gear_patch_practice"] = {
           "鍵盤楽器を複数台使うキーボーディストは、1台ずつをそれぞれFOHまでケーブルで引くと配線が増えるだけでなく、曲中に自分でシンセ間の音量バランスを変えたいときにFOHのエンジニアへ逐一頼む必要が出てくる。そこでProFX10v3のような『キーボードサブミキサー』を足元に置き、まず自分の管理下で複数台の音をまとめてから、FOHへはステレオ1系統だけを送り出すのがライブの定番構成——スネークケーブルやFOH側のチャンネル数を節約できるうえ、鍵盤の音色ごとの音量バランスを自分の感覚でリアルタイムに調整できる。以前の単元で扱った『マイクスプリッター』が1つの音を2ヶ所に分岐する(1対2)配線だったのに対し、こちらは複数の音を1つにまとめる(多対1)配線である点が対照的。",
       },
     },
+    {
+      id: "stage_wedge_monitor_aux",
+      order: 66,
+      title: "ステージ返しモニター(ウェッジ)をAUXセンドで配線する",
+      category: "配線問題",
+      hook: "客席に聴こえるバランスと、演奏者が聴きたいバランスは別物——FOHのMAIN OUTとは別の出口『AUXセンド』から、自分専用の返しスピーカーを鳴らす配線を体験しよう。",
+      patch: {
+        scenario:
+          "ライブハウスのステージで、ボーカリストが自分の足元に置いた返しスピーカー(ウェッジ、床に置いて斜め上向きに音を飛ばすステージモニター)「Yamaha S115V」で、自分の声を中心にしたモニターミックスを聴きたい。ミキサー「Yamaha MG12XU」のAUX SEND 2(客席向けのMAIN OUTとは独立した、モニター用の送り出し口)から、モニター専用のパワーアンプ「QSC GX5」の入力へ送り、GX5で増幅した信号をS115Vへ送ろう。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "mainOutL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainOutR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "auxSend2", label: "AUX SEND 2 (TRS, モニター用)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "monAmp",
+            label: "QSC GX5(モニター用パワーアンプ)",
+            icon: "GX5",
+            ports: [
+              { id: "in", label: "INPUT (TRS)", type: "trs", dir: "in" },
+              { id: "out", label: "OUTPUT (Speakon)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "wedge", label: "Yamaha S115V(ステージ返しウェッジ, パッシブ)", icon: "S115V", ports: [{ id: "in", label: "IN (Speakon)", type: "speaker", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "speaker", "xlr"],
+        correctConnections: [
+          { from: "mixer.auxSend2", to: "monAmp.in", cable: "trs" },
+          { from: "monAmp.out", to: "wedge.in", cable: "speaker" },
+        ],
+        explain:
+          "MAIN OUTから作られるのは客席(FOH)向けの完成されたバランスで、そこには演奏者自身の声や楽器が聴きやすい音量で入っているとは限らない。AUX SENDは、各チャンネルから『どれだけの量をこの送り先に分けるか』を個別に設定できる、MAIN OUTとは完全に独立したもう1つのミックス系統で、ここにモニター用のパワーアンプとウェッジスピーカーをつなぐことで、演奏者は客席用とは別の、自分が聴きたい音量バランスを足元から得られる。ウェッジ自体はYamaha HS5のようなパワードモニターと違ってアンプを内蔵しないパッシブ型がほとんどのため、以前の単元で扱ったライブPAの本線と同じく、専用のパワーアンプ(ここではQSC GX5)で増幅してからスピーカーケーブルで送る必要がある。バンドメンバーが増えるほどAUX SENDの系統数も増やし、メンバーごとに違うモニターバランスを作るのがライブ現場の基本。",
+      },
+    },
   ],
 };
