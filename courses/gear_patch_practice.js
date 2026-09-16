@@ -2761,5 +2761,49 @@ window.COURSES["gear_patch_practice"] = {
           "以前の単元で扱ったEurorackのCV/Gateパッチは『演奏データを電圧に変換してモジュラーを鳴らす』使い方だったが、ES-9のような多チャンネルのオーディオインターフェースをモジュラーに組み込むと、DAWで再生した既存のオーディオ(ドラムループやボーカルなど)を丸ごとモジュラーへ送り込み、Eurorackならではのアナログフィルターや歪み、ディレイなどを通してから、また別トラックとして録音し直すという使い方ができる——モジュラーシンセを『巨大な1つのアウトボード・エフェクター』としてDAWに組み込むイメージ。ES-9の3.5mm端子は物理的にはCV/Gateと同じ規格の端子だが、ここではオーディオ信号(可聴周波数の音声)をやり取りしている点が、以前の単元のCV/Gate配線との違い。ES-9はADAT等のデジタル入出力を持たない機種のため、PCとの接続はUSBのみで行う。",
       },
     },
+    {
+      id: "vocal_harmonizer_voicelive",
+      order: 68,
+      title: "ボーカルハーモナイザーをライブのボーカルチェーンに挿す(TC-Helicon VoiceLive 3 Extreme)",
+      category: "配線問題",
+      hook: "ギターのコードを弾くだけで、ボーカルに自動でハモりが付く——その仕組みは『マイクの音』と『ギターの音』を同じ1台のユニットに両方入れることで成り立っている。",
+      patch: {
+        scenario:
+          "弾き語りのライブで、ボーカルハーモナイザー「TC-Helicon VoiceLive 3 Extreme」を使って、歌に自動でハーモニーを付けたい。ボーカルマイク「Shure SM58」を、VoiceLive 3のMIC IN(XLR/TRSコンボ端子)へ接続する。ハーモニーのキーとコードを自動検出させるため、エレアコ「Taylor 214ce」の出力を、VoiceLive 3のGUITAR IN(TS)へも接続する。VoiceLive 3が生成した『地声+ハーモニー』のステレオMAIN OUT(XLR)を、ミキサー「Yamaha MG12XU」のチャンネル入力(L/R)へ送ろう。",
+        equipment: [
+          { id: "vocalMic", label: "Shure SM58", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "guitar", label: "Taylor 214ce(エレアコ)", icon: "T214ce", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "harmonizer",
+            label: "TC-Helicon VoiceLive 3 Extreme",
+            icon: "VL3X",
+            ports: [
+              { id: "micIn", label: "MIC IN (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "guitarIn", label: "GUITAR IN (TS)", type: "ts", dir: "in" },
+              { id: "mainOutL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainOutR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "inL", label: "CH IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "CH IN R (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "ts", "trs", "midi"],
+        correctConnections: [
+          { from: "vocalMic.out", to: "harmonizer.micIn", cable: "xlr" },
+          { from: "guitar.out", to: "harmonizer.guitarIn", cable: "ts" },
+          { from: "harmonizer.mainOutL", to: "mixer.inL", cable: "xlr" },
+          { from: "harmonizer.mainOutR", to: "mixer.inR", cable: "xlr" },
+        ],
+        explain:
+          "VoiceLive 3 Extremeのようなボーカルハーモナイザーは、マイクから入った『声』に対してハーモニーを生成するが、そのハーモニーが正しい音程(コード)になるためには『今どんなコードが鳴っているか』という情報が別途必要になる。そこでGUITAR INにエレアコの出力を接続しておくと、弾いているコードをリアルタイムに解析し、そのコードに沿った自然なハーモニーを声に足してくれる——マイクの音だけでは、ハーモナイザーは『今どのキー・コードで歌えばよいか』を知る手段がない。生成された地声+ハーモニーはステレオのMAIN OUTから出力され、通常のボーカルマイクと同じようにミキサーのチャンネルへXLRで立ち上げる。MIDI INも装備しており、外部のキーボードやMIDIギターからコード情報を送ってハーモニーを制御することもできるが、今回のシナリオでは使わない。",
+      },
+    },
   ],
 };
