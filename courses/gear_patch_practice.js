@@ -2616,5 +2616,69 @@ window.COURSES["gear_patch_practice"] = {
           "SVT-7PROのようなベースアンプヘッドは、ベースを鳴らすためのスピーカー出力(SPEAKER OUT、ここには専用のスピーカーケーブルを使う)とは別に、プリアンプ通過後の信号をXLRのライン信号として直接取り出せる『BALANCED DI OUT』を背面に備えていることが多い。DIアウトは(機種によってはEQを通す前/後を切り替えられ)キャビネットやマイキングの影響を受けない輪郭のはっきりした音が録れる一方、MD 421でキャビネットを実際にマイキングした音は、キャビネットとアンプ本体が持つ低域の鳴り・空気感まで含めて録れる。この2つを別トラックとして同時に(パラレルに)録っておけば、ミックスの段階で両者を混ぜる比率を後から自由に決められる——ライブでのDI音と、リハーサルスタジオでのアンプマイク録りの違いを知っておくと、機材を選ぶときの判断材料になる。",
       },
     },
+    {
+      id: "keyboard_rig_submixer",
+      order: 65,
+      title: "複数シンセをキーボードサブミキサーでまとめてFOHへ送る",
+      category: "配線問題",
+      hook: "ステージ上に鍵盤楽器が2台あっても、FOH(客席側の音響卓)へ送るのはステレオ1系統だけでいい——キーボーディスト自身が自分の音のバランスを作ってから送り出す配線を体験しよう。",
+      patch: {
+        scenario:
+          "キーボーディストがステージに「Nord Stage 4」(ステージピアノ)と「Roland Jupiter-Xm」(シンセサイザー)の2台を並べている。それぞれのステレオ出力を、まず自分の足元に置いた小型ミキサー「Mackie ProFX10v3」に立ち上げて、2台の音量バランスを自分でコントロールできるようにする。ProFX10v3のMAIN OUT(ステレオ)から、FOHのデジタルミキサー「Yamaha CL5」へ、1系統のステレオ信号としてまとめて送ろう。",
+        equipment: [
+          {
+            id: "nord",
+            label: "Nord Stage 4",
+            icon: "Nord4",
+            ports: [
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "jupiter",
+            label: "Roland Jupiter-Xm",
+            icon: "JupXm",
+            ports: [
+              { id: "outL", label: "OUTPUT L/MONO (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "subMixer",
+            label: "Mackie ProFX10v3(キーボードサブミキサー)",
+            icon: "ProFX10",
+            ports: [
+              { id: "chAL", label: "STEREO CH A IN L (TRS)", type: "trs", dir: "in" },
+              { id: "chAR", label: "STEREO CH A IN R (TRS)", type: "trs", dir: "in" },
+              { id: "chBL", label: "STEREO CH B IN L (TRS)", type: "trs", dir: "in" },
+              { id: "chBR", label: "STEREO CH B IN R (TRS)", type: "trs", dir: "in" },
+              { id: "mainOutL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainOutR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "fohMixer",
+            label: "Yamaha CL5(FOHデジタルミキサー)",
+            icon: "CL5",
+            ports: [
+              { id: "inL", label: "CH IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "CH IN R (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["trs", "xlr", "speaker", "usb"],
+        correctConnections: [
+          { from: "nord.outL", to: "subMixer.chAL", cable: "trs" },
+          { from: "nord.outR", to: "subMixer.chAR", cable: "trs" },
+          { from: "jupiter.outL", to: "subMixer.chBL", cable: "trs" },
+          { from: "jupiter.outR", to: "subMixer.chBR", cable: "trs" },
+          { from: "subMixer.mainOutL", to: "fohMixer.inL", cable: "xlr" },
+          { from: "subMixer.mainOutR", to: "fohMixer.inR", cable: "xlr" },
+        ],
+        explain:
+          "鍵盤楽器を複数台使うキーボーディストは、1台ずつをそれぞれFOHまでケーブルで引くと配線が増えるだけでなく、曲中に自分でシンセ間の音量バランスを変えたいときにFOHのエンジニアへ逐一頼む必要が出てくる。そこでProFX10v3のような『キーボードサブミキサー』を足元に置き、まず自分の管理下で複数台の音をまとめてから、FOHへはステレオ1系統だけを送り出すのがライブの定番構成——スネークケーブルやFOH側のチャンネル数を節約できるうえ、鍵盤の音色ごとの音量バランスを自分の感覚でリアルタイムに調整できる。以前の単元で扱った『マイクスプリッター』が1つの音を2ヶ所に分岐する(1対2)配線だったのに対し、こちらは複数の音を1つにまとめる(多対1)配線である点が対照的。",
+      },
+    },
   ],
 };
