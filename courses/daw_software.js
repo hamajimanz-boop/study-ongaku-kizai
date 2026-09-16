@@ -517,8 +517,8 @@ window.COURSES["daw_software"] = {
           dialogue: [
             { who: "mina", text: "Bitwigはどれくらい普及しているんですか?" },
             { who: "sensei", text: "AbletonやFL Studioと同じくエレクトロニックミュージック制作者に強く支持されているんだけど、規模としてはAbletonよりニッチな位置づけでね。「玄人好みの選択肢」として語られることが多いんだ。" },
-            { who: "mina", text: "常にAbletonと比較されてしまうんですね。" },
-            { who: "sensei", text: "そう。「元Abletonの開発者が作った」という出自から、常にAbletonとの比較で語られる宿命を持つ会社なんだ。でもLinux対応やモジュラー的な音作りなど独自色を打ち出すことで差別化を図っているんだよ。" },
+            { who: "mina", text: "何かとAbletonと比較されてしまうんですね。" },
+            { who: "sensei", text: "そう。「元Abletonの開発者が作った」という出自から、Abletonとの比較でよく語られる会社なんだ。でもLinux対応やモジュラー的な音作りなど独自色を打ち出すことで差別化を図っているんだよ。" },
           ],
         },
         {
