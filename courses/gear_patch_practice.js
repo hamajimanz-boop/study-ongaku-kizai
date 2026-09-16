@@ -2829,5 +2829,46 @@ window.COURSES["gear_patch_practice"] = {
           "サイレントディスコの仕組みはシンプルで、音源(DJミキサーやPCなど)をFMトランスミッターに有線でつなぎ、トランスミッターがその音声をチャンネルごとに割り当てた電波(UHF帯など)に乗せて送信、参加者のワイヤレスヘッドホンがその電波を直接受信して鳴らす、というもの。この配線問題で有線ケーブルが必要なのは『音源→トランスミッターの入力』までで、そこから先(トランスミッター→ヘッドホン)は電波を使った無線伝送のため、ケーブルは登場しない——これは以前の単元で扱ったワイヤレスマイクシステム(マイク→送信機は無線、受信機→ミキサーは有線)とちょうど逆向きの『有線区間と無線区間』の組み合わせになっている。トランスミッターを2台・2チャンネル用意しているのは、DJの音楽とMCの実況のように、参加者が『赤(音楽)』『青(実況やトークイベント)』を自分のヘッドホンで選んで聴き分けられるようにするため。",
       },
     },
+    {
+      id: "analog_tape_transfer_sync",
+      order: 70,
+      title: "アナログマルチトラックテープレコーダーの音源をDAWに取り込む(Tascam 388)",
+      category: "配線問題",
+      hook: "実家に眠っていた8trのオープンリールテープ。ボタンひとつで配信できる時代の前に録られたこの音を、今のDAWに取り込んで残すための配線を体験しよう。",
+      patch: {
+        scenario:
+          "1980年代に録音された8トラックのオープンリールテープを、ミキサー一体型のアナログマルチトラックレコーダー「Tascam 388」で再生し、DAWにデジタル化(アーカイブ)して残したい。388本体のミックスバスから出る、ステレオでまとめられたバランスXLR出力を、オーディオインターフェース「RME Babyface Pro FS」のライン入力(L/R)へ接続し、USBでMacBook Proに取り込もう。",
+        equipment: [
+          {
+            id: "tape388",
+            label: "Tascam 388(アナログマルチトラックレコーダー)",
+            icon: "T388",
+            ports: [
+              { id: "mixOutL", label: "STEREO BUSS OUT L (XLR, +4dBu)", type: "xlr", dir: "out" },
+              { id: "mixOutR", label: "STEREO BUSS OUT R (XLR, +4dBu)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "RME Babyface Pro FS",
+            icon: "BabyfacePro",
+            ports: [
+              { id: "lineInL", label: "LINE IN L (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "lineInR", label: "LINE IN R (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "rca"],
+        correctConnections: [
+          { from: "tape388.mixOutL", to: "interface.lineInL", cable: "xlr" },
+          { from: "tape388.mixOutR", to: "interface.lineInR", cable: "xlr" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "Tascam 388は8トラックのテープレコーダーと8chミキサーが一体になったヴィンテージ機材で、各トラックを再生しながら内部のミキサーでバランスを取り、ステレオのミックスバスから+4dBu(プロ機材標準のライン信号レベル)のバランスXLR出力で音を送り出せる。この出力をオーディオインターフェースのライン入力にそのまま接続すれば、テープの音をアナログのライン信号としてPCに取り込み、DAW上でデジタルファイル化(アーカイブ)できる——テープが劣化する前に、あるいは再生できる個体が減っていく前に、こうした『テープ→ライン入力→DAW』というシンプルな配線でデジタル化しておくことは、古い音源を残す実務でよく行われる。今回はミックスバスから1本のステレオでまとめて取り込んだが、各トラックを個別にデジタル化したい場合は、388の各chのダイレクトアウトからマルチトラックで取り込む方法もある。",
+      },
+    },
   ],
 };
