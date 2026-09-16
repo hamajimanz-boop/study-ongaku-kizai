@@ -2720,5 +2720,46 @@ window.COURSES["gear_patch_practice"] = {
           "MAIN OUTから作られるのは客席(FOH)向けの完成されたバランスで、そこには演奏者自身の声や楽器が聴きやすい音量で入っているとは限らない。AUX SENDは、各チャンネルから『どれだけの量をこの送り先に分けるか』を個別に設定できる、MAIN OUTとは完全に独立したもう1つのミックス系統で、ここにモニター用のパワーアンプとウェッジスピーカーをつなぐことで、演奏者は客席用とは別の、自分が聴きたい音量バランスを足元から得られる。ウェッジ自体はYamaha HS5のようなパワードモニターと違ってアンプを内蔵しないパッシブ型がほとんどのため、以前の単元で扱ったライブPAの本線と同じく、専用のパワーアンプ(ここではQSC GX5)で増幅してからスピーカーケーブルで送る必要がある。バンドメンバーが増えるほどAUX SENDの系統数も増やし、メンバーごとに違うモニターバランスを作るのがライブ現場の基本。",
       },
     },
+    {
+      id: "eurorack_audio_interface_io",
+      order: 67,
+      title: "Eurorackモジュラーとオーディオインターフェースでオーディオを往復させる(Expert Sleepers ES-9)",
+      category: "配線問題",
+      hook: "以前の単元ではCV/Gateだけをパッチしたが、今回はDAWの『オーディオそのもの』をモジュラーへ送り込み、加工した音をまた録音し直す——モジュラーをDAWの中の1つのエフェクターのように使う配線。",
+      patch: {
+        scenario:
+          "Eurorackモジュラーシンセを、DAWのオーディオエフェクトのように使いたい。USBオーディオインターフェース「Expert Sleepers ES-9」(Eurorackモジュール型で、PCとはUSBで、モジュラー側とは3.5mmケーブルで信号をやり取りする)を使い、DAWで再生したドラムループの音を、ES-9のOUTPUT 1から、フィルターモジュール「Doepfer A-124(ヴィンテージフィルター)」のAUDIO INへ送る。A-124で加工された音は、ES-9のINPUT 1へ戻し、DAW側で新しいトラックとして録音しよう。ES-9自体は、Macとの音声のやり取りをUSBケーブルで行う。",
+        equipment: [
+          {
+            id: "es9",
+            label: "Expert Sleepers ES-9(Eurorack用USBオーディオI/F)",
+            icon: "ES-9",
+            ports: [
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+              { id: "out1", label: "OUTPUT 1 (3.5mm)", type: "cv", dir: "out" },
+              { id: "in1", label: "INPUT 1 (3.5mm)", type: "cv", dir: "in" },
+            ],
+          },
+          {
+            id: "filter",
+            label: "Doepfer A-124(Eurorackフィルターモジュール)",
+            icon: "A-124",
+            ports: [
+              { id: "audioIn", label: "AUDIO IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "audioOut", label: "AUDIO OUT (3.5mm)", type: "cv", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["cv", "usb", "trs", "midi"],
+        correctConnections: [
+          { from: "es9.usb", to: "mac.usbin", cable: "usb" },
+          { from: "es9.out1", to: "filter.audioIn", cable: "cv" },
+          { from: "filter.audioOut", to: "es9.in1", cable: "cv" },
+        ],
+        explain:
+          "以前の単元で扱ったEurorackのCV/Gateパッチは『演奏データを電圧に変換してモジュラーを鳴らす』使い方だったが、ES-9のような多チャンネルのオーディオインターフェースをモジュラーに組み込むと、DAWで再生した既存のオーディオ(ドラムループやボーカルなど)を丸ごとモジュラーへ送り込み、Eurorackならではのアナログフィルターや歪み、ディレイなどを通してから、また別トラックとして録音し直すという使い方ができる——モジュラーシンセを『巨大な1つのアウトボード・エフェクター』としてDAWに組み込むイメージ。ES-9の3.5mm端子は物理的にはCV/Gateと同じ規格の端子だが、ここではオーディオ信号(可聴周波数の音声)をやり取りしている点が、以前の単元のCV/Gate配線との違い。ES-9はADAT等のデジタル入出力を持たない機種のため、PCとの接続はUSBのみで行う。",
+      },
+    },
   ],
 };
