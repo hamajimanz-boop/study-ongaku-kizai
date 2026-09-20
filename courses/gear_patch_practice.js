@@ -2911,5 +2911,39 @@ window.COURSES["gear_patch_practice"] = {
           "マイクの出力はとても小さい信号(マイクレベル)なので、必ずマイクプリアンプで増幅して、ライン信号レベルまで持ち上げる必要がある。ISA OneのようなアウトボードのマイクプリをXLRのMIC INPUTから使う場合、増幅はISA One側で済んでいるため、その出力をオーディオインターフェースにつなぐときは『ライン入力』として受けるのが基本になる。ここで注意したいのは、I/F側の入力を『マイクレベルのままの入力』として使い、しかもゲインを大きく上げてしまうと、すでに増幅された信号をもう一度増幅することになり、歪みやクリップの原因になるということ。実際には、I/Fの入力ゲインを最小近くに絞り、ライン入力(または+48Vファンタム電源をオフにした状態のライン受け)として使う。なお、ISA Oneはマイク入力のほかに、ギターやベース向けのDI入力も装備しているが、今回のシナリオではマイクを使うので、MIC INPUTを使う。",
       },
     },
+    {
+      id: "kemper_stage_foh_monitor",
+      order: 72,
+      title: "Kemper Profiler StageをFOHとステージ足元のモニターに分けて出力する",
+      category: "配線問題",
+      hook: "会場のスピーカーに送る『客席向けの音』と、自分の足元で聴く『演奏者向けの音』は、同じ1台のアンプシミュレーターから、別々の出力端子で取り出せる。どの端子をどこへつなぐか、配線で確かめよう。",
+      patch: {
+        scenario:
+          "ライブハウスで、ギター用のプロファイリングアンプ「Kemper Profiler Stage」(アンプの音をデジタルで再現する足元型の機材)を使う。エレキギター「Gibson Les Paul Standard」を、Kemper Profiler StageのINPUT(TS)へ接続する。客席向けの音は、MAIN OUTPUT(XLR)から、ライブハウスのPA卓「Allen & Heath SQ-5」のマイク入力(XLR)へ送る。演奏者自身が足元で聴くための音は、MONITOR OUTPUT(TS)から、パワードモニター「Yamaha DBR10」のLINE入力(TRSコンボ)へ、それぞれ別の系統で送ろう。",
+        equipment: [
+          { id: "guitar", label: "Gibson Les Paul Standard", icon: "LesPaul", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "kemper",
+            label: "Kemper Profiler Stage",
+            icon: "KemperStage",
+            ports: [
+              { id: "in", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "mainOut", label: "MAIN OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "monitorOut", label: "MONITOR OUTPUT (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "mixer", label: "Allen & Heath SQ-5(FOH卓)", icon: "SQ-5", ports: [{ id: "in1", label: "CH1 IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "wedge", label: "Yamaha DBR10(足元用パワードモニター)", icon: "DBR10", ports: [{ id: "in", label: "LINE IN (TRSコンボ)", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "speaker"],
+        correctConnections: [
+          { from: "guitar.out", to: "kemper.in", cable: "ts" },
+          { from: "kemper.mainOut", to: "mixer.in1", cable: "xlr" },
+          { from: "kemper.monitorOut", to: "wedge.in", cable: "ts" },
+        ],
+        explain:
+          "Kemper Profiler Stageのようなアンプシミュレーターは、ギターアンプの『音を作る部分』と『それを空気に鳴らすスピーカー』を分けて考えられるのが特徴で、内部で作られた音を、用途の違う複数の端子から同時に取り出せる。MAIN OUTPUTは、PA卓へ送る客席向けの音で、ミキサーのマイク入力にバランスのXLRでつなぐのが基本。一方MONITOR OUTPUTは、自分の足元で聴くための独立した出力で、音量を客席側とは別に調整できるため、客席の音量を変えずに自分の返しの大きさだけを変えられる。この足元用の出力をパワードモニター(アンプ内蔵のスピーカー)につなげば、以前の単元で扱ったQSC GX5のような専用パワーアンプも不要。MONITOR OUTPUTはアンバランスのTS出力とされているため、つなぐケーブルの長さは短めにまとめておくとノイズを拾いにくい。",
+      },
+    },
   ],
 };
