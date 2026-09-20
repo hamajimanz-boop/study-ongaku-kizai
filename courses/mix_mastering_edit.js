@@ -65,6 +65,12 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "VCAグループが通常のグループと異なる点は?", choices: ["各トラック自体のフェーダー値は変更されず、VCA分の値が上乗せされる", "音質が変化する", "オーディオを非破壊で結合する", "MIDIトラックにしか使えない"], answer: 0, explain: "VCAは各トラックのフェーダー値そのものは変えず、相対バランスを保ったまま上乗せで操作する。" },
         { q: "Keyboard Focus Modeを有効にすると何ができるようになるか?", choices: ["修飾キー無しの単キー操作ができるようになる", "自動的にミックスが完成する", "プラグインが自動選定される", "セッションが自動保存される"], answer: 0, explain: "例えばEキーだけでセパレートができるなど、単キー操作が可能になり編集速度が上がる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Pro Tools: Fast Mix Preparation Using Strip Silence (Sound On Sound)", url: "https://www.soundonsound.com/techniques/pro-tools-fast-mix-preparation-using-strip-silence" },
+          { title: "How To Use VCA Groups (Sound On Sound)", url: "https://www.soundonsound.com/techniques/how-use-vca-groups" },
+        ],
+      },
     },
     {
       id: "elastic_audio_melodyne",
@@ -118,6 +124,11 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "Correct Pitchマクロの説明として正しいのは?", choices: ["選択ノートの音程補正を0〜100%の強さで一括適用できる", "必ず全ノートを100%補正する", "テンポだけを変更する", "リバーブ量を調整する機能である"], answer: 0, explain: "0%(補正なし)〜100%(完全補正)の強さで一括補正できる。" },
         { q: "Melodyneのフォルマント編集で「フォルマントラインを下げる」とどうなるか?", choices: ["軽い声質になる", "暗い声質になる", "ピッチが上がる", "テンポが変わる"], answer: 1, explain: "フォルマントを下げると共鳴腔が大きいような暗い声質になる。上げると軽い声質になる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Pro Tools integrates Melodyne via ARA(Celemony公式)", url: "https://www.celemony.com/en/protools-ara" },
+        ],
+      },
     },
     {
       id: "gain_staging_bus_routing",
@@ -162,6 +173,11 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "サブミックスバスの利点として挙げられているものは?", choices: ["レベル管理の一元化とグローバルな質感付け", "録音時間の短縮", "自動的なピッチ補正", "ファイルサイズの削減"], answer: 0, explain: "レベル管理の一元化と、バス全体への質感付けが利点として挙げられる。" },
         { q: "適正レベルから外れたままプラグインチェーンに通すとどうなりやすいか?", choices: ["歪みや不自然な反応が起きやすくなる", "必ず音質が向上する", "CPU負荷が下がる", "自動的に補正される"], answer: 0, explain: "アナログモデリング系プラグインは想定レベルを外れると歪み・不自然な反応が出やすい。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Gain Staging In Your DAW Software(Sound On Sound)", url: "https://www.soundonsound.com/techniques/gain-staging-your-daw-software" },
+        ],
+      },
     },
     {
       id: "compressor_types_parallel",
@@ -206,6 +222,11 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "パンチ狙いや激しいダイナミクス処理には不向きとされるコンプの種類は?", choices: ["FET", "VCA", "Vari-Mu", "全て向いている"], answer: 2, explain: "Vari-Muは反応が遅く色気があるが、パンチ狙いには不向きとされる。" },
         { q: "ドラムのパラレルコンプの利点として正しいのは?", choices: ["トランジェントの自然な形を保ちつつボディ・サステインを足せる", "必ず音量が下がる", "位相が自動的に揃う", "ピッチが安定する"], answer: 0, explain: "リズム・グルーヴ感を壊さずにボディとサステインを足せるのが利点。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "4 Types of Analog Compression—and Why They Matter in a Digital World(iZotope)", url: "https://www.izotope.com/en/learn/4-types-of-analog-compression-and-why-they-matter-in-a-digital-world.html" },
+        ],
+      },
     },
     {
       id: "eq_types_masking",
@@ -259,6 +280,12 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "耳に刺さるハイの対策として挙げられているのは?", choices: ["4〜6kHz付近を少し足す・エキサイターで倍音を足す", "全帯域を一律にブーストする", "必ずハイシェルフでカットする", "サンプルレートを下げる"], answer: 0, explain: "生の高域を上げるより自然にヌケが出ることがある方法として挙げられている。" },
         { q: "ハイパスフィルターの適切なカットオフの目安として説明されているのは?", choices: ["薄くなりすぎる直前まで上げていく", "常に20Hzに固定する", "常に1kHzに固定する", "使わない方がよい"], answer: 0, explain: "各トラックごとに「薄くなりすぎる直前」までカットオフを上げていくのが実践的な目安。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Types of Equalizers and How to Use Them(Sonarworks)", url: "https://www.sonarworks.com/blog/learn/types-of-equalizers-and-their-applications" },
+          { title: "Should You Be Using Linear Phase EQ?(Sonarworks)", url: "https://www.sonarworks.com/blog/learn/should-you-be-using-linear-phase-eq" },
+        ],
+      },
     },
     {
       id: "reverb_delay_practice",
@@ -312,6 +339,11 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "EQとリバーブの基本的な信号順序として正しいのは?", choices: ["EQ→リバーブ", "リバーブ→EQ", "順序は音に影響しない", "常に同時に処理する"], answer: 0, explain: "先に不要な帯域を削ってから送ることで、リバーブがその帯域を余計に増幅しない。" },
         { q: "非常に短いディレイでモノ互換性を保ちながら広がりを作れるとされる種類は?", choices: ["ピンポンディレイ", "スラップバックディレイ", "テープディレイ", "マルチタップディレイ"], answer: 0, explain: "非常に短いピンポンディレイはモノ互換性を保ちながら透明感のある広がりを作れる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Types of Delay: The 6 Most Common Delay Effects Explained(Baby Audio)", url: "https://babyaud.io/blog/types-of-delay" },
+        ],
+      },
     },
     {
       id: "vocal_mix_chain",
@@ -365,6 +397,11 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "テイクの継ぎ目として適切とされる場所は?", choices: ["単語の胴体部分", "無音区間か無声子音の部分", "常に小節の頭", "母音の最も強い部分"], answer: 1, explain: "無音区間・無声子音の部分で切るとクリックノイズや不自然さが出にくい。" },
         { q: "ダブルとハーモニーのパンニングの目安として挙げられているのは?", choices: ["ダブルは左右30%程度、ハーモニーは60%程度", "両方とも常にセンター", "両方とも100%振り切る", "ダブルは60%、ハーモニーは30%"], answer: 0, explain: "ダブルは左右30%程度、ハーモニーはさらに広く60%程度が目安とされる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Which Comes First: EQ or Compressor?(iZotope)", url: "https://www.izotope.com/community/blog/eq-before-or-after-compression" },
+        ],
+      },
     },
     {
       id: "mastering_chain_lufs",
@@ -418,6 +455,12 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "ディザリングが必要になるのはどのような時か?", choices: ["ビット深度を落とすとき", "サンプルレートを変える度に毎回", "常に全工程で複数回", "リバーブをかける時"], answer: 0, explain: "24bit→16bit等、ビット深度を落とす時のみ必要。" },
         { q: "マスタリングエンジニアに送る際の基本的な運用は?", choices: ["ディザをかけずフル解像度のまま渡す", "必ず16bitにディザをかけてから渡す", "MP3に変換して渡す", "モノラルにまとめて渡す"], answer: 0, explain: "最終的なビット深度変換とディザはエンジニア側の最終工程に任せるのが基本。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "Loudness normalization on Spotify(Spotify公式)", url: "https://support.spotify.com/us/artists/article/loudness-normalization/" },
+          { title: "How to master for streaming platforms: normalization, LUFS, and loudness(iZotope)", url: "https://www.izotope.com/en/learn/mastering-for-streaming-platforms" },
+        ],
+      },
     },
     {
       id: "loudness_dynamics_export",
@@ -471,6 +514,12 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "Dolby Atmosの標準納品スペックは?", choices: ["48kHz/24bit", "44.1kHz/16bit", "96kHz/32bit float", "22kHz/8bit"], answer: 0, explain: "Dolby Atmosは48kHz/24bitが標準納品スペックとされる。" },
         { q: "24bitの理論上のダイナミックレンジのおおよその目安は?", choices: ["約48dB", "約96dB", "約144dB", "約300dB"], answer: 2, explain: "24bitは約144dB、16bitは約96dBが目安。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "How to master for streaming platforms: normalization, LUFS, and loudness(iZotope)", url: "https://www.izotope.com/en/learn/mastering-for-streaming-platforms" },
+          { title: "Dolby Atmos Music Master Delivery Specification(Dolby公式)", url: "https://professionalsupport.dolby.com/s/article/Dolby-Atmos-Music-Master-Delivery-Specification" },
+        ],
+      },
     },
     {
       id: "reference_track_ms_check",
@@ -524,6 +573,12 @@ window.COURSES["mix_mastering_edit"] = {
         { q: "モノ互換性チェックが必要とされる理由は?", choices: ["スマホスピーカー等モノ再生される環境が今でも多いため", "モノラルでしか配信できないため", "ステレオ機材が高価なため", "法律で義務付けられているため"], answer: 0, explain: "モノ再生環境は今でも多く存在するため必須のチェック工程とされる。" },
         { q: "マスターバスコンプでM/S分割を使う利点は?", choices: ["サイドは軽めに、ミッドだけしっかり潰し広がりを保ったまま芯を潰せる", "常に音量が2倍になる", "リバーブが不要になる", "ビット深度が自動的に上がる"], answer: 0, explain: "センターに集中しがちな要素を深く潰しつつ、サイドの広がりは保てる。" },
       ],
+      furtherLearning: {
+        articles: [
+          { title: "How to Use Reference Tracks When Mixing(iZotope)", url: "https://www.izotope.com/community/blog/13-tips-for-using-references-while-mixing" },
+          { title: "Mid/Side Stereo Explained: Part I(JustMastering)", url: "https://www.justmastering.com/article-mid-side-stereo-explained-part1.php" },
+        ],
+      },
     },
   ],
 };
