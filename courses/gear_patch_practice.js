@@ -2976,5 +2976,49 @@ window.COURSES["gear_patch_practice"] = {
           "パワードスピーカーはアンプを内蔵しているので、以前の単元のパッシブスピーカーのようなパワーアンプとスピーカーケーブルは要らず、ミキサーからはXLRやTRSといった『ライン信号用のケーブル』で音を送るだけで鳴らせる。DBR12には、入力した音をそのまま(または2つの入力をミックスして)外へ出す『MIX OUT』端子があり、1台目に入れた音を2台目へ渡す『デイジーチェーン(数珠つなぎ)』ができる。これにより、ミキサーから会場の両端まで2本のケーブルを別々に引き回す必要がなく、ミキサー側の出力端子を1系統で済ませられる。ただし、この連結でつながった2台は基本的に同じ音を鳴らすため、左右で違う音を出すステレオ再生にはならない。左右を分けたいときは、ミキサーのMAIN OUT LとRから、それぞれのスピーカーへ別々のケーブルでつなぐ必要がある。",
       },
     },
+    {
+      id: "headphone_amp_ha8000_cue",
+      order: 74,
+      title: "ヘッドホンアンプで演奏者ごとに別のキューミックスを配る(Behringer HA8000)",
+      category: "配線問題",
+      hook: "ボーカルは自分の声を大きく、ドラマーはクリックを大きく——同じ録音現場でも、聴きたい音のバランスは人それぞれ。人数分の別ミックスを、1台のヘッドホンアンプで配る配線を体験しよう。",
+      patch: {
+        scenario:
+          "バンドの一発録りで、ボーカリストとドラマーに別々のキューミックス(演奏者が聴くためのモニター用ミックス)を送りたい。オーディオインターフェース「MOTU 828es」のLINE OUT 3(TRS)を、ヘッドホンアンプ「Behringer POWERPLAY HA8000」のCH1の入力(TRS)へ、LINE OUT 4(TRS)を、CH2の入力(TRS)へそれぞれ接続する。ヘッドホンはHA8000の各チャンネルのヘッドホン出力(TRS)につなぐ。ボーカリストの「Beyerdynamic DT 770 Pro」を、CH1のヘッドホン出力へ、ドラマーの「Sony MDR-7506」を、CH2のヘッドホン出力へ接続しよう。",
+        equipment: [
+          {
+            id: "interface",
+            label: "MOTU 828es",
+            icon: "828es",
+            ports: [
+              { id: "out3", label: "LINE OUT 3 (TRS)", type: "trs", dir: "out" },
+              { id: "out4", label: "LINE OUT 4 (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "hpamp",
+            label: "Behringer POWERPLAY HA8000",
+            icon: "HA8000",
+            ports: [
+              { id: "in1", label: "CH1 MAIN IN (TRS)", type: "trs", dir: "in" },
+              { id: "in2", label: "CH2 MAIN IN (TRS)", type: "trs", dir: "in" },
+              { id: "out1", label: "CH1 PHONES (TRS)", type: "trs", dir: "out" },
+              { id: "out2", label: "CH2 PHONES (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "hpVocal", label: "Beyerdynamic DT 770 Pro(ボーカル用)", icon: "DT770", ports: [{ id: "in", label: "PHONES (TRS)", type: "trs", dir: "in" }] },
+          { id: "hpDrum", label: "Sony MDR-7506(ドラム用)", icon: "MDR7506", ports: [{ id: "in", label: "PHONES (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["trs", "ts", "xlr", "speaker"],
+        correctConnections: [
+          { from: "interface.out3", to: "hpamp.in1", cable: "trs" },
+          { from: "interface.out4", to: "hpamp.in2", cable: "trs" },
+          { from: "hpamp.out1", to: "hpVocal.in", cable: "trs" },
+          { from: "hpamp.out2", to: "hpDrum.in", cable: "trs" },
+        ],
+        explain:
+          "以前の単元でも扱ったキューミックスは、DAWやミキサーで『演奏者が聴くための、客席や録音とは別のバランス』を作って送る仕組み。人数が増えるほど、ヘッドホンを1つずつ直接つなぐのではなく、HA8000のように複数のヘッドホン出力を持つ『ヘッドホンアンプ』を使い、1人ずつに別のミックスを割り当てる運用が現実的になる。HA8000は8つの独立したステレオのチャンネルを備え、各チャンネルがそれぞれ別の入力を受けられるため、オーディオインターフェースの出力を2系統に分ければ、ボーカルとドラムで別のバランスを送り分けられる。各チャンネルにはフロントとリアにヘッドホン出力があるので、同じミックスを複数の人で聴きたいときは、1つのチャンネルに2人分のヘッドホンをつなぐこともできる。ヘッドホンは本来アンプの出力で鳴らすものなので、オーディオインターフェースのLINE OUTを直接ヘッドホンにつなぐのではなく、必ずヘッドホンアンプを間にはさむ。",
+      },
+    },
   ],
 };
