@@ -2945,5 +2945,36 @@ window.COURSES["gear_patch_practice"] = {
           "Kemper Profiler Stageのようなアンプシミュレーターは、ギターアンプの『音を作る部分』と『それを空気に鳴らすスピーカー』を分けて考えられるのが特徴で、内部で作られた音を、用途の違う複数の端子から同時に取り出せる。MAIN OUTPUTは、PA卓へ送る客席向けの音で、ミキサーのマイク入力にバランスのXLRでつなぐのが基本。一方MONITOR OUTPUTは、自分の足元で聴くための独立した出力で、音量を客席側とは別に調整できるため、客席の音量を変えずに自分の返しの大きさだけを変えられる。この足元用の出力をパワードモニター(アンプ内蔵のスピーカー)につなげば、以前の単元で扱ったQSC GX5のような専用パワーアンプも不要。MONITOR OUTPUTはアンバランスのTS出力とされているため、つなぐケーブルの長さは短めにまとめておくとノイズを拾いにくい。",
       },
     },
+    {
+      id: "powered_speaker_daisychain",
+      order: 73,
+      title: "パワードスピーカー2台をMIX OUTで連結する(Yamaha DBR12 ×2)",
+      category: "配線問題",
+      hook: "ミキサーから左右のスピーカーへ、それぞれ別のケーブルを延々と引き回さなくても、1台目のスピーカーの『出力端子』から2台目へ音を渡せる。パワードスピーカーならではの、すっきりした配線を体験しよう。",
+      patch: {
+        scenario:
+          "小さなライブ会場で、パワードスピーカー「Yamaha DBR12」を2台使い、ステレオではなく同じ音を両側から鳴らす(モノラル)構成にしたい。ミキサー「Yamaha MG12XU」のMAIN OUT(XLR)から、1台目のDBR12のCH1入力(XLR/TRSコンボ)へ接続する。1台目のDBR12の背面にあるMIX OUT(XLR)から、2台目のDBR12のCH1入力(XLR/TRSコンボ)へ接続しよう。DBR12はアンプを内蔵しているため、スピーカーケーブルは使わず、電源ケーブルは今回は配線対象に含めない。",
+        equipment: [
+          { id: "mixer", label: "Yamaha MG12XU", icon: "MG12XU", ports: [{ id: "mainOut", label: "MAIN OUT (XLR)", type: "xlr", dir: "out" }] },
+          {
+            id: "spk1",
+            label: "Yamaha DBR12(1台目)",
+            icon: "DBR12-1",
+            ports: [
+              { id: "in", label: "CH1 IN (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "mixOut", label: "MIX OUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spk2", label: "Yamaha DBR12(2台目)", icon: "DBR12-2", ports: [{ id: "in", label: "CH1 IN (XLR/TRSコンボ)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "speaker", "ts"],
+        correctConnections: [
+          { from: "mixer.mainOut", to: "spk1.in", cable: "xlr" },
+          { from: "spk1.mixOut", to: "spk2.in", cable: "xlr" },
+        ],
+        explain:
+          "パワードスピーカーはアンプを内蔵しているので、以前の単元のパッシブスピーカーのようなパワーアンプとスピーカーケーブルは要らず、ミキサーからはXLRやTRSといった『ライン信号用のケーブル』で音を送るだけで鳴らせる。DBR12には、入力した音をそのまま(または2つの入力をミックスして)外へ出す『MIX OUT』端子があり、1台目に入れた音を2台目へ渡す『デイジーチェーン(数珠つなぎ)』ができる。これにより、ミキサーから会場の両端まで2本のケーブルを別々に引き回す必要がなく、ミキサー側の出力端子を1系統で済ませられる。ただし、この連結でつながった2台は基本的に同じ音を鳴らすため、左右で違う音を出すステレオ再生にはならない。左右を分けたいときは、ミキサーのMAIN OUT LとRから、それぞれのスピーカーへ別々のケーブルでつなぐ必要がある。",
+      },
+    },
   ],
 };
