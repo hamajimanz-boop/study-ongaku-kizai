@@ -3061,5 +3061,49 @@ window.COURSES["gear_patch_practice"] = {
           "RC-505mkIIのようなルーパーは、マイクの音を機械の中に録音し、その録音を繰り返し再生しながら、さらに新しい音を重ねていく。ボーカルの生の声も、ルーパーが再生している重ね録りの音も、すべて『ルーパーを通ったあとの音』としてMAIN OUTから出てくるため、マイクは直接ミキサーへつながず、必ずルーパーに入力して、ルーパーの出力だけをミキサーへ送る配線にする。マイクをミキサーにも直接つなぐと、ルーパーを経由しない声が二重にミックスされ、ルーパーの音量バランスやエフェクトのかかり方をコントロールしづらくなる。RC-505mkIIのMIC入力にはファンタム電源が用意されており、コンデンサーマイクも使えるが、今回のSM58のようなダイナミックマイクではファンタム電源は不要。MAIN OUTのほかにSUB OUTも備えており、たとえばトラックごとに別々のチャンネルへ送り分けたい場合は、そちらを使う。",
       },
     },
+    {
+      id: "subwoofer_hpf_post_tops",
+      order: 76,
+      title: "サブウーファーの出力(HPF POST)から左右のトップスピーカーへつなぐ(Yamaha DXS12mkII + DXR12mkII)",
+      category: "配線問題",
+      hook: "低音だけを専用のサブウーファーに任せると、トップスピーカーは中高音に集中できる。ただし、ミキサーの音を先にトップへ送るか、サブウーファーを経由させるかで、配線の意味が変わる。今回は『サブウーファーを先頭に置く』つなぎ方を体験しよう。",
+      patch: {
+        scenario:
+          "ダンスイベントの会場で、低音を強化するために、サブウーファー「Yamaha DXS12mkII」を1台とトップスピーカー「Yamaha DXR12mkII」を左右に1台ずつ使う。ミキサー「Allen & Heath SQ-5」のMAIN OUT L・Rを、DXS12mkIIのINPUT L・R(XLR)へそれぞれ接続する。DXS12mkIIのOUTPUT L・R(XLR、THROUGH/HPF POSTスイッチをHPF POSTに設定済み)から、左右のDXR12mkIIのINPUT(XLR)へ、それぞれ接続しよう。3台ともアンプを内蔵したパワード型のため、スピーカーケーブルは使わない。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Allen & Heath SQ-5",
+            icon: "SQ-5",
+            ports: [
+              { id: "mainL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "sub",
+            label: "Yamaha DXS12mkII(サブウーファー)",
+            icon: "DXS12mkII",
+            ports: [
+              { id: "inL", label: "INPUT L (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "INPUT R (XLR)", type: "xlr", dir: "in" },
+              { id: "outL", label: "OUTPUT L (XLR, HPF POST)", type: "xlr", dir: "out" },
+              { id: "outR", label: "OUTPUT R (XLR, HPF POST)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "topL", label: "Yamaha DXR12mkII(左)", icon: "DXR12-L", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "topR", label: "Yamaha DXR12mkII(右)", icon: "DXR12-R", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "speaker", "ts"],
+        correctConnections: [
+          { from: "mixer.mainL", to: "sub.inL", cable: "xlr" },
+          { from: "mixer.mainR", to: "sub.inR", cable: "xlr" },
+          { from: "sub.outL", to: "topL.in", cable: "xlr" },
+          { from: "sub.outR", to: "topR.in", cable: "xlr" },
+        ],
+        explain:
+          "DXS12mkIIの背面には、入力用のXLR端子が2つと、出力用のXLR端子が2つある。出力用の端子は、THROUGH/HPF POSTというスイッチで切り替えられ、THROUGHでは入力された信号がそのまま出力され、HPF POSTでは、サブウーファー内蔵のハイパスフィルター(低音をカットするフィルター)を通した信号が出力される。HPF POSTに設定しておけば、サブウーファーが担当する低音は自分で鳴らし、トップスピーカーには低音をカットした中高音だけを送れるため、ミキサーから出ているすべての音をそのままトップへ送る場合と比べ、トップが低音でムダに負荷をかけられずに済む。この配線は、サブウーファーを経由させるため、ミキサーの出力をトップへ直接送るときとは違って、サブウーファーの電源が入っていないとトップにも音が届かない点に注意が必要になる。以前の単元で扱ったdbx DriveRack PA2のようなアクティブクロスオーバーを使う方法と比べると、機材が少なくて済むかわりに、分割の細かい調整はサブウーファー側の機能の範囲に限られる。",
+      },
+    },
   ],
 };
