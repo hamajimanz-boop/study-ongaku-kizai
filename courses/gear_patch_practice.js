@@ -3020,5 +3020,46 @@ window.COURSES["gear_patch_practice"] = {
           "以前の単元でも扱ったキューミックスは、DAWやミキサーで『演奏者が聴くための、客席や録音とは別のバランス』を作って送る仕組み。人数が増えるほど、ヘッドホンを1つずつ直接つなぐのではなく、HA8000のように複数のヘッドホン出力を持つ『ヘッドホンアンプ』を使い、1人ずつに別のミックスを割り当てる運用が現実的になる。HA8000は8つの独立したステレオのチャンネルを備え、各チャンネルがそれぞれ別の入力を受けられるため、オーディオインターフェースの出力を2系統に分ければ、ボーカルとドラムで別のバランスを送り分けられる。各チャンネルにはフロントとリアにヘッドホン出力があるので、同じミックスを複数の人で聴きたいときは、1つのチャンネルに2人分のヘッドホンをつなぐこともできる。ヘッドホンは本来アンプの出力で鳴らすものなので、オーディオインターフェースのLINE OUTを直接ヘッドホンにつなぐのではなく、必ずヘッドホンアンプを間にはさむ。",
       },
     },
+    {
+      id: "looper_rc505_mixer",
+      order: 75,
+      title: "ルーパーでボーカルを重ねてミキサーへ送る(Boss RC-505mkII)",
+      category: "配線問題",
+      hook: "その場で歌を録音して何重にも重ねていく『ループパフォーマンス』。マイクの音は一度ルーパーに入り、重ねた結果だけがミキサーへ出ていく——信号の流れる向きを配線で確かめよう。",
+      patch: {
+        scenario:
+          "ストリートライブで、ルーパー「Boss RC-505mkII」を使い、その場で歌を重ねて演奏する。ボーカルマイク「Shure SM58」を、RC-505mkIIのMIC 1(XLR)へ接続する。ルーパーで加工された音は、MAIN OUT L(TS)とMAIN OUT R(TS)から、ミキサー「Yamaha MG12XU」のライン入力1のL側とR側(TS)へ、それぞれ接続しよう。マイクをミキサーへ直接つなぐ必要はない。",
+        equipment: [
+          { id: "mic", label: "Shure SM58", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "looper",
+            label: "Boss RC-505mkII",
+            icon: "RC-505",
+            ports: [
+              { id: "mic1", label: "MIC 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "outL", label: "MAIN OUT L/MONO (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "MAIN OUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "lineL", label: "LINE IN 1 L (TS)", type: "ts", dir: "in" },
+              { id: "lineR", label: "LINE IN 1 R (TS)", type: "ts", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "ts", "trs", "midi"],
+        correctConnections: [
+          { from: "mic.out", to: "looper.mic1", cable: "xlr" },
+          { from: "looper.outL", to: "mixer.lineL", cable: "ts" },
+          { from: "looper.outR", to: "mixer.lineR", cable: "ts" },
+        ],
+        explain:
+          "RC-505mkIIのようなルーパーは、マイクの音を機械の中に録音し、その録音を繰り返し再生しながら、さらに新しい音を重ねていく。ボーカルの生の声も、ルーパーが再生している重ね録りの音も、すべて『ルーパーを通ったあとの音』としてMAIN OUTから出てくるため、マイクは直接ミキサーへつながず、必ずルーパーに入力して、ルーパーの出力だけをミキサーへ送る配線にする。マイクをミキサーにも直接つなぐと、ルーパーを経由しない声が二重にミックスされ、ルーパーの音量バランスやエフェクトのかかり方をコントロールしづらくなる。RC-505mkIIのMIC入力にはファンタム電源が用意されており、コンデンサーマイクも使えるが、今回のSM58のようなダイナミックマイクではファンタム電源は不要。MAIN OUTのほかにSUB OUTも備えており、たとえばトラックごとに別々のチャンネルへ送り分けたい場合は、そちらを使う。",
+      },
+    },
   ],
 };
