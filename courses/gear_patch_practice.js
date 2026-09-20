@@ -2870,5 +2870,46 @@ window.COURSES["gear_patch_practice"] = {
           "Tascam 388は8トラックのテープレコーダーと8chミキサーが一体になったヴィンテージ機材で、各トラックを再生しながら内部のミキサーでバランスを取り、ステレオのミックスバスから+4dBu(プロ機材標準のライン信号レベル)のバランスXLR出力で音を送り出せる。この出力をオーディオインターフェースのライン入力にそのまま接続すれば、テープの音をアナログのライン信号としてPCに取り込み、DAW上でデジタルファイル化(アーカイブ)できる——テープが劣化する前に、あるいは再生できる個体が減っていく前に、こうした『テープ→ライン入力→DAW』というシンプルな配線でデジタル化しておくことは、古い音源を残す実務でよく行われる。今回はミックスバスから1本のステレオでまとめて取り込んだが、各トラックを個別にデジタル化したい場合は、388の各chのダイレクトアウトからマルチトラックで取り込む方法もある。",
       },
     },
+    {
+      id: "outboard_micpre_line_in",
+      order: 71,
+      title: "アウトボード・マイクプリをオーディオI/Fのライン入力につなぐ(Focusrite ISA One + Apollo Twin X)",
+      category: "配線問題",
+      hook: "I/Fに内蔵されたマイクプリより『音に色をつけたい』とき、外付けのマイクプリを1台はさむ。ただし、つなぐ先を間違えると音が二重に増幅されて歪んでしまう——マイクの信号を、どこで増幅するかを意識して配線しよう。",
+      patch: {
+        scenario:
+          "ボーカル録りで、外付けのマイクプリアンプ「Focusrite ISA One」を使いたい。コンデンサーマイク「Neumann TLM 103」を、ISA OneのMIC INPUT(XLR)へ接続する。ISA Oneでマイクの微弱な信号をライン信号レベルまで増幅したあとは、リア側のMAIN OUTPUT(XLR)から、オーディオインターフェース「Universal Audio Apollo Twin X USB」のLINE入力(XLR/TRSコンボ端子のうちのXLR側)へ接続しよう。Apollo Twin XとMacBook Proは、USBケーブルで接続する。",
+        equipment: [
+          { id: "mic", label: "Neumann TLM 103", icon: "TLM103", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "micpre",
+            label: "Focusrite ISA One(マイクプリアンプ)",
+            icon: "ISA One",
+            ports: [
+              { id: "micIn", label: "MIC INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "mainOut", label: "MAIN OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Universal Audio Apollo Twin X USB",
+            icon: "ApolloTwinX",
+            ports: [
+              { id: "lineIn", label: "INPUT 1 (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb"],
+        correctConnections: [
+          { from: "mic.out", to: "micpre.micIn", cable: "xlr" },
+          { from: "micpre.mainOut", to: "interface.lineIn", cable: "xlr" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "マイクの出力はとても小さい信号(マイクレベル)なので、必ずマイクプリアンプで増幅して、ライン信号レベルまで持ち上げる必要がある。ISA OneのようなアウトボードのマイクプリをXLRのMIC INPUTから使う場合、増幅はISA One側で済んでいるため、その出力をオーディオインターフェースにつなぐときは『ライン入力』として受けるのが基本になる。ここで注意したいのは、I/F側の入力を『マイクレベルのままの入力』として使い、しかもゲインを大きく上げてしまうと、すでに増幅された信号をもう一度増幅することになり、歪みやクリップの原因になるということ。実際には、I/Fの入力ゲインを最小近くに絞り、ライン入力(または+48Vファンタム電源をオフにした状態のライン受け)として使う。なお、ISA Oneはマイク入力のほかに、ギターやベース向けのDI入力も装備しているが、今回のシナリオではマイクを使うので、MIC INPUTを使う。",
+      },
+    },
   ],
 };
