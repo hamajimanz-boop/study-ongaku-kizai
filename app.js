@@ -82,7 +82,30 @@ function render() {
   if (parts[0] === "tip" && parts[1] && parts[2]) return renderTip(parts[1], parts[2]);
   if (parts[0] === "progress") return renderProgress();
   if (parts[0] === "glossary") return renderGlossary();
-  renderHome();
+  renderNotFound();
+}
+
+// ---------- NOT FOUND ----------
+// 古いブックマークや打ち間違いで存在しないID/URLに来たとき、無言でホームを
+// 表示すると「なぜホームに戻されたのか」が分からないため、短く理由を伝える。
+// コースだけ存在する場合は、そのコースの単元一覧へ戻れるようにする。
+function renderNotFound(courseId) {
+  const course = courseId ? getCourse(courseId) : null;
+  const back = course
+    ? `<a class="back" href="#/course/${course.id}">← ${course.title}</a>`
+    : `<a class="back" href="#/">← ホーム</a>`;
+  const message = course
+    ? "お探しの単元は見つかりませんでした。単元が整理・移動された可能性があります。"
+    : "お探しのページは見つかりませんでした。URLが古いか、打ち間違いの可能性があります。";
+  root.innerHTML = `
+    <header class="topbar">
+      ${back}
+      <h1>ページが見つかりません</h1>
+    </header>
+    <section class="section">
+      <p class="empty">${message}</p>
+      <a class="btn btn-primary" href="${course ? `#/course/${course.id}` : "#/"}">${course ? "単元一覧へ戻る" : "ホームへ戻る"}</a>
+    </section>`;
 }
 
 // ---------- helpers: status ----------
@@ -368,7 +391,7 @@ function renderHome() {
 function renderGenre(genreId) {
   const state = loadState();
   const genre = getGenre(genreId);
-  if (!genre) return renderHome();
+  if (!genre) return renderNotFound();
 
   const courseCards = coursesInGenre(genreId)
     .map((course) => courseCardHtml(course, state))
@@ -390,7 +413,7 @@ function renderGenre(genreId) {
 function renderCourse(courseId) {
   const state = loadState();
   const course = getCourse(courseId);
-  if (!course) return renderHome();
+  if (!course) return renderNotFound();
   const backHref = "#/";
   const backLabel = "ホーム";
 
@@ -428,7 +451,7 @@ function renderCourse(courseId) {
 function renderLesson(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
-  if (!course || !unit) return renderHome();
+  if (!course || !unit) return renderNotFound(courseId);
   if (!unit.sections) return renderCourse(courseId);
 
   if (unit.stub) {
@@ -582,7 +605,8 @@ let quizRuntime = null;
 function renderQuiz(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
-  if (!course || !unit || unit.stub) return renderHome();
+  if (!course || !unit) return renderNotFound(courseId);
+  if (unit.stub) return renderHome();
   if (!unit.quiz) return renderCourse(courseId);
 
   if (!quizRuntime || quizRuntime.courseId !== courseId || quizRuntime.unitId !== unitId) {
@@ -743,7 +767,8 @@ let patchRuntime = null;
 function renderPatch(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
-  if (!course || !unit || !unit.patch) return renderHome();
+  if (!course || !unit) return renderNotFound(courseId);
+  if (!unit.patch) return renderHome();
   const p = unit.patch;
 
   patchRuntime = { courseId, unitId, cables: [], graded: false, armedCable: null, dragging: null, dragPoint: null, kbPending: null };
@@ -1040,7 +1065,8 @@ let caseRuntime = null;
 function renderCase(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
-  if (!course || !unit || !unit.caseStudy) return renderHome();
+  if (!course || !unit) return renderNotFound(courseId);
+  if (!unit.caseStudy) return renderHome();
   const cs = unit.caseStudy;
 
   caseRuntime = { courseId, unitId, graded: false };
@@ -1140,7 +1166,8 @@ let tipRuntime = null;
 function renderTip(courseId, unitId) {
   const course = getCourse(courseId);
   const unit = getUnit(courseId, unitId);
-  if (!course || !unit || !unit.tip) return renderHome();
+  if (!course || !unit) return renderNotFound(courseId);
+  if (!unit.tip) return renderHome();
   const t = unit.tip;
 
   tipRuntime = { courseId, unitId, graded: false };
