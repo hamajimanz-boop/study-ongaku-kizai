@@ -23,10 +23,13 @@
   --aqua-dark: #0d7f64;
   --red-dark: #cb3a4c;
   --good-dark: #148140;
+  /* --violet も白背景の小さい文字では4.35:1でAA(4.5:1)に届かないため、文字色用に暗くした版 */
+  --violet-dark: #6548f0;
   --shadow-sm: 0 1px 2px rgba(30, 20, 60, 0.06), 0 1px 1px rgba(30, 20, 60, 0.04);
   --shadow-md: 0 8px 20px rgba(30, 20, 60, 0.10), 0 2px 6px rgba(30, 20, 60, 0.06);
   --shadow-lg: 0 16px 36px rgba(30, 20, 60, 0.16), 0 4px 10px rgba(30, 20, 60, 0.08);
-  --gradient-hero: linear-gradient(120deg, #6a4bff 0%, #8b5cff 45%, #ff5da2 100%);
+  /* 白文字を乗せるため、右端のピンクや中間色は白文字でAA(4.5:1)を満たす濃さにしてある */
+  --gradient-hero: linear-gradient(120deg, #6a4bff 0%, #7450ee 45%, #c22f78 100%);
   --gradient-page: linear-gradient(160deg, #fff7f0 0%, #fbf5ff 45%, #f2f6ff 100%);
   --radius-lg: 20px;
   --radius-md: 14px;
@@ -50,6 +53,7 @@
   --aqua: #2fe0b4;
   --yellow: #ffc25c;
   --violet: #a48bff;
+  --violet-dark: #a48bff;
   --pink: #ff7fb8;
   --red: #ff6b7f;
   --good: #35d374;
@@ -120,7 +124,7 @@ a, button {
   border-radius: 999px;
   box-shadow: var(--shadow-sm);
 }
-.topbar nav a:hover { text-decoration: none; color: var(--violet); border-color: var(--violet); }
+.topbar nav a:hover { text-decoration: none; color: var(--violet-dark); border-color: var(--violet); }
 .back {
   font-size: 13.5px;
   font-weight: 700;
@@ -132,7 +136,7 @@ a, button {
   box-shadow: var(--shadow-sm);
   display: inline-block;
 }
-.back:hover { text-decoration: none; color: var(--violet); border-color: var(--violet); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.back:hover { text-decoration: none; color: var(--violet-dark); border-color: var(--violet); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .progress-indicator { font-size: 13px; font-weight: 700; color: var(--muted); }
 
 .section { margin-bottom: 34px; }
@@ -176,16 +180,17 @@ a, button {
   font-weight: 800;
 }
 .hero-ring-label strong { font-size: 22px; line-height: 1; }
-.hero-ring-label span { font-size: 10px; opacity: 0.85; margin-top: 2px; letter-spacing: 0.02em; }
+.hero-ring-label span { font-size: 10px; margin-top: 2px; letter-spacing: 0.02em; }
 .hero-body { flex: 1; min-width: 200px; position: relative; z-index: 1; }
 .hero-title { font-size: 21px; font-weight: 800; margin: 0 0 6px; letter-spacing: -0.01em; }
-.hero-sub { font-size: 13.5px; opacity: 0.92; margin: 0 0 14px; }
+.hero-sub { font-size: 13.5px; margin: 0 0 14px; }
 .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
 .hero-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255,255,255,0.18);
+  /* 白い半透明だと下地が明るくなり白文字が4.5:1を割るため、濃い半透明にしてある */
+  background: rgba(30,15,80,0.2);
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.3);
   border-radius: 999px;
@@ -370,7 +375,7 @@ a, button {
 }
 .task-title { flex: 1; font-weight: 700; }
 .task-title small { display: block; font-weight: 600; color: var(--muted); font-size: 12px; margin-top: 1px; }
-.task-arrow { font-size: 12.5px; color: var(--violet); font-weight: 700; flex-shrink: 0; }
+.task-arrow { font-size: 12.5px; color: var(--violet-dark); font-weight: 700; flex-shrink: 0; }
 
 /* ---------- unit list (course page) ---------- */
 .unit-list { display: flex; flex-direction: column; gap: 7px; }
@@ -407,7 +412,7 @@ a, button {
 
 /* ---------- lesson ---------- */
 .lesson { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 28px 36px; box-shadow: var(--shadow-sm); }
-.unit-eyebrow { color: var(--violet); font-size: 12.5px; margin: 0 0 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; }
+.unit-eyebrow { color: var(--violet-dark); font-size: 12.5px; margin: 0 0 4px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; }
 .lesson h1 { margin: 0 0 16px; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; }
 .hook-box {
   background: color-mix(in srgb, var(--orange) 10%, var(--surface));
@@ -560,7 +565,7 @@ a, button {
   font-weight: 700;
   cursor: pointer;
 }
-.memo-toggle:hover { border-color: var(--violet); color: var(--violet); }
+.memo-toggle:hover { border-color: var(--violet); color: var(--violet-dark); }
 .memo-toggle svg { width: 14px; height: 14px; }
 .memo-pad { margin: 0 0 18px; }
 .memo-pad textarea {
