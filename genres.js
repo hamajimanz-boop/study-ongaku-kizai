@@ -7,7 +7,7 @@ window.GENRES = [
     title: "機材ブランド・楽器メーカー",
     icon: "HW",
     description: "マイク・コンソール・モニタースピーカーなどの音響機材メーカーと、ギター/ベース/ドラム/シンバルなどの楽器メーカーの沿革・お金の話(各社の歴史・製品ラインナップ)。",
-    color: "#2a78d6",
+    color: "#266cc1",
     courseIds: ["hardware_dtm", "instrument_makers"],
   },
   {
@@ -31,7 +31,7 @@ window.GENRES = [
     title: "お金・ビジネス",
     icon: "¥",
     description: "個人事業主の簿記・税務・実務と、印税・著作権・レーベル契約など音楽業界特有のお金の話。",
-    color: "#2f9e58",
+    color: "#257b45",
     courseIds: ["kojin_jigyou", "music_business_money"],
   },
   {

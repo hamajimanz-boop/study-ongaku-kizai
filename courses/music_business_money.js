@@ -7,7 +7,7 @@ window.COURSES["music_business_money"] = {
   id: "music_business_money",
   title: "音楽業界のお金編(印税・著作権・契約)",
   description: "作曲・演奏・レコーディングで生まれた音楽が、どういう仕組みでお金に変わるのかを学ぶ。著作権の基礎、印税の種類、JASRAC/NexTone、レーベル契約、ストリーミング時代の収益構造まで扱う、音楽制作者向けのお金の知識編。",
-  color: "#b8860b",
+  color: "#8c6608",
   order: 6,
   active: true,
   units: [

@@ -8,7 +8,7 @@ window.COURSES["hardware_dtm"] = {
   id: "hardware_dtm",
   title: "音響機材編(DTM/レコーディング系)",
   description: "オーディオインターフェース・マイク・モニタースピーカー・実機コンソール/プリアンプなど、録音の入口〜出口に関わるハードウェアメーカーを学ぶ。",
-  color: "#2a78d6",
+  color: "#266cc1",
   order: 1,
   active: true,
   units: [

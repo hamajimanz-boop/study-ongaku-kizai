@@ -4,7 +4,7 @@ window.COURSES["kojin_jigyou"] = {
   id: "kojin_jigyou",
   title: "個人事業主マネー編(簿記・FP・実務)",
   description: "個人事業主として活動するために必要なお金の知識を学ぶ。簿記3級(記帳・確定申告の土台)、FP3級(保険・年金などのライフプランニング)、開業届〜法人化までの実務を扱う。",
-  color: "#2f9e58",
+  color: "#257b45",
   order: 4,
   active: true,
   units: [
