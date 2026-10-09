@@ -351,6 +351,15 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "ある音によって別の近い周波数の音が聞こえにくくなる現象を何と呼ぶか?", choices: ["マスキング効果", "ドップラー効果", "回折", "位相反転"], answer: 0, explain: "マスキング効果と呼ばれ、ミックスで楽器同士がぶつかって聞こえる原因の一つ。" },
         { q: "耳小骨の役割として最も近いものは?", choices: ["音を電気信号に変換する", "空気中の振動を内耳のリンパ液に効率よく伝えるインピーダンス整合", "周波数を分析する", "音量を記憶する"], answer: 1, explain: "耳小骨は空気とリンパ液という異なる媒質間で振動を効率よく受け渡す役割を持つ。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "蝸牛 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E8%9D%B8%E7%89%9B" },
+          { title: "中耳 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E4%B8%AD%E8%80%B3" },
+          { title: "等ラウドネス曲線 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E7%AD%89%E3%83%A9%E3%82%A6%E3%83%89%E3%83%8D%E3%82%B9%E6%9B%B2%E7%B7%9A" },
+          { title: "音響心理学(マスキング効果) - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E9%9F%B3%E9%9F%BF%E5%BF%83%E7%90%86%E5%AD%A6" },
+        ],
+      },
     },
     {
       id: "temperament_pitch",
@@ -414,6 +423,15 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "純正律の弱点として正しいのは?", choices: ["転調すると音程が濁ってしまう", "常に平均律より響きが悪い", "楽器で演奏できない", "オクターブの概念がない"], answer: 0, explain: "ある調で純正に調律すると、別の調へ転調した際に音程が濁る弱点がある。" },
         { q: "1オクターブは何セントか?", choices: ["100セント", "440セント", "1200セント", "12セント"], answer: 2, explain: "1オクターブは1200セントで、平均律の半音1つ分は100セントにあたる。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "音律 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E9%9F%B3%E5%BE%8B" },
+          { title: "平均律 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E5%B9%B3%E5%9D%87%E5%BE%8B" },
+          { title: "純正律 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E7%B4%94%E6%AD%A3%E5%BE%8B" },
+          { title: "セント (音楽) - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%82%BB%E3%83%B3%E3%83%88_(%E9%9F%B3%E6%A5%BD)" },
+        ],
+      },
     },
     {
       id: "binaural_stereo_theory",
@@ -477,6 +495,14 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "MS方式の最大の特徴は?", choices: ["録音後にステレオの広がりを自由に調整できる", "マイクが1本で済む", "常にモノラル非対応になる", "常にマイクが4本必要"], answer: 0, explain: "M/Sの音量バランスを後から変えることでステレオ幅を調整できる。" },
         { q: "モノラル互換性を特に重視する場合に適しているとされる方式の組み合わせは?", choices: ["ORTF方式とAB方式", "XY方式とMS方式", "5.1chとサブウーファー", "純正律と平均律"], answer: 1, explain: "位相のズレが少ないXY方式・M信号を使えるMS方式はモノラル互換性に優れる。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "Stereo recording techniques and setups | DPA Microphones Mic University", url: "https://www.dpamicrophones.com/mic-university/stereo-recording-techniques-and-setups" },
+          { title: "頭部伝達関数 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E9%A0%AD%E9%83%A8%E4%BC%9D%E9%81%94%E9%96%A2%E6%95%B0" },
+          { title: "ステレオ - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%86%E3%83%AC%E3%82%AA" },
+        ],
+      },
     },
     {
       id: "electrical_basics",
@@ -540,6 +566,13 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "交流回路における、抵抗とリアクタンスを組み合わせた総合的な「流れにくさ」を何と呼ぶか?", choices: ["インピーダンス", "キャパシタンス", "コンダクタンス", "リラクタンス"], answer: 0, explain: "抵抗とリアクタンスを組み合わせた総合値がインピーダンス。" },
         { q: "電圧が2倍になったときのデシベル変化のおおよその目安は?", choices: ["約+3dB", "約+6dB", "約+20dB", "約+40dB"], answer: 1, explain: "電圧比のdBは20×log10(比率)で計算され、2倍で約+6dBになる。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "オームの法則 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%83%A0%E3%81%AE%E6%B3%95%E5%89%87" },
+          { title: "インピーダンス - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%94%E3%83%BC%E3%83%80%E3%83%B3%E3%82%B9" },
+        ],
+      },
     },
     {
       id: "magnetic_recording",
@@ -603,6 +636,14 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "デジタルのテープシミュレータープラグインが再現しようとしている特性は?", choices: ["デジタルのサンプリング定理", "アナログテープのヒステリシス・飽和特性", "ステレオマイキングの配置", "著作権使用料の計算"], answer: 1, explain: "テープ特有のヒステリシス・飽和特性をデジタルでモデリングしている。" },
         { q: "磁気記録における再生の仕組みとして正しいのは?", choices: ["磁化パターンが再生ヘッドを通過する際の電磁誘導で電流を発生させる", "テープの色を読み取る", "テープの厚みを測定する", "赤外線センサーで読み取る"], answer: 0, explain: "磁化パターンが再生ヘッドを通過する際、電磁誘導により電流が発生し音声として再生される。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "磁気テープ - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E7%A3%81%E6%B0%97%E3%83%86%E3%83%BC%E3%83%97" },
+          { title: "テープレコーダー - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%BC%E3%83%97%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC" },
+          { title: "Tape bias - Wikipedia(英語)", url: "https://en.wikipedia.org/wiki/Tape_bias" },
+        ],
+      },
     },
     {
       id: "miking_techniques",
@@ -666,6 +707,14 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "複数マイクの位相干渉で生じる、特定周波数が強調・打ち消しされる現象を何と呼ぶか?", choices: ["コムフィルター効果", "ドップラー効果", "マスキング効果", "ラウドネス効果"], answer: 0, explain: "位相差により特定周波数が変化するコムフィルター効果が生じやすい。" },
         { q: "位相干渉を避けるための経験則として知られる目安は?", choices: ["1:1ルール", "3:1ルール", "10:1ルール", "そのようなルールは存在しない"], answer: 1, explain: "マイク間距離が音源との距離の3倍以上離れていると干渉の影響が少ないとされる3:1ルールが知られている。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "Microphones: Essential Recording Tools(Decca Tree Technique) | Tape Op Magazine", url: "https://tapeop.com/interviews/46/microphones-decca-tree-technique" },
+          { title: "The Decca Ring Cycle: Then & Now | Sound On Sound", url: "https://www.soundonsound.com/techniques/decca-ring-cycle-then-now" },
+          { title: "How to mic a drum kit | DPA Microphones Mic University", url: "https://www.dpamicrophones.com/mic-university/how-to-mic-a-drum-kit" },
+        ],
+      },
     },
     {
       id: "surround_multichannel",
@@ -726,6 +775,14 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "マルチチャンネルミックスで確認すべき重要な工程は?", choices: ["ステレオへのダウンミックスで破綻しないかの確認", "全チャンネルを同じ音量に固定すること", "LFEチャンネルを常にオフにすること", "モノラル変換を一切行わないこと"], answer: 0, explain: "ステレオへのダウンミックス時に破綻しないかを確認する工程が重要。" },
         { q: "JAPRS試験でサラウンド制作が分類されている章は?", choices: ["音楽著作権", "次世代音響技術", "録音の歴史", "楽器法"], answer: 1, explain: "「次世代音響技術」の章でデジタル録音・サラウンド制作がまとめて扱われている。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "サラウンド - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89" },
+          { title: "ドルビーアトモス - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%AB%E3%83%93%E3%83%BC%E3%82%A2%E3%83%88%E3%83%A2%E3%82%B9" },
+          { title: "Leader in immersive music | Dolby Professional", url: "https://professional.dolby.com/music/" },
+        ],
+      },
     },
     {
       id: "recording_media_history",
@@ -786,6 +843,14 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "1980年代のSSLによる、つまみの位置を記憶・再現する仕組みの名称は?", choices: ["Total Recall", "Rack Extension", "Max for Live", "AAX"], answer: 0, explain: "SSLのTotal Recallが複数日にまたがるミックス作業を可能にした。" },
         { q: "録音・保存メディアの大まかな変遷順として正しいのは?", choices: ["デジタルストレージ→磁気テープ→円盤レコード→円筒蓄音機", "円筒蓄音機→円盤レコード→磁気テープ→デジタルストレージ", "磁気テープ→円筒蓄音機→デジタルストレージ→円盤レコード", "変遷の順序は存在しない"], answer: 1, explain: "円筒蓄音機→円盤レコード→磁気テープ→デジタルストレージという順で発展してきた。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "蓄音機 - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E8%93%84%E9%9F%B3%E6%A9%9F" },
+          { title: "磁気テープ - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E7%A3%81%E6%B0%97%E3%83%86%E3%83%BC%E3%83%97" },
+          { title: "ミキシング・コンソール - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%83%9F%E3%82%AD%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB" },
+        ],
+      },
     },
     {
       id: "music_production_history_staff",
@@ -846,6 +911,14 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "多くのエンジニアがキャリアの入り口として担うことが多い役割は?", choices: ["プロデューサー", "アシスタントエンジニア", "マスタリングエンジニア", "音楽出版社の社長"], answer: 1, explain: "機材セッティング等を補助するアシスタントエンジニアからキャリアを始めることが多い。" },
         { q: "インディーズ・宅録の現場でよく見られる制作体制の特徴は?", choices: ["必ず10人以上の分業体制が組まれる", "一人が複数の役割(作曲・演奏・録音・ミックス等)を兼任することが多い", "プロデューサーが存在してはならない", "マスタリングは絶対に外注できない"], answer: 1, explain: "宅録・インディーズでは一人が複数役割を兼任することが多い。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "音楽プロデューサー - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E9%9F%B3%E6%A5%BD%E3%83%97%E3%83%AD%E3%83%87%E3%83%A5%E3%83%BC%E3%82%B5%E3%83%BC" },
+          { title: "レコーディング・エンジニア - Wikipedia", url: "https://ja.wikipedia.org/wiki/%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%83%BB%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2" },
+          { title: "一般社団法人 日本音楽スタジオ協会(JAPRS)公式サイト", url: "https://www.japrs.or.jp/" },
+        ],
+      },
     },
     {
       id: "studio_design_basics",
@@ -908,6 +981,12 @@ window.COURSES["sound_engineering_theory"] = {
         { q: "業務用スタジオの電気設備で重視される対策は?", choices: ["一般コンセントと機材専用電源系統の分離、適切な接地(アース)", "電源を一切使わないこと", "全ての機材を直流でのみ動かすこと", "アースを取らないこと"], answer: 0, explain: "電源系統の分離と適切な接地により、ノイズ混入・ハムノイズを防ぐ。" },
         { q: "本格的なスタジオの新設・改装で対応が必要になる法規の例は?", choices: ["著作権法のみ", "建築基準法・消防法など通常の建築物と同様の法規", "特許法のみ", "法規への対応は一切不要"], answer: 1, explain: "建築基準法・消防法など、通常の建築物と同様の法規対応が必要になる。" },
       ],
+      furtherLearning: {
+        videos: [],
+        articles: [
+          { title: "【初めての防音対策】自分で出来る簡単防音から本格防音までまるわかりガイド | 島村楽器", url: "https://www.shimamura.co.jp/update/shops/chibanewtown/accessories/17659/" },
+        ],
+      },
     },
   ],
 };
