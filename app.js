@@ -814,7 +814,7 @@ function renderPatch(courseId, unitId) {
       <h1>${unit.title}</h1>
       <div class="hook-box">${p.scenario}</div>
 
-      <p class="patch-instructions">${ICONS.sparkle} 下のケーブルを1本選び、機材の端子(●)からもう一方の端子までドラッグしてつなごう。配線を間違えたら、そのケーブルをクリックすると剪定(削除)できる。(キーボード操作の場合: ケーブルを選んだ後、Tabキーで端子に移動しEnterキーで選択、もう一方の端子でもEnterキーを押すと接続される)</p>
+      <p class="patch-instructions">${ICONS.sparkle} 下のケーブルを1本選び、機材の端子(●)からもう一方の端子までドラッグしてつなごう。配線を間違えたら、そのケーブルをクリックすると剪定(削除)できる。(キーボード操作の場合: ケーブルを選んだ後、Tabキーで端子に移動しEnterキーで選択、もう一方の端子でもEnterキーを押すと接続される。削除は盤面の下の「つないだケーブル」一覧の「外す」ボタンからもできる)</p>
 
       <div class="patch-palette" id="patchPalette">${paletteHtml}</div>
 
@@ -822,6 +822,9 @@ function renderPatch(courseId, unitId) {
         <svg class="patch-cables-svg" id="patchSvg"></svg>
         <div class="patch-board" id="patchBoard">${equipHtml}</div>
       </div>
+
+      <div class="patch-cable-list" id="patchCableList"></div>
+      <p class="patch-cable-status" id="patchCableStatus" role="status"></p>
 
       <div class="patch-actions">
         <button type="button" class="btn btn-primary" id="patchGradeBtn">配線を確認する</button>
@@ -904,6 +907,49 @@ function flashPatchHint(msg) {
   if (fb) fb.innerHTML = `<p class="fb-wrong">${msg}</p>`;
 }
 
+function patchCableLabel(c) {
+  const elA = patchPortEl(c.from.equip, c.from.port);
+  const elB = patchPortEl(c.to.equip, c.to.port);
+  const a = elA ? elA.getAttribute("aria-label") : c.from.port;
+  const b = elB ? elB.getAttribute("aria-label") : c.to.port;
+  return `${CABLE_LABELS[c.type] || c.type}: ${a} → ${b}`;
+}
+
+// 接続済みケーブルの一覧(キーボード・スクリーンリーダーでも「外す」操作ができるように)
+function renderPatchCableList() {
+  const list = document.getElementById("patchCableList");
+  if (!list) return;
+  if (!patchRuntime.cables.length) {
+    list.innerHTML = "";
+    return;
+  }
+  list.innerHTML = `
+    <p class="patch-cable-list-title">つないだケーブル(${patchRuntime.cables.length}本)</p>
+    <ul>
+      ${patchRuntime.cables
+        .map(
+          (c) => `
+        <li class="patch-cable-item">
+          <span class="cable-chip-dot" style="--cable-color:${CABLE_COLORS[c.type] || "#999"}"></span>
+          <span class="patch-cable-item-label">${patchCableLabel(c)}</span>
+          ${patchRuntime.graded ? "" : `<button type="button" class="patch-cable-remove" data-cable-id="${c.id}" aria-label="${patchCableLabel(c)} を外す">外す</button>`}
+        </li>`
+        )
+        .join("")}
+    </ul>`;
+}
+
+function removePatchCable(id) {
+  const idx = patchRuntime.cables.findIndex((c) => c.id === id);
+  if (idx < 0) return;
+  const label = patchCableLabel(patchRuntime.cables[idx]);
+  patchRuntime.cables.splice(idx, 1);
+  redrawPatchCables(null);
+  renderPatchCableList();
+  const status = document.getElementById("patchCableStatus");
+  if (status) status.textContent = `${label} を外しました。`;
+}
+
 function clearKbPending() {
   patchRuntime.kbPending = null;
   document.querySelectorAll(".patch-port-selected").forEach((el) => el.classList.remove("patch-port-selected"));
@@ -960,6 +1006,7 @@ function wirePatchBoard(course, unit) {
         }
         patchRuntime.dragging = null;
         redrawPatchCables(null);
+        renderPatchCableList();
       };
       document.addEventListener("mousemove", onMove);
       document.addEventListener("mouseup", onUp);
@@ -991,6 +1038,7 @@ function wirePatchBoard(course, unit) {
         type: patchRuntime.armedCable,
       });
       redrawPatchCables(null);
+      renderPatchCableList();
     });
   });
 
@@ -998,8 +1046,19 @@ function wirePatchBoard(course, unit) {
     if (patchRuntime.graded) return;
     const id = e.target.dataset.cableId;
     if (!id) return;
-    patchRuntime.cables = patchRuntime.cables.filter((c) => c.id !== id);
-    redrawPatchCables(null);
+    removePatchCable(id);
+  });
+
+  document.getElementById("patchCableList").addEventListener("click", (e) => {
+    const btn = e.target.closest(".patch-cable-remove");
+    if (!btn || patchRuntime.graded) return;
+    const buttons = Array.from(document.querySelectorAll(".patch-cable-remove"));
+    const pos = buttons.indexOf(btn);
+    removePatchCable(btn.dataset.cableId);
+    // 削除後もキーボード操作を続けられるよう、次(無ければ前)の「外す」ボタンへ、それも無ければ確認ボタンへフォーカスを移す
+    const rest = document.querySelectorAll(".patch-cable-remove");
+    const next = rest[Math.min(pos, rest.length - 1)] || document.getElementById("patchGradeBtn");
+    if (next) next.focus();
   });
 
   document.getElementById("patchGradeBtn").addEventListener("click", () => gradePatch(course, unit));
@@ -1041,6 +1100,7 @@ function gradePatch(course, unit) {
   const total = expected.length;
   patchRuntime.graded = true;
   redrawPatchCables(status);
+  renderPatchCableList();
 
   const { pass } = updateUnitProgress(course.id, unit.id, correctCount, total);
 
