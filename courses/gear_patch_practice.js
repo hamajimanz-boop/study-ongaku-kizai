@@ -3377,5 +3377,65 @@ window.COURSES["gear_patch_practice"] = {
           "monologueの音声出力はモノラルの1系統だけなので、そのまま録れば左右どちらにも同じ音が出る『点』の音になる。BigSkyはステレオの入出力を持ち、モノラルで入力した場合はLEFT INだけを使う。リバーブの響きは内部で左右に違う成分として作られ、LEFT OUTとRIGHT OUTから別々に出てくるため、2本の出力をオーディオインターフェースの2つの入力にそれぞれつなぎ、DAWでLとRに振り分ければ、響きが左右に広がったステレオの音として録音できる。RIGHT INは、ステレオ出力のシンセやキーボードをつなぐときに使う端子なので、今回は空けておく。BigSkyのようなギター用ペダルは、本来ギターの小さな信号を受ける前提で作られているため、シンセのようなライン信号を入れると、音が大きすぎて歪むことがある。シンセ側の音量を控えめにして、ペダルの入力で音が割れていないか確認してから録音しよう。また、ステレオで録ったリバーブは、片方のチャンネルだけをミュートしてしまうと響きのバランスが崩れるので、2本のトラックはセットで扱うのが基本。",
       },
     },
+    {
+      id: "analog_mastering_chain_print",
+      order: 83,
+      title: "アナログのマスタリングチェーンで2ミックスを処理して録り直す(Manley Massive Passive + SSL Fusion)",
+      category: "配線問題",
+      hook: "DAWから出した2ミックス(左右2chにまとめた完成ミックス)を、アナログのEQとコンプに通して、もう一度DAWに録り直す。出口から入口へ戻る『一周』の配線を、左右の取り違えなく組めるか?",
+      patch: {
+        scenario:
+          "マスタリング作業で、DAWの2ミックスをアナログ機材に通して音を仕上げ、その結果を録り直したい(プリント)。AD/DAコンバーター「RME ADI-2 Pro FS R」とMacBook ProはUSBケーブルで接続する。ADI-2 Pro FS RのLINE OUT L・R(XLR)から、ステレオのEQ「Manley Massive Passive」のCH1 INPUT(XLR)・CH2 INPUT(XLR)へ接続する(CH1を左、CH2を右として扱う)。Massive PassiveのCH1 OUTPUT・CH2 OUTPUT(XLR)から、ステレオのアナログプロセッサー「SSL Fusion」のINPUT L・R(XLR)へ接続する。FusionのOUTPUT L・R(XLR)から、ADI-2 Pro FS RのLINE IN 1・2(XLR/TRSコンボ)へ接続して、DAWで録音しよう。",
+        equipment: [
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "out" }] },
+          {
+            id: "conv",
+            label: "RME ADI-2 Pro FS R(AD/DAコンバーター)",
+            icon: "ADI-2 Pro",
+            ports: [
+              { id: "usbin", label: "USB", type: "usb", dir: "in" },
+              { id: "outL", label: "LINE OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "LINE OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "in1", label: "LINE IN 1 (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "in2", label: "LINE IN 2 (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+            ],
+          },
+          {
+            id: "eq",
+            label: "Manley Massive Passive(ステレオEQ)",
+            icon: "Massive",
+            ports: [
+              { id: "in1", label: "CH1 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "CH2 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out1", label: "CH1 OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "CH2 OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "fusion",
+            label: "SSL Fusion",
+            icon: "Fusion",
+            ports: [
+              { id: "inL", label: "INPUT L (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "INPUT R (XLR)", type: "xlr", dir: "in" },
+              { id: "outL", label: "OUTPUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "OUTPUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "aes"],
+        correctConnections: [
+          { from: "pc.usb", to: "conv.usbin", cable: "usb" },
+          { from: "conv.outL", to: "eq.in1", cable: "xlr" },
+          { from: "conv.outR", to: "eq.in2", cable: "xlr" },
+          { from: "eq.out1", to: "fusion.inL", cable: "xlr" },
+          { from: "eq.out2", to: "fusion.inR", cable: "xlr" },
+          { from: "fusion.outL", to: "conv.in1", cable: "xlr" },
+          { from: "fusion.outR", to: "conv.in2", cable: "xlr" },
+        ],
+        explain:
+          "この配線は、DAWの音をDA(デジタル→アナログ)変換して外へ出し、アナログ機材で処理したあと、AD(アナログ→デジタル)変換してDAWへ戻す『一周』の流れになっている。アナログのマスタリング機材は、左右2chを同じ設定で処理することが前提なので、左はずっと左(CH1・L・IN 1)、右はずっと右(CH2・R・IN 2)という対応を、機材をまたいでも崩さないことが最も大事。途中で左右が入れ替わると、録り直した音の定位が逆になったり、左右で違うかかり方になったりする。Massive PassiveはXLR入出力がプロ用の+4dBuレベルで動作し、出力はトランスでバランスされているため、XLRケーブルでつなぐのが基本。SSL FusionもすべてXLRで入出力するため、XLRケーブルだけで一周を組める。また、DAWから出した音を外部機材に通して戻すと、変換処理と機材の通過で、わずかな時間の遅れ(レイテンシー)が生じる。録り直した音は元のデータより少し後ろにずれるので、曲の頭の位置を合わせ直すか、DAWの遅延補正機能で調整しておこう。",
+      },
+    },
   ],
 };
