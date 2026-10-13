@@ -3180,7 +3180,64 @@ window.COURSES["gear_patch_practice"] = {
           { from: "mic.out", to: "mixer.mic1", cable: "xlr" },
         ],
         explain:
-          "HT1のような昔ながらのトークボックスは、自分では音を増幅する仕組み(アンプ)を持たず、ギターアンプが本来スピーカーを鳴らすために出している大きな電力で、内部のドライバーを鳴らしている。そのため、アンプのSPEAKER OUTPUTとHT1の間、HT1とキャビネットの間は、ギター用のシールドケーブル(TS)ではなく、太い導線のスピーカーケーブルでつなぐ必要がある。メーカーの説明書でも、ギター用ケーブルではなく頑丈なスピーカーケーブルを使うよう注意されている。HT1のフットスイッチをオフにすると、音はそのままキャビネットへ素通りし、オンにするとドライバー側へ切り替わって、チューブを通って口元に届く。口の形で音色を変えた結果はそのままでは客席に届かないため、ボーカルマイクで拾ってPAへ送るのが基本。また、HT1には扱える電力の上限(説明書では最大100W、連続50W RMS)があるため、大出力のアンプにつなぐとドライバーを壊すおそれがある。今回は20Wのアンプを選んでいるが、実際に使うときはアンプの出力と、キャビネットのインピーダンス(Ω)が合っているかを必ず確認しよう。なお、MXRの後継モデルのように、アンプを内蔵し、ギターから直接つなげるタイプのトークボックスもある。",
+          "HT1のような昔ながらのトークボックスは、自分では音を増幅する仕組み(アンプ)を持たず、ギターアンプが本来スピーカーを鳴らすために出している大きな電力で、内部のドライバーを鳴らしている。そのため、アンプのSPEAKER OUTPUTとHT1の間、HT1とキャビネットの間は、ギター用のシールドケーブル(TS)ではなく、太い導線のスピーカーケーブルでつなぐ必要がある。メーカーの説明書でも、ギター用ケーブルではなく頑丈なスピーカーケーブルを使うよう注意されている。HT1のフットスイッチをオフにすると、音はそのままキャビネットへ素通りし、オンにするとドライバー側へ切り替わって、チューブを通って口元に届く。口の形で音色を変えた結果はそのままでは客席に届かないため、ボーカルマイクで拾ってPAへ送るのが基本。また、HT1には扱える電力の上限(説明書では最大100W、連続50W RMS)があるため、大出力のアンプにつなぐとドライバーを壊すおそれがある。今回は20Wのアンプを選んでいるが、実際に使うときはアンプの出力と、キャビネットのインピーダンス(Ω)が合っているかを必ず確認しよう。なお、トークボックスには、HT1のようにアンプのスピーカー出力で鳴らすタイプのほかに、小さなアンプを内蔵していて、ギターから直接つなげるタイプも販売されている。",
+      },
+    },
+    {
+      id: "backing_track_click_split",
+      order: 79,
+      title: "同期演奏のオケとクリックを分けて出力する(Scarlett 4i4 + Radial ProD2 + Behringer P1)",
+      category: "配線問題",
+      hook: "パソコンから流すオケ(伴奏音源)はお客さんに聴かせたいが、テンポを刻むクリック音は絶対に客席へ漏らしたくない。同じパソコンから出る2種類の音を、出口から分けて配線しよう。",
+      patch: {
+        scenario:
+          "バンドのライブで、ドラマーがクリック(テンポを示すメトロノーム音)を聴きながら、パソコンで再生するオケ(シンセやコーラスなどの伴奏音源)と合わせて演奏する『同期演奏』をする。MacBook Pro(Ableton Live起動済み)とオーディオインターフェース「Focusrite Scarlett 4i4(第4世代)」をUSBケーブルで接続する。オケはLINE OUTPUT 1・2から出して、ステレオのパッシブDI「Radial ProD2」のCH1・CH2 INPUTへTSケーブルで接続し、ProD2のCH1・CH2 XLR OUTPUTを、FOH(客席側のミキサー)へ送るステージボックスのCH15・CH16(XLR)へ接続する。クリックはLINE OUTPUT 3だけに出すようにDAWで設定済み。LINE OUTPUT 3から、ドラマーの足元に置くイヤモニ用アンプ「Behringer POWERPLAY P1」のINPUT 1(XLR)へ、片側がTRS・片側がXLRのバランスケーブルで接続しよう。P1のPHONES出力にはドラマーのイヤホンが接続済みとする。",
+        equipment: [
+          { id: "pc", label: "MacBook Pro(Ableton Live)", icon: "MacBk", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "out" }] },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 4i4(第4世代)",
+            icon: "4i4",
+            ports: [
+              { id: "usbin", label: "USB", type: "usb", dir: "in" },
+              { id: "out1", label: "LINE OUTPUT 1 (TRS)", type: "trs", dir: "out" },
+              { id: "out2", label: "LINE OUTPUT 2 (TRS)", type: "trs", dir: "out" },
+              { id: "out3", label: "LINE OUTPUT 3 (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "di",
+            label: "Radial ProD2(ステレオDI)",
+            icon: "ProD2",
+            ports: [
+              { id: "in1", label: "CH1 INPUT (1/4\")", type: "ts", dir: "in" },
+              { id: "in2", label: "CH2 INPUT (1/4\")", type: "ts", dir: "in" },
+              { id: "xlr1", label: "CH1 OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "xlr2", label: "CH2 OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "stagebox",
+            label: "ステージボックス(FOHへ)",
+            icon: "BOX",
+            ports: [
+              { id: "ch15", label: "CH15 IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch16", label: "CH16 IN (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          { id: "iem", label: "Behringer POWERPLAY P1(ドラマー用)", icon: "P1", ports: [{ id: "in1", label: "INPUT 1 (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "ts", "trs", "xlr", "speaker"],
+        correctConnections: [
+          { from: "pc.usb", to: "interface.usbin", cable: "usb" },
+          { from: "interface.out1", to: "di.in1", cable: "ts" },
+          { from: "interface.out2", to: "di.in2", cable: "ts" },
+          { from: "di.xlr1", to: "stagebox.ch15", cable: "xlr" },
+          { from: "di.xlr2", to: "stagebox.ch16", cable: "xlr" },
+          { from: "interface.out3", to: "iem.in1", cable: "trs" },
+        ],
+        explain:
+          "同期演奏で一番大事なのは、クリックとオケを『別々の出力』から出すこと。オケとクリックを同じ出力に混ぜてしまうと、FOHのエンジニアがクリックだけを消すことができず、客席にメトロノーム音が漏れてしまう。そこでDAW側で、オケはLINE OUTPUT 1・2(ステレオ)、クリックはLINE OUTPUT 3、というように出口を分けておき、配線でも行き先を分ける。オケをステージボックスへ送るときにDIをはさむのは、パソコン周りの機材とPA側の機材の電源の違いから生じるハムノイズ(ブーンという低いノイズ)を、ProD2のグラウンドリフトスイッチなどで対策しやすくするためと、長いケーブルでも音が劣化しにくいXLRのバランス信号に変換するため。ProD2はトランスを使ったパッシブ型なので、電源やファンタム電源は必要ない。クリックはドラマーの耳にだけ届けばよいので、ステージボックスには送らず、足元のイヤモニ用アンプP1へ直接送る。P1は2つの入力を混ぜられるため、INPUT 2にモニター卓から送られるバンドの音を入れれば、クリックとバンドの音のバランスをドラマーが手元で調整できる。Scarlett 4i4(第4世代)のLINE OUTPUT 3・4は、本体の大きな音量ノブではなく専用ソフトのFocusrite Control 2側で音量を設定する仕様とされているため、本番前にクリックの音量を必ず確認しておこう。",
       },
     },
   ],
