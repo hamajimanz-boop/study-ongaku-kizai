@@ -3332,5 +3332,50 @@ window.COURSES["gear_patch_practice"] = {
           "マイクの信号はとても小さいので、まずマイクプリ(1073N)でライン信号の大きさまで増幅してから、コンプ(LA-2A)へ送る。順番を逆にして、マイクを直接LA-2Aにつないでも、LA-2Aはライン信号を受ける前提の機材なので、ほとんど圧縮がかからないうえに音も小さすぎて使えない。1073Nを先に置くことで、EQで声の色づけをしたうえで、LA-2Aで音量のばらつきをなだらかに整えた音を録音できる。LA-2Aの出力もすでにライン信号なので、828es側はマイクプリを通らないLINE IN(TRS)で受けるのが正しい。ここでマイク入力につないでゲインを上げると、増幅が二重になり歪みやノイズの原因になる。かけ録りの最大の注意点は『録ったあとでコンプのかかり方を戻せない』こと。圧縮をかけすぎた音はミックスで元に戻せないため、録音時は控えめなかけ方にとどめ、足りない分はミックスで補うのが一般的な考え方とされる。",
       },
     },
+    {
+      id: "mono_synth_stereo_reverb_pedal",
+      order: 82,
+      title: "モノラルのシンセをステレオのリバーブペダルで広げて録る(Korg monologue + Strymon BigSky)",
+      category: "配線問題",
+      hook: "シンセ本体の出力は1本(モノラル)なのに、録音すると左右に広がる響きになる——その秘密は、1つの入力から2つの出力を作り出す『モノラル入力・ステレオ出力』のペダルにある。",
+      patch: {
+        scenario:
+          "モノフォニック(同時に1音だけ鳴るタイプ)のアナログシンセ「Korg monologue」の音に、広がりのあるリバーブをかけて録音したい。monologueのOUTPUT(モノラル、TS)を、リバーブペダル「Strymon BigSky」のLEFT IN(TS)へ接続する。BigSkyはモノラル入力・ステレオ出力として使い、LEFT OUT(TS)をオーディオインターフェース「Focusrite Scarlett 4i4(第4世代)」のLINE INPUT 3へ、RIGHT OUT(TS)をLINE INPUT 4へ、それぞれ接続しよう。Scarlett 4i4とMacBook ProはUSBケーブルで接続する。",
+        equipment: [
+          { id: "synth", label: "Korg monologue", icon: "monologue", ports: [{ id: "out", label: "OUTPUT (TS・モノラル)", type: "ts", dir: "out" }] },
+          {
+            id: "reverb",
+            label: "Strymon BigSky(リバーブペダル)",
+            icon: "BigSky",
+            ports: [
+              { id: "inL", label: "LEFT IN (TS)", type: "ts", dir: "in" },
+              { id: "inR", label: "RIGHT IN (TS)", type: "ts", dir: "in" },
+              { id: "outL", label: "LEFT OUT (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "RIGHT OUT (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 4i4(第4世代)",
+            icon: "4i4",
+            ports: [
+              { id: "line3", label: "LINE INPUT 3", type: "trs", dir: "in" },
+              { id: "line4", label: "LINE INPUT 4", type: "trs", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "usb", "midi"],
+        correctConnections: [
+          { from: "synth.out", to: "reverb.inL", cable: "ts" },
+          { from: "reverb.outL", to: "interface.line3", cable: "ts" },
+          { from: "reverb.outR", to: "interface.line4", cable: "ts" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "monologueの音声出力はモノラルの1系統だけなので、そのまま録れば左右どちらにも同じ音が出る『点』の音になる。BigSkyはステレオの入出力を持ち、モノラルで入力した場合はLEFT INだけを使う。リバーブの響きは内部で左右に違う成分として作られ、LEFT OUTとRIGHT OUTから別々に出てくるため、2本の出力をオーディオインターフェースの2つの入力にそれぞれつなぎ、DAWでLとRに振り分ければ、響きが左右に広がったステレオの音として録音できる。RIGHT INは、ステレオ出力のシンセやキーボードをつなぐときに使う端子なので、今回は空けておく。BigSkyのようなギター用ペダルは、本来ギターの小さな信号を受ける前提で作られているため、シンセのようなライン信号を入れると、音が大きすぎて歪むことがある。シンセ側の音量を控えめにして、ペダルの入力で音が割れていないか確認してから録音しよう。また、ステレオで録ったリバーブは、片方のチャンネルだけをミュートしてしまうと響きのバランスが崩れるので、2本のトラックはセットで扱うのが基本。",
+      },
+    },
   ],
 };
