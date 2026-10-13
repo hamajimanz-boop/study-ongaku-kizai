@@ -3105,5 +3105,39 @@ window.COURSES["gear_patch_practice"] = {
           "DXS12mkIIの背面には、入力用のXLR端子が2つと、出力用のXLR端子が2つある。出力用の端子は、THROUGH/HPF POSTというスイッチで切り替えられ、THROUGHでは入力された信号がそのまま出力され、HPF POSTでは、サブウーファー内蔵のハイパスフィルター(低音をカットするフィルター)を通した信号が出力される。HPF POSTに設定しておけば、サブウーファーが担当する低音は自分で鳴らし、トップスピーカーには低音をカットした中高音だけを送れるため、ミキサーから出ているすべての音をそのままトップへ送る場合と比べ、トップが低音でムダに負荷をかけられずに済む。この配線は、サブウーファーを経由させるため、ミキサーの出力をトップへ直接送るときとは違って、サブウーファーの電源が入っていないとトップにも音が届かない点に注意が必要になる。以前の単元で扱ったdbx DriveRack PA2のようなアクティブクロスオーバーを使う方法と比べると、機材が少なくて済むかわりに、分割の細かい調整はサブウーファー側の機能の範囲に限られる。",
       },
     },
+    {
+      id: "ms_stereo_recording",
+      order: 77,
+      title: "M/S方式でアコースティックギターをステレオ録音する(Neumann KM 184 + AKG C414 XLII)",
+      category: "配線問題",
+      hook: "マイク2本で左右を録るのではなく、『正面の音』と『横の広がり』を別々に録る——あとから広がりの量を自由に調整できる、M/S方式の配線を体験しよう。",
+      patch: {
+        scenario:
+          "アコースティックギターの弾き語り作品で、あとからステレオの広がりを調整できるように、M/S方式(Mid/Side方式。正面を向けたマイクと、真横を向けた8の字型のマイクを組み合わせる録音方法)で録音したい。正面(Mid)用には単一指向性のコンデンサーマイク「Neumann KM 184」を、横(Side)用には指向性を切り替えられるコンデンサーマイク「AKG C414 XLII」を8の字(双指向性)に設定して使う。KM 184をオーディオインターフェース「RME Babyface Pro FS」のMIC 1(XLR)へ、C414 XLIIをMIC 2(XLR)へ接続し、Babyface Pro FSとMacBook ProはUSBケーブルで接続しよう。2本ともコンデンサーマイクなので、Babyface Pro FS側で両方の入力に+48Vファンタム電源を入れる。",
+        equipment: [
+          { id: "micMid", label: "Neumann KM 184(Mid:正面用)", icon: "KM184", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "micSide", label: "AKG C414 XLII(Side:8の字に設定)", icon: "C414", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "interface",
+            label: "RME Babyface Pro FS",
+            icon: "Babyface",
+            ports: [
+              { id: "mic1", label: "MIC 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "mic2", label: "MIC 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb"],
+        correctConnections: [
+          { from: "micMid.out", to: "interface.mic1", cable: "xlr" },
+          { from: "micSide.out", to: "interface.mic2", cable: "xlr" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "配線そのものはマイク2本をXLRケーブルで別々の入力につなぐだけだが、M/S方式では『どちらのマイクがどちらの入力か』が後の作業に直結する。Mid(正面)のマイクは音源をまっすぐ狙い、Side(横)のマイクは8の字の指向性を左右に向けて、Midと同じ位置(カプセル同士をできるだけ近づけ、上下に重ねるのが一般的)に置く。録音した2つの信号は、そのままでは左右のステレオにならないため、DAWで『デコード(左右の音に変換する処理)』をする。手作業で行う場合は、Sideのトラックを複製して片方の極性(位相)を反転し、元のSideを左、反転したSideを右に振り切り、Midを中央に置く。こうすると、左=Mid+Side、右=Mid−Sideとなり、ステレオの音像ができる。Sideトラックの音量を上げれば広がりが増え、下げれば狭くなり、Sideを消せば完全なモノラルになるため、モノラル再生でも音が痩せにくいのがM/S方式の大きな利点。デコード用のプラグイン(M/Sデコーダー)を使えば、この処理を1つのプラグインで済ませることもできる。",
+      },
+    },
   ],
 };
