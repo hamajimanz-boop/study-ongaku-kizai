@@ -3240,5 +3240,46 @@ window.COURSES["gear_patch_practice"] = {
           "同期演奏で一番大事なのは、クリックとオケを『別々の出力』から出すこと。オケとクリックを同じ出力に混ぜてしまうと、FOHのエンジニアがクリックだけを消すことができず、客席にメトロノーム音が漏れてしまう。そこでDAW側で、オケはLINE OUTPUT 1・2(ステレオ)、クリックはLINE OUTPUT 3、というように出口を分けておき、配線でも行き先を分ける。オケをステージボックスへ送るときにDIをはさむのは、パソコン周りの機材とPA側の機材の電源の違いから生じるハムノイズ(ブーンという低いノイズ)を、ProD2のグラウンドリフトスイッチなどで対策しやすくするためと、長いケーブルでも音が劣化しにくいXLRのバランス信号に変換するため。ProD2はトランスを使ったパッシブ型なので、電源やファンタム電源は必要ない。クリックはドラマーの耳にだけ届けばよいので、ステージボックスには送らず、足元のイヤモニ用アンプP1へ直接送る。P1は2つの入力を混ぜられるため、INPUT 2にモニター卓から送られるバンドの音を入れれば、クリックとバンドの音のバランスをドラマーが手元で調整できる。Scarlett 4i4(第4世代)のLINE OUTPUT 3・4は、本体の大きな音量ノブではなく専用ソフトのFocusrite Control 2側で音量を設定する仕様とされているため、本番前にクリックの音量を必ず確認しておこう。",
       },
     },
+    {
+      id: "mixer_to_camera_line",
+      order: 80,
+      title: "ミキサーの音をビデオカメラに直接録る(Yamaha MG12XU → Sony FX3のXLRハンドル)",
+      category: "配線問題",
+      hook: "ライブ動画の音がスカスカなのは、カメラ内蔵マイクで会場の反響ごと拾っているから。ミキサーで整えたラインの音をカメラに直接入れれば、映像と音が最初からぴったり合った素材になる。ただし、カメラ側の『入力の種類』の設定を間違えると、音が割れてしまう。",
+      patch: {
+        scenario:
+          "カフェでの弾き語りライブを、シネマカメラ「Sony FX3」で撮影する。ボーカルマイク「Shure SM58」は、会場のミキサー「Yamaha MG12XU」のCH1 MIC INPUT(XLR)へ接続する。ミキサーで整えた音は、ST OUT L(XLR)からFX3に付属するXLRハンドルユニットのINPUT1(XLR/TRSコンボ)へ、ST OUT R(XLR)からINPUT2(XLR/TRSコンボ)へ、それぞれ接続しよう。ハンドルユニットのINPUT1・INPUT2の切り替えスイッチは、どちらも『LINE』に設定する。",
+        equipment: [
+          { id: "mic", label: "Shure SM58", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU",
+            icon: "MG12XU",
+            ports: [
+              { id: "mic1", label: "CH1 MIC INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "stL", label: "ST OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "stR", label: "ST OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "camera",
+            label: "Sony FX3(XLRハンドルユニット装着)",
+            icon: "FX3",
+            ports: [
+              { id: "in1", label: "INPUT1 (XLR/TRSコンボ・LINE設定)", type: "xlr", dir: "in" },
+              { id: "in2", label: "INPUT2 (XLR/TRSコンボ・LINE設定)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "rca"],
+        correctConnections: [
+          { from: "mic.out", to: "mixer.mic1", cable: "xlr" },
+          { from: "mixer.stL", to: "camera.in1", cable: "xlr" },
+          { from: "mixer.stR", to: "camera.in2", cable: "xlr" },
+        ],
+        explain:
+          "FX3のXLRハンドルユニットには、INPUT1・INPUT2それぞれに『LINE/MIC/MIC+48V』の切り替えスイッチがある。LINEはミキサーなどの外部機器向け、MICはダイナミックマイクや電池で動くマイク向け、MIC+48Vはファンタム電源が必要なコンデンサーマイク向けの設定。ミキサーのST OUTから出る音は、すでに十分な大きさまで増幅された『ライン信号』なので、カメラ側をMICにしたままだと、もう一度大きく増幅されて音が割れてしまう。必ずLINEに合わせよう。また、MIC+48Vの位置のままケーブルを抜き差しすると大きなノイズや故障の原因になるとメーカーも注意しているため、配線の前にスイッチを切り替えておくのが安全。ミキサーから直接音を取ると、会場の反響や客席のざわめきが少ないクリアな音になる一方、拍手や会場の空気感は入りにくい。実際の現場では、カメラ本体のマイクやもう1台の録音機で会場の雰囲気(アンビエンス)も別に録っておき、編集でミキサーの音と混ぜることも多い。",
+      },
+    },
   ],
 };
