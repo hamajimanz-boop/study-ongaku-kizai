@@ -3281,5 +3281,56 @@ window.COURSES["gear_patch_practice"] = {
           "FX3のXLRハンドルユニットには、INPUT1・INPUT2それぞれに『LINE/MIC/MIC+48V』の切り替えスイッチがある。LINEはミキサーなどの外部機器向け、MICはダイナミックマイクや電池で動くマイク向け、MIC+48Vはファンタム電源が必要なコンデンサーマイク向けの設定。ミキサーのST OUTから出る音は、すでに十分な大きさまで増幅された『ライン信号』なので、カメラ側をMICにしたままだと、もう一度大きく増幅されて音が割れてしまう。必ずLINEに合わせよう。また、MIC+48Vの位置のままケーブルを抜き差しすると大きなノイズや故障の原因になるとメーカーも注意しているため、配線の前にスイッチを切り替えておくのが安全。ミキサーから直接音を取ると、会場の反響や客席のざわめきが少ないクリアな音になる一方、拍手や会場の空気感は入りにくい。実際の現場では、カメラ本体のマイクやもう1台の録音機で会場の雰囲気(アンビエンス)も別に録っておき、編集でミキサーの音と混ぜることも多い。",
       },
     },
+    {
+      id: "tracking_chain_1073_la2a",
+      order: 81,
+      title: "マイクプリ→コンプの「かけ録り」チェーンを組む(AMS Neve 1073N + Teletronix LA-2A)",
+      category: "配線問題",
+      hook: "コンプはミックスのときに挿すもの——とは限らない。録音の段階でアナログのコンプを通し、その音ごと録ってしまう『かけ録り』。機材を通る順番を間違えると、狙った音にならない。",
+      patch: {
+        scenario:
+          "ボーカル録りで、マイクプリアンプ「AMS Neve 1073N」で増幅した声を、真空管のコンプレッサー「Universal Audio Teletronix LA-2A Classic Leveler」に通してから録音したい(かけ録り)。コンデンサーマイク「Neumann U 87 Ai」を、1073NのMIC/LINE INPUT(XLR/TRSコンボのXLR側)へ接続する。1073NのOUTPUT(XLR)から、LA-2AのINPUT(XLR)へ接続する。LA-2AのOUTPUT(XLR)から、オーディオインターフェース「MOTU 828es」のLINE IN 3(TRS)へ、片側がXLR・片側がTRSのバランスケーブルで接続する。828esとMacBook ProはUSBケーブルで接続しよう。",
+        equipment: [
+          { id: "mic", label: "Neumann U 87 Ai", icon: "U87Ai", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "pre",
+            label: "AMS Neve 1073N(マイクプリ/EQ)",
+            icon: "1073N",
+            ports: [
+              { id: "micIn", label: "MIC/LINE INPUT (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "out", label: "OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "comp",
+            label: "UA Teletronix LA-2A Classic Leveler",
+            icon: "LA-2A",
+            ports: [
+              { id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out", label: "OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "MOTU 828es",
+            icon: "828es",
+            ports: [
+              { id: "line3", label: "LINE IN 3 (TRS)", type: "trs", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb"],
+        correctConnections: [
+          { from: "mic.out", to: "pre.micIn", cable: "xlr" },
+          { from: "pre.out", to: "comp.in", cable: "xlr" },
+          { from: "comp.out", to: "interface.line3", cable: "trs" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "マイクの信号はとても小さいので、まずマイクプリ(1073N)でライン信号の大きさまで増幅してから、コンプ(LA-2A)へ送る。順番を逆にして、マイクを直接LA-2Aにつないでも、LA-2Aはライン信号を受ける前提の機材なので、ほとんど圧縮がかからないうえに音も小さすぎて使えない。1073Nを先に置くことで、EQで声の色づけをしたうえで、LA-2Aで音量のばらつきをなだらかに整えた音を録音できる。LA-2Aの出力もすでにライン信号なので、828es側はマイクプリを通らないLINE IN(TRS)で受けるのが正しい。ここでマイク入力につないでゲインを上げると、増幅が二重になり歪みやノイズの原因になる。かけ録りの最大の注意点は『録ったあとでコンプのかかり方を戻せない』こと。圧縮をかけすぎた音はミックスで元に戻せないため、録音時は控えめなかけ方にとどめ、足りない分はミックスで補うのが一般的な考え方とされる。",
+      },
+    },
   ],
 };
