@@ -3139,5 +3139,49 @@ window.COURSES["gear_patch_practice"] = {
           "配線そのものはマイク2本をXLRケーブルで別々の入力につなぐだけだが、M/S方式では『どちらのマイクがどちらの入力か』が後の作業に直結する。Mid(正面)のマイクは音源をまっすぐ狙い、Side(横)のマイクは8の字の指向性を左右に向けて、Midと同じ位置(カプセル同士をできるだけ近づけ、上下に重ねるのが一般的)に置く。録音した2つの信号は、そのままでは左右のステレオにならないため、DAWで『デコード(左右の音に変換する処理)』をする。手作業で行う場合は、Sideのトラックを複製して片方の極性(位相)を反転し、元のSideを左、反転したSideを右に振り切り、Midを中央に置く。こうすると、左=Mid+Side、右=Mid−Sideとなり、ステレオの音像ができる。Sideトラックの音量を上げれば広がりが増え、下げれば狭くなり、Sideを消せば完全なモノラルになるため、モノラル再生でも音が痩せにくいのがM/S方式の大きな利点。デコード用のプラグイン(M/Sデコーダー)を使えば、この処理を1つのプラグインで済ませることもできる。",
       },
     },
+    {
+      id: "talkbox_speaker_level",
+      order: 78,
+      title: "トークボックスをギターアンプとキャビネットの間に挟む(Dunlop HT1 Heil Talk Box)",
+      category: "配線問題",
+      hook: "ギターが『しゃべる』ように聞こえるトークボックス。実はエフェクターのように足元のケーブルの途中に挟むのではなく、アンプの『スピーカー出力』という大きな電力の流れに割り込ませる機材だ。",
+      patch: {
+        scenario:
+          "ライブで、ギターの音を口の形で変化させるトークボックス「Dunlop HT1 Heil Talk Box」を使いたい。HT1は内部に小さなスピーカー(ドライバー)を持ち、そこから出た音をチューブで口元へ送る仕組みで、アンプのスピーカー出力で直接鳴らすタイプの機材。ギター「Fender Stratocaster」をアンプヘッド「Marshall DSL20HR」のINPUT(TS)へ接続する。DSL20HRのSPEAKER OUTPUTから、HT1のINPUT(アンプのスピーカー出力を受ける端子)へ、HT1のOUTPUTから8Ωのギター用スピーカーキャビネットのINPUTへ、それぞれスピーカーケーブルで接続する。口元で形を変えた音は、ボーカル用マイク「Shure SM58」で拾って、ミキサー「Yamaha MG12XU」のCH1 MIC INPUT(XLR)へ接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "amp",
+            label: "Marshall DSL20HR(アンプヘッド)",
+            icon: "DSL20HR",
+            ports: [
+              { id: "in", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "spkOut", label: "SPEAKER OUTPUT", type: "speaker", dir: "out" },
+            ],
+          },
+          {
+            id: "talkbox",
+            label: "Dunlop HT1 Heil Talk Box",
+            icon: "HT1",
+            ports: [
+              { id: "in", label: "INPUT(アンプのスピーカー出力から)", type: "speaker", dir: "in" },
+              { id: "out", label: "OUTPUT(スピーカーへ)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "cab", label: "ギター用スピーカーキャビネット(8Ω)", icon: "CAB", ports: [{ id: "in", label: "INPUT", type: "speaker", dir: "in" }] },
+          { id: "mic", label: "Shure SM58(トークボックスの音を拾う)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "mixer", label: "Yamaha MG12XU", icon: "MG12XU", ports: [{ id: "mic1", label: "CH1 MIC INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "speaker", "xlr", "trs"],
+        correctConnections: [
+          { from: "guitar.out", to: "amp.in", cable: "ts" },
+          { from: "amp.spkOut", to: "talkbox.in", cable: "speaker" },
+          { from: "talkbox.out", to: "cab.in", cable: "speaker" },
+          { from: "mic.out", to: "mixer.mic1", cable: "xlr" },
+        ],
+        explain:
+          "HT1のような昔ながらのトークボックスは、自分では音を増幅する仕組み(アンプ)を持たず、ギターアンプが本来スピーカーを鳴らすために出している大きな電力で、内部のドライバーを鳴らしている。そのため、アンプのSPEAKER OUTPUTとHT1の間、HT1とキャビネットの間は、ギター用のシールドケーブル(TS)ではなく、太い導線のスピーカーケーブルでつなぐ必要がある。メーカーの説明書でも、ギター用ケーブルではなく頑丈なスピーカーケーブルを使うよう注意されている。HT1のフットスイッチをオフにすると、音はそのままキャビネットへ素通りし、オンにするとドライバー側へ切り替わって、チューブを通って口元に届く。口の形で音色を変えた結果はそのままでは客席に届かないため、ボーカルマイクで拾ってPAへ送るのが基本。また、HT1には扱える電力の上限(説明書では最大100W、連続50W RMS)があるため、大出力のアンプにつなぐとドライバーを壊すおそれがある。今回は20Wのアンプを選んでいるが、実際に使うときはアンプの出力と、キャビネットのインピーダンス(Ω)が合っているかを必ず確認しよう。なお、MXRの後継モデルのように、アンプを内蔵し、ギターから直接つなげるタイプのトークボックスもある。",
+      },
+    },
   ],
 };
