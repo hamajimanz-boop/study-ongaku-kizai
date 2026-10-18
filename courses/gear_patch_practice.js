@@ -3437,5 +3437,52 @@ window.COURSES["gear_patch_practice"] = {
           "この配線は、DAWの音をDA(デジタル→アナログ)変換して外へ出し、アナログ機材で処理したあと、AD(アナログ→デジタル)変換してDAWへ戻す『一周』の流れになっている。アナログのマスタリング機材は、左右2chを同じ設定で処理することが前提なので、左はずっと左(CH1・L・IN 1)、右はずっと右(CH2・R・IN 2)という対応を、機材をまたいでも崩さないことが最も大事。途中で左右が入れ替わると、録り直した音の定位が逆になったり、左右で違うかかり方になったりする。Massive PassiveはXLR入出力がプロ用の+4dBuレベルで動作し、出力はトランスでバランスされているため、XLRケーブルでつなぐのが基本。SSL FusionもすべてXLRで入出力するため、XLRケーブルだけで一周を組める。また、DAWから出した音を外部機材に通して戻すと、変換処理と機材の通過で、わずかな時間の遅れ(レイテンシー)が生じる。録り直した音は元のデータより少し後ろにずれるので、曲の頭の位置を合わせ直すか、DAWの遅延補正機能で調整しておこう。",
       },
     },
+    {
+      id: "drum_machine_parallel_outs",
+      order: 84,
+      title: "ドラムマシンのパラアウト(個別出力)で楽器ごとに別トラックへ録る(Roland TR-8S + Focusrite Scarlett 18i20)",
+      category: "配線問題",
+      hook: "キックだけにコンプをかけたいのに、録音した音はドラム全部が1本のステレオに混ざっている——そうならないように、楽器ごとに出口を分ける『パラアウト』配線を組もう。",
+      patch: {
+        scenario:
+          "リズムマシン「Roland TR-8S」で作ったビートを、あとからミックスで個別に音作りできるように録音したい。TR-8S本体の設定で、キックをASSIGNABLE OUT 1、スネアをASSIGNABLE OUT 2に割り当て、それ以外の楽器(ハイハットやクラップなど)はMIX OUTから出す。MIX OUT L/MONO・R(TRS)を、オーディオインターフェース「Focusrite Scarlett 18i20(第3世代)」のINPUT 1・INPUT 2(XLR/TRSコンボ)へ、TRSケーブルで接続する。ASSIGNABLE OUT 1・2(TSフォーン)を、INPUT 3・INPUT 4へTSケーブルで接続する。Scarlett 18i20とMacBook ProはUSBケーブルで接続しよう。",
+        equipment: [
+          {
+            id: "tr8s",
+            label: "Roland TR-8S(リズムマシン)",
+            icon: "TR-8S",
+            ports: [
+              { id: "mixL", label: "MIX OUT L/MONO (TRS)", type: "trs", dir: "out" },
+              { id: "mixR", label: "MIX OUT R (TRS)", type: "trs", dir: "out" },
+              { id: "assign1", label: "ASSIGNABLE OUT 1 (TS)", type: "ts", dir: "out" },
+              { id: "assign2", label: "ASSIGNABLE OUT 2 (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 18i20(第3世代)",
+            icon: "18i20",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/TRSコンボ)", type: "trs", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR/TRSコンボ)", type: "trs", dir: "in" },
+              { id: "in3", label: "INPUT 3 (XLR/TRSコンボ)", type: "ts", dir: "in" },
+              { id: "in4", label: "INPUT 4 (XLR/TRSコンボ)", type: "ts", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["trs", "ts", "xlr", "usb", "midi"],
+        correctConnections: [
+          { from: "tr8s.mixL", to: "interface.in1", cable: "trs" },
+          { from: "tr8s.mixR", to: "interface.in2", cable: "trs" },
+          { from: "tr8s.assign1", to: "interface.in3", cable: "ts" },
+          { from: "tr8s.assign2", to: "interface.in4", cable: "ts" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "TR-8Sの背面には、全体の音をまとめて出すMIX OUT(L/R)のほかに、ASSIGNABLE OUT 1〜6という6つの個別出力がある。本体の設定で楽器ごとに出力先を選べるため、キックやスネアのように、あとで別々にEQやコンプをかけたい音だけを個別出力に振り分けておけば、DAWの別トラックとして録音できる。これを『パラアウト(パラレル・アウト)』と呼ぶ。個別出力に割り当てた楽器は、設定によってはMIX OUTから出なくなるので、録音前に各トラックのメーターを見て、音が二重に録られていないか、逆にどこからも出ていない楽器がないかを確認しよう。MIX OUTは左右2本でステレオの1組なので、DAWではINPUT 1・2をステレオトラックとして扱い、ASSIGNABLE OUTはモノラルのトラックとして録るのが基本。なお、ASSIGNABLE OUTは設定を切り替えると、外部のシンセやドラムマシンを鳴らすためのトリガー信号の出力(TRIGGER OUT)としても使える。トリガーに設定したままの出力にはドラムの音が出てこないので、パラアウトで使うときはオーディオ出力の設定になっているかを確認しておこう。",
+      },
+    },
   ],
 };
