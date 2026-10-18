@@ -3616,5 +3616,58 @@ window.COURSES["gear_patch_practice"] = {
           "DVSでは、ターンテーブルから出てくるのは曲の音ではなく、コントロール用レコードに刻まれたタイムコードの音(ピーという信号音)。ミキサーはそれを内蔵のオーディオインターフェースでデジタル化してUSB経由でPCへ送り、Serato DJ Proが『いまレコードのどの位置を、どの速さで、どちら向きに回しているか』を読み取って、PC内の曲を同じように再生・スクラッチする。PCで鳴らした曲の音は、同じUSBケーブルを通ってミキサーに戻り、各チャンネルのフェーダーやクロスフェーダーを通ってMAIN OUTから出ていく。つまり、ターンテーブル→ミキサー→PC→ミキサー→スピーカーと、USBケーブル1本の中で音が往復している。ターンテーブルの針から出る信号はとても小さいため、ミキサーの入力はPHONO(レコード用の増幅回路を通す設定)にしておく必要がある。LINEのままだと信号が小さすぎて、タイムコードを正しく読み取れないことがある。また、ターンテーブルのRCAケーブルの近くにある細いアース線は、ミキサーのアース端子(GND)にネジで留めておこう。外したままだと、ブーンというハムノイズが乗ったり、タイムコードの読み取りが不安定になったりする原因になる。メインの出力は、会場のスピーカーまで距離があっても雑音に強いXLR(バランス接続)で送るのが基本。",
       },
     },
+    {
+      id: "volca_sync_chain",
+      order: 88,
+      title: "Korg volcaシリーズをSYNC端子でつないでテンポを合わせる(volca beats + volca bass)",
+      category: "配線問題",
+      hook: "MIDI端子にはINしかない小さなシンセ2台。それでも、片方のスタートボタンを押すだけで2台が同じテンポで走り出す——3.5mmのミニケーブル1本で済む『アナログシンク』の配線を組もう。",
+      patch: {
+        scenario:
+          "リズムマシン「Korg volca beats」と、ベースシンセ「Korg volca bass」を同じテンポで同時に再生したい。volca beatsをテンポの基準(マスター)にして、volca beatsのSYNC OUT(3.5mmモノラルミニ)から、volca bassのSYNC IN(3.5mmモノラルミニ)へ、モノラルのミニケーブルで接続する。それぞれの音は、ライン出力を兼ねたヘッドホン端子(3.5mmステレオミニ)から、ミニ→フォーンの変換ケーブルを使って、オーディオインターフェース「Focusrite Scarlett 4i4(第4世代)」のLINE INPUT 3(volca beats)・LINE INPUT 4(volca bass)へ接続する。Scarlett 4i4とMacBook ProはUSBケーブルで接続しよう。",
+        equipment: [
+          {
+            id: "beats",
+            label: "Korg volca beats(マスター)",
+            icon: "v.beats",
+            ports: [
+              { id: "syncIn", label: "SYNC IN (3.5mmモノラルミニ)", type: "cv", dir: "in" },
+              { id: "syncOut", label: "SYNC OUT (3.5mmモノラルミニ)", type: "cv", dir: "out" },
+              { id: "phones", label: "PHONES (3.5mmステレオミニ・ライン出力兼用)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "bass",
+            label: "Korg volca bass(スレーブ)",
+            icon: "v.bass",
+            ports: [
+              { id: "syncIn", label: "SYNC IN (3.5mmモノラルミニ)", type: "cv", dir: "in" },
+              { id: "syncOut", label: "SYNC OUT (3.5mmモノラルミニ)", type: "cv", dir: "out" },
+              { id: "phones", label: "PHONES (3.5mmステレオミニ・ライン出力兼用)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 4i4(第4世代)",
+            icon: "4i4",
+            ports: [
+              { id: "line3", label: "LINE INPUT 3", type: "trs", dir: "in" },
+              { id: "line4", label: "LINE INPUT 4", type: "trs", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(DAW起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["cv", "ts", "trs", "midi", "usb"],
+        correctConnections: [
+          { from: "beats.syncOut", to: "bass.syncIn", cable: "cv" },
+          { from: "beats.phones", to: "interface.line3", cable: "ts" },
+          { from: "bass.phones", to: "interface.line4", cable: "ts" },
+          { from: "interface.usb", to: "pc.usbin", cable: "usb" },
+        ],
+        explain:
+          "volcaシリーズのSYNC端子は、MIDIクロックのような細かい情報ではなく、一定の間隔で『トン、トン』と電気のパルス(短い電圧の合図)を送るだけのシンプルな仕組み。スレーブ側はこのパルスが来るたびにシーケンスを先へ進めるので、マスターのテンポを変えるとスレーブも自動的に追従する。SYNC INにケーブルが挿さっていると、スレーブは自分のテンポではなく外からのパルスに従う。つなぐ向きは必ず『マスターのOUT→スレーブのIN』。逆にすると、どちらも相手の合図を待つ形になり、うまく同期しない。ここで使うケーブルは、モジュラーシンセのパッチに使うものと同じ3.5mmのモノラルミニケーブルでよい。ステレオのミニケーブルでは正しく動かないことがあるとされるので注意しよう。音声は、ヘッドホン端子がライン出力を兼ねているため、ここからオーディオインターフェースへ送る。ヘッドホン端子は音量つまみの影響を受けるので、録音前に2台の音量を揃え、オーディオインターフェース側の入力で音が割れていないかを確認しておこう。3台目のvolcaを足したい場合は、volca bassのSYNC OUTから3台目のSYNC INへとつないでいけば、数珠つなぎ(デイジーチェーン)で同期できる。",
+      },
+    },
   ],
 };
