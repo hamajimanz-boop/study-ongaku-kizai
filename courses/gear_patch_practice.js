@@ -3669,5 +3669,47 @@ window.COURSES["gear_patch_practice"] = {
           "volcaシリーズのSYNC端子は、MIDIクロックのような細かい情報ではなく、一定の間隔で『トン、トン』と電気のパルス(短い電圧の合図)を送るだけのシンプルな仕組み。スレーブ側はこのパルスが来るたびにシーケンスを先へ進めるので、マスターのテンポを変えるとスレーブも自動的に追従する。SYNC INにケーブルが挿さっていると、スレーブは自分のテンポではなく外からのパルスに従う。つなぐ向きは必ず『マスターのOUT→スレーブのIN』。逆にすると、どちらも相手の合図を待つ形になり、うまく同期しない。ここで使うケーブルは、モジュラーシンセのパッチに使うものと同じ3.5mmのモノラルミニケーブルでよい。ステレオのミニケーブルでは正しく動かないことがあるとされるので注意しよう。音声は、ヘッドホン端子がライン出力を兼ねているため、ここからオーディオインターフェースへ送る。ヘッドホン端子は音量つまみの影響を受けるので、録音前に2台の音量を揃え、オーディオインターフェース側の入力で音が割れていないかを確認しておこう。3台目のvolcaを足したい場合は、volca bassのSYNC OUTから3台目のSYNC INへとつないでいけば、数珠つなぎ(デイジーチェーン)で同期できる。",
       },
     },
+    {
+      id: "wireless_lav_camera",
+      order: 89,
+      title: "動画撮影用のワイヤレスピンマイクをカメラにつなぐ(RØDE Wireless PRO + Sony α7 IV)",
+      category: "配線問題",
+      hook: "カメラ内蔵のマイクでは、少し離れた出演者の声は部屋の響きに埋もれてしまう。服に付ける小さなピンマイクの声を、電波でカメラまで届ける——インタビュー動画の定番配線を組もう。",
+      patch: {
+        scenario:
+          "アーティストのインタビュー動画を、2人の対談形式で撮影したい。ワイヤレスマイク「RØDE Wireless PRO」は、送信機(TX)2台と受信機(RX)1台のセット。出演者それぞれの服に付けるピンマイク(ラベリアマイク)「RØDE Lavalier II」を、TX1・TX2の3.5mm入力(ロック機構付き)へ挿す。TXとRXの間は電波(2.4GHz帯のデジタル無線)で飛ばすので、ケーブルはいらない。RXの3.5mm出力から、ミラーレスカメラ「Sony α7 IV」のMIC端子(3.5mmステレオミニ)へ、3.5mmのミニケーブルで接続する。撮影中に声を確認できるよう、α7 IVのヘッドホン端子(3.5mmステレオミニ)にモニター用ヘッドホン「Sony MDR-7506」を接続しよう。",
+        equipment: [
+          { id: "lav1", label: "RØDE Lavalier II(出演者A)", icon: "Lav II", ports: [{ id: "out", label: "3.5mm TRS", type: "trs", dir: "out" }] },
+          { id: "lav2", label: "RØDE Lavalier II(出演者B)", icon: "Lav II", ports: [{ id: "out", label: "3.5mm TRS", type: "trs", dir: "out" }] },
+          { id: "tx1", label: "Wireless PRO 送信機 TX1", icon: "TX1", ports: [{ id: "in", label: "MIC IN (3.5mm・ロック付き)", type: "trs", dir: "in" }] },
+          { id: "tx2", label: "Wireless PRO 送信機 TX2", icon: "TX2", ports: [{ id: "in", label: "MIC IN (3.5mm・ロック付き)", type: "trs", dir: "in" }] },
+          {
+            id: "rx",
+            label: "Wireless PRO 受信機 RX(カメラのシューに装着)",
+            icon: "RX",
+            ports: [{ id: "out", label: "OUTPUT (3.5mm・ヘッドホン出力兼用)", type: "trs", dir: "out" }],
+          },
+          {
+            id: "camera",
+            label: "Sony α7 IV",
+            icon: "α7 IV",
+            ports: [
+              { id: "micIn", label: "MIC (3.5mmステレオミニ)", type: "trs", dir: "in" },
+              { id: "hpOut", label: "ヘッドホン (3.5mmステレオミニ)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "headphones", label: "Sony MDR-7506", icon: "7506", ports: [{ id: "in", label: "3.5mmステレオミニ", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["trs", "ts", "xlr", "usb", "hdmi"],
+        correctConnections: [
+          { from: "lav1.out", to: "tx1.in", cable: "trs" },
+          { from: "lav2.out", to: "tx2.in", cable: "trs" },
+          { from: "rx.out", to: "camera.micIn", cable: "trs" },
+          { from: "camera.hpOut", to: "headphones.in", cable: "trs" },
+        ],
+        explain:
+          "ピンマイクは口元から20cm前後の近い位置で声を拾えるため、カメラが離れていても、部屋の反響や周りの雑音が少ないはっきりした声になる。Wireless PROのRXには、2台のTXの声を1つにまとめて左右両方に出す『マージ(Merged)』と、TX1を左・TX2を右に分けて出す『スプリット(Split)』のモードがある。対談ではスプリットにしておくと、あとから編集でそれぞれの声の音量を別々に調整できる。カメラのMIC端子は、本来カメラ用の小さなマイクを想定した入力なので、カメラ側の録音レベルを上げすぎると、カメラ内部の増幅回路のノイズ(サー音)が目立ちやすい。一般には、RX側の出力をある程度上げて、カメラ側の録音レベルは控えめにするほうがノイズを抑えやすいとされる。撮影前に必ずヘッドホンで、声が割れていないか、ノイズが乗っていないかを確かめよう。RXの3.5mm端子はヘッドホン出力を兼ねているが、今回はカメラへの出力に使っているので、モニターはカメラのヘッドホン端子から行う。こうすると『実際にカメラに録音されている音』を聞けるので、ケーブルの挿し忘れや接触不良にも気づける。また、Wireless PROのTXは本体の内部メモリーにも録音できるので、無線が途切れたときの保険として内部録音もオンにしておくと安心。",
+      },
+    },
   ],
 };
