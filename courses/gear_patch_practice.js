@@ -3484,5 +3484,42 @@ window.COURSES["gear_patch_practice"] = {
           "TR-8Sの背面には、全体の音をまとめて出すMIX OUT(L/R)のほかに、ASSIGNABLE OUT 1〜6という6つの個別出力がある。本体の設定で楽器ごとに出力先を選べるため、キックやスネアのように、あとで別々にEQやコンプをかけたい音だけを個別出力に振り分けておけば、DAWの別トラックとして録音できる。これを『パラアウト(パラレル・アウト)』と呼ぶ。個別出力に割り当てた楽器は、設定によってはMIX OUTから出なくなるので、録音前に各トラックのメーターを見て、音が二重に録られていないか、逆にどこからも出ていない楽器がないかを確認しよう。MIX OUTは左右2本でステレオの1組なので、DAWではINPUT 1・2をステレオトラックとして扱い、ASSIGNABLE OUTはモノラルのトラックとして録るのが基本。なお、ASSIGNABLE OUTは設定を切り替えると、外部のシンセやドラムマシンを鳴らすためのトリガー信号の出力(TRIGGER OUT)としても使える。トリガーに設定したままの出力にはドラムの音が出てこないので、パラアウトで使うときはオーディオ出力の設定になっているかを確認しておこう。",
       },
     },
+    {
+      id: "aby_box_dual_amp",
+      order: 85,
+      title: "ABYボックスで2台のギターアンプを切り替え・同時に鳴らす(Radial BigShot ABY)",
+      category: "配線問題",
+      hook: "クリーンはFender、歪みはVox——2台のアンプを足元で切り替えたり、両方同時に鳴らして厚みを出したりしたい。1本のギター信号を2台に分ける『ABYボックス』の配線を組もう。",
+      patch: {
+        scenario:
+          "ライブで、2台のギターアンプ「Fender '65 Deluxe Reverb」と「Vox AC30C2」を使い分けたい。ギター「Fender Stratocaster」のOUTPUT(TS)を、ABYボックス「Radial BigShot ABY」のINPUT(TS)へ接続する。BigShot ABYのOUTPUT A(TS)をDeluxe ReverbのINPUT(TS)へ、OUTPUT B(TS)をAC30C2のINPUT(TS)へ接続する。BigShot ABYは信号を通すだけならどこからも電源をもらわない(パッシブ)が、どちらのアンプが選ばれているかを示すLEDを光らせるために、9VのDCアダプターを接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          { id: "psu", label: "9V DCアダプター(センターマイナス)", icon: "9V DC", ports: [{ id: "out", label: "DC OUT 9V", type: "power", dir: "out" }] },
+          {
+            id: "aby",
+            label: "Radial BigShot ABY(ABYボックス)",
+            icon: "BigShot",
+            ports: [
+              { id: "in", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "outA", label: "OUTPUT A (TS)", type: "ts", dir: "out" },
+              { id: "outB", label: "OUTPUT B (TS・ISOトランス付き)", type: "ts", dir: "out" },
+              { id: "dc", label: "9V DC IN", type: "power", dir: "in" },
+            ],
+          },
+          { id: "ampA", label: "Fender '65 Deluxe Reverb", icon: "Deluxe", ports: [{ id: "in", label: "INPUT (TS)", type: "ts", dir: "in" }] },
+          { id: "ampB", label: "Vox AC30C2", icon: "AC30", ports: [{ id: "in", label: "INPUT (TS)", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker", "power"],
+        correctConnections: [
+          { from: "guitar.out", to: "aby.in", cable: "ts" },
+          { from: "aby.outA", to: "ampA.in", cable: "ts" },
+          { from: "aby.outB", to: "ampB.in", cable: "ts" },
+          { from: "psu.out", to: "aby.dc", cable: "power" },
+        ],
+        explain:
+          "ABYボックスは、1本のギター信号を『Aだけ』『Bだけ』『AとBの両方(A+B=Y)』に振り分ける切り替え器。BigShot ABYは、信号を増幅したり作り替えたりする回路を通さないパッシブ設計で、ギターの音がそのままアンプへ届くとされる。ただし、2台のアンプを同時に鳴らすと、問題が2つ起こりやすい。1つめはハムノイズ。2台のアンプがそれぞれ別のコンセントからアース(電気の逃げ道)を取っていると、ギターのケーブルを介してアース同士がつながり『グラウンドループ』ができて、ブーンという低いノイズが出ることがある。BigShot ABYはOUTPUT BにISO(アイソレーション)トランスを内蔵しており、スイッチで入れるとB側の電気的なつながりを切って、このノイズを抑えられる。2つめは位相(波の向き)。アンプは回路によって、出てくる音の波の向きが上下逆になっていることがあり、2台を同時に鳴らすと波同士が打ち消し合って、低音が痩せた細い音になる。BigShot ABYにはB側の極性を180度反転させるスイッチがあり、A+Bで鳴らしながら低音がしっかり出るほうに合わせればよい。この極性反転スイッチは、ISOトランスを入れているときにだけ働く点も覚えておこう。なお、ギター用の箱なので信号の向きは決まっている。ギターをOUTPUT側に、アンプをINPUT側につなぐような逆向きの配線では正しく使えない。",
+      },
+    },
   ],
 };
