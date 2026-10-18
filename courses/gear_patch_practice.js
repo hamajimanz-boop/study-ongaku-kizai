@@ -3521,5 +3521,60 @@ window.COURSES["gear_patch_practice"] = {
           "ABYボックスは、1本のギター信号を『Aだけ』『Bだけ』『AとBの両方(A+B=Y)』に振り分ける切り替え器。BigShot ABYは、信号を増幅したり作り替えたりする回路を通さないパッシブ設計で、ギターの音がそのままアンプへ届くとされる。ただし、2台のアンプを同時に鳴らすと、問題が2つ起こりやすい。1つめはハムノイズ。2台のアンプがそれぞれ別のコンセントからアース(電気の逃げ道)を取っていると、ギターのケーブルを介してアース同士がつながり『グラウンドループ』ができて、ブーンという低いノイズが出ることがある。BigShot ABYはOUTPUT BにISO(アイソレーション)トランスを内蔵しており、スイッチで入れるとB側の電気的なつながりを切って、このノイズを抑えられる。2つめは位相(波の向き)。アンプは回路によって、出てくる音の波の向きが上下逆になっていることがあり、2台を同時に鳴らすと波同士が打ち消し合って、低音が痩せた細い音になる。BigShot ABYにはB側の極性を180度反転させるスイッチがあり、A+Bで鳴らしながら低音がしっかり出るほうに合わせればよい。この極性反転スイッチは、ISOトランスを入れているときにだけ働く点も覚えておこう。なお、A+Bで鳴らすときは2台の音量差がそのまま音のバランスになるので、まず片方ずつ鳴らして、それぞれのアンプのボリュームを揃えてから同時に鳴らすと調整しやすい。",
       },
     },
+    {
+      id: "usb_midi_host_no_pc",
+      order: 86,
+      title: "PCなしでUSB-MIDIキーボードからハードシンセを鳴らす(Kenton MIDI USB Host mk3 + Korg minilogue xd)",
+      category: "配線問題",
+      hook: "USB端子しかないキーボードと、5ピンMIDI端子しかないシンセ。ふつうは間にパソコンを挟むが、ライブの機材を減らしたい——パソコンの代わりを務める『USBホスト』の配線を組もう。",
+      patch: {
+        scenario:
+          "ライブで、USB-MIDIキーボード「Akai Professional MPK Mini mk3」を弾いて、アナログシンセ「Korg minilogue xd」を鳴らしたい。MPK Miniには5ピンのMIDI端子がなく、USBでつなぐしかないが、ステージにパソコンは持ち込みたくない。そこで、MIDIインターフェース「Kenton MIDI USB Host mk3」を使う。MPK MiniのUSB端子を、MIDI USB HostのUSB HOST端子(USB-A)へ接続する。MIDI USB HostのMIDI OUT(5ピンDIN)から、minilogue xdのMIDI INへ接続する。MIDI USB Hostには付属の5V DCアダプターを接続しよう。minilogue xdのOUTPUT L/MONO・R(TS)は、ミキサー「Yamaha MG10XU」のステレオチャンネル5/6のL/MONO・R入力へ接続する。",
+        equipment: [
+          { id: "keyboard", label: "Akai Professional MPK Mini mk3(USB-MIDIキーボード)", icon: "MPKmini", ports: [{ id: "usbOut", label: "USB", type: "usb", dir: "out" }] },
+          { id: "psu", label: "5V DCアダプター(MIDI USB Host付属)", icon: "5V DC", ports: [{ id: "out", label: "DC OUT 5V", type: "power", dir: "out" }] },
+          {
+            id: "host",
+            label: "Kenton MIDI USB Host mk3",
+            icon: "USBHost",
+            ports: [
+              { id: "usbHost", label: "USB HOST (USB-A)", type: "usb", dir: "in" },
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "dc", label: "5V DC IN", type: "power", dir: "in" },
+            ],
+          },
+          {
+            id: "synth",
+            label: "Korg minilogue xd",
+            icon: "mlogue xd",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "outL", label: "OUTPUT L/MONO (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG10XU",
+            icon: "MG10XU",
+            ports: [
+              { id: "st56L", label: "CH5/6 L/MONO (フォーン)", type: "ts", dir: "in" },
+              { id: "st56R", label: "CH5/6 R (フォーン)", type: "ts", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["usb", "midi", "ts", "trs", "power"],
+        correctConnections: [
+          { from: "keyboard.usbOut", to: "host.usbHost", cable: "usb" },
+          { from: "host.midiOut", to: "synth.midiIn", cable: "midi" },
+          { from: "psu.out", to: "host.dc", cable: "power" },
+          { from: "synth.outL", to: "mixer.st56L", cable: "ts" },
+          { from: "synth.outR", to: "mixer.st56R", cable: "ts" },
+        ],
+        explain:
+          "USBの世界には『ホスト(親機)』と『デバイス(子機)』の役割分担があり、通信の主導権を握るのはホスト側。USB-MIDIキーボードはデバイスなので、ふだんはホストであるパソコンにつないで初めて演奏データを送れる。キーボード同士やシンセの5ピンMIDI端子に直接つなげないのはこのためで、MIDI USB Hostのような機材が、パソコンの代わりにホスト役を務め、受け取った演奏データを5ピンMIDIに変換して送り出してくれる。キーボード側のUSBは『バスパワー』(USBケーブル経由で電源を受け取る仕組み)で動くことが多く、その電気もMIDI USB Hostが供給するため、MIDI USB Host自体にはDCアダプターでの給電が必要になる。また、つなげるのは特別なドライバーを入れなくても動く『クラスコンプライアント』のUSB機器に限られるとされるので、手持ちのキーボードが対応しているかを事前に確認しておこう。MIDI INは、ほかのMIDI機器の演奏データを合流(マージ)させたいときに使う端子なので、今回は空けておく。minilogue xdはステレオで出力できるため、ミキサーのステレオチャンネルにL・Rそろえてつなぐと、エフェクトの広がりも含めて再現できる。",
+      },
+    },
   ],
 };
