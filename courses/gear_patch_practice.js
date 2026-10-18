@@ -3576,5 +3576,45 @@ window.COURSES["gear_patch_practice"] = {
           "USBの世界には『ホスト(親機)』と『デバイス(子機)』の役割分担があり、通信の主導権を握るのはホスト側。USB-MIDIキーボードはデバイスなので、ふだんはホストであるパソコンにつないで初めて演奏データを送れる。キーボード同士やシンセの5ピンMIDI端子に直接つなげないのはこのためで、MIDI USB Hostのような機材が、パソコンの代わりにホスト役を務め、受け取った演奏データを5ピンMIDIに変換して送り出してくれる。キーボード側のUSBは『バスパワー』(USBケーブル経由で電源を受け取る仕組み)で動くことが多く、その電気もMIDI USB Hostが供給するため、MIDI USB Host自体にはDCアダプターでの給電が必要になる。また、つなげるのは特別なドライバーを入れなくても動く『クラスコンプライアント』のUSB機器に限られるとされるので、手持ちのキーボードが対応しているかを事前に確認しておこう。MIDI INは、ほかのMIDI機器の演奏データを合流(マージ)させたいときに使う端子なので、今回は空けておく。minilogue xdはステレオで出力できるため、ミキサーのステレオチャンネルにL・Rそろえてつなぐと、エフェクトの広がりも含めて再現できる。",
       },
     },
+    {
+      id: "dvs_turntable_serato",
+      order: 87,
+      title: "DVS(デジタル・バイナル・システム)でレコードを使ってPCの音源を操作する(Technics SL-1200MK7 ×2 + Rane Seventy-Two MKII)",
+      category: "配線問題",
+      hook: "ターンテーブルに乗っているのは、音楽ではなく『信号』が刻まれた特殊なレコード。針で読み取ったその信号でPCの曲を前後に動かす——レコードの手触りのままデジタル音源を操る『DVS』の配線を組もう。",
+      patch: {
+        scenario:
+          "クラブで、DJソフト「Serato DJ Pro」のDVS機能を使ってプレイしたい。2台のターンテーブル「Technics SL-1200MK7」には、それぞれタイムコード(位置と速度を表す信号)が刻まれたコントロール用レコード「Serato Control Vinyl」を乗せる。1台目のPHONO OUT(RCA)をDJミキサー「Rane Seventy-Two MKII」のCH1 PHONO/LINE入力(RCA)へ、2台目のPHONO OUTをCH2 PHONO/LINE入力(RCA)へ接続する(入力の切り替えスイッチはPHONOにしておく)。Seventy-Two MKIIのUSB 1端子とMacBook ProをUSBケーブルで接続する。Seventy-Two MKIIのMAIN OUT L・R(XLR)を、会場のパワードスピーカー「QSC K12.2」2台のINPUT(XLR/TRSコンボ)へ接続しよう。",
+        equipment: [
+          { id: "tt1", label: "Technics SL-1200MK7(1台目)", icon: "1200MK7", ports: [{ id: "out", label: "PHONO OUT (RCA)", type: "rca", dir: "out" }] },
+          { id: "tt2", label: "Technics SL-1200MK7(2台目)", icon: "1200MK7", ports: [{ id: "out", label: "PHONO OUT (RCA)", type: "rca", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Rane Seventy-Two MKII(DJミキサー)",
+            icon: "Rane72",
+            ports: [
+              { id: "ch1In", label: "CH1 PHONO/LINE IN (RCA)", type: "rca", dir: "in" },
+              { id: "ch2In", label: "CH2 PHONO/LINE IN (RCA)", type: "rca", dir: "in" },
+              { id: "usb1", label: "USB 1", type: "usb", dir: "out" },
+              { id: "mainL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "MacBook Pro(Serato DJ Pro起動済み)", icon: "MacBk", ports: [{ id: "usbin", label: "USB-C", type: "usb", dir: "in" }] },
+          { id: "spkL", label: "QSC K12.2(左)", icon: "K12.2", ports: [{ id: "in", label: "INPUT (XLR/TRSコンボ)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "QSC K12.2(右)", icon: "K12.2", ports: [{ id: "in", label: "INPUT (XLR/TRSコンボ)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["rca", "usb", "xlr", "trs", "optical"],
+        correctConnections: [
+          { from: "tt1.out", to: "mixer.ch1In", cable: "rca" },
+          { from: "tt2.out", to: "mixer.ch2In", cable: "rca" },
+          { from: "mixer.usb1", to: "pc.usbin", cable: "usb" },
+          { from: "mixer.mainL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.mainR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "DVSでは、ターンテーブルから出てくるのは曲の音ではなく、コントロール用レコードに刻まれたタイムコードの音(ピーという信号音)。ミキサーはそれを内蔵のオーディオインターフェースでデジタル化してUSB経由でPCへ送り、Serato DJ Proが『いまレコードのどの位置を、どの速さで、どちら向きに回しているか』を読み取って、PC内の曲を同じように再生・スクラッチする。PCで鳴らした曲の音は、同じUSBケーブルを通ってミキサーに戻り、各チャンネルのフェーダーやクロスフェーダーを通ってMAIN OUTから出ていく。つまり、ターンテーブル→ミキサー→PC→ミキサー→スピーカーと、USBケーブル1本の中で音が往復している。ターンテーブルの針から出る信号はとても小さいため、ミキサーの入力はPHONO(レコード用の増幅回路を通す設定)にしておく必要がある。LINEのままだと信号が小さすぎて、タイムコードを正しく読み取れないことがある。また、ターンテーブルのRCAケーブルの近くにある細いアース線は、ミキサーのアース端子(GND)にネジで留めておこう。外したままだと、ブーンというハムノイズが乗ったり、タイムコードの読み取りが不安定になったりする原因になる。メインの出力は、会場のスピーカーまで距離があっても雑音に強いXLR(バランス接続)で送るのが基本。",
+      },
+    },
   ],
 };
