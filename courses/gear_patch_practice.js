@@ -3711,5 +3711,52 @@ window.COURSES["gear_patch_practice"] = {
           "ピンマイクは口元から20cm前後の近い位置で声を拾えるため、カメラが離れていても、部屋の反響や周りの雑音が少ないはっきりした声になる。Wireless PROのRXには、2台のTXの声を1つにまとめて左右両方に出す『マージ(Merged)』と、TX1を左・TX2を右に分けて出す『スプリット(Split)』のモードがある。対談ではスプリットにしておくと、あとから編集でそれぞれの声の音量を別々に調整できる。カメラのMIC端子は、本来カメラ用の小さなマイクを想定した入力なので、カメラ側の録音レベルを上げすぎると、カメラ内部の増幅回路のノイズ(サー音)が目立ちやすい。一般には、RX側の出力をある程度上げて、カメラ側の録音レベルは控えめにするほうがノイズを抑えやすいとされる。撮影前に必ずヘッドホンで、声が割れていないか、ノイズが乗っていないかを確かめよう。RXの3.5mm端子はヘッドホン出力を兼ねているが、今回はカメラへの出力に使っているので、モニターはカメラのヘッドホン端子から行う。こうすると『実際にカメラに録音されている音』を聞けるので、ケーブルの挿し忘れや接触不良にも気づける。また、Wireless PROのTXは本体の内部メモリーにも録音できるので、無線が途切れたときの保険として内部録音もオンにしておくと安心。",
       },
     },
+    {
+      id: "four_cable_method_hx_stomp",
+      order: 90,
+      title: "4ケーブルメソッドでマルチエフェクターをアンプの前と後ろに挟む(Line 6 HX Stomp + Marshall JVM410H)",
+      category: "配線問題",
+      hook: "ワウや歪みペダルはアンプの『前』、ディレイやリバーブはアンプの歪みの『後ろ』——1台のマルチエフェクターで両方をこなすために、4本のケーブルで行って帰って、また行って帰る配線を組もう。",
+      patch: {
+        scenario:
+          "真空管アンプヘッド「Marshall JVM410H」の歪みを活かしつつ、マルチエフェクター「Line 6 HX Stomp」1台で、オーバードライブはアンプの前に、ディレイとリバーブはアンプのFXループ(プリアンプとパワーアンプの間)にかけたい。①ギター「Fender Stratocaster」のOUTPUTを、HX StompのINPUT L/MONOへ接続する。②HX StompのSENDから、JVM410HのINPUTへ接続する。③JVM410HのFX SENDから、HX StompのRETURN L/MONOへ接続する。④HX StompのOUTPUT L/MONOから、JVM410HのFX RETURNへ接続する。JVM410Hのスピーカー出力(16Ω)は、キャビネット「Marshall 1960A」の入力へスピーカーケーブルで接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "stomp",
+            label: "Line 6 HX Stomp(マルチエフェクター)",
+            icon: "HXStomp",
+            ports: [
+              { id: "inL", label: "INPUT L/MONO (TS)", type: "ts", dir: "in" },
+              { id: "send", label: "SEND", type: "ts", dir: "out" },
+              { id: "returnL", label: "RETURN L/MONO (TS)", type: "ts", dir: "in" },
+              { id: "outL", label: "OUTPUT L/MONO (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "amp",
+            label: "Marshall JVM410H(ギターアンプヘッド)",
+            icon: "JVM410H",
+            ports: [
+              { id: "guitarIn", label: "INPUT (TS)", type: "ts", dir: "in" },
+              { id: "fxSend", label: "FX SEND (TS)", type: "ts", dir: "out" },
+              { id: "fxReturn", label: "FX RETURN (TS)", type: "ts", dir: "in" },
+              { id: "spkOut", label: "SPEAKER OUT (16Ω)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "cab", label: "Marshall 1960A(4×12キャビネット)", icon: "1960A", ports: [{ id: "in", label: "INPUT (16Ω MONO)", type: "speaker", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "speaker", "xlr", "midi"],
+        correctConnections: [
+          { from: "guitar.out", to: "stomp.inL", cable: "ts" },
+          { from: "stomp.send", to: "amp.guitarIn", cable: "ts" },
+          { from: "amp.fxSend", to: "stomp.returnL", cable: "ts" },
+          { from: "stomp.outL", to: "amp.fxReturn", cable: "ts" },
+          { from: "amp.spkOut", to: "cab.in", cable: "speaker" },
+        ],
+        explain:
+          "4ケーブルメソッド(4CM)は、マルチエフェクターの中の信号の流れを、アンプのプリアンプ部(歪みを作る回路)の前後で2つに分ける配線。HX Stompの中では『INPUT→オーバードライブ→SEND』と『RETURN→ディレイ・リバーブ→OUTPUT』の2つの道を作っておき、SENDから出た音がアンプのプリアンプで歪み、FX SENDから戻ってきた歪んだ音に空間系のエフェクトをかけてから、FX RETURN経由でパワーアンプへ送り込む。ディレイやリバーブを歪みの前にかけると、響きまで一緒に歪んで濁った音になりやすいが、この配線なら残響がきれいなまま残る。HX Stomp側では、エフェクトの並びの途中に『FX Loop』ブロックを置き、そこを境に前段と後段を分ける設定が必要になる。ここで紹介したケーブルの番号①〜④のどこかを取り違えると、音が出なかったり、ハウリングのような発振が起きたりするので、1本ずつ確認しながらつなごう。また、アンプのINPUTはギターと同じ小さな信号、FX SEND/RETURNはアンプによってはもっと大きなライン信号を想定していることがあるため、HX Stompの設定で、SEND/RETURNと出力のレベルを、つなぐ先に合わせて切り替えておく。真空管アンプは、スピーカーをつながずに電源を入れると故障の原因になるため、キャビネットへのスピーカーケーブルは、電源を入れる前に必ず接続しておこう。",
+      },
+    },
   ],
 };
