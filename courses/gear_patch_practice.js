@@ -4027,5 +4027,50 @@ window.COURSES["gear_patch_practice"] = {
           "ESP(External Signal Processor)は、外から入ってきた音を分析して、シンセを動かすための電圧に変える回路。ギターの音程を読み取って『この高さの音を出せ』という電圧(CV)に変えてCV OUTから出し、ギターを弾いた瞬間には『音を鳴らし始めろ』という合図(トリガー)をTRIG OUTから出す。CV OUTをVCO(音のもとを作る発振器)の音程の入力へ、TRIG OUTをEG(音の立ち上がりや減衰の形を作る回路)の合図の入力へつなぐと、鍵盤の代わりにギターでシンセを演奏できる。さらに、ESPで増幅したギターの音そのもの(AMP OUT)をVCF(音色を削って変えるフィルター)の外部入力に入れると、ギターの音もシンセの音と一緒にフィルターを通るので、両方が混ざった荒々しい音になる。CV OUTやTRIG OUTは『電圧の合図』で、音として聞くための出力ではない。ここをオーディオインターフェースへつないでも、意図した音にはならないので注意しよう。音程の読み取りは、和音ではなく単音で、はっきり弾いたときに安定しやすい。ESP部のつまみで入力の音量やしきい値(=どの大きさから弾いたとみなすか)を調整し、ギター側は音程の基本となる成分が太く出やすいネック側(=指板に近い側)のピックアップを選ぶと、読み取りが安定しやすいとされる。また、MS-20 miniの入出力は3.5mmのミニ端子なので、ギターや録音機材とつなぐときは変換ケーブルが必要になる。",
       },
     },
+    {
+      id: "stereo_guitar_rig_two_amps",
+      order: 96,
+      title: "ステレオ出力のリバーブで2台のギターアンプを左右に鳴らす(Strymon BigSky + Fender '65 Twin Reverb + Vox AC30C2)",
+      category: "配線問題",
+      hook: "リバーブの響きが、ステージの左のアンプから右のアンプへと広がっていく——ギターはモノラルのまま、空間系エフェクトの『ステレオ出力』から2台のアンプに分ける、ステレオリグの配線を組もう。",
+      patch: {
+        scenario:
+          "ギタリストが、リバーブの広がりを活かすために、2台のギターアンプでステレオのリグを組みたい。ギター「Gibson ES-335」のOUTPUTから、オーバードライブ「Ibanez TS9」のINPUTへ、TS9のOUTPUTから、リバーブ「Strymon BigSky」のINPUT L(MONO)へ接続する(ここまではモノラル)。BigSkyは『モノラルで入力し、ステレオで出力する』設定にしておき、OUTPUT Lをギターアンプ「Fender '65 Twin Reverb」のVIBRATOチャンネルのINPUT 1へ、OUTPUT Rをギターアンプ「Vox AC30C2」のTOP BOOSTチャンネルのHI入力へ、それぞれシールドケーブルで接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Gibson ES-335", icon: "335", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "od",
+            label: "Ibanez TS9(オーバードライブ)",
+            icon: "TS9",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "bigsky",
+            label: "Strymon BigSky(リバーブ / モノラル入力・ステレオ出力に設定)",
+            icon: "BigSky",
+            ports: [
+              { id: "inL", label: "INPUT L (MONO)", type: "ts", dir: "in" },
+              { id: "inR", label: "INPUT R", type: "ts", dir: "in" },
+              { id: "outL", label: "OUTPUT L", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "twin", label: "Fender '65 Twin Reverb(左)", icon: "Twin", ports: [{ id: "in1", label: "VIBRATO INPUT 1 (TS)", type: "ts", dir: "in" }] },
+          { id: "ac30", label: "Vox AC30C2(右)", icon: "AC30", ports: [{ id: "hi", label: "TOP BOOST HI (TS)", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "speaker", "xlr", "midi"],
+        correctConnections: [
+          { from: "guitar.out", to: "od.in", cable: "ts" },
+          { from: "od.out", to: "bigsky.inL", cable: "ts" },
+          { from: "bigsky.outL", to: "twin.in1", cable: "ts" },
+          { from: "bigsky.outR", to: "ac30.hi", cable: "ts" },
+        ],
+        explain:
+          "ギターそのものはモノラルの楽器なので、歪みペダルまではふつうに1本の流れでつなぎ、左右の違いを作れるリバーブやディレイの段階で初めてステレオに分ける。BigSkyのような空間系エフェクトは、左右の出力で響きの返ってくるタイミングや成分を少しずつ変えているため、2台のアンプを離して置くと、音がステージ全体に包み込むように広がる。INPUT R側には何もつながない。BigSky側の設定を『モノラル入力・ステレオ出力』にしておかないと、片側から音が出なかったり、広がりが出なかったりするので、つなぐ前に説明書どおりに設定を確認しよう。音の性格が違う2台(Fenderのクリーンで硬めの音と、Voxの中域が前に出る音)を組み合わせると、左右の音が混ざってより厚みのある音色になる。一方で、2台のアンプはそれぞれ別のコンセントから電源を取るため、電気の通り道が輪のようになってハムノイズ(ブーンという低い雑音)が出ることがある。その場合は、どちらかの経路にアイソレーション(電気的に切り離す)機能付きのボックスを挟むなどの対策がある。また、PAで2台のアンプにマイクを立てる場合、ライブハウスによってはPAがモノラルで客席に出していることもあるので、左右で大きく違う音にしすぎると、片方の音だけが目立ってしまう。事前にPAスタッフと相談しておくと安心。",
+      },
+    },
   ],
 };
