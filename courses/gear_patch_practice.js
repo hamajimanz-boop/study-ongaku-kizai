@@ -3924,5 +3924,50 @@ window.COURSES["gear_patch_practice"] = {
           "MIDIの1本のケーブルで送れるのは16チャンネル(=宛先の番号)まで。マルチポートMIDIインターフェースは、その出入り口(ポート)を複数持っているので、DAWからは『OUT 1はDX7用』『OUT 2はProphet-5用』と、ポートごとに別の機材として扱える。シンセ側のMIDIチャンネルが同じ1番のままでも、ポートが分かれていれば混線しないのが大きな利点。DX7はMIDIの入り口と出口を両方つなぐのがポイントで、鍵盤を弾いた情報はMIDI OUT→mioXMのIN 1→DAWへ届いて録音され、DAWで打ち込んだフレーズはmioXMのOUT 1→DX7のMIDI INへ届いて鳴る。Prophet-5は今回は音源として鳴らすだけなので、行きのMIDI INだけでよい。注意したいのは『音が2回鳴る』現象。DX7の鍵盤を弾くと、本体の音源が直接鳴るのに加えて、DAWを経由して戻ってきたMIDIでも鳴ってしまうことがある。シンセ側に『ローカルコントロール(=鍵盤と本体の音源のつながり)』をオフにする設定がある機種ではオフにし、ない機種ではDAW側で、弾いているトラックのMIDIを同じシンセへ送り返さない設定にしよう。また、MIDIケーブルは音を運ばないので、シンセの音はオーディオインターフェースへ別に配線する必要がある。mioXMはUSBクラスコンプライアント(=専用ドライバーなしでコンピューターが認識できる規格)に対応しているとされ、Macにつなぐだけで各ポートが一覧に表示される。",
       },
     },
+    {
+      id: "hybrid_drum_trigger_spdsx",
+      order: 94,
+      title: "生ドラムにトリガーを付けてサンプルを重ねるハイブリッドドラムを組む(Roland RT-30K / RT-30HR + SPD-SX PRO)",
+      category: "配線問題",
+      hook: "生のキックとスネアはそのままに、叩いた瞬間に打ち込みのような重たいサンプルも同時に鳴らしたい——ドラムの胴に取り付ける小さな振動センサーを、サンプリングパッドの外部入力へつなぐ配線を組もう。",
+      patch: {
+        scenario:
+          "ライブで、生ドラムのキックとスネアに、電子音のサンプルを重ねて鳴らしたい。キックのフープ(ヘッドを留める枠)に取り付けたアコースティックドラム用トリガー「Roland RT-30K」の出力を、サンプリングパッド「Roland SPD-SX PRO」のTRIG IN 1/2(6.3mm TRS)へ接続する。スネアに取り付けたデュアルトリガー(ヘッドとリムの2つのセンサーを持つ)「Roland RT-30HR」の出力は、TRIG IN 3/4(6.3mm TRS)へ接続する。どちらのトリガーも付属のTRS(ステレオ)ケーブルを使う。SPD-SX PROのMASTER OUT L/R(バランスTRS)は、デジタルミキサー「Yamaha DM3」のINPUT 15・16(XLR/TRSコンボ)へ、TRSケーブルで接続しよう。",
+        equipment: [
+          { id: "kickTrig", label: "Roland RT-30K(キック用トリガー)", icon: "RT-30K", ports: [{ id: "out", label: "OUTPUT (6.3mm)", type: "trs", dir: "out" }] },
+          { id: "snareTrig", label: "Roland RT-30HR(スネア用デュアルトリガー)", icon: "RT-30HR", ports: [{ id: "out", label: "OUTPUT (6.3mm)", type: "trs", dir: "out" }] },
+          {
+            id: "spd",
+            label: "Roland SPD-SX PRO(サンプリングパッド)",
+            icon: "SPD-SX",
+            ports: [
+              { id: "trig12", label: "TRIG IN 1/2 (TRS)", type: "trs", dir: "in" },
+              { id: "trig34", label: "TRIG IN 3/4 (TRS)", type: "trs", dir: "in" },
+              { id: "masterL", label: "MASTER OUT L (バランスTRS)", type: "trs", dir: "out" },
+              { id: "masterR", label: "MASTER OUT R (バランスTRS)", type: "trs", dir: "out" },
+              { id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha DM3(デジタルミキサー)",
+            icon: "DM3",
+            ports: [
+              { id: "in15", label: "INPUT 15 (XLR/TRSコンボ)", type: "trs", dir: "in" },
+              { id: "in16", label: "INPUT 16 (XLR/TRSコンボ)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["trs", "ts", "xlr", "midi", "usb"],
+        correctConnections: [
+          { from: "kickTrig.out", to: "spd.trig12", cable: "trs" },
+          { from: "snareTrig.out", to: "spd.trig34", cable: "trs" },
+          { from: "spd.masterL", to: "mixer.in15", cable: "trs" },
+          { from: "spd.masterR", to: "mixer.in16", cable: "trs" },
+        ],
+        explain:
+          "アコースティックドラム用トリガーは、ヘッドの振動を電気の合図に変えるセンサーで、音そのものを拾うマイクではない。SPD-SX PROは、その合図を受け取った瞬間に、あらかじめ割り当てておいたサンプル(キックの低音の膨らみやスネアのクラップなど)を鳴らす。SPD-SX PROのトリガー入力は『1/2』『3/4』のように2つの番号が1つの端子にまとまっていて、TRSケーブルの先端(チップ)と中間(リング)に別々の合図を通せる。RT-30HRのようなデュアルトリガーは、ヘッドを叩いたときとリム(枠)を叩いたときで別の合図を出すため、ステレオ(TRS)ケーブルで1本の端子につなぐと、2つのセンサーを別々のサンプルに割り当てられる。モノラル(TS)ケーブルを使うと片方の合図しか届かないので、付属のTRSケーブルを使おう。また、シングルのトリガー2つを1つの端子にまとめたい場合は、Y字に分かれたケーブルを使う方法もある。ライブ前には、SPD-SX PRO側で『どれくらいの強さから反応するか(感度)』や『隣のドラムの振動で誤って鳴らないか(クロストーク)』を必ず調整しよう。特にスネアは、キックやタムの振動を拾って勝手に鳴りやすい。MASTER OUTはバランス出力なので、TRSケーブルでミキサーにつなげば長い距離でもノイズに強い。生ドラムのマイクの音とサンプルの音は、ミキサーで別々のチャンネルとして音量を調整できる。",
+      },
+    },
   ],
 };
