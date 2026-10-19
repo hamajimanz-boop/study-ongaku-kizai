@@ -3969,5 +3969,63 @@ window.COURSES["gear_patch_practice"] = {
           "アコースティックドラム用トリガーは、ヘッドの振動を電気の合図に変えるセンサーで、音そのものを拾うマイクではない。SPD-SX PROは、その合図を受け取った瞬間に、あらかじめ割り当てておいたサンプル(キックの低音の膨らみやスネアのクラップなど)を鳴らす。SPD-SX PROのトリガー入力は『1/2』『3/4』のように2つの番号が1つの端子にまとまっていて、TRSケーブルの先端(チップ)と中間(リング)に別々の合図を通せる。RT-30HRのようなデュアルトリガーは、ヘッドを叩いたときとリム(枠)を叩いたときで別の合図を出すため、ステレオ(TRS)ケーブルで1本の端子につなぐと、2つのセンサーを別々のサンプルに割り当てられる。モノラル(TS)ケーブルを使うと片方の合図しか届かないので、付属のTRSケーブルを使おう。また、シングルのトリガー2つを1つの端子にまとめたい場合は、Y字に分かれたケーブルを使う方法もある。ライブ前には、SPD-SX PRO側で『どれくらいの強さから反応するか(感度)』や『隣のドラムの振動で誤って鳴らないか(クロストーク)』を必ず調整しよう。特にスネアは、キックやタムの振動を拾って勝手に鳴りやすい。MASTER OUTはバランス出力なので、TRSケーブルでミキサーにつなげば長い距離でもノイズに強い。生ドラムのマイクの音とサンプルの音は、ミキサーで別々のチャンネルとして音量を調整できる。",
       },
     },
+    {
+      id: "ms20_esp_guitar_synth",
+      order: 95,
+      title: "ギターの音程でシンセを鳴らす(Korg MS-20 miniの外部信号処理部をパッチする)",
+      category: "配線問題",
+      hook: "ギターで1音弾くと、その音程どおりにアナログシンセが鳴り、ギターの音そのものもシンセのフィルターで唸る——MS-20 miniに内蔵された『外部信号処理部(ESP)』に、パッチケーブル3本をつないでギターシンセにしよう。",
+      patch: {
+        scenario:
+          "セミモジュラー(=最初から配線済みで、パッチケーブルで配線を変えられる)のアナログシンセ「Korg MS-20 mini」を、エレキギター「Fender Jazzmaster」でコントロールしたい。ギターのOUTPUTを、MS-20 miniのESP部のSIGNAL IN(3.5mm)へ、フォーン→ミニの変換ケーブルで接続する。次に、パッチパネルの中で、ESP部のCV OUTをVCO-1+VCO-2のCV IN(音程を決める電圧の入力)へ、ESP部のTRIG OUTをEG1+EG2のTRIG IN(エンベロープを動かし始める合図の入力)へ、ESP部のAMP OUTをVCF部のEXT SIGNAL IN(フィルターへの外部音声入力)へ、3.5mmのパッチケーブルでつなぐ。MS-20 miniのSIGNAL OUTPUT(3.5mmモノラル)は、ミニ→フォーンのケーブルでオーディオインターフェース「Focusrite Scarlett 4i4(第4世代)」のLINE INPUT 3へ接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Jazzmaster", icon: "JM", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "esp",
+            label: "MS-20 mini:ESP部(外部信号処理部)",
+            icon: "ESP",
+            ports: [
+              { id: "signalIn", label: "SIGNAL IN (3.5mm)", type: "ts", dir: "in" },
+              { id: "ampOut", label: "AMP OUT", type: "cv", dir: "out" },
+              { id: "bpfOut", label: "BPF OUT", type: "cv", dir: "out" },
+              { id: "cvOut", label: "CV OUT", type: "cv", dir: "out" },
+              { id: "envOut", label: "ENV OUT", type: "cv", dir: "out" },
+              { id: "trigOut", label: "TRIG OUT", type: "cv", dir: "out" },
+            ],
+          },
+          {
+            id: "synth",
+            label: "MS-20 mini:シンセ部(VCO / VCF / EG)",
+            icon: "MS-20",
+            ports: [
+              { id: "vcoCv", label: "VCO-1+VCO-2 CV IN", type: "cv", dir: "in" },
+              { id: "egTrig", label: "EG1+EG2 TRIG IN", type: "cv", dir: "in" },
+              { id: "vcfExt", label: "VCF EXT SIGNAL IN", type: "cv", dir: "in" },
+              { id: "hpfCutoff", label: "HPF CUTOFF FREQ IN", type: "cv", dir: "in" },
+              { id: "out", label: "SIGNAL OUTPUT (3.5mmモノラル)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 4i4(第4世代)",
+            icon: "4i4",
+            ports: [
+              { id: "line3", label: "LINE INPUT 3", type: "trs", dir: "in" },
+              { id: "line4", label: "LINE INPUT 4", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["cv", "ts", "trs", "midi", "usb"],
+        correctConnections: [
+          { from: "guitar.out", to: "esp.signalIn", cable: "ts" },
+          { from: "esp.cvOut", to: "synth.vcoCv", cable: "cv" },
+          { from: "esp.trigOut", to: "synth.egTrig", cable: "cv" },
+          { from: "esp.ampOut", to: "synth.vcfExt", cable: "cv" },
+          { from: "synth.out", to: "interface.line3", cable: "ts" },
+        ],
+        explain:
+          "ESP(External Signal Processor)は、外から入ってきた音を分析して、シンセを動かすための電圧に変える回路。ギターの音程を読み取って『この高さの音を出せ』という電圧(CV)に変えてCV OUTから出し、ギターを弾いた瞬間には『音を鳴らし始めろ』という合図(トリガー)をTRIG OUTから出す。CV OUTをVCO(音のもとを作る発振器)の音程の入力へ、TRIG OUTをEG(音の立ち上がりや減衰の形を作る回路)の合図の入力へつなぐと、鍵盤の代わりにギターでシンセを演奏できる。さらに、ESPで増幅したギターの音そのもの(AMP OUT)をVCF(音色を削って変えるフィルター)の外部入力に入れると、ギターの音もシンセの音と一緒にフィルターを通るので、両方が混ざった荒々しい音になる。CV OUTやTRIG OUTは『電圧の合図』で、音として聞くための出力ではない。ここをオーディオインターフェースへつないでも、意図した音にはならないので注意しよう。音程の読み取りは、和音ではなく単音で、はっきり弾いたときに安定しやすい。ESP部のつまみで入力の音量やしきい値(=どの大きさから弾いたとみなすか)を調整し、ギター側は手元に近いピックアップを選ぶと誤動作を減らしやすい。また、MS-20 miniの入出力は3.5mmのミニ端子なので、ギターや録音機材とつなぐときは変換ケーブルが必要になる。",
+      },
+    },
   ],
 };
