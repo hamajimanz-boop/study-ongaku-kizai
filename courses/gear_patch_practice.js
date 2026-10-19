@@ -4072,5 +4072,79 @@ window.COURSES["gear_patch_practice"] = {
           "ギターそのものはモノラルの楽器なので、歪みペダルまではふつうに1本の流れでつなぎ、左右の違いを作れるリバーブやディレイの段階で初めてステレオに分ける。BigSkyのような空間系エフェクトは、左右の出力で響きの返ってくるタイミングや成分を少しずつ変えているため、2台のアンプを離して置くと、音がステージ全体に包み込むように広がる。INPUT R側には何もつながない。BigSky側の設定を『モノラル入力・ステレオ出力』にしておかないと、片側から音が出なかったり、広がりが出なかったりするので、つなぐ前に説明書どおりに設定を確認しよう。音の性格が違う2台(Fenderのクリーンで硬めの音と、Voxの中域が前に出る音)を組み合わせると、左右の音が混ざってより厚みのある音色になる。一方で、2台のアンプはそれぞれ別のコンセントから電源を取るため、電気の通り道が輪のようになってハムノイズ(ブーンという低い雑音)が出ることがある。その場合は、どちらかの経路にアイソレーション(電気的に切り離す)機能付きのボックスを挟むなどの対策がある。また、PAで2台のアンプにマイクを立てる場合、ライブハウスによってはPAがモノラルで客席に出していることもあるので、左右で大きく違う音にしすぎると、片方の音だけが目立ってしまう。事前にPAスタッフと相談しておくと安心。",
       },
     },
+    {
+      id: "power_sequencer_pa_rack",
+      order: 97,
+      title: "PAラックの電源を『順番に入る』コンセントへ振り分ける(TASCAM AV-P250S + Crown XLS 2502)",
+      category: "配線問題",
+      hook: "PAの電源を入れた瞬間、スピーカーから『ボンッ!』という大きな音——その原因は、機材の電源を入れる順番にある。スイッチ1つで正しい順番を自動で守ってくれる、電源の配線を組もう。",
+      patch: {
+        scenario:
+          "小さなイベントスペースのPAラックを、スイッチ1つで安全に電源の入り切りができるようにしたい。パワーディストリビューター「TASCAM AV-P250S」の背面には、電源を入れると TIMING 1 → TIMING 2 → TIMING 3 の順に少しずつ遅れて電気が流れ、切るときは逆の順番で止まる『連動コンセント(SWITCHED)』がある。アナログミキサー「Yamaha MG12XU」の電源ケーブルをTIMING 1へ、グラフィックイコライザー「dbx 231s」の電源ケーブルをTIMING 2へ、パワーアンプ「Crown XLS 2502」の電源ケーブルをTIMING 3へ挿す。音の信号は、MG12XUのSTEREO OUT L/R(XLR)からdbx 231sのCH1/CH2 INPUT(XLR)へ、dbx 231sのCH1/CH2 OUTPUT(XLR)からXLS 2502のCH1/CH2 INPUT(XLR)へ、XLS 2502のCH1/CH2 OUTPUT(Speakon)からパッシブスピーカー「JBL JRX225」の左右へ接続しよう。",
+        equipment: [
+          {
+            id: "power",
+            label: "TASCAM AV-P250S(パワーディストリビューター)",
+            icon: "AV-P250S",
+            ports: [
+              { id: "t1", label: "SWITCHED TIMING 1", type: "power", dir: "out" },
+              { id: "t2", label: "SWITCHED TIMING 2", type: "power", dir: "out" },
+              { id: "t3", label: "SWITCHED TIMING 3", type: "power", dir: "out" },
+              { id: "front", label: "UNSWITCHED (前面・非連動)", type: "power", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU(アナログミキサー)",
+            icon: "MG12XU",
+            ports: [
+              { id: "ac", label: "AC IN (電源)", type: "power", dir: "in" },
+              { id: "outL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "eq",
+            label: "dbx 231s(2ch グラフィックEQ)",
+            icon: "231s",
+            ports: [
+              { id: "ac", label: "AC IN (電源)", type: "power", dir: "in" },
+              { id: "in1", label: "CH1 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "CH2 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out1", label: "CH1 OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "CH2 OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "amp",
+            label: "Crown XLS 2502(パワーアンプ)",
+            icon: "XLS2502",
+            ports: [
+              { id: "ac", label: "AC IN (電源)", type: "power", dir: "in" },
+              { id: "in1", label: "CH1 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "CH2 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out1", label: "CH1 OUTPUT (Speakon)", type: "speaker", dir: "out" },
+              { id: "out2", label: "CH2 OUTPUT (Speakon)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "JBL JRX225(左)", icon: "JRX225", ports: [{ id: "in", label: "INPUT (Speakon)", type: "speaker", dir: "in" }] },
+          { id: "spkR", label: "JBL JRX225(右)", icon: "JRX225", ports: [{ id: "in", label: "INPUT (Speakon)", type: "speaker", dir: "in" }] },
+        ],
+        cablePalette: ["power", "xlr", "speaker", "trs", "ts"],
+        correctConnections: [
+          { from: "power.t1", to: "mixer.ac", cable: "power" },
+          { from: "power.t2", to: "eq.ac", cable: "power" },
+          { from: "power.t3", to: "amp.ac", cable: "power" },
+          { from: "mixer.outL", to: "eq.in1", cable: "xlr" },
+          { from: "mixer.outR", to: "eq.in2", cable: "xlr" },
+          { from: "eq.out1", to: "amp.in1", cable: "xlr" },
+          { from: "eq.out2", to: "amp.in2", cable: "xlr" },
+          { from: "amp.out1", to: "spkL.in", cable: "speaker" },
+          { from: "amp.out2", to: "spkR.in", cable: "speaker" },
+        ],
+        explain:
+          "PAの電源の基本ルールは『入れるときは音の上流(ミキサー)から順に、パワーアンプは最後』『切るときはパワーアンプを最初に』。ミキサーやイコライザーは、電源が入った瞬間や切れた瞬間に、出力から『ポン』という短い電気の揺れが出ることがある。このときパワーアンプがすでに動いていると、その揺れを大きく増幅してスピーカーへ送ってしまい、『ボンッ!』という大きな音でスピーカーを傷める原因になる。AV-P250Sの連動コンセントは、電源を入れるとTIMING 1→2→3の順に、それぞれ数秒ずつ遅れて電気を流し、切るときは3→2→1の順に止めてくれる。だから、パワーアンプのように最後に入れて最初に切りたい機材をTIMING 3へ、最初に入れたいミキサーをTIMING 1へつなぐ。前面の非連動コンセントは、本体のスイッチに関係なく電気が流れるため、スマートフォンの充電などに使い、PAの機材はつながないようにする。パワーアンプは電源を入れた瞬間に大きな電流が流れやすいので、全部の機材が同時に入るとブレーカーが落ちることもあるが、順番に入れることでこうした負担も分散できる。ただし、1台のパワーディストリビューターで使える電気の量には上限(AV-P250Sは15Aのブレーカー付き)があるため、大きなパワーアンプを何台も使う場合は、機材の消費電力の合計を確認し、必要なら電源を分けよう。",
+      },
+    },
   ],
 };
