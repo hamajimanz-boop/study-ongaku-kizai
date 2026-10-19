@@ -536,7 +536,7 @@ window.COURSES["hardware_dtm"] = {
           heading: "お金の話",
           dialogue: [
             { who: "mina", text: "Focusriteって上場してるんですか?" },
-            { who: "sensei", text: "Focusriteグループは、2021年にロンドン証券取引所(AIM市場)に上場しているんだ。超高級コンソール専業だった会社が、低価格帯の量産製品で成長し株式市場に上場するまでに至った軌跡は、音響機材業界における代表的な成功事例として語られるよ。" },
+            { who: "sensei", text: "Focusriteグループは、2014年にロンドン証券取引所(AIM市場)に上場しているんだ。超高級コンソール専業だった会社が、低価格帯の量産製品で成長し株式市場に上場するまでに至った軌跡は、音響機材業界における代表的な成功事例として語られるよ。" },
             { who: "mina", text: "コロナ禍とかでも影響あったんですか?" },
             { who: "sensei", text: "コロナ禍の巣ごもり需要で自宅制作機材の需要が急増した時期には、Scarlettシリーズの品薄が世界的に話題になったこともあるんだ。正確な直近の売上高・時価総額は変動するため要確認だね。" },
           ],
@@ -571,7 +571,7 @@ window.COURSES["hardware_dtm"] = {
       quiz: [
         { q: "Focusriteを創業したのは誰か?", choices: ["Rupert Neve", "Ilpo Martikainen", "Sidney Shure", "Colin Sanders"], answer: 0, explain: "Neve Electronicsを離れたRupert Neveが1985年に設立した。" },
         { q: "Focusriteを一躍有名にした低価格帯I/Fシリーズは?", choices: ["Apollo", "Scarlett", "Babyface", "Duet"], answer: 1, explain: "2011年発売のScarlettシリーズが宅録ブームで爆発的に普及した。" },
-        { q: "Focusriteグループが上場した市場はどこか?", choices: ["ニューヨーク証券取引所", "東京証券取引所", "ロンドン証券取引所(AIM)", "香港証券取引所"], answer: 2, explain: "2021年にロンドン証券取引所のAIM市場に上場した。" },
+        { q: "Focusriteグループが上場した市場はどこか?", choices: ["ニューヨーク証券取引所", "東京証券取引所", "ロンドン証券取引所(AIM)", "香港証券取引所"], answer: 2, explain: "2014年にロンドン証券取引所のAIM市場に上場した。" },
         { q: "Focusriteグループの傘下ブランドではないものは?", choices: ["Novation", "ADAM Audio", "Universal Audio", "Martin Audio"], answer: 2, explain: "Universal AudioはFocusriteグループとは別の独立企業。" },
         { q: "Scarlettシリーズのブランドカラーとしてよく知られる色は?", choices: ["赤", "青", "緑", "黒一色"], answer: 0, explain: "赤い筐体が「あの赤いインターフェース」として広く認知されている。" },
         { q: "第4世代Scarlettから搭載された「Air」モードとは?", choices: ["ワイヤレス伝送機能", "ISAプリアンプ回路を模した高域の質感を付加する機能", "自動ノイズ除去機能", "バッテリー駆動モード"], answer: 1, explain: "ISA回路の高域の伸びやかさを疑似的に付加するモードで、常時オンが前提ではない。" },
@@ -914,6 +914,7 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "業界内でのポジション",
+          image: "compare_consoles.png",
           dialogue: [
             { who: "mina", text: "自分で作った規格に他社も参入してるって、ちょっと不思議な立ち位置ですね?" },
             { who: "sensei", text: "その通り。500シリーズという「規格の生みの親」でありながら、その規格に多数の他社が参入しているという独特のポジションにあるんだ。単体のプリアンプ/EQブランドとしては、前述の通りNeveと対比される形で語られることが多いよ。" },
@@ -1256,6 +1257,7 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "代表製品ラインナップ",
+          image: "tl_chandler.png",
           paragraphs: [
             "<strong>TG2</strong>(20〜40万円台) — プリアンプ/EQ。Abbey RoadのTG12345コンソール回路由来。",
             "<strong>TG12413</strong>(20〜40万円台) — コンプレッサー。",

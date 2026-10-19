@@ -3100,6 +3100,7 @@ window.COURSES["instrument_makers"] = {
         },
         {
           heading: "業界内でのポジション",
+          image: "compare_drums.png",
           dialogue: [
             { who: "mina", text: "業界内でのポジションはどうですか?" },
             { who: "sensei", text: "「ロック創成期の音」を象徴するブランドとして、Pearl、Tama、DWといった後発の日本・アメリカブランドと対比されるんだ。" },
