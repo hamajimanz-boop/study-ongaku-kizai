@@ -3793,5 +3793,61 @@ window.COURSES["gear_patch_practice"] = {
           "インピーダンス(Ω)は、スピーカーが電気の流れにどれだけ『抵抗』するかを表す数字。真空管アンプは、出力トランス(真空管の出力をスピーカー向けに変換する部品)の設定と、つないだスピーカーのインピーダンスが合っているときに、いちばん安全かつ本来の音で鳴る。2203の2つのスピーカー出力は内部で『並列』につながっているため、8Ωのキャビネットを2台つなぐと、合計は8Ω ÷ 2 = 4Ωになる。だからインピーダンススイッチは4Ωに合わせる。1台だけつなぐなら8Ω、16Ωのキャビネット2台なら8Ωに合わせる、という考え方だ。設定がずれるとアンプに負担がかかり、特に『アンプの設定よりスピーカーのインピーダンスが高い』状態や、スピーカーをつながない状態で音を出すと、出力トランスや真空管を傷める原因になるとされる。また、ここで使うのは楽器用のシールドケーブルではなく、太い線でできたスピーカーケーブル。見た目は同じ6.3mmのフォーンプラグでも、シールドケーブルを代わりに使うと、大きな電流で線が発熱したり、音が細くなったりするので使い分けよう。INPUTのHIGHとLOWは入力の感度の違いで、通常のギターはHIGH、出力の大きなピックアップやエフェクターの影響で歪みすぎる場合はLOWを使う。なお、古い年代の2203には4Ωと8Ωしか選べない個体もあるとされるので、実際の機材では背面の表示を確認しよう。",
       },
     },
+    {
+      id: "midi_foot_controller_pedals",
+      order: 92,
+      title: "MIDIフットコントローラーで2台のエフェクターの設定を一度に切り替える(Morningstar MC6 MkII + Strymon TimeLine / BigSky)",
+      category: "配線問題",
+      hook: "曲のサビでディレイとリバーブの設定を同時に変えたい。でも両足で別々のペダルを踏むのは無理——フットスイッチ1つで2台の『記憶された設定』を呼び出す、MIDIの配線を組もう。",
+      patch: {
+        scenario:
+          "ギタリストの足元で、ディレイ「Strymon TimeLine」とリバーブ「Strymon BigSky」の設定(プリセット)を、MIDIフットコントローラー「Morningstar MC6 MkII」のスイッチ1つで同時に切り替えたい。MIDIは、MC6 MkIIのMIDI OUT(5ピンDIN)からTimeLineのMIDI IN(5ピンDIN)へ接続し、TimeLineのMIDI OUT(THRUとして動作する設定にする)からBigSkyのMIDI IN(5ピンDIN)へ接続する。音の信号は、ギター「Fender Telecaster」のOUTPUTからTimeLineのINPUT L、TimeLineのOUTPUT LからBigSkyのINPUT L、BigSkyのOUTPUT Lからギターアンプ「Fender '65 Deluxe Reverb」のINPUT 1へ、すべてモノラルで接続しよう。",
+        equipment: [
+          { id: "guitar", label: "Fender Telecaster", icon: "Tele", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "mc6",
+            label: "Morningstar MC6 MkII(MIDIフットコントローラー)",
+            icon: "MC6",
+            ports: [
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+            ],
+          },
+          {
+            id: "timeline",
+            label: "Strymon TimeLine(ディレイ / MIDIチャンネル1)",
+            icon: "TimeLine",
+            ports: [
+              { id: "inL", label: "INPUT L (TS)", type: "ts", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TS)", type: "ts", dir: "out" },
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT/THRU (5ピンDIN)", type: "midi", dir: "out" },
+            ],
+          },
+          {
+            id: "bigsky",
+            label: "Strymon BigSky(リバーブ / MIDIチャンネル2)",
+            icon: "BigSky",
+            ports: [
+              { id: "inL", label: "INPUT L (TS)", type: "ts", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TS)", type: "ts", dir: "out" },
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT/THRU (5ピンDIN)", type: "midi", dir: "out" },
+            ],
+          },
+          { id: "amp", label: "Fender '65 Deluxe Reverb(ギターアンプ)", icon: "Deluxe", ports: [{ id: "in1", label: "INPUT 1 (TS)", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "midi", "trs", "usb", "speaker"],
+        correctConnections: [
+          { from: "mc6.midiOut", to: "timeline.midiIn", cable: "midi" },
+          { from: "timeline.midiOut", to: "bigsky.midiIn", cable: "midi" },
+          { from: "guitar.out", to: "timeline.inL", cable: "ts" },
+          { from: "timeline.outL", to: "bigsky.inL", cable: "ts" },
+          { from: "bigsky.outL", to: "amp.in1", cable: "ts" },
+        ],
+        explain:
+          "この配線では、ケーブルが『音の道』と『命令の道』の2系統に分かれている。音の道はギター→ディレイ→リバーブ→アンプとふつうのエフェクターと同じ順番。命令の道はMIDIで、MC6 MkIIのスイッチを踏むと『プログラムチェンジ(=何番の設定を呼び出すかという番号の命令)』が送られる。MIDIには1〜16のチャンネル(=宛先の番号)があり、TimeLineをチャンネル1、BigSkyをチャンネル2に設定しておけば、MC6 MkII側で『スイッチAを踏んだらチャンネル1に5番、チャンネル2に12番』のように、2台に別々の番号を同時に送れる。TimeLineのMIDI OUTは、受け取ったMIDIをそのまま次へ流す『THRU』として働くように設定を切り替えられるため、1本のMIDIの流れで2台を数珠つなぎ(デイジーチェーン)にできる。この設定を忘れると、BigSkyにだけ命令が届かない。MIDIケーブルは音を運ばないので、ここを音のケーブルと取り違えないようにしよう。なお、MC6 MkIIやStrymonの新しいモデルにはTRS端子(6.3mmや3.5mm)でMIDIを送るものもあるが、TRS MIDIは機種によって配線の規格(タイプA/タイプB)が違うことがあるため、使う場合は説明書で対応を確認しよう。MC6 MkIIは9Vの電源アダプターで動かす(必要な電流は説明書で確認する)ため、パワーサプライの空き出力も事前に確保しておく。",
+      },
+    },
   ],
 };
