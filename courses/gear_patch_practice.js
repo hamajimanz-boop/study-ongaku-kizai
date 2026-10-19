@@ -3849,5 +3849,80 @@ window.COURSES["gear_patch_practice"] = {
           "この配線では、ケーブルが『音の道』と『命令の道』の2系統に分かれている。音の道はギター→ディレイ→リバーブ→アンプとふつうのエフェクターと同じ順番。命令の道はMIDIで、MC6 MkIIのスイッチを踏むと『プログラムチェンジ(=何番の設定を呼び出すかという番号の命令)』が送られる。MIDIには1〜16のチャンネル(=宛先の番号)があり、TimeLineをチャンネル1、BigSkyをチャンネル2に設定しておけば、MC6 MkII側で『スイッチAを踏んだらチャンネル1に5番、チャンネル2に12番』のように、2台に別々の番号を同時に送れる。TimeLineのMIDI OUTは、受け取ったMIDIをそのまま次へ流す『THRU』として働くように設定を切り替えられるため、1本のMIDIの流れで2台を数珠つなぎ(デイジーチェーン)にできる。この設定を忘れると、BigSkyにだけ命令が届かない。MIDIケーブルは音を運ばないので、ここを音のケーブルと取り違えないようにしよう。なお、MC6 MkIIやStrymonの新しいモデルにはTRS端子(6.3mmや3.5mm)でMIDIを送るものもあるが、TRS MIDIは機種によって配線の規格(タイプA/タイプB)が違うことがあるため、使う場合は説明書で対応を確認しよう。MC6 MkIIは9Vの電源アダプターで動かす(必要な電流は説明書で確認する)ため、パワーサプライの空き出力も事前に確保しておく。",
       },
     },
+    {
+      id: "multiport_midi_interface",
+      order: 93,
+      title: "マルチポートMIDIインターフェースで複数のハードシンセをDAWから個別に鳴らす(iConnectivity mioXM + Yamaha DX7 + Sequential Prophet-5)",
+      category: "配線問題",
+      hook: "USB端子のない昔のシンセを何台も、DAWの打ち込みでそれぞれ別のフレーズを鳴らしたい——MIDIの出入り口をいくつも持つ『マルチポートMIDIインターフェース』を中心に、行きと帰りのMIDIを配線しよう。",
+      patch: {
+        scenario:
+          "USB端子を持たないハードウェアシンセ「Yamaha DX7」と「Sequential Prophet-5(Rev4)」を、DAW(Logic Pro)から別々に鳴らしたい。DX7の鍵盤は、DAWへの打ち込み用のキーボードとしても使う。MIDIインターフェース「iConnectivity mioXM」は、5ピンDINのMIDI入出力を4系統ずつ持つ。DX7のMIDI OUTからmioXMのMIDI IN 1へ、mioXMのMIDI OUT 1からDX7のMIDI INへ、mioXMのMIDI OUT 2からProphet-5のMIDI INへ接続する。mioXMはUSBでMac Studioへ接続する。音声は、DX7のOUTPUT(モノラル)をオーディオインターフェース「Focusrite Scarlett 4i4(第4世代)」のLINE INPUT 3へ、Prophet-5のAUDIO OUT(モノラル)をLINE INPUT 4へ接続し、Scarlett 4i4もUSBでMac Studioへ接続しよう。",
+        equipment: [
+          {
+            id: "dx7",
+            label: "Yamaha DX7",
+            icon: "DX7",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" },
+              { id: "out", label: "OUTPUT (モノラル)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "p5",
+            label: "Sequential Prophet-5(Rev4)",
+            icon: "P-5",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "out", label: "AUDIO OUT (モノラル)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "mio",
+            label: "iConnectivity mioXM(4×4 MIDIインターフェース)",
+            icon: "mioXM",
+            ports: [
+              { id: "in1", label: "MIDI IN 1 (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "in2", label: "MIDI IN 2 (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "out1", label: "MIDI OUT 1 (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "out2", label: "MIDI OUT 2 (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "usb", label: "USB (コンピューター接続)", type: "usb", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 4i4(第4世代)",
+            icon: "4i4",
+            ports: [
+              { id: "line3", label: "LINE INPUT 3", type: "trs", dir: "in" },
+              { id: "line4", label: "LINE INPUT 4", type: "trs", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          {
+            id: "pc",
+            label: "Mac Studio(Logic Pro起動済み)",
+            icon: "Mac",
+            ports: [
+              { id: "usb1", label: "USB-C 1", type: "usb", dir: "in" },
+              { id: "usb2", label: "USB-C 2", type: "usb", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["midi", "ts", "trs", "usb", "xlr"],
+        correctConnections: [
+          { from: "dx7.midiOut", to: "mio.in1", cable: "midi" },
+          { from: "mio.out1", to: "dx7.midiIn", cable: "midi" },
+          { from: "mio.out2", to: "p5.midiIn", cable: "midi" },
+          { from: "mio.usb", to: "pc.usb1", cable: "usb" },
+          { from: "dx7.out", to: "interface.line3", cable: "ts" },
+          { from: "p5.out", to: "interface.line4", cable: "ts" },
+          { from: "interface.usb", to: "pc.usb2", cable: "usb" },
+        ],
+        explain:
+          "MIDIの1本のケーブルで送れるのは16チャンネル(=宛先の番号)まで。マルチポートMIDIインターフェースは、その出入り口(ポート)を複数持っているので、DAWからは『OUT 1はDX7用』『OUT 2はProphet-5用』と、ポートごとに別の機材として扱える。シンセ側のMIDIチャンネルが同じ1番のままでも、ポートが分かれていれば混線しないのが大きな利点。DX7はMIDIの入り口と出口を両方つなぐのがポイントで、鍵盤を弾いた情報はMIDI OUT→mioXMのIN 1→DAWへ届いて録音され、DAWで打ち込んだフレーズはmioXMのOUT 1→DX7のMIDI INへ届いて鳴る。Prophet-5は今回は音源として鳴らすだけなので、行きのMIDI INだけでよい。注意したいのは『音が2回鳴る』現象。DX7の鍵盤を弾くと、本体の音源が直接鳴るのに加えて、DAWを経由して戻ってきたMIDIでも鳴ってしまうことがある。シンセ側に『ローカルコントロール(=鍵盤と本体の音源のつながり)』をオフにする設定がある機種ではオフにし、ない機種ではDAW側で、弾いているトラックのMIDIを同じシンセへ送り返さない設定にしよう。また、MIDIケーブルは音を運ばないので、シンセの音はオーディオインターフェースへ別に配線する必要がある。mioXMはUSBクラスコンプライアント(=専用ドライバーなしでコンピューターが認識できる規格)に対応しているとされ、Macにつなぐだけで各ポートが一覧に表示される。",
+      },
+    },
   ],
 };
