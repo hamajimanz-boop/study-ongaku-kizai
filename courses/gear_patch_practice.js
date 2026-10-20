@@ -4389,5 +4389,61 @@ window.COURSES["gear_patch_practice"] = {
           "INSERT(インサート)は、チャンネルの音の通り道の途中に、外の機材を『割り込ませる』ための端子。1202VLZ4のインサートは、1つのTRSジャックの中で、TIP(=プラグの先端)が送り出し、RING(=先端の次の輪の部分)が戻りという役割を分けている。そのため、TRSの1本のプラグが2本のTSプラグに分かれたYケーブルを使い、送り側をコンプの入力へ、戻り側をコンプの出力へつなぐ。送りと戻りを逆に挿すと、音が出なくなったり、コンプがかからなかったりするので、プラグに書かれた印やケーブルの色を確かめよう。インサートにつないだ機材は、そのチャンネルだけにかかる。コンプのように音の大きさそのものを整える機材はインサートで使い、リバーブのように元の音に響きを足す機材はAUXのセンド/リターンで使うのが基本の使い分けだ。また、1202VLZ4のインサートは、チャンネルのイコライザーより手前に入るため、コンプで音量をならしたあとにEQで音色を整える流れになる。なお、Yケーブルの1本は2本の線で送りと戻りを運ぶため、バランス伝送にはならない。ノイズを避けるため、ミキサーとコンプはなるべく短いケーブルでつなごう。",
       },
     },
+    {
+      id: "moog_dfam_mother32_patch",
+      order: 103,
+      title: "ドラムシンセのシーケンサーでベースシンセを鳴らす(Moog DFAM + Mother-32)",
+      category: "配線問題",
+      hook: "DFAMの8ステップのシーケンサーは、自分のドラム音を鳴らすだけでなく、パッチケーブル1本で隣のシンセにも『ここで鳴らせ』『この高さで』と指示を出せる。セミモジュラーシンセ同士のCV/Gate配線を組もう。",
+      patch: {
+        scenario:
+          "アナログのドラムシンセ「Moog DFAM」と、セミモジュラー(=配線しなくても音が出るが、パッチケーブルで内部のつながりを組み替えられる)のシンセ「Moog Mother-32」を並べている。DFAMのシーケンサーに合わせて、Mother-32でベースのフレーズを鳴らしたい。DFAMのパッチベイ(3.5mm)のTRIGGER出力を、Mother-32のGATE入力へ、DFAMのPITCH出力を、Mother-32のVCO 1V/OCT入力へつなぐ。さらに、DFAMのVELOCITY出力をMother-32のVCF CUTOFF入力へつないで、ステップごとに音の明るさが変わるようにする。2台の音は、それぞれのOUTPUT(フォーン)から、オーディオインターフェース「Focusrite Scarlett 4i4」のLINE IN 3とLINE IN 4(TRS)へ送ろう。",
+        equipment: [
+          {
+            id: "dfam",
+            label: "Moog DFAM(ドラムシンセ)",
+            icon: "DFAM",
+            ports: [
+              { id: "trigOut", label: "TRIGGER OUT (3.5mm)", type: "cv", dir: "out" },
+              { id: "pitchOut", label: "PITCH OUT (3.5mm)", type: "cv", dir: "out" },
+              { id: "velOut", label: "VELOCITY OUT (3.5mm)", type: "cv", dir: "out" },
+              { id: "vcaEgOut", label: "VCA EG OUT (3.5mm)", type: "cv", dir: "out" },
+              { id: "audioOut", label: "OUTPUT (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "m32",
+            label: "Moog Mother-32(セミモジュラーシンセ)",
+            icon: "Mother-32",
+            ports: [
+              { id: "gateIn", label: "GATE IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "vcoIn", label: "VCO 1V/OCT IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "cutoffIn", label: "VCF CUTOFF IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "mixCvIn", label: "MIX CV IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "audioOut", label: "OUTPUT (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 4i4",
+            icon: "4i4",
+            ports: [
+              { id: "line3", label: "LINE IN 3 (TRS)", type: "trs", dir: "in" },
+              { id: "line4", label: "LINE IN 4 (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["cv", "ts", "trs", "midi", "usb"],
+        correctConnections: [
+          { from: "dfam.trigOut", to: "m32.gateIn", cable: "cv" },
+          { from: "dfam.pitchOut", to: "m32.vcoIn", cable: "cv" },
+          { from: "dfam.velOut", to: "m32.cutoffIn", cable: "cv" },
+          { from: "dfam.audioOut", to: "interface.line3", cable: "ts" },
+          { from: "m32.audioOut", to: "interface.line4", cable: "ts" },
+        ],
+        explain:
+          "CV(=音の高さや明るさを電圧の大きさで伝える信号)とGate/Trigger(=『今、鳴らせ』という合図の電圧)は、MIDIを使わずにアナログシンセ同士を操るための昔ながらの方法だ。DFAMのシーケンサーは、ステップが進むたびにTRIGGER出力から『鳴らせ』の合図を出し、同時にPITCH出力から、そのステップのPITCHノブで決めた電圧を、VELOCITY出力から、そのステップのVELOCITYノブで決めた電圧を出している。これをMother-32のGATE入力(発音のタイミング)、VCO 1V/OCT入力(1Vで1オクターブ上がる約束の音程入力)、VCF CUTOFF入力(フィルターの開き具合)につなぐことで、DFAMのリズムに合わせてMother-32がフレーズを弾くようになる。ただし、DFAMのPITCHノブは無段階で回せるつまみなので、ドレミの音階にぴったり合うわけではない。耳で聞きながらノブを回して、音程を合わせよう。パッチケーブルは必ず『出力→入力』の向きでつなぐ。出力同士をつなぐと、2つの機材が電圧を押し合って正しく動かないので注意。3.5mmのパッチケーブルは見た目がイヤホンのプラグに似ているが、運んでいるのは音ではなく『指示の電圧』なので、オーディオインターフェースへの音の出力は、別にフォーンのケーブルでつなぐ。",
+      },
+    },
   ],
 };
