@@ -4191,5 +4191,57 @@ window.COURSES["gear_patch_practice"] = {
           "500シリーズのラックは、モジュールに電源を配り、背面の端子と各モジュールをつなぐ『入れ物』で、スロット同士の音の通り道は基本的にはつながっていない(1つ目のモジュールの出力が、自動で隣のモジュールに流れるわけではない)。だから、マイクプリ→EQのように直列で使いたいときは、スロット1のOUTPUTからスロット2のINPUTへ、短いXLRケーブルで自分でつなぐ。順番は『まずマイクプリでマイクの小さな信号をラインレベルまで持ち上げ、その後でEQ』が基本。EQはライン信号を扱う前提の機材なので、マイクの信号をそのままEQに入れても、正しく働かない。コンデンサーマイクに必要な+48Vファンタム電源は、Lunchbox本体が電力を供給し、512cの前面の48Vスイッチで入り切りする。512cで増幅した後の信号はすでにラインレベルなので、Apollo x8ではマイクプリが入っているMIC/LINE IN 1のXLR側ではなく、LINE IN 5のようなライン入力で受けよう。マイクプリの入口に再びつなぐと、増幅が二重になり歪みやノイズの原因になる。なお512cの前面には、ギターやベースを直接挿せるHi-Z(=高インピーダンス。楽器の出力に合わせた入力)のフォーン入力もあり、モジュールを並べ替えるだけでチェーンを組み替えられるのが500シリーズの楽しさだ。",
       },
     },
+    {
+      id: "x32_rack_s16_aes50",
+      order: 99,
+      title: "デジタルミキサーとステージボックスをLANケーブル1本でつなぐ(Behringer X32 Rack + S16 / AES50)",
+      category: "配線問題",
+      hook: "ステージから客席の奥のミキサー卓まで、何十本ものケーブルを束ねた太いスネークを引き回すのは大変。ステージ側の箱でマイクの音をデジタルに変えれば、往復の音をLANケーブル1本で運べる——ステージボックスの配線を組もう。",
+      patch: {
+        scenario:
+          "ライブハウスで、客席後方のミキサー席に置いたデジタルミキサー「Behringer X32 Rack」と、ステージ上のステージボックス(=マイクの入力と、スピーカーへの出力をまとめてステージ側に置く箱)「Behringer S16」をつなぎたい。ボーカルの「Shure SM58」をS16のINPUT 1へ、ギターアンプに立てた「Shure SM57」をS16のINPUT 2へ接続する。X32 RackのAES50 Aポートと、S16のAES50 Aポートを、シールド付きのLANケーブル(Cat5e)でつなぐ。ミキサーで作ったメインの左右の音は、S16のOUTPUT 1/2からステージ両脇のパワードスピーカー「Yamaha DBR12」(左右)へ、ボーカル用の返しはS16のOUTPUT 3から足元のパワードモニター「Yamaha DBR10」へ、それぞれXLRで接続しよう。X32 Rack本体のマイク入力は今回は使わない。",
+        equipment: [
+          { id: "vo", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "gt", label: "Shure SM57(ギターアンプ)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "s16",
+            label: "Behringer S16(ステージボックス・ステージ上)",
+            icon: "S16",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "aesA", label: "AES50 A (etherCON)", type: "ethernet", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (XLR)", type: "xlr", dir: "out" },
+              { id: "out3", label: "OUTPUT 3 (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "x32",
+            label: "Behringer X32 Rack(デジタルミキサー・客席後方)",
+            icon: "X32 Rack",
+            ports: [
+              { id: "localIn1", label: "本体 INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "aesA", label: "AES50 A (etherCON)", type: "ethernet", dir: "out" },
+              { id: "aesB", label: "AES50 B (etherCON)", type: "ethernet", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DBR12(左)", icon: "DBR12", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR12(右)", icon: "DBR12", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "wedge", label: "Yamaha DBR10(足元の返し)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "ethernet", "trs", "usb", "speaker"],
+        correctConnections: [
+          { from: "vo.out", to: "s16.in1", cable: "xlr" },
+          { from: "gt.out", to: "s16.in2", cable: "xlr" },
+          { from: "x32.aesA", to: "s16.aesA", cable: "ethernet" },
+          { from: "s16.out1", to: "spkL.in", cable: "xlr" },
+          { from: "s16.out2", to: "spkR.in", cable: "xlr" },
+          { from: "s16.out3", to: "wedge.in", cable: "xlr" },
+        ],
+        explain:
+          "S16は、16系統のマイク入力と8系統の出力を持つステージボックスで、マイクの音をステージ上でデジタル信号に変え、AES50(=Behringerやミダスのデジタルミキサーで使われる、音声を双方向に送る規格)でミキサーへ送る。1本のLANケーブルの中を、ステージからミキサーへ向かうマイクの音と、ミキサーからステージへ戻るスピーカー用の音が同時に流れるので、何十本もの線を束ねたアナログスネークの代わりになる。マイクのゲイン(=入力の増幅量)も、ミキサー側から遠隔で調整できる。ケーブルを挿しただけでは音は出ず、X32側のルーティング(=どの入力・出力をどこへ割り当てるかの設定)で、AES50 Aから来る音をチャンネルに、メインとモニターの出力をAES50 A経由でS16の出力1〜3に割り当てる。AES50はLANケーブルと同じ形をしているが、パソコンのネットワークとは仕組みが違うため、間にルーターやスイッチングハブをはさまず機材同士を直接つなぐ。また、ステージの照明や電源ケーブルから来る雑音や、静電気によるトラブルを防ぐため、シールド付きのCat5eケーブルを使うことがメーカーから推奨されている。S16にはAES50 Bポートもあり、ここから2台目のS16へ数珠つなぎにすれば入力をさらに増やせる。",
+      },
+    },
   ],
 };
