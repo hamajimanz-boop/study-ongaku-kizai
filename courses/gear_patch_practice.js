@@ -4293,5 +4293,52 @@ window.COURSES["gear_patch_practice"] = {
           "MIDIケーブルを流れるのは『どの鍵盤を、どの強さで、いつ押したか』という演奏の指示だけで、音そのものは流れない。だから、MPCからシンセを鳴らすには『MPCのMIDI OUT→シンセのMIDI IN』という指示の線と、『シンセのOUTPUT→MPCのINPUT』という音の線の、2系統の配線が必要になる。MIDIは必ずOUTからINへつなぐのが決まりで、OUT同士・IN同士では何も起きない。MPC側では、シーケンスのトラックをMIDIトラックにして、出力先をMIDI OUT 1と、minilogue xdが受け取る設定にしたMIDIチャンネル(=1本のMIDIケーブルで最大16台を区別するための番号)に合わせる。minilogue xdの出力はアンバランスのTSフォーンだが、MPCのフォーン入力に挿せばそのまま受けられる。シンセの音をMPCに戻しておけば、録音してサンプルにし、刻んだりピッチを変えたりと、MPCならではの加工ができる。録音中に入力の音をスピーカーから聞くには、MPC側の入力モニターの設定を有効にする。背面のRCA入力は、レコードプレーヤーをつなぐことを想定した入力で、PHONOの設定ではレコード針の小さな信号を大きく増幅する。そこにシンセのライン信号を入れると音が大きすぎて歪むので、シンセは素直にフォーンのLINE INPUTで受けよう。",
       },
     },
+    {
+      id: "radial_sw8_backup_playback",
+      order: 101,
+      title: "同期演奏のメインPCとバックアップPCを自動で切り替える(Radial SW8-USB)",
+      category: "配線問題",
+      hook: "本番中に、オケ(=同期演奏で流す伴奏トラック)を再生しているパソコンが突然止まったら、ライブはその場で止まってしまう。同じオケを2台のパソコンで同時に再生し、止まった瞬間に予備の方へ切り替わる仕組みを配線しよう。",
+      patch: {
+        scenario:
+          "同期演奏をするバンドのライブで、オケとクリックを再生するパソコンを2台用意し、万一に備えたい。2台の「MacBook Pro」で同じDAWのセッションを同時に再生し、メイン機をオートスイッチャー兼オーディオインターフェース「Radial SW8-USB」のメインPC用USB端子へ、バックアップ機をバックアップPC用USB端子へ、それぞれUSBケーブルでつなぐ。SW8-USBのOUTPUT 1/2(XLR)にはオケの左右が出てくるので、ステージボックス「Behringer S16」のINPUT 9/10へ送る。OUTPUT 3(XLR)にはクリックだけが出てくるので、ドラマー用のイヤモニアンプ「Behringer P1」のINPUT(XLR/TRSコンボ)へ送ろう。",
+        equipment: [
+          { id: "macMain", label: "MacBook Pro(メイン機)", icon: "Mac A", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "out" }] },
+          { id: "macBackup", label: "MacBook Pro(バックアップ機)", icon: "Mac B", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "out" }] },
+          {
+            id: "sw8",
+            label: "Radial SW8-USB(オートスイッチャー兼オーディオI/F)",
+            icon: "SW8-USB",
+            ports: [
+              { id: "usbMain", label: "USB (メインPC用)", type: "usb", dir: "in" },
+              { id: "usbBackup", label: "USB (バックアップPC用)", type: "usb", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (XLR) ※オケL", type: "xlr", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (XLR) ※オケR", type: "xlr", dir: "out" },
+              { id: "out3", label: "OUTPUT 3 (XLR) ※クリック", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "s16",
+            label: "Behringer S16(ステージボックス)",
+            icon: "S16",
+            ports: [
+              { id: "in9", label: "INPUT 9 (XLR)", type: "xlr", dir: "in" },
+              { id: "in10", label: "INPUT 10 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          { id: "p1", label: "Behringer P1(ドラマー用イヤモニアンプ)", icon: "P1", ports: [{ id: "in", label: "INPUT (XLR/TRSコンボ)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "xlr", "trs", "ts", "ethernet"],
+        correctConnections: [
+          { from: "macMain.usb", to: "sw8.usbMain", cable: "usb" },
+          { from: "macBackup.usb", to: "sw8.usbBackup", cable: "usb" },
+          { from: "sw8.out1", to: "s16.in9", cable: "xlr" },
+          { from: "sw8.out2", to: "s16.in10", cable: "xlr" },
+          { from: "sw8.out3", to: "p1.in", cable: "xlr" },
+        ],
+        explain:
+          "SW8-USBは、2台のパソコンそれぞれからUSBで音を受け取れるオーディオインターフェースで、普段はメイン機の音をOUTPUTへ出している。メイン機の再生が止まったり、USBの音が途切れたりしたことを検知すると、自動でバックアップ機の音に切り替わる(手元のボタンやフットスイッチで手動で切り替えることもできる)。この仕組みが働くには、2台のパソコンが『同じセッションを、同じ位置で、同時に』再生している必要がある。そのため、メイン機から再生・停止の指示を送ってバックアップ機を追いかけさせる設定(MIDIのタイムコードなど)を使うのが一般的だ。出力側は、ミキサーやステージボックスから見ると『いつも同じ1台の機材』なので、パソコンが切り替わってもケーブルを挿し替える必要はない。オケとクリックを別々のOUTPUTに分けておくのは、クリックをお客さんに聞かせず、ドラマーのイヤモニにだけ送るため。XLR出力は、ステージボックスまで長くケーブルを引き回してもノイズを拾いにくいバランス出力になっている。本番前のリハーサルでは、メイン機のUSBケーブルをわざと抜いて、切り替わりの瞬間に音が途切れないかを必ず確かめておこう。",
+      },
+    },
   ],
 };
