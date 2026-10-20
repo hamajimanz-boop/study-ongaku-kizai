@@ -4146,5 +4146,50 @@ window.COURSES["gear_patch_practice"] = {
           "PAの電源の基本ルールは『入れるときは音の上流(ミキサー)から順に、パワーアンプは最後』『切るときはパワーアンプを最初に』。ミキサーやイコライザーは、電源が入った瞬間や切れた瞬間に、出力から『ポン』という短い電気の揺れが出ることがある。このときパワーアンプがすでに動いていると、その揺れを大きく増幅してスピーカーへ送ってしまい、『ボンッ!』という大きな音でスピーカーを傷める原因になる。AV-P250Sの連動コンセントは、電源を入れるとTIMING 1→2→3の順に、それぞれ数秒ずつ遅れて電気を流し、切るときは3→2→1の順に止めてくれる。だから、パワーアンプのように最後に入れて最初に切りたい機材をTIMING 3へ、最初に入れたいミキサーをTIMING 1へつなぐ。前面の非連動コンセントは、本体のスイッチに関係なく電気が流れるため、スマートフォンの充電などに使い、PAの機材はつながないようにする。パワーアンプは電源を入れた瞬間に大きな電流が流れやすいので、全部の機材が同時に入るとブレーカーが落ちることもあるが、順番に入れることでこうした負担も分散できる。ただし、1台のパワーディストリビューターで使える電気の量には上限(AV-P250Sは15Aのブレーカー付き)があるため、大きなパワーアンプを何台も使う場合は、機材の消費電力の合計を確認し、必要なら電源を分けよう。",
       },
     },
+    {
+      id: "api_lunchbox_500_series_chain",
+      order: 98,
+      title: "500シリーズのラックにマイクプリとEQを入れて直列につなぐ(API 500-6B Lunchbox + API 512c + API 550A)",
+      category: "配線問題",
+      hook: "小さなモジュールを差し替えて、自分だけのチャンネルストリップを作れる『500シリーズ』。ただしモジュール同士は、ラックに差しただけでは勝手につながらない——マイクプリからEQへ、音の通り道を自分で配線しよう。",
+      patch: {
+        scenario:
+          "自宅スタジオのボーカル録りで、500シリーズ(=幅の細い共通規格のモジュールを、専用ラックに差して使う仕組み)のマイクプリアンプとイコライザーを使いたい。6スロットのラック「API 500-6B Lunchbox」のスロット1にマイクプリアンプ「API 512c」、スロット2に3バンドEQ「API 550A」を差してある。Lunchboxの背面には、スロットごとにINPUT(XLR)とOUTPUT(XLR)が並んでいる。コンデンサーマイク「Neumann TLM 103」をスロット1のINPUTへ、スロット1のOUTPUTをスロット2のINPUTへつないで、マイクプリの後ろにEQが来るようにする。スロット2のOUTPUTからは、片側がXLR・もう片側がTRSフォーンになっているバランスケーブルで、オーディオインターフェース「Universal Audio Apollo x8」のLINE IN 5(TRS)へ接続しよう。スロット3は空きスロットなので使わない。",
+        equipment: [
+          { id: "mic", label: "Neumann TLM 103", icon: "TLM103", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "rack",
+            label: "API 500-6B Lunchbox(500シリーズ用ラック)",
+            icon: "Lunchbox",
+            ports: [
+              { id: "in1", label: "SLOT 1 INPUT (XLR) ※API 512c", type: "xlr", dir: "in" },
+              { id: "in2", label: "SLOT 2 INPUT (XLR) ※API 550A", type: "xlr", dir: "in" },
+              { id: "in3", label: "SLOT 3 INPUT (XLR) ※空き", type: "xlr", dir: "in" },
+              { id: "out1", label: "SLOT 1 OUTPUT (XLR) ※API 512c", type: "xlr", dir: "out" },
+              { id: "out2", label: "SLOT 2 OUTPUT (XLR) ※API 550A", type: "xlr", dir: "out" },
+              { id: "out3", label: "SLOT 3 OUTPUT (XLR) ※空き", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Universal Audio Apollo x8",
+            icon: "Apollo x8",
+            ports: [
+              { id: "mic1", label: "MIC/LINE IN 1 (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "line5", label: "LINE IN 5 (TRS)", type: "trs", dir: "in" },
+              { id: "line6", label: "LINE IN 6 (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb"],
+        correctConnections: [
+          { from: "mic.out", to: "rack.in1", cable: "xlr" },
+          { from: "rack.out1", to: "rack.in2", cable: "xlr" },
+          { from: "rack.out2", to: "interface.line5", cable: "trs" },
+        ],
+        explain:
+          "500シリーズのラックは、モジュールに電源を配り、背面の端子と各モジュールをつなぐ『入れ物』で、スロット同士の音の通り道は基本的にはつながっていない(1つ目のモジュールの出力が、自動で隣のモジュールに流れるわけではない)。だから、マイクプリ→EQのように直列で使いたいときは、スロット1のOUTPUTからスロット2のINPUTへ、短いXLRケーブルで自分でつなぐ。順番は『まずマイクプリでマイクの小さな信号をラインレベルまで持ち上げ、その後でEQ』が基本。EQはライン信号を扱う前提の機材なので、マイクの信号をそのままEQに入れても、正しく働かない。コンデンサーマイクに必要な+48Vファンタム電源は、Lunchbox本体が電力を供給し、512cの前面の48Vスイッチで入り切りする。512cで増幅した後の信号はすでにラインレベルなので、Apollo x8ではマイクプリが入っているMIC/LINE IN 1のXLR側ではなく、LINE IN 5のようなライン入力で受けよう。マイクプリの入口に再びつなぐと、増幅が二重になり歪みやノイズの原因になる。なお512cの前面には、ギターやベースを直接挿せるHi-Z(=高インピーダンス。楽器の出力に合わせた入力)のフォーン入力もあり、モジュールを並べ替えるだけでチェーンを組み替えられるのが500シリーズの楽しさだ。",
+      },
+    },
   ],
 };
