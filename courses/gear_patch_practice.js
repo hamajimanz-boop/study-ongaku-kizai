@@ -4243,5 +4243,55 @@ window.COURSES["gear_patch_practice"] = {
           "S16は、16系統のマイク入力と8系統の出力を持つステージボックスで、マイクの音をステージ上でデジタル信号に変え、AES50(=Behringerやミダスのデジタルミキサーで使われる、音声を双方向に送る規格)でミキサーへ送る。1本のLANケーブルの中を、ステージからミキサーへ向かうマイクの音と、ミキサーからステージへ戻るスピーカー用の音が同時に流れるので、何十本もの線を束ねたアナログスネークの代わりになる。マイクのゲイン(=入力の増幅量)も、ミキサー側から遠隔で調整できる。ケーブルを挿しただけでは音は出ず、X32側のルーティング(=どの入力・出力をどこへ割り当てるかの設定)で、AES50 Aから来る音をチャンネルに、メインとモニターの出力をAES50 A経由でS16の出力1〜3に割り当てる。AES50はLANケーブルと同じ形をしているが、パソコンのネットワークとは仕組みが違うため、間にルーターやスイッチングハブをはさまず機材同士を直接つなぐ。また、ステージの照明や電源ケーブルから来る雑音や、静電気によるトラブルを防ぐため、シールド付きのCat5eケーブルを使うことがメーカーから推奨されている。S16にはAES50 Bポートもあり、ここから2台目のS16へ数珠つなぎにすれば入力をさらに増やせる。",
       },
     },
+    {
+      id: "mpc_live2_resample_hardsynth",
+      order: 100,
+      title: "サンプラーからハードシンセを鳴らして、その音をサンプリングする(Akai MPC Live II + Korg minilogue xd)",
+      category: "配線問題",
+      hook: "パソコンを開かずに、MPCだけでビートを作りたい。MPCで打ち込んだフレーズでハードシンセを鳴らし、その音をそのままMPCに録り込めば、シンセの音もサンプルとして自由に切り貼りできる——『送る線』と『戻す線』の2系統を配線しよう。",
+      patch: {
+        scenario:
+          "スタンドアローン(=パソコンにつながずに単体で動く)のサンプラー「Akai MPC Live II」で作ったシーケンス(=打ち込んだフレーズ)で、アナログシンセ「Korg minilogue xd」を鳴らしたい。MPC Live IIのMIDI OUT 1(5ピンDIN)から、minilogue xdのMIDI IN(5ピンDIN)へMIDIケーブルをつなぐ。minilogue xdのOUTPUT L/MONOとOUTPUT R(TSフォーン)は、MPC Live IIのLINE INPUT L/R(フォーン)へ戻して、シンセの音を録音(サンプリング)できるようにする。MPCで鳴らした全体の音は、MPC Live IIのOUTPUT 1/2(TRS)から、モニタースピーカー「Yamaha HS5」の左右へ接続しよう。背面のPHONO/LINE入力(RCA)はレコードプレーヤー用なので、今回は使わない。",
+        equipment: [
+          {
+            id: "mpc",
+            label: "Akai MPC Live II",
+            icon: "MPC Live II",
+            ports: [
+              { id: "midiOut1", label: "MIDI OUT 1 (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "midiIn1", label: "MIDI IN 1 (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "inL", label: "LINE INPUT L (フォーン)", type: "trs", dir: "in" },
+              { id: "inR", label: "LINE INPUT R (フォーン)", type: "trs", dir: "in" },
+              { id: "phonoL", label: "PHONO/LINE IN L (RCA)", type: "rca", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (TRS)", type: "trs", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "synth",
+            label: "Korg minilogue xd",
+            icon: "minilogue xd",
+            ports: [
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "outL", label: "OUTPUT L/MONO (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha HS5(左)", icon: "HS5", ports: [{ id: "in", label: "INPUT (TRS)", type: "trs", dir: "in" }] },
+          { id: "spkR", label: "Yamaha HS5(右)", icon: "HS5", ports: [{ id: "in", label: "INPUT (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["midi", "ts", "trs", "rca", "usb"],
+        correctConnections: [
+          { from: "mpc.midiOut1", to: "synth.midiIn", cable: "midi" },
+          { from: "synth.outL", to: "mpc.inL", cable: "ts" },
+          { from: "synth.outR", to: "mpc.inR", cable: "ts" },
+          { from: "mpc.out1", to: "spkL.in", cable: "trs" },
+          { from: "mpc.out2", to: "spkR.in", cable: "trs" },
+        ],
+        explain:
+          "MIDIケーブルを流れるのは『どの鍵盤を、どの強さで、いつ押したか』という演奏の指示だけで、音そのものは流れない。だから、MPCからシンセを鳴らすには『MPCのMIDI OUT→シンセのMIDI IN』という指示の線と、『シンセのOUTPUT→MPCのINPUT』という音の線の、2系統の配線が必要になる。MIDIは必ずOUTからINへつなぐのが決まりで、OUT同士・IN同士では何も起きない。MPC側では、シーケンスのトラックをMIDIトラックにして、出力先をMIDI OUT 1と、minilogue xdが受け取る設定にしたMIDIチャンネル(=1本のMIDIケーブルで最大16台を区別するための番号)に合わせる。minilogue xdの出力はアンバランスのTSフォーンだが、MPCのフォーン入力に挿せばそのまま受けられる。シンセの音をMPCに戻しておけば、録音してサンプルにし、刻んだりピッチを変えたりと、MPCならではの加工ができる。録音中に入力の音をスピーカーから聞くには、MPC側の入力モニターの設定を有効にする。背面のRCA入力は、レコードプレーヤーをつなぐことを想定した入力で、PHONOの設定ではレコード針の小さな信号を大きく増幅する。そこにシンセのライン信号を入れると音が大きすぎて歪むので、シンセは素直にフォーンのLINE INPUTで受けよう。",
+      },
+    },
   ],
 };
