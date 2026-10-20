@@ -4340,5 +4340,54 @@ window.COURSES["gear_patch_practice"] = {
           "SW8-USBは、2台のパソコンそれぞれからUSBで音を受け取れるオーディオインターフェースで、普段はメイン機の音をOUTPUTへ出している。メイン機の再生が止まったり、USBの音が途切れたりしたことを検知すると、自動でバックアップ機の音に切り替わる(手元のボタンやフットスイッチで手動で切り替えることもできる)。この仕組みが働くには、2台のパソコンが『同じセッションを、同じ位置で、同時に』再生している必要がある。そのため、メイン機から再生・停止の指示を送ってバックアップ機を追いかけさせる設定(MIDIのタイムコードなど)を使うのが一般的だ。出力側は、ミキサーやステージボックスから見ると『いつも同じ1台の機材』なので、パソコンが切り替わってもケーブルを挿し替える必要はない。オケとクリックを別々のOUTPUTに分けておくのは、クリックをお客さんに聞かせず、ドラマーのイヤモニにだけ送るため。XLR出力は、ステージボックスまで長くケーブルを引き回してもノイズを拾いにくいバランス出力になっている。本番前のリハーサルでは、メイン機のUSBケーブルをわざと抜いて、切り替わりの瞬間に音が途切れないかを必ず確かめておこう。",
       },
     },
+    {
+      id: "mixer_insert_y_cable_comp",
+      order: 102,
+      title: "アナログミキサーのインサート端子にYケーブルでコンプを挿す(Mackie 1202VLZ4 + dbx 266xs)",
+      category: "配線問題",
+      hook: "ボーカルの声の大小のムラを、ミキサーのそのチャンネルだけでコンプレッサーに整えてほしい。そのための端子が『INSERT』——1つの穴で『送り』と『戻り』を同時にこなす、少し変わった端子の配線を組もう。",
+      patch: {
+        scenario:
+          "小さなライブバーのPAで、アナログミキサー「Mackie 1202VLZ4」のCH1にボーカルマイク「Shure SM58」をつないでいる。このボーカルにだけ、2chコンプレッサー「dbx 266xs」をかけたい。1202VLZ4のCH1 INSERT端子(TRSフォーン)に、片側がTRSプラグ1本・もう片側がTSプラグ2本に分かれた『インサートケーブル(Yケーブル)』を挿す。Yケーブルの先のうち、TIP側(SEND=ミキサーから送り出す音)のTSプラグをdbx 266xsのCH1 INPUT(フォーン)へ、RING側(RETURN=ミキサーへ戻ってくる音)のTSプラグをdbx 266xsのCH1 OUTPUT(フォーン)へつなぐ。全体の音は、1202VLZ4のMAIN OUT L/R(XLR)からパワードスピーカー「Yamaha DBR10」の左右へ送ろう。",
+        equipment: [
+          { id: "mic", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Mackie 1202VLZ4(アナログミキサー)",
+            icon: "1202VLZ4",
+            ports: [
+              { id: "mic1", label: "CH1 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "insSend", label: "CH1 INSERT → Yケーブル TIP側(SEND)", type: "ts", dir: "out" },
+              { id: "insRet", label: "CH1 INSERT → Yケーブル RING側(RETURN)", type: "ts", dir: "in" },
+              { id: "mainL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "comp",
+            label: "dbx 266xs(2ch コンプレッサー/ゲート)",
+            icon: "266xs",
+            ports: [
+              { id: "in1", label: "CH1 INPUT (フォーン)", type: "trs", dir: "in" },
+              { id: "out1", label: "CH1 OUTPUT (フォーン)", type: "trs", dir: "out" },
+              { id: "in2", label: "CH2 INPUT (フォーン)", type: "trs", dir: "in" },
+              { id: "out2", label: "CH2 OUTPUT (フォーン)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DBR10(左)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR10(右)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "ts", "trs", "speaker", "rca"],
+        correctConnections: [
+          { from: "mic.out", to: "mixer.mic1", cable: "xlr" },
+          { from: "mixer.insSend", to: "comp.in1", cable: "ts" },
+          { from: "comp.out1", to: "mixer.insRet", cable: "ts" },
+          { from: "mixer.mainL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.mainR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "INSERT(インサート)は、チャンネルの音の通り道の途中に、外の機材を『割り込ませる』ための端子。1202VLZ4のインサートは、1つのTRSジャックの中で、TIP(=プラグの先端)が送り出し、RING(=先端の次の輪の部分)が戻りという役割を分けている。そのため、TRSの1本のプラグが2本のTSプラグに分かれたYケーブルを使い、送り側をコンプの入力へ、戻り側をコンプの出力へつなぐ。送りと戻りを逆に挿すと、音が出なくなったり、コンプがかからなかったりするので、プラグに書かれた印やケーブルの色を確かめよう。インサートにつないだ機材は、そのチャンネルだけにかかる。コンプのように音の大きさそのものを整える機材はインサートで使い、リバーブのように元の音に響きを足す機材はAUXのセンド/リターンで使うのが基本の使い分けだ。また、1202VLZ4のインサートは、チャンネルのイコライザーより手前に入るため、コンプで音量をならしたあとにEQで音色を整える流れになる。なお、Yケーブルの1本は2本の線で送りと戻りを運ぶため、バランス伝送にはならない。ノイズを避けるため、ミキサーとコンプはなるべく短いケーブルでつなごう。",
+      },
+    },
   ],
 };
