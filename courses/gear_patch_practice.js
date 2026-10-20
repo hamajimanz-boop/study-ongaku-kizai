@@ -4445,5 +4445,69 @@ window.COURSES["gear_patch_practice"] = {
           "CV(=音の高さや明るさを電圧の大きさで伝える信号)とGate/Trigger(=『今、鳴らせ』という合図の電圧)は、MIDIを使わずにアナログシンセ同士を操るための昔ながらの方法だ。DFAMのシーケンサーは、ステップが進むたびにTRIGGER出力から『鳴らせ』の合図を出し、同時にPITCH出力から、そのステップのPITCHノブで決めた電圧を、VELOCITY出力から、そのステップのVELOCITYノブで決めた電圧を出している。これをMother-32のGATE入力(発音のタイミング)、VCO 1V/OCT入力(1Vで1オクターブ上がる約束の音程入力)、VCF CUTOFF入力(フィルターの開き具合)につなぐことで、DFAMのリズムに合わせてMother-32がフレーズを弾くようになる。ただし、DFAMのPITCHノブは無段階で回せるつまみなので、ドレミの音階にぴったり合うわけではない。耳で聞きながらノブを回して、音程を合わせよう。パッチケーブルは必ず『出力→入力』の向きでつなぐ。出力同士をつなぐと、2つの機材が電圧を押し合って正しく動かないので注意。3.5mmのパッチケーブルは見た目がイヤホンのプラグに似ているが、運んでいるのは音ではなく『指示の電圧』なので、オーディオインターフェースへの音の出力は、別にフォーンのケーブルでつなぐ。",
       },
     },
+    {
+      id: "ebtech_lls_level_shift_cassette",
+      order: 104,
+      title: "民生機の-10dBVをプロ機材の+4dBuに合わせる(TASCAM 202MKVII + Ebtech LLS-2-XLR + Manley Variable Mu)",
+      category: "配線問題",
+      hook: "カセットテープの音をスタジオのコンプに通したら、針がほとんど振れず、音も細い——原因は、家庭用の機材とプロ用の機材で『標準の音の大きさ』が違うことにある。2つの世界の橋渡しをする配線を組もう。",
+      patch: {
+        scenario:
+          "ローファイな質感を出すため、2ミックスを一度カセットテープに録音し、その再生音をスタジオのステレオコンプレッサー「Manley Stereo Variable Mu」に通して、オーディオインターフェース「Universal Audio Apollo x8」に録り込みたい。カセットデッキ「TASCAM 202MKVII」のLINE OUT L/R(RCA)は家庭用機材の標準レベル(-10dBV)なので、そのままでは業務用の標準レベル(+4dBu)を前提としたManleyには小さすぎる。そこで、レベル変換器「Ebtech LLS-2-XLR」を間にはさむ。202MKVIIのLINE OUT L/Rから、RCA-フォーン変換ケーブルでLLS-2-XLRの-10dBV側CH1/CH2(フォーン)へ、LLS-2-XLRの+4dBu側CH1/CH2(XLR)からManleyのINPUT L/R(XLR)へつなぐ。ManleyのOUTPUT L/R(XLR)からは、片側がXLR・もう片側がTRSのバランスケーブルで、Apollo x8のLINE IN 5/6(TRS)へ送ろう。",
+        equipment: [
+          {
+            id: "deck",
+            label: "TASCAM 202MKVII(ダブルカセットデッキ)",
+            icon: "202MKVII",
+            ports: [
+              { id: "outL", label: "LINE OUT L (RCA)", type: "rca", dir: "out" },
+              { id: "outR", label: "LINE OUT R (RCA)", type: "rca", dir: "out" },
+            ],
+          },
+          {
+            id: "lls",
+            label: "Ebtech LLS-2-XLR(ラインレベル・シフター)",
+            icon: "LLS-2",
+            ports: [
+              { id: "lo1", label: "-10dBV側 CH1 (フォーン)", type: "trs", dir: "in" },
+              { id: "lo2", label: "-10dBV側 CH2 (フォーン)", type: "trs", dir: "in" },
+              { id: "hi1", label: "+4dBu側 CH1 (XLR)", type: "xlr", dir: "out" },
+              { id: "hi2", label: "+4dBu側 CH2 (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "comp",
+            label: "Manley Stereo Variable Mu(真空管コンプレッサー)",
+            icon: "Vari-Mu",
+            ports: [
+              { id: "inL", label: "INPUT L (XLR)", type: "xlr", dir: "in" },
+              { id: "inR", label: "INPUT R (XLR)", type: "xlr", dir: "in" },
+              { id: "outL", label: "OUTPUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "OUTPUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "interface",
+            label: "Universal Audio Apollo x8",
+            icon: "Apollo x8",
+            ports: [
+              { id: "line5", label: "LINE IN 5 (TRS)", type: "trs", dir: "in" },
+              { id: "line6", label: "LINE IN 6 (TRS)", type: "trs", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["rca", "xlr", "trs", "ts", "optical"],
+        correctConnections: [
+          { from: "deck.outL", to: "lls.lo1", cable: "rca" },
+          { from: "deck.outR", to: "lls.lo2", cable: "rca" },
+          { from: "lls.hi1", to: "comp.inL", cable: "xlr" },
+          { from: "lls.hi2", to: "comp.inR", cable: "xlr" },
+          { from: "comp.outL", to: "interface.line5", cable: "trs" },
+          { from: "comp.outR", to: "interface.line6", cable: "trs" },
+        ],
+        explain:
+          "オーディオ機材の『標準の音の大きさ』には、家庭用・アマチュア向けの-10dBVと、業務用の+4dBuの2種類がある。dBVとdBuは基準の違う単位だが、電圧に直すと、-10dBVは約0.32V、+4dBuは約1.23Vで、+4dBuのほうがおよそ4倍(約12dB)大きい。そのため、-10dBVの機材をそのまま+4dBuの機材につなぐと音が小さすぎ、コンプのように入力の大きさで効き方が変わる機材では、狙ったかかり方にならない。逆に、+4dBuの出力を-10dBVの入力に入れると、大きすぎて歪みやすい。LLS-2-XLRは、中に入ったトランス(=電気の通り道を磁気でつなぎ、レベルを変えながら信号を受け渡す部品)でこの差を埋める箱で、電源がいらない。さらに、アンバランスのRCA出力をバランスのXLRに変えてくれるので、スタジオの中で長いケーブルを引き回してもノイズを拾いにくくなり、トランスが機材同士の電気的なつながりを切ることで、ハムノイズ(=ブーンという低い雑音)の対策にもなる。なお、このような変換器はライン信号専用なので、マイクやギターを直接つないだり、パワードスピーカーの入力に使ったりするものではない。最近のオーディオインターフェースの中には、入力ごとに-10dBVと+4dBuを切り替えられるものもあるので、変換器を買う前に、つなぐ機材の設定を確認しよう。",
+      },
+    },
   ],
 };
