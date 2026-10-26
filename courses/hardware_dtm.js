@@ -534,6 +534,7 @@ window.COURSES["hardware_dtm"] = {
         },
         {
           heading: "お金の話",
+          image: "tl_focusrite.png",
           dialogue: [
             { who: "mina", text: "Focusriteって上場してるんですか?" },
             { who: "sensei", text: "Focusriteグループは、2014年にロンドン証券取引所(AIM市場)に上場しているんだ。超高級コンソール専業だった会社が、低価格帯の量産製品で成長し株式市場に上場するまでに至った軌跡は、音響機材業界における代表的な成功事例として語られるよ。" },
