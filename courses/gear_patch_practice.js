@@ -4559,5 +4559,64 @@ window.COURSES["gear_patch_practice"] = {
           "マイクには、ボーカル用のSM58のように低い抵抗値(ローインピーダンス)でXLRから出すものと、520DXのように高い抵抗値(ハイインピーダンス)でフォーンプラグから出すものがある。520DXは、ギターアンプのような『ハイインピーダンスの入力』につなぐ前提で作られているので、変換プラグでミキサーのマイク入力に挿すと、音が小さく細くなりやすい。ブルースハープのあの歪んだ太い音は、マイクそのものではなく、真空管アンプが少し無理をして鳴ることで生まれる。だから、ハープの音はいったんアンプで鳴らし、その音をSM57で拾ってPAへ送る。Bassmanには4つの入力があり、BRIGHT(=高音を強調するチャンネル)とNORMALの2チャンネルに、それぞれINPUT 1(感度が高い)とINPUT 2(感度が低い)がある。ハープはキンキンしやすいので、今回はNORMALのINPUT 1を使ったが、好みに応じて別の入力を試してもよい。注意したいのはハウリング(=スピーカーの音をマイクがまた拾って、キーンと鳴り続ける現象)。520DXは全方向の音を拾うマイクなので、アンプの真正面に立たない、アンプの音量を上げすぎない、手でマイクをしっかり包む、などで対策しよう。",
       },
     },
+    {
+      id: "volume_pedal_tuner_out",
+      order: 106,
+      title: "ボリュームペダルのチューナー出力で、音を出さずにチューニングする(Boss FV-500H + TU-3)",
+      category: "配線問題",
+      hook: "曲間のチューニングで、チューニング中の音がアンプから鳴ってしまう——ボリュームペダルの『TUNER OUT』を使えば、ペダルを戻すだけで客席に音を出さずにチューナーへ信号を送れる。足元の配線を組もう。",
+      patch: {
+        scenario:
+          "ライブ用の小さなペダルボードを組む。エレキギター「Fender Player Telecaster」の出力を、ハイインピーダンス(=ギターの出力を直接受けるのに向いた、高い抵抗値の入力)のボリュームペダル「Boss FV-500H」のINPUTへ直接つなぐ。FV-500HのOUTPUTからディレイ「Boss DD-8」のINPUT A/MONOへ、DD-8のOUTPUT A/MONOから真空管アンプ「Fender Blues Junior IV」のINPUTへ送る。チューナー「Boss TU-3」は、音の通り道には入れず、FV-500HのTUNER OUTからTU-3のINPUTへつなぐ。電源は、ACアダプター「Boss PSA-100S2」をTU-3のDC INに挿し、TU-3のDC OUTから、別売の分岐ケーブルでDD-8のDC INへ電気を分けよう。",
+        equipment: [
+          { id: "gtr", label: "Fender Player Telecaster", icon: "Tele", ports: [{ id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" }] },
+          {
+            id: "vol",
+            label: "Boss FV-500H(ボリュームペダル)",
+            icon: "FV-500H",
+            ports: [
+              { id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" },
+              { id: "tunerOut", label: "TUNER OUT (フォーン)", type: "ts", dir: "out" },
+              { id: "exp", label: "EXP (TRSフォーン)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "delay",
+            label: "Boss DD-8(デジタルディレイ)",
+            icon: "DD-8",
+            ports: [
+              { id: "in", label: "INPUT A/MONO (フォーン)", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT A/MONO (フォーン)", type: "ts", dir: "out" },
+              { id: "dcIn", label: "DC IN", type: "power", dir: "in" },
+            ],
+          },
+          {
+            id: "tuner",
+            label: "Boss TU-3(チューナー)",
+            icon: "TU-3",
+            ports: [
+              { id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" },
+              { id: "dcIn", label: "DC IN", type: "power", dir: "in" },
+              { id: "dcOut", label: "DC OUT", type: "power", dir: "out" },
+            ],
+          },
+          { id: "amp", label: "Fender Blues Junior IV(ギターアンプ)", icon: "Blues Jr", ports: [{ id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" }] },
+          { id: "psu", label: "Boss PSA-100S2(ACアダプター)", icon: "PSA", ports: [{ id: "out", label: "DC OUT", type: "power", dir: "out" }] },
+        ],
+        cablePalette: ["ts", "trs", "power", "xlr", "midi"],
+        correctConnections: [
+          { from: "gtr.out", to: "vol.in", cable: "ts" },
+          { from: "vol.out", to: "delay.in", cable: "ts" },
+          { from: "delay.out", to: "amp.in", cable: "ts" },
+          { from: "vol.tunerOut", to: "tuner.in", cable: "ts" },
+          { from: "psu.out", to: "tuner.dcIn", cable: "power" },
+          { from: "tuner.dcOut", to: "delay.dcIn", cable: "power" },
+        ],
+        explain:
+          "FV-500HのTUNER OUTは、ペダルを踏んだ深さで音量を変える前の信号を取り出す端子。取扱説明書では、ミニマム・ボリューム(=ペダルを戻したときの最小音量を決めるつまみ)を0にしておき、ペダルを戻した状態でチューニングすれば、アンプから音を出さずにチューニングできると案内されている。チューナーを音の通り道の途中に入れる方法もあるが、TUNER OUTから分けて取り出せば、チューナーを通らないぶん音の通り道が短くなり、ペダルを戻すだけで『消音+チューニング』ができる。このときTU-3のOUTPUTには何もつながないので、TU-3は『音を見るだけ』の役割になる。FV-500Hはハイインピーダンスで設計されたモデルなので、ギターから直接つなぐのが基本。並び順を『ボリュームペダル→ディレイ』にすると、ペダルを戻してもディレイの残響は自然に消えていき、演奏の終わりがきれいになる。逆に『ディレイ→ボリュームペダル』にすると、ペダルを戻した瞬間に残響もまとめて切れる。EXP端子は、FV-500Hを別の機材のエクスプレッションペダル(=つまみの代わりに足で値を動かすペダル)として使うときの出力で、今回は使わない。TU-3のDC OUTからほかのペダルへ電源を分けるときは、つないだペダルの消費電流の合計が、アダプターの供給できる範囲に収まるか、メーカーの案内で確かめよう。",
+      },
+    },
   ],
 };
