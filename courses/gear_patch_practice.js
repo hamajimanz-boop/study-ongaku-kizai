@@ -4667,5 +4667,56 @@ window.COURSES["gear_patch_practice"] = {
           "Smaartのような測定ソフトの代表的な使い方が『伝達関数(トランスファーファンクション)測定』。これは、スピーカーへ送り出した音(リファレンス)と、客席のマイクで拾った音(メジャメント)を同時に録り、2つを見比べることで、『スピーカーと部屋を通ったあいだに、どの高さの音がどれだけ増えたり減ったりしたか』を調べる方法。そのため、オーディオインターフェースには最低2つの入力が必要で、1つは測定用マイク、もう1つはミキサーの出力から分けたリファレンスに使う。MG10XUのSTEREO OUTは、XLRとフォーンの両方の端子から同じ音が出るので、XLRをスピーカーへ、フォーンを2i2へ、と分けて使える。リファレンスをミキサーの出力から取ると、ミキサーのEQやフェーダーの影響は2つの信号に同じように入るので打ち消され、『スピーカーと部屋』の影響だけが見えるようになる。測定用マイクのRTA-Mはコンデンサーマイクで、全方向の音を均等に拾い、周波数ごとの感度のかたよりが小さく作られている。ファンタム電源を忘れると音が入らない。また、2つの信号が届くまでの時間の差(マイクまで音が空気中を進む時間)は、Smaart側の『ディレイ・ファインダー』機能で測って合わせる。右のスピーカーを測るときは、STEREO OUT Rに同じようにつなぎ替えよう。",
       },
     },
+    {
+      id: "xr18_external_router_ipad",
+      order: 108,
+      title: "デジタルミキサーを外付けWi-FiルーターにつないでiPadで操作する(Behringer XR18 + TP-Link Archer AX55)",
+      category: "配線問題",
+      hook: "本番中に、iPadのミキサー画面が急に固まった——お客さんのスマホのWi-Fiで電波が混み合うと、ミキサー内蔵のWi-Fiは不安定になりやすい。ミキサーをLANケーブルで外付けルーターにつなぎ、操作用のネットワークをしっかり作る配線を組もう。",
+      patch: {
+        scenario:
+          "小さなライブバーのPAを、本体に操作画面のないデジタルミキサー「Behringer XR18」で組む。ミキサーの操作は、iPadの無料アプリ「X AIR」で客席から行い、PAブースのノートPC(アプリ「X AIR Edit」)でも同時に操作できるようにしたい。内蔵のWi-Fiではなく、Wi-Fiルーター「TP-Link Archer AX55」を使う。XR18のETHERNET端子(RJ45)から、ルーターのLANポート1へLANケーブルでつなぐ。ノートPCも、ルーターのLANポート2へLANケーブルで有線接続する(iPadはルーターのWi-Fiに無線でつなぐので、ケーブルはいらない)。ボーカルの「Shure SM58」はXR18のINPUT 1(XLR)へ。XR18のMAIN OUT L/R(XLR)からパワードスピーカー「Yamaha DBR10」の左右へ、AUX OUT 1(XLR)からステージの返しモニター「Yamaha DBR10」へ送ろう。",
+        equipment: [
+          { id: "mic", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Behringer XR18(デジタルミキサー)",
+            icon: "XR18",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/フォーンコンボ)", type: "xlr", dir: "in" },
+              { id: "mainL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "aux1", label: "AUX OUT 1 (XLR)", type: "xlr", dir: "out" },
+              { id: "eth", label: "ETHERNET (RJ45)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "router",
+            label: "TP-Link Archer AX55(Wi-Fiルーター)",
+            icon: "Archer",
+            ports: [
+              { id: "wan", label: "WANポート(インターネット側)", type: "ethernet", dir: "in" },
+              { id: "lan1", label: "LANポート1", type: "ethernet", dir: "in" },
+              { id: "lan2", label: "LANポート2", type: "ethernet", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "ノートPC(X AIR Edit)", icon: "PC", ports: [{ id: "eth", label: "LAN端子(RJ45)", type: "ethernet", dir: "in" }] },
+          { id: "spkL", label: "Yamaha DBR10(メイン左)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR10(メイン右)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "wedge", label: "Yamaha DBR10(返しモニター)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["ethernet", "xlr", "usb", "trs", "speaker"],
+        correctConnections: [
+          { from: "mic.out", to: "mixer.in1", cable: "xlr" },
+          { from: "mixer.eth", to: "router.lan1", cable: "ethernet" },
+          { from: "router.lan2", to: "pc.eth", cable: "ethernet" },
+          { from: "mixer.mainL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.mainR", to: "spkR.in", cable: "xlr" },
+          { from: "mixer.aux1", to: "wedge.in", cable: "xlr" },
+        ],
+        explain:
+          "XR18のように本体に画面やフェーダーのないデジタルミキサーは、タブレットやPCのアプリが操作パネルになる。そのため、操作をつなぐネットワークが切れると、本番中に音量を変えられなくなる。XR18はWi-Fiの電波を自分で出す機能も持っているが、内蔵のWi-Fiは同時につなげる台数が少なく、お客さんのスマホなどで電波が混み合う会場では不安定になりやすい、という声が多い。そこで、ETHERNET端子を外付けのルーターにつなぎ、ルーターのWi-Fiにタブレットをつなぐのが定番の方法だ。このとき、XR18の背面のスイッチを、内蔵Wi-Fiを使う設定から、外部のネットワークにつなぐ設定に切り替えておく。ルーターのWAN(=インターネット側)ポートは、外のネットワークにつなぐための入り口なので、ミキサーやPCはLANポート側につなぐ。LANケーブルは音を運ぶのではなく、ミキサーの『操作の指示』を運んでいる点に注意しよう(音はXLRで別に送っている)。PAブースのPCを有線でつないでおけば、Wi-Fiが不安定になっても、少なくとも1台は確実に操作を続けられる。電波の混み合いを避けるには、ルーターの設定で5GHz帯(=電子レンジやほかの機器と干渉しにくい電波の帯)を使い、ルーターを客席より高い位置に置くとよい。",
+      },
+    },
   ],
 };
