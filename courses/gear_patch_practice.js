@@ -4718,5 +4718,56 @@ window.COURSES["gear_patch_practice"] = {
           "XR18のように本体に画面やフェーダーのないデジタルミキサーは、タブレットやPCのアプリが操作パネルになる。そのため、操作をつなぐネットワークが切れると、本番中に音量を変えられなくなる。XR18はWi-Fiの電波を自分で出す機能も持っているが、内蔵のWi-Fiは同時につなげる台数が少なく、お客さんのスマホなどで電波が混み合う会場では不安定になりやすい、という声が多い。そこで、ETHERNET端子を外付けのルーターにつなぎ、ルーターのWi-Fiにタブレットをつなぐのが定番の方法だ。このとき、XR18の背面のスイッチを、内蔵Wi-Fiを使う設定から、外部のネットワークにつなぐ設定に切り替えておく。ルーターのWAN(=インターネット側)ポートは、外のネットワークにつなぐための入り口なので、ミキサーやPCはLANポート側につなぐ。LANケーブルは音を運ぶのではなく、ミキサーの『操作の指示』を運んでいる点に注意しよう(音はXLRで別に送っている)。PAブースのPCを有線でつないでおけば、Wi-Fiが不安定になっても、少なくとも1台は確実に操作を続けられる。電波の混み合いを避けるには、ルーターの設定で5GHz帯(=電子レンジやほかの機器と干渉しにくい電波の帯)を使い、ルーターを客席より高い位置に置くとよい。",
       },
     },
+    {
+      id: "hearing_loop_driver",
+      order: 109,
+      title: "補聴器を使うお客さんに音を届けるヒアリングループを配線する(Ampetronic ILD300)",
+      category: "配線問題",
+      hook: "補聴器をつけたお客さんには、会場のスピーカーの音が、反響やまわりの雑音と混ざって聞き取りにくいことがある。ミキサーの音を『磁気』に変えて、補聴器へ直接届ける——ヒアリングループ(磁気ループ)の配線を組もう。",
+      patch: {
+        scenario:
+          "公民館のホールで、トークと弾き語りのイベントを行う。補聴器を使うお客さんのために、ヒアリングループを用意した。客席の床のまわりを1周するように、ループ線(=電線を輪にして床に敷いたもの)を敷いてある。アナログミキサー「Yamaha MG12XU」には、司会の「Shure SM58」をCH1 MIC INPUT(XLR)、弾き語りのボーカル「Shure SM58」をCH2 MIC INPUT(XLR)につなぐ。会場のスピーカーには、MG12XUのST OUT L/R(XLR)からパワードスピーカー「Yamaha DBR10」の左右へ。ヒアリングループ用には、MG12XUのAUX SEND 2(フォーン)から、ループドライバー(=ループ線に電流を流す専用アンプ)「Ampetronic ILD300」のLINE INPUT(フォーン)へ送り、ILD300のLOOP OUTPUT(着脱式の端子)にループ線の両端をつなごう。",
+        equipment: [
+          { id: "mc", label: "Shure SM58(司会)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "vox", label: "Shure SM58(弾き語りボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Yamaha MG12XU(アナログミキサー)",
+            icon: "MG12XU",
+            ports: [
+              { id: "mic1", label: "CH1 MIC INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "mic2", label: "CH2 MIC INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "stL", label: "ST OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "stR", label: "ST OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "aux2", label: "AUX SEND 2 (フォーン)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "loopDrv",
+            label: "Ampetronic ILD300(ループドライバー)",
+            icon: "ILD300",
+            ports: [
+              { id: "micIn", label: "MIC INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "lineIn", label: "LINE INPUT (フォーン)", type: "trs", dir: "in" },
+              { id: "loopOut", label: "LOOP OUTPUT (着脱式端子)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "loop", label: "ループ線(客席の床を1周)", icon: "LOOP", ports: [{ id: "ends", label: "ループ線の両端", type: "speaker", dir: "in" }] },
+          { id: "spkL", label: "Yamaha DBR10(左)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR10(右)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "speaker", "ts", "rf"],
+        correctConnections: [
+          { from: "mc.out", to: "mixer.mic1", cable: "xlr" },
+          { from: "vox.out", to: "mixer.mic2", cable: "xlr" },
+          { from: "mixer.stL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.stR", to: "spkR.in", cable: "xlr" },
+          { from: "mixer.aux2", to: "loopDrv.lineIn", cable: "trs" },
+          { from: "loopDrv.loopOut", to: "loop.ends", cable: "speaker" },
+        ],
+        explain:
+          "ヒアリングループは、ループ線に音の信号どおりの電流を流し、輪の内側に磁気の場を作るしくみ。多くの補聴器や人工内耳には、この磁気を受け取るTコイル(=磁気を音に戻す小さな部品)が入っていて、補聴器を『T』の設定に切り替えると、会場の反響やまわりの話し声に邪魔されず、マイクの声を直接聞ける。ループ線は普通のスピーカーと違い、『電圧』ではなく『電流』をきちんと流す必要があるため、一般的なパワーアンプではなく、専用のループドライバーを使うのが基本。ILD300にはマイクを直接つなぐXLR入力もあるが、今回はミキサーでまとめた音を送るので、LINE入力を使う。ミキサーから送るときは、メインのST OUTではなく、AUX SENDのように別に音量バランスを作れる出口を使うと、会場スピーカーの音量を変えても、ループの音量が一緒に変わってしまわない。ループ用のミックスには、言葉や歌がはっきり聞こえるマイクだけを入れ、客席の拍手を拾うマイクや大きすぎる楽器の音は控えめにするのがコツ。ILD300にはヘッドホンでループの音を確かめる端子もあるので、本番前に必ず聞いて確認しよう。会場の入口には、ループが使えることを示すマークや案内を掲示しておくと、お客さんが補聴器の設定を切り替えやすい。",
+      },
+    },
   ],
 };
