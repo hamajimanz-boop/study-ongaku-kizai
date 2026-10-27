@@ -4509,5 +4509,55 @@ window.COURSES["gear_patch_practice"] = {
           "オーディオ機材の『標準の音の大きさ』には、家庭用・アマチュア向けの-10dBVと、業務用の+4dBuの2種類がある。dBVとdBuは基準の違う単位だが、電圧に直すと、-10dBVは約0.32V、+4dBuは約1.23Vで、+4dBuのほうがおよそ4倍(約12dB)大きい。そのため、-10dBVの機材をそのまま+4dBuの機材につなぐと音が小さすぎ、コンプのように入力の大きさで効き方が変わる機材では、狙ったかかり方にならない。逆に、+4dBuの出力を-10dBVの入力に入れると、大きすぎて歪みやすい。LLS-2-XLRは、中に入ったトランス(=電気の通り道を磁気でつなぎ、レベルを変えながら信号を受け渡す部品)でこの差を埋める箱で、電源がいらない。さらに、アンバランスのRCA出力をバランスのXLRに変えてくれるので、スタジオの中で長いケーブルを引き回してもノイズを拾いにくくなり、トランスが機材同士の電気的なつながりを切ることで、ハムノイズ(=ブーンという低い雑音)の対策にもなる。なお、このような変換器はライン信号専用なので、マイクやギターを直接つないだり、パワードスピーカーの入力に使ったりするものではない。最近のオーディオインターフェースの中には、入力ごとに-10dBVと+4dBuを切り替えられるものもあるので、変換器を買う前に、つなぐ機材の設定を確認しよう。",
       },
     },
+    {
+      id: "harmonica_bullet_mic_amp",
+      order: 105,
+      title: "ブルースハープ用マイクをギターアンプで鳴らしてPAへ送る(Shure 520DX + Fender '59 Bassman LTD)",
+      category: "配線問題",
+      hook: "ブルースハープの、あの太くてザラッとした音は、マイクをミキサーに直接つないでも出ない。ハープ用マイクをいったんギターアンプで鳴らし、そのアンプの音をマイクで拾ってPAへ送る——ブルースの定番配線を組もう。",
+      patch: {
+        scenario:
+          "ブルースバンドのライブで、ハーモニカ(ブルースハープ)奏者が、ハープ用ダイナミックマイク「Shure 520DX(Green Bullet)」を手に包むように持って吹く。520DXは、本体から伸びるケーブルの先が標準フォーンプラグになったハイインピーダンス(=ギターと同じ、高い抵抗値で信号を出すタイプ)のマイクなので、ミキサーのXLR入力ではなく、真空管ギターアンプ「Fender '59 Bassman LTD」のNORMAL INPUT 1(フォーン)に挿す。アンプのスピーカーの前に「Shure SM57」を立てて、アナログミキサー「Yamaha MG10XU」のCH1 MIC IN(XLR)へ送る。ボーカルの「Shure SM58」はCH2 MIC IN(XLR)へ。全体の音は、MG10XUのSTEREO OUT L/R(XLR)からパワードスピーカー「Yamaha DBR10」の左右へ送ろう。",
+        equipment: [
+          { id: "harp", label: "Shure 520DX(ハープ用マイク)", icon: "520DX", ports: [{ id: "out", label: "フォーンプラグ(本体ケーブル)", type: "ts", dir: "out" }] },
+          {
+            id: "amp",
+            label: "Fender '59 Bassman LTD(真空管ギターアンプ)",
+            icon: "Bassman",
+            ports: [
+              { id: "brightIn1", label: "BRIGHT INPUT 1 (フォーン)", type: "ts", dir: "in" },
+              { id: "brightIn2", label: "BRIGHT INPUT 2 (フォーン)", type: "ts", dir: "in" },
+              { id: "normIn1", label: "NORMAL INPUT 1 (フォーン)", type: "ts", dir: "in" },
+              { id: "normIn2", label: "NORMAL INPUT 2 (フォーン)", type: "ts", dir: "in" },
+            ],
+          },
+          { id: "ampMic", label: "Shure SM57(アンプ収音用)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "vox", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Yamaha MG10XU(アナログミキサー)",
+            icon: "MG10XU",
+            ports: [
+              { id: "mic1", label: "CH1 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "mic2", label: "CH2 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "mainL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DBR10(左)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR10(右)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "xlr", "trs", "speaker", "rca"],
+        correctConnections: [
+          { from: "harp.out", to: "amp.normIn1", cable: "ts" },
+          { from: "ampMic.out", to: "mixer.mic1", cable: "xlr" },
+          { from: "vox.out", to: "mixer.mic2", cable: "xlr" },
+          { from: "mixer.mainL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.mainR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "マイクには、ボーカル用のSM58のように低い抵抗値(ローインピーダンス)でXLRから出すものと、520DXのように高い抵抗値(ハイインピーダンス)でフォーンプラグから出すものがある。520DXは、ギターアンプのような『ハイインピーダンスの入力』につなぐ前提で作られているので、変換プラグでミキサーのマイク入力に挿すと、音が小さく細くなりやすい。ブルースハープのあの歪んだ太い音は、マイクそのものではなく、真空管アンプが少し無理をして鳴ることで生まれる。だから、ハープの音はいったんアンプで鳴らし、その音をSM57で拾ってPAへ送る。Bassmanには4つの入力があり、BRIGHT(=高音を強調するチャンネル)とNORMALの2チャンネルに、それぞれINPUT 1(感度が高い)とINPUT 2(感度が低い)がある。ハープはキンキンしやすいので、今回はNORMALのINPUT 1を使ったが、好みに応じて別の入力を試してもよい。注意したいのはハウリング(=スピーカーの音をマイクがまた拾って、キーンと鳴り続ける現象)。520DXは全方向の音を拾うマイクなので、アンプの真正面に立たない、アンプの音量を上げすぎない、手でマイクをしっかり包む、などで対策しよう。",
+      },
+    },
   ],
 };
