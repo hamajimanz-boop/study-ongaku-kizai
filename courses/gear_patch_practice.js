@@ -4769,5 +4769,54 @@ window.COURSES["gear_patch_practice"] = {
           "ヒアリングループは、ループ線に音の信号どおりの電流を流し、輪の内側に磁気の場を作るしくみ。多くの補聴器や人工内耳には、この磁気を受け取るTコイル(=磁気を音に戻す小さな部品)が入っていて、補聴器を『T』の設定に切り替えると、会場の反響やまわりの話し声に邪魔されず、マイクの声を直接聞ける。ループ線は普通のスピーカーと違い、『電圧』ではなく『電流』をきちんと流す必要があるため、一般的なパワーアンプではなく、専用のループドライバーを使うのが基本。ILD300にはマイクを直接つなぐXLR入力もあるが、今回はミキサーでまとめた音を送るので、LINE入力を使う。ミキサーから送るときは、メインのST OUTではなく、AUX SENDのように別に音量バランスを作れる出口を使うと、会場スピーカーの音量を変えても、ループの音量が一緒に変わってしまわない。ループ用のミックスには、言葉や歌がはっきり聞こえるマイクだけを入れ、客席の拍手を拾うマイクや大きすぎる楽器の音は控えめにするのがコツ。ILD300にはヘッドホンでループの音を確かめる端子もあるので、本番前に必ず聞いて確認しよう。会場の入口には、ループが使えることを示すマークや案内を掲示しておくと、お客さんが補聴器の設定を切り替えやすい。",
       },
     },
+    {
+      id: "online_piano_lesson_ag06",
+      order: 110,
+      title: "オンラインのピアノレッスンを、声もピアノもきれいに届ける配線(Roland FP-30X + Yamaha AG06MK2)",
+      category: "配線問題",
+      hook: "ノートPCの内蔵マイクでピアノのレッスンをすると、低音はこもり、強く弾くと音が途切れがち。電子ピアノのライン出力と先生のマイクを小さなミキサーでまとめて、PCへ直接送る——オンラインレッスンの配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは自宅でピアノ教室を開いていて、遠方の生徒さんにはビデオ会議アプリでオンラインレッスンをしている。電子ピアノ「Roland FP-30X」のOUTPUT L/MONO・R(フォーン)から、USBミキサー「Yamaha AG06MK2」のCH3/4 LINE入力 L/MONO・R(フォーン)へつなぐ。説明する声は、コンデンサーマイク「Audio-Technica AT2020」をAG06MK2のCH1(XLR/フォーンのコンボ端子)につなぎ、+48Vのファンタム電源を入れて拾う。AG06MK2のUSB-C端子からノートPCへUSBケーブルでつなぎ、生徒さんの声とピアノは、AG06MK2のPHONES端子(フォーン)に挿したヘッドホン「Sony MDR-7506」で聞こう。",
+        equipment: [
+          {
+            id: "piano",
+            label: "Roland FP-30X(電子ピアノ)",
+            icon: "FP-30X",
+            ports: [
+              { id: "outL", label: "OUTPUT L/MONO (フォーン)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "mic", label: "Audio-Technica AT2020(コンデンサーマイク)", icon: "AT2020", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Yamaha AG06MK2(USBミキサー)",
+            icon: "AG06MK2",
+            ports: [
+              { id: "ch1", label: "CH1 MIC/LINE (XLR/フォーンコンボ)", type: "xlr", dir: "in" },
+              { id: "ch3", label: "CH3/4 LINE L/MONO (フォーン)", type: "ts", dir: "in" },
+              { id: "ch4", label: "CH3/4 LINE R (フォーン)", type: "ts", dir: "in" },
+              { id: "ch56L", label: "CH5/6 LINE L (RCA)", type: "rca", dir: "in" },
+              { id: "phones", label: "PHONES (ステレオフォーン)", type: "trs", dir: "out" },
+              { id: "monOut", label: "MONITOR OUT (フォーン)", type: "trs", dir: "out" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "hp", label: "Sony MDR-7506(ヘッドホン)", icon: "7506", ports: [{ id: "in", label: "ステレオフォーンプラグ", type: "trs", dir: "in" }] },
+          { id: "pc", label: "ノートPC(ビデオ会議アプリ)", icon: "PC", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "usb", "rca"],
+        correctConnections: [
+          { from: "piano.outL", to: "mixer.ch3", cable: "ts" },
+          { from: "piano.outR", to: "mixer.ch4", cable: "ts" },
+          { from: "mic.out", to: "mixer.ch1", cable: "xlr" },
+          { from: "mixer.phones", to: "hp.in", cable: "trs" },
+          { from: "mixer.usb", to: "pc.usb", cable: "usb" },
+        ],
+        explain:
+          "電子ピアノの音をマイクで拾うと、部屋の響きや電子ピアノのスピーカーのクセも一緒に入ってしまう。ライン出力から直接ミキサーへ送れば、ピアノの音そのものをきれいに届けられる。FP-30XのOUTPUTはL/MONO・Rの2つのフォーン端子なので、AG06MK2のCH3/4のLとRへそれぞれつなぐとステレオになる(L/MONOだけにつなぐとモノラル)。CH5/6のRCA端子もライン入力だが、FP-30Xの端子はフォーンなので、そのまま挿せるCH3/4を使う。AT2020はコンデンサーマイクなので、+48Vのファンタム電源がないと音が出ない。AG06MK2は、マイクとピアノの音をまとめてUSBでPCに送るので、ビデオ会議アプリの入力(マイク)と出力(スピーカー)の両方にAG06MK2を選ぶ。ここで大切なのがLOOPBACK(ループバック=PCから出た音を、もう一度PCへの送り返しに混ぜる機能)の設定。配信でBGMを流すときには便利だが、ビデオ会議では、生徒さんの声がそのまま生徒さんに返ってしまい、こだまのように聞こえる原因になるので、オフにしておく。また、ビデオ会議アプリは、話し声を聞きやすくするために雑音を消したり音量をならしたりする処理を自動でかけるため、ピアノの音が途切れたり小さくなったりしやすい。アプリの設定に、音楽向けに元の音をそのまま送るモードがあれば、オンにしておこう。",
+      },
+    },
   ],
 };
