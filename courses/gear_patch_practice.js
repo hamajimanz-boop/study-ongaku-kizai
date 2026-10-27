@@ -4618,5 +4618,54 @@ window.COURSES["gear_patch_practice"] = {
           "FV-500HのTUNER OUTは、ペダルを踏んだ深さで音量を変える前の信号を取り出す端子。取扱説明書では、ミニマム・ボリューム(=ペダルを戻したときの最小音量を決めるつまみ)を0にしておき、ペダルを戻した状態でチューニングすれば、アンプから音を出さずにチューニングできると案内されている。チューナーを音の通り道の途中に入れる方法もあるが、TUNER OUTから分けて取り出せば、チューナーを通らないぶん音の通り道が短くなり、ペダルを戻すだけで『消音+チューニング』ができる。このときTU-3のOUTPUTには何もつながないので、TU-3は『音を見るだけ』の役割になる。FV-500Hはハイインピーダンスで設計されたモデルなので、ギターから直接つなぐのが基本。並び順を『ボリュームペダル→ディレイ』にすると、ペダルを戻してもディレイの残響は自然に消えていき、演奏の終わりがきれいになる。逆に『ディレイ→ボリュームペダル』にすると、ペダルを戻した瞬間に残響もまとめて切れる。EXP端子は、FV-500Hを別の機材のエクスプレッションペダル(=つまみの代わりに足で値を動かすペダル)として使うときの出力で、今回は使わない。TU-3のDC OUTからほかのペダルへ電源を分けるときは、つないだペダルの消費電流の合計が、アダプターの供給できる範囲に収まるか、メーカーの案内で確かめよう。",
       },
     },
+    {
+      id: "smaart_transfer_function",
+      order: 107,
+      title: "測定ソフトSmaartでスピーカーの鳴り方を測る(2チャンネル測定 / dbx RTA-M + Scarlett 2i2)",
+      category: "配線問題",
+      hook: "会場で鳴らしたスピーカーの音が、ミキサーから送った音とどれくらい違って聞こえているのか——測定ソフトは『送った音』と『マイクで拾った音』を見比べてそれを調べる。だから入力が2つ必要になる。測定のための配線を組もう。",
+      patch: {
+        scenario:
+          "ライブハウスのPAを任された。本番前に、測定ソフト「Smaart」を入れたノートPCで、メインスピーカーの鳴り方を測りたい。PCには、オーディオインターフェース「Focusrite Scarlett 2i2」をUSBでつないである。Smaartが出すピンクノイズ(=低音から高音まで、耳で聞いて均等に近いバランスで含んだ『シャー』という測定用の音)を、2i2のOUTPUT L(TRS)からアナログミキサー「Yamaha MG10XU」のCH5/6 L/MONO入力(フォーン)へ送る。MG10XUのSTEREO OUT L(XLR)からパワードスピーカー「Yamaha DBR10」へ。同じSTEREO OUT Lのフォーン端子からは、2i2のINPUT 2(TRS)へ『リファレンス(=比べる元の音)』として送り返す。客席に立てた測定用マイク「dbx RTA-M」は、2i2のINPUT 1(XLR)へつなぎ、48Vファンタム電源を入れよう。",
+        equipment: [
+          { id: "mic", label: "dbx RTA-M(測定用マイク)", icon: "RTA-M", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 2i2",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/TRSコンボ)", type: "xlr", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR/TRSコンボ)", type: "trs", dir: "in" },
+              { id: "outL", label: "OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUTPUT R (TRS)", type: "trs", dir: "out" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "ノートPC(Smaart)", icon: "PC", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+          {
+            id: "mixer",
+            label: "Yamaha MG10XU(アナログミキサー)",
+            icon: "MG10XU",
+            ports: [
+              { id: "st56L", label: "CH5/6 L/MONO (フォーン)", type: "trs", dir: "in" },
+              { id: "stOutLxlr", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "stOutLph", label: "STEREO OUT L (フォーン)", type: "trs", dir: "out" },
+              { id: "stOutRxlr", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spk", label: "Yamaha DBR10(メインスピーカー)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "speaker"],
+        correctConnections: [
+          { from: "interface.usb", to: "pc.usb", cable: "usb" },
+          { from: "interface.outL", to: "mixer.st56L", cable: "trs" },
+          { from: "mixer.stOutLxlr", to: "spk.in", cable: "xlr" },
+          { from: "mixer.stOutLph", to: "interface.in2", cable: "trs" },
+          { from: "mic.out", to: "interface.in1", cable: "xlr" },
+        ],
+        explain:
+          "Smaartのような測定ソフトの代表的な使い方が『伝達関数(トランスファーファンクション)測定』。これは、スピーカーへ送り出した音(リファレンス)と、客席のマイクで拾った音(メジャメント)を同時に録り、2つを見比べることで、『スピーカーと部屋を通ったあいだに、どの高さの音がどれだけ増えたり減ったりしたか』を調べる方法。そのため、オーディオインターフェースには最低2つの入力が必要で、1つは測定用マイク、もう1つはミキサーの出力から分けたリファレンスに使う。MG10XUのSTEREO OUTは、XLRとフォーンの両方の端子から同じ音が出るので、XLRをスピーカーへ、フォーンを2i2へ、と分けて使える。リファレンスをミキサーの出力から取ると、ミキサーのEQやフェーダーの影響は2つの信号に同じように入るので打ち消され、『スピーカーと部屋』の影響だけが見えるようになる。測定用マイクのRTA-Mはコンデンサーマイクで、全方向の音を均等に拾い、周波数ごとの感度のかたよりが小さく作られている。ファンタム電源を忘れると音が入らない。また、2つの信号が届くまでの時間の差(マイクまで音が空気中を進む時間)は、Smaart側の『ディレイ・ファインダー』機能で測って合わせる。右のスピーカーを測るときは、STEREO OUT Rに同じようにつなぎ替えよう。",
+      },
+    },
   ],
 };
