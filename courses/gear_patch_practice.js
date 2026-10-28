@@ -5009,5 +5009,63 @@ window.COURSES["gear_patch_practice"] = {
           "バスドラムは、ビーターが皮を叩く『カチッ』というアタックと、胴全体が鳴る『ドン』という低音、さらに耳では聞こえにくいほど低い空気の揺れが混ざった楽器。1本のマイクではすべてをバランスよく拾いにくいので、場所と種類の違うマイクを組み合わせ、ミックスで混ぜ具合を決める。胴の中のBeta 91Aはアタックをくっきり拾い、穴の外のBeta 52Aは胴鳴りと低音をまとめて拾う。SubKickは、スピーカーが『電気を振動に変える』のとは逆に、『空気の振動を電気に変える』しくみを利用したもので、大きな振動板が、普通のマイクでは拾いにくい低い帯域をよく拾う。ファンタム電源は、Beta 91A(1ch)にだけ入れる。Beta 52AとSubKickは電源のいらないタイプなので、Apollo x8pのコンソールアプリで、チャンネルごとに+48Vを切り替えておく。3本を同時に鳴らすときに大切なのが『位相』(=波の山と谷のタイミング)。胴の中と外のマイクは、皮からの距離が違うため音が届く時間がずれ、さらに向きの関係で波が逆さまになることもある。混ぜたときに低音が痩せて聞こえたら、DAWで片方の極性(=波の上下)を反転したり、波形を見て位置をずらしたりして、いちばん太く聞こえる状態を探そう。なお、SKRM-100は現在は生産終了とされ、中古で探すか、同じ考え方の他社製品を使うことになる。",
       },
     },
+    {
+      id: "theremin_cv_mother32",
+      order: 115,
+      title: "テルミンの手の動きでアナログシンセを鳴らす(Moog Claravox Centennial + Mother-32)",
+      category: "配線問題",
+      hook: "テルミンは、アンテナに手を近づけるだけで音の高さと大きさを操る楽器。その手の動きを『電圧』として取り出せば、別のアナログシンセの音程やフィルターまで動かせる。テルミン自身の音とシンセの音を、2本の線で並べて録る配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは映画のサウンドトラックで、不思議な浮遊感のある音を作りたい。テルミン「Moog Claravox Centennial」には、右手(音程のアンテナ)の位置を電圧で出すPITCH CV OUTと、左手(音量のアンテナ)の位置を電圧で出すVOLUME CV OUT(どちらも1/4インチのフォーン端子)がある。PITCH CV OUTをセミモジュラーシンセ「Moog Mother-32」のVCO 1V/OCT IN(3.5mm)へ、VOLUME CV OUTをVCF CUTOFF IN(3.5mm)へ、片側が1/4インチ・もう片側が3.5mmのケーブル(この問題ではCV/Gateケーブルとして扱う)でつなぐ。音は、ClaravoxのMAIN OUT(フォーン)をオーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」のINPUT 1(コンボ端子のフォーン側)へ、Mother-32のOUTPUT(フォーン)をINPUT 2へ送り、2i2はUSB-CケーブルでMacBook Airにつなごう。",
+        equipment: [
+          {
+            id: "theremin",
+            label: "Moog Claravox Centennial(テルミン)",
+            icon: "Claravox",
+            ports: [
+              { id: "mainOut", label: "MAIN OUT (フォーン)", type: "ts", dir: "out" },
+              { id: "tunerOut", label: "TUNER OUT (フォーン)", type: "ts", dir: "out" },
+              { id: "pitchCv", label: "PITCH CV OUT (1/4インチ)", type: "cv", dir: "out" },
+              { id: "volCv", label: "VOLUME CV OUT (1/4インチ)", type: "cv", dir: "out" },
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+            ],
+          },
+          {
+            id: "m32",
+            label: "Moog Mother-32(セミモジュラーシンセ)",
+            icon: "Mother-32",
+            ports: [
+              { id: "vcoIn", label: "VCO 1V/OCT IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "cutoffIn", label: "VCF CUTOFF IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "gateIn", label: "GATE IN (3.5mm)", type: "cv", dir: "in" },
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "audioOut", label: "OUTPUT (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 2i2(第4世代)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (コンボ・フォーン側)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (コンボ・フォーン側)", type: "ts", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "MacBook Air(DAW)", icon: "Mac", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["cv", "ts", "trs", "midi", "usb"],
+        correctConnections: [
+          { from: "theremin.pitchCv", to: "m32.vcoIn", cable: "cv" },
+          { from: "theremin.volCv", to: "m32.cutoffIn", cable: "cv" },
+          { from: "theremin.mainOut", to: "scarlett.in1", cable: "ts" },
+          { from: "m32.audioOut", to: "scarlett.in2", cable: "ts" },
+          { from: "scarlett.usb", to: "mac.usb", cable: "usb" },
+        ],
+        explain:
+          "テルミンは、2本のアンテナと手のあいだの距離の変化を読み取って音を作る楽器で、鍵盤のように『この音』と区切られていないため、なめらかに音程が動くのが持ち味。Claravox Centennialは、その手の動きを、音とは別にCV(=音の高さや明るさを電圧の大きさで伝える信号)として出力できる。右手の位置をMother-32のVCO 1V/OCT IN(=1Vで1オクターブ上がる約束の音程入力)へ送れば、Mother-32の発振器がテルミンと一緒に音程を変え、左手の位置をVCF CUTOFF INへ送れば、手を動かすとフィルターが開いたり閉じたりして、音の明るさが変わる。Mother-32を鳴りっぱなしにしておくには、VCAのモードを『ON』にしておく(エンベロープのままだと、GATEの合図がないので音が出ない)。CVの出力電圧の範囲は、Claravox側の設定で選べるので、Mother-32の音程がテルミンとずれる場合は、出力の範囲や音程の合わせ込みを確かめよう。テルミンとMother-32は、どちらも別々の音として録っておくと、あとでミックスで混ぜ具合を決められる。MIDI OUTからMother-32のMIDI INへつなぐ方法もあるが、MIDIは音程を『半音ごとの番号+ピッチベンド』で伝えるため、テルミン特有のなめらかな音程の動きを、そのまま伝えるにはCVのほうが向いている。CVのケーブルは見た目がイヤホンのプラグに似ているが、運んでいるのは音ではなく『指示の電圧』なので、出力→入力の向きを守ってつなぎ、オーディオの入力には挿さないようにしよう。",
+      },
+    },
   ],
 };
