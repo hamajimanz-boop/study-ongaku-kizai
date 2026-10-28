@@ -4818,5 +4818,48 @@ window.COURSES["gear_patch_practice"] = {
           "電子ピアノの音をマイクで拾うと、部屋の響きや電子ピアノのスピーカーのクセも一緒に入ってしまう。ライン出力から直接ミキサーへ送れば、ピアノの音そのものをきれいに届けられる。FP-30XのOUTPUTはL/MONO・Rの2つのフォーン端子なので、AG06MK2のCH3/4のLとRへそれぞれつなぐとステレオになる(L/MONOだけにつなぐとモノラル)。CH5/6のRCA端子もライン入力だが、FP-30Xの端子はフォーンなので、そのまま挿せるCH3/4を使う。AT2020はコンデンサーマイクなので、+48Vのファンタム電源がないと音が出ない。AG06MK2は、マイクとピアノの音をまとめてUSBでPCに送るので、ビデオ会議アプリの入力(マイク)と出力(スピーカー)の両方にAG06MK2を選ぶ。ここで大切なのがLOOPBACK(ループバック=PCから出た音を、もう一度PCへの送り返しに混ぜる機能)の設定。配信でBGMを流すときには便利だが、ビデオ会議では、生徒さんの声がそのまま生徒さんに返ってしまい、こだまのように聞こえる原因になるので、オフにしておく。また、ビデオ会議アプリは、話し声を聞きやすくするために雑音を消したり音量をならしたりする処理を自動でかけるため、ピアノの音が途切れたり小さくなったりしやすい。アプリの設定に、音楽向けに元の音をそのまま送るモードがあれば、オンにしておこう。",
       },
     },
+    {
+      id: "theater_qlab_multi_output",
+      order: 111,
+      title: "演劇の効果音を、PCから別々のスピーカーへ出し分ける(QLab + MOTU UltraLite mk5)",
+      category: "配線問題",
+      hook: "電話の着信音は舞台の上から、雷の低い音は客席の床から——演劇の効果音は『どこから聞こえるか』も演出のうち。効果音ソフトの音を、オーディオインターフェースの別々の出力からそれぞれのスピーカーへ送り分ける配線を組もう。",
+      patch: {
+        scenario:
+          "小劇場の芝居で、あなたは音響オペレーターを担当する。効果音とBGMは、演劇の音出し用ソフト「QLab」を入れた「MacBook Pro」から出す。MacBook ProとオーディオインターフェースMOTU「UltraLite mk5」をUSB-Cケーブルでつなぐ。BGMは客席の左右に置いたパワードスピーカー「Yamaha DBR12」2台から流したいので、UltraLite mk5のLINE OUT 1・2(TRSフォーン)をそれぞれ左右のDBR12の入力へ。電話の着信音やドアのノックなど『舞台の上で鳴っている音』は、舞台奥のセットの陰に置いた「Yamaha DBR10」から鳴らすので、LINE OUT 3をつなぐ。雷や地鳴りの低い音は、客席の床に置いたサブウーファー「Yamaha DXS12mkII」だけから鳴らしたいので、LINE OUT 4をつなごう。スピーカーの入力はどれもXLR/フォーンのコンボ端子で、すべてTRSフォーンケーブルで配線する。",
+        equipment: [
+          { id: "mac", label: "MacBook Pro(QLab)", icon: "Mac", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "out" }] },
+          {
+            id: "motu",
+            label: "MOTU UltraLite mk5(オーディオインターフェース)",
+            icon: "UL mk5",
+            ports: [
+              { id: "usb", label: "USB-C", type: "usb", dir: "in" },
+              { id: "micIn1", label: "MIC/LINE/INST IN 1 (コンボ)", type: "xlr", dir: "in" },
+              { id: "out1", label: "LINE OUT 1 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "out2", label: "LINE OUT 2 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "out3", label: "LINE OUT 3 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "out4", label: "LINE OUT 4 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "out5", label: "LINE OUT 5 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "spdifOut", label: "S/PDIF OUT (RCA)", type: "rca", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DBR12(客席・左)", icon: "DBR12", ports: [{ id: "in", label: "INPUT (XLR/フォーンコンボ)", type: "trs", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR12(客席・右)", icon: "DBR12", ports: [{ id: "in", label: "INPUT (XLR/フォーンコンボ)", type: "trs", dir: "in" }] },
+          { id: "spkStage", label: "Yamaha DBR10(舞台奥・セットの陰)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR/フォーンコンボ)", type: "trs", dir: "in" }] },
+          { id: "sub", label: "Yamaha DXS12mkII(サブウーファー)", icon: "DXS12", ports: [{ id: "in", label: "INPUT (XLR/フォーンコンボ)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "trs", "ts", "xlr", "rca"],
+        correctConnections: [
+          { from: "mac.usb", to: "motu.usb", cable: "usb" },
+          { from: "motu.out1", to: "spkL.in", cable: "trs" },
+          { from: "motu.out2", to: "spkR.in", cable: "trs" },
+          { from: "motu.out3", to: "spkStage.in", cable: "trs" },
+          { from: "motu.out4", to: "sub.in", cable: "trs" },
+        ],
+        explain:
+          "QLabは、効果音やBGMを『キュー』(=きっかけごとに用意した再生の単位)として順番に並べ、GOボタンを押すたびに次の音を出していく、演劇やイベントの定番ソフト。キューごとに『どの出力から鳴らすか』を決められるので、BGMのキューはOUT 1・2、着信音のキューはOUT 3、雷のキューはOUT 4、というように割り当てておけば、1台のPCから音の出どころを演出どおりに切り替えられる。役者が受話器を取る芝居なら、客席のスピーカーより舞台奥のスピーカーから鳴ったほうが、本当にその場で電話が鳴っているように聞こえる。サブウーファーに専用の出力を用意しておくと、雷や地鳴りのような低い音だけを足元から響かせ、セリフの邪魔になりやすいBGMの低音は送らない、といった使い分けができる。UltraLite mk5のLINE OUTはバランス出力(=ノイズを打ち消せる3芯の方式)なので、客席の後ろの操作席から舞台まで長く引き回しても、TRSケーブルならノイズが乗りにくい。距離が長いときは、片側がTRS・もう片側がXLRのケーブルで、スピーカー側をXLRにしてもよい。QLabは無料のままでは使える出力チャンネル数などに制限があるとされ、多チャンネルで出し分けるには有料のオーディオライセンスが必要になるので、最新の条件は公式サイトで確認しよう。配線や抜き差しは、スピーカーの電源を切ってから行い、電源を入れるときはPCとインターフェース→スピーカーの順、切るときはその逆にすると、大きな『ボン』という音でスピーカーを傷めずにすむ。",
+      },
+    },
   ],
 };
