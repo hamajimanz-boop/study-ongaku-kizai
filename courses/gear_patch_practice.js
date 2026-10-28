@@ -5119,5 +5119,55 @@ window.COURSES["gear_patch_practice"] = {
           "DDJ-FLX4は、2台のプレーヤーとミキサーの操作部をひとつにまとめたDJコントローラーで、音そのものはPCのDJソフトが作り、コントローラーに内蔵されたオーディオインターフェース(=PCの音を外に出す装置)を通ってMASTER OUTやPHONESから出てくる。PCとつなぐUSB-Cは、操作の情報と音の両方を運ぶので、PC接続用の端子に挿すのが大切。もう1つのUSB-C端子は、スマートフォンやタブレットでDJをするときに、コントローラーへ電気を補うための給電用で、PCをつなぐ端子ではない。DM-50Dは、左のスピーカーにだけアンプが入っている『アクティブ+パッシブ』の組み合わせ。PCの音は左のアクティブ側だけに入れ、左のSPEAKER OUTから、増幅した右チャンネルの信号をスピーカーケーブルで右のパッシブ側へ送る。右のスピーカーには電源もRCAの入力もないので、迷わないようにしよう。DJのヘッドホンは、お客さんに聞こえる音とは別に、次にかける曲を頭出ししたり、テンポを合わせたりする『キュー(下準備の音)』を聞くためのもの。MIC IN(アンバランスのフォーン端子)のマイクの音は、PCを通らずにコントローラーの中でマスターの音と混ぜられる。そのため、PCのソフトでミックスを録音しても、マイクの声は入らないとされるので、曲紹介まで録っておきたいときは、MASTER OUTの音を別の録音機で録るなどの工夫が必要。パーティーで、より大きなPAスピーカーにつなぐときも、MASTER OUTのRCAから先を付け替えるだけでよい。ケーブルの抜き差しは、スピーカーの音量を下げるか電源を切ってから行い、電源はコントローラーとPCが先、スピーカーが最後(切るときはスピーカーが先)にすると、大きなノイズを出さずにすむ。",
       },
     },
+    {
+      id: "sp404mk2_sampling_vinyl_mic",
+      order: 117,
+      title: "サンプラーにレコードと声を取り込む(Roland SP-404MKII + Audio-Technica AT-LP120XUSB)",
+      category: "配線問題",
+      hook: "レコードから好きなフレーズを切り取り、自分の声のかけ声を重ねて、ビートを組む——ヒップホップの定番の作り方。でもターンテーブルの出力は『PHONO』のままではサンプラーに入れられない。レコード・マイク・スピーカーを、正しい端子と設定でサンプラーにつなごう。",
+      patch: {
+        scenario:
+          "あなたは部屋で、レコードをサンプリングしてビートを作りたい。サンプラー「Roland SP-404MKII」には、背面にLINE IN L/MONO・R(フォーン)、MIC/GUITAR INのMIC端子(TRSフォーン)、LINE OUT L/MONO・R(TRSフォーン)、PHONES(フォーン)がある。ターンテーブル「Audio-Technica AT-LP120XUSB」は、内蔵のプリアンプのスイッチを『LINE』にして、OUTPUT L/R(RCA)からSP-404MKIIのLINE IN L/MONO・Rへ、片側がRCA・もう片側がフォーンの変換ケーブル(この問題ではRCAケーブルとして扱う)でつなぐ。かけ声用のダイナミックマイク「Shure SM57」は、XLR(メス)-TRSフォーンのマイクケーブル(この問題ではXLRケーブルとして扱う)でMIC端子へ。音を聞くために、LINE OUT L/MONO・Rからモニタースピーカー「Yamaha HS5」の左右へ、TRSフォーンケーブルでつなごう。",
+        equipment: [
+          {
+            id: "tt",
+            label: "Audio-Technica AT-LP120XUSB(ターンテーブル・LINE出力に設定)",
+            icon: "LP120X",
+            ports: [
+              { id: "outL", label: "OUTPUT L (RCA)", type: "rca", dir: "out" },
+              { id: "outR", label: "OUTPUT R (RCA)", type: "rca", dir: "out" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mic", label: "Shure SM57(ダイナミックマイク)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "sp",
+            label: "Roland SP-404MKII(サンプラー)",
+            icon: "SP-404MKII",
+            ports: [
+              { id: "lineInL", label: "LINE IN L/MONO (フォーン)", type: "ts", dir: "in" },
+              { id: "lineInR", label: "LINE IN R (フォーン)", type: "ts", dir: "in" },
+              { id: "micIn", label: "MIC/GUITAR IN: MIC (TRSフォーン)", type: "trs", dir: "in" },
+              { id: "gtrIn", label: "MIC/GUITAR IN: GUITAR (フォーン)", type: "ts", dir: "in" },
+              { id: "outL", label: "LINE OUT L/MONO (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "outR", label: "LINE OUT R (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "midiIn", label: "MIDI IN (3.5mmミニ)", type: "midi", dir: "in" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha HS5(L)", icon: "HS5", ports: [{ id: "in", label: "LINE IN (TRS)", type: "trs", dir: "in" }] },
+          { id: "spkR", label: "Yamaha HS5(R)", icon: "HS5", ports: [{ id: "in", label: "LINE IN (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["rca", "xlr", "trs", "ts", "usb", "midi"],
+        correctConnections: [
+          { from: "tt.outL", to: "sp.lineInL", cable: "rca" },
+          { from: "tt.outR", to: "sp.lineInR", cable: "rca" },
+          { from: "mic.out", to: "sp.micIn", cable: "xlr" },
+          { from: "sp.outL", to: "spkL.in", cable: "trs" },
+          { from: "sp.outR", to: "spkR.in", cable: "trs" },
+        ],
+        explain:
+          "レコードの溝から針が拾う信号はとても小さく、しかも低音を弱め高音を強めた特殊なバランス(RIAAカーブ)で刻まれているため、そのままでは使えない。これを元に戻して大きくするのがフォノイコライザー(フォノプリアンプ)。AT-LP120XUSBにはこれが内蔵されていて、スイッチを『LINE』にするとライン入力にそのまま挿せる大きさの信号になる。SP-404MKIIにはPHONO入力がないので、スイッチが『PHONO』のままだと、音がとても小さく、低音のないシャカシャカした音になってしまう。SP-404MKIIのMIC端子にはファンタム電源がないとされるので、電源のいらないダイナミックマイクのSM57を使うのが手軽。GUITAR端子はギター用のハイインピーダンス入力なので、マイクはMIC側に挿す。どの入力の音をサンプリングするかや、入力の音量は本体の設定で調整する。録るときは、レベルメーターを見て、いちばん大きいところでも赤く振り切れない大きさにしておこう。AT-LP120XUSBにはUSB端子もあり、PCへ直接デジタルで録音することもできる。なお、市販のレコードをサンプリングした曲を作品として配信・販売するときは、原盤(録音そのもの)と作詞・作曲の権利者の両方から許可を得る『サンプリングのクリアランス』が必要になることが多いので、自分の練習用と、公開する作品とは分けて考えよう。",
+      },
+    },
   ],
 };
