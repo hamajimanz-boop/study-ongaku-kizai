@@ -4861,5 +4861,58 @@ window.COURSES["gear_patch_practice"] = {
           "QLabは、効果音やBGMを『キュー』(=きっかけごとに用意した再生の単位)として順番に並べ、GOボタンを押すたびに次の音を出していく、演劇やイベントの定番ソフト。キューごとに『どの出力から鳴らすか』を決められるので、BGMのキューはOUT 1・2、着信音のキューはOUT 3、雷のキューはOUT 4、というように割り当てておけば、1台のPCから音の出どころを演出どおりに切り替えられる。役者が受話器を取る芝居なら、客席のスピーカーより舞台奥のスピーカーから鳴ったほうが、本当にその場で電話が鳴っているように聞こえる。サブウーファーに専用の出力を用意しておくと、雷や地鳴りのような低い音だけを足元から響かせ、セリフの邪魔になりやすいBGMの低音は送らない、といった使い分けができる。UltraLite mk5のLINE OUTはバランス出力(=ノイズを打ち消せる3芯の方式)なので、客席の後ろの操作席から舞台まで長く引き回しても、TRSケーブルならノイズが乗りにくい。DXS12mkIIのように入力がXLR端子だけの機材には、片側がTRS・もう片側がXLRのケーブルを使えば、バランスのまま接続できる。QLabは無料のままでは使える出力チャンネル数などに制限があるとされ、多チャンネルで出し分けるには有料のオーディオライセンスが必要になるので、最新の条件は公式サイトで確認しよう。配線や抜き差しは、スピーカーの電源を切ってから行い、電源を入れるときはPCとインターフェース→スピーカーの順、切るときはその逆にすると、大きな『ボン』という音でスピーカーを傷めずにすむ。",
       },
     },
+    {
+      id: "extc_pedals_as_outboard",
+      order: 112,
+      title: "ギター用エフェクターを、ミックス用の外部機材として使う(Radial EXTC-SA + Scarlett 18i20)",
+      category: "配線問題",
+      hook: "ソフトシンセのベースを、愛用のファズとディレイに通して汚したい。でも、オーディオインターフェースのライン出力をそのままペダルに挿すと、音が大きすぎて歪みすぎたり、ノイズが出たりする。レベルとインピーダンスを行き来で変換してくれる箱を挟んで、ペダルを『外部エフェクター』として配線しよう。",
+      patch: {
+        scenario:
+          "DAWで打ち込んだソフトシンセのベースを、ファズ「Electro-Harmonix Big Muff Pi」とディレイ「Boss DD-8」に通して録り直したい。オーディオインターフェース「Focusrite Scarlett 18i20(第3世代)」はMacBook ProとUSBケーブルでつないである。18i20のLINE OUT 3(TRSフォーン)から、ギター用エフェクターとの橋渡しをする「Radial EXTC-SA」のINPUT(TRSフォーン、XLRと並列の端子)へ送る。EXTC-SAのSEND A(フォーン)からBig MuffのINPUTへ、Big MuffのOUTPUTからEXTC-SAのRECEIVE Aへ戻す。同じように、SEND BからDD-8のINPUT A/MONOへ、DD-8のOUTPUT A/MONOからRECEIVE Bへ戻す。最後に、EXTC-SAのOUTPUT(TRSフォーン)から、18i20のINPUT 5(コンボ端子のフォーン側=ライン入力)へ戻して録音しよう。",
+        equipment: [
+          { id: "mac", label: "MacBook Pro(DAW)", icon: "Mac", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 18i20(オーディオインターフェース)",
+            icon: "18i20",
+            ports: [
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+              { id: "mon1", label: "MONITOR OUT 1 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "out3", label: "LINE OUT 3 (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "in1Xlr", label: "INPUT 1 (コンボ・XLR側=マイク)", type: "xlr", dir: "in" },
+              { id: "in5", label: "INPUT 5 (コンボ・フォーン側=ライン)", type: "trs", dir: "in" },
+            ],
+          },
+          {
+            id: "extc",
+            label: "Radial EXTC-SA(エフェクター用インターフェース)",
+            icon: "EXTC-SA",
+            ports: [
+              { id: "inTrs", label: "INPUT (TRSフォーン)", type: "trs", dir: "in" },
+              { id: "outTrs", label: "OUTPUT (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "sendA", label: "SEND A (フォーン)", type: "ts", dir: "out" },
+              { id: "recvA", label: "RECEIVE A (フォーン)", type: "ts", dir: "in" },
+              { id: "sendB", label: "SEND B (フォーン)", type: "ts", dir: "out" },
+              { id: "recvB", label: "RECEIVE B (フォーン)", type: "ts", dir: "in" },
+            ],
+          },
+          { id: "fuzz", label: "Electro-Harmonix Big Muff Pi(ファズ)", icon: "Big Muff", ports: [{ id: "in", label: "INPUT", type: "ts", dir: "in" }, { id: "out", label: "OUTPUT", type: "ts", dir: "out" }] },
+          { id: "delay", label: "Boss DD-8(ディレイ)", icon: "DD-8", ports: [{ id: "in", label: "INPUT A/MONO", type: "ts", dir: "in" }, { id: "out", label: "OUTPUT A/MONO", type: "ts", dir: "out" }] },
+        ],
+        cablePalette: ["usb", "trs", "ts", "xlr", "speaker"],
+        correctConnections: [
+          { from: "scarlett.usb", to: "mac.usb", cable: "usb" },
+          { from: "scarlett.out3", to: "extc.inTrs", cable: "trs" },
+          { from: "extc.sendA", to: "fuzz.in", cable: "ts" },
+          { from: "fuzz.out", to: "extc.recvA", cable: "ts" },
+          { from: "extc.sendB", to: "delay.in", cable: "ts" },
+          { from: "delay.out", to: "extc.recvB", cable: "ts" },
+          { from: "extc.outTrs", to: "scarlett.in5", cable: "trs" },
+        ],
+        explain:
+          "オーディオインターフェースのライン出力は、プロ機材向けの大きな信号(+4dBu前後)を、バランス(=ノイズを打ち消せる3芯の方式)で、低いインピーダンス(=電気の流れにくさ。出力側は低いのが普通)で送り出す。一方、ギター用のペダルは、ギターから来る小さくて繊細な信号を受けることを前提に作られている。ライン出力をペダルに直接挿すと、入力が大きすぎてファズが歪みすぎたり、ペダルの戻りの小さな信号をライン入力で受けてノイズが目立ったりしやすい。EXTC-SAは、行きではライン信号をギターと同じくらいの大きさ・性質に変換してペダルへ送り、帰りではペダルの信号をライン信号に戻してくれる、『往復両方向』の変換器。リアンプボックス(=録音済みの音をアンプへ送り直すための、片道だけの変換器)との違いはここにある。SENDとRECEIVEのツマミで、行きと帰りの音量を別々に調整できる。ループAとBは1つずつでも、つなげて(直列で)使うこともできるので、今回は『ファズ→ディレイ』の順になる。EXTC-SAのINPUT・OUTPUTはXLRとTRSフォーンが並列についているので、どちらで配線してもよい。戻りを18i20のコンボ端子のXLR側に挿すと、マイク用の増幅回路を通って音が大きくなりすぎることがあるので、ライン入力として働くフォーン側に挿すのが基本。EXTC-SAには、元の音(ドライ)とペダルを通った音(ウェット)を混ぜるBLEND、混ぜたときに音が打ち消し合うのを防ぐ極性反転のスイッチもある。DAW側では、Logic Proの『I/O』プラグインやPro Toolsの『ハードウェアインサート』のように、外部機材へ送って戻す機能を使うと便利。外へ出て戻ってくるまでには少し時間がかかるので、その遅れを補正して、ほかのトラックとタイミングがずれないようにしよう(Logic ProのI/Oプラグインには、この遅れを自動で測る『Ping』ボタンがある)。",
+      },
+    },
   ],
 };
