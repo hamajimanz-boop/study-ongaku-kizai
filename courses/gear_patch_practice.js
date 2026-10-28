@@ -5067,5 +5067,57 @@ window.COURSES["gear_patch_practice"] = {
           "テルミンは、2本のアンテナと手のあいだの距離の変化を読み取って音を作る楽器で、鍵盤のように『この音』と区切られていないため、なめらかに音程が動くのが持ち味。Claravox Centennialは、その手の動きを、音とは別にCV(=音の高さや明るさを電圧の大きさで伝える信号)として出力できる。右手の位置をMother-32のVCO 1V/OCT IN(=1Vで1オクターブ上がる約束の音程入力)へ送れば、Mother-32の発振器がテルミンと一緒に音程を変え、左手の位置をVCF CUTOFF INへ送れば、手を動かすとフィルターが開いたり閉じたりして、音の明るさが変わる。Mother-32を鳴りっぱなしにしておくには、VCAのモードを『ON』にしておく(エンベロープのままだと、GATEの合図がないので音が出ない)。CVの出力電圧の範囲は、Claravox側の設定で選べるので、Mother-32の音程がテルミンとずれる場合は、出力の範囲や音程の合わせ込みを確かめよう。テルミンとMother-32は、どちらも別々の音として録っておくと、あとでミックスで混ぜ具合を決められる。MIDI OUTからMother-32のMIDI INへつなぐ方法もあるが、MIDIは音程を『半音ごとの番号+ピッチベンド』で伝えるため、テルミン特有のなめらかな音程の動きを、そのまま伝えるにはCVのほうが向いている。CVのケーブルは見た目がイヤホンのプラグに似ているが、運んでいるのは音ではなく『指示の電圧』なので、出力→入力の向きを守ってつなぎ、オーディオの入力には挿さないようにしよう。",
       },
     },
+    {
+      id: "ddj_flx4_pc_dj_minimum",
+      order: 116,
+      title: "パソコンDJの最小構成を配線する(Pioneer DJ DDJ-FLX4 + DM-50D)",
+      category: "配線問題",
+      hook: "DJを始めるのに、CDJ2台と大きなミキサーは要らない。ノートPCとDJコントローラー1台、小さなモニタースピーカー、ヘッドホンがあれば練習も小さなパーティーもできる。USB-Cが2つ、RCA、マイク端子——どこに何を挿すかを確かめながら、最小構成のDJセットを配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅でDJの練習を始め、友人のバーの小さなパーティーでも回すことになった。ノートPCにDJソフト「rekordbox」を入れ、DJコントローラー「Pioneer DJ DDJ-FLX4」の背面のUSB-C(PC接続用)とノートPCをUSBケーブルでつなぐ(もう1つのUSB-C端子は、スマートフォンやタブレットで使うときの給電用)。DDJ-FLX4のMASTER OUT L/R(RCA)から、アンプ内蔵スピーカー「Pioneer DJ DM-50D」のアクティブ側(左)のRCA入力 L/Rへつなぎ、アクティブ側のSPEAKER OUTからパッシブ側(右)のSPEAKER INへ、付属のスピーカーケーブルでつなぐ。曲の頭出しを聞くヘッドホン「Pioneer DJ HDJ-X5」は前面のPHONES(3.5mmミニ)へ、曲紹介に使うマイク「Shure SM58」は背面のMIC IN(フォーン)へ、XLR(メス)-フォーンのマイクケーブル(この問題ではXLRケーブルとして扱う)でつなごう。",
+        equipment: [
+          { id: "pc", label: "ノートPC(rekordbox)", icon: "PC", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+          {
+            id: "flx4",
+            label: "Pioneer DJ DDJ-FLX4(DJコントローラー)",
+            icon: "FLX4",
+            ports: [
+              { id: "usbPc", label: "USB-C (PC接続用)", type: "usb", dir: "out" },
+              { id: "usbPow", label: "USB-C (給電用)", type: "usb", dir: "in" },
+              { id: "masterL", label: "MASTER OUT L (RCA)", type: "rca", dir: "out" },
+              { id: "masterR", label: "MASTER OUT R (RCA)", type: "rca", dir: "out" },
+              { id: "micIn", label: "MIC IN (フォーン)", type: "xlr", dir: "in" },
+              { id: "phones", label: "PHONES (3.5mmミニ)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "dmActive",
+            label: "Pioneer DJ DM-50D(アクティブ側・左)",
+            icon: "DM-50D L",
+            ports: [
+              { id: "rcaL", label: "INPUT L (RCA)", type: "rca", dir: "in" },
+              { id: "rcaR", label: "INPUT R (RCA)", type: "rca", dir: "in" },
+              { id: "trsIn", label: "INPUT (TRSフォーン)", type: "trs", dir: "in" },
+              { id: "spOut", label: "SPEAKER OUT", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "dmPassive", label: "Pioneer DJ DM-50D(パッシブ側・右)", icon: "DM-50D R", ports: [{ id: "spIn", label: "SPEAKER IN", type: "speaker", dir: "in" }] },
+          { id: "hp", label: "Pioneer DJ HDJ-X5(DJ用ヘッドホン)", icon: "HDJ-X5", ports: [{ id: "in", label: "ステレオミニプラグ", type: "trs", dir: "in" }] },
+          { id: "mic", label: "Shure SM58(マイク)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+        ],
+        cablePalette: ["usb", "rca", "speaker", "xlr", "trs", "ts"],
+        correctConnections: [
+          { from: "flx4.usbPc", to: "pc.usb", cable: "usb" },
+          { from: "flx4.masterL", to: "dmActive.rcaL", cable: "rca" },
+          { from: "flx4.masterR", to: "dmActive.rcaR", cable: "rca" },
+          { from: "dmActive.spOut", to: "dmPassive.spIn", cable: "speaker" },
+          { from: "flx4.phones", to: "hp.in", cable: "trs" },
+          { from: "mic.out", to: "flx4.micIn", cable: "xlr" },
+        ],
+        explain:
+          "DDJ-FLX4は、2台のプレーヤーとミキサーの操作部をひとつにまとめたDJコントローラーで、音そのものはPCのDJソフトが作り、コントローラーに内蔵されたオーディオインターフェース(=PCの音を外に出す装置)を通ってMASTER OUTやPHONESから出てくる。PCとつなぐUSB-Cは、操作の情報と音の両方を運ぶので、PC接続用の端子に挿すのが大切。もう1つのUSB-C端子は、スマートフォンやタブレットでDJをするときに、コントローラーへ電気を補うための給電用で、PCをつなぐ端子ではない。DM-50Dは、左のスピーカーにだけアンプが入っている『アクティブ+パッシブ』の組み合わせ。PCの音は左のアクティブ側だけに入れ、左のSPEAKER OUTから、増幅した右チャンネルの信号をスピーカーケーブルで右のパッシブ側へ送る。右のスピーカーには電源もRCAの入力もないので、迷わないようにしよう。DJのヘッドホンは、お客さんに聞こえる音とは別に、次にかける曲を頭出ししたり、テンポを合わせたりする『キュー(下準備の音)』を聞くためのもの。MIC INのマイクの音は、PCを通らずにコントローラーの中でマスターの音と混ぜられる。パーティーで、より大きなPAスピーカーにつなぐときも、MASTER OUTのRCAから先を付け替えるだけでよい。ケーブルの抜き差しは、スピーカーの音量を下げるか電源を切ってから行い、電源はコントローラーとPCが先、スピーカーが最後(切るときはスピーカーが先)にすると、大きなノイズを出さずにすむ。",
+      },
+    },
   ],
 };
