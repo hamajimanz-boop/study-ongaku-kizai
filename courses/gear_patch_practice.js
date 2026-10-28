@@ -4965,5 +4965,49 @@ window.COURSES["gear_patch_practice"] = {
           "ライブハウスのPAでは、アンプ1台に4Ωや8Ωのスピーカーを1〜2台つなぐ『ローインピーダンス』方式が普通。店舗や学校、駅の放送では、アンプが高い電圧(日本では100Vが標準)で信号を送り出し、各スピーカーの中にあるトランス(=電圧を変える部品)で下げて鳴らす『ハイインピーダンス(100Vライン)』方式が使われる。この方式なら、細めのケーブルで長く引き回しても音が弱まりにくく、スピーカーを何台も並列にぶら下げられる。PC-648Rは、トランスのタップ(=つなぐ位置)を変えて、6W・3W・1Wから鳴らす大きさを選べる。たとえばフロアの2台を6W、トイレを1W、スタッフルームを3Wにすれば、合計は6+6+1+3=16Wで、TA-2060の定格60Wに十分おさまる。100Vライン方式では、スピーカーのワット数の合計がアンプの定格出力を超えないようにするのが基本で、あとからスピーカーを増やせるよう余裕をもたせておくとよい。TA-2060はモノラルのアンプなので、プレーヤーのLとRを予備入力1と2に分けて入れ、アンプの中で1つにまとめて鳴らす(Lだけをつなぐと、右側にしか入っていない楽器が聞こえなくなることがある)。天井のスピーカーはお客さんの頭の上から均等に鳴らすのが目的なので、ステレオにするより、モノラルで全体を同じように鳴らすほうが向いている。5局のセレクターで『閉店後はスタッフルームだけ』のように場所ごとにオン・オフできるのも、業務用アンプの便利なところ。なお、お店でBGMを流すときは、個人向けの音楽配信サービスは利用規約で店舗での利用が認められていないことが多いので、店舗向けのBGMサービスを使うか、JASRACなどへの手続きが必要かを確認しよう。",
       },
     },
+    {
+      id: "kick_three_mic_subkick",
+      order: 114,
+      title: "バスドラムを3本のマイクで録り分ける(Shure Beta 91A + Beta 52A + Yamaha SubKick)",
+      category: "配線問題",
+      hook: "バスドラム1つに、マイクを3本。胴の中で『アタック』を、前で『胴鳴り』を、そしてスピーカーを逆に使った特殊なマイクで『耳よりお腹に響く低音』を拾う。性質の違う3本を、ファンタム電源の要・不要に気をつけて配線しよう。",
+      patch: {
+        scenario:
+          "レコーディングスタジオで、ロックバンドのドラムを録る。バスドラムだけで3本のマイクを使う。①胴の中の毛布の上に、ファンタム電源(=マイクケーブルを通じて送る+48Vの電気)が必要な境界型コンデンサーマイク「Shure Beta 91A」を置く。②前の皮に開けた穴の少し外に、ダイナミックマイク「Shure Beta 52A」を立てる。③前の皮のさらに外に、スピーカーを逆向きに使ってマイクにした「Yamaha SKRM-100 SubKick」を置く。オーディオインターフェース「Universal Audio Apollo x8p」の背面MIC/LINE IN 1〜3(XLR/フォーンのコンボ端子)に、①〜③を順にXLRケーブルでつなぐ。Apollo x8pはThunderbolt 3ケーブルでMac Studioへ、MONITOR OUT L/R(TRSフォーン)からモニタースピーカー「Yamaha HS8」の左右へつなごう(この問題ではThunderboltケーブルをUSBケーブルとして扱う)。",
+        equipment: [
+          { id: "inside", label: "Shure Beta 91A(胴の中・コンデンサー)", icon: "Beta91A", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "outside", label: "Shure Beta 52A(前の皮の外・ダイナミック)", icon: "Beta52A", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "subkick", label: "Yamaha SKRM-100 SubKick", icon: "SubKick", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "apollo",
+            label: "Universal Audio Apollo x8p(オーディオインターフェース)",
+            icon: "Apollo x8p",
+            ports: [
+              { id: "in1", label: "MIC/LINE IN 1 (コンボ)", type: "xlr", dir: "in" },
+              { id: "in2", label: "MIC/LINE IN 2 (コンボ)", type: "xlr", dir: "in" },
+              { id: "in3", label: "MIC/LINE IN 3 (コンボ)", type: "xlr", dir: "in" },
+              { id: "hiz1", label: "前面 Hi-Z IN 1 (フォーン)", type: "ts", dir: "in" },
+              { id: "monL", label: "MONITOR OUT L (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "monR", label: "MONITOR OUT R (TRSフォーン)", type: "trs", dir: "out" },
+              { id: "tb", label: "Thunderbolt 3", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "Mac Studio(DAW)", icon: "Mac", ports: [{ id: "tb", label: "Thunderbolt", type: "usb", dir: "in" }] },
+          { id: "spkL", label: "Yamaha HS8(左)", icon: "HS8-L", ports: [{ id: "in", label: "INPUT (XLR/TRSフォーン)", type: "trs", dir: "in" }] },
+          { id: "spkR", label: "Yamaha HS8(右)", icon: "HS8-R", ports: [{ id: "in", label: "INPUT (XLR/TRSフォーン)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "speaker"],
+        correctConnections: [
+          { from: "inside.out", to: "apollo.in1", cable: "xlr" },
+          { from: "outside.out", to: "apollo.in2", cable: "xlr" },
+          { from: "subkick.out", to: "apollo.in3", cable: "xlr" },
+          { from: "apollo.tb", to: "mac.tb", cable: "usb" },
+          { from: "apollo.monL", to: "spkL.in", cable: "trs" },
+          { from: "apollo.monR", to: "spkR.in", cable: "trs" },
+        ],
+        explain:
+          "バスドラムは、ビーターが皮を叩く『カチッ』というアタックと、胴全体が鳴る『ドン』という低音、さらに耳では聞こえにくいほど低い空気の揺れが混ざった楽器。1本のマイクではすべてをバランスよく拾いにくいので、場所と種類の違うマイクを組み合わせ、ミックスで混ぜ具合を決める。胴の中のBeta 91Aはアタックをくっきり拾い、穴の外のBeta 52Aは胴鳴りと低音をまとめて拾う。SubKickは、スピーカーが『電気を振動に変える』のとは逆に、『空気の振動を電気に変える』しくみを利用したもので、大きな振動板が、普通のマイクでは拾いにくい低い帯域をよく拾う。ファンタム電源は、Beta 91A(1ch)にだけ入れる。Beta 52AとSubKickは電源のいらないタイプなので、Apollo x8pのコンソールアプリで、チャンネルごとに+48Vを切り替えておく。3本を同時に鳴らすときに大切なのが『位相』(=波の山と谷のタイミング)。胴の中と外のマイクは、皮からの距離が違うため音が届く時間がずれ、さらに向きの関係で波が逆さまになることもある。混ぜたときに低音が痩せて聞こえたら、DAWで片方の極性(=波の上下)を反転したり、波形を見て位置をずらしたりして、いちばん太く聞こえる状態を探そう。なお、SKRM-100は現在は生産終了とされ、中古で探すか、同じ考え方の他社製品を使うことになる。",
+      },
+    },
   ],
 };
