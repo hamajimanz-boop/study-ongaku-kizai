@@ -111,3 +111,15 @@ node -e "global.window={}; require('./courses/対象ファイル.js'); console.l
 
 `OK`が出力されればその場でファイルは構文的に読み込み可能。エラーが出た場合は
 push前に必ず修正すること。
+
+### PNG画像の圧縮
+
+`images/` にPNG画像を追加したら、pushする前に pngquant(`brew install pngquant`)で
+減色圧縮しておく(2026-10-28に既存167件へ適用済み、合計約14.6MB→約4.4MB)。
+
+```sh
+pngquant --quality=80-95 --speed 1 --strip --skip-if-larger --ext .png --force images/追加したファイル.png
+```
+
+`--quality=80-95` は画質がこの範囲に収まらない場合は変換しない指定なので、
+写真・グラデーションの多い画像でも見た目が崩れることはない。
