@@ -5207,5 +5207,49 @@ window.COURSES["gear_patch_practice"] = {
           "エクスプレッションペダルは、それ自体は音を出さず、中に入っている可変抵抗(=ボリュームのツマミと同じ部品)の値を、つないだ機材に伝えるだけの装置。そのため、ギターの音の通り道(ギター→ディレイ→アンプ)には入れず、DD-500のCTL 1,2/EXP端子という『操作用の入り口』に挿す。この端子は、ペダルの値を読み取るために3本の線を使うので、ケーブルはTRSフォーン(ステレオフォーン)が必要になる。EV-5はTRSのケーブルが本体についているので、そのまま挿せばよい。普通のギター用シールド(TS)を使った延長などをすると、ペダルの効き方がおかしくなる原因になる。DD-500では、設定画面の『CONTROL』でEXP FUNC(ペダルの役割)を選ぶ。選べるのは、TIME(ディレイの間隔)、FEEDBACK(繰り返しの回数)、TONE(音色)、E.LEVEL(ディレイ音の大きさ)、MOD DEPTH / MOD RATE(揺れの深さ / 速さ)など。この設定は、パッチ(=音色の記憶場所)ごとに変えることも、全パッチで共通にすることもできる。FEEDBACKを踏み込みすぎると、音が止まらず大きくなり続ける『発振』の状態になるので、本番前に、どこまで踏むとどうなるかを確かめておこう。また、DD-500のINPUT A/MONO端子は電源スイッチを兼ねていて、プラグを挿すと電源が入り、抜くと切れる。モノラルで使うときは、入力も出力もA/MONO側だけを使う。DD-500の取扱説明書では、エクスプレッションペダルは指定のEV-5を使うよう書かれているので、他社のペダルを使うときは、対応しているかを先に確認しよう。EV-5の側面にある最小値のツマミは、ペダルを戻しきったときの値を決めるもので、ふつうは0にしておくと、ペダルの動きの幅を最大まで使える。",
       },
     },
+    {
+      id: "guitar_cab_two_mics_phase",
+      order: 119,
+      title: "ギターキャビネットを2本のマイクで録り、位相をそろえる(Shure SM57 + Royer R-121 + Apollo Twin X)",
+      category: "配線問題",
+      hook: "ギターの録音でよく使われるのが、性格の違う2本のマイクを同じスピーカーに向ける方法。ところが、2本を混ぜたとたんに音がスカスカに痩せてしまうことがある。原因は配線ではなく『位相』かもしれない。2本のマイクをインターフェースへ正しく配線し、ファンタム電源と位相の扱いまで確かめよう。",
+      patch: {
+        scenario:
+          "あなたは自宅スタジオで、ギターアンプ「Marshall DSL40CR」(スピーカー内蔵のコンボアンプ)の音を2本のマイクで録る。ダイナミックマイク「Shure SM57」はスピーカーの中心から少し外した位置にグリルが触れる寸前まで近づけ、リボンマイク「Royer R-121」はその横に、スピーカーからの距離がSM57とできるだけ同じになるように並べる。ギター「Gibson Les Paul Standard」はアンプのINPUTへTSフォーンで。SM57はオーディオインターフェース「Universal Audio Apollo Twin X」背面のMIC/LINE 1へ、R-121はMIC/LINE 2へ、それぞれXLRケーブルでつなぐ。Apollo Twin XとMacはThunderbolt 3ケーブルでつなぎ(この問題ではUSBケーブルとして扱う)、MONITOR OUT L/Rからモニタースピーカー「Yamaha HS5」の左右へTRSフォーンでつなごう。",
+        equipment: [
+          { id: "guitar", label: "Gibson Les Paul Standard", icon: "LesPaul", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          { id: "amp", label: "Marshall DSL40CR(コンボアンプ)", icon: "DSL40", ports: [{ id: "in", label: "INPUT (TS)", type: "ts", dir: "in" }] },
+          { id: "sm57", label: "Shure SM57(ダイナミックマイク)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "r121", label: "Royer R-121(リボンマイク)", icon: "R-121", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "apollo",
+            label: "Universal Audio Apollo Twin X",
+            icon: "TwinX",
+            ports: [
+              { id: "hiz", label: "Hi-Z (前面・TS)", type: "ts", dir: "in" },
+              { id: "in1", label: "MIC/LINE 1 (コンボ)", type: "xlr", dir: "in" },
+              { id: "in2", label: "MIC/LINE 2 (コンボ)", type: "xlr", dir: "in" },
+              { id: "monL", label: "MONITOR OUT L (TRS)", type: "trs", dir: "out" },
+              { id: "monR", label: "MONITOR OUT R (TRS)", type: "trs", dir: "out" },
+              { id: "tb", label: "Thunderbolt 3", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "Mac(DAW)", icon: "Mac", ports: [{ id: "tb", label: "Thunderbolt", type: "usb", dir: "in" }] },
+          { id: "spkL", label: "Yamaha HS5(L)", icon: "HS5", ports: [{ id: "in", label: "LINE IN (TRS)", type: "trs", dir: "in" }] },
+          { id: "spkR", label: "Yamaha HS5(R)", icon: "HS5", ports: [{ id: "in", label: "LINE IN (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "ts", "trs", "usb", "speaker"],
+        correctConnections: [
+          { from: "guitar.out", to: "amp.in", cable: "ts" },
+          { from: "sm57.out", to: "apollo.in1", cable: "xlr" },
+          { from: "r121.out", to: "apollo.in2", cable: "xlr" },
+          { from: "apollo.tb", to: "mac.tb", cable: "usb" },
+          { from: "apollo.monL", to: "spkL.in", cable: "trs" },
+          { from: "apollo.monR", to: "spkR.in", cable: "trs" },
+        ],
+        explain:
+          "SM57はギターの中高域の芯や張りを、R-121は耳に痛い高域を抑えた太く温かい音を拾いやすく、2本を混ぜる量で音色を作れるのがこの録り方の利点。ギターはアンプに挿すもので、Apollo Twin X前面のHi-Z端子(ギターを直接挿す入り口)は今回は使わない。注意したいのは、2本のマイクのスピーカーからの距離がずれると、音が届く時間がずれることで、混ぜたときに一部の周波数が打ち消し合い、低音が抜けたような細い音になってしまう点(これを『位相のずれ』という)。音は1ミリ秒(1000分の1秒)で約34cm進むので、数cmのずれでも音色が変わる。録る前に、2本を混ぜた音をモノラルで聞きながら、片方のマイクを少しずつ前後に動かし、低音がいちばん太く聞こえる位置を探そう。それでも痩せて聞こえるときは、Apolloのコンソール画面で片方のチャンネルの『極性反転(Ø)』ボタンを押して比べる。また、R-121は前と後ろの両方から音を拾う『双指向性』のマイクで、後ろ側で拾うと信号のプラスとマイナスが逆になるので、ロゴのある正面をスピーカーに向けるのが基本。R-121はファンタム電源のいらないパッシブのリボンマイクで、正しく配線されていれば48Vで壊れることはまずないとされるが、ケーブルの不良やパッチベイの抜き差しで傷めるおそれがあるので、2チャンネル目の48Vはオフにしておくのが安全。SM57も電源のいらないダイナミックマイクなので、どちらのチャンネルも48Vは不要。ギターアンプの音はとても大きいので、マイクプリの入力の大きさは、いちばん大きく弾いたときでもメーターが赤くならない程度に控えめにしておこう。",
+      },
+    },
   ],
 };
