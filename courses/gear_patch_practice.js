@@ -5415,5 +5415,65 @@ window.COURSES["gear_patch_practice"] = {
           "小さな会場では、ドラムやギターアンプの音は、スピーカーを通さなくても客席に十分届いている。そのため会場用のミックスは、生音で足りない分(主にボーカル)だけを足した、偏ったバランスになっている。これをそのまま配信に流すと、ボーカルだけが大きく、楽器が遠い音になってしまう。そこで使うのがマトリクス。マトリクスは『できあがったミックスを、さらに混ぜ直して別の出口に送る』ための出力で、DM3はメインのステレオミックスに加えて、入力チャンネルの音も直接マトリクスへ送れる。ここでは、メインのステレオミックスに客席マイクのNT5を足して、拍手や会場の響きが聞こえる配信用のミックスを作っている。客席マイクは会場のスピーカーに出すと、ハウリング(スピーカーの音をマイクが拾ってキーンと鳴る現象)の原因になるので、メインのステレオには送らず、マトリクスにだけ送る。NT5はコンデンサーマイクなので、INPUT 15・16は48Vのファンタム電源をオンにする。注意したいのは、マトリクスに送ったメインのステレオミックスは、会場用のフェーダー操作の影響をそのまま受けること。ボーカルを会場向けに上げれば、配信でも上がる。だから、ヘッドホンでマトリクスの音を聞いて確かめながら、配信側のバランスを整えよう。DM3のOMNI OUTはラインレベル(=マイクより大きな信号)で出てくるので、Scarlettでは、マイク用のXLR側ではなく、ライン用のTRS側で受け、入力の大きさを下げめに設定する。なお、DM3はUSBで直接PCとつないで、マトリクスの音をPCへ送ることもできる。今回のように別のインターフェースを使う方法は、配信用PCをミキサーから離れた場所に置きたいときや、PAのPCと配信のPCを分けたいときに向いている。",
       },
     },
+    {
+      id: "crown_xls_bridge_sub_aux_fed",
+      order: 123,
+      title: "パワーアンプのブリッジ接続でサブウーファーを鳴らす(Crown XLS 2502 ×2 + JBL JRX218S)",
+      category: "配線問題",
+      hook: "低音をしっかり出すサブウーファーには、大きなパワーが必要になる。そこで使うのが、アンプの2チャンネル分の力を1台のスピーカーにまとめる『ブリッジ接続』。ただし、入力はCH1だけ、スピーカーケーブルの配線も特別、つなげるスピーカーの抵抗にも下限がある。左右のスピーカーとサブウーファーを、2台のアンプで正しく鳴らそう。",
+      patch: {
+        scenario:
+          "あなたは小さなイベントホールのPAを組む。ミキサーは「Yamaha MG16XU」。左右のメインスピーカーは、パッシブ(アンプなし)の「JBL JRX212」(8Ω)2台、低音用にパッシブのサブウーファー「JBL JRX218S」(4Ω)1台を使う。アンプは「Crown XLS 2502」を2台用意し、アンプAはふつうのステレオモード(STEREO)でメインスピーカー用に、アンプBはブリッジモード(BRIDGE)でサブウーファー用にする。ミキサーのSTEREO OUT L/R(XLR)からアンプAのCH1・CH2の入力(XLR)へ。サブウーファーには、ミキサーのAUX SEND 4(TRSフォーン)を専用の送りとして使い、アンプBのCH1の入力(フォーン)へTRSフォーンでつなぐ(アンプBのCH2には何もつながない)。アンプAのCH1・CH2のスピコン出力から左右のJRX212へ、アンプBのCH1のスピコン出力からJRX218Sへ、スピーカーケーブルでつなごう(サブウーファー用のケーブルは、アンプ側のプラグをブリッジ用に配線したもの)。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha MG16XU(ミキサー)",
+            icon: "MG16XU",
+            ports: [
+              { id: "stL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "stR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "aux1", label: "AUX SEND 1 (TRS)", type: "trs", dir: "out" },
+              { id: "aux4", label: "AUX SEND 4 (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "ampA",
+            label: "Crown XLS 2502 A(STEREOモード・メイン用)",
+            icon: "XLS A",
+            ports: [
+              { id: "in1", label: "CH1 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "CH2 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "sp1", label: "CH1 OUTPUT (スピコン)", type: "speaker", dir: "out" },
+              { id: "sp2", label: "CH2 OUTPUT (スピコン)", type: "speaker", dir: "out" },
+            ],
+          },
+          {
+            id: "ampB",
+            label: "Crown XLS 2502 B(BRIDGEモード・サブ用)",
+            icon: "XLS B",
+            ports: [
+              { id: "in1", label: "CH1 INPUT (フォーン)", type: "trs", dir: "in" },
+              { id: "in2", label: "CH2 INPUT (フォーン)", type: "trs", dir: "in" },
+              { id: "sp1", label: "CH1 OUTPUT (スピコン)", type: "speaker", dir: "out" },
+              { id: "sp2", label: "CH2 OUTPUT (スピコン)", type: "speaker", dir: "out" },
+            ],
+          },
+          { id: "topL", label: "JBL JRX212(L・8Ω)", icon: "JRX212 L", ports: [{ id: "in", label: "INPUT (スピコン)", type: "speaker", dir: "in" }] },
+          { id: "topR", label: "JBL JRX212(R・8Ω)", icon: "JRX212 R", ports: [{ id: "in", label: "INPUT (スピコン)", type: "speaker", dir: "in" }] },
+          { id: "sub", label: "JBL JRX218S(サブウーファー・4Ω)", icon: "JRX218S", ports: [{ id: "in", label: "INPUT (スピコン)", type: "speaker", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "speaker", "power"],
+        correctConnections: [
+          { from: "mixer.stL", to: "ampA.in1", cable: "xlr" },
+          { from: "mixer.stR", to: "ampA.in2", cable: "xlr" },
+          { from: "mixer.aux4", to: "ampB.in1", cable: "trs" },
+          { from: "ampA.sp1", to: "topL.in", cable: "speaker" },
+          { from: "ampA.sp2", to: "topR.in", cable: "speaker" },
+          { from: "ampB.sp1", to: "sub.in", cable: "speaker" },
+        ],
+        explain:
+          "ブリッジ接続は、アンプの2つのチャンネルを逆向きの信号で動かし、その間にスピーカーをつなぐことで、1台のスピーカーに2チャンネル分の力をまとめる方法。XLS 2502の取扱説明書では、ブリッジモードでは入力はCH1だけにつなぎ、スピコンを使う場合は、スピーカーのプラスをスピコンのピン1+、マイナスをピン2+につないだプラグを、CH1の出力に挿すよう書かれている。ふつうのステレオ用のスピーカーケーブル(1+と1−を使う配線)のままではブリッジの力が出ないので、ケーブルの中の配線が違うことを覚えておこう。アンプの前面のメニューで、AMP MODEを『BRIDGE』に切り替えるのも忘れずに。ブリッジ接続では、つなげるスピーカーの抵抗(インピーダンス)は4Ω以上とされている。JRX218Sは4Ωなのでぎりぎり使えるが、これを2台並べてつなぐと2Ωになり、アンプが過熱したり保護回路が働いて音が止まったりするので、2台目のサブを足すときはアンプも増やす。サブウーファーへの送りに、メインの左右の音ではなく専用のAUXを使うのは、低音が必要な楽器(バスドラムやベース)だけをサブに送り、ボーカルやトークのマイクの音は送らないようにするため。こうすると、声の低い『こもり』や、マイクを触ったときの『ボコッ』という音がサブから出にくくなる。フェーダーを下げたときにサブへの送りも一緒に下がるよう、フェーダーより後ろ(POST)で送るAUXを使うのが一般的とされる。アンプBでは、低い音だけを通すローパスフィルター(例:100Hz前後)を、アンプAでは、低すぎる音を切るハイパスフィルターをかけておくと、それぞれのスピーカーが得意な帯域に集中できる。電源は、ミキサーを先に入れてアンプを最後に入れ、切るときはアンプを先に切ろう。",
+      },
+    },
   ],
 };
