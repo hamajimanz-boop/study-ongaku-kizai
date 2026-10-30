@@ -5358,5 +5358,62 @@ window.COURSES["gear_patch_practice"] = {
           "デッカツリーは、イギリスのレコード会社デッカの技術者たちが1950年代に考え出したとされる録り方で、3本の無指向性マイクを離して置き、音がそれぞれのマイクに届く時間と大きさのわずかな差で、左右の広がりを表現する。中央のマイクを少し前に出すのは、真ん中の楽器の音をしっかり支え、左右2本だけで録ったときに起きやすい『真ん中がぽっかり空いたような音』を防ぐため。寸法は『左右約2m・中央が約1m前』が教科書的な目安とされるが、決まった正解はなく、ホールや編成に合わせて耳で調整する。DAWでは、ツリー左を左いっぱい、中央を真ん中、右を右いっぱいに振り、アウトリガーも左右いっぱいに振って、ツリーの音を土台に、端の楽器の輪郭や広がりが足りない分だけアウトリガーを足す。中央のマイクを上げすぎると音がモノラルっぽく狭くなるので、混ぜる量に注意しよう。5本ともコンデンサーマイクなので、Clarett+ 8Preの48Vファンタム電源を入れる必要がある。ファンタム電源のオン・オフは、マイクをつないでから、スピーカーの音量を下げた状態で行うと、大きなノイズでスピーカーを傷めずにすむ。マイクの数がもっと増えたときは、ADAT端子(光ケーブル1本で8チャンネル分のデジタル音声を送る端子)に別のマイクプリをつないで入力を増やせる。Genelec 8030Cの入力はXLRなので、MONITOR OUTのTRSからは、片側がTRS・片側がXLR(オス)のケーブルを使う(この問題ではTRSフォーンとして扱う)。",
       },
     },
+    {
+      id: "dm3_matrix_stream_mix",
+      order: 122,
+      title: "会場の音とは別に、客席の空気も入れた配信用ミックスを作る(Yamaha DM3 Standardのマトリクス + Rode NT5 ×2)",
+      category: "配線問題",
+      hook: "ライブハウスの客席ではちょうどよく聞こえていたのに、配信で聞くとボーカルばかり大きく、ドラムは遠く、拍手も聞こえない——小さな会場の配信でよく起きる失敗だ。原因は、会場のスピーカー用のミックスをそのまま配信に流していること。マトリクスという出力を使って、配信専用のミックスを別に作る配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは小さなライブハウスで、バンドのライブをPA(音響)しながら配信もする。ミキサーは「Yamaha DM3 Standard」。ボーカルマイク「Shure SM58」をINPUT 1へ(ほかの楽器のマイクは省略する)。客席の拍手や会場の響きを拾うため、ステージの左右の端から客席に向けたコンデンサーマイク「Rode NT5」2本をINPUT 15・16へつなぐ。この2本は会場のスピーカーには出さない。会場のスピーカー(メインのステレオミックス)は、OMNI OUT 1・2から、パワードスピーカー「Yamaha DZR10」の左右へ。配信用には、メインのステレオミックスに客席マイクを足したミックスを2つのマトリクス(MATRIX 1・2)で作り、OMNI OUT 7・8から出して、配信用PCにつないだオーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」のINPUT 1・2(ラインとして受ける)へ送る。OMNI OUT(XLR)からScarlettのコンボ端子のTRS側へは、XLR(メス)-TRSフォーンのケーブル(この問題ではTRSフォーンとして扱う)を使い、ScarlettとPCはUSBケーブルでつなごう。",
+        equipment: [
+          { id: "vo", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ambL", label: "Rode NT5(客席マイク・左)", icon: "NT5 L", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ambR", label: "Rode NT5(客席マイク・右)", icon: "NT5 R", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "dm3",
+            label: "Yamaha DM3 Standard(デジタルミキサー)",
+            icon: "DM3",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in15", label: "INPUT 15 (コンボ)", type: "xlr", dir: "in" },
+              { id: "in16", label: "INPUT 16 (コンボ)", type: "xlr", dir: "in" },
+              { id: "omni1", label: "OMNI OUT 1 (STEREO L)", type: "xlr", dir: "out" },
+              { id: "omni2", label: "OMNI OUT 2 (STEREO R)", type: "xlr", dir: "out" },
+              { id: "omni7", label: "OMNI OUT 7 (MATRIX 1)", type: "xlr", dir: "out" },
+              { id: "omni8", label: "OMNI OUT 8 (MATRIX 2)", type: "xlr", dir: "out" },
+              { id: "usb", label: "USB TO HOST", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DZR10(L)", icon: "DZR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DZR10(R)", icon: "DZR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 2i2(第4世代・配信用)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (コンボ・TRS側)", type: "trs", dir: "in" },
+              { id: "in2", label: "INPUT 2 (コンボ・TRS側)", type: "trs", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "配信用PC(OBS)", icon: "PC", ports: [{ id: "usb", label: "USB", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "ethernet"],
+        correctConnections: [
+          { from: "vo.out", to: "dm3.in1", cable: "xlr" },
+          { from: "ambL.out", to: "dm3.in15", cable: "xlr" },
+          { from: "ambR.out", to: "dm3.in16", cable: "xlr" },
+          { from: "dm3.omni1", to: "spkL.in", cable: "xlr" },
+          { from: "dm3.omni2", to: "spkR.in", cable: "xlr" },
+          { from: "dm3.omni7", to: "scarlett.in1", cable: "trs" },
+          { from: "dm3.omni8", to: "scarlett.in2", cable: "trs" },
+          { from: "scarlett.usb", to: "pc.usb", cable: "usb" },
+        ],
+        explain:
+          "小さな会場では、ドラムやギターアンプの音は、スピーカーを通さなくても客席に十分届いている。そのため会場用のミックスは、生音で足りない分(主にボーカル)だけを足した、偏ったバランスになっている。これをそのまま配信に流すと、ボーカルだけが大きく、楽器が遠い音になってしまう。そこで使うのがマトリクス。マトリクスは『できあがったミックスを、さらに混ぜ直して別の出口に送る』ための出力で、DM3はメインのステレオミックスに加えて、入力チャンネルの音も直接マトリクスへ送れる。ここでは、メインのステレオミックスに客席マイクのNT5を足して、拍手や会場の響きが聞こえる配信用のミックスを作っている。客席マイクは会場のスピーカーに出すと、ハウリング(スピーカーの音をマイクが拾ってキーンと鳴る現象)の原因になるので、メインのステレオには送らず、マトリクスにだけ送る。NT5はコンデンサーマイクなので、INPUT 15・16は48Vのファンタム電源をオンにする。注意したいのは、マトリクスに送ったメインのステレオミックスは、会場用のフェーダー操作の影響をそのまま受けること。ボーカルを会場向けに上げれば、配信でも上がる。だから、ヘッドホンでマトリクスの音を聞いて確かめながら、配信側のバランスを整えよう。DM3のOMNI OUTはラインレベル(=マイクより大きな信号)で出てくるので、Scarlettでは、マイク用のXLR側ではなく、ライン用のTRS側で受け、入力の大きさを下げめに設定する。なお、DM3はUSBで直接PCとつないで、マトリクスの音をPCへ送ることもできる。今回のように別のインターフェースを使う方法は、配信用PCをミキサーから離れた場所に置きたいときや、PAのPCと配信のPCを分けたいときに向いている。",
+      },
+    },
   ],
 };
