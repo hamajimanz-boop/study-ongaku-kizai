@@ -5169,5 +5169,43 @@ window.COURSES["gear_patch_practice"] = {
           "レコードの溝から針が拾う信号はとても小さく、しかも低音を弱め高音を強めた特殊なバランス(RIAAカーブ)で刻まれているため、そのままでは使えない。これを元に戻して大きくするのがフォノイコライザー(フォノプリアンプ)。AT-LP120XUSBにはこれが内蔵されていて、スイッチを『LINE』にするとライン入力にそのまま挿せる大きさの信号になる。SP-404MKIIにはPHONO入力がないので、スイッチが『PHONO』のままだと、音がとても小さく、低音のないシャカシャカした音になってしまう。SP-404MKIIのMIC端子にはファンタム電源がないとされるので、電源のいらないダイナミックマイクのSM57を使うのが手軽。GUITAR端子はギター用のハイインピーダンス入力なので、マイクはMIC側に挿す。どの入力の音をサンプリングするかや、入力の音量は本体の設定で調整する。録るときは、レベルメーターを見て、いちばん大きいところでも赤く振り切れない大きさにしておこう。AT-LP120XUSBにはUSB端子もあり、PCへ直接デジタルで録音することもできる。なお、市販のレコードをサンプリングした曲を作品として配信・販売するときは、原盤(録音そのもの)と作詞・作曲の権利者の両方から許可を得る『サンプリングのクリアランス』が必要になることが多いので、自分の練習用と、公開する作品とは分けて考えよう。",
       },
     },
+    {
+      id: "dd500_ev5_expression_feedback",
+      order: 118,
+      title: "エクスプレッションペダルでディレイの効き方を足で操作する(Boss DD-500 + Roland EV-5)",
+      category: "配線問題",
+      hook: "ソロの最後で、ディレイの音がどんどん重なって渦を巻くように盛り上げたい。でも、演奏中にしゃがんでツマミを回すわけにはいかない。そこで使うのがエクスプレッションペダル——踏み込む深さで、ツマミを回すのと同じ操作を足でできる。ギター・ディレイ・アンプ・ペダルを、正しい端子とケーブルで配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブで、ギターソロの終わりにディレイのフィードバック(=やまびこの音が何回繰り返されるか)を足で増やして盛り上げたい。ギター「Fender Stratocaster」の出力を、ディレイ「Boss DD-500」のINPUT A/MONOへ、ギター用のシールド(TSフォーン)でつなぐ。今回はアンプ1台のモノラルの構成なので、DD-500のOUTPUT A/MONOからギターアンプ「Fender Blues Junior IV」のINPUTへ、TSフォーンでつなぐ(B側の端子は使わない)。エクスプレッションペダル「Roland EV-5」は、本体から出ているTRSフォーン(ステレオフォーン)のケーブルを、DD-500の背面のCTL 1,2/EXP端子に挿す。DD-500の設定画面で、ペダルの役割(EXP FUNC)を『FEEDBACK』にしておこう。",
+        equipment: [
+          { id: "guitar", label: "Fender Stratocaster", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "dd500",
+            label: "Boss DD-500(デジタルディレイ)",
+            icon: "DD-500",
+            ports: [
+              { id: "inA", label: "INPUT A/MONO", type: "ts", dir: "in" },
+              { id: "inB", label: "INPUT B", type: "ts", dir: "in" },
+              { id: "outA", label: "OUTPUT A/MONO", type: "ts", dir: "out" },
+              { id: "outB", label: "OUTPUT B", type: "ts", dir: "out" },
+              { id: "ctlExp", label: "CTL 1,2/EXP (TRSフォーン)", type: "trs", dir: "in" },
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "ev5", label: "Roland EV-5(エクスプレッションペダル)", icon: "EV-5", ports: [{ id: "out", label: "ケーブル(TRSフォーンプラグ)", type: "trs", dir: "out" }] },
+          { id: "amp", label: "Fender Blues Junior IV(ギターアンプ)", icon: "BluesJr", ports: [{ id: "in", label: "INPUT (TS)", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "midi", "usb"],
+        correctConnections: [
+          { from: "guitar.out", to: "dd500.inA", cable: "ts" },
+          { from: "dd500.outA", to: "amp.in", cable: "ts" },
+          { from: "ev5.out", to: "dd500.ctlExp", cable: "trs" },
+        ],
+        explain:
+          "エクスプレッションペダルは、それ自体は音を出さず、中に入っている可変抵抗(=ボリュームのツマミと同じ部品)の値を、つないだ機材に伝えるだけの装置。そのため、ギターの音の通り道(ギター→ディレイ→アンプ)には入れず、DD-500のCTL 1,2/EXP端子という『操作用の入り口』に挿す。この端子は、ペダルの値を読み取るために3本の線を使うので、ケーブルはTRSフォーン(ステレオフォーン)が必要になる。EV-5はTRSのケーブルが本体についているので、そのまま挿せばよい。普通のギター用シールド(TS)を使った延長などをすると、ペダルの効き方がおかしくなる原因になる。DD-500では、設定画面の『CONTROL』でEXP FUNC(ペダルの役割)を選ぶ。選べるのは、TIME(ディレイの間隔)、FEEDBACK(繰り返しの回数)、TONE(音色)、E.LEVEL(ディレイ音の大きさ)、MOD DEPTH / MOD RATE(揺れの深さ / 速さ)など。この設定は、パッチ(=音色の記憶場所)ごとに変えることも、全パッチで共通にすることもできる。FEEDBACKを踏み込みすぎると、音が止まらず大きくなり続ける『発振』の状態になるので、本番前に、どこまで踏むとどうなるかを確かめておこう。また、DD-500のINPUT A/MONO端子は電源スイッチを兼ねていて、プラグを挿すと電源が入り、抜くと切れる。モノラルで使うときは、入力も出力もA/MONO側だけを使う。DD-500の取扱説明書では、エクスプレッションペダルは指定のEV-5を使うよう書かれているので、他社のペダルを使うときは、対応しているかを先に確認しよう。EV-5の側面にある最小値のツマミは、ペダルを戻しきったときの値を決めるもので、ふつうは0にしておくと、ペダルの動きの幅を最大まで使える。",
+      },
+    },
   ],
 };
