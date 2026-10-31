@@ -5635,5 +5635,79 @@ window.COURSES["gear_patch_practice"] = {
           "コンプは、入ってきた音が大きいほど音量を下げる機材。左右を別々のコンプにかけると、左だけ大きな音が来たときに左だけ下がり、右は下がらないので、音の中心が右にずれて聞こえる。ステレオリンクは、2台のコンプが『どれだけ音量を下げるか』の情報をお互いに送り合い、左右を同じだけ下げるようにする仕組み。だから、LINKの配線はAからBへの1本だけでは足りず、BからAへのもう1本も必要で、2本を交差させるようにつなぐ。リンクのケーブルは音そのものではなく、コンプの動きを伝える信号を運んでいるので、ドラムの音はINPUT/OUTPUTの配線だけを通る。配線したら、2台の前面にあるリンクのスイッチを両方ともオンにし、入力・出力のレベルやアタック・リリースなどの設定も、左右で同じ値にそろえよう。片方だけ設定がずれていると、リンクしていても左右で音色が変わってしまう。DAWでは、Pro Toolsの『ハードウェア・インサート』や、Logic Proの『I/O』プラグインのように、外部機材を通る行き帰りをプラグインのように挿す機能を使うと便利。外部機材を通る間に音がわずかに遅れるので、これらの機能の遅れの測定(ピング)を使って、ほかのトラックとタイミングをそろえておこう。なお、ClarettのINPUT 3・4はマイク用のXLR側ではなく、ライン用のTRS側で受ける。XLR側に挿すと、マイク用のプリアンプを通って音が大きすぎたり、余計な色づけが加わったりするので注意。",
       },
     },
+    {
+      id: "pedal_order_fuzz_wah_chain",
+      order: 127,
+      title: "ギターのエフェクターを正しい順番でつなぐ(Cry Baby GCB95 + Fuzz Face Mini + Boss TU-3 / CE-2W / DD-8)",
+      category: "配線問題",
+      hook: "エフェクターは、つなぐ順番を変えるだけで音がまったく変わる。特にビンテージ系のファズは、前に置く機材によって、太い音が『ジリジリした細い音』に化けてしまうことがある。ワウ、ファズ、チューナー、コーラス、ディレイを、それぞれの性質に合った順番でつなごう。",
+      patch: {
+        scenario:
+          "あなたは60年代のロックのような音を目指して、ペダルボードを組む。ギターは「Fender Stratocaster」、アンプは「Fender Blues Junior IV」。つなぐ順番は、ギター → ワウ「Dunlop Cry Baby GCB95」 → ゲルマニウム・ファズ「Dunlop FFM2 Fuzz Face Mini Germanium」 → チューナー「Boss TU-3」 → コーラス「Boss CE-2W」 → ディレイ「Boss DD-8」 → アンプのINPUT。CE-2WとDD-8はモノラルで使い、どちらもA(MONO)側の端子を使う(B側は使わない)。ペダル同士とギター・アンプは、すべてTSフォーンのシールドでつなごう。電源の配線はこの問題では省略する。",
+        equipment: [
+          { id: "gtr", label: "Fender Stratocaster(ギター)", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" }] },
+          {
+            id: "wah",
+            label: "Dunlop Cry Baby GCB95(ワウ)",
+            icon: "Wah",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "fuzz",
+            label: "Dunlop FFM2 Fuzz Face Mini Germanium(ファズ)",
+            icon: "Fuzz",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "tuner",
+            label: "Boss TU-3(チューナー)",
+            icon: "TU-3",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "chorus",
+            label: "Boss CE-2W(コーラス)",
+            icon: "CE-2W",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "outA", label: "OUTPUT A (MONO)", type: "ts", dir: "out" },
+              { id: "outB", label: "OUTPUT B", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "delay",
+            label: "Boss DD-8(ディレイ)",
+            icon: "DD-8",
+            ports: [
+              { id: "inA", label: "INPUT A (MONO)", type: "ts", dir: "in" },
+              { id: "inB", label: "INPUT B", type: "ts", dir: "in" },
+              { id: "outA", label: "OUTPUT A (MONO)", type: "ts", dir: "out" },
+              { id: "outB", label: "OUTPUT B", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "amp", label: "Fender Blues Junior IV(ギターアンプ)", icon: "BJ IV", ports: [{ id: "in", label: "INPUT", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker", "power"],
+        correctConnections: [
+          { from: "gtr.out", to: "wah.in", cable: "ts" },
+          { from: "wah.out", to: "fuzz.in", cable: "ts" },
+          { from: "fuzz.out", to: "tuner.in", cable: "ts" },
+          { from: "tuner.out", to: "chorus.in", cable: "ts" },
+          { from: "chorus.outA", to: "delay.inA", cable: "ts" },
+          { from: "delay.outA", to: "amp.in", cable: "ts" },
+        ],
+        explain:
+          "この順番のポイントは、ゲルマニウム・ファズの前に何を置くか。Fuzz Faceのような古い設計のファズは、ギターのピックアップと直接つながったときにいちばん良い音が出るように作られていて、ギターのボリュームを絞ると歪みが減ってきれいな音に近づく、という反応も、この直接のつながりがあってこそ。ところが、Bossのコンパクトエフェクターの多くは、オフのときも信号が『バッファ』(=信号を整えて送り出す小さな回路)を通る仕組みになっている。これをファズの前に置くと、ファズから見るとギターではなくバッファがつながっている状態になり、太い音がジリジリした細い音に変わりやすいと言われる。だからチューナーのTU-3はファズの後ろに置き、ファズの前には、オフのときに信号が素通りする(バッファを通らない)ワウだけを置いている。ワウとファズの順番は好みが分かれるところで、ワウ→ファズはジミ・ヘンドリックスのような、ワウの動きがファズで強調される音、ファズ→ワウは、歪んだ音をワウで削るような音になる。ただ、ファズの後ろにワウを置くと、組み合わせによってはファズの音が崩れることがあるので、実際に鳴らして確かめよう。コーラスやディレイのような、音を揺らしたり繰り返したりするエフェクターは、歪みの後ろに置くのが基本。ディレイを歪みの前に置くと、繰り返しの音まで一緒に歪んで、にごった音になりやすい。チューナーをこの位置に置くと、チューニングのときはファズとワウを必ずオフにしておく必要がある(オンのままだと音程を正しく測れない)。なお、CE-2WとDD-8はステレオにも対応していて、アンプを2台使うときはB側の端子も使える。今回はアンプ1台なので、A(MONO)側だけでつなごう。",
+      },
+    },
   ],
 };
