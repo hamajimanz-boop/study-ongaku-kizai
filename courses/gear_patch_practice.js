@@ -5578,5 +5578,62 @@ window.COURSES["gear_patch_practice"] = {
           "CUBE Street EXは、4つのチャンネルを持つ小さなミキサー付きのステレオアンプ。CH1(MIC/INSTRUMENT)とCH2(MIC/GUITAR)は、XLRとフォーンのどちらも挿せるコンボ端子で、それぞれ専用の音量・EQ(=音質の調整)・リバーブを持つ。ボーカルは、SELECTスイッチをMICにしたCH1へ。ギターはCH2へつなぎ、TYPEスイッチを『A-GUITAR』(=ピックアップ付きのアコースティックギター向けの設定)にする。CH2のTYPEには、エレキギター用のCLEAN・CRUNCH・LEADや、エレキギターの音をアコースティックギター風に変える『ACOUSTIC SIM』もあるので、エレアコなのにLEADのままで歪んでしまう、という失敗に気をつけよう。キーボードはマイクやギターより大きなライン信号なので、マイク用の入力ではなく、CH3のLINE INへ。L/MONOとRの2本でつなげば、reface CPのコーラスやトレモロの左右の広がりもそのまま出せる(1本しかないときはL/MONOに挿せば、左右の音がまとまって出る)。電池の持ちは出力の設定で大きく変わり、Rolandの仕様では、アルカリ単3電池8本でMAX(50W)が約4時間、NORMAL(25W)が約8時間、ECO(10W)が約16時間とされている。路上では、広い場所でも意外とNORMALで足りることが多いので、まずは控えめの設定から試そう。もっと大きな会場で鳴らしたくなったら、LINE OUTから会場のミキサーへ送ったり、STEREO LINKで2台目のCUBE Street EXとつないで左右に1台ずつ置いたりもできる。なお、駅前や公園での演奏は、場所によって管理者や警察の許可が必要になるので、事前に確認しておこう。",
       },
     },
+    {
+      id: "distressor_stereo_link_drum_bus",
+      order: 126,
+      title: "2台のコンプをステレオリンクして、ドラムのまとめにかける(Empirical Labs Distressor EL8-X ×2)",
+      category: "配線問題",
+      hook: "ステレオのドラムに、モノラルのコンプを左右1台ずつかけると、左のタムを叩いたときだけ左側が縮み、ドラム全体が右に寄って聞こえる——こんな『左右のふらつき』が起きる。これを防ぐのが、2台のコンプの動きをそろえる『ステレオリンク』。リンク用のケーブルを正しく交差させて、DAWのドラムのまとめに外部コンプをかける配線を組もう。",
+      patch: {
+        scenario:
+          "あなたはミックス中のドラムのステレオのまとめ(=ドラム全部を1つにまとめたトラック)に、ハードウェアのコンプ「Empirical Labs Distressor EL8-X」を2台使ってかける。オーディオインターフェース「Focusrite Clarett+ 8Pre」のLINE OUTPUT 3(左)・4(右)から、Distressor A(左用)とDistressor B(右用)のINPUT(XLR)へ送り、それぞれのOUTPUT(XLR)から、ClarettのINPUT 3・4(コンボ端子のTRS側・ラインとして受ける)へ戻す。TRS側とXLR側をつなぐケーブルは、TRSフォーン-XLRのケーブル(この問題ではTRSフォーンとして扱う)を使う。さらに、2台の動きをそろえるため、AのLINK OUTからBのLINK INへ、BのLINK OUTからAのLINK INへ、付属のバランスケーブル(TRSフォーン)でつなごう。",
+        equipment: [
+          {
+            id: "clarett",
+            label: "Focusrite Clarett+ 8Pre(オーディオインターフェース)",
+            icon: "8Pre",
+            ports: [
+              { id: "out3", label: "LINE OUTPUT 3 (TRS)", type: "trs", dir: "out" },
+              { id: "out4", label: "LINE OUTPUT 4 (TRS)", type: "trs", dir: "out" },
+              { id: "in3", label: "INPUT 3 (コンボ・TRS側)", type: "trs", dir: "in" },
+              { id: "in4", label: "INPUT 4 (コンボ・TRS側)", type: "trs", dir: "in" },
+            ],
+          },
+          {
+            id: "distA",
+            label: "Distressor EL8-X A(左用)",
+            icon: "Dist A",
+            ports: [
+              { id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out", label: "OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "linkIn", label: "LINK IN (TRS)", type: "trs", dir: "in" },
+              { id: "linkOut", label: "LINK OUT (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "distB",
+            label: "Distressor EL8-X B(右用)",
+            icon: "Dist B",
+            ports: [
+              { id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out", label: "OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "linkIn", label: "LINK IN (TRS)", type: "trs", dir: "in" },
+              { id: "linkOut", label: "LINK OUT (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "wordclock"],
+        correctConnections: [
+          { from: "clarett.out3", to: "distA.in", cable: "trs" },
+          { from: "clarett.out4", to: "distB.in", cable: "trs" },
+          { from: "distA.out", to: "clarett.in3", cable: "trs" },
+          { from: "distB.out", to: "clarett.in4", cable: "trs" },
+          { from: "distA.linkOut", to: "distB.linkIn", cable: "trs" },
+          { from: "distB.linkOut", to: "distA.linkIn", cable: "trs" },
+        ],
+        explain:
+          "コンプは、入ってきた音が大きいほど音量を下げる機材。左右を別々のコンプにかけると、左だけ大きな音が来たときに左だけ下がり、右は下がらないので、音の中心が右にずれて聞こえる。ステレオリンクは、2台のコンプが『どれだけ音量を下げるか』の情報をお互いに送り合い、左右を同じだけ下げるようにする仕組み。だから、LINKの配線はAからBへの1本だけでは足りず、BからAへのもう1本も必要で、2本を交差させるようにつなぐ。リンクのケーブルは音そのものではなく、コンプの動きを伝える信号を運んでいるので、ドラムの音はINPUT/OUTPUTの配線だけを通る。配線したら、2台の前面にあるリンクのスイッチを両方ともオンにし、入力・出力のレベルやアタック・リリースなどの設定も、左右で同じ値にそろえよう。片方だけ設定がずれていると、リンクしていても左右で音色が変わってしまう。DAWでは、Pro Toolsの『ハードウェア・インサート』や、Logic Proの『I/O』プラグインのように、外部機材を通る行き帰りをプラグインのように挿す機能を使うと便利。外部機材を通る間に音がわずかに遅れるので、これらの機能の遅れの測定(ピング)を使って、ほかのトラックとタイミングをそろえておこう。なお、ClarettのINPUT 3・4はマイク用のXLR側ではなく、ライン用のTRS側で受ける。XLR側に挿すと、マイク用のプリアンプを通って音が大きすぎたり、余計な色づけが加わったりするので注意。",
+      },
+    },
   ],
 };
