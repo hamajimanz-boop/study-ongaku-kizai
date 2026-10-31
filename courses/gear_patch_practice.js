@@ -5709,5 +5709,58 @@ window.COURSES["gear_patch_practice"] = {
           "この順番のポイントは、ゲルマニウム・ファズの前に何を置くか。Fuzz Faceのような古い設計のファズは、ギターのピックアップと直接つながったときにいちばん良い音が出るように作られていて、ギターのボリュームを絞ると歪みが減ってきれいな音に近づく、という反応も、この直接のつながりがあってこそ。ところが、Bossのコンパクトエフェクターの多くは、オフのときも信号が『バッファ』(=信号を整えて送り出す小さな回路)を通る仕組みになっている。これをファズの前に置くと、ファズから見るとギターではなくバッファがつながっている状態になり、太い音がジリジリした細い音に変わりやすいと言われる。だからチューナーのTU-3はファズの後ろに置き、ファズの前には、オフのときに信号が素通りする(バッファを通らない)ワウだけを置いている。ワウとファズの順番は好みが分かれるところで、ワウ→ファズはジミ・ヘンドリックスのような、ワウの動きがファズで強調される音、ファズ→ワウは、歪んだ音をワウで削るような音になる。ただ、ファズの後ろにワウを置くと、組み合わせによってはファズの音が崩れることがあるので、実際に鳴らして確かめよう。コーラスやディレイのような、音を揺らしたり繰り返したりするエフェクターは、歪みの後ろに置くのが基本。ディレイを歪みの前に置くと、繰り返しの音まで一緒に歪んで、にごった音になりやすい。チューナーをこの位置に置くと、チューニングのときはファズとワウを必ずオフにしておく必要がある(オンのままだと音程を正しく測れない)。なお、CE-2WとDD-8はステレオにも対応していて、アンプを2台使うときはB側の端子も使える。今回はアンプ1台なので、A(MONO)側だけでつなごう。",
       },
     },
+    {
+      id: "delay_fill_speakers_dcx2496",
+      order: 128,
+      title: "会場の後ろに、音を遅らせて鳴らす『ディレイスピーカー』を足す(Behringer DCX2496 + Yamaha DZR12 / DZR10)",
+      category: "配線問題",
+      hook: "奥行きのある会場では、ステージのスピーカーの音が後ろの席まで届きにくい。そこで客席の途中にスピーカーを足すのだが、ただ同じ音を流すだけでは、近くのスピーカーの音と、遅れて届くステージの音が二重に聞こえて、エコーのように濁ってしまう。足したスピーカーの音を、ちょうどよい時間だけ遅らせる配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは奥行き約40mの体育館で行われる音楽イベントのPAを担当する。ミキサーは「Yamaha MG16XU」。ミキサーのSTEREO OUT L/R(XLR)から、スピーカー用のプロセッサー「Behringer DCX2496 ULTRADRIVE PRO」のINPUT A・Bへつなぐ。DCX2496のOUTPUT 1・2からは、ステージの左右に置くパワードスピーカー「Yamaha DZR12」(メイン)へ。OUTPUT 3・4からは、ステージから20m離れた客席の途中の左右に置くパワードスピーカー「Yamaha DZR10」(ディレイスピーカー)へつなぐ。すべてXLRケーブルを使う。DCX2496のINPUT CとOUTPUT 5・6はこの問題では使わない。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha MG16XU(ミキサー)",
+            icon: "MG16XU",
+            ports: [
+              { id: "stL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "stR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "dcx",
+            label: "Behringer DCX2496(スピーカープロセッサー)",
+            icon: "DCX2496",
+            ports: [
+              { id: "inA", label: "INPUT A (XLR)", type: "xlr", dir: "in" },
+              { id: "inB", label: "INPUT B (XLR)", type: "xlr", dir: "in" },
+              { id: "inC", label: "INPUT C (XLR)", type: "xlr", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (XLR)", type: "xlr", dir: "out" },
+              { id: "out3", label: "OUTPUT 3 (XLR)", type: "xlr", dir: "out" },
+              { id: "out4", label: "OUTPUT 4 (XLR)", type: "xlr", dir: "out" },
+              { id: "out5", label: "OUTPUT 5 (XLR)", type: "xlr", dir: "out" },
+              { id: "out6", label: "OUTPUT 6 (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "mainL", label: "Yamaha DZR12(メイン・L)", icon: "DZR12 L", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "mainR", label: "Yamaha DZR12(メイン・R)", icon: "DZR12 R", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "delayL", label: "Yamaha DZR10(ディレイ・L)", icon: "DZR10 L", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "delayR", label: "Yamaha DZR10(ディレイ・R)", icon: "DZR10 R", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "speaker", "ethernet"],
+        correctConnections: [
+          { from: "mixer.stL", to: "dcx.inA", cable: "xlr" },
+          { from: "mixer.stR", to: "dcx.inB", cable: "xlr" },
+          { from: "dcx.out1", to: "mainL.in", cable: "xlr" },
+          { from: "dcx.out2", to: "mainR.in", cable: "xlr" },
+          { from: "dcx.out3", to: "delayL.in", cable: "xlr" },
+          { from: "dcx.out4", to: "delayR.in", cable: "xlr" },
+        ],
+        explain:
+          "電気の信号はほぼ一瞬でスピーカーに届くが、空気中の音は1秒に約340m(気温20℃で約343m)しか進まない。ステージから20m離れた席には、メインの音が約58ミリ秒(20 ÷ 343 ≒ 0.058秒)遅れて届く。ディレイスピーカーを遅らせずに鳴らすと、その席では『近くのスピーカーの音』と『58ミリ秒遅れたメインの音』が二重に聞こえ、言葉が聞き取りにくくなる。そこで、DCX2496の出力ごとの遅延(ディレイ)機能で、OUTPUT 3・4だけを約58ミリ秒遅らせて、メインの音が届くのとタイミングをそろえる。さらに、そこから10ミリ秒前後だけ多めに遅らせるのがよく使われるコツ。人の耳は、先に届いた音の方向から音が鳴っていると感じる性質(先行音効果、ハース効果)があるので、メインの音がほんの少し先に届くようにすると、すぐ近くのスピーカーが鳴っていても、音はステージから聞こえてくるように感じられる。遅延の量は、メインとディレイスピーカーの距離をメジャーやレーザー距離計で測って計算し、最後は測定マイクや自分の耳で確かめて調整する。DCX2496は、出力ごとに最大で約582ミリ秒(距離にして約200m)まで遅らせられるとされる。ディレイスピーカーは、後ろの席の聞こえにくさを補うためのものなので、メインより音量を控えめにし、低音もあまり出さないようにする(低音を出しすぎると、会場全体がもやもやしやすい)。OUTPUT 1・2(メイン)とOUTPUT 3・4(ディレイ)が別々の出力になっているので、遅延・音量・EQをそれぞれ別に設定できる。これが、ミキサーからスピーカーへ直接つながず、間にプロセッサーをはさむ理由だ。",
+      },
+    },
   ],
 };
