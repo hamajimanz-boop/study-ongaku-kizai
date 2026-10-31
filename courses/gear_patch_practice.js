@@ -5531,5 +5531,52 @@ window.COURSES["gear_patch_practice"] = {
           "レスリースピーカーは、高音を出すホーンと、低音を受け持つドラム状のローターが、モーターで回転する仕組み。音の出る向きが回り続けるので、音の大きさと高さが周期的に揺れ、オルガン特有のうねりが生まれる。回転には、ゆっくりの『SLOW(コラール)』と速い『FAST(トレモロ)』があり、演奏中に切り替えるのが醍醐味だ。11ピンケーブルは、オルガンの音に加えて、この回転の切り替えなどの制御信号もまとめて送るケーブル。だから、XK-5の操作パネルやフットスイッチで、つないだ本物のレスリーの回転を切り替えられる。XK-5のクイックスタートガイドでは、11ピンでレスリーをつなぐと、XK-5の中に入っている『デジタル・レスリー』(=回転スピーカーの音をまねる機能)は使われなくなると説明されている。本物の回転にまかせるので、二重に揺れることはない。一方、LINE INPUT(フォーン)は、ハモンド以外のキーボードをつなぐための入力で、ここにつなぐとオルガンからは回転を切り替えられない。録音では、ホーンを左右から2本のマイクで狙うと、ホーンが回る様子が左右の動きとしてステレオで記録できる。ローターは低音が中心なので、低音に強いMD 421-IIを1本立てる。回転するものの風が当たるので、マイクはルーバーから少し離しておこう。SM57もMD 421-IIもダイナミックマイクなので、48Vのファンタム電源は必要ない。ミックスでは、ホーン左右を左右に広げ、ローターを真ん中に置くのが基本の形。なお、XK-5のLINE OUTは、11ピンでレスリーをつないでいる間も同時に使える。クイックスタートガイドでは、オルガン以外の音色(エクストラ・ボイス)を聞くために、LINE OUTをキーボードアンプへつなぐ使い方が紹介されている。",
       },
     },
+    {
+      id: "busking_battery_amp_cube_street",
+      order: 125,
+      title: "路上ライブ用の電池で動くアンプで、歌とギターとキーボードを鳴らす(Roland CUBE Street EX)",
+      category: "配線問題",
+      hook: "コンセントのない駅前の広場や公園でライブをするなら、電池で動くアンプが頼りになる。1台に歌のマイク・アコースティックギター・キーボードをまとめてつなげる便利な機材だが、どの入力に何を挿すかで音が大きく変わる。2人組の路上ライブの配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは2人組のユニットで路上ライブをする。アンプは、単3電池8本で動くステレオアンプ「Roland CUBE Street EX」。ボーカルマイク「Shure SM58」はCH1(MIC/INSTRUMENT)のコンボ端子へXLRケーブルで、ピックアップ付きのエレクトリック・アコースティックギター「Yamaha APX600」はCH2(MIC/GUITAR)のコンボ端子のフォーン側へTSフォーンでつなぐ。相方が弾くキーボード「Yamaha reface CP」は、本体のOUTPUT L/MONO・Rから、CH3のLINE IN L/MONO・Rへ、TSフォーン2本でステレオのままつなぐ。AUX IN、LINE OUT、i-CUBE LINK(スマートフォンをつなぐ端子)はこの問題では使わない。",
+        equipment: [
+          { id: "vo", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "gtr", label: "Yamaha APX600(エレアコ)", icon: "APX", ports: [{ id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" }] },
+          {
+            id: "reface",
+            label: "Yamaha reface CP(キーボード)",
+            icon: "reface",
+            ports: [
+              { id: "outL", label: "OUTPUT L/MONO (フォーン)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "cube",
+            label: "Roland CUBE Street EX(電池駆動アンプ)",
+            icon: "CUBE",
+            ports: [
+              { id: "ch1", label: "CH1 MIC/INSTRUMENT (コンボ)", type: "xlr", dir: "in" },
+              { id: "ch2", label: "CH2 MIC/GUITAR (コンボ・フォーン側)", type: "ts", dir: "in" },
+              { id: "lineL", label: "CH3 LINE IN L/MONO (フォーン)", type: "ts", dir: "in" },
+              { id: "lineR", label: "CH3 LINE IN R (フォーン)", type: "ts", dir: "in" },
+              { id: "aux", label: "AUX IN / STEREO LINK IN (フォーン)", type: "ts", dir: "in" },
+              { id: "lineOutL", label: "LINE OUT L/MONO (フォーン)", type: "ts", dir: "out" },
+              { id: "lineOutR", label: "LINE OUT R (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "speaker", "power"],
+        correctConnections: [
+          { from: "vo.out", to: "cube.ch1", cable: "xlr" },
+          { from: "gtr.out", to: "cube.ch2", cable: "ts" },
+          { from: "reface.outL", to: "cube.lineL", cable: "ts" },
+          { from: "reface.outR", to: "cube.lineR", cable: "ts" },
+        ],
+        explain:
+          "CUBE Street EXは、4つのチャンネルを持つ小さなミキサー付きのステレオアンプ。CH1(MIC/INSTRUMENT)とCH2(MIC/GUITAR)は、XLRとフォーンのどちらも挿せるコンボ端子で、それぞれ専用の音量・EQ(=音質の調整)・リバーブを持つ。ボーカルは、SELECTスイッチをMICにしたCH1へ。ギターはCH2へつなぎ、TYPEスイッチを『A-GUITAR』(=ピックアップ付きのアコースティックギター向けの設定)にする。CH2のTYPEには、エレキギター用のCLEAN・CRUNCH・LEADや、エレキギターの音をアコースティックギター風に変える『ACOUSTIC SIM』もあるので、エレアコなのにLEADのままで歪んでしまう、という失敗に気をつけよう。キーボードはマイクやギターより大きなライン信号なので、マイク用の入力ではなく、CH3のLINE INへ。L/MONOとRの2本でつなげば、reface CPのコーラスやトレモロの左右の広がりもそのまま出せる(1本しかないときはL/MONOに挿せば、左右の音がまとまって出る)。電池の持ちは出力の設定で大きく変わり、Rolandの仕様では、アルカリ単3電池8本でMAX(50W)が約4時間、NORMAL(25W)が約8時間、ECO(10W)が約16時間とされている。路上では、広い場所でも意外とNORMALで足りることが多いので、まずは控えめの設定から試そう。もっと大きな会場で鳴らしたくなったら、LINE OUTから会場のミキサーへ送ったり、STEREO LINKで2台目のCUBE Street EXとつないで左右に1台ずつ置いたりもできる。なお、駅前や公園での演奏は、場所によって管理者や警察の許可が必要になるので、事前に確認しておこう。",
+      },
+    },
   ],
 };
