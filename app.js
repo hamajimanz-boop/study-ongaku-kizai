@@ -1224,6 +1224,8 @@ function gradeCase(course, unit) {
 
 // ---------- MIX TIP (即断クイズ: 状況→選択肢→即採点) ----------
 // unit.tip = { situation, question, choices:[...], answer, explain, nextStep? }
+// unit.furtherLearning(省略可)を書くと、採点後の解説の下に「さらに学ぶ」欄を表示する
+// (答える前に見えるとヒントになるため、採点後にだけ出す)。
 let tipRuntime = null;
 
 function renderTip(courseId, unitId) {
@@ -1276,6 +1278,7 @@ function gradeTip(course, unit, chosenIndex) {
     <p class="${pass ? "fb-correct" : "fb-wrong"}">${correct ? "正解!" : "不正解"}</p>
     <p class="fb-explain">${t.explain || ""}</p>
     ${t.nextStep ? `<p class="fb-explain"><strong>次の一手: </strong>${t.nextStep}</p>` : ""}
+    ${furtherLearningHtml(unit)}
     <div class="result-actions">
       <button type="button" class="btn" id="tipRetryBtn">もう一度挑戦する</button>
       <a class="btn btn-primary" href="#/course/${course.id}">${course.title}に戻る</a>
