@@ -5983,5 +5983,45 @@ window.COURSES["gear_patch_practice"] = {
           "ノイズゲートは『音が小さくなったら、音を止める』という仕組みなので、何の音の大きさを見て判断するかがとても大事になる。DS-1の後ろにNS-2をふつうに並べると、NS-2は歪んでノイズの混ざった音を見て判断することになり、ノイズを消そうと効きを強くすると、弾いた音が小さくなっていく途中で音まで止められて、サステインが不自然に切れてしまう。SEND/RETURNを使うと、NS-2はINPUTに入ってきた『ギターそのままのきれいな音』を見て判断しながら、実際に音を止めるのはRETURNから戻ってきた『歪んだ音』のほうになる、とBossは説明している。弦が鳴っている間はギターの音を正しく感じ取れるので、ノイズはしっかり消しつつ、音の伸びは残しやすい。間違えやすいのはSENDとRETURNの向き。SENDは『NS-2から外へ送り出す』端子なのでDS-1のINPUTへ、RETURNは『NS-2へ戻ってくる』端子なのでDS-1のOUTPUTから受ける。逆につなぐと音が出ない。ディレイをループの中に入れないのもポイント。ディレイの繰り返し音は、ギターを弾き終えた後も鳴り続けるのが持ち味なのに、ループに入れるとギターの音が止まった瞬間に、繰り返しの音まで止められてしまう。だからディレイやリバーブは、NS-2のOUTPUTより後ろに置く(NS-2の取扱説明書でも、ディレイやリバーブはループに入れず、NS-2とアンプの間につなぐよう案内されている)。歪みのエフェクターを2台以上使うときは、それらをまとめてSENDとRETURNの間に並べればよい。ノイズゲートの効き具合(THRESHOLD)は、強くしすぎると小さく弾いた音まで消えてしまうので、弾かないときのノイズがちょうど消えるくらいから少しずつ上げていこう。",
       },
     },
+    {
+      id: "glyn_johns_drums_id44",
+      order: 133,
+      title: "グリン・ジョンズ方式で、4本のマイクだけでドラムを録る(Audio-Technica AT4040 ×2 + Shure SM57 + AKG D112 MKII + Audient iD44 MKII)",
+      category: "配線問題",
+      hook: "ドラムを録るには、太鼓1つずつにマイクを立てて10本以上使うやり方もあるが、マイクプリアンプが4つしかないオーディオインターフェースでも、迫力のあるドラムは録れる。レッド・ツェッペリンやザ・フーなどの録音で知られるエンジニアの名前がついた『グリン・ジョンズ方式』で、4本のマイクを配線しよう。",
+      patch: {
+        scenario:
+          "あなたはリハーサルスタジオでバンドのデモを録る。オーディオインターフェースは、マイクプリアンプを4つ持つ「Audient iD44 MKII」。マイクは、ドラムセットの上に立てる1本目のオーバーヘッド(スネアの真上あたり)と、フロアタムの横から、スネアの方向へ向けて低めに立てる2本目に、コンデンサーマイク「Audio-Technica AT4040」を1本ずつ使う。スネアにはダイナミックマイク「Shure SM57」、バスドラムにはバスドラム用のダイナミックマイク「AKG D112 MKII」を使う。iD44 MKIIのMIC/LINE INPUT 1にバスドラム、2にスネア、3にスネア上のオーバーヘッド、4にフロアタム横のマイクをXLRケーブルでつなぐ。iD44 MKIIのUSB-Cは、MacBook ProのUSB-Cへつなぐ。",
+        equipment: [
+          { id: "kick", label: "AKG D112 MKII(バスドラム)", icon: "D112", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "snare", label: "Shure SM57(スネア)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ohTop", label: "Audio-Technica AT4040(スネア上のオーバーヘッド)", icon: "AT4040 上", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "ohSide", label: "Audio-Technica AT4040(フロアタム横)", icon: "AT4040 横", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "iface",
+            label: "Audient iD44 MKII(オーディオインターフェース)",
+            icon: "iD44",
+            ports: [
+              { id: "in1", label: "MIC/LINE INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "MIC/LINE INPUT 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "in3", label: "MIC/LINE INPUT 3 (XLR)", type: "xlr", dir: "in" },
+              { id: "in4", label: "MIC/LINE INPUT 4 (XLR)", type: "xlr", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "MacBook Pro", icon: "MacBk", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "optical"],
+        correctConnections: [
+          { from: "kick.out", to: "iface.in1", cable: "xlr" },
+          { from: "snare.out", to: "iface.in2", cable: "xlr" },
+          { from: "ohTop.out", to: "iface.in3", cable: "xlr" },
+          { from: "ohSide.out", to: "iface.in4", cable: "xlr" },
+          { from: "iface.usb", to: "mac.usb", cable: "usb" },
+        ],
+        explain:
+          "グリン・ジョンズ方式の主役は、2本のオーバーヘッド。1本はドラムセットの上から全体を、もう1本はフロアタムの外側からスネアの方向へ向けて、セットを横から捉える。この2本だけで、シンバルからタムまでドラムセット全体の音と、左右の広がりが録れる。そこに、輪郭をはっきりさせるためのスネアとバスドラムのマイクを足したのが、4本の形だ。この方式では、2本のオーバーヘッドの『スネアからの距離』をそろえるのがよく言われるコツ。スネアの音が2本のマイクに届く時間がずれると、2つの音が打ち消し合って、スネアが細く、遠い音になってしまう(位相のずれ)。マイクケーブルの端をスネアの中心に当てて、それぞれのマイクまでの長さを測ってそろえるやり方がよく紹介されている。コンデンサーマイクのAT4040は、48Vのファンタム電源で動くので、iD44 MKIIの入力3と4だけ48Vをオンにする(iD44 MKIIは入力ごとにオン・オフできる)。ダイナミックマイクのSM57とD112 MKIIには電源は要らない。ミックスでは、2本のオーバーヘッドを左右に振って広がりを作り、スネアとバスドラムは真ん中に置くのが基本。2本のオーバーヘッドは完全に左右いっぱいに振らず、少し内側に寄せたほうがまとまりよく聞こえる、とも言われる。マイクの数が少ないぶん、部屋の響きや、ドラマー自身の叩くバランスがそのまま録音に出る。録る前にドラマーに叩いてもらい、ヘッドホンで聴きながらマイクの位置を少しずつ動かして決めよう。",
+      },
+    },
   ],
 };
