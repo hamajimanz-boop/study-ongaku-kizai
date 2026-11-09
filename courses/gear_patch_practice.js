@@ -5859,5 +5859,73 @@ window.COURSES["gear_patch_practice"] = {
           "ポイントは、サブウーファーを左右のモニターの『横に並べる』のではなく、インターフェースとモニターの『間に挟む』こと。HS8Sは、INPUT L/Rに入ってきた音を中で1つにまとめて、低い音だけを自分のスピーカーで鳴らす。同時に、入ってきた左右の音をそのままOUTPUT L/Rから送り出すので、ここから左右のHS5へつなぐ。こうすると、HS8Sの背面にあるつまみで、①サブウーファーがどの高さの音まで鳴らすか(HIGH CUT)と、②HS5へ送る音から低い音を削るかどうか(LOW CUT)を、80Hz〜120Hzの範囲で決められる。HS5が鳴らせる低音はおおよそ50Hzあたりまでなので、LOW CUTを使わないと、サブウーファーとHS5の両方が同じ低音を鳴らして、その帯域だけ膨らんでしまう。LOW CUTをオンにしてHS5の負担を減らし、HIGH CUTを同じくらいの周波数に合わせて、低音を『受け渡す』ように設定するのが基本の考え方(どの値がよいかは部屋によって変わるので、聴き慣れた曲で確かめよう)。HS8SにはPHASE(=位相)の切り替えスイッチもあり、置く場所によってはこれを切り替えたほうが低音がしっかり出ることがある。よくある間違いは、インターフェースのヘッドホン端子や、RCAの民生用端子からつなごうとすること。業務用のTRS/XLRのバランス接続(=ノイズに強い接続)でつなげば、ケーブルが長くなってもノイズを拾いにくい。また、スピーカーケーブルはパッシブスピーカー(=アンプを内蔵していないスピーカー)用なので、パワードのHS8SとHS5の間では使わない。サブウーファーは床に置くことが多く、部屋の角に近いほど低音が強く出やすい。左右のHS5の真ん中あたりの、少し前か後ろから始めて、置き場所を少しずつ動かして確かめよう。",
       },
     },
+    {
+      id: "partyline_intercom_clearcom",
+      order: 131,
+      title: "舞台スタッフ用のインカムを配線する(Clear-Com MS-702 + RS-701)",
+      category: "配線問題",
+      hook: "コンサートや演劇の本番中、音響・照明・舞台袖のスタッフは、離れた場所にいながらヘッドセットで声をかけ合って、きっかけ(=次の操作に入るタイミング)をそろえている。この『インカム』は、実はふつうのマイクケーブル1本で何人もつなげる仕組みになっている。メインステーションからベルトパック、そしてヘッドセットまでを配線しよう。",
+      patch: {
+        scenario:
+          "あなたはホールコンサートの音響チーフで、客席後方の音響卓の横にインカムのメインステーション「Clear-Com MS-702」(2チャンネル)を置く。チャンネルAは『舞台進行』用で、舞台監督(上手袖)と、下手袖の舞台スタッフがつながる。チャンネルBは『照明』用で、照明オペレーターがつながる。MS-702の背面には、チャンネルごとにINTERCOM(XLR 3ピン・オス)が3つずつある。各スタッフは1チャンネル用のベルトパック「Clear-Com RS-701」を腰につけ、片耳のヘッドセット「Clear-Com CC-300」をつなぐ。RS-701には、ラインの入口(XLR 3ピン・メス)と、次のベルトパックへ送るための送り出し(XLR 3ピン・オス)がある。舞台監督のベルトパックから下手袖のベルトパックへは、送り出し端子から数珠つなぎ(=デイジーチェーン)にする。インカムのラインはふつうのマイク用XLRケーブルでつなぐ。CC-300のケーブルの先はXLR 4ピンだが、この問題ではXLRケーブルとして扱う。MS-702の残りのINTERCOM端子は使わない。",
+        equipment: [
+          {
+            id: "ms",
+            label: "Clear-Com MS-702(メインステーション)",
+            icon: "MS-702",
+            ports: [
+              { id: "a1", label: "CH A INTERCOM 1 (XLR-3M)", type: "xlr", dir: "out" },
+              { id: "a2", label: "CH A INTERCOM 2 (XLR-3M)", type: "xlr", dir: "out" },
+              { id: "b1", label: "CH B INTERCOM 1 (XLR-3M)", type: "xlr", dir: "out" },
+              { id: "b2", label: "CH B INTERCOM 2 (XLR-3M)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "bpSM",
+            label: "Clear-Com RS-701(舞台監督・上手袖)",
+            icon: "RS-701 SM",
+            ports: [
+              { id: "in", label: "INTERCOM IN (XLR-3F)", type: "xlr", dir: "in" },
+              { id: "thru", label: "INTERCOM 送り出し (XLR-3M)", type: "xlr", dir: "out" },
+              { id: "hs", label: "HEADSET (XLR-4M)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "bpSL",
+            label: "Clear-Com RS-701(下手袖スタッフ)",
+            icon: "RS-701 下手",
+            ports: [
+              { id: "in", label: "INTERCOM IN (XLR-3F)", type: "xlr", dir: "in" },
+              { id: "thru", label: "INTERCOM 送り出し (XLR-3M)", type: "xlr", dir: "out" },
+              { id: "hs", label: "HEADSET (XLR-4M)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "bpLX",
+            label: "Clear-Com RS-701(照明オペレーター)",
+            icon: "RS-701 照明",
+            ports: [
+              { id: "in", label: "INTERCOM IN (XLR-3F)", type: "xlr", dir: "in" },
+              { id: "thru", label: "INTERCOM 送り出し (XLR-3M)", type: "xlr", dir: "out" },
+              { id: "hs", label: "HEADSET (XLR-4M)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "hsSM", label: "Clear-Com CC-300(舞台監督のヘッドセット)", icon: "CC-300", ports: [{ id: "in", label: "ケーブル (XLR-4F)", type: "xlr", dir: "in" }] },
+          { id: "hsSL", label: "Clear-Com CC-300(下手袖のヘッドセット)", icon: "CC-300", ports: [{ id: "in", label: "ケーブル (XLR-4F)", type: "xlr", dir: "in" }] },
+          { id: "hsLX", label: "Clear-Com CC-300(照明のヘッドセット)", icon: "CC-300", ports: [{ id: "in", label: "ケーブル (XLR-4F)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ethernet", "speaker", "power"],
+        correctConnections: [
+          { from: "ms.a1", to: "bpSM.in", cable: "xlr" },
+          { from: "bpSM.thru", to: "bpSL.in", cable: "xlr" },
+          { from: "ms.b1", to: "bpLX.in", cable: "xlr" },
+          { from: "bpSM.hs", to: "hsSM.in", cable: "xlr" },
+          { from: "bpSL.hs", to: "hsSL.in", cable: "xlr" },
+          { from: "bpLX.hs", to: "hsLX.in", cable: "xlr" },
+        ],
+        explain:
+          "このようなインカムは『パーティーライン』と呼ばれ、同じチャンネルにつながった人全員が、電話の会議通話のように同時に話したり聞いたりできる。1本のXLRケーブルの中には3本の線があり、Clear-Comの方式では、1番ピンが共通のアース、2番ピンがベルトパックを動かすための直流の電気(約28〜30V)、3番ピンが声の信号を運ぶ。だから、ベルトパックには電池も電源ケーブルもいらず、メインステーションから届く電気で動く。舞台監督と下手袖のスタッフは同じチャンネルAなので、メインステーションから1本ずつ引かなくても、ベルトパックの送り出し端子から次のベルトパックへ数珠つなぎにすれば同じラインに入れる。一方、照明はチャンネルBにつながっているので、照明への指示(『照明さん、スタンバイ』など)はチャンネルBで話し、舞台進行の会話とは混ざらない。MS-702は2つのチャンネルをつなげて(LINK)全員で話すこともできる。注意したいのは、インカムのラインには直流の電気が流れていること。見た目は同じXLRなので、ミキサーのマイク入力に挿したり、逆にマイクの代わりにつないだりしないよう、インカム用のケーブルにはテープで印をつけておく現場も多い。また、ベルトパックを何台もつなぐほど電気を多く使うので、メインステーションが何台まで動かせるかを、仕様書で確かめておこう。ヘッドセットは、ベルトパック側の4ピンの端子につなぐ(4本の線で、マイクの行きとイヤホンの帰りを別々に運ぶ)。ケーブルを長く引き回すときは、舞台上で人がつまずかないよう、床に養生テープで固定するのも大事な仕事だ。",
+      },
+    },
   ],
 };
