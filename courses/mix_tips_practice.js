@@ -2,7 +2,8 @@
    ミキシング作業中に実際に遭遇する具体的な症状を1つ提示し、「まず最初に試すべき対処」を
    選択式で即答させる。gear_patch_practice/money_case_studiesと同じ「実践問題編」ジャンルの
    3つ目のkind。通常コースと違い sections/quiz ではなく tip:{...} を持つ
-   (app.js の renderTip が描画)。出典: ~/.claude/skills/mix/PRO_AUDIO_KNOWLEDGE.md の蓄積知識。 */
+   (app.js の renderTip が描画)。出典: ~/.claude/skills/mix/PRO_AUDIO_KNOWLEDGE.md の蓄積知識。
+   2026-11-09: 全10単元にfurtherLearning(関連記事)を追加。URLはcurlで表示確認、内容はWebFetchで単元との対応を確認済み。 */
 window.COURSES = window.COURSES || {};
 window.COURSES["mix_tips_practice"] = {
   id: "mix_tips_practice",
@@ -36,6 +37,13 @@ window.COURSES["mix_tips_practice"] = {
         nextStep:
           "ハイパスだけで解決しない場合は、アナライザーで問題帯域をピンポイントに探し、ノッチ(狭い範囲のカット)で該当トラックだけを削る。",
       },
+      furtherLearning: {
+        articles: [
+          { title: "ミックスで音が濁らないようにする方法｜eMastered", url: "https://emastered.com/ja/blog/avoiding-muddy-sound" },
+          { title: "「マディー」な(濁った)ミックスを避ける 5 つの方法｜LANDR Blog", url: "https://blog.landr.com/ja/%e3%80%8c%e3%83%9e%e3%83%87%e3%82%a3%e3%83%bc%e3%80%8d%e3%81%aa%ef%bc%88%e6%bf%81%e3%81%a3%e3%81%9f%ef%bc%89%e3%83%9f%e3%83%83%e3%82%af%e3%82%b9%e3%82%92%e9%81%bf%e3%81%91%e3%82%8b-5-%e3%81%a4/" },
+          { title: "ハイパスフィルターとは何か?｜eMastered", url: "https://emastered.com/ja/blog/what-is-a-high-pass-filter" },
+        ],
+      },
     },
     {
       id: "harsh_highs",
@@ -59,6 +67,12 @@ window.COURSES["mix_tips_practice"] = {
         nextStep:
           "それでも刺さる場合は、ディエッサーやダイナミックEQで問題周波数だけを狙い撃ちする(常時カットではなく、突出した瞬間だけ効かせる)。",
       },
+      furtherLearning: {
+        articles: [
+          { title: "ハイシェルフEQとは何か?｜eMastered", url: "https://emastered.com/ja/blog/high-shelf-eq" },
+          { title: "ダイナミックEQとは｜eMastered", url: "https://emastered.com/ja/blog/what-is-dynamic-eq" },
+        ],
+      },
     },
     {
       id: "kick_bass_clash",
@@ -81,6 +95,12 @@ window.COURSES["mix_tips_practice"] = {
           "帯域が被る場合の実践手順は「周波数スロッティング(frequency carving)」: ①アナライザーでキックの基音ピークを実測(ベースのA〜D弦の間、70Hz付近に来ることが多い) ②その周波数だけをベース側で狭くカットし、その帯域をキックの専有スペースにする ③ベース自身の基音は別の帯域で活かす。現代的な実装ではダイナミックEQ(サイドチェインEQ)でキックが鳴った瞬間だけノッチを効かせる手法もある。",
         nextStep:
           "EQでの棲み分けだけで足りない場合は、ベースにコンプを挿し、キックのSendをそのサイドチェイン(キー入力)に送って、キックが鳴った瞬間だけベースの音量を一瞬下げる。",
+      },
+      furtherLearning: {
+        articles: [
+          { title: "キックドラムEQの基本:パンチと存在感を生み出す方法｜Native Instruments", url: "https://www.native-instruments.com/ja/blogs/blog/kick-drum-eq" },
+          { title: "サイドチェインコンプレッション:仕組みと使い方｜Native Instruments", url: "https://www.native-instruments.com/ja/blogs/blog/sidechain-compression" },
+        ],
       },
     },
     {
@@ -106,6 +126,11 @@ window.COURSES["mix_tips_practice"] = {
         nextStep:
           "順番を直しても刺さりが残る場合は、ディエッサーのターゲット帯域(6〜10kHz付近)がそのボーカルの実際のピーク周波数と合っているか、アナライザーで確認する。",
       },
+      furtherLearning: {
+        articles: [
+          { title: "ディエッサーとは何か?｜eMastered", url: "https://emastered.com/ja/blog/what-is-a-de-esser" },
+        ],
+      },
     },
     {
       id: "parallel_comp_fader_move",
@@ -128,6 +153,12 @@ window.COURSES["mix_tips_practice"] = {
           "パラレルコンプレッションでは、パラレルバスへのSendは必ずPre-faderにするのが鉄則。Post-faderだと元トラック(ここではドラムバス)のフェーダーを動かすたびにパラレル側へ送られる信号量も変わってしまい、ドライ/ウェットのバランスが毎回崩れる。Pre-faderにしておけば、元のフェーダー操作とパラレル側のバランスを独立して調整できる。",
         nextStep:
           "Pre-faderに直した上で、パラレル側のAuxボリュームは0から少しずつ上げて、ドライ信号を飲み込まない程度の狙ったパンチ感を探る。",
+      },
+      furtherLearning: {
+        articles: [
+          { title: "パラレル・コンプレッションとは何か?｜eMastered", url: "https://emastered.com/ja/blog/parallel-compression" },
+          { title: "プリフェーダーとポストフェーダー:その違いは?｜eMastered", url: "https://emastered.com/ja/blog/pre-fader-vs-post-fader" },
+        ],
       },
     },
     {
@@ -152,6 +183,11 @@ window.COURSES["mix_tips_practice"] = {
         nextStep:
           "それでもボワつく場合は、プリディレイ(20〜40ms程度)を入れて、ドライの音が先に届いてから残響が追いかけてくる形にすると明瞭度が保たれる。",
       },
+      furtherLearning: {
+        articles: [
+          { title: "リバーブの使い方:音楽プロデューサー向けガイド｜Native Instruments", url: "https://www.native-instruments.com/ja/blogs/blog/how-to-use-reverb" },
+        ],
+      },
     },
     {
       id: "mono_fold_phase_cancel",
@@ -174,6 +210,12 @@ window.COURSES["mix_tips_practice"] = {
           "モノ再生で低域が消える典型的な原因は、ステレオの左右で低域の位相がズレていて、モノに畳んだ瞬間に位相相殺(打ち消し合い)が起きること。対策は、ミックス中に一時的にモノへフォールドダウンし、パンニングやM/S処理を調整して破綻しないか確認する「モノ互換性チェック」。相関メーター(Correlation Meter)で+0.5以上を目安にすると安全なステレオ感を保ちやすい。",
         nextStep:
           "根本対策として、100〜150Hz以下(情報源により90〜350Hzまで幅がある)をモノにまとめておくと、低域のエネルギーがセンターに集約され、モノ再生環境でも消えにくくなる。",
+      },
+      furtherLearning: {
+        articles: [
+          { title: "モノラルでのミキシング:モノラルでミックスするべきか?｜eMastered", url: "https://emastered.com/ja/blog/mixing-in-mono" },
+          { title: "オーディオにおける位相とは?基本を理解する｜eMastered", url: "https://emastered.com/ja/blog/audio-phase" },
+        ],
       },
     },
     {
@@ -198,6 +240,12 @@ window.COURSES["mix_tips_practice"] = {
         nextStep:
           "順番を直した上でDrive(かける量)とBlend(原音とのミックス比)を調整し、Blend側で原音とのバランスを探ると、太さを保ちながら暴れを抑えやすい。",
       },
+      furtherLearning: {
+        articles: [
+          { title: "音楽制作におけるサチュレーションの使い方｜Native Instruments", url: "https://www.native-instruments.com/ja/blogs/blog/saturation-in-music-production" },
+          { title: "オーディオのサチュレーション:サチュレーションとは何か?｜eMastered", url: "https://emastered.com/ja/blog/audio-saturation" },
+        ],
+      },
     },
     {
       id: "loudness_normalize_smaller",
@@ -221,6 +269,11 @@ window.COURSES["mix_tips_practice"] = {
         nextStep:
           "弱いコンプを直列で数段かける、リミッターの代わりにクリッパーを検討する等、ダイナミクスを保ったまま音圧感を出す手法に切り替える。最終的に-14 LUFS/-1dBTP前後を目安に仕上げる。",
       },
+      furtherLearning: {
+        articles: [
+          { title: "Spotifyでのラウドネスノーマライゼーション｜Spotify for Artists", url: "https://support.spotify.com/jp/artists/article/loudness-normalization/" },
+        ],
+      },
     },
     {
       id: "di_amp_blend_thin",
@@ -243,6 +296,11 @@ window.COURSES["mix_tips_practice"] = {
           "DI(直接入力)とマイク録りのアンプ音をブレンドする際、位相(フェイズ)がズレていると低域が痩せる典型的な症状が出る。波形を見てマイク録りトラックをDIに合わせて数samples単位でずらし、位相を合わせてからブレンドするのが正しい対処。位相が合っていないままEQで低域をブーストしても、打ち消し合っている帯域はそもそも増幅できず、むしろ他の問題を生みやすい。",
         nextStep:
           "位相を合わせても薄いと感じる場合は、DI側にアンプシミュレーターを軽くかけて質感を足す、または位相反転(ポラリティ)ボタンを試して逆相になっていないか確認する。",
+      },
+      furtherLearning: {
+        articles: [
+          { title: "オーディオにおける位相とは?基本を理解する｜eMastered", url: "https://emastered.com/ja/blog/audio-phase" },
+        ],
       },
     },
   ],
