@@ -5815,5 +5815,49 @@ window.COURSES["gear_patch_practice"] = {
           "ふつうのコンデンサーマイクは、プリアンプからXLRケーブルを通って届く48Vのファンタム電源で動く。しかし真空管マイクは、真空管を温めるための電気や、高い電圧が必要で、ファンタム電源ではまかなえない。そこで、専用の電源ユニットから、何本もの線をまとめた多ピンのケーブルで電気を送り、同じケーブルでマイクの音を電源ユニットまで戻してくる。電源ユニットのAUDIO OUTは、ふつうのマイクと同じXLRの出力になっているので、ここから先はふつうのマイクと同じようにプリアンプにつなげばよい。間違えやすいのは、マイクをいきなりプリアンプにつなごうとすること。U 67の端子は7ピンなので、そもそもXLRケーブルは挿さらない。もう一つの注意は、プリアンプの48V。電源ユニットからマイクに電気が送られているので、VT-737spのファンタム電源は必要なく、オフにしておくのが一般的な習慣だ。また、真空管は電源を入れてすぐには音が安定しないので、録音の少し前(数分〜十数分ほど)に電源を入れて温めておこう。電源を入れる前にマイクのケーブルをつなぎ、外すときは先に電源を切るのも、機材を守るための基本の順番。VT-737spは、マイクプリアンプ・コンプ・EQ(=音質の調整)が1台になっていて、録る段階で音を整えられる。VT-737spから出てくるのはライン(=マイクより大きな信号)なので、ApolloではマイクのXLR側ではなく、ライン用のTRS側で受ける。XLR側に挿すと、Apolloのマイクプリアンプでもう一度増幅されてしまい、音が大きすぎたり、ノイズが増えたりする原因になる。",
       },
     },
+    {
+      id: "studio_subwoofer_hs8s",
+      order: 130,
+      title: "モニタースピーカーにサブウーファーを足す(Yamaha HS8S + HS5 + Scarlett 2i2)",
+      category: "配線問題",
+      hook: "小さなモニタースピーカーでは、キックやベースのいちばん低い音が聞こえず、ミックスの低音が『出すぎ』か『足りない』か判断できない。そこでサブウーファーを足すのだが、ただ部屋に置いて同じ音を鳴らすだけでは、低音が二重に重なってボワボワしてしまう。オーディオインターフェース→サブウーファー→左右のモニターの順に通す配線を組もう。",
+      patch: {
+        scenario:
+          "あなたの宅録デスクには、オーディオインターフェース「Focusrite Scarlett 2i2」と、左右1台ずつのパワードモニター「Yamaha HS5」がある。ここに、スタジオ用のパワードサブウーファー「Yamaha HS8S」を足す。Scarlett 2i2のLINE OUTPUT L/R(TRS)から、HS8SのINPUT L/R(TRS側)へTRSケーブルでつなぐ。HS8SのOUTPUT L/R(XLR)からは、左右のHS5のINPUT(XLR)へXLRケーブルでつなぐ。HS8SのINPUTはXLRとTRSの両方の端子があるが、同じチャンネルで同時には使えないので、この問題ではTRS側だけを使う。",
+        equipment: [
+          {
+            id: "interface",
+            label: "Focusrite Scarlett 2i2(オーディオインターフェース)",
+            icon: "2i2",
+            ports: [
+              { id: "outL", label: "LINE OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "LINE OUTPUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "sub",
+            label: "Yamaha HS8S(サブウーファー)",
+            icon: "HS8S",
+            ports: [
+              { id: "inL", label: "INPUT L (TRS)", type: "trs", dir: "in" },
+              { id: "inR", label: "INPUT R (TRS)", type: "trs", dir: "in" },
+              { id: "outL", label: "OUTPUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "OUTPUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha HS5(L)", icon: "HS5 L", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha HS5(R)", icon: "HS5 R", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["trs", "xlr", "ts", "rca", "speaker"],
+        correctConnections: [
+          { from: "interface.outL", to: "sub.inL", cable: "trs" },
+          { from: "interface.outR", to: "sub.inR", cable: "trs" },
+          { from: "sub.outL", to: "spkL.in", cable: "xlr" },
+          { from: "sub.outR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "ポイントは、サブウーファーを左右のモニターの『横に並べる』のではなく、インターフェースとモニターの『間に挟む』こと。HS8Sは、INPUT L/Rに入ってきた音を中で1つにまとめて、低い音だけを自分のスピーカーで鳴らす。同時に、入ってきた左右の音をそのままOUTPUT L/Rから送り出すので、ここから左右のHS5へつなぐ。こうすると、HS8Sの背面にあるつまみで、①サブウーファーがどの高さの音まで鳴らすか(HIGH CUT)と、②HS5へ送る音から低い音を削るかどうか(LOW CUT)を、80Hz〜120Hzの範囲で決められる。HS5が鳴らせる低音はおおよそ50Hzあたりまでなので、LOW CUTを使わないと、サブウーファーとHS5の両方が同じ低音を鳴らして、その帯域だけ膨らんでしまう。LOW CUTをオンにしてHS5の負担を減らし、HIGH CUTを同じくらいの周波数に合わせて、低音を『受け渡す』ように設定するのが基本の考え方(どの値がよいかは部屋によって変わるので、聴き慣れた曲で確かめよう)。HS8SにはPHASE(=位相)の切り替えスイッチもあり、置く場所によってはこれを切り替えたほうが低音がしっかり出ることがある。よくある間違いは、インターフェースのヘッドホン端子や、RCAの民生用端子からつなごうとすること。業務用のTRS/XLRのバランス接続(=ノイズに強い接続)でつなげば、ケーブルが長くなってもノイズを拾いにくい。また、スピーカーケーブルはパッシブスピーカー(=アンプを内蔵していないスピーカー)用なので、パワードのHS8SとHS5の間では使わない。サブウーファーは床に置くことが多く、部屋の角に近いほど低音が強く出やすい。左右のHS5の真ん中あたりの、少し前か後ろから始めて、置き場所を少しずつ動かして確かめよう。",
+      },
+    },
   ],
 };
