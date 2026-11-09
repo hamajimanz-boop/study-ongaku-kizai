@@ -5927,5 +5927,61 @@ window.COURSES["gear_patch_practice"] = {
           "このようなインカムは『パーティーライン』と呼ばれ、同じチャンネルにつながった人全員が、電話の会議通話のように同時に話したり聞いたりできる。1本のXLRケーブルの中には3本の線があり、Clear-Comの方式では、1番ピンが共通のアース、2番ピンがベルトパックを動かすための直流の電気(約28〜30V)、3番ピンが声の信号を運ぶ。だから、ベルトパックには電池も電源ケーブルもいらず、メインステーションから届く電気で動く。舞台監督と下手袖のスタッフは同じチャンネルAなので、メインステーションから1本ずつ引かなくても、ベルトパックの送り出し端子から次のベルトパックへ数珠つなぎにすれば同じラインに入れる。一方、照明はチャンネルBにつながっているので、照明への指示(『照明さん、スタンバイ』など)はチャンネルBで話し、舞台進行の会話とは混ざらない。MS-702は2つのチャンネルをつなげて(LINK)全員で話すこともできる。注意したいのは、インカムのラインには直流の電気が流れていること。見た目は同じXLRなので、ミキサーのマイク入力に挿したり、逆にマイクの代わりにつないだりしないよう、インカム用のケーブルにはテープで印をつけておく現場も多い。また、ベルトパックを何台もつなぐほど電気を多く使うので、メインステーションが何台まで動かせるかを、仕様書で確かめておこう。ヘッドセットは、ベルトパック側の4ピンの端子につなぐ(4本の線で、マイクの行きとイヤホンの帰りを別々に運ぶ)。ケーブルを長く引き回すときは、舞台上で人がつまずかないよう、床に養生テープで固定するのも大事な仕事だ。",
       },
     },
+    {
+      id: "noise_gate_loop_ns2",
+      order: 132,
+      title: "ノイズゲートのSEND/RETURNで、歪みのノイズだけを消す(Boss NS-2 + DS-1 + DD-8)",
+      category: "配線問題",
+      hook: "歪みのエフェクターを強くかけると、弾いていないときに『サーッ』『ジー』というノイズが目立つ。ノイズゲート(=音が小さいときだけ音を止める機械)を足せば消せるが、ただ並べてつなぐだけだと、弾いた音の伸び(サステイン)まで途中でブツッと切れてしまうことがある。ノイズゲートのSEND/RETURN端子を使って、歪みを『ループの中』に入れる配線を組もう。",
+      patch: {
+        scenario:
+          "あなたはギタリストで、ディストーション「Boss DS-1」の後ろにディレイ「Boss DD-8」を置いて、ギターアンプ「Fender Blues Junior IV」で鳴らしている。DS-1のノイズを抑えるため、ノイズサプレッサー「Boss NS-2」を足す。ギター「Fender Stratocaster」のOUTPUTからNS-2のINPUTへつなぎ、NS-2のSENDからDS-1のINPUTへ、DS-1のOUTPUTからNS-2のRETURNへ戻す。NS-2のOUTPUTからDD-8のINPUT A(MONO)へ、DD-8のOUTPUT A(MONO)からアンプのINPUTへつなぐ。ケーブルはすべてギター用のシールドケーブル(TSフォーン)を使う。DD-8のINPUT B・OUTPUT Bと、各エフェクターの電源はこの問題では省略する。",
+        equipment: [
+          { id: "gtr", label: "Fender Stratocaster(エレキギター)", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "ns2",
+            label: "Boss NS-2(ノイズサプレッサー)",
+            icon: "NS-2",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "send", label: "SEND", type: "ts", dir: "out" },
+              { id: "ret", label: "RETURN", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "ds1",
+            label: "Boss DS-1(ディストーション)",
+            icon: "DS-1",
+            ports: [
+              { id: "in", label: "INPUT", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "dd8",
+            label: "Boss DD-8(ディレイ)",
+            icon: "DD-8",
+            ports: [
+              { id: "inA", label: "INPUT A (MONO)", type: "ts", dir: "in" },
+              { id: "inB", label: "INPUT B", type: "ts", dir: "in" },
+              { id: "outA", label: "OUTPUT A (MONO)", type: "ts", dir: "out" },
+              { id: "outB", label: "OUTPUT B", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "amp", label: "Fender Blues Junior IV(ギターアンプ)", icon: "BluesJr", ports: [{ id: "in", label: "INPUT", type: "ts", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker"],
+        correctConnections: [
+          { from: "gtr.out", to: "ns2.in", cable: "ts" },
+          { from: "ns2.send", to: "ds1.in", cable: "ts" },
+          { from: "ds1.out", to: "ns2.ret", cable: "ts" },
+          { from: "ns2.out", to: "dd8.inA", cable: "ts" },
+          { from: "dd8.outA", to: "amp.in", cable: "ts" },
+        ],
+        explain:
+          "ノイズゲートは『音が小さくなったら、音を止める』という仕組みなので、何の音の大きさを見て判断するかがとても大事になる。DS-1の後ろにNS-2をふつうに並べると、NS-2は歪んでノイズの混ざった音を見て判断することになり、ノイズを消そうと効きを強くすると、弾いた音が小さくなっていく途中で音まで止められて、サステインが不自然に切れてしまう。SEND/RETURNを使うと、NS-2はINPUTに入ってきた『ギターそのままのきれいな音』を見て判断しながら、実際に音を止めるのはRETURNから戻ってきた『歪んだ音』のほうになる、とBossは説明している。弦が鳴っている間はギターの音を正しく感じ取れるので、ノイズはしっかり消しつつ、音の伸びは残しやすい。間違えやすいのはSENDとRETURNの向き。SENDは『NS-2から外へ送り出す』端子なのでDS-1のINPUTへ、RETURNは『NS-2へ戻ってくる』端子なのでDS-1のOUTPUTから受ける。逆につなぐと音が出ない。ディレイをループの中に入れないのもポイント。ディレイの繰り返し音は、ギターを弾き終えた後も鳴り続けるのが持ち味なのに、ループに入れるとギターの音が止まった瞬間に、繰り返しの音まで止められてしまう。だからディレイやリバーブは、NS-2のOUTPUTより後ろに置く(NS-2の取扱説明書でも、ディレイやリバーブはループに入れず、NS-2とアンプの間につなぐよう案内されている)。歪みのエフェクターを2台以上使うときは、それらをまとめてSENDとRETURNの間に並べればよい。ノイズゲートの効き具合(THRESHOLD)は、強くしすぎると小さく弾いた音まで消えてしまうので、弾かないときのノイズがちょうど消えるくらいから少しずつ上げていこう。",
+      },
+    },
   ],
 };
