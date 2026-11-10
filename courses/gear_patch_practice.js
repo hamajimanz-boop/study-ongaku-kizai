@@ -6278,5 +6278,54 @@ window.COURSES["gear_patch_practice"] = {
           "どれも同じXLRケーブルでつなぐが、マイクによって『電源が要るかどうか』が違うのが、この配線のポイント。H2a-XLRは、中に小さな回路を持つハイドロフォンで、ファンタム電源(48V)で動く。MKH 8020もコンデンサーマイクなので、ファンタム電源が必要だ。一方、Geofónは、磁石とコイルだけでできた電源の要らない仕組み(ダイナミックマイクと同じ考え方)で、ファンタム電源を送っても壊れはしないが、意味もないとメーカーは説明している。MixPre-6 IIは入力ごとにファンタム電源をオン・オフできるので、入力1・3・4をオン、入力2はオフにしておくと、電池の減りも少しおさえられる。屋外では電池で動かすことが多いので、要らない電源を切っておくのは大事な習慣だ。ハイドロフォンは、空気中で使うためのものではなく、水に沈めて初めて本来の音で録れる。空気中で振り回すと、ケーブルがこすれる音ばかり入るので、先に水に沈めてから録音を始めよう。ケーブルが岸や橋の上でこすれる音も、水の中へ伝わって入るので、ケーブルは固定しておくのがコツ。コンタクトマイクは空気の音をほとんど拾わず、触れている物の振動だけを拾う。橋の欄干なら、車が通ったり風が吹いたりしたときの、金属の『うなり』のような低い音が録れる。こうした低い音はとても大きく入ることがあるので、ゲイン(=増幅の量)は控えめにしておく。MixPre-6 IIは32ビット浮動小数点(32-bit float)という形式で録音でき、多少大きすぎる音でも、あとから音量を下げれば割れずに戻せるとされる。それでもヘッドホンで聴いて、音が割れて聞こえないかは確かめよう。A-B方式は、2本の無指向性マイクを数十cm〜数mほど離して立て、左右のマイクに音が届く時間の差で広がりを録るやり方で、川の流れや風のように周りを包む音に向いている。",
       },
     },
+    {
+      id: "optical_spdif_adi2dac_check",
+      order: 140,
+      title: "オーディオインターフェースの光デジタル出力から、外付けのDACへ音を送る(RME Babyface Pro FS + ADI-2 DAC FS)",
+      category: "配線問題",
+      hook: "ミックスの最終確認は、いつもと違う『耳』でも聴きたい。そこで、デジタルの音をアナログに変える専用の機械(DAC)を追加して、そこからヘッドホンとスピーカーを鳴らす。オーディオインターフェースとDACの間は、光の信号で音を運ぶ『光デジタルケーブル』1本でつなげる。光ケーブルとアナログのケーブルを使い分けて配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅の作業部屋で、ミックスの最終チェック用の環境を作る。オーディオインターフェースは「RME Babyface Pro FS」で、USBでMacBook Proにつながっている。Babyface Pro FSの光デジタル出力(OPTICAL OUT)を、設定でADATではなくS/PDIF(=2チャンネルのデジタル音声の方式)にして、DAC(=デジタルの音をアナログの音に変える機械)「RME ADI-2 DAC FS」の光デジタル入力(OPTICAL IN)へ、光デジタルケーブル(TOSLINK)でつなぐ。ADI-2 DAC FSのアナログ出力(XLR)のLとRから、モニタースピーカー「Genelec 8030C」の左右それぞれのINPUT(XLR)へXLRケーブルでつなぐ。ヘッドホン「Sennheiser HD 600」は、ADI-2 DAC FS前面のPHONES(φ6.3 TRS)へつなぐ。ADI-2 DAC FSの同軸デジタル入力(RCA)とRCAのアナログ出力は、この問題では使わない。",
+        equipment: [
+          { id: "mac", label: "MacBook Pro", icon: "MacBk", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "out" }] },
+          {
+            id: "bf",
+            label: "RME Babyface Pro FS(オーディオインターフェース)",
+            icon: "Babyface",
+            ports: [
+              { id: "usb", label: "USB", type: "usb", dir: "in" },
+              { id: "optOut", label: "OPTICAL OUT (S/PDIF)", type: "optical", dir: "out" },
+            ],
+          },
+          {
+            id: "dac",
+            label: "RME ADI-2 DAC FS(DAC・ヘッドホンアンプ)",
+            icon: "ADI-2",
+            ports: [
+              { id: "optIn", label: "OPTICAL IN", type: "optical", dir: "in" },
+              { id: "coaxIn", label: "COAXIAL IN (RCA)", type: "rca", dir: "in" },
+              { id: "xlrL", label: "ANALOG OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "xlrR", label: "ANALOG OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "rcaL", label: "ANALOG OUT L (RCA)", type: "rca", dir: "out" },
+              { id: "phones", label: "PHONES (φ6.3 TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          { id: "spL", label: "Genelec 8030C(左のモニタースピーカー)", icon: "8030C L", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spR", label: "Genelec 8030C(右のモニタースピーカー)", icon: "8030C R", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "hp", label: "Sennheiser HD 600(ヘッドホン)", icon: "HD 600", ports: [{ id: "in", label: "φ6.3 TRS IN", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "rca", "usb", "optical"],
+        correctConnections: [
+          { from: "mac.usb", to: "bf.usb", cable: "usb" },
+          { from: "bf.optOut", to: "dac.optIn", cable: "optical" },
+          { from: "dac.xlrL", to: "spL.in", cable: "xlr" },
+          { from: "dac.xlrR", to: "spR.in", cable: "xlr" },
+          { from: "dac.phones", to: "hp.in", cable: "trs" },
+        ],
+        explain:
+          "光デジタルケーブルは、電気ではなく光の点滅で音のデータを運ぶ。電気が流れないので、機材どうしをつないでもハムノイズ(=『ブーン』という電源由来の雑音)の原因になる電気の回り道ができない、という利点がある。同じ光の端子(TOSLINK)でも、運べる方式は2つある。1つはADATで、1本で最大8チャンネルを送れるが、プロ用・録音用の機材どうしで使う方式。もう1つはS/PDIFで、2チャンネル(ステレオ)だけを送る方式で、CDプレーヤーやテレビ、DACなど、家庭用の機器でも広く使われる。ケーブルは同じでも、送る側と受ける側の方式がそろっていないと音は出ない。Babyface Pro FSの光出力は、設定でADATとS/PDIFを切り替えられるとされ、DACにつなぐ今回はS/PDIFにする(ADI-2 DAC FSはADATの信号も受けられるが、そのうちの2チャンネルだけを鳴らす使い方になる)。デジタルで送ると、Babyface Pro FSの中ではアナログに変換されず、ADI-2 DAC FSで初めてアナログに変わる。つまり、聴こえる音の最後の仕上がりは、DACの性能で決まる。録音や作業はいつものインターフェースで、最終確認だけは別のDACで、という使い分けができる。ADI-2 DAC FSのXLR出力は、出力の大きさを何段階かに切り替えられるので、スピーカーの入力に合わせて、音が大きすぎない段を選ぶ。光デジタルケーブルは、強く折り曲げると中の光の通り道が傷ついて、音が途切れる原因になるので、きつく曲げずにゆるく取り回そう。また、片方の機材のサンプリングレート(=1秒あたりのデータの細かさ。44.1kHzや48kHzなど)を変えると、DAC側がそれに合わせ直すまで一瞬音が途切れることがある。チェック中に『プツッ』と鳴っても、故障とは限らない。",
+      },
+    },
   ],
 };
