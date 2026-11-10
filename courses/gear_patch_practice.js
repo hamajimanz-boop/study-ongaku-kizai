@@ -6327,5 +6327,68 @@ window.COURSES["gear_patch_practice"] = {
           "光デジタルケーブルは、電気ではなく光の点滅で音のデータを運ぶ。電気が流れないので、機材どうしをつないでもハムノイズ(=『ブーン』という電源由来の雑音)の原因になる電気の回り道ができない、という利点がある。同じ光の端子(TOSLINK)でも、運べる方式は2つある。1つはADATで、1本で最大8チャンネルを送れるが、プロ用・録音用の機材どうしで使う方式。もう1つはS/PDIFで、2チャンネル(ステレオ)だけを送る方式で、CDプレーヤーやテレビ、DACなど、家庭用の機器でも広く使われる。ケーブルは同じでも、送る側と受ける側の方式がそろっていないと音は出ない。Babyface Pro FSの光出力は、設定でADATとS/PDIFを切り替えられるとされ、DACにつなぐ今回はS/PDIFにする(ADI-2 DAC FSはADATの信号も受けられるが、そのうちの2チャンネルだけを鳴らす使い方になる)。デジタルで送ると、Babyface Pro FSの中ではアナログに変換されず、ADI-2 DAC FSで初めてアナログに変わる。つまり、聴こえる音の最後の仕上がりは、DACの性能で決まる。録音や作業はいつものインターフェースで、最終確認だけは別のDACで、という使い分けができる。ADI-2 DAC FSのXLR出力は、出力の大きさを何段階かに切り替えられるので、スピーカーの入力に合わせて、音が大きすぎない段を選ぶ。光デジタルケーブルは、強く折り曲げると中の光の通り道が傷ついて、音が途切れる原因になるので、きつく曲げずにゆるく取り回そう。また、片方の機材のサンプリングレート(=1秒あたりのデータの細かさ。44.1kHzや48kHzなど)を変えると、DAC側がそれに合わせ直すまで一瞬音が途切れることがある。チェック中に『プツッ』と鳴っても、故障とは限らない。",
       },
     },
+    {
+      id: "aerophone_stereo_out_prod2",
+      order: 141,
+      title: "ウインドシンセの『1つの端子から出るステレオ』を、左右に分けてPAへ送る(Roland Aerophone Pro AE-30 + Radial ProD2)",
+      category: "配線問題",
+      hook: "サックスのように吹いて演奏するデジタル管楽器(ウインドシンセ)は、内蔵の音源で鳴らし、そのままPAへ送れる。ただし出力端子は1つだけ——その1つの端子に、左右2チャンネル分のステレオの音がまとめて出ている。ふつうのギター用シールドを挿すと、半分の音しか届かない。分岐ケーブルとDIボックスを使って、正しく配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブで、デジタル管楽器「Roland Aerophone Pro AE-30」を吹く。AE-30のOUTPUT端子は1つで、標準サイズのステレオフォーン端子(TRS)になっている。ここに、TRSのプラグ1つを、TSのプラグ2つ(LとR)に分ける分岐ケーブルの『TRS側』を挿す。この問題では、分岐ケーブルを1つの機材として扱い、AE-30から分岐ケーブルまでをTRSケーブル、分岐ケーブルの先をTSケーブルとして配線する。分岐ケーブルのLを、ステレオのDIボックス(=楽器の信号をPA向けのマイクと同じ形の信号に変える箱)「Radial ProD2」のINPUT L(フォーン)へ、RをINPUT R(フォーン)へつなぐ。ProD2のOUTPUT L(XLR)とOUTPUT R(XLR)から、ステージボックスのCH 9とCH 10へXLRケーブルでつなぐ。AE-30のPHONES(ステレオミニ)とProD2のTHRU端子は、この問題では使わない。",
+        equipment: [
+          {
+            id: "ae30",
+            label: "Roland Aerophone Pro AE-30(デジタル管楽器)",
+            icon: "AE-30",
+            ports: [
+              { id: "out", label: "OUTPUT (ステレオフォーン)", type: "trs", dir: "out" },
+              { id: "phones", label: "PHONES (ステレオミニ)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "ycab",
+            label: "分岐ケーブル(TRS×1 → TS×2)",
+            icon: "Y",
+            ports: [
+              { id: "in", label: "TRS (ステレオ)", type: "trs", dir: "in" },
+              { id: "outL", label: "L (TS)", type: "ts", dir: "out" },
+              { id: "outR", label: "R (TS)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "di",
+            label: "Radial ProD2(ステレオDIボックス)",
+            icon: "ProD2",
+            ports: [
+              { id: "inL", label: "INPUT L (フォーン)", type: "ts", dir: "in" },
+              { id: "inR", label: "INPUT R (フォーン)", type: "ts", dir: "in" },
+              { id: "thruL", label: "THRU L (フォーン)", type: "ts", dir: "out" },
+              { id: "outL", label: "OUTPUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "OUTPUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "stage",
+            label: "ステージボックス(客席のPAへ)",
+            icon: "Stage",
+            ports: [
+              { id: "ch9", label: "CH 9 (XLR)", type: "xlr", dir: "in" },
+              { id: "ch10", label: "CH 10 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "usb", "midi"],
+        correctConnections: [
+          { from: "ae30.out", to: "ycab.in", cable: "trs" },
+          { from: "ycab.outL", to: "di.inL", cable: "ts" },
+          { from: "ycab.outR", to: "di.inR", cable: "ts" },
+          { from: "di.outL", to: "stage.ch9", cable: "xlr" },
+          { from: "di.outR", to: "stage.ch10", cable: "xlr" },
+        ],
+        explain:
+          "TRSのプラグには、先端(Tip)・中間の輪(Ring)・根元(Sleeve)の3つの接点がある。同じTRSでも、使い方は2通りある。1つは、1チャンネルの音を『バランス』(=雑音を打ち消せる送り方)で送る使い方。もう1つは、先端に左、中間の輪に右の音を乗せて、1本でステレオを送る使い方で、ヘッドホンのプラグがその代表だ。AE-30のOUTPUTは後者の、ステレオの出力とされる。ここに接点が2つしかないTSのシールドを挿すと、先端の左の音しか届かず、右の音が抜け落ちる。内蔵音源のコーラスやリバーブは左右に広がる作りになっていることが多いので、片方だけだと、響きが薄くなったり、音色によっては音量が下がったりする。そこで、TRS1つをTS2つに分ける分岐ケーブル(Yケーブル、インサートケーブルとも呼ばれる)で、左と右に分ける。この分岐ケーブルは、ミキサーのインサート端子用のものと形が同じでも、どの接点がどちらに出るかの組み合わせが同じとは限らないので、ステレオ用(先端=L、輪=R)と書かれたものを選ぶ。分けたLとRは、ステレオのDIボックスProD2に入れて、XLRに変えてPAへ送る。フォーンの出力をそのまま長いケーブルでPA卓まで引くと雑音を拾いやすいが、DIボックスでマイクと同じ形の信号に変えれば、ステージボックスのマイク入力にそのまま入れられる。PA側でモノラルにまとめたい場合も、いったん左右2本で受け取ってから、ミキサーでまとめる方が確実だ。なお、AE-30はUSB(Type-C)でパソコンにつなぎ、MIDIの演奏データや音を送ることもできる。吹く息の強さ(ブレス)の情報もMIDIとして送れるので、パソコンのソフト音源を、息の強弱で表情をつけて鳴らすこともできる。",
+      },
+    },
   ],
 };
