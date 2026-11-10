@@ -6107,5 +6107,49 @@ window.COURSES["gear_patch_practice"] = {
           "VT-4には、声の高さ(ピッチ)を上げ下げするつまみと、声の太さや性別っぽさを左右する『フォルマント』のつまみが別々にある。ピッチだけを上げると、早回しのような声になりやすいが、フォルマントも一緒に動かすと、自然に『別の人の声』らしく聞こえる。ロボット声やハーモニーをつける効果も、ボタンで切り替えられる。配線のポイントは、マイクを背面のMIC INにつなぐこと。背面はXLRとTRSのどちらも挿せるコンボ端子で、ファンタム電源(48V)を送れるので、電気で動くコンデンサーマイクのAT2020も使える。前面のステレオミニのMIC INは、プラグインパワー(=小さなピンマイクなどを動かす、弱い電気)用の入り口で、XLRのコンデンサーマイクはつなげない。VT-4はUSBでパソコンにつなぐと、オーディオインターフェースとしても働く(USBから電気をもらって動くこともできる)。だから、別のオーディオインターフェースを用意しなくても、変えた声をそのまま配信ソフトの『マイク』として選べる。ヘッドホンで聴くときは、VT-4のPHONESにつなぐと、パソコンの処理を通らない分、遅れのない声で確かめられる。よくある失敗は、ファンタム電源をオンにし忘れて『マイクの音が入らない』と悩むこと。また、ダイナミックマイクに替えるときは、ファンタム電源をオフに戻しておこう。声を変える配信では、地声がそのまま入らないように、マイクの近くにほかの音の出口(パソコンのスピーカーなど)を置かず、ヘッドホンで聴くのが基本だ。",
       },
     },
+    {
+      id: "helix_powercab_l6link",
+      order: 136,
+      title: "マルチエフェクターと専用スピーカーを、デジタルの1本でつなぐ(Line 6 Helix Floor + Powercab 112 Plus / L6 LINK)",
+      category: "配線問題",
+      hook: "アンプの音をパソコンのように作り出すマルチエフェクターは、そのままPAにも送れるが、ステージで自分が聴くためのスピーカーも欲しい。Helixと専用スピーカーPowercab Plusなら、見た目はマイクケーブルそっくりの『L6 LINK』1本で、デジタルのまま音を送れる。足元のスピーカーと、客席へ届けるPAへの送り出しを、同時に配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブハウスでギターを弾く。ギター「Fender Stratocaster」を、マルチエフェクター「Line 6 Helix Floor」背面のGUITAR INへシールド(TSケーブル)でつなぐ。ステージで自分が聴くスピーカーには、Line 6のギター用パワードスピーカー「Powercab 112 Plus」を使う。HelixのL6 LINK端子から、Powercab 112 PlusのL6 LINK IN端子へ、AES/EBU用のデジタルケーブル(XLRの形をした110Ωのケーブル)でつなぐ。客席のPAへは、HelixのXLR OUT L/MONOから、ステージ上のマルチケーブルの差し込み口(ステージボックスのCH 7)へ、XLRケーブルでモノラルで送る。Helixの1/4\" OUTとPowercab 112 Plusのアナログ入力は、この問題では使わない。",
+        equipment: [
+          { id: "gtr", label: "Fender Stratocaster(エレキギター)", icon: "Strat", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "helix",
+            label: "Line 6 Helix Floor(マルチエフェクター)",
+            icon: "Helix",
+            ports: [
+              { id: "gtrIn", label: "GUITAR IN (TS)", type: "ts", dir: "in" },
+              { id: "link", label: "L6 LINK (AES/EBU OUT)", type: "aes", dir: "out" },
+              { id: "xlrL", label: "XLR OUT L/MONO", type: "xlr", dir: "out" },
+              { id: "xlrR", label: "XLR OUT R", type: "xlr", dir: "out" },
+              { id: "qL", label: "1/4\" OUT L/MONO", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "pcab",
+            label: "Line 6 Powercab 112 Plus(ギター用パワードスピーカー)",
+            icon: "Powercab",
+            ports: [
+              { id: "linkIn", label: "L6 LINK IN (AES/EBU)", type: "aes", dir: "in" },
+              { id: "anaIn", label: "アナログ INPUT", type: "ts", dir: "in" },
+            ],
+          },
+          { id: "stage", label: "ステージボックス(客席のPAへ)", icon: "Stage", ports: [{ id: "ch7", label: "CH 7 (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "aes", "ts", "trs", "speaker"],
+        correctConnections: [
+          { from: "gtr.out", to: "helix.gtrIn", cable: "ts" },
+          { from: "helix.link", to: "pcab.linkIn", cable: "aes" },
+          { from: "helix.xlrL", to: "stage.ch7", cable: "xlr" },
+        ],
+        explain:
+          "L6 LINKは、AES/EBU(=プロ用の、2チャンネルのデジタル音声を1本のケーブルで送る方式)を使ったLine 6独自のつなぎ方。端子の形はXLRなので、マイクケーブルでも挿さってしまうが、デジタル信号を安定して送るには、AES/EBU用の110Ωのケーブルを使うのが基本とされる。マイクケーブルを使うと、音が途切れたり、まったく出なかったりすることがある。デジタルのまま送るので、アナログで送るときのような雑音が乗りにくく、左右2チャンネル分の音を1本で送れる。さらにL6 LINKでは、Helixのプリセットを切り替えたときに、Powercab Plus側の設定(スピーカーの鳴り方のモードなど)も一緒に切り替えられるとされる。Powercab Plusには、ギターアンプのスピーカーらしい鳴り方を再現するモードと、音に色をつけずにそのまま鳴らす『フラット』(FRFR=どの音域も同じように鳴らす、という意味)のモードがある。Helixの中でキャビネット(スピーカーの箱)の音まで作っているなら、Powercab Plusはフラットにするのが一般的だ。逆に、Helix側でキャビネットの音を外して、Powercab Plusのスピーカーの鳴り方を使うやり方もあるが、その場合はPAへ送るXLR OUTの音にもキャビネットの音が入らなくなるので、ルーティング(=音の通り道)を分けるなどの工夫が必要になる。PAへの送り出しは、HelixのXLR OUTからそのままステージボックスへつなげばよく、DIボックス(=楽器の信号をPA向けに変換する箱)は要らない。Helixの設定でXLR OUTの出力レベルを『Mic』にしておくと、ステージボックスのマイク入力と合わせやすい。ライブハウスのPAはモノラルで鳴らすことも多いので、L/MONOだけをつなぐと、左右の音がまとめて送られるとされる。ステレオで送るかどうかは、事前にPAスタッフと打ち合わせておこう。",
+      },
+    },
   ],
 };
