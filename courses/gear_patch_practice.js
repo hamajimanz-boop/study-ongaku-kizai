@@ -6390,5 +6390,57 @@ window.COURSES["gear_patch_practice"] = {
           "TRSのプラグには、先端(Tip)・中間の輪(Ring)・根元(Sleeve)の3つの接点がある。同じTRSでも、使い方は2通りある。1つは、1チャンネルの音を『バランス』(=雑音を打ち消せる送り方)で送る使い方。もう1つは、先端に左、中間の輪に右の音を乗せて、1本でステレオを送る使い方で、ヘッドホンのプラグがその代表だ。AE-30のOUTPUTは後者の、ステレオの出力とされる。ここに接点が2つしかないTSのシールドを挿すと、先端の左の音しか届かず、右の音が抜け落ちる。内蔵音源のコーラスやリバーブは左右に広がる作りになっていることが多いので、片方だけだと、響きが薄くなったり、音色によっては音量が下がったりする。そこで、TRS1つをTS2つに分ける分岐ケーブル(Yケーブル、インサートケーブルとも呼ばれる)で、左と右に分ける。この分岐ケーブルは、ミキサーのインサート端子用のものと形が同じでも、どの接点がどちらに出るかの組み合わせが同じとは限らないので、ステレオ用(先端=L、輪=R)と書かれたものを選ぶ。分けたLとRは、ステレオのDIボックスProD2に入れて、XLRに変えてPAへ送る。フォーンの出力をそのまま長いケーブルでPA卓まで引くと雑音を拾いやすいが、DIボックスでマイクと同じ形の信号に変えれば、ステージボックスのマイク入力にそのまま入れられる。PA側でモノラルにまとめたい場合も、いったん左右2本で受け取ってから、ミキサーでまとめる方が確実だ。なお、AE-30はUSB(Type-C)でパソコンにつなぎ、MIDIの演奏データや音を送ることもできる。吹く息の強さ(ブレス)の情報もMIDIとして送れるので、パソコンのソフト音源を、息の強弱で表情をつけて鳴らすこともできる。",
       },
     },
+    {
+      id: "apollo_multi_unit_cascade",
+      order: 142,
+      title: "Apollo 2台をThunderboltでつないで、マイク入力を増やす(Universal Audio Apollo x8 + Apollo x6)",
+      category: "配線問題",
+      hook: "バンドのドラムまで一度に録りたいのに、手元のオーディオインターフェースだけではマイクの入力が足りない。同じメーカーのApolloをもう1台買い足せば、パソコンからは『入力の多い1台』のように扱える。ただし、つなぐのはThunderboltケーブルだけでよく、ワードクロックのケーブルは2台の間に挿さない。正しく配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅スタジオで、バンドのリハーサルをまとめて録る。メインのオーディオインターフェースは「Universal Audio Apollo x8」(マイクプリアンプ4つ)で、これまでThunderbolt 3ケーブルでMac Studioにつないで使ってきた。今回、マイクの入力を増やすため「Apollo x6」(マイクプリアンプ2つ)を追加する。Mac StudioのThunderbolt端子からApollo x8のTHUNDERBOLT 1へつなぎ、Apollo x8のTHUNDERBOLT 2からApollo x6のTHUNDERBOLT 1へつなぐ(数珠つなぎ)。この問題ではThunderboltケーブルをUSBケーブルとして扱う。スピーカーとヘッドホンは、これまで通りApollo x8から鳴らす:MONITOR OUT L/R(TRSフォーン)からモニタースピーカー「Yamaha HS8」の左右へ。追加するマイクは、タム用の「Sennheiser MD 421-II」2本で、Apollo x6のMIC IN 1と2へXLRケーブルでつなぐ。2台のApolloのWORD CLOCK端子(BNC)は、この問題では使わない。",
+        equipment: [
+          { id: "mac", label: "Mac Studio(DAW)", icon: "Mac", ports: [{ id: "tb", label: "Thunderbolt", type: "usb", dir: "out" }] },
+          {
+            id: "x8",
+            label: "Universal Audio Apollo x8(1台目・モニター用)",
+            icon: "x8",
+            ports: [
+              { id: "tb1", label: "THUNDERBOLT 1", type: "usb", dir: "in" },
+              { id: "tb2", label: "THUNDERBOLT 2", type: "usb", dir: "out" },
+              { id: "wcOut", label: "WORD CLOCK OUT (BNC)", type: "wordclock", dir: "out" },
+              { id: "monL", label: "MONITOR OUT L (TRS)", type: "trs", dir: "out" },
+              { id: "monR", label: "MONITOR OUT R (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "x6",
+            label: "Universal Audio Apollo x6(2台目・追加分)",
+            icon: "x6",
+            ports: [
+              { id: "tb1", label: "THUNDERBOLT 1", type: "usb", dir: "in" },
+              { id: "wcIn", label: "WORD CLOCK IN (BNC)", type: "wordclock", dir: "in" },
+              { id: "mic1", label: "MIC IN 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "mic2", label: "MIC IN 2 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          { id: "tom1", label: "Sennheiser MD 421-II(ハイタム用)", icon: "421 ①", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "tom2", label: "Sennheiser MD 421-II(フロアタム用)", icon: "421 ②", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "spL", label: "Yamaha HS8(左)", icon: "HS8 L", ports: [{ id: "in", label: "INPUT (TRS)", type: "trs", dir: "in" }] },
+          { id: "spR", label: "Yamaha HS8(右)", icon: "HS8 R", ports: [{ id: "in", label: "INPUT (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "usb", "wordclock", "optical"],
+        correctConnections: [
+          { from: "mac.tb", to: "x8.tb1", cable: "usb" },
+          { from: "x8.tb2", to: "x6.tb1", cable: "usb" },
+          { from: "tom1.out", to: "x6.mic1", cable: "xlr" },
+          { from: "tom2.out", to: "x6.mic2", cable: "xlr" },
+          { from: "x8.monL", to: "spL.in", cable: "trs" },
+          { from: "x8.monR", to: "spR.in", cable: "trs" },
+        ],
+        explain:
+          "Universal Audioのメーカーは、Thunderboltでつないだ複数のApolloを、専用ソフト(Console)の上で1台の大きなインターフェースのようにまとめて使える仕組みを用意しており、これを『カスケード』(=数珠つなぎで増設すること)と呼ぶ。Thunderbolt接続のApolloなら、機種が違っても最大4台までまとめられるとされる(USB接続のモデルとは混ぜられない)。まとめたときは、スピーカーやヘッドホンを鳴らす1台が『モニター用』の親機になり、ほかの台は子機として、親機のテンポの基準(クロック=デジタル録音の『1秒を何回に刻むか』のタイミング)に合わせて動く。この合わせ込みはThunderboltのケーブルを通して自動で行われるので、2台の間にワードクロック(=タイミングを合わせるための専用の信号)のケーブルをつなぐ必要はない。それどころかメーカーは、Thunderboltでつないだ Apollo どうしの間を、ワードクロックや光デジタル(ADAT)のケーブルでさらにつなぐことは避けるよう案内している。タイミングの基準が2重になって、音が途切れたりノイズが出たりする原因になるからだ。ワードクロックの端子は、Apollo以外の外部のデジタル機材とタイミングを合わせたいときに、親機の端子を使う。スピーカーは親機のMONITOR OUTにつないだままでよく、子機のマイクの音も、Consoleの上で親機の音と一緒にミックスされて聴こえる。子機の電源は、パソコンや親機より先に入れておき、録音の途中で子機の電源を切ったりケーブルを抜いたりしないこと。台数を増やすと、パソコンに入る音の数(チャンネル数)も増えるので、DAWの入力の割り当ては、増えた入力の名前を確かめてから設定しよう。",
+      },
+    },
   ],
 };
