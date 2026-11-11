@@ -6575,7 +6575,7 @@ window.COURSES["gear_patch_practice"] = {
             ],
           },
         ],
-        cablePalette: ["xlr", "trs", "ts", "usb", "snake"],
+        cablePalette: ["xlr", "trs", "ts", "usb", "speaker"],
         correctConnections: [
           { from: "u87.out", to: "wall.mic1", cable: "xlr" },
           { from: "km184.out", to: "wall.mic2", cable: "xlr" },
@@ -6585,6 +6585,52 @@ window.COURSES["gear_patch_practice"] = {
         ],
         explain:
           "タイラインとは、離れた2つの場所の間に、あらかじめ固定で通しておくケーブルのこと。スタジオでは、ブースとコントロールルームの壁の中や床下に何本も通してあり、両側の壁パネルに同じ番号の差し込み口が付いている。ドアを開けてケーブルを引き回すと、防音のためのドアがきちんと閉まらず、音が漏れたり、人がケーブルにつまずいたりする。タイラインを使えば、ドアを閉めたまま、ブースのマイクの音をコントロールルームへ届けられる。考え方は、ライブで使うマルチケーブル(スネーク)の、建物に作り付けた版だと思えばよい。ブース側のMIC 1に挿したものは、必ずコントロールルーム側のTIE 1から出てくるので、『何番に何を挿したか』をメモしておくことが大切。録音のトラブルの多くは、番号の思い違いから起きる。タイラインは、ただの線なので、マイクに必要な電気もそのまま通る。U 87 AiやKM 184のようなコンデンサーマイクは、ファンタム電源(=マイクケーブルを通して送る+48Vの電気)が必要で、今回はコントロールルーム側の1073SPXやApollo x8から、タイラインを通ってブースのマイクまで電気が届く。つなぎ直すときは、ファンタム電源を切ってから抜き挿しすること。1073SPXで増幅した音は、マイクの小さな信号ではなく、ラインの大きな信号になっているので、Apolloのコンボ端子はライン入力として受ける(マイク入力のまま受けると、もう一度増幅されて音が割れる)。KM 184は、Apolloのマイクプリアンプでそのまま増幅する。タイラインは長い距離を通っているぶん、どこかで接触が悪くなっていることもある。セッションの前に、1本ずつ声を出して音が来るかを確かめておこう。",
+      },
+    },
+    {
+      id: "sync_x_video_reference",
+      order: 146,
+      title: "映像の基準信号にPro Toolsを合わせる(Avid Pro Tools | SYNC X + HD I/O + AJA GEN10)",
+      category: "配線問題",
+      hook: "映画やドラマの音を仕上げる部屋では、映像と音が1コマもずれないことが求められる。そのため、部屋の中のすべての機材を、1台の『基準の信号』に合わせて動かす。映像の基準信号を同期専用の機械に入れ、そこからオーディオインターフェースへ、ぐるっと輪になるように配線しよう。",
+      patch: {
+        scenario:
+          "あなたはMA(=映像に音を付けて仕上げる作業)のスタジオで、Pro Tools HDXのシステムを組む。同期専用の機械「Avid Pro Tools | SYNC X」は、Macに入っているHDXカードのDigiSerial端子へ、付属のシリアルケーブルで接続済みとする。映像の基準信号(ビデオリファレンス)は、同期信号発生器「AJA GEN10」が作る。GEN10のREF OUT 1から、SYNC XのVIDEO REF IN(BNC)へつなぐ。SYNC XのVIDEO REF OUT(BNC)からは、映像を再生するための機械「Blackmagic Design UltraStudio 4K Mini」のREF IN(BNC)へつなぐ。さらに、SYNC XのLOOP SYNC OUTから、オーディオインターフェース「Avid HD I/O」のLOOP SYNC INへ、HD I/OのLOOP SYNC OUTから、SYNC XのLOOP SYNC INへつないで、輪(ループ)にする。ここまでの4本は、すべてBNC同軸ケーブルを使う。SYNC XのWORD CLOCK OUTと、HD I/OのEXT CLOCK IN(ワードクロック入力)は、この問題では使わない。",
+        equipment: [
+          { id: "gen", label: "AJA GEN10(同期信号発生器)", icon: "GEN10", ports: [{ id: "ref1", label: "REF OUT 1 (BNC)", type: "bnc", dir: "out" }] },
+          {
+            id: "syncx",
+            label: "Avid Pro Tools | SYNC X(同期用の機械)",
+            icon: "SYNC X",
+            ports: [
+              { id: "vrefIn", label: "VIDEO REF IN (BNC)", type: "bnc", dir: "in" },
+              { id: "vrefOut", label: "VIDEO REF OUT (BNC)", type: "bnc", dir: "out" },
+              { id: "loopOut", label: "LOOP SYNC OUT (BNC)", type: "bnc", dir: "out" },
+              { id: "loopIn", label: "LOOP SYNC IN (BNC)", type: "bnc", dir: "in" },
+              { id: "wcOut", label: "WORD CLOCK OUT 1 (BNC)", type: "wordclock", dir: "out" },
+            ],
+          },
+          {
+            id: "hdio",
+            label: "Avid HD I/O(オーディオインターフェース)",
+            icon: "HD I/O",
+            ports: [
+              { id: "loopIn", label: "LOOP SYNC IN (BNC)", type: "bnc", dir: "in" },
+              { id: "loopOut", label: "LOOP SYNC OUT (BNC)", type: "bnc", dir: "out" },
+              { id: "extIn", label: "EXT CLOCK IN (BNC)", type: "wordclock", dir: "in" },
+            ],
+          },
+          { id: "ultra", label: "Blackmagic Design UltraStudio 4K Mini(映像の再生用)", icon: "UltraStudio", ports: [{ id: "refIn", label: "REF IN (BNC)", type: "bnc", dir: "in" }] },
+        ],
+        cablePalette: ["bnc", "wordclock", "xlr", "digilink", "usb"],
+        correctConnections: [
+          { from: "gen.ref1", to: "syncx.vrefIn", cable: "bnc" },
+          { from: "syncx.vrefOut", to: "ultra.refIn", cable: "bnc" },
+          { from: "syncx.loopOut", to: "hdio.loopIn", cable: "bnc" },
+          { from: "hdio.loopOut", to: "syncx.loopIn", cable: "bnc" },
+        ],
+        explain:
+          "デジタルの音は、1秒を44,100回や48,000回に細かく刻んで記録している。この『刻むタイミング』(クロック)が機材ごとにわずかでも違うと、長い映像の終わりの方で音と映像がずれてきたり、『プチッ』というノイズが出たりする。映像の世界にも、1秒を何コマに刻むかの基準があり、スタジオでは同期信号発生器(ハウスシンク)が作る1つの基準信号(ビデオリファレンス)に、映像の機械も音の機械もすべて合わせる。SYNC Xは、その映像の基準信号を受け取り、それに正確に合わせた音用のクロックを作ってPro Toolsのシステムへ配る役目の機械。HDXカードとつないだシリアルケーブルを通して、Pro Toolsからの操作や、タイムコード(=映像の何時何分何秒何コマ目かを示す番地)の受け渡しも行う。ループシンクは、Avidの HD シリーズのオーディオインターフェースどうしで、クロックを数珠つなぎに受け渡すための専用の信号。親になる機械(今回はSYNC X)のOUTから1台目のINへ、最後の台のOUTから親のINへ戻して、必ず輪になるようにつなぐ。HD I/Oを2台以上使う場合も、1台目のOUTから2台目のINへ……と順につなぎ、最後の台から親のINへ戻す。見た目は同じBNC端子でも、映像の基準信号、ループシンク、ワードクロック(=音の機材どうしでタイミングを合わせる信号)は中身が別物なので、端子の名前を必ず読んでつなぐこと。どれか1つでも基準を受け取れていないと、Pro Toolsの画面でクロックの表示が外れ、録音や再生はできても、映像と少しずつずれていく。セッションの前に、Pro Toolsのハードウェア設定画面で、クロックの元が正しく選ばれ、ロック(=基準に合っている状態)の表示になっているかを確かめよう。",
       },
     },
   ],
