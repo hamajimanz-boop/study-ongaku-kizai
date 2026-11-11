@@ -6682,5 +6682,65 @@ window.COURSES["gear_patch_practice"] = {
           "EAD10のセンサーユニットには、ドラムセット全体の音を左右に分けて拾うステレオのマイクと、バスドラムの振動を検知するセンサーが入っている。本体はそのマイクの音にリバーブなどのエフェクトをかけたり、キックのセンサーをきっかけに電子音(サンプル)を重ねたりして、ステレオの音として出力する。マイクを何本も立てなくても、ドラム全体を手軽にまとまった音で録れるのが強みだ(1本1本の太鼓を別々に調整したい本格的なレコーディングには、従来通りのマルチマイクが向く)。OUTPUTは左右2つのフォーン端子で、ステレオで録るならLとRの両方を使う。モノラルでよいときはL/MONOだけを使う、と説明書に書かれている。出力はアンバランス(=雑音を打ち消す仕組みがない送り方)なので、TSのケーブルで短めにつなぐのがよい。Scarlett 2i2側はライン入力として受け、INSTボタン(ギター用の入力切り替え)はオフにしておく。AUX INにつないだスマートフォンの伴奏は、ヘッドホンで聴こえるように本体の中で混ぜられるが、設定によっては OUTPUT にも伴奏が混ざって録音されることがある。ドラムだけを録りたいときは、伴奏が録音にも入っていないか、録った音を聴いて確かめよう。USB TO DEVICE端子は、USBメモリーをつなぐための端子で、説明書ではほかのUSB機器はつなげないとされている。パソコンとつなぐ端子ではない。端子の名前が似ていても、何のための端子かを確かめてからつなぐこと。",
       },
     },
+    {
+      id: "octatrack_external_input_fx",
+      order: 148,
+      title: "サンプラーの入力にドラムマシンの音を通し、テンポを合わせてエフェクトをかける(Elektron Octatrack MKII + Roland TR-8S)",
+      category: "配線問題",
+      hook: "ライブで、ドラムマシンの音をサンプラーに通し、テンポに合ったディレイをかけたり、その場で切り刻んだりしたい。そのためには、音の線と、テンポを伝えるMIDIの線の2つが必要になる。MIDIの『OUT』と『THRU』の違いに気をつけて配線しよう。",
+      patch: {
+        scenario:
+          "あなたはクラブイベントで、ドラムマシン「Roland TR-8S」とサンプラー「Elektron Octatrack MKII」でライブをする。テンポの基準(MIDIクロック)はOctatrackが出す。OctatrackのMIDI OUTからTR-8SのMIDI INへ、MIDIケーブルでつなぐ。TR-8Sの MIX OUT L と R(フォーン)から、OctatrackのINPUT A と INPUT B(フォーン)へ、TSのフォーンケーブルでつなぎ、Octatrackの中でエフェクトをかけたり録音して切り刻んだりする。OctatrackのMAIN OUT L と R(フォーン、インピーダンスバランス)から、会場のミキサー「Yamaha MG10XU」のステレオチャンネル LINE IN 5(L)と 6(R)へ、TRSのフォーンケーブルでつなぐ。自分で確認するためのヘッドホン「Sennheiser HD 25」は、OctatrackのHEADPHONES(ステレオフォーン)へつなぐ。OctatrackのMIDI THRU、INPUT C / D、CUE OUT、USBは、この問題では使わない。",
+        equipment: [
+          {
+            id: "tr8s",
+            label: "Roland TR-8S(ドラムマシン)",
+            icon: "TR-8S",
+            ports: [
+              { id: "midiIn", label: "MIDI IN", type: "midi", dir: "in" },
+              { id: "outL", label: "MIX OUT L (フォーン)", type: "ts", dir: "out" },
+              { id: "outR", label: "MIX OUT R (フォーン)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "ot",
+            label: "Elektron Octatrack MKII(サンプラー)",
+            icon: "OT",
+            ports: [
+              { id: "midiOut", label: "MIDI OUT", type: "midi", dir: "out" },
+              { id: "midiThru", label: "MIDI THRU", type: "midi", dir: "out" },
+              { id: "inA", label: "INPUT A (フォーン)", type: "ts", dir: "in" },
+              { id: "inB", label: "INPUT B (フォーン)", type: "ts", dir: "in" },
+              { id: "inC", label: "INPUT C (フォーン)", type: "ts", dir: "in" },
+              { id: "mainL", label: "MAIN OUT L (フォーン)", type: "trs", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (フォーン)", type: "trs", dir: "out" },
+              { id: "cueL", label: "CUE OUT L (フォーン)", type: "trs", dir: "out" },
+              { id: "hp", label: "HEADPHONES (ステレオフォーン)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG10XU(会場のミキサー)",
+            icon: "MG10XU",
+            ports: [
+              { id: "in5", label: "CH 5/6 LINE IN 5 (L)", type: "trs", dir: "in" },
+              { id: "in6", label: "CH 5/6 LINE IN 6 (R)", type: "trs", dir: "in" },
+            ],
+          },
+          { id: "phones", label: "Sennheiser HD 25(ヘッドホン)", icon: "HD 25", ports: [{ id: "in", label: "φ6.3 ステレオプラグ", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["midi", "ts", "trs", "xlr", "usb"],
+        correctConnections: [
+          { from: "ot.midiOut", to: "tr8s.midiIn", cable: "midi" },
+          { from: "tr8s.outL", to: "ot.inA", cable: "ts" },
+          { from: "tr8s.outR", to: "ot.inB", cable: "ts" },
+          { from: "ot.mainL", to: "mixer.in5", cable: "trs" },
+          { from: "ot.mainR", to: "mixer.in6", cable: "trs" },
+          { from: "ot.hp", to: "phones.in", cable: "trs" },
+        ],
+        explain:
+          "この配線では、音とテンポの情報が逆向きに流れる。テンポの基準(MIDIクロック=『今この速さで進んでいる』という合図を細かく送り続ける信号)は、Octatrack → TR-8S の向き。音は、TR-8S → Octatrack → ミキサー の向き。Octatrackのディレイやルーパーなどは、Octatrack自身のテンポに合わせて動くので、TR-8SをOctatrackのテンポに従わせておけば、ドラムの音にかけたディレイの間隔や、録音して切り刻んだ音の長さが、ぴったりそろう。TR-8S側では、テンポを外部から受け取る設定(クロックの元をMIDIにする設定)にしておく必要がある。MIDIの端子は3種類ある。OUTは、その機械自身が作ったMIDI(クロックや演奏の情報)を送り出す端子。INは受け取る端子。THRUは、INに入ってきたMIDIを、そのまま次の機械へ受け流すだけの端子で、その機械自身のクロックは出てこない。OctatrackのクロックをTR-8Sへ送りたいのに、THRUにつなぐと何も届かない、というのはよくある間違いだ(Octatrackは設定によって、受け取ったMIDIをOUTからも送り直せるとされるが、THRUの基本の働きは『受け流すだけ』と覚えておこう)。Octatrackの入力は4つあり、AとBの組、CとDの組で、それぞれステレオの音として扱える。今回はTR-8SのステレオのMIX OUTを、AとBの組に入れる。入力の音は、Octatrackの中でそのまま出力へ通したり(素通しの音量を設定で調整できる)、エフェクトをかけたトラックとして鳴らしたりできるので、同じ音が2重に出て大きくなりすぎないよう、リハーサルで音量のバランスを確かめよう。CUE OUTは、本番のメインの音とは別に、次に出す音を自分だけで確認したいときなどに使う出口で、DJミキサーのヘッドホン確認(キュー)と同じ考え方の端子だ。",
+      },
+    },
   ],
 };
