@@ -6442,5 +6442,52 @@ window.COURSES["gear_patch_practice"] = {
           "Universal Audioのメーカーは、Thunderboltでつないだ複数のApolloを、専用ソフト(Console)の上で1台の大きなインターフェースのようにまとめて使える仕組みを用意しており、これを『カスケード』(=数珠つなぎで増設すること)と呼ぶ。Thunderbolt接続のApolloなら、機種が違っても最大4台までまとめられるとされる(USB接続のモデルとは混ぜられない)。まとめたときは、スピーカーやヘッドホンを鳴らす1台が『モニター用』の親機になり、ほかの台は子機として、親機のテンポの基準(クロック=デジタル録音の『1秒を何回に刻むか』のタイミング)に合わせて動く。この合わせ込みはThunderboltのケーブルを通して自動で行われるので、2台の間にワードクロック(=タイミングを合わせるための専用の信号)のケーブルをつなぐ必要はない。それどころかメーカーは、Thunderboltでつないだ Apollo どうしの間を、ワードクロックや光デジタル(ADAT)のケーブルでさらにつなぐことは避けるよう案内している。タイミングの基準が2重になって、音が途切れたりノイズが出たりする原因になるからだ。ワードクロックの端子は、Apollo以外の外部のデジタル機材とタイミングを合わせたいときに、親機の端子を使う。スピーカーは親機のMONITOR OUTにつないだままでよく、子機のマイクの音も、Consoleの上で親機の音と一緒にミックスされて聴こえる。子機の電源は、パソコンや親機より先に入れておき、録音の途中で子機の電源を切ったりケーブルを抜いたりしないこと。台数を増やすと、パソコンに入る音の数(チャンネル数)も増えるので、DAWの入力の割り当ては、増えた入力の名前を確かめてから設定しよう。",
       },
     },
+    {
+      id: "afs2_feedback_suppressor_wedge",
+      order: 143,
+      title: "ステージの返しスピーカーの前に、ハウリングを自動で抑える機械を挟む(dbx AFS2 + Yamaha MG16XU)",
+      category: "配線問題",
+      hook: "ボーカルが『返しをもっと大きくして』と言うのに、上げると『キーン』とハウリングしてしまう。そこで、ミキサーと返しのスピーカーの間に、ハウリングの音程だけを見つけて細く削る機械を挟む。ミキサーの出口と、スピーカーの入口の間に正しく割り込ませて配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブハウスでPAを担当する。アナログミキサー「Yamaha MG16XU」のAUX SEND 1(フォーン、インピーダンスバランス)はボーカルの足元の返しスピーカー用、AUX SEND 2はギタリストの足元の返しスピーカー用に使う。この2つの音を、ハウリングを抑える機械(フィードバックサプレッサー)「dbx AFS2」の CH 1 と CH 2 にそれぞれ通してから、返しスピーカー(電源内蔵のパワードスピーカー)「Yamaha DBR10」2台へ送る。MG16XUのAUX SEND 1からAFS2の CH 1 INPUT(TRSフォーン)へ、AUX SEND 2から CH 2 INPUT(TRSフォーン)へ、TRSケーブルでつなぐ。AFS2の CH 1 OUTPUT(XLR)からボーカル用のDBR10へ、CH 2 OUTPUT(XLR)からギター用のDBR10へ、XLRケーブルでつなぐ。AFS2のXLRの入力端子と、背面のUSB端子は、この問題では使わない。",
+        equipment: [
+          {
+            id: "mixer",
+            label: "Yamaha MG16XU(アナログミキサー)",
+            icon: "MG16XU",
+            ports: [
+              { id: "aux1", label: "AUX SEND 1 (フォーン)", type: "trs", dir: "out" },
+              { id: "aux2", label: "AUX SEND 2 (フォーン)", type: "trs", dir: "out" },
+              { id: "stL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "afs",
+            label: "dbx AFS2(フィードバックサプレッサー)",
+            icon: "AFS2",
+            ports: [
+              { id: "in1Trs", label: "CH 1 INPUT (TRS)", type: "trs", dir: "in" },
+              { id: "in2Trs", label: "CH 2 INPUT (TRS)", type: "trs", dir: "in" },
+              { id: "in1Xlr", label: "CH 1 INPUT (XLR)", type: "xlr", dir: "in" },
+              { id: "out1", label: "CH 1 OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "CH 2 OUTPUT (XLR)", type: "xlr", dir: "out" },
+              { id: "usb", label: "USB", type: "usb", dir: "in" },
+            ],
+          },
+          { id: "wedgeVo", label: "Yamaha DBR10(ボーカル用の返し)", icon: "DBR10 Vo", ports: [{ id: "in", label: "INPUT (XLR/フォーン コンボ)", type: "xlr", dir: "in" }] },
+          { id: "wedgeGt", label: "Yamaha DBR10(ギター用の返し)", icon: "DBR10 Gt", ports: [{ id: "in", label: "INPUT (XLR/フォーン コンボ)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "speaker", "usb"],
+        correctConnections: [
+          { from: "mixer.aux1", to: "afs.in1Trs", cable: "trs" },
+          { from: "mixer.aux2", to: "afs.in2Trs", cable: "trs" },
+          { from: "afs.out1", to: "wedgeVo.in", cable: "xlr" },
+          { from: "afs.out2", to: "wedgeGt.in", cable: "xlr" },
+        ],
+        explain:
+          "ハウリングは、スピーカーから出た音をマイクがまた拾い、それがまたスピーカーから出て……とぐるぐる回るうちに、特定の高さの音(周波数)だけが急に大きくなって起きる。返しのスピーカーは、マイクのすぐ近くで、しかもマイクの方を向けて置くので、客席のスピーカーよりハウリングが起きやすい。AFS2のようなフィードバックサプレッサーは、流れてくる音を見張っていて、ハウリングが始まった高さの音だけを、とても幅の狭いフィルター(=特定の高さの音だけを下げる仕組み)で削る。歌や楽器の音全体を下げるわけではないので、音の変化が少ないまま、返しの音量をもう少し上げられるようになる。挟む場所は、ミキサーのAUX SEND(=返し用の音の出口)と、返しスピーカーの間。返しごとにハウリングしやすい高さは違うので、ボーカル用とギター用を、それぞれ別のチャンネルに通す。AFS2の入力はXLRとTRSのどちらでも受けられるが、メーカーは1つのチャンネルの2つの入力に同時につながないよう注意している。MG16XUのAUX SENDはフォーン端子なので、今回はTRSの入力を使う。背面には、つなぐ機材の音の大きさの基準に合わせる+4dBu / -10dBVの切り替えスイッチがチャンネルごとにあるので、業務用のミキサーなら+4dBuを選ぶ。本番前のリハーサルで、返しの音量を少しずつ上げてハウリングの起きやすい高さを先に見つけさせ、その削り方を固定しておく使い方(固定フィルター)と、本番中に新しく起きたハウリングをその場で削る使い方(ライブフィルター)を組み合わせるのが一般的とされる。ただし、削れる量には限りがあり、マイクとスピーカーの向きや距離を見直す方が効果が大きい場面も多い。機械に任せきりにせず、まずは置き方を整えよう。",
+      },
+    },
   ],
 };
