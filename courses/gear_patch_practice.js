@@ -6856,5 +6856,56 @@ window.COURSES["gear_patch_practice"] = {
           "Overbridgeは、Elektronの機材とパソコンをUSBケーブル1本で深く結びつけるソフト。Digitakt IIでは2024年のOS 1.03から使えるようになり、16個のトラックの音を、それぞれ別々のステレオの音としてDAWへ送れるとされる。DAWの中では、Overbridgeのプラグインを立ち上げると、Digitakt IIの画面のつまみをパソコン上で操作したり、DAWに設定を保存しておいて次に開いたときに元通りに戻したり(トータルリコール)できる。そのため、キックだけ、スネアだけ、とトラックごとに音量やEQを後から調整したい場合でも、Digitakt IIの OUT L/R からオーディオインターフェースへケーブルを何本もつなぐ必要はない。ここが、従来の『パラアウト(個別出力)』の考え方との大きな違いだ。ただし、Digitakt IIのUSBには、USB MIDI・USB AUDIO/MIDI(ドライバー不要のふつうのオーディオ機器として使うモード)・OVERBRIDGEの3つのモードがあり、どれか1つしか選べない。Overbridgeで録るときは、OVERBRIDGEを選んでおくこと。Overbridgeで送る個別トラックの音は、ディレイやリバーブなどの『センドエフェクト』がかかる前の音になる、とする説明もあるので、エフェクトも含めて録りたいときは、何がどこで送られているかを録る前に確かめよう。モニタースピーカーは、Digitakt IIではなく、オーディオインターフェースから鳴らす。DAWで録った音も、DAWの他のトラックの音も、全部パソコンを通ってオーディオインターフェースから出てくるので、聴く場所を1か所にまとめておくと混乱しない。シンセのサンプリングは、Digitakt IIの背面のIN L/R を使う。説明書では、IN L/RはTRS(バランス)でもTS(アンバランス)でも挿せるとされ、minilogue xdの出力はモノラルなのでTSケーブル1本で IN L へ入れる。片側だけに入れた音は左にかたよって聞こえることがあるので、Digitakt IIの入力の設定(左右のバランスなど)で調整しよう。",
       },
     },
+    {
+      id: "upright_bass_pickup_mic_blend",
+      order: 151,
+      title: "ウッドベースのピックアップとマイクを、ミキサーで混ぜてPAへ送る(David Gage The Realist + Radial PZ-DI + Neumann KM 184)",
+      category: "配線問題",
+      hook: "ウッドベース(コントラバス)は、ピックアップだけだと硬い音になりやすく、マイクだけだとハウリング(スピーカーの音をマイクが拾ってキーンと鳴る現象)が起きやすい。そこで、両方を別々のチャンネルに立ち上げて、ミキサーでちょうどよく混ぜるのが定番のやり方だ。ピックアップの信号に合ったDIを選んで配線しよう。",
+      patch: {
+        scenario:
+          "ジャズのライブで、ウッドベースの音をPAから出す。ウッドベースの駒(弦を支える木の部品)には、パッシブ(電池を使わない)のピエゾピックアップ「David Gage The Realist」が付いていて、出力はφ6.3のフォーン(TS)。この出力を、ピエゾ用のDI「Radial PZ-DI」のINPUTへ、TSのフォーンケーブルでつなぐ。PZ-DIの入力インピーダンス(=信号を受け取る側の『受け止めの重さ』)の切り替えは、ピエゾ用の10MΩにしておく。PZ-DIのTHRU(入力の音をそのまま分けて出す端子、フォーン)から、ステージのベースアンプ「Gallien-Krueger MB200」のINPUTへ、TSのフォーンケーブルでつなぐ。PZ-DIのXLR OUTPUTから、ミキサー「Yamaha MG10XU」のCH 1 MIC INへ、XLRケーブルでつなぐ。さらに、f字孔(胴体の表板にあるf字形の穴)の近くに向けてスタンドに立てたコンデンサーマイク「Neumann KM 184」を、MG10XUのCH 2 MIC INへ、XLRケーブルでつなぐ。MG10XUのSTEREO OUT L と R(XLR)から、客席用のパワードスピーカー「Yamaha DBR10」のL と R のINPUTへ、XLRケーブルでつなぐ。MG10XUの+48V(ファンタム電源)のスイッチは入れておく。",
+        equipment: [
+          { id: "bass", label: "ウッドベース(David Gage The Realist 付き)", icon: "Realist", ports: [{ id: "out", label: "OUTPUT (φ6.3 TS)", type: "ts", dir: "out" }] },
+          {
+            id: "pzdi",
+            label: "Radial PZ-DI(ピエゾ用DI)",
+            icon: "PZ-DI",
+            ports: [
+              { id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" },
+              { id: "thru", label: "THRU (フォーン)", type: "ts", dir: "out" },
+              { id: "xlr", label: "OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "amp", label: "Gallien-Krueger MB200(ベースアンプ)", icon: "MB200", ports: [{ id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" }] },
+          { id: "mic", label: "Neumann KM 184(コンデンサーマイク)", icon: "KM184", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "mixer",
+            label: "Yamaha MG10XU(ミキサー)",
+            icon: "MG10XU",
+            ports: [
+              { id: "ch1", label: "CH 1 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch2", label: "CH 2 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch3", label: "CH 3 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "outL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DBR10(L)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR10(R)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker"],
+        correctConnections: [
+          { from: "bass.out", to: "pzdi.in", cable: "ts" },
+          { from: "pzdi.thru", to: "amp.in", cable: "ts" },
+          { from: "pzdi.xlr", to: "mixer.ch1", cable: "xlr" },
+          { from: "mic.out", to: "mixer.ch2", cable: "xlr" },
+          { from: "mixer.outL", to: "spkL.in", cable: "xlr" },
+          { from: "mixer.outR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "ピエゾピックアップは、駒の振動を直接電気に変えるので、ハウリングに強く、大きな音のバンドの中でも音量を上げやすい。その代わり、楽器の胴体が響いた『木の鳴り』や空気感は拾いにくく、硬くて細い音になりがちだ。マイクはその逆で、自然な響きを拾える代わりに、音量を上げるとハウリングしやすく、周りの楽器の音も入ってくる。そこで、ピックアップを音の土台(音量と芯)、マイクを響きの足し算として、別々のチャンネルで受けて混ぜる。ピエゾのような信号は、受け止める側の入力インピーダンスが低いと、低音がやせて硬い音になりやすい。PZ-DIは、入力インピーダンスを220kΩ・1MΩ・10MΩから選べ、パッシブのピエゾには10MΩが用意されている。The Realistは、メーカーの説明ではプリアンプなしでも使えるとされるが、高いインピーダンスで受けたほうが太い音になった、という使用者の声も多い。PZ-DIは48Vのファンタム電源で動くアクティブのDIなので、ミキサー側の+48Vを入れておかないと音が出ない。MG10XUのファンタム電源は、複数のマイク入力にまとめてかかる1つのスイッチで、KM 184(コンデンサーマイク)もファンタム電源で動くので、今回はどちらにとっても都合がよい(ただし、ファンタム電源で壊れるおそれのある古いリボンマイクなどを同じミキサーにつなぐときは注意)。THRUは、入力の音をそのまま分けて出す端子なので、DIの音をPAへ送りつつ、ステージのベースアンプにも同じ音を送れる。混ぜるときに気をつけたいのは、マイクとピックアップで音が届くタイミングが少しずれること。マイクは楽器から離れた分だけ遅れて音を拾うので、混ぜると特定の低音が打ち消し合って薄く聞こえることがある。両方のフェーダーを上げて低音がやせたと感じたら、マイクの位置を少し動かしたり、ミキサーやDAWの位相(極性)反転を試したりして、いちばん太く聞こえるところを探そう。",
+      },
+    },
   ],
 };
