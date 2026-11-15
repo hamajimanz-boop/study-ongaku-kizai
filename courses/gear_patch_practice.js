@@ -6798,5 +6798,63 @@ window.COURSES["gear_patch_practice"] = {
           "MIDIの信号は、もともと丸い5ピンのDIN端子でやりとりする決まりだった。しかし5ピンの端子は大きく、薄くて小さな機材には載せにくい。そこで、イヤホンと同じ3.5mmのミニジャック(TRS=先端・中間の輪・根元の3つの接点を持つ端子)でMIDIを送る機材が増えた。困ったのは、メーカーによって、3つの接点のどこにどの線を割り当てるかが違っていたことだ。のちにMIDIの規格を決める団体(MIDI Association)が『Type A』という割り当てを正式な決まりにしたが、それ以前から別の割り当てを使っているメーカーもあり、こちらは『Type B』と呼ばれる。KorgやMake Noiseなどの機材はType A、ArturiaやNovationの機材はType Bを使っているとされ、MicroFreakもType Bとされる。Type AとType Bは、見た目がまったく同じなのに中の配線が逆なので、違う方式のアダプターやケーブルを使うと、つながっているように見えても信号が届かない(故障ではないので、壊れたと勘違いしやすい)。いちばん確実なのは、その機材に付属しているアダプターを使うこと。MicroFreakの説明書でも、付属のアダプター(3.5mmのTRS ⇄ 5ピンDIN、灰色)を使うように書かれている。アダプターを付けてしまえば、あとはふつうのMIDIケーブルで、KeyStep 37のMIDI OUTからMicroFreakのMIDI INへつなぐだけだ。MIDIは『OUTからINへ』が基本なので、MicroFreakのMIDI OUT側のアダプターに挿してしまわないよう注意しよう。また、ミニジャックのMIDI端子に、ふつうのオーディオ用のステレオミニケーブルで別の機材のMIDI端子を直接つなぐのも、方式が合っていない限りうまく動かない。音の出口は、背面のLINE OUT。説明書ではバランス出力(=雑音を打ち消す仕組みのある送り方)のTRSジャックとされ、TRSのケーブルでつなぐとノイズが少なくなる。出力はモノラルなので、オーディオインターフェースの入力も1つでよい。KeyStep 37とMicroFreakで、送るMIDIチャンネルと受けるMIDIチャンネルが合っていないと音が鳴らないので、鳴らないときは配線の次にチャンネル設定を確かめよう。",
       },
     },
+    {
+      id: "digitakt2_overbridge_multitrack",
+      order: 150,
+      title: "USBケーブル1本で、ドラムマシンの音をトラックごとにDAWへ録る(Elektron Digitakt II + Overbridge)",
+      category: "配線問題",
+      hook: "ドラムマシンの音を、キック・スネア・ハイハット……と別々のトラックで録りたい。昔なら出力の数だけケーブルとオーディオインターフェースの入力が必要だったが、Digitakt IIはOverbridgeという仕組みで、USBケーブル1本で全部のトラックをパソコンへ送れる。どのケーブルが本当に必要かを見極めて配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅スタジオで、サンプラー兼ドラムマシン「Elektron Digitakt II」で作ったビートを、DAWにトラックごとに録音したい。Digitakt IIは、Elektron社の無料ソフト「Overbridge」をパソコンに入れ、本体の設定(SETTINGS → SYSTEM → USB CONFIG)をOVERBRIDGEにしてある。Digitakt IIのUSB端子(Type B)から、パソコンのUSB端子へ、付属のUSBケーブルでつなぐ。パソコンの音を聴くためのオーディオインターフェース「Audient iD14 MKII」はUSB-Cで同じパソコンにつなぎ、背面のLINE OUT 1 と 2(TRSフォーン、バランス)から、モニタースピーカー「Yamaha HS5」のL と R へ、TRSのフォーンケーブルでつなぐ。さらに、シンセ「Korg minilogue xd」の音をDigitakt IIでサンプリング(録音して素材にすること)したいので、minilogue xdのOUTPUT(φ6.3、モノラル)から、Digitakt IIのIN L へ、TSのフォーンケーブルでつなぐ。Digitakt IIのOUT L/R、HEADPHONES、MIDI端子は、この問題では使わない。",
+        equipment: [
+          {
+            id: "mlxd",
+            label: "Korg minilogue xd(シンセ)",
+            icon: "mlxd",
+            ports: [{ id: "out", label: "OUTPUT (φ6.3 モノラル)", type: "ts", dir: "out" }],
+          },
+          {
+            id: "dt",
+            label: "Elektron Digitakt II(サンプラー/ドラムマシン)",
+            icon: "DT II",
+            ports: [
+              { id: "inL", label: "IN L (フォーン)", type: "trs", dir: "in" },
+              { id: "inR", label: "IN R (フォーン)", type: "trs", dir: "in" },
+              { id: "outL", label: "OUT L (フォーン)", type: "trs", dir: "out" },
+              { id: "outR", label: "OUT R (フォーン)", type: "trs", dir: "out" },
+              { id: "phones", label: "HEADPHONES (ステレオフォーン)", type: "trs", dir: "out" },
+              { id: "midiOut", label: "MIDI OUT/SYNC A", type: "midi", dir: "out" },
+              { id: "usb", label: "USB (Type B)", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "Mac(DAW + Overbridge)", icon: "Mac", ports: [{ id: "usb1", label: "USB 1", type: "usb", dir: "in" }, { id: "usb2", label: "USB-C 2", type: "usb", dir: "in" }] },
+          {
+            id: "iface",
+            label: "Audient iD14 MKII(オーディオインターフェース)",
+            icon: "iD14",
+            ports: [
+              { id: "in1", label: "INPUT 1 (コンボ: XLR / TRS)", type: "trs", dir: "in" },
+              { id: "in2", label: "INPUT 2 (コンボ: XLR / TRS)", type: "trs", dir: "in" },
+              { id: "out1", label: "LINE OUT 1 (TRS)", type: "trs", dir: "out" },
+              { id: "out2", label: "LINE OUT 2 (TRS)", type: "trs", dir: "out" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha HS5(L)", icon: "HS5", ports: [{ id: "in", label: "LINE IN (TRS)", type: "trs", dir: "in" }] },
+          { id: "spkR", label: "Yamaha HS5(R)", icon: "HS5", ports: [{ id: "in", label: "LINE IN (TRS)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "trs", "ts", "xlr", "midi"],
+        correctConnections: [
+          { from: "mlxd.out", to: "dt.inL", cable: "ts" },
+          { from: "dt.usb", to: "pc.usb1", cable: "usb" },
+          { from: "iface.usb", to: "pc.usb2", cable: "usb" },
+          { from: "iface.out1", to: "spkL.in", cable: "trs" },
+          { from: "iface.out2", to: "spkR.in", cable: "trs" },
+        ],
+        explain:
+          "Overbridgeは、Elektronの機材とパソコンをUSBケーブル1本で深く結びつけるソフト。Digitakt IIでは2024年のOS 1.03から使えるようになり、16個のトラックの音を、それぞれ別々のステレオの音としてDAWへ送れるとされる。DAWの中では、Overbridgeのプラグインを立ち上げると、Digitakt IIの画面のつまみをパソコン上で操作したり、DAWに設定を保存しておいて次に開いたときに元通りに戻したり(トータルリコール)できる。そのため、キックだけ、スネアだけ、とトラックごとに音量やEQを後から調整したい場合でも、Digitakt IIの OUT L/R からオーディオインターフェースへケーブルを何本もつなぐ必要はない。ここが、従来の『パラアウト(個別出力)』の考え方との大きな違いだ。ただし、Digitakt IIのUSBには、USB MIDI・USB AUDIO/MIDI(ドライバー不要のふつうのオーディオ機器として使うモード)・OVERBRIDGEの3つのモードがあり、どれか1つしか選べない。Overbridgeで録るときは、OVERBRIDGEを選んでおくこと。Overbridgeで送る個別トラックの音は、ディレイやリバーブなどの『センドエフェクト』がかかる前の音になる、とする説明もあるので、エフェクトも含めて録りたいときは、何がどこで送られているかを録る前に確かめよう。モニタースピーカーは、Digitakt IIではなく、オーディオインターフェースから鳴らす。DAWで録った音も、DAWの他のトラックの音も、全部パソコンを通ってオーディオインターフェースから出てくるので、聴く場所を1か所にまとめておくと混乱しない。シンセのサンプリングは、Digitakt IIの背面のIN L/R を使う。説明書では、IN L/RはTRS(バランス)でもTS(アンバランス)でも挿せるとされ、minilogue xdの出力はモノラルなのでTSケーブル1本で IN L へ入れる。片側だけに入れた音は左にかたよって聞こえることがあるので、Digitakt IIの入力の設定(左右のバランスなど)で調整しよう。",
+      },
+    },
   ],
 };
