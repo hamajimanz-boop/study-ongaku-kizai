@@ -6990,5 +6990,63 @@ window.COURSES["gear_patch_practice"] = {
           "スティックで打面を叩くと、上の皮は下へへこみ、その動きにつられて下の皮も下へ動く。上のマイクから見ると皮は『遠ざかる』のに、下のマイクから見ると皮は『近づいてくる』。マイクは、空気に押されるか引かれるかで電気の向きが決まるので、上と下のマイクの信号は、同じ瞬間に正反対の向き(プラスとマイナスが逆)になる。これをそのまま混ぜると、特にスネアの胴鳴りの太い成分が打ち消し合って、薄く、細い音になってしまう。そこで、下のマイクの信号の『極性』(=信号のプラスとマイナスの向き)を反転させて、上のマイクと向きをそろえる。多くのDAWでは、トラックやプラグインに『Ø』の記号のボタンがあり、これを押すと極性を反転できる。ミキサーやマイクプリアンプによっては、入力のところに同じスイッチがある。Scarlett 2i2(第4世代)の本体には極性反転のスイッチがないので、今回は録ったあとにDAWの『Snare Bottom』のトラックで反転する。反転したら、上下のフェーダーを両方上げて、反転のオン・オフを切り替えて聴き比べ、低音が太く、芯のある音になるほうを選ぶ。よく『位相を反転する』と言われるが、正確には、時間をずらす『位相』の調整ではなく、向きをひっくり返す『極性』の反転だ。下のマイクは、すぐ近くにあるハイハットやキックの音も拾いやすい。M 201 TGのような、正面以外の音を拾いにくい指向性(ハイパーカーディオイド)のマイクがよく使われるのはそのためで、ミックスでは、下のマイクの低音をEQで少し削ると、スナッピーの音だけを足しやすくなる。下のマイクはあくまで『ザッ』という成分の味付けなので、上のマイクを主役に、少しずつ足していくのが基本だ。",
       },
     },
+    {
+      id: "djm_send_return_space_echo",
+      order: 154,
+      title: "DJミキサーのSEND/RETURNに、テープエコー風のペダルをステレオでつなぐ(Pioneer DJ DJM-900NXS2 + Boss RE-202)",
+      category: "配線問題",
+      hook: "DJミキサーに内蔵されているエフェクトに飽きてきたら、外部のエフェクターをつないでみよう。DJM-900NXS2の背面には、外のエフェクターへ音を送り出してまた戻すための『SEND』と『RETURN』の端子がある。どちらがエフェクターの入口で、どちらが出口かを間違えないように配線しよう。",
+      patch: {
+        scenario:
+          "あなたはクラブのDJブースに、自分のテープエコー風ディレイペダル「Boss RE-202 Space Echo」を持ち込んで、DJミキサー「Pioneer DJ DJM-900NXS2」につなぎたい。2台のDJプレーヤー「Pioneer DJ CDJ-3000」のAUDIO OUT(RCAのL/Rが一組になったケーブル)は、DJM-900NXS2のCH 2 と CH 3 のLINE入力にすでにつながっている(この問題では、この2本は配線済みとする)。DJM-900NXS2の背面のSEND L(MONO) と SEND R(φ6.3のフォーン)から、RE-202のINPUT A/MONO と INPUT B へ、TSのフォーンケーブルでつなぐ。RE-202のOUTPUT A/MONO と OUTPUT B から、DJM-900NXS2の背面のRETURN L(MONO) と RETURN R へ、TSのフォーンケーブルでつなぐ。RE-202は、楽器用ではなくラインレベル(ミキサーなどの機材どうしでやりとりする大きさの信号)で使う設定にしておく。DJM-900NXS2のMASTER1 L と R(XLR)から、クラブのPAシステムにつながるステージボックスの入力 1 と 2 へ、XLRケーブルでつなぐ。BOOTH出力とREC OUTは、この問題では使わない。",
+        equipment: [
+          {
+            id: "djm",
+            label: "Pioneer DJ DJM-900NXS2(DJミキサー)",
+            icon: "DJM-900",
+            ports: [
+              { id: "sendL", label: "SEND L (MONO) (フォーン)", type: "ts", dir: "out" },
+              { id: "sendR", label: "SEND R (フォーン)", type: "ts", dir: "out" },
+              { id: "returnL", label: "RETURN L (MONO) (フォーン)", type: "ts", dir: "in" },
+              { id: "returnR", label: "RETURN R (フォーン)", type: "ts", dir: "in" },
+              { id: "master1L", label: "MASTER1 L (XLR)", type: "xlr", dir: "out" },
+              { id: "master1R", label: "MASTER1 R (XLR)", type: "xlr", dir: "out" },
+              { id: "boothL", label: "BOOTH L (MONO) (フォーン)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "re202",
+            label: "Boss RE-202 Space Echo(ディレイペダル)",
+            icon: "RE-202",
+            ports: [
+              { id: "inA", label: "INPUT A/MONO", type: "ts", dir: "in" },
+              { id: "inB", label: "INPUT B", type: "ts", dir: "in" },
+              { id: "outA", label: "OUTPUT A/MONO", type: "ts", dir: "out" },
+              { id: "outB", label: "OUTPUT B", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "stagebox",
+            label: "PAのステージボックス(会場のスピーカーシステムへ)",
+            icon: "PA",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "rca", "ethernet"],
+        correctConnections: [
+          { from: "djm.sendL", to: "re202.inA", cable: "ts" },
+          { from: "djm.sendR", to: "re202.inB", cable: "ts" },
+          { from: "re202.outA", to: "djm.returnL", cable: "ts" },
+          { from: "re202.outB", to: "djm.returnR", cable: "ts" },
+          { from: "djm.master1L", to: "stagebox.in1", cable: "xlr" },
+          { from: "djm.master1R", to: "stagebox.in2", cable: "xlr" },
+        ],
+        explain:
+          "SENDは『ミキサーからエフェクターへ音を送り出す出口』、RETURNは『エフェクターを通った音が戻ってくる入口』。だから、SEND → エフェクターのINPUT、エフェクターのOUTPUT → RETURN、という向きでつなぐ。説明書でも、SENDは外部エフェクターの入力端子へ、RETURNは外部エフェクターの出力端子へつなぐように書かれている。DJの音はステレオなので、左右2本ずつ、合計4本でつなぐのが基本。モノラルのエフェクターしかない場合は、L(MONO)だけをつなげばよく、RETURNのL(MONO)だけに音を戻すと、同じ音がR側にも入るようになっている。DJM-900NXS2には、戻ってきた音の扱い方が2種類ある。前面のRETURN TYPEを『INSERT』にすると、エフェクトチャンネルで選んだチャンネル(またはマスター)の音がまるごとエフェクターを通って、そのチャンネルに戻ってくる。原音とエフェクト音の混ぜ具合は、RE-202側のつまみで決める。『AUX』にすると、エフェクターから戻ってきた音を、どれかのチャンネルの入力切り替えを『RETURN AUX』にして、ふつうの1つのチャンネルとして受ける。こうすると、エフェクトの音だけをフェーダーやEQで自由に操作できる(AUXのときは、少なくとも1つのチャンネルでRETURN AUXを選んでおかないと、戻ってきた音が聞こえない)。また、前面のSEND/RETURNの切り替えを『1/4インチジャック』にしておかないと、背面の端子ではなく、スマートフォンなどをつなぐUSB端子のほうが使われてしまう。音が戻ってこないときは、まずこの切り替えを確かめよう。ギター用のペダルの多くは、ギターの小さな信号を前提に作られているので、DJミキサーの大きなライン信号を入れると音が割れやすい。RE-202は、ギター用とライン機器用を切り替えられるとされるので、ライン側に設定しておく。そうした切り替えのないペダルを使うときは、AUXのときはSEND/RETURN LEVELのつまみ(INSERTのときは戻りの量、AUXのときは送りの量を調整する)で送る量を控えめにし、INSERTのときはペダル側の入力の設定を見直して、音が割れないところを探そう。",
+      },
+    },
   ],
 };
