@@ -7048,5 +7048,52 @@ window.COURSES["gear_patch_practice"] = {
           "SENDは『ミキサーからエフェクターへ音を送り出す出口』、RETURNは『エフェクターを通った音が戻ってくる入口』。だから、SEND → エフェクターのINPUT、エフェクターのOUTPUT → RETURN、という向きでつなぐ。説明書でも、SENDは外部エフェクターの入力端子へ、RETURNは外部エフェクターの出力端子へつなぐように書かれている。DJの音はステレオなので、左右2本ずつ、合計4本でつなぐのが基本。モノラルのエフェクターしかない場合は、L(MONO)だけをつなげばよく、RETURNのL(MONO)だけに音を戻すと、同じ音がR側にも入るようになっている。DJM-900NXS2には、戻ってきた音の扱い方が2種類ある。前面のRETURN TYPEを『INSERT』にすると、エフェクトチャンネルで選んだチャンネル(またはマスター)の音がまるごとエフェクターを通って、そのチャンネルに戻ってくる。原音とエフェクト音の混ぜ具合は、RE-202側のつまみで決める。『AUX』にすると、エフェクターから戻ってきた音を、どれかのチャンネルの入力切り替えを『RETURN AUX』にして、ふつうの1つのチャンネルとして受ける。こうすると、エフェクトの音だけをフェーダーやEQで自由に操作できる(AUXのときは、少なくとも1つのチャンネルでRETURN AUXを選んでおかないと、戻ってきた音が聞こえない)。また、前面のSEND/RETURNの切り替えを『1/4インチジャック』にしておかないと、背面の端子ではなく、スマートフォンなどをつなぐUSB端子のほうが使われてしまう。音が戻ってこないときは、まずこの切り替えを確かめよう。ギター用のペダルの多くは、ギターの小さな信号を前提に作られているので、DJミキサーの大きなライン信号を入れると音が割れやすい。RE-202は、ギター用とライン機器用を切り替えられるとされるので、ライン側に設定しておく。そうした切り替えのないペダルを使うときは、AUXのときはSEND/RETURN LEVELのつまみ(INSERTのときは戻りの量、AUXのときは送りの量を調整する)で送る量を控えめにし、INSERTのときはペダル側の入力の設定を見直して、音が割れないところを探そう。",
       },
     },
+    {
+      id: "bass_preamp_pedal_di",
+      order: 155,
+      title: "ベース用プリアンプペダルのDI出力をPAへ、フォーン出力をステージのアンプへ送る(Darkglass Microtubes B7K Ultra V2)",
+      category: "配線問題",
+      hook: "ベーシストの足元にあるプリアンプペダルには、アンプへつなぐフォーンの出力のほかに、PAへ直接送るためのXLRの出力(DI)が付いていることが多い。これを使えば、会場のDIを借りなくても、自分で作った音をそのままPAへ渡せる。どの線をどこへつなぐか、そして電源の極性にも気をつけて配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブハウスで演奏するベーシスト。ベース「Fender Jazz Bass」の出力(TS)から、足元のプリアンプペダル「Darkglass Microtubes B7K Ultra V2」のINPUTへ、TSのフォーンケーブルでつなぐ。B7K UltraのOUTPUT(φ6.3のフォーン)から、ステージのベースアンプ「Markbass Little Mark IV」のINPUTへ、TSのフォーンケーブルでつなぐ。B7K UltraのDIRECT OUT(XLR、バランス)から、ステージ上のステージボックス(PAのミキサーへつながる中継箱)のCH 5へ、XLRケーブルでつなぐ。電源は、9V・センターマイナス(プラグの中心がマイナス)のACアダプター「Boss PSA-100S2」を、B7K Ultraの9V DC INにつなぐ。B7K UltraのAUX IN(3.5mm)、PHONES(3.5mm)、USBは、この問題では使わない。",
+        equipment: [
+          { id: "bass", label: "Fender Jazz Bass", icon: "J-Bass", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "b7k",
+            label: "Darkglass Microtubes B7K Ultra V2(ベース用プリアンプ)",
+            icon: "B7K",
+            ports: [
+              { id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" },
+              { id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" },
+              { id: "di", label: "DIRECT OUT (XLR・バランス)", type: "xlr", dir: "out" },
+              { id: "phones", label: "PHONES (3.5mm)", type: "trs", dir: "out" },
+              { id: "usb", label: "USB (Micro-B)", type: "usb", dir: "in" },
+              { id: "dcin", label: "9V DC IN(センターマイナス)", type: "power", dir: "in" },
+            ],
+          },
+          { id: "amp", label: "Markbass Little Mark IV(ベースアンプ)", icon: "LM IV", ports: [{ id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" }] },
+          {
+            id: "stagebox",
+            label: "ステージボックス(PAミキサーへの中継)",
+            icon: "BOX",
+            ports: [
+              { id: "ch5", label: "CH 5 (XLR)", type: "xlr", dir: "in" },
+              { id: "ch6", label: "CH 6 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          { id: "psu", label: "Boss PSA-100S2(9V ACアダプター)", icon: "PSA", ports: [{ id: "dcout", label: "DC 9V OUT(センターマイナス)", type: "power", dir: "out" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "usb", "power"],
+        correctConnections: [
+          { from: "bass.out", to: "b7k.in", cable: "ts" },
+          { from: "b7k.out", to: "amp.in", cable: "ts" },
+          { from: "b7k.di", to: "stagebox.ch5", cable: "xlr" },
+          { from: "psu.dcout", to: "b7k.dcin", cable: "power" },
+        ],
+        explain:
+          "ベースのPAへの送り方には、大きく分けて『ベースアンプのスピーカーにマイクを立てる』『DIでラインの音を送る』の2つがあり、ライブハウスでは両方を混ぜることも多い。B7K Ultraのようなプリアンプペダルは、歪み・EQ・音量の調整がひとつになっていて、本体にバランスのXLR出力(DIRECT OUT)を持っている。DIの役割(=楽器の出力を、ミキサーのマイク入力が受けやすいバランスの信号に変えて、長いケーブルでも雑音が乗りにくくする)を、ペダル自身が受け持ってくれるので、会場のDIを使わなくてもステージボックスへ直接送れる。しかも、自分で作った歪みやEQのかかった音がそのままPAへ届くので、どの会場でも同じ音を出しやすい。MASTERのつまみは、全体の音量であると同時に、DIの出力レベルの調整も兼ねていると説明書に書かれている。本番中にMASTERを大きく動かすと、PAへ送る音量も変わってしまうので、PAの担当者と相談してから決めよう。DIRECT OUTには、スピーカーキャビネットの響きを再現する機能(キャビネットシミュレーター)を切り替えるスイッチがある。アンプを通さない音は高い音が耳に痛く聞こえやすいので、オンにしておくと、アンプのスピーカーで鳴らしたような、まとまった音でPAへ送れる。また、DIRECT OUTには、アースの線を切り離して『ブーン』というハムノイズ(グラウンドループ)を断つためのグラウンドリフトのスイッチもあり、このスイッチは フォーンの OUTPUT には影響しないとされる。ノイズが出たときに試してみよう。足元のスイッチは2つあり、歪みだけをオン/オフするものと、ペダル全体をバイパス(素通し)するものに分かれている。電源は、9Vの『センターマイナス』を使う。プラグの見た目が同じでも、中心がプラスのアダプターや、電圧の違うアダプターを挿すと故障の原因になるので、アダプターに書かれた電圧と極性の印を必ず確かめよう。B7K Ultraは電池では動かないので、電源をつなぎ忘れると、ベースの音はどこからも出ない。",
+      },
+    },
   ],
 };
