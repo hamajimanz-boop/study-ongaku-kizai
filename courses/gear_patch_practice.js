@@ -6742,5 +6742,61 @@ window.COURSES["gear_patch_practice"] = {
           "この配線では、音とテンポの情報が逆向きに流れる。テンポの基準(MIDIクロック=『今この速さで進んでいる』という合図を細かく送り続ける信号)は、Octatrack → TR-8S の向き。音は、TR-8S → Octatrack → ミキサー の向き。Octatrackのディレイやルーパーなどは、Octatrack自身のテンポに合わせて動くので、TR-8SをOctatrackのテンポに従わせておけば、ドラムの音にかけたディレイの間隔や、録音して切り刻んだ音の長さが、ぴったりそろう。TR-8S側では、テンポを外部から受け取る設定(クロックの元をMIDIにする設定)にしておく必要がある。MIDIの端子は3種類ある。OUTは、その機械自身が作ったMIDI(クロックや演奏の情報)を送り出す端子。INは受け取る端子。THRUは、INに入ってきたMIDIを、そのまま次の機械へ受け流すだけの端子で、その機械自身のクロックは出てこない。OctatrackのクロックをTR-8Sへ送りたいのに、THRUにつなぐと何も届かない、というのはよくある間違いだ(Octatrackは設定によって、受け取ったMIDIをOUTからも送り直せるとされるが、THRUの基本の働きは『受け流すだけ』と覚えておこう)。Octatrackの入力は4つあり、AとBの組、CとDの組で、それぞれステレオの音として扱える。今回はTR-8SのステレオのMIX OUTを、AとBの組に入れる。入力の音は、Octatrackの中でそのまま出力へ通したり(素通しの音量を設定で調整できる)、エフェクトをかけたトラックとして鳴らしたりできるので、同じ音が2重に出て大きくなりすぎないよう、リハーサルで音量のバランスを確かめよう。CUE OUTは、本番のメインの音とは別に、次に出す音を自分だけで確認したいときなどに使う出口で、DJミキサーのヘッドホン確認(キュー)と同じ考え方の端子だ。",
       },
     },
+    {
+      id: "trs_midi_adapter_microfreak",
+      order: 149,
+      title: "ミニプラグのMIDI端子に、付属の変換アダプターでキーボードをつなぐ(Arturia KeyStep 37 + MicroFreak)",
+      category: "配線問題",
+      hook: "最近の小型シンセには、MIDIの端子がおなじみの丸い5ピンではなく、イヤホンと同じ形の小さな穴(3.5mmのミニプラグ)になっているものがある。見た目はイヤホン端子でも、中身はMIDI。付属の変換アダプターを使って、キーボードからシンセを鳴らす配線をしよう。",
+      patch: {
+        scenario:
+          "あなたは自宅で、キーボード「Arturia KeyStep 37」を弾いて、シンセ「Arturia MicroFreak」を鳴らし、その音をDAWに録音したい。KeyStep 37のMIDI OUT(丸い5ピンのDIN端子)から、MIDIケーブルを出す。MicroFreakのMIDI INは3.5mmのミニジャックなので、MicroFreakに付属している灰色の変換アダプター(3.5mmのプラグ ⇄ 5ピンDINのメス)を、あらかじめMicroFreakのMIDI INに挿してある。MIDIケーブルは、このアダプターのDIN側に挿す。MicroFreakの音は、本体背面のLINE OUT(φ6.3のTRSフォーン、モノラル)から、オーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」のINPUT 1(XLRとフォーンの両方が挿せるコンボ端子)へ、TRSのフォーンケーブルで送る。Scarlett 2i2はUSB-Cでパソコンにつなぎ、モニター用のヘッドホン「Audio-Technica ATH-M50x」はScarlett 2i2のヘッドホン端子につなぐ。KeyStep 37も、電源をもらうためにUSBでパソコンにつなぐ。MicroFreakのヘッドホン端子(3.5mm)、CLOCK、CV/GATEの端子は、この問題では使わない。",
+        equipment: [
+          {
+            id: "keystep",
+            label: "Arturia KeyStep 37(キーボード)",
+            icon: "KeyStep",
+            ports: [
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+              { id: "cvOut", label: "PITCH CV OUT (3.5mm)", type: "cv", dir: "out" },
+            ],
+          },
+          {
+            id: "mf",
+            label: "Arturia MicroFreak(シンセ)",
+            icon: "MicroFreak",
+            ports: [
+              { id: "midiIn", label: "MIDI IN(付属アダプターのDIN側)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT(付属アダプターのDIN側)", type: "midi", dir: "out" },
+              { id: "lineOut", label: "LINE OUT (φ6.3 TRS・モノラル)", type: "trs", dir: "out" },
+              { id: "phones", label: "HEADPHONES (3.5mm)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "if",
+            label: "Focusrite Scarlett 2i2(第4世代)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (コンボ: XLR / フォーン)", type: "trs", dir: "in" },
+              { id: "hp", label: "ヘッドホン端子", type: "trs", dir: "out" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "pc", label: "ノートパソコン(DAW)", icon: "PC", ports: [{ id: "usb1", label: "USB-C 1", type: "usb", dir: "in" }, { id: "usb2", label: "USB-C 2", type: "usb", dir: "in" }] },
+          { id: "hp", label: "Audio-Technica ATH-M50x(ヘッドホン)", icon: "M50x", ports: [{ id: "in", label: "φ6.3 ステレオプラグ", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["midi", "trs", "ts", "usb", "cv"],
+        correctConnections: [
+          { from: "keystep.midiOut", to: "mf.midiIn", cable: "midi" },
+          { from: "mf.lineOut", to: "if.in1", cable: "trs" },
+          { from: "if.usb", to: "pc.usb1", cable: "usb" },
+          { from: "keystep.usb", to: "pc.usb2", cable: "usb" },
+          { from: "if.hp", to: "hp.in", cable: "trs" },
+        ],
+        explain:
+          "MIDIの信号は、もともと丸い5ピンのDIN端子でやりとりする決まりだった。しかし5ピンの端子は大きく、薄くて小さな機材には載せにくい。そこで、イヤホンと同じ3.5mmのミニジャック(TRS=先端・中間の輪・根元の3つの接点を持つ端子)でMIDIを送る機材が増えた。困ったのは、メーカーによって、3つの接点のどこにどの線を割り当てるかが違っていたことだ。のちにMIDIの規格を決める団体(MIDI Association)が『Type A』という割り当てを正式な決まりにしたが、それ以前から別の割り当てを使っているメーカーもあり、こちらは『Type B』と呼ばれる。KorgやMake Noiseなどの機材はType A、ArturiaやNovationの機材はType Bを使っているとされ、MicroFreakもType Bとされる。Type AとType Bは、見た目がまったく同じなのに中の配線が逆なので、違う方式のアダプターやケーブルを使うと、つながっているように見えても信号が届かない(故障ではないので、壊れたと勘違いしやすい)。いちばん確実なのは、その機材に付属しているアダプターを使うこと。MicroFreakの説明書でも、付属のアダプター(3.5mmのTRS ⇄ 5ピンDIN、灰色)を使うように書かれている。アダプターを付けてしまえば、あとはふつうのMIDIケーブルで、KeyStep 37のMIDI OUTからMicroFreakのMIDI INへつなぐだけだ。MIDIは『OUTからINへ』が基本なので、MicroFreakのMIDI OUT側のアダプターに挿してしまわないよう注意しよう。また、ミニジャックのMIDI端子に、ふつうのオーディオ用のステレオミニケーブルで別の機材のMIDI端子を直接つなぐのも、方式が合っていない限りうまく動かない。音の出口は、背面のLINE OUT。説明書ではバランス出力(=雑音を打ち消す仕組みのある送り方)のTRSジャックとされ、TRSのケーブルでつなぐとノイズが少なくなる。出力はモノラルなので、オーディオインターフェースの入力も1つでよい。KeyStep 37とMicroFreakで、送るMIDIチャンネルと受けるMIDIチャンネルが合っていないと音が鳴らないので、鳴らないときは配線の次にチャンネル設定を確かめよう。",
+      },
+    },
   ],
 };
