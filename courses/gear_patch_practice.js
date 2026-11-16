@@ -7314,5 +7314,75 @@ window.COURSES["gear_patch_practice"] = {
           "ワイヤレスのイヤモニは、送信機と受信機(ベルトパック)の間を電波で飛ばすので、動き回るボーカルやギターには便利だが、電波の周波数の管理や、受信機の電池の残りに気を配る必要がある。ドラマーやキーボーディストのように、演奏中に持ち場を離れないパートなら、有線のイヤモニ用アンプで十分なことが多い。音が電波を通らないので、混信や音切れの心配がなく、ワイヤレスの機材より安く組めることも多い。ポイントは、バンドの音とクリックを1本にまとめてもらわず、『別々の送り(MIX 1 と MIX 2)』で受け取っていること。In-Ear Amp 2 は入力が2つあり、入力ごとに音量(ゲイン)のつまみがある。2つの入力を混ぜて両耳に送るモードにすれば、『今日はクリックをもう少し大きく』という調整を、本番中でもPAの担当者に頼まずに自分の手元でできる。片方の入力を左耳、もう片方を右耳に分けて聞くモードもあるとされるが、片耳にクリックだけが聞こえる状態は疲れやすいので、まずは混ぜるモードから試そう。LINK OUT は、入ってきた信号をそのまま次の機材へ渡すための出口。たとえばベーシストも同じバンドの音とクリックを聞きたいなら、LINK OUT から2台目のイヤモニ用アンプへつなげば、PAのミキサーの送りを増やさずに済む(ただし、その場合は2人が同じ送りを聞くことになり、音のバランスはそれぞれの手元で調整する)。SHAKER の出力は、椅子に取り付けて低音を体で感じる振動装置(ボディーソニック)をつなぐためのもので、今回は使わない。イヤモニで気をつけたいのは音量。イヤホンは耳のすぐ近くで鳴るので、大きすぎると耳を傷めやすい。In-Ear Amp 2 には、急に大きな音が出たときに出力を抑えるリミッターが付いているとされるが、それに頼りきらず、最初は音量を絞った状態でイヤホンを耳に入れ、少しずつ上げていこう。電源を入れる順番は、ミキサー → イヤモニ用アンプ、切るときはその逆が基本。イヤホンを耳に入れたまま電源を入れ切りすると、『ボツッ』という大きな音が耳に直接入ることがあるので、電源の操作はイヤホンを外してから行う。",
       },
     },
+    {
+      id: "h90_mono_synth_stereo_line",
+      order: 160,
+      title: "モノラルのシンセを、ギター用のマルチエフェクターでステレオに広げて録る(Novation Bass Station II + Eventide H90)",
+      category: "配線問題",
+      hook: "Eventide H90は、ギタリストの足元でおなじみの空間系(=ディレイやリバーブなど、音に広がりを足すエフェクト)の機材だが、入出力をライン用に切り替えれば、シンセやスタジオの機材にも使える。モノラルのシンセを1本で入れて、ステレオの2本で戻し、DAWのテンポにディレイを合わせるところまで配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅で打ち込みの曲を作っている。モノラル出力のアナログシンセ「Novation Bass Station II」のリード音に、ギター用のマルチエフェクター「Eventide H90」でステレオのディレイとリバーブをかけて、オーディオインターフェース「Focusrite Scarlett 4i4(第4世代)」で録音したい。Bass Station IIの演奏データ(MIDI)は、DAWから送る。Scarlett 4i4の MIDI OUT(5ピンDIN)から、Bass Station IIの MIDI IN へ、MIDIケーブルでつなぐ。Bass Station IIの LINE OUT(φ6.3・モノラル)から、H90の INPUT 1 へ、TSのフォーンケーブルでつなぐ。H90の OUTPUT 1 と OUTPUT 2 から、Scarlett 4i4の背面の LINE INPUT 3 と LINE INPUT 4 へ、TSのフォーンケーブルでつなぐ(H90の INPUT 1、OUTPUT 1、OUTPUT 2 は、設定でラインレベルにしておく)。ディレイの速さをDAWのテンポに合わせるため、H90の USB-C 端子を、パソコンのUSB端子へ、USBケーブルでつなぐ(DAWから、USB経由でMIDIクロック(=テンポの情報)を送る)。Scarlett 4i4の USB-C 端子も、パソコンのもう1つのUSB端子へ、USBケーブルでつなぐ。H90の電源には、付属の 12V のACアダプターを使う。H90の INPUT 2、EXP/CTL、MIDI DIN の端子、Bass Station IIのヘッドホン端子は、この問題では使わない。",
+        equipment: [
+          {
+            id: "bs2",
+            label: "Novation Bass Station II(モノラルのアナログシンセ)",
+            icon: "BS II",
+            ports: [
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "lineOut", label: "LINE OUT (φ6.3・モノラル)", type: "ts", dir: "out" },
+              { id: "phones", label: "HEADPHONES (φ6.3)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "h90",
+            label: "Eventide H90(マルチエフェクター)",
+            icon: "H90",
+            ports: [
+              { id: "in1", label: "INPUT 1 (TSフォーン・ラインに設定)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (TSフォーン)", type: "ts", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (TSフォーン・ラインに設定)", type: "ts", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (TSフォーン・ラインに設定)", type: "ts", dir: "out" },
+              { id: "exp", label: "EXP/CTL 1 (TRSフォーン)", type: "trs", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+              { id: "dcin", label: "DC IN 12V(センタープラス)", type: "power", dir: "in" },
+            ],
+          },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 4i4(第4世代)",
+            icon: "4i4",
+            ports: [
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "in3", label: "LINE INPUT 3 (フォーン)", type: "ts", dir: "in" },
+              { id: "in4", label: "LINE INPUT 4 (フォーン)", type: "ts", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          {
+            id: "pc",
+            label: "パソコン(DAW)",
+            icon: "PC",
+            ports: [
+              { id: "usb1", label: "USB 1", type: "usb", dir: "in" },
+              { id: "usb2", label: "USB 2", type: "usb", dir: "in" },
+            ],
+          },
+          { id: "psu", label: "H90付属のACアダプター(12V・センタープラス)", icon: "12V", ports: [{ id: "dcout", label: "DC OUT 12V", type: "power", dir: "out" }] },
+        ],
+        cablePalette: ["ts", "trs", "midi", "usb", "power", "xlr"],
+        correctConnections: [
+          { from: "scarlett.midiOut", to: "bs2.midiIn", cable: "midi" },
+          { from: "bs2.lineOut", to: "h90.in1", cable: "ts" },
+          { from: "h90.out1", to: "scarlett.in3", cable: "ts" },
+          { from: "h90.out2", to: "scarlett.in4", cable: "ts" },
+          { from: "h90.usb", to: "pc.usb1", cable: "usb" },
+          { from: "scarlett.usb", to: "pc.usb2", cable: "usb" },
+          { from: "psu.dcout", to: "h90.dcin", cable: "power" },
+        ],
+        explain:
+          "この配線の主役は『モノラルで入れて、ステレオで出す』という使い方。Bass Station IIの出力は1本(モノラル)だが、H90のステレオのディレイやリバーブは、左右で違う響きを作って音を広げる。だから、入力は INPUT 1 の1本だけ、出力は OUTPUT 1 と 2 の2本を使い、DAWでは2本をステレオのトラック1つとして録音する。H90の説明書では、入力と出力はそれぞれ『楽器レベル』と『ラインレベル』を切り替えられ、ラインに設定した端子は背面のランプで分かるようになっている。ギター用の初期設定のままシンセのライン信号を入れると、入力が大きすぎて音がひずみやすく、逆に出力を楽器レベルのままにするとオーディオインターフェースに届く音が小さくなる。シンセやスタジオの機材と組み合わせるときは、まず入出力をラインに切り替えよう。H90の端子は、すべてアンバランスのTS(=チップとスリーブの2極)なので、TSのケーブルでつなぐ。Scarlettの入力はTRSにも対応しているが、TSのケーブルを挿せばアンバランスの信号としてそのまま受けられる。ディレイの繰り返しの間隔を曲のテンポにぴったり合わせるには、DAWからMIDIクロック(=テンポを知らせる信号)を送る。H90は、MIDI DIN IN のほか、USB経由でもMIDIを受け取れると説明されているので、今回はUSBケーブル1本で済ませている(DAWの設定で、H90あてにMIDIクロックを送る項目をオンにする)。Bass Station IIへの演奏データは、Scarlett 4i4の MIDI OUT から5ピンDINのMIDIケーブルで送る。電源は要注意。多くのギター用ペダルは9V・センターマイナスだが、Eventideの説明書では、H90は付属の12V・1A、センタープラスのアダプターを使うように書かれている。プラグの形が同じでも、ほかのペダル用の電源を流用すると故障の原因になるので、付属品を使うか、仕様が同じことを必ず確かめよう。",
+      },
+    },
   ],
 };
