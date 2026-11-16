@@ -7440,5 +7440,68 @@ window.COURSES["gear_patch_practice"] = {
           "Rhodesのステージモデルは、電源を使わない『パッシブ』の楽器。鍵盤を弾くとハンマーが金属の棒をたたき、その振動をピックアップが電気の信号に変える。エレキギターと同じで、出てくる信号は小さく、インピーダンス(=信号の流れにくさを表す値)が高い。こういう信号をそのまま何十メートルもあるケーブルでPAまで送ると、雑音が乗ったり、高い音がこもったりしやすい。そこでDIを挟み、PAのミキサーが受けやすいバランスの信号(XLR)に変えて送る。パッシブの楽器は、受ける側の入力インピーダンスが低いと高い音が削られやすいとされるため、電源で動くアクティブDIを選ぶことが多い。J48はファンタム電源(=ミキサーからマイクケーブルを通して送られる48Vの電気)で動くので、PAの担当者にCH 11のファンタム電源をオンにしてもらう必要がある。オンにし忘れると、PAには何も届かない。J48の THRU は、INPUT に入ってきた信号をそのまま外へ出す端子。ここからアンプへつなげば、1本の楽器の出力を『ステージのアンプ』と『PA』の2か所へ分けられる。Rhodesの音作りで定番なのが、Fender のギターアンプで鳴らすこと。真空管アンプの温かいひずみや、Vibrato チャンネルのトレモロ(=音量が周期的に揺れる効果)、スプリングリバーブは、Rhodesと相性がよいとされる。PA側では、DIで送ったまっすぐな音(CH 11)と、アンプにマイクを立てた音(CH 12)を混ぜて、輪郭とアンプの味わいのバランスを決める。2つの音を混ぜたときに低音が薄くなるなら、どちらかの位相(=波の向き)を反転すると改善することがある。アンプから『ブーン』というハムノイズが出るときは、J48のグラウンドリフトのスイッチ(=アースの線を切り離して、ノイズの原因になる電気の通り道を断つ)を試してみよう。Rhodes本体には電源の端子がないので、電源をつなぐのはアンプだけでよい。",
       },
     },
+    {
+      id: "clavinova_midi_and_audio_record",
+      order: 162,
+      title: "電子ピアノの演奏を、MIDIと音の両方でパソコンに録る(Yamaha Clavinova CLP-835 + Scarlett 2i2)",
+      category: "配線問題",
+      hook: "自宅の電子ピアノでピアノのパートを弾いて、DAWに録りたい。電子ピアノには、『どの鍵盤をどの強さで弾いたか』という演奏データ(MIDI)を送る端子と、ピアノの音そのものを送る端子の両方がある。2種類を同時に録っておけば、あとで音色を差し替えることも、電子ピアノの音をそのまま使うこともできる。どの端子がどちらの役目かを見分けて配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅で作曲をしている。電子ピアノ「Yamaha Clavinova CLP-835」で弾いたピアノのパートを、DAWに『MIDI』と『音(オーディオ)』の両方で録りたい。CLP-835の USB TO HOST(USB Type B)から、パソコンのUSB端子へ、USBケーブルでつなぐ(演奏データ=MIDIをパソコンへ送る)。CLP-835の AUX OUT L/L+R と R(フォーン・アンバランス)から、オーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」の INPUT 1 と INPUT 2(XLR/フォーンのコンボ端子)へ、TSのフォーンケーブルでつなぐ(Scarlettの入力はラインの設定にする)。Scarlett 2i2の USB-C 端子から、パソコンのもう1つのUSB端子へ、USBケーブルでつなぐ。Scarlett 2i2の LINE OUTPUT L と R(TRS・バランス)から、モニタースピーカー「Yamaha HS5」の左と右の INPUT(XLR/フォーンのコンボ端子)へ、TRSのフォーンケーブルでつなぐ。CLP-835の電源は、付属のACアダプターを DC IN につなぐ。CLP-835の USB TO DEVICE、AUX IN、ヘッドホン端子は、この問題では使わない。",
+        equipment: [
+          {
+            id: "clp",
+            label: "Yamaha Clavinova CLP-835(電子ピアノ)",
+            icon: "CLP-835",
+            ports: [
+              { id: "usbHost", label: "USB TO HOST (Type B)", type: "usb", dir: "out" },
+              { id: "usbDevice", label: "USB TO DEVICE (Type A・USBメモリー用)", type: "usb", dir: "out" },
+              { id: "auxOutL", label: "AUX OUT L/L+R (フォーン)", type: "ts", dir: "out" },
+              { id: "auxOutR", label: "AUX OUT R (フォーン)", type: "ts", dir: "out" },
+              { id: "auxIn", label: "AUX IN (3.5mmステレオミニ)", type: "trs", dir: "in" },
+              { id: "phones", label: "PHONES (φ6.3ステレオ)", type: "trs", dir: "out" },
+              { id: "dcin", label: "DC IN (16V)", type: "power", dir: "in" },
+            ],
+          },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 2i2(第4世代)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "outL", label: "LINE OUTPUT L (TRS)", type: "trs", dir: "out" },
+              { id: "outR", label: "LINE OUTPUT R (TRS)", type: "trs", dir: "out" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          {
+            id: "pc",
+            label: "パソコン(DAW)",
+            icon: "PC",
+            ports: [
+              { id: "usb1", label: "USB 1", type: "usb", dir: "in" },
+              { id: "usb2", label: "USB 2", type: "usb", dir: "in" },
+            ],
+          },
+          { id: "hsL", label: "Yamaha HS5(左)", icon: "HS5 L", ports: [{ id: "in", label: "INPUT (XLR/フォーン コンボ)", type: "trs", dir: "in" }] },
+          { id: "hsR", label: "Yamaha HS5(右)", icon: "HS5 R", ports: [{ id: "in", label: "INPUT (XLR/フォーン コンボ)", type: "trs", dir: "in" }] },
+          { id: "psu", label: "CLP-835付属のACアダプター", icon: "PSU", ports: [{ id: "dcout", label: "DC OUT", type: "power", dir: "out" }] },
+        ],
+        cablePalette: ["usb", "ts", "trs", "midi", "xlr", "power"],
+        correctConnections: [
+          { from: "clp.usbHost", to: "pc.usb1", cable: "usb" },
+          { from: "clp.auxOutL", to: "scarlett.in1", cable: "ts" },
+          { from: "clp.auxOutR", to: "scarlett.in2", cable: "ts" },
+          { from: "scarlett.usb", to: "pc.usb2", cable: "usb" },
+          { from: "scarlett.outL", to: "hsL.in", cable: "trs" },
+          { from: "scarlett.outR", to: "hsR.in", cable: "trs" },
+          { from: "psu.dcout", to: "clp.dcin", cable: "power" },
+        ],
+        explain:
+          "電子ピアノからパソコンへ送れるものは2種類ある。1つはMIDI(=どの鍵盤を、いつ、どの強さで弾いたかという演奏の記録)で、音そのものは入っていない。もう1つはオーディオ(=実際に鳴っているピアノの音)。MIDIで録っておくと、弾き間違えた音だけを直したり、あとからDAWの中の別のピアノ音源に差し替えたりできる。オーディオで録っておくと、Clavinovaのピアノの音をそのまま作品に使える。今回は両方を同時に録っておき、あとでどちらを使うか決められるようにしている。USB TO HOST は、パソコンとつなぐための端子(Type B)。最近の電子ピアノは、5ピンのMIDI端子の代わりに、この端子でMIDIをやりとりすることが多い。よく似た USB TO DEVICE(Type A)は、USBメモリーなどを挿して録音や曲データを保存するための端子なので、パソコンとはつながらない。音の出口は AUX OUT。ここからオーディオインターフェースの入力へつなぐ。L/L+R という表示は、『Rにケーブルを挿さないときは、Lから左右を混ぜたモノラルの音が出る』という意味。ステレオで録りたいなら L と R の2本ともつなぐ。電子ピアノの出力はラインレベルのアンバランスなので、TSのケーブルでつなぎ、Scarlett側の入力はライン(または楽器用ではない設定)にする。機種によっては USB TO HOST から音も送れるものがあるが(USBオーディオインターフェース機能)、対応しているかどうかは機種ごとに違うので、説明書で確かめよう。気をつけたいのが『音の二重鳴り』。DAWでMIDIを録りながら、DAWの中のピアノ音源で鳴らすと、Clavinova自身の音と、DAWから返ってきた音の両方が鳴ってしまうことがある。Yamahaの資料では、パソコンと組み合わせるときは、Clavinova側の『ローカルコントロール』(=鍵盤と内部の音源のつながり)をオフにすることが案内されている。今回のように Clavinova の音もオーディオで録るなら、ローカルコントロールはオンのままにして、DAW側でMIDIトラックの音を鳴らさない(MIDIを本体に送り返さない)設定にしよう。録音中にClavinovaのスピーカーからも音が出ていると、スタジオのモニタースピーカーの音と混ざって聞き分けにくいので、Clavinova本体の音量を下げ、HS5で聞きながら録るとよい(AUX OUT からの出力レベルも本体の音量と連動する機種があるので、Scarlettの入力レベルのランプで確認する)。",
+      },
+    },
   ],
 };
