@@ -7095,5 +7095,65 @@ window.COURSES["gear_patch_practice"] = {
           "ベースのPAへの送り方には、大きく分けて『ベースアンプのスピーカーにマイクを立てる』『DIでラインの音を送る』の2つがあり、ライブハウスでは両方を混ぜることも多い。B7K Ultraのようなプリアンプペダルは、歪み・EQ・音量の調整がひとつになっていて、本体にバランスのXLR出力(DIRECT OUT)を持っている。DIの役割(=楽器の出力を、ミキサーのマイク入力が受けやすいバランスの信号に変えて、長いケーブルでも雑音が乗りにくくする)を、ペダル自身が受け持ってくれるので、会場のDIを使わなくてもステージボックスへ直接送れる。しかも、自分で作った歪みやEQのかかった音がそのままPAへ届くので、どの会場でも同じ音を出しやすい。MASTERのつまみは、全体の音量であると同時に、DIの出力レベルの調整も兼ねていると説明書に書かれている。本番中にMASTERを大きく動かすと、PAへ送る音量も変わってしまうので、PAの担当者と相談してから決めよう。DIRECT OUTには、スピーカーキャビネットの響きを再現する機能(キャビネットシミュレーター)を切り替えるスイッチがある。アンプを通さない音は高い音が耳に痛く聞こえやすいので、オンにしておくと、アンプのスピーカーで鳴らしたような、まとまった音でPAへ送れる。また、DIRECT OUTには、アースの線を切り離して『ブーン』というハムノイズ(グラウンドループ)を断つためのグラウンドリフトのスイッチもあり、このスイッチは フォーンの OUTPUT には影響しないとされる。ノイズが出たときに試してみよう。足元のスイッチは2つあり、歪みだけをオン/オフするものと、ペダル全体をバイパス(素通し)するものに分かれている。電源は、9Vの『センターマイナス』を使う。プラグの見た目が同じでも、中心がプラスのアダプターや、電圧の違うアダプターを挿すと故障の原因になるので、アダプターに書かれた電圧と極性の印を必ず確かめよう。B7K Ultraは電池では動かないので、電源をつなぎ忘れると、ベースの音はどこからも出ない。",
       },
     },
+    {
+      id: "fm9_fc12_faslink_xlr",
+      order: 156,
+      title: "ギター用マルチエフェクターに、足元のコントローラーをXLRケーブル1本でつなぐ(Fractal Audio FM9 + FC-12)",
+      category: "配線問題",
+      hook: "ギター用のアンプシミュレーター(=本物のアンプの音をデジタルで再現する機材)を、ライブで足元から操作したい。FM9と専用のフットコントローラーFC-12は、なんとマイク用と同じXLRケーブル1本でつながる。ただし、そのXLR端子は音を出す端子ではない。音の出口と操作用の線を取り違えないように配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブハウスで演奏するギタリスト。足元のアンプシミュレーター兼マルチエフェクター「Fractal Audio FM9」だけで音を作り、PAとステージの返し(モニター)の両方へ送りたい。ギター「Gibson Les Paul Standard」の出力から、FM9の INPUT 1(INSTRUMENT、フォーン)へ、TSのフォーンケーブルでつなぐ。FM9の背面の OUTPUT 1 L と R(XLR)から、ステージボックス(PAのミキサーへつながる中継箱)の CH 7 と CH 8 へ、XLRケーブルでつなぐ。足元の自分用の返しとして、パワードスピーカー(アンプ内蔵スピーカー)「Yamaha DXR10mkII」を1台だけ置く。FM9の OUTPUT 3 L(フォーン)から、DXR10mkIIの INPUT 1(XLR/フォーンのコンボ端子)へ、TRSのフォーンケーブルでつなぐ。足りない踏みスイッチを増やすため、フットコントローラー「Fractal Audio FC-12」を足す。FM9の FASLINK II 端子から、FC-12の FASLINK II 端子へ、XLRケーブルでつなぐ(FC-12の電源は、このケーブルを通してFM9から送られるので、ACアダプターは使わない)。ワウやボリューム操作用のエクスプレッションペダル「Fractal Audio EV-1」は、FC-12の PEDAL 1 へ、TRSのフォーンケーブルでつなぐ。FM9の OUTPUT 2 と USB、FC-12の FASLINK II THRU は、この問題では使わない。",
+        equipment: [
+          { id: "gtr", label: "Gibson Les Paul Standard", icon: "LP", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "fm9",
+            label: "Fractal Audio FM9(アンプシミュレーター兼マルチエフェクター)",
+            icon: "FM9",
+            ports: [
+              { id: "in1", label: "INPUT 1 (INSTRUMENT・フォーン)", type: "ts", dir: "in" },
+              { id: "out1L", label: "OUTPUT 1 L (XLR)", type: "xlr", dir: "out" },
+              { id: "out1R", label: "OUTPUT 1 R (XLR)", type: "xlr", dir: "out" },
+              { id: "out2L", label: "OUTPUT 2 L (XLR)", type: "xlr", dir: "out" },
+              { id: "out3L", label: "OUTPUT 3 L (フォーン・Humbuster)", type: "trs", dir: "out" },
+              { id: "faslink", label: "FASLINK II (XLR・フットコントローラー専用)", type: "xlr", dir: "out" },
+              { id: "usb", label: "USB", type: "usb", dir: "in" },
+            ],
+          },
+          {
+            id: "fc12",
+            label: "Fractal Audio FC-12(フットコントローラー)",
+            icon: "FC-12",
+            ports: [
+              { id: "faslink", label: "FASLINK II (XLR)", type: "xlr", dir: "in" },
+              { id: "pedal1", label: "PEDAL 1 (フォーン)", type: "trs", dir: "in" },
+              { id: "thru", label: "FASLINK II THRU (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "ev1", label: "Fractal Audio EV-1(エクスプレッションペダル)", icon: "EV-1", ports: [{ id: "out", label: "EXPRESSION OUT (フォーン)", type: "trs", dir: "out" }] },
+          {
+            id: "stagebox",
+            label: "ステージボックス(PAミキサーへの中継)",
+            icon: "BOX",
+            ports: [
+              { id: "ch7", label: "CH 7 (XLR)", type: "xlr", dir: "in" },
+              { id: "ch8", label: "CH 8 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          { id: "wedge", label: "Yamaha DXR10mkII(パワードスピーカー・足元の返し)", icon: "DXR10", ports: [{ id: "in1", label: "INPUT 1 (XLR/フォーン コンボ)", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "usb", "power", "midi"],
+        correctConnections: [
+          { from: "gtr.out", to: "fm9.in1", cable: "ts" },
+          { from: "fm9.out1L", to: "stagebox.ch7", cable: "xlr" },
+          { from: "fm9.out1R", to: "stagebox.ch8", cable: "xlr" },
+          { from: "fm9.out3L", to: "wedge.in1", cable: "trs" },
+          { from: "fm9.faslink", to: "fc12.faslink", cable: "xlr" },
+          { from: "ev1.out", to: "fc12.pedal1", cable: "trs" },
+        ],
+        explain:
+          "この配線のいちばんの落とし穴は、FM9の背面にXLRの端子が何個も並んでいること。OUTPUT 1 と OUTPUT 2 のXLRは音の出口だが、FASLINK II は、フットコントローラーとやりとりするための専用の端子で、音は出てこない。Fractal Audioは、FC-12とFM9は『ふつうのXLRケーブル1本』で双方向にやりとりでき、1台目のFCにはFASLINK IIを通して電源も送られると説明している。マイクケーブルがそのまま使えるのは便利だが、逆に言えば、FASLINK IIの線をステージボックスへ挿してしまうミスも起こりやすい。説明書でも、FASLINK II はFCシリーズ専用で、ほかの機材とは互換性がないと注意されている。ステージで線を挿す前に、端子の表示を指で確かめるくせをつけよう。音の出口は、PA用とモニター用で分けるのが基本。OUTPUT 1 はメインの出力で、XLRとフォーンの両方の端子を持つ。ここではXLRでステージボックスへ送り、PAに左右(ステレオ)で届ける。足元の返しは、FM9の別の出力(OUTPUT 3)から送っている。こうすると、PAへ送る音量を変えずに、自分の返しの音量や音色だけを変えられる(どの出力に何を送るかは、FM9の中のルーティングや出力ごとの設定で決める)。FM9のフォーンの出力には、Humbuster(ハムバスター)という、グラウンドループ(=機材どうしのアースの電位の差でブーンというノイズが出る現象)を減らす仕組みが付いている。Humbusterの効果を生かすには、FM9側がTRSになったケーブルを使うとされる。今回の返しのスピーカーはバランス入力なので、TRSのケーブルでつなげばよい。エクスプレッションペダル(=踏み込む角度でワウやボリュームを連続的に操作するペダル)は、TRSのケーブルでFC-12のPEDAL端子へつなぐ。FM9本体のPEDAL端子へ直接つなぐこともできるが、足元のコントローラー側にまとめておくと、FM9本体を足元から離れた場所に置いたときも、ペダルの線を長く引き回さずにすむ。つないだら、FM9の設定画面で、どのペダル端子をどのつまみの操作に使うかを割り当て、ペダルの踏み込みの端から端までを覚えさせる作業(キャリブレーション)をしておこう。",
+      },
+    },
   ],
 };
