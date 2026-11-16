@@ -7384,5 +7384,61 @@ window.COURSES["gear_patch_practice"] = {
           "この配線の主役は『モノラルで入れて、ステレオで出す』という使い方。Bass Station IIの出力は1本(モノラル)だが、H90のステレオのディレイやリバーブは、左右で違う響きを作って音を広げる。だから、入力は INPUT 1 の1本だけ、出力は OUTPUT 1 と 2 の2本を使い、DAWでは2本をステレオのトラック1つとして録音する。H90の説明書では、入力と出力はそれぞれ『楽器レベル』と『ラインレベル』を切り替えられ、ラインに設定した端子は背面のランプで分かるようになっている。ギター用の初期設定のままシンセのライン信号を入れると、入力が大きすぎて音がひずみやすく、逆に出力を楽器レベルのままにするとオーディオインターフェースに届く音が小さくなる。シンセやスタジオの機材と組み合わせるときは、まず入出力をラインに切り替えよう。H90の端子は、すべてアンバランスのTS(=チップとスリーブの2極)なので、TSのケーブルでつなぐ。Scarlettの入力はTRSにも対応しているが、TSのケーブルを挿せばアンバランスの信号としてそのまま受けられる。ディレイの繰り返しの間隔を曲のテンポにぴったり合わせるには、DAWからMIDIクロック(=テンポを知らせる信号)を送る。H90は、MIDI DIN IN のほか、USB経由でもMIDIを受け取れると説明されているので、今回はUSBケーブル1本で済ませている(DAWの設定で、H90あてにMIDIクロックを送る項目をオンにする)。Bass Station IIへの演奏データは、Scarlett 4i4の MIDI OUT から5ピンDINのMIDIケーブルで送る。電源は要注意。多くのギター用ペダルは9V・センターマイナスだが、Eventideの説明書では、H90は付属の12V・1A、センタープラスのアダプターを使うように書かれている。プラグの形が同じでも、ほかのペダル用の電源を流用すると故障の原因になるので、付属品を使うか、仕様が同じことを必ず確かめよう。",
       },
     },
+    {
+      id: "rhodes_stage_di_thru_twin",
+      order: 161,
+      title: "電源のないエレピ、Fender Rhodesを、DIのTHRUでアンプへ、XLRでPAへ送る(Rhodes Mark I Stage + Radial J48 + Fender Twin Reverb)",
+      category: "配線問題",
+      hook: "ビンテージのエレクトリックピアノ「Fender Rhodes」のステージモデルは、コンセントにつながず、金属の棒が鳴る振動をピックアップ(=振動を電気信号に変えるマイクのような部品)で拾うだけの楽器。エレキギターと同じく信号がとても繊細なので、そのまま長いケーブルでPAへ送るのは苦手だ。DIを1台挟んで、ステージのアンプとPAの両方へ届けよう。",
+      patch: {
+        scenario:
+          "あなたはソウルバンドのキーボーディスト。ライブハウスに「Rhodes Mark I Stage 73」を持ち込んだ。Rhodesの音は、ステージ上のギターアンプ「Fender '65 Twin Reverb」で鳴らしつつ、PAへも送りたい。RhodesのOUTPUT(フォーン)から、DI「Radial J48」の INPUT へ、TSのフォーンケーブルでつなぐ。J48の THRU から、Twin Reverbの INPUT 1(Vibrato チャンネル)へ、TSのフォーンケーブルでつなぐ。J48の OUTPUT(XLR)から、ステージボックスの CH 11 へ、XLRケーブルでつなぐ。J48は、PAのミキサーのCH 11のファンタム電源(48V)で動かす。アンプの響きも混ぜたいので、Twin Reverbのスピーカーの前に立てたマイク「Shure SM57」から、ステージボックスの CH 12 へ、XLRケーブルでつなぐ。Twin Reverbの電源ケーブルは、ステージの電源タップにつなぐ。Rhodes本体には電源の端子はない。Twin Reverbの INPUT 2 と、ステージボックスの CH 13 は、この問題では使わない。",
+        equipment: [
+          { id: "rhodes", label: "Rhodes Mark I Stage 73(エレクトリックピアノ)", icon: "Rhodes", ports: [{ id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" }] },
+          {
+            id: "di",
+            label: "Radial J48(アクティブDI)",
+            icon: "J48",
+            ports: [
+              { id: "in", label: "INPUT (フォーン)", type: "ts", dir: "in" },
+              { id: "thru", label: "THRU (フォーン)", type: "ts", dir: "out" },
+              { id: "out", label: "OUTPUT (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "twin",
+            label: "Fender '65 Twin Reverb(ギターアンプ)",
+            icon: "Twin",
+            ports: [
+              { id: "in1", label: "VIBRATO INPUT 1 (フォーン)", type: "ts", dir: "in" },
+              { id: "in2", label: "VIBRATO INPUT 2 (フォーン)", type: "ts", dir: "in" },
+              { id: "acin", label: "電源プラグ", type: "power", dir: "in" },
+            ],
+          },
+          { id: "sm57", label: "Shure SM57(アンプ用のマイク)", icon: "SM57", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "stagebox",
+            label: "ステージボックス(PAミキサーへの中継)",
+            icon: "BOX",
+            ports: [
+              { id: "ch11", label: "CH 11 (XLR)", type: "xlr", dir: "in" },
+              { id: "ch12", label: "CH 12 (XLR)", type: "xlr", dir: "in" },
+              { id: "ch13", label: "CH 13 (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+          { id: "tap", label: "ステージの電源タップ", icon: "AC", ports: [{ id: "out", label: "コンセント", type: "power", dir: "out" }] },
+        ],
+        cablePalette: ["ts", "trs", "xlr", "speaker", "power"],
+        correctConnections: [
+          { from: "rhodes.out", to: "di.in", cable: "ts" },
+          { from: "di.thru", to: "twin.in1", cable: "ts" },
+          { from: "di.out", to: "stagebox.ch11", cable: "xlr" },
+          { from: "sm57.out", to: "stagebox.ch12", cable: "xlr" },
+          { from: "tap.out", to: "twin.acin", cable: "power" },
+        ],
+        explain:
+          "Rhodesのステージモデルは、電源を使わない『パッシブ』の楽器。鍵盤を弾くとハンマーが金属の棒をたたき、その振動をピックアップが電気の信号に変える。エレキギターと同じで、出てくる信号は小さく、インピーダンス(=信号の流れにくさを表す値)が高い。こういう信号をそのまま何十メートルもあるケーブルでPAまで送ると、雑音が乗ったり、高い音がこもったりしやすい。そこでDIを挟み、PAのミキサーが受けやすいバランスの信号(XLR)に変えて送る。パッシブの楽器は、受ける側の入力インピーダンスが低いと高い音が削られやすいとされるため、電源で動くアクティブDIを選ぶことが多い。J48はファンタム電源(=ミキサーからマイクケーブルを通して送られる48Vの電気)で動くので、PAの担当者にCH 11のファンタム電源をオンにしてもらう必要がある。オンにし忘れると、PAには何も届かない。J48の THRU は、INPUT に入ってきた信号をそのまま外へ出す端子。ここからアンプへつなげば、1本の楽器の出力を『ステージのアンプ』と『PA』の2か所へ分けられる。Rhodesの音作りで定番なのが、Fender のギターアンプで鳴らすこと。真空管アンプの温かいひずみや、Vibrato チャンネルのトレモロ(=音量が周期的に揺れる効果)、スプリングリバーブは、Rhodesと相性がよいとされる。PA側では、DIで送ったまっすぐな音(CH 11)と、アンプにマイクを立てた音(CH 12)を混ぜて、輪郭とアンプの味わいのバランスを決める。2つの音を混ぜたときに低音が薄くなるなら、どちらかの位相(=波の向き)を反転すると改善することがある。アンプから『ブーン』というハムノイズが出るときは、J48のグラウンドリフトのスイッチ(=アースの線を切り離して、ノイズの原因になる電気の通り道を断つ)を試してみよう。Rhodes本体には電源の端子がないので、電源をつなぐのはアンプだけでよい。",
+      },
+    },
   ],
 };
