@@ -7204,5 +7204,68 @@ window.COURSES["gear_patch_practice"] = {
           "AES/EBUは、1本のケーブルで左右2チャンネルのデジタル音声を送れる業務用の規格で、端子はマイクと同じXLRを使う。だから、行き(UFX III → M7)と帰り(M7 → UFX III)の2本だけで、ステレオのリバーブを往復させられる。アナログでつなぐと、送るときにデジタル→アナログ、戻すときにアナログ→デジタルの変換がそれぞれ入るが、デジタルのままなら変換を挟まないので、音の劣化やレベル合わせの手間が少ない。注意したいのはケーブル。AES/EBUは、インピーダンス(=ケーブルの電気的な性質を表す値)が110Ωのケーブルを使う規格になっている。マイク用のXLRケーブルでも短ければ音が出てしまうことがあるが、長くなるほど信号が乱れて、プツプツというノイズや音切れの原因になりやすい。見た目が同じでも、デジタル用のケーブルを選ぼう。もう1つの大事な点が『時計役(クロックのマスター)』を1台に決めること。デジタルの機材どうしは、1秒間に何回音を記録するか(サンプルレート)のタイミングをぴったりそろえないと、ノイズや音切れが起きる。今回はUFX IIIを内部クロックのマスターにして、M7は送られてきたAESの信号に合わせて動く。Bricastiは、M7が入ってくる信号のサンプルレート(44.1kHz〜192kHz)に自動で合わせると説明している。UFX IIIは、M7から戻ってくるAESの信号も、自分のクロックで動いたM7が返してきたものなので、そのまま受け取れる。もし両方をマスターにしたり、UFX IIIをAESに同期させる設定にしてしまうと、お互いがお互いに合わせようとして、同期が取れなくなることがある。今回は2台だけなので、ワードクロックのケーブル(=時計の信号だけを送る専用の線)はいらない。DAW側では、UFX IIIのAESの出力をセンドの行き先にし、AESの入力を新しいステレオのトラックで受けて、DAWに入っているハードウェア・インサート(=外部機材を通す)機能などで遅れ(レイテンシー)を補正しておくと、リバーブの立ち上がりがずれない。M7の中では、原音とリバーブ音の混ぜ具合を『リバーブ音だけ』にしておくのが、センドで使うときの基本だ。",
       },
     },
+    {
+      id: "push3_standalone_live_minilogue",
+      order: 158,
+      title: "パソコンなしのライブで、Push 3から外部シンセを鳴らして、音をまとめてPAへ送る(Ableton Push 3 スタンドアローン + Korg minilogue xd)",
+      category: "配線問題",
+      hook: "Ableton Push 3のスタンドアローン版は、パソコンなしでAbleton Liveの曲を動かせる。外部のシンセもPush 3から演奏させ、その音をPush 3に戻して、まとめてPAへ送ってみよう。Push 3のMIDI端子は、よく見る丸い5ピンではなく、イヤホンと同じ小さな3.5mmの端子。変換アダプターの種類にも気をつけて配線しよう。",
+      patch: {
+        scenario:
+          "あなたは小さなクラブで、パソコンを使わずにライブをする。曲はPush 3(スタンドアローン)の中のAbleton Liveで動かし、シンセのフレーズだけは、外部のアナログシンセ「Korg minilogue xd」をPush 3から演奏させたい。Push 3の背面の MIDI OUT(3.5mmのTRS端子)に、TRS-MIDIの変換アダプター(Type A)を挿し、その5ピンDIN側から、minilogue xdの MIDI IN へ、MIDIケーブルでつなぐ。minilogue xdの OUTPUT L/MONO と R(φ6.3、アンバランス)から、Push 3の INPUT 1 と INPUT 2(フォーン)へ、TSのフォーンケーブルでつなぐ(Push 3の入力の設定はラインにする)。Push 3の OUTPUT 1 と OUTPUT 2(フォーン・バランス)から、ステージボックスの CH 9 と CH 10(XLR/フォーンのコンボ端子)へ、TRSのフォーンケーブルでつなぐ。サスティンペダル「Roland DP-10」を、Push 3の PEDAL 1 へつなぐ(DP-10のケーブルはTSのフォーン)。本番は1時間を超えるので、内蔵バッテリーだけに頼らず、Push 3付属の電源アダプターを Push 3の DC IN につなぐ。Push 3のヘッドホン端子と MIDI IN、minilogue xdの MIDI OUT は、この問題では使わない。",
+        equipment: [
+          {
+            id: "push",
+            label: "Ableton Push 3(スタンドアローン)",
+            icon: "Push 3",
+            ports: [
+              { id: "midiOut", label: "MIDI OUT(3.5mm TRS → 変換アダプターのDIN側)", type: "midi", dir: "out" },
+              { id: "midiIn", label: "MIDI IN(3.5mm TRS → 変換アダプターのDIN側)", type: "midi", dir: "in" },
+              { id: "in1", label: "INPUT 1 (フォーン)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (フォーン)", type: "ts", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (フォーン・バランス)", type: "trs", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (フォーン・バランス)", type: "trs", dir: "out" },
+              { id: "phones", label: "HEADPHONES (フォーン)", type: "trs", dir: "out" },
+              { id: "pedal1", label: "PEDAL 1 (フォーン)", type: "ts", dir: "in" },
+              { id: "dcin", label: "DC IN(電源)", type: "power", dir: "in" },
+            ],
+          },
+          {
+            id: "xd",
+            label: "Korg minilogue xd(アナログシンセ)",
+            icon: "xd",
+            ports: [
+              { id: "midiIn", label: "MIDI IN (5ピンDIN)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピンDIN)", type: "midi", dir: "out" },
+              { id: "outL", label: "OUTPUT L/MONO (φ6.3・アンバランス)", type: "ts", dir: "out" },
+              { id: "outR", label: "OUTPUT R (φ6.3・アンバランス)", type: "ts", dir: "out" },
+            ],
+          },
+          { id: "pedal", label: "Roland DP-10(サスティンペダル)", icon: "DP-10", ports: [{ id: "out", label: "プラグ (TSフォーン)", type: "ts", dir: "out" }] },
+          {
+            id: "stagebox",
+            label: "ステージボックス(PAミキサーへの中継)",
+            icon: "BOX",
+            ports: [
+              { id: "ch9", label: "CH 9 (XLR/フォーン コンボ)", type: "trs", dir: "in" },
+              { id: "ch10", label: "CH 10 (XLR/フォーン コンボ)", type: "trs", dir: "in" },
+            ],
+          },
+          { id: "psu", label: "Push 3付属の電源アダプター", icon: "PSU", ports: [{ id: "dcout", label: "DC OUT", type: "power", dir: "out" }] },
+        ],
+        cablePalette: ["midi", "ts", "trs", "xlr", "usb", "power", "cv"],
+        correctConnections: [
+          { from: "push.midiOut", to: "xd.midiIn", cable: "midi" },
+          { from: "xd.outL", to: "push.in1", cable: "ts" },
+          { from: "xd.outR", to: "push.in2", cable: "ts" },
+          { from: "push.out1", to: "stagebox.ch9", cable: "trs" },
+          { from: "push.out2", to: "stagebox.ch10", cable: "trs" },
+          { from: "pedal.out", to: "push.pedal1", cable: "ts" },
+          { from: "psu.dcout", to: "push.dcin", cable: "power" },
+        ],
+        explain:
+          "Push 3のスタンドアローン版は、それ自体がAbleton Liveを動かすコンピューターであり、オーディオインターフェース(=音の入出力の機材)でもある。だから、外部シンセを『Push 3から演奏させる(MIDI OUT)』『シンセの音をPush 3に戻す(INPUT)』『全部まとめてPAへ送る(OUTPUT)』という3つの流れを、Push 3を中心に組める。シンセの音をいったんPush 3に入れておくと、Live の中でエフェクトをかけたり、曲の他のパートと一緒に音量のバランスを取ってから、2本の線でPAへ渡せる。PAの担当者にとっても、受け取るチャンネルが少ないほうが扱いやすい。MIDIの端子には注意が必要。Push 3の MIDI IN/OUT は、3.5mmのTRS端子で、Sound On Soundのレビューでは『Type A』の方式だと紹介されている。TRS-MIDIには、Type A と Type B という、線のつなぎ方が違う2つの方式がある。違う方式のアダプターを使うと、形はぴったり挿さるのに信号が届かない。手元のアダプターが Type A かどうかを確かめよう。MIDIは、送る側の MIDI OUT から受ける側の MIDI IN へ、という向きでつなぐ。minilogue xd側では、Push 3が送ってくるMIDIのチャンネルと、minilogue xdが受け取るチャンネルをそろえておく。シンセの出力はアンバランスのラインレベルなので、TSのケーブルで Push 3の入力へつなぎ、Push 3の入力の設定をラインにする(楽器用のインストゥルメント設定のままだと、音が大きすぎてひずみやすい)。Push 3の出力はバランスなので、TRSのケーブルでステージボックスのコンボ端子のフォーン側へ挿せば、長く引き回しても雑音が乗りにくい(ステージボックスまでの距離が長いときや、会場の入力がXLRしかないときは、間にDIを挟む)。Ableton によると、内蔵バッテリーで動かせるのは2〜2.5時間ほど。リハーサルから本番まで電池だけで乗り切るのは心もとないので、コンセントが使える場所では電源アダプターをつないでおこう。Ableton のよくある質問では、PEDAL端子でサスティンペダルは使えるが、エクスプレッションペダルは使えないと案内されている。PEDAL端子は、設定によってCV(=モジュラーシンセなどを動かす電圧の信号)を出す端子にもなる。",
+      },
+    },
   ],
 };
