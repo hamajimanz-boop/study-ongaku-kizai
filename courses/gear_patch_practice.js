@@ -7155,5 +7155,54 @@ window.COURSES["gear_patch_practice"] = {
           "この配線のいちばんの落とし穴は、FM9の背面にXLRの端子が何個も並んでいること。OUTPUT 1 と OUTPUT 2 のXLRは音の出口だが、FASLINK II は、フットコントローラーとやりとりするための専用の端子で、音は出てこない。Fractal Audioは、FC-12とFM9は『ふつうのXLRケーブル1本』で双方向にやりとりでき、1台目のFCにはFASLINK IIを通して電源も送られると説明している。マイクケーブルがそのまま使えるのは便利だが、逆に言えば、FASLINK IIの線をステージボックスへ挿してしまうミスも起こりやすい。説明書でも、FASLINK II はFCシリーズ専用で、ほかの機材とは互換性がないと注意されている。ステージで線を挿す前に、端子の表示を指で確かめるくせをつけよう。音の出口は、PA用とモニター用で分けるのが基本。OUTPUT 1 はメインの出力で、XLRとフォーンの両方の端子を持つ。ここではXLRでステージボックスへ送り、PAに左右(ステレオ)で届ける。足元の返しは、FM9の別の出力(OUTPUT 3)から送っている。こうすると、PAへ送る音量を変えずに、自分の返しの音量や音色だけを変えられる(どの出力に何を送るかは、FM9の中のルーティングや出力ごとの設定で決める)。FM9のフォーンの出力には、Humbuster(ハムバスター)という、グラウンドループ(=機材どうしのアースの電位の差でブーンというノイズが出る現象)を減らす仕組みが付いている。Humbusterの効果を生かすには、FM9側がTRSになったケーブルを使うとされる。今回の返しのスピーカーはバランス入力なので、TRSのケーブルでつなげばよい。エクスプレッションペダル(=踏み込む角度でワウやボリュームを連続的に操作するペダル)は、TRSのケーブルでFC-12のPEDAL端子へつなぐ。FM9本体のPEDAL端子へ直接つなぐこともできるが、足元のコントローラー側にまとめておくと、FM9本体を足元から離れた場所に置いたときも、ペダルの線を長く引き回さずにすむ。つないだら、FM9の設定画面で、どのペダル端子をどのつまみの操作に使うかを割り当て、ペダルの踏み込みの端から端までを覚えさせる作業(キャリブレーション)をしておこう。",
       },
     },
+    {
+      id: "bricasti_m7_aes_digital_insert",
+      order: 157,
+      title: "ハードウェアのリバーブを、デジタル(AES/EBU)のまま送って返す(Bricasti M7 + RME Fireface UFX III)",
+      category: "配線問題",
+      hook: "名機と呼ばれるハードウェアのリバーブを、ミックスの外部エフェクトとして使いたい。アナログでつなぐこともできるが、オーディオインターフェースとリバーブの両方にAES/EBU(=業務用のデジタル音声の規格)の端子があるなら、デジタルのまま往復させられる。見た目はXLRと同じ端子なので、どのケーブルを選ぶかと、どちらの機材が『時計役』になるかに気をつけて配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅スタジオでミックスをしている。オーディオインターフェース「RME Fireface UFX III」を使っていて、ハードウェアのリバーブ「Bricasti Design M7」を、DAWのセンド(=トラックの音の一部を分けてエフェクトへ送る経路)のリバーブとして使いたい。M7の背面には、アナログの入出力(XLR)と、AES/EBUのデジタル入出力(XLR)の両方がある。今回はデジタルでつなぐ。UFX IIIの AES/EBU OUT から、M7の AES IN へ、AES/EBU用のデジタルケーブル(110Ωのケーブル)でつなぐ。M7の AES OUT から、UFX IIIの AES/EBU IN へ、同じくAES/EBU用のケーブルでつなぐ。M7は、メニューで入力をデジタル(AES)に切り替えておく。UFX IIIのクロック(=デジタル音声のタイミングを合わせる基準の時計)は内部(マスター)のままにして、M7は送られてきたAESの信号に合わせて動かす。モニタースピーカー「Genelec 8030C」2台へは、UFX IIIの背面の OUTPUT 1 と OUTPUT 2(XLR)から、XLRケーブルでつなぐ。M7のアナログ入出力は、この問題では使わない。",
+        equipment: [
+          {
+            id: "ufx",
+            label: "RME Fireface UFX III(オーディオインターフェース)",
+            icon: "UFX III",
+            ports: [
+              { id: "aesOut", label: "AES/EBU OUT (XLR)", type: "aes", dir: "out" },
+              { id: "aesIn", label: "AES/EBU IN (XLR)", type: "aes", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (XLR)", type: "xlr", dir: "out" },
+              { id: "wcOut", label: "WORD CLOCK OUT (BNC)", type: "wordclock", dir: "out" },
+            ],
+          },
+          {
+            id: "m7",
+            label: "Bricasti Design M7(ステレオ・リバーブ)",
+            icon: "M7",
+            ports: [
+              { id: "aesIn", label: "AES IN (XLR)", type: "aes", dir: "in" },
+              { id: "aesOut", label: "AES OUT (XLR)", type: "aes", dir: "out" },
+              { id: "anInL", label: "ANALOG IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "anInR", label: "ANALOG IN R (XLR)", type: "xlr", dir: "in" },
+              { id: "anOutL", label: "ANALOG OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "anOutR", label: "ANALOG OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Genelec 8030C(左)", icon: "8030C L", ports: [{ id: "in", label: "ANALOG IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Genelec 8030C(右)", icon: "8030C R", ports: [{ id: "in", label: "ANALOG IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "aes", "wordclock", "optical", "trs"],
+        correctConnections: [
+          { from: "ufx.aesOut", to: "m7.aesIn", cable: "aes" },
+          { from: "m7.aesOut", to: "ufx.aesIn", cable: "aes" },
+          { from: "ufx.out1", to: "spkL.in", cable: "xlr" },
+          { from: "ufx.out2", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "AES/EBUは、1本のケーブルで左右2チャンネルのデジタル音声を送れる業務用の規格で、端子はマイクと同じXLRを使う。だから、行き(UFX III → M7)と帰り(M7 → UFX III)の2本だけで、ステレオのリバーブを往復させられる。アナログでつなぐと、送るときにデジタル→アナログ、戻すときにアナログ→デジタルの変換がそれぞれ入るが、デジタルのままなら変換を挟まないので、音の劣化やレベル合わせの手間が少ない。注意したいのはケーブル。AES/EBUは、インピーダンス(=ケーブルの電気的な性質を表す値)が110Ωのケーブルを使う規格になっている。マイク用のXLRケーブルでも短ければ音が出てしまうことがあるが、長くなるほど信号が乱れて、プツプツというノイズや音切れの原因になりやすい。見た目が同じでも、デジタル用のケーブルを選ぼう。もう1つの大事な点が『時計役(クロックのマスター)』を1台に決めること。デジタルの機材どうしは、1秒間に何回音を記録するか(サンプルレート)のタイミングをぴったりそろえないと、ノイズや音切れが起きる。今回はUFX IIIを内部クロックのマスターにして、M7は送られてきたAESの信号に合わせて動く。Bricastiは、M7が入ってくる信号のサンプルレート(44.1kHz〜192kHz)に自動で合わせると説明している。UFX IIIは、M7から戻ってくるAESの信号も、自分のクロックで動いたM7が返してきたものなので、そのまま受け取れる。もし両方をマスターにしたり、UFX IIIをAESに同期させる設定にしてしまうと、お互いがお互いに合わせようとして、同期が取れなくなることがある。今回は2台だけなので、ワードクロックのケーブル(=時計の信号だけを送る専用の線)はいらない。DAW側では、UFX IIIのAESの出力をセンドの行き先にし、AESの入力を新しいステレオのトラックで受けて、DAWに入っているハードウェア・インサート(=外部機材を通す)機能などで遅れ(レイテンシー)を補正しておくと、リバーブの立ち上がりがずれない。M7の中では、原音とリバーブ音の混ぜ具合を『リバーブ音だけ』にしておくのが、センドで使うときの基本だ。",
+      },
+    },
   ],
 };
