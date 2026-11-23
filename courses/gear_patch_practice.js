@@ -7503,5 +7503,85 @@ window.COURSES["gear_patch_practice"] = {
           "電子ピアノからパソコンへ送れるものは2種類ある。1つはMIDI(=どの鍵盤を、いつ、どの強さで弾いたかという演奏の記録)で、音そのものは入っていない。もう1つはオーディオ(=実際に鳴っているピアノの音)。MIDIで録っておくと、弾き間違えた音だけを直したり、あとからDAWの中の別のピアノ音源に差し替えたりできる。オーディオで録っておくと、Clavinovaのピアノの音をそのまま作品に使える。今回は両方を同時に録っておき、あとでどちらを使うか決められるようにしている。USB TO HOST は、パソコンとつなぐための端子(Type B)。最近の電子ピアノは、5ピンのMIDI端子の代わりに、この端子でMIDIをやりとりすることが多い。よく似た USB TO DEVICE(Type A)は、USBメモリーなどを挿して録音や曲データを保存するための端子なので、パソコンとはつながらない。音の出口は AUX OUT。ここからオーディオインターフェースの入力へつなぐ。L/L+R という表示は、『Rにケーブルを挿さないときは、Lから左右を混ぜたモノラルの音が出る』という意味。ステレオで録りたいなら L と R の2本ともつなぐ。電子ピアノの出力はラインレベルのアンバランスなので、TSのケーブルでつなぎ、Scarlett側の入力はライン(または楽器用ではない設定)にする。機種によっては USB TO HOST から音も送れるものがあるが(USBオーディオインターフェース機能)、対応しているかどうかは機種ごとに違うので、説明書で確かめよう。気をつけたいのが『音の二重鳴り』。DAWでMIDIを録りながら、DAWの中のピアノ音源で鳴らすと、Clavinova自身の音と、DAWから返ってきた音の両方が鳴ってしまうことがある。Yamahaの資料では、パソコンと組み合わせるときは、Clavinova側の『ローカルコントロール』(=鍵盤と内部の音源のつながり)をオフにすることが案内されている。今回のように Clavinova の音もオーディオで録るなら、ローカルコントロールはオンのままにして、DAW側でMIDIトラックの音を鳴らさない(MIDIを本体に送り返さない)設定にしよう。録音中にClavinovaのスピーカーからも音が出ていると、スタジオのモニタースピーカーの音と混ざって聞き分けにくいので、Clavinova本体の音量を下げ、HS5で聞きながら録るとよい(AUX OUT からの出力レベルも本体の音量と連動する機種があるので、Scarlettの入力レベルのランプで確認する)。",
       },
     },
+    {
+      id: "motu_avb_switch_network",
+      order: 163,
+      title: "AVBのスイッチで、3台のオーディオインターフェースをLANケーブルでつなぐ(MOTU 1248 + 8M ×2 + MOTU AVB Switch)",
+      category: "配線問題(プロ環境)",
+      hook: "ライブハウスの舞台に置いたマイク入力の箱と、離れた録音席のパソコンを、太いマルチケーブルではなく細いLANケーブルでつなぎたい。MOTUの機材は『AVB』というネットワークの仕組みで音を送り合える。2台ならケーブル1本で直結できるが、3台以上になると専用のスイッチが必要になる。どの端子をどこへつなぐか、普通のネットワーク機器と何が違うのかを確かめながら配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブハウスで、バンドのライブを全チャンネル録音する。舞台の上手と下手に、マイクプリアンプを8つずつ持つオーディオインターフェース「MOTU 8M」を1台ずつ置き、録音席には「MOTU 1248」を置いて、パソコン(Mac)とつなぐ。3台のあいだはAVB(=LANケーブルで多チャンネルの音を送り合う規格)で音をやりとりする。3台以上をつなぐので、AVB対応のスイッチ「MOTU AVB Switch」を使う。1248の Thunderbolt 端子から、MacのThunderbolt端子へ、Thunderboltケーブルでつなぐ(パソコンとつなぐのは1248の1台だけ)。1248・上手の8M・下手の8Mの NETWORK(AVB)端子から、MOTU AVB Switch の AVB NETWORK 1・2・3 へ、それぞれLANケーブル(CAT-5e以上)でつなぐ。MOTU AVB Switch の ETHERNET 端子(AVBではない、普通のネットワーク用)、8Mの Thunderbolt と USB 端子、Macの Ethernet 端子、録音席にある普通のネットワークハブは、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "m1248",
+            label: "MOTU 1248(録音席のオーディオインターフェース)",
+            icon: "1248",
+            ports: [
+              { id: "tb", label: "Thunderbolt", type: "usb", dir: "out" },
+              { id: "net", label: "NETWORK (AVB)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "m8mA",
+            label: "MOTU 8M(舞台・上手)",
+            icon: "8M 上手",
+            ports: [
+              { id: "net", label: "NETWORK (AVB)", type: "ethernet", dir: "out" },
+              { id: "tb", label: "Thunderbolt", type: "usb", dir: "out" },
+              { id: "usb", label: "USB 2.0", type: "usb", dir: "out" },
+            ],
+          },
+          {
+            id: "m8mB",
+            label: "MOTU 8M(舞台・下手)",
+            icon: "8M 下手",
+            ports: [
+              { id: "net", label: "NETWORK (AVB)", type: "ethernet", dir: "out" },
+              { id: "tb", label: "Thunderbolt", type: "usb", dir: "out" },
+              { id: "usb", label: "USB 2.0", type: "usb", dir: "out" },
+            ],
+          },
+          {
+            id: "avbsw",
+            label: "MOTU AVB Switch(AVB対応スイッチ)",
+            icon: "AVB SW",
+            ports: [
+              { id: "avb1", label: "AVB NETWORK 1", type: "ethernet", dir: "in" },
+              { id: "avb2", label: "AVB NETWORK 2", type: "ethernet", dir: "in" },
+              { id: "avb3", label: "AVB NETWORK 3", type: "ethernet", dir: "in" },
+              { id: "eth", label: "ETHERNET (AVBではない普通のネットワーク用)", type: "ethernet", dir: "in" },
+            ],
+          },
+          {
+            id: "hub",
+            label: "普通のネットワークハブ(AVB非対応)",
+            icon: "HUB",
+            ports: [
+              { id: "p1", label: "PORT 1", type: "ethernet", dir: "in" },
+              { id: "p2", label: "PORT 2", type: "ethernet", dir: "in" },
+            ],
+          },
+          {
+            id: "mac",
+            label: "Mac(DAW)",
+            icon: "Mac",
+            ports: [
+              { id: "tb", label: "Thunderbolt", type: "usb", dir: "in" },
+              { id: "eth", label: "Ethernet", type: "ethernet", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ethernet", "usb", "xlr", "madi"],
+        correctConnections: [
+          { from: "m1248.tb", to: "mac.tb", cable: "usb" },
+          { from: "m1248.net", to: "avbsw.avb1", cable: "ethernet" },
+          { from: "m8mA.net", to: "avbsw.avb2", cable: "ethernet" },
+          { from: "m8mB.net", to: "avbsw.avb3", cable: "ethernet" },
+        ],
+        explain:
+          "AVB(Audio Video Bridging)は、LANケーブルで多チャンネルの音を、決まった遅れのまま確実に届けるためのネットワーク規格。MOTUのAVB対応インターフェースどうしなら、1本のLANケーブルで、アナログのマルチケーブル(=何十本分ものケーブルを束ねた太いケーブル)の代わりに多くのチャンネルを送れる。舞台と録音席が離れていても、運ぶのは細いケーブル1本で済む。2台だけなら、NETWORK端子どうしをLANケーブルで直結できる。しかしMOTUの説明書では、3台以上をつなぐにはAVBに対応したスイッチが必要とされていて、普通の家庭用やオフィス用のネットワークハブ(スイッチ)ではAVBの音は流れない。見た目は同じLANの差し込み口でも、AVB対応かどうかで中身がまったく違う、という点がこの問題のいちばんの落とし穴。MOTU AVB Switch には、AVB用の差し込み口が5つと、AVBではない普通のネットワーク用の ETHERNET 端子が1つある。インターフェースは必ずAVB用の差し込み口へつなぐ。ETHERNET 端子は、インターフェースの設定画面(ブラウザで開く操作画面)を使うために、パソコンやWi-Fiのルーターをつなぐ場所として用意されている。パソコンとつなぐのは、ネットワーク上の1台だけでよい。MOTUの説明では、1台をThunderboltかUSBでパソコンにつなげば、パソコンからネットワーク上のすべてのインターフェースのチャンネルを扱えるとされている。だから舞台の8MのThunderboltやUSBには何も挿さない。どのマイクの音をパソコンのどのチャンネルへ送るかは、MOTUの設定画面で割り当てる(ケーブルを挿しただけでは、音の行き先はまだ決まっていない)。LANケーブルはCAT-5e以上の、できればシールド付きのものを使い、1本の長さは一般的なLANと同じく最大100mまでが目安。もっと遠くへ送るときや5台を超えるときは、スイッチを増やして段階的につなぐ。なお、MOTU AVB Switch は販売を終えている地域もあるので、新しく組むときは、ほかのAVB対応スイッチが使えるかを含めて、最新の情報を確認しよう。",
+      },
+    },
   ],
 };
