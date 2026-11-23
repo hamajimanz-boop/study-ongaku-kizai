@@ -7786,5 +7786,59 @@ window.COURSES["gear_patch_practice"] = {
           "バウンダリーマイク(=床や机などの平らな面に置いて使うマイク)は、マイクの音を拾う部分を面のすぐ近くに置くことで、まっすぐ届く声と、床に跳ね返ってから届く声が、ほぼ同じタイミングでマイクに入るようにしている。普通のマイクをスタンドで床の近くに立てると、この2つの声がわずかにずれて届き、特定の高さの音が打ち消し合って、こもったような音になりやすい。バウンダリーマイクはこの問題を避けられるので、舞台の床や会議の机でよく使われる。Crown PCC-160は、舞台の床に置く定番のバウンダリーマイクとして知られ、Crownの資料では、前方(舞台の奥、役者の方向)に向いた指向性を持ち、横や後ろ(客席やオーケストラピット)からの音を拾いにくい形とされている。置くときは、マイクの正面を舞台の奥に向けることを忘れずに。PCC-160はコンデンサーマイク(=電気で動く回路を持ち、ファンタム電源=マイクケーブルを通してミキサーから送る電気が必要なマイク)で、仕様では12〜48Vのファンタム電源で動くとされている。ZEDi-10の48Vのスイッチは、すべてのマイク入力にまとめて電気を送るしくみなので、1つ押せば3本とも動く。逆に、ファンタム電源を入れ忘れると、配線が正しくても音が出ない。電源を入れる・切るときは、スピーカーから大きなポップ音が出ないよう、ミキサーの音量を下げておく。PCC-160の本体側は小さな専用の差し込み口なので、付属のケーブルを外したまま普通のXLRケーブルを挿すことはできない。付属ケーブルのXLR側からは、普通のXLRケーブルで延長できる。舞台の床のマイクは、役者さんの足音や、床を歩く振動も拾いやすい。チャンネルのローカット(=低い音を削るスイッチ)を入れると、足音のドスドスという低い音を減らせる。また、バウンダリーマイクはピンマイクより口から遠いので、音量を上げすぎるとスピーカーの音を拾ってハウリングしやすい。スピーカーはマイクより客席側に置き、マイクで声を『少し補う』くらいのつもりで使おう。",
       },
     },
+    {
+      id: "widi_master_bluetooth_midi",
+      order: 168,
+      title: "MIDIインターフェースなしで、ヴィンテージシンセとパソコンをBluetoothのMIDIでつなぐ(CME WIDI Master + Roland Juno-106)",
+      category: "配線問題",
+      hook: "中古で手に入れた1980年代のシンセ、Roland Juno-106。USB端子はなく、5ピンのMIDI端子しかない。パソコンにもオーディオインターフェースにもMIDI端子がない。MIDIインターフェースを買い足す代わりに、シンセのMIDI端子に挿すだけでBluetoothのMIDIに変えてくれる小さな機械『WIDI Master』を使ってみよう。ケーブルが要るところと、要らないところを見分けながら配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅で、ヴィンテージのシンセ「Roland Juno-106」をDAWから鳴らし、その音を録音したい。パソコン(Mac)にもオーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」にも5ピンのMIDI端子はない。そこで、BluetoothのMIDI(=無線でMIDIを送る規格)の変換器「CME WIDI Master」を使う。WIDI Masterには5ピンのプラグが2つあり、MIDIを送り出す側(OUT)のプラグをJuno-106の MIDI IN へ、MIDIを受け取る側(IN)のプラグをJuno-106の MIDI OUT へ、それぞれ直接挿す(この2本はMIDIケーブルとして扱う)。WIDI MasterとMacのあいだは無線なので、ケーブルはいらない。Juno-106の OUTPUT(フォーン・モノラル)から、Scarlett 2i2の INPUT 1(XLR/フォーンのコンボ端子・ラインの設定)へ、TSのフォーンケーブルでつなぐ。Scarlett 2i2の USB-C 端子から、MacのUSB端子へ、USBケーブルでつなぐ。Juno-106の MIDI THRU、ヘッドホン端子は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "juno",
+            label: "Roland Juno-106(ヴィンテージ・シンセサイザー)",
+            icon: "Juno-106",
+            ports: [
+              { id: "midiIn", label: "MIDI IN (5ピン)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピン)", type: "midi", dir: "out" },
+              { id: "midiThru", label: "MIDI THRU (5ピン)", type: "midi", dir: "out" },
+              { id: "out", label: "OUTPUT (フォーン・モノラル)", type: "ts", dir: "out" },
+              { id: "phones", label: "PHONES (ステレオ)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "widi",
+            label: "CME WIDI Master(BluetoothのMIDI変換器)",
+            icon: "WIDI",
+            ports: [
+              { id: "outPlug", label: "送り出す側(OUT)のプラグ", type: "midi", dir: "out" },
+              { id: "inPlug", label: "受け取る側(IN)のプラグ", type: "midi", dir: "in" },
+            ],
+          },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 2i2(第4世代)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "Mac(DAW・Bluetooth内蔵)", icon: "Mac", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["midi", "ts", "trs", "usb", "xlr"],
+        correctConnections: [
+          { from: "widi.outPlug", to: "juno.midiIn", cable: "midi" },
+          { from: "juno.midiOut", to: "widi.inPlug", cable: "midi" },
+          { from: "juno.out", to: "scarlett.in1", cable: "ts" },
+          { from: "scarlett.usb", to: "mac.usb", cable: "usb" },
+        ],
+        explain:
+          "MIDIは『どの鍵盤を、いつ、どの強さで弾いたか』という演奏の情報で、音そのものではない。だから、この配線には2種類の道がある。1つは、DAWからJuno-106へ演奏の情報を送り、Juno-106のつまみの動きをDAWへ返す『MIDIの道』。もう1つは、Juno-106が鳴らした音をオーディオインターフェースで録る『音の道』。WIDI Masterが無線にしてくれるのはMIDIの道だけで、音の道には今までどおりケーブルが必要。ここを取り違えないことが大切。MIDIの端子をつなぐときは、『出口(OUT)は入口(IN)へ』が基本。WIDI Masterの送り出す側のプラグ(パソコンから来た演奏の情報が出てくる側)はシンセのMIDI INへ、受け取る側のプラグはシンセのMIDI OUTへ挿す。どちらのプラグがどちらかは、本体の表示や説明書で確かめる。逆に挿すと、何も伝わらない。CMEの説明では、WIDI Masterは挿した機材のMIDI OUTから電気をもらって動くとされていて、電池やACアダプターはいらない。ただし古い機材や一部の機材の中には、MIDI OUTから十分な電気が取れないものもあり、そのときは外から電気を足せる別の製品(WIDI Jackなど)を使う必要がある、とCMEは案内している。WIDI Masterのランプが点かないときは、まずこの点を疑おう。MacとのペアリングはmacOSのBluetoothの設定画面ではなく、『Audio MIDI設定』の中のBluetoothの画面から行う、とCMEは案内している(機種やOSのバージョンで画面は変わることがある)。無線のMIDIは便利な反面、ケーブルに比べてわずかな遅れが出ることがあり、周りの電波の状況にも左右される。弾いたタイミングが大事な録音では、DAWの再生でJuno-106を鳴らし、録音したあとにタイミングを確認しよう。Juno-106の音の出口は1つのフォーン端子(モノラル)なので、Scarlettの入力は1つで足りる。シンセの出力はラインのレベルなので、Scarlett側の入力はラインの設定にし、楽器用(Inst)にはしない。",
+      },
+    },
   ],
 };
