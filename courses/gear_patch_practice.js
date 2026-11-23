@@ -7742,5 +7742,49 @@ window.COURSES["gear_patch_practice"] = {
           "フィジカルコントローラーは音を通す機材ではなく、『このフェーダーをここまで動かした』『このボタンを押した』という操作の情報を、MIDIのしくみでパソコンへ送る機材。だから音のケーブルは1本もいらず、USBケーブルでパソコンとつなぐだけで働く。DAWの側では、Mackie Control(=Mackieというメーカーが作った、コントローラーとDAWのやりとりの決まりごと。多くのDAWが対応している)や、Pro Toolsなどで使われるHUIという決まりごとを選んで、X-Touchを登録する。X-Touch本体はチャンネル用のフェーダーが8本(とマスター用の1本)で、それ以上のトラックを同時に触りたいときに足すのがExtender(増設ユニット)。Extenderも1台の独立したコントローラーとしてパソコンにつなぎ、DAWの設定では『Mackie Control』の隣に『Mackie Control Extender』として登録して、どちらが左(1〜8ch)でどちらが右(9〜16ch)かを指定する。この登録の順番を間違えると、画面とコントローラーのチャンネルの並びがずれるので気をつけよう。X-TouchのUSB HUB端子は、Behringerの説明ではマウスやキーボードなどをつなぐための差し込み口とされている。今回は、確実に動かすためにExtenderをパソコンへ直接つないでいる。ETHERNET(REMOTE)端子は、RTP-MIDI(=LANケーブルやネットワークでMIDIを送るしくみ)に対応したDAWで、USBの代わりに使う端子なので、USBでつなぐなら使わない。5ピンのMIDI端子は、パソコンを使わずにほかのMIDI機器を操作するようなときに使う。モーターで動くフェーダー(DAWの画面でオートメーションを再生すると、手を触れていないのにフェーダーが動く)と、指で触れたことを感じ取るフェーダーのおかげで、オートメーション(=音量などの動きを記録して自動で再現する機能)を手で書き込める。フットスイッチの役割は、DAWとの組み合わせやコントローラーの設定で変わるので、録音の開始と停止に割り当てられるかは、説明書とDAW側の設定で確かめよう。",
       },
     },
+    {
+      id: "crown_pcc160_stage_boundary",
+      order: 167,
+      title: "舞台の床に置くバウンダリーマイクで、演劇のセリフを拾う(Crown PCC-160 ×3 + Allen & Heath ZEDi-10)",
+      category: "配線問題",
+      hook: "小劇場の演劇で、役者さんにピンマイクを付けるほどではないけれど、客席の後ろまでセリフをもう少し届けたい。そんなときに使われるのが、舞台の床にぺたっと置く平たいマイク『バウンダリーマイク』。床そのものを利用して音を拾う、ちょっと変わったマイクだ。電源が必要なマイクであることに気をつけながら、3本をミキサーへ配線しよう。",
+      patch: {
+        scenario:
+          "あなたは小劇場の音響スタッフ。舞台の一番前の床(客席に近い縁)に、バウンダリーマイク「Crown PCC-160」を下手・中央・上手に1本ずつ、合計3本置く。PCC-160は本体側が小さな専用の差し込み口で、付属のケーブルの先が普通のXLR(オス)になっている。下手・中央・上手のPCC-160の付属ケーブルのXLRから、ミキサー「Allen & Heath ZEDi-10」の CH1・CH2・CH3 の MIC 入力(XLR)へ、XLRケーブルで延長してつなぐ。ZEDi-10の48Vファンタム電源はオンにする。ZEDi-10の MAIN OUT L と R(XLR)から、客席の左右に置いたパワードスピーカー「Yamaha DBR10」の INPUT へ、XLRケーブルでつなぐ。ZEDi-10の Hi-Z 入力、STEREO LINE 入力、MONITOR OUT(RCA)、USB端子は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          { id: "micL", label: "Crown PCC-160(下手)", icon: "PCC下手", ports: [{ id: "out", label: "付属ケーブルの先 XLR(オス)", type: "xlr", dir: "out" }] },
+          { id: "micC", label: "Crown PCC-160(中央)", icon: "PCC中央", ports: [{ id: "out", label: "付属ケーブルの先 XLR(オス)", type: "xlr", dir: "out" }] },
+          { id: "micR", label: "Crown PCC-160(上手)", icon: "PCC上手", ports: [{ id: "out", label: "付属ケーブルの先 XLR(オス)", type: "xlr", dir: "out" }] },
+          {
+            id: "zedi",
+            label: "Allen & Heath ZEDi-10(ミキサー)",
+            icon: "ZEDi-10",
+            ports: [
+              { id: "ch1", label: "CH1 MIC (XLR)", type: "xlr", dir: "in" },
+              { id: "ch2", label: "CH2 MIC (XLR)", type: "xlr", dir: "in" },
+              { id: "ch3", label: "CH3 MIC (XLR)", type: "xlr", dir: "in" },
+              { id: "hiz", label: "Hi-Z 切替付きのフォーン入力(楽器用)", type: "ts", dir: "in" },
+              { id: "stLine", label: "STEREO LINE IN L (フォーン)", type: "trs", dir: "in" },
+              { id: "mainL", label: "MAIN OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "mainR", label: "MAIN OUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "monOut", label: "MONITOR OUT (RCA)", type: "rca", dir: "out" },
+              { id: "usb", label: "USB", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "spkL", label: "Yamaha DBR10(客席・左)", icon: "DBR10 L", ports: [{ id: "in", label: "INPUT (XLR/フォーン コンボ)", type: "xlr", dir: "in" }] },
+          { id: "spkR", label: "Yamaha DBR10(客席・右)", icon: "DBR10 R", ports: [{ id: "in", label: "INPUT (XLR/フォーン コンボ)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "ts", "trs", "rca", "speaker"],
+        correctConnections: [
+          { from: "micL.out", to: "zedi.ch1", cable: "xlr" },
+          { from: "micC.out", to: "zedi.ch2", cable: "xlr" },
+          { from: "micR.out", to: "zedi.ch3", cable: "xlr" },
+          { from: "zedi.mainL", to: "spkL.in", cable: "xlr" },
+          { from: "zedi.mainR", to: "spkR.in", cable: "xlr" },
+        ],
+        explain:
+          "バウンダリーマイク(=床や机などの平らな面に置いて使うマイク)は、マイクの音を拾う部分を面のすぐ近くに置くことで、まっすぐ届く声と、床に跳ね返ってから届く声が、ほぼ同じタイミングでマイクに入るようにしている。普通のマイクをスタンドで床の近くに立てると、この2つの声がわずかにずれて届き、特定の高さの音が打ち消し合って、こもったような音になりやすい。バウンダリーマイクはこの問題を避けられるので、舞台の床や会議の机でよく使われる。Crown PCC-160は、舞台の床に置く定番のバウンダリーマイクとして知られ、Crownの資料では、前方(舞台の奥、役者の方向)に向いた指向性を持ち、横や後ろ(客席やオーケストラピット)からの音を拾いにくい形とされている。置くときは、マイクの正面を舞台の奥に向けることを忘れずに。PCC-160はコンデンサーマイク(=電気で動く回路を持ち、ファンタム電源=マイクケーブルを通してミキサーから送る電気が必要なマイク)で、仕様では12〜48Vのファンタム電源で動くとされている。ZEDi-10の48Vのスイッチは、すべてのマイク入力にまとめて電気を送るしくみなので、1つ押せば3本とも動く。逆に、ファンタム電源を入れ忘れると、配線が正しくても音が出ない。電源を入れる・切るときは、スピーカーから大きなポップ音が出ないよう、ミキサーの音量を下げておく。PCC-160の本体側は小さな専用の差し込み口なので、付属のケーブルを外したまま普通のXLRケーブルを挿すことはできない。付属ケーブルのXLR側からは、普通のXLRケーブルで延長できる。舞台の床のマイクは、役者さんの足音や、床を歩く振動も拾いやすい。チャンネルのローカット(=低い音を削るスイッチ)を入れると、足音のドスドスという低い音を減らせる。また、バウンダリーマイクはピンマイクより口から遠いので、音量を上げすぎるとスピーカーの音を拾ってハウリングしやすい。スピーカーはマイクより客席側に置き、マイクで声を『少し補う』くらいのつもりで使おう。",
+      },
+    },
   ],
 };
