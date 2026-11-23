@@ -7688,5 +7688,59 @@ window.COURSES["gear_patch_practice"] = {
           "USBマイクは、マイクの中にオーディオインターフェースの役目(=音をデジタルに変えてパソコンへ送る回路)が入っているので、ケーブル1本でパソコンに直接つなげる。一方XLRの出口は、普通のマイクと同じアナログの信号を出す。MV7+は両方を持つ『ハイブリッド』のマイクで、販売店の説明などでは、USBとXLRを同時に使えるとされている。だから1本のマイクの声を、USBでは配信用のパソコンへ、XLRでは会場のミキサーへと、2か所に同時に届けられる。ここで知っておきたいのが、2つの出口では音の中身が少し違うこと。MV7+の内部にある音の処理(声の大きさをそろえるコンプレッサーやノイズを減らす機能などで、専用ソフトで設定する)は、USB側の音にかかり、XLR側には処理なしの素の音が出る、と説明されている。配信の声は整っているのに会場では素っ気なく聞こえる、という違いが出るのはこのため。会場側の音作りは、MG10XUのチャンネルのEQやコンプで行う。MV7+はダイナミックマイク(=ファンタム電源がなくても音が出るマイク)なので、MG10XUのファンタム電源はオンにしなくてよい。MG10XUのファンタム電源は全チャンネルまとめて入る1つのスイッチなので、ほかにコンデンサーマイクを使うときにオンにすることはあるが、ダイナミックマイクはファンタム電源がかかっても通常は問題ないとされる。配信の声を確かめるヘッドホンは、ミキサーではなくMV7+のヘッドホン端子につなぐ。こうすると、配信に乗っているUSB側の音(処理がかかった音)を、遅れなく聞ける。会場のスピーカーとパソコンが近いと、スピーカーから出た声をマイクが再び拾ってハウリング(=キーンという音)が起きやすいので、スピーカーは話し手より前に置き、マイクの後ろ側に向けない。ミキサーのUSB端子からも音をパソコンへ送れるが、それを配信に使うと、マイクのUSBと合わせて同じ声が二重に入ってしまう。今回は配信の音をMV7+のUSBに一本化する。",
       },
     },
+    {
+      id: "xtouch_extender_daw_control",
+      order: 166,
+      title: "DAWを手で操作するコントローラーを、増設ユニットと一緒につなぐ(Behringer X-Touch + X-Touch Extender)",
+      category: "配線問題",
+      hook: "マウスでフェーダーを1本ずつ動かすミックスに疲れてきた。X-Touchは、DAWの音量やパンを、本物のミキサーのようにつまみとフェーダーで操作できる『フィジカルコントローラー』。8本では足りないので、増設用のX-Touch Extenderも足して16チャンネルを同時に触れるようにしたい。音のケーブルは1本も使わないこの配線、どこに何を挿せばDAWが反応するだろうか。",
+      patch: {
+        scenario:
+          "あなたは自宅スタジオで、DAWのミックスをもっと手で操作したい。フィジカルコントローラー(=DAWの画面のフェーダーやボタンを、手で触れる本物のつまみやフェーダーで操作する機材)「Behringer X-Touch」と、増設用の「Behringer X-Touch Extender」を使う。X-Touchの USB(Type B)端子から、パソコンのUSB端子1へ、USBケーブルでつなぐ。X-Touch Extenderの USB(Type B)端子から、パソコンのUSB端子2へ、USBケーブルでつなぐ(Extenderは、X-Touchを経由せず、パソコンへ直接つなぐ)。録音の開始と停止を足で操作するため、フットスイッチ「Boss FS-5U」を X-Touch の FOOTSWITCH 1 へ、TSのフォーンケーブルでつなぐ。X-Touchの MIDI IN/OUT(5ピン)、両方の機材の ETHERNET(REMOTE)端子と USB HUB(Type A)端子は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "xtouch",
+            label: "Behringer X-Touch(フィジカルコントローラー本体)",
+            icon: "X-Touch",
+            ports: [
+              { id: "usb", label: "USB (Type B・パソコン用)", type: "usb", dir: "out" },
+              { id: "hub", label: "USB HUB (Type A・マウス等用)", type: "usb", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピン)", type: "midi", dir: "out" },
+              { id: "midiIn", label: "MIDI IN (5ピン)", type: "midi", dir: "in" },
+              { id: "eth", label: "ETHERNET (REMOTE)", type: "ethernet", dir: "out" },
+              { id: "fs1", label: "FOOTSWITCH 1 (フォーン)", type: "ts", dir: "in" },
+            ],
+          },
+          {
+            id: "ext",
+            label: "Behringer X-Touch Extender(増設ユニット)",
+            icon: "X-Touch EXT",
+            ports: [
+              { id: "usb", label: "USB (Type B・パソコン用)", type: "usb", dir: "out" },
+              { id: "eth", label: "ETHERNET (REMOTE)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "pc",
+            label: "パソコン(DAW)",
+            icon: "PC",
+            ports: [
+              { id: "usb1", label: "USB 1", type: "usb", dir: "in" },
+              { id: "usb2", label: "USB 2", type: "usb", dir: "in" },
+              { id: "eth", label: "Ethernet", type: "ethernet", dir: "in" },
+            ],
+          },
+          { id: "fs", label: "Boss FS-5U(フットスイッチ)", icon: "FS-5U", ports: [{ id: "out", label: "OUTPUT (フォーン)", type: "ts", dir: "out" }] },
+        ],
+        cablePalette: ["usb", "midi", "ethernet", "ts", "xlr"],
+        correctConnections: [
+          { from: "xtouch.usb", to: "pc.usb1", cable: "usb" },
+          { from: "ext.usb", to: "pc.usb2", cable: "usb" },
+          { from: "fs.out", to: "xtouch.fs1", cable: "ts" },
+        ],
+        explain:
+          "フィジカルコントローラーは音を通す機材ではなく、『このフェーダーをここまで動かした』『このボタンを押した』という操作の情報を、MIDIのしくみでパソコンへ送る機材。だから音のケーブルは1本もいらず、USBケーブルでパソコンとつなぐだけで働く。DAWの側では、Mackie Control(=Mackieというメーカーが作った、コントローラーとDAWのやりとりの決まりごと。多くのDAWが対応している)や、Pro Toolsなどで使われるHUIという決まりごとを選んで、X-Touchを登録する。X-Touch本体はチャンネル用のフェーダーが8本(とマスター用の1本)で、それ以上のトラックを同時に触りたいときに足すのがExtender(増設ユニット)。Extenderも1台の独立したコントローラーとしてパソコンにつなぎ、DAWの設定では『Mackie Control』の隣に『Mackie Control Extender』として登録して、どちらが左(1〜8ch)でどちらが右(9〜16ch)かを指定する。この登録の順番を間違えると、画面とコントローラーのチャンネルの並びがずれるので気をつけよう。X-TouchのUSB HUB端子は、Behringerの説明ではマウスやキーボードなどをつなぐための差し込み口とされている。今回は、確実に動かすためにExtenderをパソコンへ直接つないでいる。ETHERNET(REMOTE)端子は、RTP-MIDI(=LANケーブルやネットワークでMIDIを送るしくみ)に対応したDAWで、USBの代わりに使う端子なので、USBでつなぐなら使わない。5ピンのMIDI端子は、パソコンを使わずにほかのMIDI機器を操作するようなときに使う。モーターで動くフェーダー(DAWの画面でオートメーションを再生すると、手を触れていないのにフェーダーが動く)と、指で触れたことを感じ取るフェーダーのおかげで、オートメーション(=音量などの動きを記録して自動で再現する機能)を手で書き込める。フットスイッチの役割は、DAWとの組み合わせやコントローラーの設定で変わるので、録音の開始と停止に割り当てられるかは、説明書とDAW側の設定で確かめよう。",
+      },
+    },
   ],
 };
