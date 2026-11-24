@@ -7893,5 +7893,50 @@ window.COURSES["gear_patch_practice"] = {
           "DIN SYNC(=Rolandが1980年前後から使っていた同期の方式。Sync24とも呼ばれる)は、親の機材が『テンポの刻み』と『スタート・ストップの合図』を電気のパルス(=短いオン・オフの信号)で子の機材に送るしくみ。刻みの細かさは4分音符1つあたり24回とされ、子の機材は届いたパルスの数を数えて、親とぴったり同じテンポで進む。だから、子にしたTB-303のテンポのつまみを回しても、テンポは変わらない。テンポを変えたいときは、親のTR-606側で変える。TR-606のスタートボタンを押せば、TB-303も一緒に走り出す。TR-606は1つのDIN端子を入力にも出力にも使える作りで、背面のスイッチで切り替える。ここが入力(IN)側のままだと、TR-606もほかから刻みが来るのを待ってしまい、2台とも動かない。一方TB-303のDIN端子は入力専用なので、TB-303を親にすることはできない。どちらを親にできるかは、端子の数ではなく『その端子が出力になれるか』で決まる。注意したいのは、DIN SYNCとMIDIは、プラグの形が同じ5ピンのDINなのに、中を流れる信号がまったく違うこと。DIN SYNCの端子とMIDIの端子をつないでも、何も伝わらない。また、市販のMIDIケーブルの中には、MIDIで使うピンの線しかつないでいないものがあり、DIN SYNCに使うとテンポやスタートの合図が届かないことがある、とされる。DIN SYNC用、または5本のピンがすべてつながったケーブルを使おう。パソコンのDAWとテンポを合わせたいときは、MIDIのテンポ情報(MIDIクロック)をDIN SYNCに変換する機械を、DAWと親の機材のあいだに入れるのが一般的。TB-303のCV OUTとGATE OUTは、TB-303のシーケンサー(=自動で演奏を進める機能)でほかのアナログシンセを鳴らすための出力で、今回の同期とは関係がない。2台の音はどちらもラインのレベルなので、Scarlettの入力はラインの設定にし、楽器用(Inst)にはしない。",
       },
     },
+    {
+      id: "minimoog_feedback_loop",
+      order: 170,
+      title: "シンセの出力を自分の入力に戻して、音を太く歪ませる(ヴィンテージのMoog Minimoog Model D)",
+      category: "配線問題",
+      hook: "1970年代のMinimoog Model Dには、昔から知られた『裏ワザの配線』がある。使っていない方の音の出口を、ケーブル1本で自分自身の外部入力に戻すと、フィルターに入る音が押し込まれて、太く歪んだ音になる。出口が2つあるシンセの、どちらを録音に使い、どちらを戻すのか。配線しよう。",
+      patch: {
+        scenario:
+          "あなたはスタジオにある1970年代の「Moog Minimoog Model D(ヴィンテージ)」で、太く歪んだベースの音を録りたい。Minimoogの背面には、音の出口が2つある。大きいレベルの「AUDIO OUTPUT HIGH」と、小さいレベルの「AUDIO OUTPUT LOW」だ。HIGHを録音に使い、使っていないLOWを、同じMinimoogの「EXTERNAL SIGNAL INPUT(外部入力)」へ、TSのフォーンケーブルで戻す。AUDIO OUTPUT HIGHからは、オーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」の INPUT 1(ラインの設定)へ、TSのフォーンケーブルでつなぐ。Scarlett 2i2の USB-C 端子から、MacのUSB端子へ、USBケーブルでつなぐ。Minimoogの OSCILLATOR(音程)・FILTER(フィルター)・LOUDNESS(音量)の CONTROL INPUT(=外から電圧で操作するための入力)と S-TRIG(=外から鍵盤を押した合図を送る入力)は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "moog",
+            label: "Moog Minimoog Model D(1970年代のヴィンテージ)",
+            icon: "Model D",
+            ports: [
+              { id: "outHigh", label: "AUDIO OUTPUT HIGH", type: "ts", dir: "out" },
+              { id: "outLow", label: "AUDIO OUTPUT LOW", type: "ts", dir: "out" },
+              { id: "extIn", label: "EXTERNAL SIGNAL INPUT", type: "ts", dir: "in" },
+              { id: "oscCv", label: "OSCILLATOR CONTROL INPUT", type: "ts", dir: "in" },
+              { id: "filterCv", label: "FILTER CONTROL INPUT", type: "ts", dir: "in" },
+              { id: "strig", label: "S-TRIG INPUT", type: "ts", dir: "in" },
+            ],
+          },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 2i2(第4世代)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "Mac(DAW)", icon: "Mac", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["ts", "trs", "cv", "xlr", "usb"],
+        correctConnections: [
+          { from: "moog.outLow", to: "moog.extIn", cable: "ts" },
+          { from: "moog.outHigh", to: "scarlett.in1", cable: "ts" },
+          { from: "scarlett.usb", to: "mac.usb", cable: "usb" },
+        ],
+        explain:
+          "Minimoogの音は、オシレーター(=音のもとを作る部分)からミキサー(=音のもとを混ぜる部分)を通り、フィルター(=音の明るさを変える部分)へ進む。ミキサーには3つのオシレーターとノイズのほかに、『外部入力(EXTERNAL INPUT)』のつまみとスイッチがあり、外から来た音もフィルターに混ぜられる。ここに自分自身の出力を戻すと、出てきた音がまたフィルターの手前に入り、ぐるぐる回る輪(=フィードバックの輪)ができる。戻る音が大きいほど、フィルターの手前の回路が押し込まれて音が歪み、低い音がぶ厚くなったり、フィルターのクセが強く出たりする。この裏ワザは昔から多くの奏者が使ってきた、とSound On Soundのレビューでも紹介されている。戻す音の量は、Minimoogの全体の音量(出力の大きさ)と、ミキサーの外部入力のつまみの両方で決まる。ミキサーの外部入力のスイッチを入れ忘れると、配線が正しくても何も変わらない。録音に使う出口と戻す出口は、別々にするのがポイント。1つの出口しか使えないと、録音か輪のどちらかをあきらめることになるが、Minimoogには出口が2つあるので、HIGHを録音に、LOWを輪に、と役割を分けられる。LOWは小さいレベルの出口なので、外部入力に戻したときに量を調整しやすいとされる。始めるときは、外部入力のつまみを0にしてから、少しずつ上げていこう。急に上げると、甲高い発振音(=輪の中で音が勝手に鳴り続ける状態)が大きな音で出ることがあり、耳やスピーカーを傷める。なお、2016年以降に作られた復刻版のModel Dには、外部入力に何も挿していないときに、この輪を本体の中で作る仕組みが入っているので、ケーブルなしで同じ効果が得られる、とされている(そのかわり、外部入力に別の音を入れているときは、この効果は使えない)。ヴィンテージの機材では、つまみの効き方に個体差があるので、耳で確かめながら決めよう。Minimoogの出力はラインのレベルとして扱えるので、Scarlettの入力はラインの設定にする。",
+      },
+    },
   ],
 };
