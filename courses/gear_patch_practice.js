@@ -7938,5 +7938,60 @@ window.COURSES["gear_patch_practice"] = {
           "Minimoogの音は、オシレーター(=音のもとを作る部分)からミキサー(=音のもとを混ぜる部分)を通り、フィルター(=音の明るさを変える部分)へ進む。ミキサーには3つのオシレーターとノイズのほかに、『外部入力(EXTERNAL INPUT)』のつまみとスイッチがあり、外から来た音もフィルターに混ぜられる。ここに自分自身の出力を戻すと、出てきた音がまたフィルターの手前に入り、ぐるぐる回る輪(=フィードバックの輪)ができる。戻る音が大きいほど、フィルターの手前の回路が押し込まれて音が歪み、低い音がぶ厚くなったり、フィルターのクセが強く出たりする。この裏ワザは昔から多くの奏者が使ってきた、とSound On Soundのレビューでも紹介されている。戻す音の量は、Minimoogの全体の音量(出力の大きさ)と、ミキサーの外部入力のつまみの両方で決まる。ミキサーの外部入力のスイッチを入れ忘れると、配線が正しくても何も変わらない。録音に使う出口と戻す出口は、別々にするのがポイント。1つの出口しか使えないと、録音か輪のどちらかをあきらめることになるが、Minimoogには出口が2つあるので、HIGHを録音に、LOWを輪に、と役割を分けられる。LOWは小さいレベルの出口なので、外部入力に戻したときに量を調整しやすいとされる。始めるときは、外部入力のつまみを0にしてから、少しずつ上げていこう。急に上げると、甲高い発振音(=輪の中で音が勝手に鳴り続ける状態)が大きな音で出ることがあり、耳やスピーカーを傷める。なお、2016年以降に作られた復刻版のModel Dには、外部入力に何も挿していないときに、この輪を本体の中で作る仕組みが入っているので、ケーブルなしで同じ効果が得られる、とされている(そのかわり、外部入力に別の音を入れているときは、この効果は使えない)。ヴィンテージの機材では、つまみの効き方に個体差があるので、耳で確かめながら決めよう。Minimoogの出力はラインのレベルとして扱えるので、Scarlettの入力はラインの設定にする。",
       },
     },
+    {
+      id: "press_conference_pressbox",
+      order: 171,
+      title: "記者会見で、テレビ局や新聞社のカメラに音を分ける(Behringer X32 Compact + Whirlwind PB12 プレスボックス)",
+      category: "配線問題",
+      hook: "記者会見の会場に、テレビ局や新聞社のカメラが何台も並んだ。『うちのカメラにも音をください』と言われるたびに、演台のマイクをいじるわけにはいかない。1本の音を12本に分ける『プレスボックス』を使って、会場のスピーカーとは別の音を、各社のカメラへ配ろう。",
+      patch: {
+        scenario:
+          "あなたは新作アルバムの発表記者会見で、音響を担当している。演台には、アーティスト用とプロデューサー用の「Shure SM58」が2本。デジタルミキサー「Behringer X32 Compact」の CH1・CH2 の MIC IN へ、それぞれXLRケーブルでつなぐ。X32 Compactの背面のXLR出力のうち、OUTPUT 1 は会場のスピーカー用(メインの音)に、OUTPUT 3 は記者向けの音を作るバス(=ミキサーの中で音をまとめる道)に、あらかじめ設定してある。OUTPUT 1 から会場のパワードスピーカー「Yamaha DBR10」へ、OUTPUT 3 から、電源のいらないプレスボックス「Whirlwind PB12」の LINE INPUT へ、それぞれXLRケーブルでつなぐ。PB12の12個のマイクレベルの出力のうち、OUT 1 から「Sony PXW-Z190(テレビ局A)」へ、OUT 2 から「Panasonic AG-CX350(テレビ局B)」へ、OUT 3 から「Canon XF605(新聞社のWeb動画班)」へ、それぞれXLRケーブルでつなぐ(3台のカメラの音声入力はXLR)。X32 Compactの OUTPUT 2 と、PB12の残りの出力は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          { id: "mic1", label: "Shure SM58(アーティスト用)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "mic2", label: "Shure SM58(プロデューサー用)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "x32",
+            label: "Behringer X32 Compact(デジタルミキサー)",
+            icon: "X32C",
+            ports: [
+              { id: "ch1", label: "CH1 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch2", label: "CH2 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (XLR・会場用)", type: "xlr", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (XLR)", type: "xlr", dir: "out" },
+              { id: "out3", label: "OUTPUT 3 (XLR・記者向け)", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "spk", label: "Yamaha DBR10(会場のパワードスピーカー)", icon: "DBR10", ports: [{ id: "in", label: "INPUT (XLR)", type: "xlr", dir: "in" }] },
+          {
+            id: "pb12",
+            label: "Whirlwind PB12(プレスボックス・電源不要)",
+            icon: "PB12",
+            ports: [
+              { id: "in", label: "LINE INPUT", type: "xlr", dir: "in" },
+              { id: "o1", label: "MIC OUT 1", type: "xlr", dir: "out" },
+              { id: "o2", label: "MIC OUT 2", type: "xlr", dir: "out" },
+              { id: "o3", label: "MIC OUT 3", type: "xlr", dir: "out" },
+              { id: "o4", label: "MIC OUT 4", type: "xlr", dir: "out" },
+            ],
+          },
+          { id: "camA", label: "Sony PXW-Z190(テレビ局A)", icon: "Z190", ports: [{ id: "in", label: "AUDIO IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "camB", label: "Panasonic AG-CX350(テレビ局B)", icon: "CX350", ports: [{ id: "in", label: "AUDIO IN (XLR)", type: "xlr", dir: "in" }] },
+          { id: "camC", label: "Canon XF605(新聞社のWeb動画班)", icon: "XF605", ports: [{ id: "in", label: "AUDIO IN (XLR)", type: "xlr", dir: "in" }] },
+        ],
+        cablePalette: ["xlr", "trs", "ts", "rca", "ethernet"],
+        correctConnections: [
+          { from: "mic1.out", to: "x32.ch1", cable: "xlr" },
+          { from: "mic2.out", to: "x32.ch2", cable: "xlr" },
+          { from: "x32.out1", to: "spk.in", cable: "xlr" },
+          { from: "x32.out3", to: "pb12.in", cable: "xlr" },
+          { from: "pb12.o1", to: "camA.in", cable: "xlr" },
+          { from: "pb12.o2", to: "camB.in", cable: "xlr" },
+          { from: "pb12.o3", to: "camC.in", cable: "xlr" },
+        ],
+        explain:
+          "プレスボックス(=1本の音を、報道各社のために何本にも分ける箱。日本の現場では『マルチボックス』と呼ばれることもある)を使うと、各社のカメラマンが自分のケーブルを挿すだけで、演台の声をきれいに録れる。マイクの前に各社のマイクを何本も並べる、いわゆる『マイクの林』も減らせる。Whirlwind PB12は電源のいらない受け身(パッシブ)のプレスボックスで、販売店の資料では、ラインのレベルの音を1本受けて、マイクのレベルの出力12本に分けるとされている。電気で音を大きくする回路を持たないので、入力にはマイクを直接挿さず、ミキサーからラインのレベルで送る必要がある。マイクを直接挿すと、音が小さすぎて使いものにならない、と販売店も注意している。出力はマイクのレベルなので、カメラ側の音声入力は『MIC』の設定にする。カメラのファンタム電源(=マイクに電気を送る機能)は、この配線では必要ないので切っておく。PB12の出力は1本ずつトランス(=電気的に切り離しながら音だけを通す部品)で分けられているとされ、ある社のカメラのケーブルが不調でも、ほかの社の音やミキサーに影響しにくく、カメラ同士のアース(=電気の基準)の違いによるブーンというノイズも出にくい。会場のスピーカーの音と記者向けの音を、別の出力に分けたのがこの配線のポイント。会場のスピーカーは、お客さんの反応や会場の響きに合わせて音量を上げ下げしたくなるが、そのたびに各社のカメラに録られる音量まで変わってしまうと、放送で使いにくい。記者向けのバスは、本番が始まったら基本的に触らない。始まる前には、ミキサーの試験用の音(=一定の高さと大きさの音。X32にはこれを出す機能がある)を記者向けのバスに流し、各社に『この大きさで来ます』と伝えて、カメラ側の録音レベルを合わせてもらうと親切。ケーブルを各社のカメラまで延ばすのは、カメラマン側の仕事にすることが多いので、PB12はカメラが並ぶ場所の近くに置くとよい。",
+      },
+    },
   ],
 };
