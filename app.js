@@ -756,7 +756,7 @@ const CABLE_LABELS = {
   cv: "CV/Gate(モジュラー3.5mm)", rf: "RF同軸(BNCアンテナケーブル)", hdmi: "HDMI(映像+音声)",
   gk13pin: "GK 13ピンケーブル(ギターシンセ用)", leslie11: "レスリー11ピンケーブル",
   tube7pin: "真空管マイク用7ピンケーブル", bnc: "BNC同軸(映像リファレンス/ループシンク)",
-  dinsync: "DIN SYNCケーブル(5ピンDIN)",
+  dinsync: "DIN SYNCケーブル(5ピンDIN)", trrs: "TRRSミニ(4極・マイク付きイヤホン用)",
 };
 const CABLE_COLORS = {
   xlr: "#3a6df0", trs: "#14c39a", ts: "#7c5cff", usb: "#ff7a3d", rca: "#ffb02e",
@@ -764,7 +764,7 @@ const CABLE_COLORS = {
   digilink: "#1d4ed8", wordclock: "#c026d3", madi: "#b45309", aes: "#0891b2", ethernet: "#059669",
   cv: "#65a30d", rf: "#dc2626", hdmi: "#9333ea",
   gk13pin: "#a16207", leslie11: "#7c2d12", tube7pin: "#4d7c0f", bnc: "#475569",
-  dinsync: "#be123c",
+  dinsync: "#be123c", trrs: "#0d9488",
 };
 
 let patchRuntime = null;
