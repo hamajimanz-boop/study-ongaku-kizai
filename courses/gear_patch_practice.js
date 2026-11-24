@@ -7840,5 +7840,58 @@ window.COURSES["gear_patch_practice"] = {
           "MIDIは『どの鍵盤を、いつ、どの強さで弾いたか』という演奏の情報で、音そのものではない。だから、この配線には2種類の道がある。1つは、DAWからJuno-106へ演奏の情報を送り、Juno-106のつまみの動きをDAWへ返す『MIDIの道』。もう1つは、Juno-106が鳴らした音をオーディオインターフェースで録る『音の道』。WIDI Masterが無線にしてくれるのはMIDIの道だけで、音の道には今までどおりケーブルが必要。ここを取り違えないことが大切。MIDIの端子をつなぐときは、『出口(OUT)は入口(IN)へ』が基本。WIDI Masterの送り出す側のプラグ(パソコンから来た演奏の情報が出てくる側)はシンセのMIDI INへ、受け取る側のプラグはシンセのMIDI OUTへ挿す。どちらのプラグがどちらかは、本体の表示や説明書で確かめる。逆に挿すと、何も伝わらない。CMEの説明では、WIDI Masterは挿した機材のMIDI OUTから電気をもらって動くとされていて、電池やACアダプターはいらない。ただし古い機材や一部の機材の中には、MIDI OUTから十分な電気が取れないものもあり、そのときは外から電気を足せる別の製品(WIDI Jackなど)を使う必要がある、とCMEは案内している。WIDI Masterのランプが点かないときは、まずこの点を疑おう。MacとのペアリングはmacOSのBluetoothの設定画面ではなく、『Audio MIDI設定』の中のBluetoothの画面から行う、とCMEは案内している(機種やOSのバージョンで画面は変わることがある)。無線のMIDIは便利な反面、ケーブルに比べてわずかな遅れが出ることがあり、周りの電波の状況にも左右される。弾いたタイミングが大事な録音では、DAWの再生でJuno-106を鳴らし、録音したあとにタイミングを確認しよう。Juno-106の音の出口は1つのフォーン端子(モノラル)なので、Scarlettの入力は1つで足りる。シンセの出力はラインのレベルなので、Scarlett側の入力はラインの設定にし、楽器用(Inst)にはしない。",
       },
     },
+    {
+      id: "din_sync_tr606_tb303",
+      order: 169,
+      title: "MIDIより前の同期方式、DIN SYNCで2台のヴィンテージ機材のテンポを合わせる(Roland TR-606 + TB-303)",
+      category: "配線問題",
+      hook: "1980年代はじめのRolandのドラムマシンTR-606と、ベースマシンTB-303。どちらもMIDIが生まれる前の機材で、テンポを合わせるには『DIN SYNC』という別の同期方式を使う。端子の形はMIDIとそっくりなのに、中身はまったく別物。どちらを親(テンポを決める側)にするか、背面のスイッチまで考えて配線しよう。",
+      patch: {
+        scenario:
+          "あなたは中古で手に入れた「Roland TR-606(ドラムマシン)」と「Roland TB-303(ベースマシン)」を同じテンポで走らせ、2台の音をオーディオインターフェース「Focusrite Scarlett 2i2(第4世代)」でパソコンに録音したい。テンポを決める親はTR-606にする。TR-606の背面には、DIN SYNCの端子を入力として使うか出力として使うかを切り替えるスイッチがあり、今回は出力(OUT)側に切り替えてある。TB-303のDIN SYNC端子は入力専用。TR-606のSYNC端子から、TB-303のSYNC IN端子へ、DIN SYNCケーブル(=5ピンのDINプラグが両端に付いたケーブル)でつなぐ。TB-303の OUTPUT から Scarlett 2i2 の INPUT 1(ラインの設定)へ、TR-606の OUTPUT から INPUT 2(ラインの設定)へ、それぞれTSのフォーンケーブルでつなぐ。Scarlett 2i2の USB-C 端子から、MacのUSB端子へ、USBケーブルでつなぐ。TB-303の CV OUT と GATE OUT(=ほかのアナログシンセを鳴らすための出力)は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "tr606",
+            label: "Roland TR-606(ドラムマシン・SYNCスイッチはOUT)",
+            icon: "TR-606",
+            ports: [
+              { id: "sync", label: "SYNC (5ピンDIN・OUTに設定)", type: "dinsync", dir: "out" },
+              { id: "out", label: "OUTPUT (フォーン・モノラル)", type: "ts", dir: "out" },
+            ],
+          },
+          {
+            id: "tb303",
+            label: "Roland TB-303(ベースマシン)",
+            icon: "TB-303",
+            ports: [
+              { id: "syncIn", label: "SYNC IN (5ピンDIN)", type: "dinsync", dir: "in" },
+              { id: "out", label: "OUTPUT (フォーン・モノラル)", type: "ts", dir: "out" },
+              { id: "cvOut", label: "CV OUT", type: "cv", dir: "out" },
+              { id: "gateOut", label: "GATE OUT", type: "cv", dir: "out" },
+            ],
+          },
+          {
+            id: "scarlett",
+            label: "Focusrite Scarlett 2i2(第4世代)",
+            icon: "2i2",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR/フォーン コンボ)", type: "ts", dir: "in" },
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+            ],
+          },
+          { id: "mac", label: "Mac(DAW)", icon: "Mac", ports: [{ id: "usb", label: "USB-C", type: "usb", dir: "in" }] },
+        ],
+        cablePalette: ["dinsync", "midi", "ts", "cv", "usb"],
+        correctConnections: [
+          { from: "tr606.sync", to: "tb303.syncIn", cable: "dinsync" },
+          { from: "tb303.out", to: "scarlett.in1", cable: "ts" },
+          { from: "tr606.out", to: "scarlett.in2", cable: "ts" },
+          { from: "scarlett.usb", to: "mac.usb", cable: "usb" },
+        ],
+        explain:
+          "DIN SYNC(=Rolandが1980年前後から使っていた同期の方式。Sync24とも呼ばれる)は、親の機材が『テンポの刻み』と『スタート・ストップの合図』を電気のパルス(=短いオン・オフの信号)で子の機材に送るしくみ。刻みの細かさは4分音符1つあたり24回とされ、子の機材は届いたパルスの数を数えて、親とぴったり同じテンポで進む。だから、子にしたTB-303のテンポのつまみを回しても、テンポは変わらない。テンポを変えたいときは、親のTR-606側で変える。TR-606のスタートボタンを押せば、TB-303も一緒に走り出す。TR-606は1つのDIN端子を入力にも出力にも使える作りで、背面のスイッチで切り替える。ここが入力(IN)側のままだと、TR-606もほかから刻みが来るのを待ってしまい、2台とも動かない。一方TB-303のDIN端子は入力専用なので、TB-303を親にすることはできない。どちらを親にできるかは、端子の数ではなく『その端子が出力になれるか』で決まる。注意したいのは、DIN SYNCとMIDIは、プラグの形が同じ5ピンのDINなのに、中を流れる信号がまったく違うこと。DIN SYNCの端子とMIDIの端子をつないでも、何も伝わらない。また、市販のMIDIケーブルの中には、MIDIで使うピンの線しかつないでいないものがあり、DIN SYNCに使うとテンポやスタートの合図が届かないことがある、とされる。DIN SYNC用、または5本のピンがすべてつながったケーブルを使おう。パソコンのDAWとテンポを合わせたいときは、MIDIのテンポ情報(MIDIクロック)をDIN SYNCに変換する機械を、DAWと親の機材のあいだに入れるのが一般的。TB-303のCV OUTとGATE OUTは、TB-303のシーケンサー(=自動で演奏を進める機能)でほかのアナログシンセを鳴らすための出力で、今回の同期とは関係がない。2台の音はどちらもラインのレベルなので、Scarlettの入力はラインの設定にし、楽器用(Inst)にはしない。",
+      },
+    },
   ],
 };
