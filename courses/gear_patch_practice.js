@@ -8352,5 +8352,57 @@ window.COURSES["gear_patch_practice"] = {
           "SDI(=放送や中継の現場で使われる、映像を送るための規格)のケーブルは、BNC(=回して留める丸い金属の端子)の付いた同軸ケーブル1本で、映像と一緒に何チャンネルもの音を運べる。音を映像の信号の中に入れることをエンベデッド(埋め込み)と呼ぶ。Teranex Mini Audio to SDI 12Gは、入ってきたSDIの映像に、XLRなどから受けた音を埋め込んで送り出す変換器。Blackmagicの資料では、XLRの入力はバランスのアナログの音とAES/EBU(=デジタルの音の規格)を切り替えて使えるとされる。今回はPA卓のアナログの音なので、アナログの設定にする。カメラの位置がPA卓に近い場合、この配線にすると、楽屋のスイッチャーまで、映像と音をSDIケーブル1本でまとめて送れる。音のケーブルを別に何十メートルも引かなくてよく、映像と音のタイミングのずれも起きにくい。注意したいのは、カメラ自身のマイクの音や、カメラに付けた音も、もともとSDIに埋め込まれている点。変換器の設定で、PA卓の音をSDIの何番目のチャンネルに入れるかを決め、カメラの音と重ならないようにしよう。スイッチャーの側でも、どのチャンネルの音を配信に使うかを選ぶ。PA卓のSTEREO OUTは、会場のスピーカーに合わせた音なので、そのまま配信に使うと、会場で大きく鳴っているギターなどの音が足りなかったり、ボーカルが大きすぎたりすることがある。余裕があれば、配信用に別のミックス(AUXやグループのバス)を作って送るとよい。ATEM Television Studio HD8にもSDIの入力が何本もあるが、ここではSDI IN 1に入れて、カメラ1の映像と音として扱う。SDIの映像と音は、HDMIとちがって数十メートル以上の長い距離を送れるので、ライブハウスや中継の現場でよく使われる。SDIのケーブルは見た目がワードクロック(=デジタル機器どうしの時計を合わせる線)のBNCケーブルと似ているが、高い画質の映像を通すため、12G-SDIのような規格に対応したケーブルを選ぶ必要がある。",
       },
     },
+    {
+      id: "genelec_aes_digital_daisychain",
+      order: 179,
+      title: "デジタルのまま、モニタースピーカー2台へ『つなぎ送り』する(RME Fireface UFX III の AES OUT + Genelec 8340A ×2)",
+      category: "配線問題(プロ環境)",
+      hook: "モニタースピーカーの多くはアナログの音を受けるが、Genelecの8340Aは、AES/EBU(=デジタルの音を送るプロ用の規格)のまま音を受け取れる。しかも、ケーブル1本に左右2チャンネル分の音が入っていて、1台目のスピーカーから2台目へ、そのまま『つなぎ送り』できる。左右を取り違えないように配線しよう。",
+      patch: {
+        scenario:
+          "あなたは自宅スタジオで、オーディオインターフェース「RME Fireface UFX III」の AES OUT(XLR)から、モニタースピーカー「Genelec 8340A」2台に、デジタルのまま音を送る。AES OUT から、左のスピーカーの DIGITAL IN(AES/EBU・XLR)へ、AES/EBU用のケーブル(110Ω)でつなぐ。左のスピーカーの DIGITAL OUT(受けたデジタルの音を、そのまま次へ送る端子)から、右のスピーカーの DIGITAL IN へ、もう1本のAES/EBUケーブルでつなぐ。左のスピーカーはAES/EBUの左チャンネル、右のスピーカーは右チャンネルを鳴らすように設定する。スピーカーのアナログ入力(ANALOG IN)と、GLM(=Genelecのスピーカーを調整するソフト)用のネットワーク端子、UFX IIIのアナログ出力は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "ufx",
+            label: "RME Fireface UFX III(オーディオインターフェース)",
+            icon: "UFX III",
+            ports: [
+              { id: "aesOut", label: "AES OUT (XLR)", type: "aes", dir: "out" },
+              { id: "lineOut1", label: "LINE OUT 1 (TRS)", type: "trs", dir: "out" },
+              { id: "lineOut2", label: "LINE OUT 2 (TRS)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "spL",
+            label: "Genelec 8340A(左)",
+            icon: "8340A L",
+            ports: [
+              { id: "dIn", label: "DIGITAL IN (AES/EBU)", type: "aes", dir: "in" },
+              { id: "dOut", label: "DIGITAL OUT (AES/EBU)", type: "aes", dir: "out" },
+              { id: "aIn", label: "ANALOG IN (XLR)", type: "xlr", dir: "in" },
+              { id: "glm", label: "GLM NETWORK", type: "ethernet", dir: "in" },
+            ],
+          },
+          {
+            id: "spR",
+            label: "Genelec 8340A(右)",
+            icon: "8340A R",
+            ports: [
+              { id: "dIn", label: "DIGITAL IN (AES/EBU)", type: "aes", dir: "in" },
+              { id: "dOut", label: "DIGITAL OUT (AES/EBU)", type: "aes", dir: "out" },
+              { id: "aIn", label: "ANALOG IN (XLR)", type: "xlr", dir: "in" },
+              { id: "glm", label: "GLM NETWORK", type: "ethernet", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["aes", "xlr", "trs", "ethernet", "optical"],
+        correctConnections: [
+          { from: "ufx.aesOut", to: "spL.dIn", cable: "aes" },
+          { from: "spL.dOut", to: "spR.dIn", cable: "aes" },
+        ],
+        explain:
+          "AES/EBUは、プロの機材どうしでデジタルの音をやり取りするための規格で、XLRの端子を使い、ケーブル1本で左右2チャンネル分の音を運べる。Genelecの説明書でも、AES/EBUの入力は1本のケーブルで2チャンネルを受けられるとされ、ふつうは左の音がAチャンネル、右の音がBチャンネルに入る。8340AのDIGITAL OUTからは、DIGITAL INに入ったデジタルの音が、手を加えずにそのまま出てくる。Genelecの資料では、これを使って最大4台までつなぎ送り(デイジーチェーン)できるとされている。2台のスピーカーには同じ左右2チャンネル分の音が届いているので、それぞれのスピーカーが『左右どちらのチャンネルを鳴らすか』を設定で決める必要がある。ここを忘れると、両方のスピーカーから同じ片側の音が鳴り、左右の広がりがなくなる。設定の方法は、スピーカー本体の切り替えか、GLMのソフトのどちらかで、機種や使い方によって異なるとされるので、説明書で確かめよう。デジタルのまま送ると、オーディオインターフェースの中でアナログの音に戻す必要がなく、スピーカーの中で直接アナログに戻されるので、途中のケーブルで雑音が乗りにくい。ただし、デジタルの音には音量のつまみがないので、音量はUFX IIIの側(TotalMix FX=RMEの音の流れと音量を決めるソフト)で下げることになる。うっかり音量を最大にしたまま再生すると、大きな音が出てスピーカーや耳を傷めるので、はじめは必ず小さくしておく。また、AES/EBUの入力に正しい信号が入ると、8340Aは自動的にデジタルの入力を選ぶとされている。AES/EBUのケーブルは、見た目はマイクケーブルと同じXLRだが、デジタルの信号を正しく送るため、110Ωという決まった性質(インピーダンス)を持つ専用のケーブルを使うのが基本。短い距離ならマイクケーブルでも音が出ることはあるが、長くなると音が途切れる原因になる。",
+      },
+    },
   ],
 };
