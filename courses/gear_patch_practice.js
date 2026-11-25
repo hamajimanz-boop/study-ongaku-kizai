@@ -8228,5 +8228,66 @@ window.COURSES["gear_patch_practice"] = {
           "映像と音を別々の機械で録ると、あとで編集ソフトの上で2つのタイミングを合わせる必要がある。昔ながらのカチンコ(=撮影の始めに板を打ち合わせて、音と映像の目印を作る道具)でも合わせられるが、録画を止めたり始めたりするたびに打つ必要があり、打ち忘れると手作業で合わせることになる。タイムコード(=録った瞬間の時刻を、1コマ単位で記録しておく信号)を、カメラとレコーダーの両方に同じ時刻で記録しておけば、編集ソフトがその時刻を手がかりに、たくさんのファイルをまとめて並べられる。Tentacle Sync Eは、とても正確な時計を内蔵していて、一度時刻をそろえれば、2台を離して持ち歩いても長い時間ずれにくいとされる。2台を同じ時刻にそろえることをジャムシンクと呼び、Tentacle Sync Eではスマートフォンのアプリから無線で行える。Zoom F6には専用のタイムコード端子(3.5mm)があり、Tentacleのサポート情報でも、このTIMECODE IN/OUT端子にTentacleをつなげば同期できると案内されている。F6は受け取ったタイムコードを、録音したファイルの中に情報として書き込む。F6の設定で、タイムコードを外から受け取るモードに切り替えておくこと。一方、α7 IVのように専用のタイムコード入力がないカメラでは、タイムコードの信号を『音』としてマイク入力に入れ、音声のトラックの片方に『ピーガー』という音として記録する。Tentacle Syncのソフトや、多くの編集ソフトは、この音を読み取って時刻に直せる。Tentacleの資料によると、マイク入力にTentacleをつなぐとカメラの内蔵マイクは使えなくなるが、Tentacle Sync Eは自分の内蔵マイクで拾った音を、もう片方のチャンネルに目安の音(スクラッチ)として送れる。タイムコードの音が大きすぎると、もう片方のチャンネルに漏れたり、ひずんで読み取れなくなったりするので、カメラのマイク入力の録音レベルは手動にして、Tentacleのアプリやメーカーの案内に合わせた控えめな大きさにしよう。カメラの『自動で音量を調整する機能』は切ること。なお、Zoom F4やF8など、タイムコード端子がBNC(=丸い金属の差し込み口)の機種もあるので、ケーブルは機種に合わせて選ぶ。撮影の始めに、カメラとレコーダーの両方で数秒だけ試し録りし、編集ソフトで本当にそろうか確かめておくと安心。",
       },
     },
+    {
+      id: "dante_avio_wireless_receiver",
+      order: 177,
+      title: "Danteの端子がないワイヤレス受信機を、小さな変換アダプターでネットワークにつなぐ(Dante AVIO Analog Input Adapter + Shure SLXD4D + Yamaha QL1)",
+      category: "配線問題(プロ環境)",
+      hook: "ホールの音響卓は、LANケーブルで音を送るDanteでつながっている。ところが、今日使うワイヤレスマイクの受信機には、アナログのXLR出力しかない。卓のそばまで長いマイクケーブルを引くかわりに、手のひらサイズの変換アダプターで、受信機の音をそのままネットワークに乗せよう。",
+      patch: {
+        scenario:
+          "あなたは多目的ホールで、司会者2人のワイヤレスマイクの音を、デジタルミキサー「Yamaha QL1」に送る。舞台袖に置いた2チャンネルのワイヤレス受信機「Shure SLXD4D」には、Dante(=LANケーブルで音を何十チャンネルも送る仕組み)の端子がなく、チャンネルごとのアナログのXLR出力(XLR OUT 1 / XLR OUT 2)がある。舞台袖には、ホールのDante用のネットワークスイッチ(=LANケーブルを何本も束ねてつなぐ中継の箱)「Netgear GS110TP」があり、PoE(=LANケーブルで電気も送る機能)に対応している。SLXD4Dの XLR OUT 1 を、2チャンネルのアナログ入力用の変換アダプター「Dante AVIO Analog Input Adapter(2ch)」の INPUT 1 へ、XLR OUT 2 を INPUT 2 へつなぐ(AVIOのXLRは、受信機の端子に直接挿す)。AVIOのLANケーブルを、GS110TPの PORT 1 へ挿す。QL1の Dante PRIMARY 端子から、GS110TPの PORT 2 へ、LANケーブルでつなぐ。SLXD4Dの背面にあるETHERNET端子(受信機の設定や電池の残りをパソコンで見るための端子)と、QL1の Dante SECONDARY 端子は、この問題では使わない。AVIOの電源は、LANケーブルから受け取る。",
+        equipment: [
+          {
+            id: "rx",
+            label: "Shure SLXD4D(2チャンネルのワイヤレス受信機)",
+            icon: "SLXD4D",
+            ports: [
+              { id: "out1", label: "XLR OUT 1", type: "xlr", dir: "out" },
+              { id: "out2", label: "XLR OUT 2", type: "xlr", dir: "out" },
+              { id: "eth", label: "ETHERNET(設定・監視用)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "avio",
+            label: "Dante AVIO Analog Input Adapter(2ch・アナログ入力)",
+            icon: "AVIO 2in",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "lan", label: "LAN(Dante + PoE電源)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "sw",
+            label: "Netgear GS110TP(PoE対応ネットワークスイッチ)",
+            icon: "GS110TP",
+            ports: [
+              { id: "p1", label: "PORT 1 (PoE)", type: "ethernet", dir: "in" },
+              { id: "p2", label: "PORT 2 (PoE)", type: "ethernet", dir: "in" },
+              { id: "p3", label: "PORT 3 (PoE)", type: "ethernet", dir: "in" },
+            ],
+          },
+          {
+            id: "ql1",
+            label: "Yamaha QL1(デジタルミキサー)",
+            icon: "QL1",
+            ports: [
+              { id: "primary", label: "Dante PRIMARY", type: "ethernet", dir: "out" },
+              { id: "secondary", label: "Dante SECONDARY", type: "ethernet", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "ethernet", "trs", "power", "usb"],
+        correctConnections: [
+          { from: "rx.out1", to: "avio.in1", cable: "xlr" },
+          { from: "rx.out2", to: "avio.in2", cable: "xlr" },
+          { from: "avio.lan", to: "sw.p1", cable: "ethernet" },
+          { from: "ql1.primary", to: "sw.p2", cable: "ethernet" },
+        ],
+        explain:
+          "Dante AVIOは、Danteを開発したAudinateが出している、手のひらサイズの変換アダプターのシリーズで、Danteの端子を持たない機材を、Danteのネットワークにつなぐためのもの。アナログ入力用の2チャンネルの機種は、XLRで受けた2つの音をデジタルに変えて、LANケーブルでネットワークに送る。PoE(=LANケーブルを通して電気も送る仕組み)で動くので、PoEに対応したスイッチにつなげば、別に電源を用意しなくてよい。スイッチがPoEに対応していないときは、PoEの電気を足すための機器(PoEインジェクター)が必要になる。ネットワークにつないだら、パソコンのDante Controller(=Danteの音の行き先を決める無料のソフト)で、『AVIOの1ch・2chを、QL1の入力のどこに届けるか』を設定する。LANケーブルを挿しただけでは、音はどこにも届かない点に注意。いちばん注意したいのは音の大きさ。Audinateの資料では、このAVIOの入力はラインのレベル(=+4dBuなどのしっかりした大きさの音)を受ける作りで、受ける大きさはDante Controllerで +4dBu / 0dBu / −10dBV などから選べるとされている。マイクの小さな音を大きくする回路は持たないので、マイクを直接挿しても使えない。そこで、SLXD4Dの出力の大きさを、メニューで『MIC』ではなく『LINE』に設定しておく。Shureの資料によると、SLXD4DのXLR出力は、MICの設定とLINEの設定で、30dBほど大きさが変わる。MICのままだと音が小さすぎて、QL1の側でつまみを大きく上げることになり、雑音が目立つ。逆にAVIOの受ける大きさの設定に対して受信機の音が大きすぎると、音がひずむ。リハーサルで一番大きな声を出してもらい、QL1のメーターで確かめよう。SLXD4DのETHERNET端子は、受信機の設定やマイクの電池の残りなどをパソコンで見るためのもので、音は流れない。見た目が同じLANの端子でも、役目がちがうので取り違えないこと。QL1のDanteの端子はPRIMARYとSECONDARYの2つがあり、SECONDARYは、ケーブルが切れたときに備えて、もう1系統のネットワークを用意する(二重化する)ときに使う。今回はPRIMARYだけで組む。アナログのマイクケーブルを卓まで長く引かなくてよくなり、受信機をアンテナの電波が届きやすい舞台袖に置けるのが、この配線の良いところ。",
+      },
+    },
   ],
 };
