@@ -8289,5 +8289,68 @@ window.COURSES["gear_patch_practice"] = {
           "Dante AVIOは、Danteを開発したAudinateが出している、手のひらサイズの変換アダプターのシリーズで、Danteの端子を持たない機材を、Danteのネットワークにつなぐためのもの。アナログ入力用の2チャンネルの機種は、XLRで受けた2つの音をデジタルに変えて、LANケーブルでネットワークに送る。PoE(=LANケーブルを通して電気も送る仕組み)で動くので、PoEに対応したスイッチにつなげば、別に電源を用意しなくてよい。スイッチがPoEに対応していないときは、PoEの電気を足すための機器(PoEインジェクター)が必要になる。ネットワークにつないだら、パソコンのDante Controller(=Danteの音の行き先を決める無料のソフト)で、『AVIOの1ch・2chを、QL1の入力のどこに届けるか』を設定する。LANケーブルを挿しただけでは、音はどこにも届かない点に注意。いちばん注意したいのは音の大きさ。Audinateの資料では、このAVIOの入力はラインのレベル(=+4dBuなどのしっかりした大きさの音)を受ける作りで、受ける大きさはDante Controllerで +4dBu / 0dBu / −10dBV などから選べるとされている。マイクの小さな音を大きくする回路は持たないので、マイクを直接挿しても使えない。そこで、SLXD4Dの出力の大きさを、メニューで『MIC』ではなく『LINE』に設定しておく。Shureの資料によると、SLXD4DのXLR出力は、MICの設定とLINEの設定で、30dBほど大きさが変わる。MICのままだと音が小さすぎて、QL1の側でつまみを大きく上げることになり、雑音が目立つ。逆にAVIOの受ける大きさの設定に対して受信機の音が大きすぎると、音がひずむ。リハーサルで一番大きな声を出してもらい、QL1のメーターで確かめよう。SLXD4DのETHERNET端子は、受信機の設定やマイクの電池の残りなどをパソコンで見るためのもので、音は流れない。見た目が同じLANの端子でも、役目がちがうので取り違えないこと。QL1のDanteの端子はPRIMARYとSECONDARYの2つがあり、SECONDARYは、ケーブルが切れたときに備えて、もう1系統のネットワークを用意する(二重化する)ときに使う。今回はPRIMARYだけで組む。アナログのマイクケーブルを卓まで長く引かなくてよくなり、受信機をアンテナの電波が届きやすい舞台袖に置けるのが、この配線の良いところ。",
       },
     },
+    {
+      id: "sdi_audio_embed_teranex",
+      order: 178,
+      title: "ミキサーの音を、カメラの映像の線(SDI)に埋め込んで、1本で中継車へ送る(Blackmagic Teranex Mini Audio to SDI 12G)",
+      category: "配線問題(プロ環境)",
+      hook: "ライブの中継で、カメラの映像は、SDIという太い1本の同軸ケーブルで中継用の機材まで送っている。音は別に長いケーブルを引くしかない、と思っていないだろうか。SDIのケーブルには、映像と一緒に音も乗せられる。音を映像に『埋め込む』小さな変換器を、カメラとスイッチャーの間に入れて配線しよう。",
+      patch: {
+        scenario:
+          "あなたはライブハウスの公演を、映像つきで中継する。客席後方のカメラ「Blackmagic Studio Camera 4K Pro」の 12G-SDI OUT から、変換器「Blackmagic Teranex Mini Audio to SDI 12G」の SDI IN へ、SDIケーブル(BNC端子の同軸ケーブル)でつなぐ。PA卓「Yamaha MG16XU」の STEREO OUT L(XLR)を、Teranex Miniの AUDIO IN L(XLR)へ、STEREO OUT R(XLR)を AUDIO IN R(XLR)へつなぐ。Teranex Miniの SDI OUT から、楽屋に置いた映像のスイッチャー(=何台かのカメラの映像を切り替える機械)「Blackmagic ATEM Television Studio HD8」の SDI IN 1 へ、SDIケーブルでつなぐ。Teranex Miniの SDI LOOP OUT(入ってきた映像をそのまま出す端子)と、光デジタル・RCAの音声入力、カメラのHDMI端子は、この問題では使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "cam",
+            label: "Blackmagic Studio Camera 4K Pro",
+            icon: "Studio Cam",
+            ports: [
+              { id: "sdiOut", label: "12G-SDI OUT", type: "sdi", dir: "out" },
+              { id: "hdmi", label: "HDMI OUT", type: "hdmi", dir: "out" },
+            ],
+          },
+          {
+            id: "mg",
+            label: "Yamaha MG16XU(PA卓)",
+            icon: "MG16XU",
+            ports: [
+              { id: "stL", label: "STEREO OUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "stR", label: "STEREO OUT R (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "tx",
+            label: "Blackmagic Teranex Mini Audio to SDI 12G(音声埋め込み)",
+            icon: "Teranex",
+            ports: [
+              { id: "sdiIn", label: "SDI IN", type: "sdi", dir: "in" },
+              { id: "audL", label: "AUDIO IN L (XLR)", type: "xlr", dir: "in" },
+              { id: "audR", label: "AUDIO IN R (XLR)", type: "xlr", dir: "in" },
+              { id: "optical", label: "OPTICAL AUDIO IN", type: "optical", dir: "in" },
+              { id: "rca", label: "RCA AUDIO IN", type: "rca", dir: "in" },
+              { id: "sdiOut", label: "SDI OUT", type: "sdi", dir: "out" },
+              { id: "loop", label: "SDI LOOP OUT", type: "sdi", dir: "out" },
+            ],
+          },
+          {
+            id: "atem",
+            label: "Blackmagic ATEM Television Studio HD8(スイッチャー)",
+            icon: "ATEM HD8",
+            ports: [
+              { id: "sdi1", label: "SDI IN 1", type: "sdi", dir: "in" },
+              { id: "sdi2", label: "SDI IN 2", type: "sdi", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["sdi", "xlr", "hdmi", "bnc", "rca", "optical"],
+        correctConnections: [
+          { from: "cam.sdiOut", to: "tx.sdiIn", cable: "sdi" },
+          { from: "mg.stL", to: "tx.audL", cable: "xlr" },
+          { from: "mg.stR", to: "tx.audR", cable: "xlr" },
+          { from: "tx.sdiOut", to: "atem.sdi1", cable: "sdi" },
+        ],
+        explain:
+          "SDI(=放送や中継の現場で使われる、映像を送るための規格)のケーブルは、BNC(=回して留める丸い金属の端子)の付いた同軸ケーブル1本で、映像と一緒に何チャンネルもの音を運べる。音を映像の信号の中に入れることをエンベデッド(埋め込み)と呼ぶ。Teranex Mini Audio to SDI 12Gは、入ってきたSDIの映像に、XLRなどから受けた音を埋め込んで送り出す変換器。Blackmagicの資料では、XLRの入力はバランスのアナログの音とAES/EBU(=デジタルの音の規格)を切り替えて使えるとされる。今回はPA卓のアナログの音なので、アナログの設定にする。カメラの位置がPA卓に近い場合、この配線にすると、楽屋のスイッチャーまで、映像と音をSDIケーブル1本でまとめて送れる。音のケーブルを別に何十メートルも引かなくてよく、映像と音のタイミングのずれも起きにくい。注意したいのは、カメラ自身のマイクの音や、カメラに付けた音も、もともとSDIに埋め込まれている点。変換器の設定で、PA卓の音をSDIの何番目のチャンネルに入れるかを決め、カメラの音と重ならないようにしよう。スイッチャーの側でも、どのチャンネルの音を配信に使うかを選ぶ。PA卓のSTEREO OUTは、会場のスピーカーに合わせた音なので、そのまま配信に使うと、会場で大きく鳴っているギターなどの音が足りなかったり、ボーカルが大きすぎたりすることがある。余裕があれば、配信用に別のミックス(AUXやグループのバス)を作って送るとよい。ATEM Television Studio HD8にもSDIの入力が何本もあるが、ここではSDI IN 1に入れて、カメラ1の映像と音として扱う。SDIの映像と音は、HDMIとちがって数十メートル以上の長い距離を送れるので、ライブハウスや中継の現場でよく使われる。SDIのケーブルは見た目がワードクロック(=デジタル機器どうしの時計を合わせる線)のBNCケーブルと似ているが、高い画質の映像を通すため、12G-SDIのような規格に対応したケーブルを選ぶ必要がある。",
+      },
+    },
   ],
 };
