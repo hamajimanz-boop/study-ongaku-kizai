@@ -8624,5 +8624,67 @@ window.COURSES["gear_patch_practice"] = {
           "パソコンのヘッドホン端子は、ヘッドホンを鳴らすための出力で、長いケーブルでミキサーへ送ることは考えられていない。さらに、パソコンに充電器をつないだまま会場のミキサーにつなぐと、電源の電気の通り道が輪のようにつながり(グラウンドループ)、ジーッ、ブーンという雑音が出やすい。USB-Pro は、パソコンからUSBでデジタルのまま音を受け取り、箱の中でアナログの音に戻して、XLRのバランス出力(=雑音を打ち消す仕組みのある出力)で送り出す。Radialの資料では、出力に切り替え式のトランス(=電気的に切り離しながら音だけを通す部品)が入っていて、グラウンドループによるハムやバズの雑音を減らせるとされ、XLRの1番ピン(=アース)を切り離すグラウンドリフトのスイッチもある。電源はUSBから取るので、別の電源はいらない。パソコンの側では、出力先(サウンドの出力)に USB-Pro を選ぶのを忘れないこと。これを忘れると、音はパソコンのスピーカーから鳴ってしまう。USB-Pro にはレベル(音量)のつまみがあり、XLR出力とヘッドホン出力の両方に効くとされる。XLR出力はマイク入力にもライン入力にもつなげる、と案内されているので、ミキサーのゲインは小さめから上げていこう。音を出す前に、確認用のイヤホンで、正しい音が来ているかを聞いておくと、本番中のトラブルを減らせる。ミキサーにモノラルのチャンネルが1つしか空いていないときは、USB-Pro のモノラルにまとめるスイッチを使えば、左右の音を1本のXLRで送れる。パソコンの動画の音は大きさがばらばらなことが多いので、本番前に一番大きい場面の音で、ミキサーのメーターが赤くならないように合わせておく。",
       },
     },
+    {
+      id: "catapult_analog_over_cat",
+      order: 185,
+      title: "LANケーブル1本で、ステージのマイクの音をアナログのまま客席後ろのミキサーへ送る(Radial Catapult TX4 + RX4)",
+      category: "配線問題",
+      hook: "公民館のホールで、ステージから客席の一番後ろのミキサーまで40mある。マイクケーブルを何本も引き回すのは大変だが、壁の中には建物のLANケーブルがすでに通っている。デジタルに変えずに、LANケーブルの中の線を使ってアナログの音を4本分まとめて送る箱がある。その配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは公民館のホールで、トークと演奏のイベントのPAを担当する。ステージ側に「Radial Catapult TX4」(送る側の箱)を置き、ボーカル用の「Shure SM58」を TX4 の INPUT 1 へ、司会用のもう1本の「Shure SM58」を INPUT 2 へ、ピアノ用のコンデンサーマイク「Neumann KM 184」を INPUT 3 へつなぐ。TX4 の Cat 5 端子(RJ45)から、壁の中を通ってステージと客席後ろを結んでいる、シールド付きのLANケーブル(Cat 6)の差し込み口へつなぐ。客席後ろでは、壁の差し込み口から「Radial Catapult RX4」(受ける側の箱)の Cat 5 端子へ、もう1本のシールド付きLANケーブルでつなぐ。パズルでは、壁の中の配線をまとめて、TX4 から RX4 への1本のLANケーブルとして扱う。RX4 の OUTPUT 1〜3(XLR)を、ミキサー「Yamaha MG16XU」の CH1〜3 のマイク入力へつなぐ。KM 184 のために、ミキサーの +48V(ファンタム電源)をオンにする。電源の配線は省略する。",
+        equipment: [
+          { id: "mic1", label: "Shure SM58(ボーカル)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "mic2", label: "Shure SM58(司会)", icon: "SM58", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "mic3", label: "Neumann KM 184(ピアノ)", icon: "KM184", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "tx",
+            label: "Radial Catapult TX4(ステージ側・送る箱)",
+            icon: "TX4",
+            ports: [
+              { id: "in1", label: "INPUT 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "in2", label: "INPUT 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "in3", label: "INPUT 3 (XLR)", type: "xlr", dir: "in" },
+              { id: "in4", label: "INPUT 4 (XLR)", type: "xlr", dir: "in" },
+              { id: "cat", label: "Cat 5 (RJ45)", type: "ethernet", dir: "out" },
+            ],
+          },
+          {
+            id: "rx",
+            label: "Radial Catapult RX4(客席後ろ・受ける箱)",
+            icon: "RX4",
+            ports: [
+              { id: "cat", label: "Cat 5 (RJ45)", type: "ethernet", dir: "in" },
+              { id: "out1", label: "OUTPUT 1 (XLR)", type: "xlr", dir: "out" },
+              { id: "out2", label: "OUTPUT 2 (XLR)", type: "xlr", dir: "out" },
+              { id: "out3", label: "OUTPUT 3 (XLR)", type: "xlr", dir: "out" },
+              { id: "out4", label: "OUTPUT 4 (XLR)", type: "xlr", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Yamaha MG16XU(ミキサー)",
+            icon: "MG16XU",
+            ports: [
+              { id: "ch1", label: "CH1 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch2", label: "CH2 MIC IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch3", label: "CH3 MIC IN (XLR)", type: "xlr", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["xlr", "ethernet", "trs", "snake"],
+        correctConnections: [
+          { from: "mic1.out", to: "tx.in1", cable: "xlr" },
+          { from: "mic2.out", to: "tx.in2", cable: "xlr" },
+          { from: "mic3.out", to: "tx.in3", cable: "xlr" },
+          { from: "tx.cat", to: "rx.cat", cable: "ethernet" },
+          { from: "rx.out1", to: "mixer.ch1", cable: "xlr" },
+          { from: "rx.out2", to: "mixer.ch2", cable: "xlr" },
+          { from: "rx.out3", to: "mixer.ch3", cable: "xlr" },
+        ],
+        explain:
+          "LANケーブル(Cat 5やCat 6)の中には、2本ずつより合わせた線が4組入っている。バランスのマイクの音(=雑音を打ち消す仕組みのある送り方)は、より合わせた2本の線と、アースの線で送れるので、LANケーブル1本で4本分のマイクの音をアナログのまま運べる。Catapult は、そのための箱で、Radialの資料では、電源のいらない受け身の機械(パッシブ)とされている。Danteのように音をデジタルに変えてネットワークで送るのとは違い、中を流れているのはアナログの音そのものなので、パソコンやネットワークの機械(スイッチやルーター)をつなぐことはできない。LANケーブルを使うのは、建物にすでに通っている配線や、細くて軽いケーブルを利用するためだ。Radialは、100mまでつないで問題なく送れたことを確かめているとしているが、長くなるほど雑音や高い音の減りが増えることがあるとも案内している。注意点は、コンデンサーマイクを使うとき。ファンタム電源(=ミキサーからマイクケーブルを通して送る、コンデンサーマイクを動かすための電気)は、ミキサーから RX4、LANケーブル、TX4 を通ってマイクまで届く。Radialの案内では、ファンタム電源を使うときや、AESのデジタルの音を送るときは、シールド付き(STP)のCat 5かCat 6のケーブルを使わなければならないとされている。建物のLANケーブルがシールドなし(UTP)なら、この使い方はできないので、事前に必ず確かめよう。Radialの資料では、TX4 には4つの XLR 入力に加えて4つの XLR 出力もあるとされ、入力と同じ音を分けて出せるので、ステージ横で別の機材にも同じマイクの音を分けたいときに使える。マイクは送る側(TX4)、ミキサーは受ける側(RX4)につなぐ、という向きを守ろう。",
+      },
+    },
   ],
 };
