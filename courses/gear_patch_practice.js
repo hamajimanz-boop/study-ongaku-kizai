@@ -8732,5 +8732,58 @@ window.COURSES["gear_patch_practice"] = {
           "Auratone 5C は、4.5インチの小さなスピーカーが1つだけ入った箱で、販売店の資料では、鳴らせる音の範囲はおよそ80Hz〜15kHzとされている。低い音も高い音も控えめにしか出ない代わりに、人の声やギターなど、真ん中あたりの音のバランスがはっきり聞こえる。大きなスピーカーでは気持ちよく聞こえていたベースやキックが、このスピーカーで聞こえなくなるなら、小さなスピーカーで聞く人にも聞こえていない可能性が高い。1本だけで鳴らすのは、モノラル(=左右の区別のない1つの音)で聞くと、左右に広げた音どうしが打ち消し合って消えてしまう問題(位相の問題)に気づけるから。お店のスピーカーや、スマートフォンのスピーカーの多くは、実質的にモノラルで鳴っている。5C はパッシブ(=アンプが入っていない)スピーカーなので、オーディオインターフェースから直接つないでも鳴らない。いったんパワーアンプ(=スピーカーを鳴らせる大きさまで電気の力を強める機械)を通す必要がある。インターフェースからパワーアンプまでは音の信号なので、TRS と XLR の両方が付いた変換ケーブル(パズルではTRSとして扱う)。パワーアンプからスピーカーまでは、大きな電気が流れるので、マイクケーブルやシールドではなく、太い2本の線のスピーカーケーブルを使う。プラスとマイナスを逆につながないよう、線の色や印をそろえよう。注意点は、パワーアンプの力の大きさ。5C は販売店の資料で、連続して受けられる力が25W(RMS)とされているが、XLS 1002 はそれよりずっと大きな力を出せる。はじめはパワーアンプの音量のつまみを絞り切ってから電源を入れ、少しずつ上げること。電源を入れる順番は、インターフェース → パワーアンプ。切るときは逆で、パワーアンプを先に切る。こうすると、電源を入れたときの『ボツッ』という音でスピーカーを傷めにくい。",
       },
     },
+    {
+      id: "disklavier_daw_midi_record",
+      order: 187,
+      title: "DAWのMIDIで自動演奏ピアノを弾かせ、本物のピアノの音をマイクで録る(Yamaha Disklavier ENSPIRE PRO + Apollo Twin X + Neumann KM 184 ×2)",
+      category: "配線問題",
+      hook: "打ち込みで作ったピアノのフレーズを、ソフトの音ではなく本物のグランドピアノで鳴らしたい。自動演奏ピアノ(Disklavier)は、MIDIを受け取ると鍵盤とハンマーが実際に動いて音が出る。DAWからMIDIを送ってピアノに弾かせ、その生の音をマイクで録る配線を組もう。",
+      patch: {
+        scenario:
+          "あなたは、自動演奏の機能が付いたグランドピアノ「Yamaha Disklavier ENSPIRE PRO」があるスタジオで録音する。DAWの入ったMacの USB 端子から、ピアノのコントロールユニットの USB TO HOST 端子へ、USBケーブルでつなぐ。DAWのMIDIトラックの出力先をDisklavierにして、打ち込んだフレーズをピアノに送る。ピアノの音は、コンデンサーマイク「Neumann KM 184」2本で左右から狙い、オーディオインターフェース「Universal Audio Apollo Twin X」の MIC IN 1 と MIC IN 2 へつなぎ、ファンタム電源(+48V)を送る。Apollo Twin X と Mac は Thunderbolt でつなぐ(パズルではUSBのケーブルとして扱う)。コントロールユニットの MIDI IN / MIDI OUT 端子(5ピン)は、今回は使わない。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "mac",
+            label: "Mac(DAW)",
+            icon: "Mac",
+            ports: [
+              { id: "usbMidi", label: "USB (Disklavier用)", type: "usb", dir: "out" },
+              { id: "tb", label: "Thunderbolt (Apollo用)", type: "usb", dir: "in" },
+            ],
+          },
+          {
+            id: "dkv",
+            label: "Yamaha Disklavier ENSPIRE PRO(コントロールユニット)",
+            icon: "ENSPIRE",
+            ports: [
+              { id: "usbHost", label: "USB TO HOST", type: "usb", dir: "in" },
+              { id: "midiIn", label: "MIDI IN (5ピン)", type: "midi", dir: "in" },
+              { id: "midiOut", label: "MIDI OUT (5ピン)", type: "midi", dir: "out" },
+            ],
+          },
+          { id: "micL", label: "Neumann KM 184(ピアノ・左)", icon: "KM184 L", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          { id: "micR", label: "Neumann KM 184(ピアノ・右)", icon: "KM184 R", ports: [{ id: "out", label: "XLR OUT", type: "xlr", dir: "out" }] },
+          {
+            id: "apollo",
+            label: "Universal Audio Apollo Twin X(オーディオインターフェース)",
+            icon: "Twin X",
+            ports: [
+              { id: "mic1", label: "MIC IN 1 (XLR)", type: "xlr", dir: "in" },
+              { id: "mic2", label: "MIC IN 2 (XLR)", type: "xlr", dir: "in" },
+              { id: "tb", label: "Thunderbolt", type: "usb", dir: "out" },
+            ],
+          },
+        ],
+        cablePalette: ["usb", "midi", "xlr", "trs"],
+        correctConnections: [
+          { from: "mac.usbMidi", to: "dkv.usbHost", cable: "usb" },
+          { from: "micL.out", to: "apollo.mic1", cable: "xlr" },
+          { from: "micR.out", to: "apollo.mic2", cable: "xlr" },
+          { from: "apollo.tb", to: "mac.tb", cable: "usb" },
+        ],
+        explain:
+          "Disklavier は、ヤマハのピアノに、鍵盤やペダルを動かす装置と、演奏を読み取るセンサーを組み込んだ自動演奏ピアノ。MIDI(=音そのものではなく、『どの鍵盤を・いつ・どれくらいの強さで』という演奏の情報)を受け取ると、本物の鍵盤とハンマーが動いて弦を打つので、録れる音は生のピアノそのものになる。ヤマハの資料では、コントロールユニットの USB TO HOST 端子でパソコンとつなぐと、USBケーブル1本でMIDIのやり取りができ、5ピンのMIDI IN / OUT 端子と同時に使うこともできるとされている。今回はパソコンから送るだけなので、USBだけで足りる。音そのものはMIDIでは送られないので、ピアノの音を録るには、ふつうのピアノの録音と同じようにマイクが必要になる。ここが、電子ピアノのライン出力を録るのとは大きく違うところ。注意点は3つ。1つ目は、ピアノの設定で、MIDIをどの端子から受け取るか(USBか、5ピンのMIDIか)を選ぶ項目があること。機種や世代によって画面の名前が違うので、説明書で確かめよう。2つ目は、DAWからMIDIを送ってから、鍵盤とハンマーが動いて音が出るまでに、少し時間がかかること。録った音がMIDIの位置より遅れていたら、録音したオーディオの位置を前にずらして合わせる。3つ目は、打ち込みのデータが、人間には弾けない速さや、同じ鍵盤の素早い連打を含んでいると、機械の動きが追いつかず、音が抜けたり強さが変わったりすることがある点。録る前に、一度ピアノに弾かせて確かめよう。また、ペダルの動き(サステインなど)もMIDIで送られて、実際にペダルが動く。打ち込みのときにペダルの情報を入れ忘れると、響きの少ない音になる。KM 184 はコンデンサーマイクなので、Apollo Twin X からファンタム電源(=マイクケーブルを通して送る、コンデンサーマイクを動かすための電気)を送る。",
+      },
+    },
   ],
 };
