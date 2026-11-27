@@ -8522,5 +8522,54 @@ window.COURSES["gear_patch_practice"] = {
           "ノイズゲート(=音が決めた大きさより小さいときに、音を消してしまう機械)は、ふつうは自分に入ってきた音そのものの大きさを見て、開くか閉じるかを決める。外部キー入力(サイドチェイン入力とも呼ばれる)を使うと、判断の材料だけを別の音に取り替えられる。今回は、パッドの音は INPUT から通し、開け閉めの合図はキックの音から取る。すると、キックが鳴った瞬間だけゲートが開き、パッドがキックと同じリズムで刻まれる。Drawmerの説明でも、外部キー入力で別の音からゲートを開けられるとされ、スネアの音で部屋の響きのマイクを開く『ゲートリバーブ』が使い方の例として挙げられている。配線のポイントは、合図用の音を、本番のミックスに混ぜない独立した出力(LINE OUT 4)から出すこと。DAWでは、キックだけのトラックを作り、その出力を LINE OUT 4 に向ける。合図は音として聞こえなくてよいので、キックの代わりに、16分音符で刻む短い音を合図専用に作れば、細かく刻むこともできる。DS201 のキー入力はアンバランス(=雑音を打ち消す仕組みのない接続)のTSフォーン端子なので、Scarlett の TRS 出力からは TS のケーブルでつなぐ。短い距離なら問題になりにくい。前面の KEY SOURCE を外部のキー入力に切り替え忘れると、パッド自身の音で開け閉めしてしまい、ほとんど開きっぱなしになる。KEY LISTEN(=ゲートが聞いている合図の音を、そのまま出力から聞ける機能)をオンにすると、合図のキックがちゃんと届いているか確かめられる。確認が済んだら必ずオフに戻す。音の切れ方は、ゲートの ATTACK(開く速さ)、HOLD(開いたままにする時間)、DECAY(閉じる速さ)で決まる。DECAY を短くするとパキッと刻まれ、長くすると、ふわっと減っていく。外部の機材を通すと、戻ってきた音が少し遅れるので、DAWの遅延補正の機能を使うか、録ったあとに位置を合わせよう。",
       },
     },
+    {
+      id: "hotrod_preamp_out_link",
+      order: 183,
+      title: "1台目のアンプのプリアンプの音を、2台目のアンプのパワーアンプに送って2台で鳴らす(Fender Hot Rod Deluxe IV + Hot Rod DeVille 212 IV)",
+      category: "配線問題",
+      hook: "広いライブハウスで、ギターアンプ1台だと音が届かない。同じ音色のまま2台目のアンプも鳴らしたいが、2台のつまみを毎回そろえるのは大変だ。1台目のアンプで作った音を、2台目のアンプの『音を大きくする部分』だけに送れば、音作りもチャンネルの切り替えも1台目だけで済む。その配線を組もう。",
+      patch: {
+        scenario:
+          "あなたはギタリストとして、ステージの左右に2台のギターアンプを置く。ギター「Fender Telecaster」の OUTPUT から、1台目のアンプ「Fender Hot Rod Deluxe IV」の INPUT へつなぐ。アンプに付属の2ボタンのフットスイッチ(チャンネルの切り替えと、歪みの段階の切り替え)を、1台目の FOOTSWITCH 端子へつなぐ。1台目の PREAMP OUT(=プリアンプ、つまり音色を作る部分を通った音が出る端子)から、2台目のアンプ「Fender Hot Rod DeVille 212 IV」の POWER AMP IN(=パワーアンプ、つまり音を大きくしてスピーカーを鳴らす部分への入り口)へつなぐ。1台目の POWER AMP IN、2台目の INPUT と FOOTSWITCH 端子には何もつながない。電源の配線は省略する。",
+        equipment: [
+          { id: "guitar", label: "Fender Telecaster", icon: "Tele", ports: [{ id: "out", label: "OUTPUT (TS)", type: "ts", dir: "out" }] },
+          {
+            id: "fsw",
+            label: "Fender 2ボタン・フットスイッチ(付属品・ケーブル付き)",
+            icon: "FSW",
+            ports: [{ id: "out", label: "プラグ(本体のケーブルの先)", type: "trs", dir: "out" }],
+          },
+          {
+            id: "amp1",
+            label: "Fender Hot Rod Deluxe IV(1台目)",
+            icon: "HRD IV",
+            ports: [
+              { id: "input", label: "INPUT", type: "ts", dir: "in" },
+              { id: "fsw", label: "FOOTSWITCH", type: "trs", dir: "in" },
+              { id: "preOut", label: "PREAMP OUT", type: "ts", dir: "out" },
+              { id: "pwrIn", label: "POWER AMP IN", type: "ts", dir: "in" },
+            ],
+          },
+          {
+            id: "amp2",
+            label: "Fender Hot Rod DeVille 212 IV(2台目)",
+            icon: "DeVille",
+            ports: [
+              { id: "input", label: "INPUT", type: "ts", dir: "in" },
+              { id: "fsw", label: "FOOTSWITCH", type: "trs", dir: "in" },
+              { id: "pwrIn", label: "POWER AMP IN", type: "ts", dir: "in" },
+            ],
+          },
+        ],
+        cablePalette: ["ts", "trs", "speaker", "xlr"],
+        correctConnections: [
+          { from: "guitar.out", to: "amp1.input", cable: "ts" },
+          { from: "fsw.out", to: "amp1.fsw", cable: "trs" },
+          { from: "amp1.preOut", to: "amp2.pwrIn", cable: "ts" },
+        ],
+        explain:
+          "ギターアンプの中は、大きく2つの部分に分かれている。音色や歪みを作るプリアンプと、その音をスピーカーを鳴らせる大きさまで持ち上げるパワーアンプだ。Hot Rodシリーズの PREAMP OUT と POWER AMP IN は、その2つの間を外に出した端子で、ふつうはエフェクターを間にはさむ『エフェクトループ』として使う。Fenderの説明書では、もう1つの使い方として、1台目の PREAMP OUT を2台目の POWER AMP IN につなぐと、2台目以降のアンプを1台目でまとめて操作できるとされている。こうすると、2台目は1台目で作った音をそのまま大きくするだけになり、2台目のプリアンプ(INPUT や、音量・音色のつまみ)は使われない。チャンネルや歪みの段階も、1台目につないだフットスイッチだけで、2台同時に切り替わる。説明書によると、2台目でも効き続けるつまみは REVERB と PRESENCE の2つ。つまり、2台目の REVERB と PRESENCE は2台目のつまみで決まるので、1台目とそろえておかないと、左右で響きの量や音の明るさが違ってしまう。1台目の POWER AMP IN には何も挿さないので、1台目のプリアンプの音は1台目のパワーアンプにも流れ、2台とも鳴る。逆に、1台目の POWER AMP IN にケーブルを挿すと、1台目の中の音の流れが切れてしまう。PREAMP OUT と POWER AMP IN はギター用の通常のフォーン端子なので、シールド(ギター用のケーブル)でつなげばよい。フットスイッチは、2つのボタンの情報を1本のケーブルで送るので、先が3極のプラグになっているのが一般的で、ケーブルは本体についている。2台目のアンプの FOOTSWITCH 端子につないでも、2台目のプリアンプは使われていないので意味がない。2台のアンプはどちらもコンセントから電気を取るので、別々のコンセントからつなぐと、まれにブーンというハムノイズ(=電源の電気の違いから生まれる低い雑音)が出ることがある。そのときは、2台を同じ電源タップからつなごう。",
+      },
+    },
   ],
 };
