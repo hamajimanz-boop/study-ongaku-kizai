@@ -8571,5 +8571,58 @@ window.COURSES["gear_patch_practice"] = {
           "ギターアンプの中は、大きく2つの部分に分かれている。音色や歪みを作るプリアンプと、その音をスピーカーを鳴らせる大きさまで持ち上げるパワーアンプだ。Hot Rodシリーズの PREAMP OUT と POWER AMP IN は、その2つの間を外に出した端子で、ふつうはエフェクターを間にはさむ『エフェクトループ』として使う。Fenderの説明書では、もう1つの使い方として、1台目の PREAMP OUT を2台目の POWER AMP IN につなぐと、2台目以降のアンプを1台目でまとめて操作できるとされている。こうすると、2台目は1台目で作った音をそのまま大きくするだけになり、2台目のプリアンプ(INPUT や、音量・音色のつまみ)は使われない。チャンネルや歪みの段階も、1台目につないだフットスイッチだけで、2台同時に切り替わる。説明書によると、2台目でも効き続けるつまみは REVERB と PRESENCE の2つ。つまり、2台目の REVERB と PRESENCE は2台目のつまみで決まるので、1台目とそろえておかないと、左右で響きの量や音の明るさが違ってしまう。1台目の POWER AMP IN には何も挿さないので、1台目のプリアンプの音は1台目のパワーアンプにも流れ、2台とも鳴る。逆に、1台目の POWER AMP IN にケーブルを挿すと、1台目の中の音の流れが切れてしまう。PREAMP OUT と POWER AMP IN はギター用の通常のフォーン端子なので、シールド(ギター用のケーブル)でつなげばよい。フットスイッチは、2つのボタンの情報を1本のケーブルで送るので、先が3極のプラグになっているのが一般的で、ケーブルは本体についている。2台目のアンプの FOOTSWITCH 端子につないでも、2台目のプリアンプは使われていないので意味がない。2台のアンプはどちらもコンセントから電気を取るので、別々のコンセントからつなぐと、まれにブーンというハムノイズ(=電源の電気の違いから生まれる低い雑音)が出ることがある。そのときは、2台を同じ電源タップからつなごう。",
       },
     },
+    {
+      id: "laptop_usb_di_to_mixer",
+      order: 184,
+      title: "ノートパソコンの音を、USBで受けるDIボックスからPAのミキサーへ送る(Radial USB-Pro + Allen & Heath ZEDi-10)",
+      category: "配線問題",
+      hook: "イベントで、司会のパソコンから流す動画の音やBGMを会場のスピーカーで鳴らしたい。パソコンのイヤホン端子からつなぐと、充電器を挿したとたんにジーッという雑音が出ることがある。USBで音を受け取り、ミキサーに合うXLRの音に変えてくれる『USB用のDIボックス』を使う配線を組もう。",
+      patch: {
+        scenario:
+          "あなたはイベントのPA担当。司会者のノートパソコン「MacBook Pro」から、動画の音とBGMをステレオで会場に流す。MacBook Pro の USB-C 端子から、USB用のDIボックス(=楽器やパソコンの音を、ミキサーのマイク入力に合う形に変える箱)「Radial USB-Pro」の USB 端子へ、USBケーブル(USB-C ⇔ USB-B)でつなぐ。USB-Pro の左の出力(XLR)をミキサー「Allen & Heath ZEDi-10」の CH1 へ、右の出力(XLR)を CH2 へつなぐ。ミキサーで CH1 を左、CH2 を右へ振る。USB-Pro の HEADPHONE 端子(3.5mmのステレオミニ)には、音の確認用にイヤホン「Shure SE215」をつなぐ。MacBook Pro のヘッドホン端子は使わない。ミキサーからスピーカーへの配線はすでに済んでいる(この問題では配線済み)。電源の配線は省略する。",
+        equipment: [
+          {
+            id: "mac",
+            label: "MacBook Pro(司会者のノートパソコン)",
+            icon: "MacBk",
+            ports: [
+              { id: "usb", label: "USB-C", type: "usb", dir: "out" },
+              { id: "hp", label: "ヘッドホン端子 (3.5mm)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "usbdi",
+            label: "Radial USB-Pro(USB用のステレオDIボックス)",
+            icon: "USB-Pro",
+            ports: [
+              { id: "usb", label: "USB (Type-B)", type: "usb", dir: "in" },
+              { id: "outL", label: "OUTPUT L (XLR)", type: "xlr", dir: "out" },
+              { id: "outR", label: "OUTPUT R (XLR)", type: "xlr", dir: "out" },
+              { id: "phones", label: "HEADPHONE (3.5mm)", type: "trs", dir: "out" },
+            ],
+          },
+          {
+            id: "mixer",
+            label: "Allen & Heath ZEDi-10(アナログミキサー)",
+            icon: "ZEDi-10",
+            ports: [
+              { id: "ch1", label: "CH1 MIC/LINE IN (XLR)", type: "xlr", dir: "in" },
+              { id: "ch2", label: "CH2 MIC/LINE IN (XLR)", type: "xlr", dir: "in" },
+              { id: "st", label: "STEREO IN (フォーン)", type: "trs", dir: "in" },
+            ],
+          },
+          { id: "ear", label: "Shure SE215(確認用イヤホン)", icon: "SE215", ports: [{ id: "in", label: "3.5mm ステレオプラグ", type: "trs", dir: "in" }] },
+        ],
+        cablePalette: ["usb", "xlr", "trs", "ts", "rca"],
+        correctConnections: [
+          { from: "mac.usb", to: "usbdi.usb", cable: "usb" },
+          { from: "usbdi.outL", to: "mixer.ch1", cable: "xlr" },
+          { from: "usbdi.outR", to: "mixer.ch2", cable: "xlr" },
+          { from: "usbdi.phones", to: "ear.in", cable: "trs" },
+        ],
+        explain:
+          "パソコンのヘッドホン端子は、ヘッドホンを鳴らすための出力で、長いケーブルでミキサーへ送ることは考えられていない。さらに、パソコンに充電器をつないだまま会場のミキサーにつなぐと、電源の電気の通り道が輪のようにつながり(グラウンドループ)、ジーッ、ブーンという雑音が出やすい。USB-Pro は、パソコンからUSBでデジタルのまま音を受け取り、箱の中でアナログの音に戻して、XLRのバランス出力(=雑音を打ち消す仕組みのある出力)で送り出す。Radialの資料では、出力に切り替え式のトランス(=電気的に切り離しながら音だけを通す部品)が入っていて、グラウンドループによるハムやバズの雑音を減らせるとされ、XLRの1番ピン(=アース)を切り離すグラウンドリフトのスイッチもある。電源はUSBから取るので、別の電源はいらない。パソコンの側では、出力先(サウンドの出力)に USB-Pro を選ぶのを忘れないこと。これを忘れると、音はパソコンのスピーカーから鳴ってしまう。USB-Pro にはレベル(音量)のつまみがあり、XLR出力とヘッドホン出力の両方に効くとされる。XLR出力はマイク入力にもライン入力にもつなげる、と案内されているので、ミキサーのゲインは小さめから上げていこう。音を出す前に、確認用のイヤホンで、正しい音が来ているかを聞いておくと、本番中のトラブルを減らせる。ミキサーにモノラルのチャンネルが1つしか空いていないときは、USB-Pro のモノラルにまとめるスイッチを使えば、左右の音を1本のXLRで送れる。パソコンの動画の音は大きさがばらばらなことが多いので、本番前に一番大きい場面の音で、ミキサーのメーターが赤くならないように合わせておく。",
+      },
+    },
   ],
 };
